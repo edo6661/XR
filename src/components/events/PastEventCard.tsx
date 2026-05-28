@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import FocusReveal from '../ui/FocusReveal';
 
 interface PastEventCardProps {
   index: number;
@@ -10,7 +11,6 @@ interface PastEventCardProps {
   imageSrc?: string;
   accentColor?: string;
 }
-
 const PastEventCard = ({
   index,
   year,
@@ -38,8 +38,8 @@ const PastEventCard = ({
       transition: { duration: 0.3 },
     }}
   >
-    {/* Image thumbnail */}
-    <div className="relative w-28 h-28 rounded-lg overflow-hidden flex-shrink-0">
+    {/* Gunakan FocusReveal pada Image thumbnail */}
+    <FocusReveal delay={0.2 + (index * 0.1)} className="relative w-28 h-28 rounded-lg overflow-hidden flex-shrink-0">
       {imageSrc ? (
         <>
           <img
@@ -74,8 +74,7 @@ const PastEventCard = ({
       >
         {year}
       </div>
-    </div>
-
+    </FocusReveal>
     {/* Content */}
     <div className="flex flex-col justify-between flex-1 min-w-0">
       <div>

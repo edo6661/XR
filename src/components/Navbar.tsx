@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import MagneticWrapper from './ui/MagneticWrapper';
+import ScrambleText from './ui/ScrambleText';
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -82,44 +84,52 @@ const Navbar = () => {
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `relative px-4 py-2 text-[0.72rem] font-medium tracking-[0.12em] uppercase transition-all duration-300 rounded-sm
-                  ${isActive
-                    ? 'text-accent'
-                    : 'text-foreground-muted hover:text-foreground'
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {link.label}
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-indicator"
-                        className="absolute bottom-0 left-2 right-2 h-[1px] bg-accent shadow-[0_0_8px_rgba(251,146,60,0.8)]"
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                  </>
-                )}
-              </NavLink>
+              <MagneticWrapper key={link.to} strength={0.15}>
+                <NavLink
+                  to={link.to}
+                  end={link.to === '/'}
+                  className={({ isActive }) =>
+                    `relative px-4 py-2 text-[0.72rem] font-medium tracking-[0.12em] uppercase transition-all duration-300 rounded-sm cursor-none
+                    ${isActive
+                      ? 'text-accent'
+                      : 'text-foreground-muted hover:text-foreground'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {/* Ganti pemanggilan {link.label} dengan ini: */}
+                      <ScrambleText text={link.label} />
+
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-indicator"
+                          className="absolute bottom-0 left-2 right-2 h-[1px] bg-accent shadow-[0_0_8px_rgba(251,146,60,0.8)]"
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </MagneticWrapper>
             ))}
 
-            <a
-              href="#tickets"
-              className="ml-4 px-5 py-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase
-                border border-accent text-accent rounded-sm
-                hover:bg-accent hover:text-background
-                transition-all duration-300
-                shadow-[0_0_16px_rgba(251,146,60,0.2)]
-                hover:shadow-[0_0_24px_rgba(251,146,60,0.5)]"
-            >
-              Register
-            </a>
+            {/* Tarikan magnet sedang (0.25) untuk tombol CTA Navigasi */}
+            <div className="ml-4">
+              <MagneticWrapper strength={0.25}>
+                <a
+                  href="#tickets"
+                  className="px-5 py-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase
+                    border border-accent text-accent rounded-sm
+                    hover:bg-accent hover:text-background
+                    transition-all duration-300
+                    shadow-[0_0_16px_rgba(251,146,60,0.2)]
+                    hover:shadow-[0_0_24px_rgba(251,146,60,0.5)] cursor-none inline-block"
+                >
+                  Register
+                </a>
+              </MagneticWrapper>
+            </div>
           </nav>
 
           {/* Mobile Menu Toggle */}

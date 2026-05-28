@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import SplitTextReveal from './SplitTextReveal';
 
 interface DemoPlaceholderProps {
   title: string;
@@ -25,9 +26,10 @@ const DemoPlaceholder = ({ title }: DemoPlaceholderProps) => {
           </svg>
         </div>
 
-        <h1 className="font-heading font-black text-3xl md:text-5xl text-foreground mb-4 leading-tight">
-          {title}
-        </h1>
+        <SplitTextReveal
+          text={title}
+          className="font-heading font-black text-3xl md:text-5xl text-foreground mb-4 leading-tight justify-center"
+        />
 
         <p className="text-foreground-muted mb-10 text-sm md:text-base leading-relaxed">
           This module <span className="text-accent font-semibold">is currently under development</span> and will be available soon.

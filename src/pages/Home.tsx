@@ -6,6 +6,9 @@ import SpeakersSection from '../components/speakers/SpeakersSection';
 import SponsorsSection from '../components/sponsors/SponsorsSection';
 import TicketsSection from '../components/tickets/TicketsSection';
 
+// Import komponen Marquee yang baru dibuat
+import ScrollMarquee from '../components/ui/ScrollMarquee';
+
 const Home = () => (
   <>
     <Helmet>
@@ -20,6 +23,9 @@ const Home = () => (
     <AboutSection />
     <EventsSection />
     <SpeakersSection />
+
+    <ScrollMarquee />
+
     <SponsorsSection />
     <TicketsSection />
   </>

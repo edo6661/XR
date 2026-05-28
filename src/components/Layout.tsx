@@ -8,6 +8,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import CustomCursor from './ui/CustomCursor';
 import ScrollProgress from './ui/ScrollProgress';
+import FilmGrain from './ui/FilmGrain';
+import BackgroundElements from './ui/BackgroundElements';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,26 +53,34 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden flex flex-col">
+    <div className="relative min-h-screen text-foreground flex flex-col selection:bg-accent/30 selection:text-white">
+      <BackgroundElements />
+      <FilmGrain />
+
       <CustomCursor />
       <ScrollProgress />
       <Navbar />
 
-      {/* ── Page Transition Wrapper ── */}
-      <AnimatePresence mode="wait">
-        <motion.main
-          key={location.pathname}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-1 flex flex-col"
-        >
-          <Outlet />
-        </motion.main>
-      </AnimatePresence>
+      {/* ── Konten Utama (Berada di lapisan atas, menutupi Footer) ── */}
+      <div className="relative z-10 bg-background shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+        <AnimatePresence mode="wait">
+          <motion.main
+            key={location.pathname}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-1 flex flex-col"
+          >
+            <Outlet />
+          </motion.main>
+        </AnimatePresence>
+      </div>
 
-      <Footer />
+      {/* ── Parallax Curtain Footer (Berada di lapisan paling bawah) ── */}
+      <div className="sticky bottom-0 z-0 h-auto">
+        <Footer />
+      </div>
     </div>
   );
 };

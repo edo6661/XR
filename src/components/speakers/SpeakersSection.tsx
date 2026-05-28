@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import HolographicImage from '../ui/HolographicImage';
 
 const SPEAKERS = [
   { name: 'Dr. Sarah Chen', role: 'Chief AI Scientist, Nexus', image: 'https://i.pravatar.cc/300?img=1' },
@@ -36,17 +37,20 @@ const SpeakersSection = () => {
               className="group relative rounded-xl overflow-hidden glass p-4 cursor-pointer"
             >
               <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
-                <img
+
+                {/* Ganti <img> dengan HolographicImage */}
+                <HolographicImage
                   src={speaker.image}
                   alt={speaker.name}
-                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                  className="w-full h-full rounded-lg"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b2e] via-transparent to-transparent opacity-80" />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b2e] via-transparent to-transparent opacity-80 z-40 pointer-events-none" />
               </div>
-              <h3 className="font-heading font-bold text-lg text-foreground group-hover:text-accent transition-colors">
+              <h3 className="font-heading font-bold text-lg text-foreground group-hover:text-accent transition-colors relative z-50">
                 {speaker.name}
               </h3>
-              <p className="text-xs text-foreground-muted tracking-wide mt-1">
+              <p className="text-xs text-foreground-muted tracking-wide mt-1 relative z-50">
                 {speaker.role}
               </p>
             </motion.div>

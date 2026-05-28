@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
@@ -12,7 +12,7 @@ const AwardsGalaPage = lazy(() => import('./pages/AwardsGalaPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
-// ── Shared loader ─────────────────────────────────────────────────────────
+// ── Shared loader (Fallback untuk navigasi antar halaman) ─────────────────
 const PageLoader = () => (
   <div className="min-h-screen flex items-center justify-center bg-background">
     <div className="relative w-16 h-16">
@@ -23,26 +23,32 @@ const PageLoader = () => (
 );
 
 // ── App ───────────────────────────────────────────────────────────────────
-const App = () => (
-  <HelmetProvider>
-    <Analytics />
-    <LazyMotion features={domAnimation}>
-      <BrowserRouter>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="mothership" element={<MothershipPage />} />
-              <Route path="awards" element={<AwardsGalaPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="contact" element={<ContactPage />} />
-            </Route>
+const App = () => {
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </LazyMotion>
-  </HelmetProvider>
-);
+  return (
+    <HelmetProvider>
+      <Analytics />
+      <LazyMotion features={domAnimation}>
+
+
+
+        <BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="mothership" element={<MothershipPage />} />
+                <Route path="awards" element={<AwardsGalaPage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="contact" element={<ContactPage />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </LazyMotion>
+    </HelmetProvider>
+  );
+};
 
 export default App;

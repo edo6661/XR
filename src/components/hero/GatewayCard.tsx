@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
+import TracerBorder from '../ui/TracerBorder';
 
 interface GatewayCardProps {
   index: number;
@@ -116,112 +117,115 @@ const GatewayCard = ({
         style={{ transformStyle: 'preserve-3d' }}
         className="relative h-full cursor-pointer"
       >
-        {/* Glow layer */}
+        {/* Glow layer (Ambient hover glow) */}
         <div
           ref={glowRef}
-          className="absolute -inset-[1px] rounded-lg opacity-0 transition-opacity"
+          className="absolute -inset-[1px] rounded-lg opacity-0 transition-opacity z-0"
           style={{
             background: `linear-gradient(135deg, ${accentColor}30, ${glowColor}20)`,
             boxShadow: `0 0 40px ${accentColor}40, 0 0 80px ${accentColor}15`,
           }}
         />
 
-        {/* Card */}
-        <div
-          className="relative h-full rounded-lg overflow-hidden"
-          style={{
-            background: 'rgba(13, 27, 46, 0.7)',
-            backdropFilter: 'blur(20px)',
-            border: `1px solid ${accentColor}35`,
-          }}
-        >
-          {/* Top accent line */}
-          <div
-            className="absolute top-0 left-0 right-0 h-[2px]"
-            style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
-          />
-
-          {/* Corner decorations */}
-          <div
-            className="absolute top-3 left-3 w-4 h-4 border-t border-l"
-            style={{ borderColor: `${accentColor}80` }}
-          />
-          <div
-            className="absolute top-3 right-3 w-4 h-4 border-t border-r"
-            style={{ borderColor: `${accentColor}80` }}
-          />
-          <div
-            className="absolute bottom-3 left-3 w-4 h-4 border-b border-l"
-            style={{ borderColor: `${accentColor}80` }}
-          />
-          <div
-            className="absolute bottom-3 right-3 w-4 h-4 border-b border-r"
-            style={{ borderColor: `${accentColor}80` }}
-          />
-
-          <div ref={contentRef} className="p-8 flex flex-col gap-5 h-full">
-            {/* Tag */}
-            <div className="flex items-center justify-between">
-              <span
-                className="text-[0.6rem] font-bold tracking-[0.3em] uppercase px-3 py-1 rounded-full"
-                style={{
-                  color: accentColor,
-                  background: `${accentColor}15`,
-                  border: `1px solid ${accentColor}30`,
-                }}
-              >
-                {tag}
-              </span>
-              <span
-                className="text-[0.6rem] font-mono tracking-widest"
-                style={{ color: `${accentColor}70` }}
-              >
-                0{index + 1}
-              </span>
-            </div>
-
-            {/* Icon */}
+        {/* Card Content wrapped in TracerBorder */}
+        <div className="relative h-full rounded-lg overflow-hidden z-10">
+          <TracerBorder accentColor={accentColor}>
             <div
-              className="w-14 h-14 rounded-lg flex items-center justify-center text-2xl"
+              className="relative h-full w-full"
               style={{
-                background: `${accentColor}12`,
-                border: `1px solid ${accentColor}25`,
-                color: accentColor,
+                background: 'rgba(13, 27, 46, 0.7)',
+                backdropFilter: 'blur(20px)',
               }}
             >
-              {icon}
-            </div>
+              {/* Top accent line */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[2px] z-10"
+                style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
+              />
 
-            {/* Text */}
-            <div className="flex flex-col gap-2">
-              <p
-                className="text-[0.65rem] font-semibold tracking-[0.25em] uppercase"
-                style={{ color: `${accentColor}90` }}
-              >
-                {subtitle}
-              </p>
-              <h3 className="font-heading text-xl font-bold text-foreground leading-tight">
-                {title}
-              </h3>
-              <p className="text-sm text-foreground-muted leading-relaxed mt-1">
-                {description}
-              </p>
-            </div>
+              {/* Corner decorations */}
+              <div
+                className="absolute top-3 left-3 w-4 h-4 border-t border-l z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
+              <div
+                className="absolute top-3 right-3 w-4 h-4 border-t border-r z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
+              <div
+                className="absolute bottom-3 left-3 w-4 h-4 border-b border-l z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
+              <div
+                className="absolute bottom-3 right-3 w-4 h-4 border-b border-r z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
 
-            {/* CTA */}
-            <div className="mt-auto pt-4">
-              <Link
-                to={to}
-                className="group inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase transition-all duration-300"
-                style={{ color: accentColor }}
-              >
-                Enter Experience
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </Link>
+              <div ref={contentRef} className="p-8 flex flex-col gap-5 h-full relative z-20">
+                {/* Tag */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className="text-[0.6rem] font-bold tracking-[0.3em] uppercase px-3 py-1 rounded-full"
+                    style={{
+                      color: accentColor,
+                      background: `${accentColor}15`,
+                      border: `1px solid ${accentColor}30`,
+                    }}
+                  >
+                    {tag}
+                  </span>
+                  <span
+                    className="text-[0.6rem] font-mono tracking-widest"
+                    style={{ color: `${accentColor}70` }}
+                  >
+                    0{index + 1}
+                  </span>
+                </div>
+
+                {/* Icon */}
+                <div
+                  className="w-14 h-14 rounded-lg flex items-center justify-center text-2xl"
+                  style={{
+                    background: `${accentColor}12`,
+                    border: `1px solid ${accentColor}25`,
+                    color: accentColor,
+                  }}
+                >
+                  {icon}
+                </div>
+
+                {/* Text */}
+                <div className="flex flex-col gap-2">
+                  <p
+                    className="text-[0.65rem] font-semibold tracking-[0.25em] uppercase"
+                    style={{ color: `${accentColor}90` }}
+                  >
+                    {subtitle}
+                  </p>
+                  <h3 className="font-heading text-xl font-bold text-foreground leading-tight">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-foreground-muted leading-relaxed mt-1">
+                    {description}
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <div className="mt-auto pt-4">
+                  <Link
+                    to={to}
+                    className="group inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase transition-all duration-300 cursor-none"
+                    style={{ color: accentColor }}
+                  >
+                    Enter Experience
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
+          </TracerBorder>
         </div>
       </div>
     </motion.div>

@@ -68,10 +68,11 @@ const ParticleCanvas = () => {
         uTime: { value: 0 },
         uPixelRatio: { value: renderer.getPixelRatio() },
       },
+      glslVersion: THREE.GLSL3,
       vertexShader: `
-        attribute float size;
-        attribute vec3 color;
-        varying vec3 vColor;
+        in float size;
+        in vec3 color;
+        out vec3 vColor;
         uniform float uTime;
         uniform float uPixelRatio;
 
@@ -89,7 +90,8 @@ const ParticleCanvas = () => {
         }
       `,
       fragmentShader: `
-        varying vec3 vColor;
+        in vec3 vColor;
+        out vec4 outColor;
 
         void main() {
           float dist = length(gl_PointCoord - vec2(0.5));
@@ -97,7 +99,7 @@ const ParticleCanvas = () => {
           float alpha = 1.0 - smoothstep(0.1, 0.5, dist);
           // Glow core
           float glow = exp(-dist * 6.0) * 0.8;
-          gl_FragColor = vec4(vColor + glow * 0.4, alpha * 0.75);
+          outColor = vec4(vColor + glow * 0.4, alpha * 0.75);
         }
       `,
       transparent: true,
@@ -138,11 +140,13 @@ const ParticleCanvas = () => {
 
     // ── Animation loop ─────────────────────────────────────────────────
     let animId: number;
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
+    timer.connect(document);
 
-    const animate = () => {
+    const animate = (timestamp: number) => {
       animId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+      timer.update(timestamp);
+      const t = timer.getElapsed();
       material.uniforms.uTime.value = t;
 
       // Slow rotation + mouse parallax
@@ -152,12 +156,13 @@ const ParticleCanvas = () => {
 
       renderer.render(scene, camera);
     };
-    animate();
+    animate(performance.now());
 
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
+      timer.dispose();
       geometry.dispose();
       material.dispose();
       renderer.dispose();
