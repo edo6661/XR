@@ -12,17 +12,14 @@ const ScrambleText = ({ text }: ScrambleTextProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (!isHovered) {
-      setDisplayText(text);
-      return;
-    }
+    if (!isHovered) return;
 
     let iteration = 0;
     const interval = setInterval(() => {
-      setDisplayText((prev) =>
+      setDisplayText(
         text
           .split('')
-          .map((char, index) => {
+          .map((_, index) => {
             // Jika iterasi sudah melewati index karakter ini, tampilkan huruf asli
             if (index < iteration) {
               return text[index];
@@ -47,7 +44,10 @@ const ScrambleText = ({ text }: ScrambleTextProps) => {
   return (
     <span
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setDisplayText(text);
+      }}
       className="inline-block whitespace-nowrap"
     >
       {displayText}

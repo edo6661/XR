@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
@@ -24,7 +24,6 @@ const PageLoader = () => (
 
 // ── App ───────────────────────────────────────────────────────────────────
 const App = () => {
-  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   return (
     <HelmetProvider>
