@@ -1,0 +1,2909 @@
+kode nya sudah ada, kamu tolong lanjutkan saja dengan bertahap dan best practice:
+prompt nya:
+You are an Expert Frontend Engineer and Immersive Web Designer. Your task is to build a cinematic, futuristic, and highly interactive website for "XR Summits". 
+TECH STACK:
+- React 19 + TypeScript + Vite
+- Tailwind CSS v4
+- Framer Motion & GSAP (for animations & scroll effects)
+- Three.js / React Three Fiber (for 3D/Particles)
+- Lenis (for smooth immersive scrolling)
+DESIGN SYSTEM & VIBE:
+- Theme: Dark, cinematic, Web3, futuristic.
+- UI Elements: Glassmorphism, subtle glowing borders, holographic effects.
+- Interactions: Immersive top-to-down scroll transitions, parallax depth, text reveals, hover-triggered motion.
+PROJECT REQUIREMENTS & CONTENT:
+This will be a single-page immersive flow on the homepage that links to specific event landing pages. We must execute this STRICTLY STEP-BY-STEP. Do not proceed to the next step until I confirm the current step is perfect. Ensure a clean, modular component architecture (separation of UI components, animation hooks, and layouts).
+### STEP 1: Core Layout, Routing & Smooth Scroll Setup
+1. Clean up the existing App.tsx routes. Set up a core Layout component that includes a futuristic, glassmorphism sticky Navbar (Logo left, Links right: Home, Mothership 26' AI Bootcamp, Awards Gala, About, Contact Us).
+2. Implement lenis for global smooth scrolling.
+3. Prepare the basic page structures for the Homepage and the 3 Event Gateways.
+Wait for my approval before proceeding.
+### STEP 2: The Cinematic Hero & "Choose Your Experience" Gateway
+1. Build a full-screen, high-impact Hero Section. 
+2. Background: Implement a cinematic 3D particle effect or subtle shader using Three.js/tsParticles.
+3. Content: The "XR SUMMITS" logo animating in smoothly.
+4. "Choose Your Experience" Gateway: Below the logo, present 3 immersive choices (Left, Right, and Center/Bottom):
+   - XR Summit
+   - XR Esports
+   - Hackathon (Use placeholder cinematic mockups for now).
+5. Add hover effects (e.g., cards expanding, glassmorphism getting brighter, sound/lighting reaction concepts using GSAP/Framer Motion).
+Wait for my approval before proceeding.
+### STEP 3: "About Us" & "Why XR Future" Scroll Transition
+1. Create a seamless, immersive scroll transition from the Hero gateways down to the "About Us" section.
+2. Content to include: "XR Asia Summit 2026 (XRAS26) is the definitive platform connecting innovators..." and the 4 key points (AI x XR, Spatial Media, Traditional Sports, Enterprises).
+3. Use text-reveal animations (GSAP ScrollTrigger or Framer Motion whileInView) for the paragraphs.
+4. Add the "Industry Leaders (500+)", "Expert Speakers (40+)", and "Years of Excellence (4)" statistics with a counting animation.
+Wait for my approval before proceeding.
+### STEP 4: Event Spotlights & Past Events Track Record
+1. Create a "Spotlight" section for upcoming events (4th XR Asia Summit 2026, Mothership 26', Siggraph Asia 2025, Awe Asia 2026, Broadcast Asia 2026). Display these as futuristic, glowing cards.
+2. Create the "Past Events" section displaying the track record (XR Asia Summit 2023, 2022, 2021, Broadcast Digital Award 2022).
+3. Integrate the image assets available in the public folder (e.g., xr-asia-summit-2023.jpeg, award-1600x329.jpeg) gracefully into the cards.
+Wait for my approval before proceeding.
+### STEP 5: Speakers, Sponsors, Tickets, and Footer
+1. Build placeholder sections for SPEAKERS and SPONSORS using a marquee or grid layout.
+2. Create a high-converting, glowing "Tickets CTA" section.
+3. Build the Footer (Dark theme, Address in Sunway Petaling Jaya, Contact info, Privacy Policy links).
+4. Do a final pass on responsive design to ensure the 3D elements and glassmorphism layouts perform well and look premium on mobile devices.
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vercel
+.env*.local
+
+
+.env
+</file>
+
+<file path="eslint.config.js">
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+])
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="icon" type="image/png" href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>XR</title>
+
+    <meta name="title" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="/" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+
+    <meta property="og:image" content="/" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="/" />
+    <meta property="twitter:title" content="" />
+    <meta property="twitter:description" content="" />
+
+    <meta property="twitter:image" content="/" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="package.json">
+{
+  "name": "xr",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1024.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.0",
+    "@tiptap/pm": "^3.22.5",
+    "@tiptap/react": "^3.22.5",
+    "@tiptap/starter-kit": "^3.22.5",
+    "@vercel/analytics": "^2.0.1",
+    "firebase": "^12.11.0",
+    "framer-motion": "^12.38.0",
+    "gsap": "^3.15.0",
+    "i18next": "^25.8.11",
+    "lenis": "^1.3.23",
+    "lottie-react": "^2.4.1",
+    "lucide-react": "^0.575.0",
+    "motion": "^12.34.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-helmet-async": "^3.0.0",
+    "react-i18next": "^16.5.4",
+    "react-router-dom": "^7.13.2",
+    "tailwindcss": "^4.2.0",
+    "three": "^0.183.2",
+    "tsparticles": "^4.0.5",
+    "unity-webgl": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.184.1",
+    "@vitejs/plugin-react-swc": "^4.2.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vite": "^7.3.1",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-sitemap": "^0.8.2"
+  }
+}
+</file>
+
+<file path="public/favicon/site.webmanifest">
+{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+</file>
+
+<file path="public/robots.txt">
+User-agent: *
+Allow: /
+
+Disallow: /assets/
+Disallow: /*.json$
+
+Sitemap:
+</file>
+
+<file path="public/sitemap.xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+</urlset>
+</file>
+
+<file path="src/App.tsx">
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
+import { LazyMotion, domAnimation } from 'framer-motion';
+import Layout from './components/Layout';
+
+// ── Pages ──────────────────────────────────────────────────────────────────
+const Home = lazy(() => import('./pages/Home'));
+const MothershipPage = lazy(() => import('./pages/MothershipPage'));
+const AwardsGalaPage = lazy(() => import('./pages/AwardsGalaPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+
+// ── Shared loader ─────────────────────────────────────────────────────────
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="relative w-16 h-16">
+      <div className="absolute inset-0 border-t-2 border-accent rounded-full animate-spin" />
+      <div className="absolute inset-2 border-t border-primary rounded-full animate-spin [animation-direction:reverse] [animation-duration:0.6s]" />
+    </div>
+  </div>
+);
+
+// ── App ───────────────────────────────────────────────────────────────────
+const App = () => (
+  <HelmetProvider>
+    <Analytics />
+    <LazyMotion features={domAnimation}>
+      <BrowserRouter>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="mothership" element={<MothershipPage />} />
+              <Route path="awards" element={<AwardsGalaPage />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="contact" element={<ContactPage />} />
+            </Route>
+
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </LazyMotion>
+  </HelmetProvider>
+);
+
+export default App;
+</file>
+
+<file path="src/components/about/AboutSection.tsx">
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
+import StatCard from './StatCard';
+import PillarCard from './PillarCard';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Pillar data ────────────────────────────────────────────────────────────
+const AIIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V6.75a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 6.75v10.5a2.25 2.25 0 002.25 2.25z" />
+  </svg>
+);
+
+const SpatialIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M2.25 7.5l10.5-6 10.5 6v9l-10.5 6-10.5-6v-9z" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21V3M2.25 7.5l9.75 5.5 9.75-5.5" />
+  </svg>
+);
+
+const SportsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+  </svg>
+);
+
+const EnterpriseIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+  </svg>
+);
+
+const PILLARS = [
+  {
+    icon: <AIIcon />,
+    title: 'AI × XR Convergence',
+    description: 'Explore the intersection of generative AI and spatial computing — from neural rendering to AI-powered XR experiences.',
+    accentColor: '#fb923c',
+  },
+  {
+    icon: <SpatialIcon />,
+    title: 'Spatial Media',
+    description: 'Immersive storytelling, volumetric video, and the future of content creation for VR, AR, and mixed-reality platforms.',
+    accentColor: '#22d3ee',
+  },
+  {
+    icon: <SportsIcon />,
+    title: 'Traditional Sports × XR',
+    description: 'How immersive tech is transforming fan engagement, athlete performance, and sports broadcasting at a global scale.',
+    accentColor: '#4ade80',
+  },
+  {
+    icon: <EnterpriseIcon />,
+    title: 'Enterprise Adoption',
+    description: 'Real-world deployments of XR in manufacturing, healthcare, training, and architecture driving measurable ROI.',
+    accentColor: '#a78bfa',
+  },
+];
+
+const STATS = [
+  { value: 500, suffix: '+', label: 'Industry Leaders', sublabel: 'Attendees across all editions', accentColor: '#fb923c' },
+  { value: 40, suffix: '+', label: 'Expert Speakers', sublabel: 'Global innovators & practitioners', accentColor: '#22d3ee' },
+  { value: 4, suffix: '', label: 'Years of Excellence', sublabel: 'Since the inaugural XRAS 2021', accentColor: '#a78bfa' },
+];
+
+// ── Component ──────────────────────────────────────────────────────────────
+const AboutSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
+
+  // GSAP text-line reveal
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Heading word-by-word
+      if (headingRef.current) {
+        const words = headingRef.current.querySelectorAll('[data-word]');
+        gsap.fromTo(
+          words,
+          { y: 60, opacity: 0, rotateX: -20 },
+          {
+            y: 0,
+            opacity: 1,
+            rotateX: 0,
+            duration: 0.9,
+            stagger: 0.06,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headingRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // Body paragraphs
+      if (bodyRef.current) {
+        const paras = bodyRef.current.querySelectorAll('[data-para]');
+        gsap.fromTo(
+          paras,
+          { y: 35, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: bodyRef.current,
+              start: 'top 78%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // Divider scale
+      if (dividerRef.current) {
+        gsap.fromTo(
+          dividerRef.current,
+          { scaleX: 0, opacity: 0 },
+          {
+            scaleX: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: dividerRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      id="about"
+      ref={sectionRef}
+      className="relative w-full bg-background overflow-hidden"
+      style={{ paddingTop: 'var(--section-padding-y)', paddingBottom: 'var(--section-padding-y)' }}
+    >
+      {/* ── Background atmosphere ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+      >
+        {/* Ambient glow top-left */}
+        <div
+          className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full opacity-[0.06]"
+          style={{ background: 'radial-gradient(circle, #1e3a8a 0%, transparent 70%)' }}
+        />
+        {/* Ambient glow bottom-right */}
+        <div
+          className="absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full opacity-[0.08]"
+          style={{ background: 'radial-gradient(circle, #7e22ce 0%, transparent 70%)' }}
+        />
+
+        {/* Subtle grid texture */}
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+
+        {/* ── Top eyebrow ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.6 }}
+          className="flex items-center gap-4 mb-10"
+        >
+          <span className="w-6 h-px bg-accent/60" />
+          <span className="text-[0.6rem] font-bold tracking-[0.5em] uppercase text-accent/80">
+            About XR Summits
+          </span>
+        </motion.div>
+
+        {/* ── Two-column layout: heading + body ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+
+          {/* LEFT — Heading */}
+          <div ref={headingRef} className="flex flex-col gap-4" style={{ perspective: '800px' }}>
+            {[
+              { text: 'The Definitive', accent: false },
+              { text: 'Platform for', accent: false },
+              { text: "Asia's XR", accent: true },
+              { text: 'Future.', accent: false },
+            ].map((line) => (
+              <div key={line.text} className="overflow-hidden">
+                <h2
+                  data-word
+                  className="font-heading font-black leading-[0.95]"
+                  style={{
+                    fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
+                    letterSpacing: '0.04em',
+                    ...(line.accent
+                      ? {
+                        background: 'linear-gradient(135deg, #fb923c 0%, #f0f4ff 80%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }
+                      : { color: '#f0f4ff' }),
+                  }}
+                >
+                  {line.text}
+                </h2>
+              </div>
+            ))}
+
+            {/* Decorative line */}
+            <div
+              ref={dividerRef}
+              className="mt-4 w-20 h-[2px] origin-left"
+              style={{
+                background: 'linear-gradient(90deg, #fb923c, transparent)',
+                boxShadow: '0 0 10px rgba(251,146,60,0.5)',
+              }}
+            />
+          </div>
+
+          {/* RIGHT — Body text */}
+          <div ref={bodyRef} className="flex flex-col justify-center gap-6">
+            <p
+              data-para
+              className="text-base text-foreground leading-relaxed"
+            >
+              <span className="text-accent font-semibold">XR Asia Summit 2026 (XRAS26)</span>{' '}
+              is the definitive platform connecting innovators, enterprise leaders, and visionaries
+              shaping the future of immersive technology across Asia and the world.
+            </p>
+            <p data-para className="text-sm text-foreground-muted leading-relaxed">
+              From extended reality and spatial computing to AI-driven experiences and the metaverse,
+              XRAS26 brings together the brightest minds to showcase, discuss, and deploy the
+              technologies redefining how humans interact with the digital world.
+            </p>
+            <p data-para className="text-sm text-foreground-muted leading-relaxed">
+              As the successor to three landmark editions, the 4th XR Asia Summit builds on a
+              legacy of breakthrough keynotes, live demos, and cross-industry partnerships — setting
+              the stage for what comes next.
+            </p>
+
+            {/* CTA */}
+            <motion.div
+              data-para
+              whileHover={{ x: 4 }}
+              transition={{ duration: 0.2 }}
+              className="inline-flex"
+            >
+              <a
+                href="#events"
+                className="inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.2em] uppercase text-accent hover:text-foreground transition-colors duration-300"
+              >
+                Explore Events
+                <span>→</span>
+              </a>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* ── Stats row ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-24">
+          {STATS.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <StatCard {...s} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── Section divider ── */}
+        <div className="flex items-center gap-4 mb-16">
+          <div className="flex-1 h-px bg-border" />
+          <span className="text-[0.6rem] font-bold tracking-[0.5em] uppercase text-foreground-muted whitespace-nowrap">
+            Why XR Future
+          </span>
+          <div className="flex-1 h-px bg-border" />
+        </div>
+
+        {/* ── Pillars grid ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {PILLARS.map((p, i) => (
+            <PillarCard key={p.title} index={i} {...p} />
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default AboutSection;
+</file>
+
+<file path="src/components/about/PillarCard.tsx">
+import { motion } from 'framer-motion';
+
+interface PillarCardProps {
+  index: number;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  accentColor: string;
+}
+
+const PillarCard = ({ index, icon, title, description, accentColor }: PillarCardProps) => (
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ delay: index * 0.1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    className="relative flex flex-col gap-4 p-6 rounded-lg group cursor-default"
+    style={{
+      background: 'rgba(13, 27, 46, 0.5)',
+      border: '1px solid rgba(255,255,255,0.06)',
+      transition: 'border-color 0.3s, transform 0.3s',
+    }}
+    whileHover={{
+      y: -4,
+      transition: { duration: 0.3 },
+    }}
+    onMouseEnter={(e) => {
+      (e.currentTarget as HTMLDivElement).style.borderColor = `${accentColor}35`;
+    }}
+    onMouseLeave={(e) => {
+      (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.06)';
+    }}
+  >
+    {/* Left accent line */}
+    <div
+      className="absolute left-0 top-4 bottom-4 w-[2px] rounded-full opacity-60"
+      style={{ background: accentColor }}
+    />
+
+    {/* Number */}
+    <span
+      className="font-heading text-[0.6rem] font-bold tracking-[0.3em] opacity-50"
+      style={{ color: accentColor }}
+    >
+      0{index + 1}
+    </span>
+
+    {/* Icon */}
+    <div
+      className="w-10 h-10 rounded-md flex items-center justify-center"
+      style={{
+        background: `${accentColor}12`,
+        border: `1px solid ${accentColor}25`,
+        color: accentColor,
+      }}
+    >
+      {icon}
+    </div>
+
+    <div className="flex flex-col gap-1">
+      <h4 className="font-heading text-sm font-bold text-foreground tracking-wide">
+        {title}
+      </h4>
+      <p className="text-xs text-foreground-muted leading-relaxed">
+        {description}
+      </p>
+    </div>
+  </motion.div>
+);
+
+export default PillarCard;
+</file>
+
+<file path="src/components/about/StatCard.tsx">
+import { useCountUp } from '../../hooks/useScrollAnimations';
+
+interface StatCardProps {
+  value: number;
+  suffix: string;
+  label: string;
+  sublabel: string;
+  accentColor?: string;
+  delay?: number;
+}
+
+const StatCard = ({
+  value,
+  suffix,
+  label,
+  sublabel,
+  accentColor = '#fb923c',
+}: StatCardProps) => {
+  const countRef = useCountUp(value, suffix, 2.4);
+
+  return (
+    <div
+      className="relative flex flex-col items-center gap-2 px-8 py-8 rounded-lg text-center group"
+      style={{
+        background: 'rgba(13, 27, 46, 0.6)',
+        backdropFilter: 'blur(16px)',
+        border: `1px solid rgba(255,255,255,0.06)`,
+        transition: 'border-color 0.3s, box-shadow 0.3s',
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLDivElement).style.borderColor = `${accentColor}40`;
+        (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 40px ${accentColor}15`;
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(255,255,255,0.06)';
+        (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+      }}
+    >
+      {/* Top accent */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-[2px] rounded-full"
+        style={{ background: accentColor, boxShadow: `0 0 12px ${accentColor}` }}
+      />
+
+      <span
+        ref={countRef}
+        className="font-heading text-5xl font-black"
+        style={{
+          background: `linear-gradient(135deg, ${accentColor} 0%, #f0f4ff 100%)`,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
+        0{suffix}
+      </span>
+
+      <span className="font-heading text-sm font-bold tracking-[0.15em] uppercase text-foreground">
+        {label}
+      </span>
+      <span className="text-xs text-foreground-muted tracking-wide">
+        {sublabel}
+      </span>
+    </div>
+  );
+};
+
+export default StatCard;
+</file>
+
+<file path="src/components/events/EventsSection.tsx">
+import { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
+import SpotlightCard from './SpotlightCard';
+import PastEventCard from './PastEventCard';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Upcoming events data ───────────────────────────────────────────────────
+const UPCOMING_EVENTS = [
+  {
+    title: '4th XR Asia Summit 2026',
+    subtitle: 'Flagship · XRAS26',
+    date: 'TBC 2026',
+    location: 'Kuala Lumpur, MY',
+    description:
+      'The fourth edition of Asia\'s premier XR event. Bigger keynotes, deeper workshops, and the most ambitious immersive showcase yet.',
+    accentColor: '#fb923c',
+    tag: 'Flagship',
+    to: '/xr-summit',
+    imageSrc: '/xr-asia-summit-4th-coming-soon.png',
+    isFeatured: true,
+  },
+  {
+    title: "Mothership 26' AI Bootcamp",
+    subtitle: 'Intensive · 3 Days',
+    date: 'TBC 2026',
+    location: 'Kuala Lumpur, MY',
+    description:
+      'A hands-on AI × XR intensive bootcamp for builders, artists, and technologists ready to ship immersive AI products.',
+    accentColor: '#22d3ee',
+    tag: 'Bootcamp',
+    to: '/mothership',
+    isFeatured: false,
+  },
+  {
+    title: 'Siggraph Asia 2025',
+    subtitle: 'Partner Event',
+    date: 'Nov 2025',
+    location: 'Tokyo, JP',
+    description:
+      'The world\'s leading conference and exhibition on computer graphics, interactive techniques, and immersive experiences.',
+    accentColor: '#4ade80',
+    tag: 'Partner',
+    isFeatured: false,
+  },
+  {
+    title: 'AWE Asia 2026',
+    subtitle: 'Partner Event',
+    date: 'TBC 2026',
+    location: 'Asia Pacific',
+    description:
+      'Augmented World Expo — the world\'s largest XR industry event returns to Asia with cutting-edge AR/VR showcases.',
+    accentColor: '#a78bfa',
+    tag: 'Partner',
+    isFeatured: false,
+  },
+  {
+    title: 'Broadcast Asia 2026',
+    subtitle: 'Partner Event',
+    date: 'TBC 2026',
+    location: 'Singapore, SG',
+    description:
+      'Asia\'s premier broadcast and media technology show, featuring immersive production and spatial media tracks.',
+    accentColor: '#f472b6',
+    tag: 'Partner',
+    isFeatured: false,
+  },
+];
+
+// ── Past events data ────────────────────────────────────────────────────────
+const PAST_EVENTS = [
+  {
+    year: '2023',
+    title: 'XR Asia Summit 2023',
+    attendees: '300+',
+    speakers: '35+',
+    highlight:
+      'Third edition brought together Southeast Asia\'s largest gathering of XR professionals with live metaverse demos and enterprise case studies.',
+    imageSrc: '/xr-asia-summit-2023.jpeg',
+    accentColor: '#fb923c',
+  },
+  {
+    year: '2022',
+    title: 'XR Asia Summit 2022',
+    attendees: '250+',
+    speakers: '30+',
+    highlight:
+      'Landmark edition featuring the first-ever XR × Sports track and the Broadcast Digital Awards ceremony recognising Asia\'s innovators.',
+    imageSrc: '/xr-asia-summit-2022.jpeg',
+    accentColor: '#22d3ee',
+  },
+  {
+    year: '2022',
+    title: 'Broadcast Digital Award 2022',
+    attendees: '200+',
+    speakers: '20+',
+    highlight:
+      'Celebrating excellence in digital broadcasting and immersive media production across the Asia-Pacific region.',
+    imageSrc: '/broadcast-digital-award-2022.jpeg',
+    accentColor: '#4ade80',
+  },
+  {
+    year: '2021',
+    title: 'XR Asia Summit 2021',
+    attendees: '150+',
+    speakers: '25+',
+    highlight:
+      'The inaugural XR Asia Summit — a pioneering hybrid event that set the benchmark for immersive technology conferences in Asia.',
+    imageSrc: '/xr-asia-summit-2021.jpeg',
+    accentColor: '#a78bfa',
+  },
+];
+
+// ── Section label component ────────────────────────────────────────────────
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex items-center gap-4 mb-14">
+    <span className="w-6 h-px bg-accent/60" />
+    <span className="text-[0.6rem] font-bold tracking-[0.5em] uppercase text-accent/80">
+      {children}
+    </span>
+  </div>
+);
+
+// ── Main component ─────────────────────────────────────────────────────────
+const EventsSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const pastHeadRef = useRef<HTMLHeadingElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+
+  // Heading reveals
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      [headingRef, pastHeadRef].forEach((ref) => {
+        if (!ref.current) return;
+        gsap.fromTo(
+          ref.current,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: ref.current,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      });
+
+      // Subtle marquee-like horizontal scroll on the award image row
+      if (marqueeRef.current) {
+        gsap.to(marqueeRef.current, {
+          x: '-8%',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: marqueeRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 2,
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  // Split upcoming: 1 featured + 2 rows of 2
+  const featured = UPCOMING_EVENTS[0];
+  const secondary = UPCOMING_EVENTS.slice(1, 3);
+  const tertiary = UPCOMING_EVENTS.slice(3);
+
+  return (
+    <section
+      id="events"
+      ref={sectionRef}
+      className="relative w-full bg-background overflow-hidden"
+      style={{ paddingTop: 'var(--section-padding-y)', paddingBottom: 'var(--section-padding-y)' }}
+    >
+      {/* ── Atmospheric background ── */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute top-0 right-0 w-[700px] h-[700px] opacity-[0.05] rounded-full"
+          style={{ background: 'radial-gradient(circle, #fb923c 0%, transparent 70%)' }}
+        />
+        <div
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-[0.05] rounded-full"
+          style={{ background: 'radial-gradient(circle, #22d3ee 0%, transparent 70%)' }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+
+        {/* ══ UPCOMING EVENTS ════════════════════════════════════════════ */}
+        <SectionLabel>Upcoming Events</SectionLabel>
+
+        <h2
+          ref={headingRef}
+          className="font-heading font-black text-foreground mb-12 opacity-0"
+          style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '0.04em' }}
+        >
+          Event{' '}
+          <span
+            style={{
+              background: 'linear-gradient(135deg, #fb923c 0%, #f0f4ff 80%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Spotlights
+          </span>
+        </h2>
+
+        {/* Featured + two secondary */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+          <div className="lg:col-span-2">
+            <SpotlightCard index={0} {...featured} />
+          </div>
+          <div className="flex flex-col gap-4">
+            {secondary.map((ev, i) => (
+              <SpotlightCard key={ev.title} index={i + 1} {...ev} />
+            ))}
+          </div>
+        </div>
+
+        {/* Two tertiary */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-28">
+          {tertiary.map((ev, i) => (
+            <SpotlightCard key={ev.title} index={i + 3} {...ev} />
+          ))}
+        </div>
+
+        {/* ══ AWARD BANNER ═══════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded-xl overflow-hidden mb-28"
+          style={{
+            background: 'rgba(13,27,46,0.7)',
+            border: '1px solid rgba(251,146,60,0.2)',
+            boxShadow: '0 0 60px rgba(251,146,60,0.06)',
+          }}
+        >
+          <div className="absolute inset-0 overflow-hidden">
+            <div ref={marqueeRef} className="flex items-center h-full w-[110%]">
+              <img
+                src="/award-1600x329-removebg-preview.png"
+                alt="XR Summits Award"
+                className="w-full object-contain opacity-20"
+                loading="lazy"
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+              />
+            </div>
+          </div>
+          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 px-10 py-10">
+            <div className="flex flex-col gap-2 text-center sm:text-left">
+              <p className="text-[0.6rem] font-bold tracking-[0.4em] uppercase text-accent/80">
+                Industry Recognition
+              </p>
+              <h3 className="font-heading text-xl font-bold text-foreground">
+                Award-Winning Event Series
+              </h3>
+              <p className="text-sm text-foreground-muted max-w-md">
+                Recognised by leading industry bodies for advancing immersive technology adoption across Asia.
+              </p>
+            </div>
+            <img
+              src="/award-1600x329-removebg-preview.png"
+              alt="Award logo"
+              className="h-14 w-auto object-contain flex-shrink-0"
+              loading="lazy"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+          </div>
+        </motion.div>
+
+        {/* ══ PAST EVENTS ═════════════════════════════════════════════════ */}
+        <SectionLabel>Track Record</SectionLabel>
+
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+          <h2
+            ref={pastHeadRef}
+            className="font-heading font-black text-foreground opacity-0"
+            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '0.04em' }}
+          >
+            Past{' '}
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #22d3ee 0%, #f0f4ff 80%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Events
+            </span>
+          </h2>
+
+          {/* Timeline decoration */}
+          <div className="hidden sm:flex items-center gap-2 pb-1">
+            {['2021', '2022', '2023', '2026'].map((yr, i, arr) => (
+              <div key={yr} className="flex items-center gap-2">
+                <span
+                  className="text-[0.6rem] font-heading font-bold tracking-widest"
+                  style={{ color: i === arr.length - 1 ? '#fb923c' : '#6b7fa3' }}
+                >
+                  {yr}
+                </span>
+                {i < arr.length - 1 && (
+                  <div className="w-6 h-px bg-border" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {PAST_EVENTS.map((ev, i) => (
+            <PastEventCard key={`${ev.year}-${ev.title}`} index={i} {...ev} />
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default EventsSection;
+</file>
+
+<file path="src/components/events/PastEventCard.tsx">
+import { motion } from 'framer-motion';
+
+interface PastEventCardProps {
+  index: number;
+  year: string;
+  title: string;
+  attendees: string;
+  speakers: string;
+  highlight: string;
+  imageSrc?: string;
+  accentColor?: string;
+}
+
+const PastEventCard = ({
+  index,
+  year,
+  title,
+  attendees,
+  speakers,
+  highlight,
+  imageSrc,
+  accentColor = '#fb923c',
+}: PastEventCardProps) => (
+  <motion.div
+    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    className="group relative flex gap-5 p-5 rounded-xl overflow-hidden"
+    style={{
+      background: 'rgba(13,27,46,0.5)',
+      border: '1px solid rgba(255,255,255,0.06)',
+      transition: 'border-color 0.3s, box-shadow 0.3s',
+    }}
+    whileHover={{
+      borderColor: `${accentColor}35`,
+      boxShadow: `0 0 30px ${accentColor}10`,
+      transition: { duration: 0.3 },
+    }}
+  >
+    {/* Image thumbnail */}
+    <div className="relative w-28 h-28 rounded-lg overflow-hidden flex-shrink-0">
+      {imageSrc ? (
+        <>
+          <img
+            src={imageSrc}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-background/30" />
+        </>
+      ) : (
+        <div
+          className="w-full h-full flex items-center justify-center"
+          style={{ background: `${accentColor}12` }}
+        >
+          <span
+            className="font-heading text-2xl font-black"
+            style={{ color: `${accentColor}60` }}
+          >
+            {year}
+          </span>
+        </div>
+      )}
+
+      {/* Year badge */}
+      <div
+        className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded text-[0.55rem] font-bold tracking-wider"
+        style={{
+          background: `${accentColor}CC`,
+          color: '#050b18',
+        }}
+      >
+        {year}
+      </div>
+    </div>
+
+    {/* Content */}
+    <div className="flex flex-col justify-between flex-1 min-w-0">
+      <div>
+        <h4 className="font-heading text-sm font-bold text-foreground leading-tight mb-1 truncate">
+          {title}
+        </h4>
+        <p className="text-xs text-foreground-muted leading-relaxed line-clamp-2">
+          {highlight}
+        </p>
+      </div>
+
+      {/* Stats row */}
+      <div className="flex items-center gap-4 mt-3">
+        <div className="flex flex-col">
+          <span
+            className="font-heading text-sm font-bold"
+            style={{ color: accentColor }}
+          >
+            {attendees}
+          </span>
+          <span className="text-[0.58rem] text-foreground-muted tracking-wide">Attendees</span>
+        </div>
+        <div className="w-px h-6 bg-border" />
+        <div className="flex flex-col">
+          <span
+            className="font-heading text-sm font-bold"
+            style={{ color: accentColor }}
+          >
+            {speakers}
+          </span>
+          <span className="text-[0.58rem] text-foreground-muted tracking-wide">Speakers</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Right accent line */}
+    <div
+      className="absolute right-0 top-4 bottom-4 w-[2px] rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-300"
+      style={{ background: accentColor }}
+    />
+  </motion.div>
+);
+
+export default PastEventCard;
+</file>
+
+<file path="src/components/events/SpotlightCard.tsx">
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+
+interface SpotlightCardProps {
+  index: number;
+  title: string;
+  subtitle: string;
+  date: string;
+  location: string;
+  description: string;
+  accentColor: string;
+  tag: string;
+  to?: string;
+  imageSrc?: string;
+  isFeatured?: boolean;
+}
+
+const SpotlightCard = ({
+  index,
+  title,
+  subtitle,
+  date,
+  location,
+  description,
+  accentColor,
+  tag,
+  to,
+  imageSrc,
+  isFeatured = false,
+}: SpotlightCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const shineRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !shineRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotX = ((y - cy) / cy) * -6;
+    const rotY = ((x - cx) / cx) * 6;
+
+    gsap.to(cardRef.current, {
+      rotateX: rotX,
+      rotateY: rotY,
+      duration: 0.4,
+      ease: 'power1.out',
+      transformPerspective: 900,
+    });
+
+    // Shine follows cursor
+    gsap.to(shineRef.current, {
+      x: x - rect.width / 2,
+      y: y - rect.height / 2,
+      opacity: 0.12,
+      duration: 0.3,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current || !shineRef.current) return;
+    gsap.to(cardRef.current, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+    });
+    gsap.to(shineRef.current, { opacity: 0, duration: 0.4 });
+  };
+
+  const inner = (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transformStyle: 'preserve-3d' }}
+      className={`relative h-full rounded-xl overflow-hidden cursor-pointer group
+        ${isFeatured ? 'min-h-[480px]' : 'min-h-[340px]'}`}
+    >
+      {/* Image / gradient background */}
+      <div className="absolute inset-0">
+        {imageSrc ? (
+          <>
+            <img
+              src={imageSrc}
+              alt={title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(to top, rgba(5,11,24,0.97) 0%, rgba(5,11,24,0.6) 50%, rgba(5,11,24,0.2) 100%)`,
+              }}
+            />
+          </>
+        ) : (
+          <div
+            className="w-full h-full"
+            style={{
+              background: `linear-gradient(135deg, rgba(13,27,46,0.95) 0%, ${accentColor}18 100%)`,
+            }}
+          />
+        )}
+      </div>
+
+      {/* Animated border */}
+      <div
+        className="absolute inset-0 rounded-xl transition-all duration-500"
+        style={{
+          border: `1px solid ${accentColor}25`,
+          boxShadow: `inset 0 0 0 1px ${accentColor}00`,
+        }}
+      />
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          boxShadow: `0 0 40px ${accentColor}25, inset 0 0 30px ${accentColor}08`,
+          border: `1px solid ${accentColor}55`,
+        }}
+      />
+
+      {/* Cursor shine blob */}
+      <div
+        ref={shineRef}
+        className="absolute w-64 h-64 rounded-full pointer-events-none opacity-0"
+        style={{
+          background: `radial-gradient(circle, ${accentColor}60 0%, transparent 70%)`,
+          transform: 'translate(-50%, -50%)',
+          left: '50%',
+          top: '50%',
+          filter: 'blur(20px)',
+        }}
+      />
+
+      {/* Top accent line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[2px] opacity-70"
+        style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
+      />
+
+      {/* Corner brackets */}
+      {[
+        'top-3 left-3 border-t border-l',
+        'top-3 right-3 border-t border-r',
+        'bottom-3 left-3 border-b border-l',
+        'bottom-3 right-3 border-b border-r',
+      ].map((cls) => (
+        <div
+          key={cls}
+          className={`absolute w-4 h-4 ${cls} transition-all duration-300`}
+          style={{ borderColor: `${accentColor}60` }}
+        />
+      ))}
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col justify-end h-full p-6 gap-3">
+        {/* Tag + index */}
+        <div className="flex items-center justify-between mb-1">
+          <span
+            className="text-[0.58rem] font-bold tracking-[0.3em] uppercase px-2.5 py-1 rounded-full"
+            style={{
+              color: accentColor,
+              background: `${accentColor}18`,
+              border: `1px solid ${accentColor}35`,
+            }}
+          >
+            {tag}
+          </span>
+          <span
+            className="font-mono text-[0.58rem] tracking-widest"
+            style={{ color: `${accentColor}60` }}
+          >
+            0{index + 1}
+          </span>
+        </div>
+
+        <div>
+          <p
+            className="text-[0.62rem] font-semibold tracking-[0.25em] uppercase mb-1"
+            style={{ color: `${accentColor}90` }}
+          >
+            {subtitle}
+          </p>
+          <h3
+            className={`font-heading font-bold text-foreground leading-tight mb-2
+              ${isFeatured ? 'text-2xl' : 'text-lg'}`}
+          >
+            {title}
+          </h3>
+          <p className="text-xs text-foreground-muted leading-relaxed line-clamp-2">
+            {description}
+          </p>
+        </div>
+
+        {/* Meta */}
+        <div className="flex items-center gap-4 pt-2 border-t border-white/[0.06]">
+          <span className="flex items-center gap-1.5 text-[0.65rem] text-foreground-muted">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3">
+              <rect x="2" y="3" width="12" height="11" rx="1" />
+              <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
+            </svg>
+            {date}
+          </span>
+          <span className="flex items-center gap-1.5 text-[0.65rem] text-foreground-muted">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
+              <circle cx="8" cy="6" r="1.5" />
+            </svg>
+            {location}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="h-full"
+    >
+      {to ? (
+        <Link to={to} className="block h-full">
+          {inner}
+        </Link>
+      ) : (
+        inner
+      )}
+    </motion.div>
+  );
+};
+
+export default SpotlightCard;
+</file>
+
+<file path="src/components/hero/GatewayCard.tsx">
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+
+interface GatewayCardProps {
+  index: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  to: string;
+  accentColor: string;
+  glowColor: string;
+  tag: string;
+  icon: React.ReactNode;
+  isCenter?: boolean;
+}
+
+const GatewayCard = ({
+  index,
+  title,
+  subtitle,
+  description,
+  to,
+  accentColor,
+  glowColor,
+  tag,
+  icon,
+  isCenter = false,
+}: GatewayCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseEnter = () => {
+    if (!cardRef.current || !glowRef.current || !contentRef.current) return;
+    gsap.to(cardRef.current, {
+      scale: 1.04,
+      y: -8,
+      duration: 0.5,
+      ease: 'power3.out',
+    });
+    gsap.to(glowRef.current, {
+      opacity: 1,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+    gsap.to(contentRef.current, {
+      y: -4,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current || !glowRef.current || !contentRef.current) return;
+    gsap.to(cardRef.current, {
+      scale: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+    gsap.to(glowRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+    gsap.to(contentRef.current, {
+      y: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 12;
+    gsap.to(cardRef.current, {
+      rotateY: x,
+      rotateX: -y,
+      duration: 0.4,
+      ease: 'power1.out',
+      transformPerspective: 800,
+    });
+  };
+
+  const handleMouseOut = () => {
+    if (!cardRef.current) return;
+    gsap.to(cardRef.current, {
+      rotateY: 0,
+      rotateX: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: 1.4 + index * 0.18,
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={`relative flex-1 ${isCenter ? 'md:flex-[1.15]' : ''}`}
+    >
+      <div
+        ref={cardRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        onMouseOut={handleMouseOut}
+        style={{ transformStyle: 'preserve-3d' }}
+        className="relative h-full cursor-pointer"
+      >
+        {/* Glow layer */}
+        <div
+          ref={glowRef}
+          className="absolute -inset-[1px] rounded-lg opacity-0 transition-opacity"
+          style={{
+            background: `linear-gradient(135deg, ${accentColor}30, ${glowColor}20)`,
+            boxShadow: `0 0 40px ${accentColor}40, 0 0 80px ${accentColor}15`,
+          }}
+        />
+
+        {/* Card */}
+        <div
+          className="relative h-full rounded-lg overflow-hidden"
+          style={{
+            background: 'rgba(13, 27, 46, 0.7)',
+            backdropFilter: 'blur(20px)',
+            border: `1px solid ${accentColor}35`,
+          }}
+        >
+          {/* Top accent line */}
+          <div
+            className="absolute top-0 left-0 right-0 h-[2px]"
+            style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
+          />
+
+          {/* Corner decorations */}
+          <div
+            className="absolute top-3 left-3 w-4 h-4 border-t border-l"
+            style={{ borderColor: `${accentColor}80` }}
+          />
+          <div
+            className="absolute top-3 right-3 w-4 h-4 border-t border-r"
+            style={{ borderColor: `${accentColor}80` }}
+          />
+          <div
+            className="absolute bottom-3 left-3 w-4 h-4 border-b border-l"
+            style={{ borderColor: `${accentColor}80` }}
+          />
+          <div
+            className="absolute bottom-3 right-3 w-4 h-4 border-b border-r"
+            style={{ borderColor: `${accentColor}80` }}
+          />
+
+          <div ref={contentRef} className="p-8 flex flex-col gap-5 h-full">
+            {/* Tag */}
+            <div className="flex items-center justify-between">
+              <span
+                className="text-[0.6rem] font-bold tracking-[0.3em] uppercase px-3 py-1 rounded-full"
+                style={{
+                  color: accentColor,
+                  background: `${accentColor}15`,
+                  border: `1px solid ${accentColor}30`,
+                }}
+              >
+                {tag}
+              </span>
+              <span
+                className="text-[0.6rem] font-mono tracking-widest"
+                style={{ color: `${accentColor}70` }}
+              >
+                0{index + 1}
+              </span>
+            </div>
+
+            {/* Icon */}
+            <div
+              className="w-14 h-14 rounded-lg flex items-center justify-center text-2xl"
+              style={{
+                background: `${accentColor}12`,
+                border: `1px solid ${accentColor}25`,
+                color: accentColor,
+              }}
+            >
+              {icon}
+            </div>
+
+            {/* Text */}
+            <div className="flex flex-col gap-2">
+              <p
+                className="text-[0.65rem] font-semibold tracking-[0.25em] uppercase"
+                style={{ color: `${accentColor}90` }}
+              >
+                {subtitle}
+              </p>
+              <h3 className="font-heading text-xl font-bold text-foreground leading-tight">
+                {title}
+              </h3>
+              <p className="text-sm text-foreground-muted leading-relaxed mt-1">
+                {description}
+              </p>
+            </div>
+
+            {/* CTA */}
+            <div className="mt-auto pt-4">
+              <Link
+                to={to}
+                className="group inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase transition-all duration-300"
+                style={{ color: accentColor }}
+              >
+                Enter Experience
+                <span className="transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default GatewayCard;
+</file>
+
+<file path="src/components/hero/HeroLogo.tsx">
+import { motion } from 'framer-motion';
+
+const logoLines = ['XR', 'SUMMITS'];
+const tagline = 'Asia\'s Premier Immersive Technology Event';
+
+const HeroLogo = () => {
+  return (
+    <div className="flex flex-col items-center gap-4 select-none">
+
+      {/* Eyebrow */}
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center gap-3"
+      >
+        <span className="w-8 h-px bg-accent/60" />
+        <span className="text-[0.6rem] font-bold tracking-[0.5em] uppercase text-accent/80">
+          Est. 2021 · Kuala Lumpur
+        </span>
+        <span className="w-8 h-px bg-accent/60" />
+      </motion.div>
+
+      {/* Logo image + wordmark */}
+      <div className="flex flex-col items-center gap-3">
+        {/* Logo mark */}
+        <motion.div
+          initial={{ scale: 0.4, opacity: 0, rotate: -10 }}
+          animate={{ scale: 1, opacity: 1, rotate: 0 }}
+          transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative"
+        >
+          <div
+            className="absolute inset-0 rounded-full blur-2xl"
+            style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.35) 0%, transparent 70%)' }}
+          />
+          <img
+            src="/logo-278x262-removebg.png"
+            alt="XR Summits Logo"
+            className="relative h-24 w-auto object-contain drop-shadow-[0_0_20px_rgba(251,146,60,0.5)]"
+            onError={(e) => { e.currentTarget.style.opacity = '0'; }}
+          />
+        </motion.div>
+
+        {/* Wordmark */}
+        <div className="overflow-hidden flex flex-col items-center">
+          {logoLines.map((word, wi) => (
+            <motion.h1
+              key={word}
+              initial={{ y: '110%' }}
+              animate={{ y: '0%' }}
+              transition={{
+                delay: 0.7 + wi * 0.12,
+                duration: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="font-heading font-black leading-[0.9] text-center"
+              style={{
+                fontSize: 'clamp(3.5rem, 10vw, 8rem)',
+                letterSpacing: '0.15em',
+                background: wi === 0
+                  ? 'linear-gradient(135deg, #f0f4ff 30%, #fb923c 100%)'
+                  : 'linear-gradient(135deg, #93c5fd 0%, #f0f4ff 60%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                textShadow: 'none',
+              }}
+            >
+              {word}
+            </motion.h1>
+          ))}
+        </div>
+      </div>
+
+      {/* Tagline */}
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.05, duration: 0.8, ease: 'easeOut' }}
+        className="text-foreground-muted text-center text-sm tracking-[0.15em] uppercase max-w-sm"
+      >
+        {tagline}
+      </motion.p>
+
+      {/* Divider */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 1.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-32 h-px origin-center"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.6), transparent)' }}
+      />
+    </div>
+  );
+};
+
+export default HeroLogo;
+</file>
+
+<file path="src/components/hero/HeroSection.tsx">
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import ParticleCanvas from './ParticleCanvas';
+import HeroLogo from './HeroLogo';
+import GatewayCard from './GatewayCard';
+
+// ── SVG Icons ──────────────────────────────────────────────────────────────
+const XRIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M2.25 7.5l10.5-6 10.5 6v9l-10.5 6-10.5-6v-9z" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21V3M2.25 7.5l9.75 5.5 9.75-5.5" />
+  </svg>
+);
+
+const EsportsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877" />
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17L6.75 19.5a2.121 2.121 0 01-3-3l4.672-4.853" />
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M12 3c3.5 0 6.5 2.5 7 6l-2.5 1.5-4.5-3-4.5 3L5 9c.5-3.5 3.5-6 7-6z" />
+  </svg>
+);
+
+const HackathonIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+  </svg>
+);
+
+// ── Gateway data ───────────────────────────────────────────────────────────
+const GATEWAYS = [
+  {
+    title: 'XR Asia Summit',
+    subtitle: '4th Edition · 2026',
+    description:
+      'The definitive platform where immersive tech visionaries, enterprise leaders, and XR innovators converge to shape the future.',
+    to: '/xr-summit',
+    accentColor: '#fb923c',
+    glowColor: '#f97316',
+    tag: 'Flagship Event',
+    icon: <XRIcon />,
+  },
+  {
+    title: 'XR Esports',
+    subtitle: 'Competitive · Immersive',
+    description:
+      'Where traditional esports collides with spatial computing. Compete, spectate, and experience gaming in a new dimension.',
+    to: '/xr-esports',
+    accentColor: '#22d3ee',
+    glowColor: '#06b6d4',
+    tag: 'Arena',
+    icon: <EsportsIcon />,
+    isCenter: true,
+  },
+  {
+    title: 'Hackathon',
+    subtitle: '48-Hour Build Sprint',
+    description:
+      'Build the immersive future in 48 hours. AI, XR, spatial media — bring your stack and compete for real prizes.',
+    to: '/hackathon',
+    accentColor: '#a78bfa',
+    glowColor: '#7c3aed',
+    tag: 'Build & Compete',
+    icon: <HackathonIcon />,
+  },
+];
+
+// ── HeroSection ────────────────────────────────────────────────────────────
+const HeroSection = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollDown = () => {
+    const next = document.getElementById('about');
+    if (next) next.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section className="relative w-full min-h-screen flex flex-col overflow-hidden">
+
+      {/* ── 3D Particle Background ── */}
+      <div className="absolute inset-0 z-0">
+        <ParticleCanvas />
+      </div>
+
+      {/* ── Radial vignette ── */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 60% at 50% 40%, transparent 0%, rgba(5,11,24,0.55) 65%, rgba(5,11,24,0.95) 100%)',
+        }}
+      />
+
+      {/* ── Bottom fog / section transition ── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 z-[2] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(5,11,24,0.9) 70%, #050b18 100%)',
+        }}
+      />
+
+      {/* ── Main content ── */}
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-28 pb-16 gap-14">
+
+        {/* Logo */}
+        <HeroLogo />
+
+        {/* Gateway label */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.3, duration: 0.6 }}
+          className="text-center"
+        >
+          <p className="text-[0.65rem] font-bold tracking-[0.5em] uppercase text-foreground-muted">
+            Choose Your Experience
+          </p>
+        </motion.div>
+
+        {/* Gateway cards */}
+        <div
+          ref={scrollRef}
+          className="w-full max-w-5xl flex flex-col md:flex-row gap-4 items-stretch"
+        >
+          {GATEWAYS.map((g, i) => (
+            <GatewayCard key={g.title} index={i} {...g} />
+          ))}
+        </div>
+
+        {/* Scroll indicator */}
+        <motion.button
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 0.6 }}
+          onClick={handleScrollDown}
+          className="flex flex-col items-center gap-2 group cursor-pointer mt-2"
+          aria-label="Scroll down"
+        >
+          <span className="text-[0.55rem] tracking-[0.4em] uppercase text-foreground-muted group-hover:text-accent transition-colors duration-300">
+            Scroll
+          </span>
+          <div className="w-[1px] h-8 bg-gradient-to-b from-foreground-muted/40 to-transparent relative overflow-hidden">
+            <motion.div
+              className="absolute top-0 left-0 right-0 h-4 bg-accent/60"
+              animate={{ y: ['-100%', '200%'] }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: 'linear' }}
+            />
+          </div>
+        </motion.button>
+      </div>
+
+      {/* ── Horizontal scan line (decorative) ── */}
+      <motion.div
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ delay: 1.8, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute top-1/2 left-0 right-0 h-px z-[3] pointer-events-none origin-left"
+        style={{
+          background:
+            'linear-gradient(90deg, transparent 0%, rgba(251,146,60,0.12) 20%, rgba(251,146,60,0.25) 50%, rgba(251,146,60,0.12) 80%, transparent 100%)',
+        }}
+      />
+    </section>
+  );
+};
+
+export default HeroSection;
+</file>
+
+<file path="src/components/hero/ParticleCanvas.tsx">
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+
+const ParticleCanvas = () => {
+  const mountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount) return;
+
+    // ── Scene setup ────────────────────────────────────────────────────
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      mount.clientWidth / mount.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.z = 3;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+    mount.appendChild(renderer.domElement);
+
+    // ── Particles ──────────────────────────────────────────────────────
+    const PARTICLE_COUNT = 2800;
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const colors = new Float32Array(PARTICLE_COUNT * 3);
+    const sizes = new Float32Array(PARTICLE_COUNT);
+
+    const colorPalette = [
+      new THREE.Color('#fb923c'), // accent orange
+      new THREE.Color('#1e3a8a'), // primary blue
+      new THREE.Color('#7e22ce'), // secondary purple
+      new THREE.Color('#93c5fd'), // light blue
+      new THREE.Color('#f0f4ff'), // near white
+    ];
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const i3 = i * 3;
+      // Spread particles in a wide sphere
+      const radius = 5 + Math.random() * 6;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i3 + 2] = radius * Math.cos(phi) - 2;
+
+      const c = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      colors[i3] = c.r;
+      colors[i3 + 1] = c.g;
+      colors[i3 + 2] = c.b;
+
+      sizes[i] = Math.random() * 2.5 + 0.5;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    // Custom shader for glowing, round particles
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uPixelRatio: { value: renderer.getPixelRatio() },
+      },
+      vertexShader: `
+        attribute float size;
+        attribute vec3 color;
+        varying vec3 vColor;
+        uniform float uTime;
+        uniform float uPixelRatio;
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+          // Gentle drift
+          pos.x += sin(uTime * 0.18 + position.z * 0.4) * 0.08;
+          pos.y += cos(uTime * 0.14 + position.x * 0.3) * 0.06;
+          pos.z += sin(uTime * 0.10 + position.y * 0.2) * 0.05;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = size * uPixelRatio * (280.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vColor;
+
+        void main() {
+          float dist = length(gl_PointCoord - vec2(0.5));
+          if (dist > 0.5) discard;
+          float alpha = 1.0 - smoothstep(0.1, 0.5, dist);
+          // Glow core
+          float glow = exp(-dist * 6.0) * 0.8;
+          gl_FragColor = vec4(vColor + glow * 0.4, alpha * 0.75);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexColors: true,
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // ── Grid plane (subtle) ────────────────────────────────────────────
+    const gridHelper = new THREE.GridHelper(30, 40, 0x1e3a8a, 0x0d1b2e);
+    gridHelper.position.y = -4;
+    const gridMaterial = gridHelper.material as THREE.LineBasicMaterial;
+    gridMaterial.color.set(0x1e3a8a);
+    gridMaterial.transparent = true;
+    gridMaterial.opacity = 0.15;
+    scene.add(gridHelper);
+
+    // ── Mouse parallax ─────────────────────────────────────────────────
+    let mouseX = 0, mouseY = 0;
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
+    // ── Resize ─────────────────────────────────────────────────────────
+    const onResize = () => {
+      if (!mount) return;
+      camera.aspect = mount.clientWidth / mount.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(mount.clientWidth, mount.clientHeight);
+      material.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+    };
+    window.addEventListener('resize', onResize);
+
+    // ── Animation loop ─────────────────────────────────────────────────
+    let animId: number;
+    const clock = new THREE.Clock();
+
+    const animate = () => {
+      animId = requestAnimationFrame(animate);
+      const t = clock.getElapsedTime();
+      material.uniforms.uTime.value = t;
+
+      // Slow rotation + mouse parallax
+      particles.rotation.y = t * 0.018 + mouseX * 0.06;
+      particles.rotation.x = mouseY * 0.04;
+      gridHelper.position.x = mouseX * 0.3;
+
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', onResize);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+      if (mount.contains(renderer.domElement)) {
+        mount.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={mountRef}
+      className="absolute inset-0 w-full h-full"
+      aria-hidden="true"
+    />
+  );
+};
+
+export default ParticleCanvas;
+</file>
+
+<file path="src/components/Layout.tsx">
+import { useEffect, useRef } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Navbar from './Navbar';
+
+gsap.registerPlugin(ScrollTrigger);
+
+export const lenisInstance: { current: Lenis | null } = { current: null };
+
+const Layout = () => {
+  const lenisRef = useRef<Lenis | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+
+    lenisRef.current = lenis;
+    lenisInstance.current = lenis;
+
+    // Keep GSAP ScrollTrigger in sync with Lenis scroll position
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Lenis drives the RAF loop; we also tick GSAP's ticker
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      lenis.destroy();
+      lenisInstance.current = null;
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  // Scroll to top on route change
+  useEffect(() => {
+    lenisInstance.current?.scrollTo(0, { immediate: true });
+    ScrollTrigger.refresh();
+  }, [location.pathname]);
+
+  return (
+    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
+};
+
+export default Layout;
+</file>
+
+<file path="src/components/Navbar.tsx">
+import { useState, useEffect, useCallback } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+
+const NAV_LINKS = [
+  { label: 'Home', to: '/' },
+  { label: "Mothership 26' AI Bootcamp", to: '/mothership' },
+  { label: 'Awards Gala', to: '/awards' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact Us', to: '/contact' },
+];
+
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 40);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  return (
+    <>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled
+          ? 'py-2 bg-[rgba(15,23,42,0.75)] backdrop-blur-xl border-b border-[rgba(251,146,60,0.12)] shadow-[0_0_40px_rgba(251,146,60,0.05)]'
+          : 'py-4 bg-transparent'
+          }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="group flex items-center gap-3 select-none">
+            <div className="relative">
+              <img
+                src="/logo-278x262-removebg.png"
+                alt="XR Summits"
+                className="h-9 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+              {/* Fallback text logo */}
+              <span
+                className="font-heading text-xl font-bold tracking-[0.2em] text-foreground group-hover:text-accent transition-colors duration-300"
+                style={{ display: 'none' }}
+                ref={(el) => {
+                  if (el) {
+                    const img = el.previousElementSibling as HTMLImageElement;
+                    if (img && img.style.display === 'none') {
+                      el.style.display = 'block';
+                    }
+                  }
+                }}
+              >
+                XR
+              </span>
+            </div>
+            <div className="flex flex-col leading-none">
+              <span className="font-heading text-sm font-bold tracking-[0.25em] text-foreground group-hover:text-accent transition-colors duration-300">
+                XR
+              </span>
+              <span className="font-heading text-[0.5rem] font-light tracking-[0.4em] text-foreground-muted uppercase">
+                Summits
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV_LINKS.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.to === '/'}
+                className={({ isActive }) =>
+                  `relative px-4 py-2 text-[0.72rem] font-medium tracking-[0.12em] uppercase transition-all duration-300 rounded-sm
+                  ${isActive
+                    ? 'text-accent'
+                    : 'text-foreground-muted hover:text-foreground'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {link.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-indicator"
+                        className="absolute bottom-0 left-2 right-2 h-[1px] bg-accent shadow-[0_0_8px_rgba(251,146,60,0.8)]"
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                  </>
+                )}
+              </NavLink>
+            ))}
+
+            <a
+              href="#tickets"
+              className="ml-4 px-5 py-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase
+                border border-accent text-accent rounded-sm
+                hover:bg-accent hover:text-background
+                transition-all duration-300
+                shadow-[0_0_16px_rgba(251,146,60,0.2)]
+                hover:shadow-[0_0_24px_rgba(251,146,60,0.5)]"
+            >
+              Register
+            </a>
+          </nav>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="lg:hidden p-2 text-foreground-muted hover:text-accent transition-colors duration-200"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[99] bg-[rgba(15,23,42,0.97)] backdrop-blur-2xl flex flex-col pt-24 px-8"
+          >
+            <nav className="flex flex-col gap-2">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.to}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <NavLink
+                    to={link.to}
+                    end={link.to === '/'}
+                    className={({ isActive }) =>
+                      `block py-4 text-xl font-heading font-semibold tracking-[0.15em] uppercase border-b border-border
+                      ${isActive ? 'text-accent' : 'text-foreground-muted'}`
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                </motion.div>
+              ))}
+
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: NAV_LINKS.length * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-8"
+              >
+                <a
+                  href="#tickets"
+                  className="inline-block px-8 py-3 text-base font-bold tracking-[0.2em] uppercase
+                    border border-accent text-accent rounded-sm
+                    hover:bg-accent hover:text-background
+                    transition-all duration-300
+                    shadow-[0_0_24px_rgba(251,146,60,0.3)]"
+                >
+                  Register
+                </a>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Navbar;
+</file>
+
+<file path="src/hooks/useScrollAnimations.ts">
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Fade + slide up on scroll ─────────────────────────────────────────────
+export const useScrollReveal = (options?: {
+  y?: number;
+  delay?: number;
+  stagger?: number;
+  threshold?: string;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const targets = el.querySelectorAll("[data-reveal]");
+    if (!targets.length) return;
+
+    gsap.set(targets, { y: options?.y ?? 50, opacity: 0 });
+
+    const ctx = gsap.context(() => {
+      gsap.to(targets, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: options?.stagger ?? 0.12,
+        delay: options?.delay ?? 0,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: options?.threshold ?? "top 78%",
+          toggleActions: "play none none none",
+        },
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, [options?.y, options?.delay, options?.stagger, options?.threshold]);
+
+  return ref;
+};
+
+// ── Counting number animation ─────────────────────────────────────────────
+export const useCountUp = (target: number, suffix = "", duration = 2.2) => {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const obj = { val: 0 };
+
+    const ctx = gsap.context(() => {
+      gsap.to(obj, {
+        val: target,
+        duration,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        onUpdate: () => {
+          el.textContent = Math.round(obj.val) + suffix;
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [target, suffix, duration]);
+
+  return ref;
+};
+
+// ── Horizontal parallax for a container ───────────────────────────────────
+export const useParallaxX = (speed = 0.15) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(el, {
+        x: () => -speed * window.innerWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [speed]);
+
+  return ref;
+};
+
+// ── Vertical parallax ─────────────────────────────────────────────────────
+export const useParallaxY = (speed = 0.2) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(el, {
+        y: () => speed * 200,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 2,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, [speed]);
+
+  return ref;
+};
+</file>
+
+<file path="src/i18n.ts">
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+
+const resources = {};
+
+const savedLanguage = localStorage.getItem("appLanguage") || "en";
+
+i18n.use(initReactI18next).init({
+  resources,
+  lng: savedLanguage,
+  fallbackLng: "en",
+  interpolation: { escapeValue: false },
+});
+export default i18n;
+</file>
+
+<file path="src/index.css">
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ── Lenis smooth scroll ───────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ── Theme tokens ───────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-heading: "Orbitron", var(--font-sans);
+
+  --color-primary: var(--theme-primary);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+
+  --color-background: var(--theme-background);
+  --color-surface: var(--theme-surface);
+
+  --color-foreground: var(--theme-foreground);
+  --color-foreground-muted: var(--theme-foreground-muted);
+
+  --color-border: var(--theme-border);
+
+  --radius-btn: 4px;
+  --radius-card: 8px;
+
+  --shadow-card:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-hover:
+    0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* ── CSS Variables ─────────────────────────────────────────────────────── */
+:root {
+  --theme-primary: #1e3a8a;
+  --theme-secondary: #7e22ce;
+  --theme-accent: #fb923c;
+  --theme-accent-glow: rgba(251, 146, 60, 0.4);
+
+  --theme-background: #050b18;
+  --theme-surface: #0d1b2e;
+  --theme-surface-2: #1a2540;
+
+  --theme-foreground: #f0f4ff;
+  --theme-foreground-muted: #6b7fa3;
+
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-border-accent: rgba(251, 146, 60, 0.25);
+
+  --section-padding-y: 7rem;
+  --transition-base: all 0.3s ease-in-out;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--theme-background);
+  color: var(--theme-foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+/* ── Glassmorphism utility ─────────────────────────────────────────────── */
+.glass {
+  background: rgba(13, 27, 46, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--theme-border);
+}
+
+.glass-accent {
+  background: rgba(13, 27, 46, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--theme-border-accent);
+  box-shadow: 0 0 30px rgba(251, 146, 60, 0.06);
+}
+
+/* ── Glow utilities ────────────────────────────────────────────────────── */
+.glow-accent {
+  box-shadow:
+    0 0 20px rgba(251, 146, 60, 0.3),
+    0 0 60px rgba(251, 146, 60, 0.1);
+}
+
+.glow-text-accent {
+  text-shadow:
+    0 0 20px rgba(251, 146, 60, 0.6),
+    0 0 40px rgba(251, 146, 60, 0.3);
+}
+
+/* ── Scan-line overlay (atmospheric) ─────────────────────────────────── */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--theme-background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(251, 146, 60, 0.4);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 146, 60, 0.7);
+}
+</file>
+
+<file path="src/main.tsx">
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import './i18n';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <App />
+);
+</file>
+
+<file path="src/pages/AboutPage.tsx">
+import React from 'react'
+
+const AboutPage = () => {
+  return (
+    <div>AboutPage</div>
+  )
+}
+
+export default AboutPage
+</file>
+
+<file path="src/pages/AwardsGalaPage.tsx">
+import React from 'react'
+
+const AwardsGalaPage = () => {
+  return (
+    <div>AwardsGalaPage</div>
+  )
+}
+
+export default AwardsGalaPage
+</file>
+
+<file path="src/pages/ContactPage.tsx">
+import React from 'react'
+
+const ContactPage = () => {
+  return (
+    <div>ContactPage</div>
+  )
+}
+
+export default ContactPage
+</file>
+
+<file path="src/pages/Home.tsx">
+import { Helmet } from 'react-helmet-async';
+import HeroSection from '../components/hero/HeroSection';
+import AboutSection from '../components/about/AboutSection';
+import EventsSection from '../components/events/EventsSection';
+
+const Home = () => (
+  <>
+    <Helmet>
+      <title>XR Summits — Asia's Premier Immersive Technology Event</title>
+      <meta
+        name="description"
+        content="XR Asia Summit 2026 — The definitive platform connecting XR innovators, enterprise leaders, and immersive tech visionaries in Asia."
+      />
+    </Helmet>
+
+    <HeroSection />
+    <AboutSection />
+    <EventsSection />
+  </>
+);
+
+export default Home;
+</file>
+
+<file path="src/pages/MothershipPage.tsx">
+import React from 'react'
+
+const MothershipPage = () => {
+  return (
+    <div>MothershipPage</div>
+  )
+}
+
+export default MothershipPage
+</file>
+
+<file path="tsconfig.app.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+</file>
+
+<file path="tsconfig.node.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "types": ["node"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+</file>
+
+<file path="vite.config.ts">
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import tailwindcss from "@tailwindcss/vite";
+import viteCompression from "vite-plugin-compression";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+
+    viteCompression({
+      algorithm: "gzip",
+      ext: ".gz",
+      threshold: 10240,
+    }),
+    viteCompression({
+      algorithm: "brotliCompress",
+      ext: ".br",
+      threshold: 10240,
+    }),
+  ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "react-router-dom"],
+          animations: ["framer-motion", "gsap"],
+        },
+      },
+    },
+  },
+});
+</file>
+
+</files>

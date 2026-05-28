@@ -1,0 +1,166 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ── Lenis smooth scroll ───────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ── Theme tokens ───────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-heading: "Orbitron", var(--font-sans);
+
+  --color-primary: var(--theme-primary);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+
+  --color-background: var(--theme-background);
+  --color-surface: var(--theme-surface);
+
+  --color-foreground: var(--theme-foreground);
+  --color-foreground-muted: var(--theme-foreground-muted);
+
+  --color-border: var(--theme-border);
+
+  --radius-btn: 4px;
+  --radius-card: 8px;
+
+  --shadow-card:
+    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-hover:
+    0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* ── CSS Variables ─────────────────────────────────────────────────────── */
+:root {
+  --theme-primary: #1e3a8a;
+  --theme-secondary: #7e22ce;
+  --theme-accent: #fb923c;
+  --theme-accent-glow: rgba(251, 146, 60, 0.4);
+
+  --theme-background: #050b18;
+  --theme-surface: #0d1b2e;
+  --theme-surface-2: #1a2540;
+
+  --theme-foreground: #f0f4ff;
+  --theme-foreground-muted: #6b7fa3;
+
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-border-accent: rgba(251, 146, 60, 0.25);
+
+  --section-padding-y: 7rem;
+  --transition-base: all 0.3s ease-in-out;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--theme-background);
+  color: var(--theme-foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+}
+
+/* ── Glassmorphism utility ─────────────────────────────────────────────── */
+.glass {
+  background: rgba(13, 27, 46, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--theme-border);
+}
+
+.glass-accent {
+  background: rgba(13, 27, 46, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--theme-border-accent);
+  box-shadow: 0 0 30px rgba(251, 146, 60, 0.06);
+}
+
+/* ── Glow utilities ────────────────────────────────────────────────────── */
+.glow-accent {
+  box-shadow:
+    0 0 20px rgba(251, 146, 60, 0.3),
+    0 0 60px rgba(251, 146, 60, 0.1);
+}
+
+.glow-text-accent {
+  text-shadow:
+    0 0 20px rgba(251, 146, 60, 0.6),
+    0 0 40px rgba(251, 146, 60, 0.3);
+}
+
+/* ── Scan-line overlay (atmospheric) ─────────────────────────────────── */
+.scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--theme-background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(251, 146, 60, 0.4);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 146, 60, 0.7);
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: none;
+  }
+}
