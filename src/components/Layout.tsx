@@ -10,14 +10,12 @@ import CustomCursor from './ui/CustomCursor';
 import ScrollProgress from './ui/ScrollProgress';
 import FilmGrain from './ui/FilmGrain';
 import BackgroundElements from './ui/BackgroundElements';
+import { lenisInstance } from '../lib/lenisInstance';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const lenisInstance: { current: Lenis | null } = { current: null };
-
 const Layout = () => {
   const lenisRef = useRef<Lenis | null>(null);
-  const rafRef = useRef<number | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -34,16 +32,17 @@ const Layout = () => {
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const onTick = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
+
+    gsap.ticker.add(onTick);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      gsap.ticker.remove(onTick);
       lenis.destroy();
       lenisInstance.current = null;
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
@@ -53,7 +52,7 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="relative min-h-screen text-foreground flex flex-col selection:bg-accent/30 selection:text-white">
+    <div className="relative min-h-screen w-full overflow-x-hidden text-foreground flex flex-col selection:bg-accent/30 selection:text-white">
       <BackgroundElements />
       <FilmGrain />
 

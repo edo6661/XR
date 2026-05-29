@@ -4,7 +4,7 @@ import SplitTextReveal from '../ui/SplitTextReveal';
 
 const TicketsSection = () => {
   return (
-    <section id="tickets" className="relative w-full py-32 bg-background flex items-center justify-center px-6">
+    <section id="tickets" className="relative w-full overflow-hidden py-32 bg-background flex items-center justify-center px-6">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-[0.03] bg-radial from-accent to-transparent blur-3xl" />
       </div>
