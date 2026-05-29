@@ -1,36 +1,39 @@
-import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface MagneticWrapperProps {
   children: React.ReactNode;
-  strength?: number; // Seberapa kuat tarikan magnetnya
+  strength?: number;
   className?: string;
 }
 
 const MagneticWrapper = ({ children, strength = 0.3, className = "" }: MagneticWrapperProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  // 1. Gunakan useMotionValue, bukan useState
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // 2. Wrap dengan useSpring
+  const springConfig = { stiffness: 150, damping: 15, mass: 0.1 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
 
-    // Dapatkan posisi dan dimensi elemen
     const { left, top, width, height } = ref.current.getBoundingClientRect();
-
-    // Hitung titik tengah elemen
     const centerX = left + width / 2;
     const centerY = top + height / 2;
 
-    // Hitung jarak cursor dari titik tengah, kalikan dengan kekuatan (strength)
-    const x = (e.clientX - centerX) * strength;
-    const y = (e.clientY - centerY) * strength;
-
-    setPosition({ x, y });
+    // 3. Mutasi value langsung ke DOM
+    x.set((e.clientX - centerX) * strength);
+    y.set((e.clientY - centerY) * strength);
   };
 
   const handleMouseLeave = () => {
-    // Kembalikan ke posisi semula saat cursor pergi
-    setPosition({ x: 0, y: 0 });
+    x.set(0);
+    y.set(0);
   };
 
   return (
@@ -38,13 +41,8 @@ const MagneticWrapper = ({ children, strength = 0.3, className = "" }: MagneticW
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{
-        type: "spring",
-        stiffness: 150,
-        damping: 15,
-        mass: 0.1
-      }}
+      // 4. Masukkan value spring langsung ke properti style
+      style={{ x: springX, y: springY }}
       className={`inline-block ${className}`}
     >
       {children}

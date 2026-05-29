@@ -1,49 +1,6 @@
-kode nya sudah ada, kamu tolong lanjutkan saja dengan bertahap dan best practice:
-prompt nya:
-You are an Expert Frontend Engineer and Immersive Web Designer. Your task is to build a cinematic, futuristic, and highly interactive website for "XR Summits". 
-TECH STACK:
-- React 19 + TypeScript + Vite
-- Tailwind CSS v4
-- Framer Motion & GSAP (for animations & scroll effects)
-- Three.js / React Three Fiber (for 3D/Particles)
-- Lenis (for smooth immersive scrolling)
-DESIGN SYSTEM & VIBE:
-- Theme: Dark, cinematic, Web3, futuristic.
-- UI Elements: Glassmorphism, subtle glowing borders, holographic effects.
-- Interactions: Immersive top-to-down scroll transitions, parallax depth, text reveals, hover-triggered motion.
-PROJECT REQUIREMENTS & CONTENT:
-This will be a single-page immersive flow on the homepage that links to specific event landing pages. We must execute this STRICTLY STEP-BY-STEP. Do not proceed to the next step until I confirm the current step is perfect. Ensure a clean, modular component architecture (separation of UI components, animation hooks, and layouts).
-### STEP 1: Core Layout, Routing & Smooth Scroll Setup
-1. Clean up the existing App.tsx routes. Set up a core Layout component that includes a futuristic, glassmorphism sticky Navbar (Logo left, Links right: Home, Mothership 26' AI Bootcamp, Awards Gala, About, Contact Us).
-2. Implement lenis for global smooth scrolling.
-3. Prepare the basic page structures for the Homepage and the 3 Event Gateways.
-Wait for my approval before proceeding.
-### STEP 2: The Cinematic Hero & "Choose Your Experience" Gateway
-1. Build a full-screen, high-impact Hero Section. 
-2. Background: Implement a cinematic 3D particle effect or subtle shader using Three.js/tsParticles.
-3. Content: The "XR SUMMITS" logo animating in smoothly.
-4. "Choose Your Experience" Gateway: Below the logo, present 3 immersive choices (Left, Right, and Center/Bottom):
-   - XR Summit
-   - XR Esports
-   - Hackathon (Use placeholder cinematic mockups for now).
-5. Add hover effects (e.g., cards expanding, glassmorphism getting brighter, sound/lighting reaction concepts using GSAP/Framer Motion).
-Wait for my approval before proceeding.
-### STEP 3: "About Us" & "Why XR Future" Scroll Transition
-1. Create a seamless, immersive scroll transition from the Hero gateways down to the "About Us" section.
-2. Content to include: "XR Asia Summit 2026 (XRAS26) is the definitive platform connecting innovators..." and the 4 key points (AI x XR, Spatial Media, Traditional Sports, Enterprises).
-3. Use text-reveal animations (GSAP ScrollTrigger or Framer Motion whileInView) for the paragraphs.
-4. Add the "Industry Leaders (500+)", "Expert Speakers (40+)", and "Years of Excellence (4)" statistics with a counting animation.
-Wait for my approval before proceeding.
-### STEP 4: Event Spotlights & Past Events Track Record
-1. Create a "Spotlight" section for upcoming events (4th XR Asia Summit 2026, Mothership 26', Siggraph Asia 2025, Awe Asia 2026, Broadcast Asia 2026). Display these as futuristic, glowing cards.
-2. Create the "Past Events" section displaying the track record (XR Asia Summit 2023, 2022, 2021, Broadcast Digital Award 2022).
-3. Integrate the image assets available in the public folder (e.g., xr-asia-summit-2023.jpeg, award-1600x329.jpeg) gracefully into the cards.
-Wait for my approval before proceeding.
-### STEP 5: Speakers, Sponsors, Tickets, and Footer
-1. Build placeholder sections for SPEAKERS and SPONSORS using a marquee or grid layout.
-2. Create a high-converting, glowing "Tickets CTA" section.
-3. Build the Footer (Dark theme, Address in Sunway Petaling Jaya, Contact info, Privacy Policy links).
-4. Do a final pass on responsive design to ensure the 3D elements and glassmorphism layouts perform well and look premium on mobile devices.
+saya kan menggerakan mouse, saya merasa lag gitu, dan jika ada animasi yang belum di optimisasi tolong optimisasi, tapi jangan merusak animasi nya.
+lakukan secara bertahap (jangan buru buru)
+dan dengan best practice.
 
 <file path=".gitignore">
 # Logs
@@ -101,62 +58,6 @@ export default defineConfig([
     },
   },
 ])
-</file>
-
-<file path="index.html">
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-
-    <link rel="icon" type="image/png" href="/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>XR</title>
-
-    <meta name="title" content="" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="/" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="/" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-
-    <meta property="og:image" content="/" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
-    <meta property="og:site_name" content="" />
-    <meta property="og:locale" content="en_US" />
-
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="/" />
-    <meta property="twitter:title" content="" />
-    <meta property="twitter:description" content="" />
-
-    <meta property="twitter:image" content="/" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
 </file>
 
 <file path="package.json">
@@ -236,57 +137,6 @@ Sitemap:
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 </urlset>
-</file>
-
-<file path="src/App.tsx">
-import { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import { Analytics } from '@vercel/analytics/react';
-import { LazyMotion, domAnimation } from 'framer-motion';
-import Layout from './components/Layout';
-
-// ── Pages ──────────────────────────────────────────────────────────────────
-const Home = lazy(() => import('./pages/Home'));
-const MothershipPage = lazy(() => import('./pages/MothershipPage'));
-const AwardsGalaPage = lazy(() => import('./pages/AwardsGalaPage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-
-// ── Shared loader ─────────────────────────────────────────────────────────
-const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-background">
-    <div className="relative w-16 h-16">
-      <div className="absolute inset-0 border-t-2 border-accent rounded-full animate-spin" />
-      <div className="absolute inset-2 border-t border-primary rounded-full animate-spin [animation-direction:reverse] [animation-duration:0.6s]" />
-    </div>
-  </div>
-);
-
-// ── App ───────────────────────────────────────────────────────────────────
-const App = () => (
-  <HelmetProvider>
-    <Analytics />
-    <LazyMotion features={domAnimation}>
-      <BrowserRouter>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="mothership" element={<MothershipPage />} />
-              <Route path="awards" element={<AwardsGalaPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="contact" element={<ContactPage />} />
-            </Route>
-
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </LazyMotion>
-  </HelmetProvider>
-);
-
-export default App;
 </file>
 
 <file path="src/components/about/AboutSection.tsx">
@@ -1094,131 +944,6 @@ const EventsSection = () => {
 export default EventsSection;
 </file>
 
-<file path="src/components/events/PastEventCard.tsx">
-import { motion } from 'framer-motion';
-
-interface PastEventCardProps {
-  index: number;
-  year: string;
-  title: string;
-  attendees: string;
-  speakers: string;
-  highlight: string;
-  imageSrc?: string;
-  accentColor?: string;
-}
-
-const PastEventCard = ({
-  index,
-  year,
-  title,
-  attendees,
-  speakers,
-  highlight,
-  imageSrc,
-  accentColor = '#fb923c',
-}: PastEventCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true, amount: 0.2 }}
-    transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex gap-5 p-5 rounded-xl overflow-hidden"
-    style={{
-      background: 'rgba(13,27,46,0.5)',
-      border: '1px solid rgba(255,255,255,0.06)',
-      transition: 'border-color 0.3s, box-shadow 0.3s',
-    }}
-    whileHover={{
-      borderColor: `${accentColor}35`,
-      boxShadow: `0 0 30px ${accentColor}10`,
-      transition: { duration: 0.3 },
-    }}
-  >
-    {/* Image thumbnail */}
-    <div className="relative w-28 h-28 rounded-lg overflow-hidden flex-shrink-0">
-      {imageSrc ? (
-        <>
-          <img
-            src={imageSrc}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-background/30" />
-        </>
-      ) : (
-        <div
-          className="w-full h-full flex items-center justify-center"
-          style={{ background: `${accentColor}12` }}
-        >
-          <span
-            className="font-heading text-2xl font-black"
-            style={{ color: `${accentColor}60` }}
-          >
-            {year}
-          </span>
-        </div>
-      )}
-
-      {/* Year badge */}
-      <div
-        className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded text-[0.55rem] font-bold tracking-wider"
-        style={{
-          background: `${accentColor}CC`,
-          color: '#050b18',
-        }}
-      >
-        {year}
-      </div>
-    </div>
-
-    {/* Content */}
-    <div className="flex flex-col justify-between flex-1 min-w-0">
-      <div>
-        <h4 className="font-heading text-sm font-bold text-foreground leading-tight mb-1 truncate">
-          {title}
-        </h4>
-        <p className="text-xs text-foreground-muted leading-relaxed line-clamp-2">
-          {highlight}
-        </p>
-      </div>
-
-      {/* Stats row */}
-      <div className="flex items-center gap-4 mt-3">
-        <div className="flex flex-col">
-          <span
-            className="font-heading text-sm font-bold"
-            style={{ color: accentColor }}
-          >
-            {attendees}
-          </span>
-          <span className="text-[0.58rem] text-foreground-muted tracking-wide">Attendees</span>
-        </div>
-        <div className="w-px h-6 bg-border" />
-        <div className="flex flex-col">
-          <span
-            className="font-heading text-sm font-bold"
-            style={{ color: accentColor }}
-          >
-            {speakers}
-          </span>
-          <span className="text-[0.58rem] text-foreground-muted tracking-wide">Speakers</span>
-        </div>
-      </div>
-    </div>
-
-    {/* Right accent line */}
-    <div
-      className="absolute right-0 top-4 bottom-4 w-[2px] rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-300"
-      style={{ background: accentColor }}
-    />
-  </motion.div>
-);
-
-export default PastEventCard;
-</file>
-
 <file path="src/components/events/SpotlightCard.tsx">
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -1461,238 +1186,56 @@ const SpotlightCard = ({
 export default SpotlightCard;
 </file>
 
-<file path="src/components/hero/GatewayCard.tsx">
-import { useRef } from 'react';
+<file path="src/components/Footer.tsx">
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
 
-interface GatewayCardProps {
-  index: number;
-  title: string;
-  subtitle: string;
-  description: string;
-  to: string;
-  accentColor: string;
-  glowColor: string;
-  tag: string;
-  icon: React.ReactNode;
-  isCenter?: boolean;
-}
-
-const GatewayCard = ({
-  index,
-  title,
-  subtitle,
-  description,
-  to,
-  accentColor,
-  glowColor,
-  tag,
-  icon,
-  isCenter = false,
-}: GatewayCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  const handleMouseEnter = () => {
-    if (!cardRef.current || !glowRef.current || !contentRef.current) return;
-    gsap.to(cardRef.current, {
-      scale: 1.04,
-      y: -8,
-      duration: 0.5,
-      ease: 'power3.out',
-    });
-    gsap.to(glowRef.current, {
-      opacity: 1,
-      duration: 0.4,
-      ease: 'power2.out',
-    });
-    gsap.to(contentRef.current, {
-      y: -4,
-      duration: 0.4,
-      ease: 'power2.out',
-    });
-  };
-
-  const handleMouseLeave = () => {
-    if (!cardRef.current || !glowRef.current || !contentRef.current) return;
-    gsap.to(cardRef.current, {
-      scale: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power3.out',
-    });
-    gsap.to(glowRef.current, {
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-    });
-    gsap.to(contentRef.current, {
-      y: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-    });
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 12;
-    gsap.to(cardRef.current, {
-      rotateY: x,
-      rotateX: -y,
-      duration: 0.4,
-      ease: 'power1.out',
-      transformPerspective: 800,
-    });
-  };
-
-  const handleMouseOut = () => {
-    if (!cardRef.current) return;
-    gsap.to(cardRef.current, {
-      rotateY: 0,
-      rotateX: 0,
-      duration: 0.6,
-      ease: 'power3.out',
-    });
-  };
-
+const Footer = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: 1.4 + index * 0.18,
-        duration: 0.9,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className={`relative flex-1 ${isCenter ? 'md:flex-[1.15]' : ''}`}
-    >
-      <div
-        ref={cardRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onMouseMove={handleMouseMove}
-        onMouseOut={handleMouseOut}
-        style={{ transformStyle: 'preserve-3d' }}
-        className="relative h-full cursor-pointer"
-      >
-        {/* Glow layer */}
-        <div
-          ref={glowRef}
-          className="absolute -inset-[1px] rounded-lg opacity-0 transition-opacity"
-          style={{
-            background: `linear-gradient(135deg, ${accentColor}30, ${glowColor}20)`,
-            boxShadow: `0 0 40px ${accentColor}40, 0 0 80px ${accentColor}15`,
-          }}
-        />
+    <footer className="w-full bg-[#03060c] border-t border-border pt-20 pb-10 px-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
-        {/* Card */}
-        <div
-          className="relative h-full rounded-lg overflow-hidden"
-          style={{
-            background: 'rgba(13, 27, 46, 0.7)',
-            backdropFilter: 'blur(20px)',
-            border: `1px solid ${accentColor}35`,
-          }}
-        >
-          {/* Top accent line */}
-          <div
-            className="absolute top-0 left-0 right-0 h-[2px]"
-            style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
-          />
+        <div className="col-span-1 md:col-span-2">
+          <Link to="/" className="flex flex-col leading-none mb-6 w-fit">
+            <span className="font-heading text-2xl font-bold tracking-[0.25em] text-foreground">XR</span>
+            <span className="font-heading text-[0.6rem] font-light tracking-[0.4em] text-accent uppercase">Summits</span>
+          </Link>
+          <p className="text-sm text-foreground-muted max-w-xs leading-relaxed">
+            Asia's definitive platform connecting innovators and shaping the future of immersive technology.
+          </p>
+        </div>
 
-          {/* Corner decorations */}
-          <div
-            className="absolute top-3 left-3 w-4 h-4 border-t border-l"
-            style={{ borderColor: `${accentColor}80` }}
-          />
-          <div
-            className="absolute top-3 right-3 w-4 h-4 border-t border-r"
-            style={{ borderColor: `${accentColor}80` }}
-          />
-          <div
-            className="absolute bottom-3 left-3 w-4 h-4 border-b border-l"
-            style={{ borderColor: `${accentColor}80` }}
-          />
-          <div
-            className="absolute bottom-3 right-3 w-4 h-4 border-b border-r"
-            style={{ borderColor: `${accentColor}80` }}
-          />
+        <div>
+          <h4 className="font-heading font-bold text-sm tracking-widest text-foreground uppercase mb-6">Location</h4>
+          <address className="not-italic text-sm text-foreground-muted leading-relaxed">
+            Sunway Innovation Hub,<br />
+            Bandar Sunway, 47500<br />
+            Petaling Jaya, Selangor,<br />
+            Malaysia
+          </address>
+        </div>
 
-          <div ref={contentRef} className="p-8 flex flex-col gap-5 h-full">
-            {/* Tag */}
-            <div className="flex items-center justify-between">
-              <span
-                className="text-[0.6rem] font-bold tracking-[0.3em] uppercase px-3 py-1 rounded-full"
-                style={{
-                  color: accentColor,
-                  background: `${accentColor}15`,
-                  border: `1px solid ${accentColor}30`,
-                }}
-              >
-                {tag}
-              </span>
-              <span
-                className="text-[0.6rem] font-mono tracking-widest"
-                style={{ color: `${accentColor}70` }}
-              >
-                0{index + 1}
-              </span>
-            </div>
-
-            {/* Icon */}
-            <div
-              className="w-14 h-14 rounded-lg flex items-center justify-center text-2xl"
-              style={{
-                background: `${accentColor}12`,
-                border: `1px solid ${accentColor}25`,
-                color: accentColor,
-              }}
-            >
-              {icon}
-            </div>
-
-            {/* Text */}
-            <div className="flex flex-col gap-2">
-              <p
-                className="text-[0.65rem] font-semibold tracking-[0.25em] uppercase"
-                style={{ color: `${accentColor}90` }}
-              >
-                {subtitle}
-              </p>
-              <h3 className="font-heading text-xl font-bold text-foreground leading-tight">
-                {title}
-              </h3>
-              <p className="text-sm text-foreground-muted leading-relaxed mt-1">
-                {description}
-              </p>
-            </div>
-
-            {/* CTA */}
-            <div className="mt-auto pt-4">
-              <Link
-                to={to}
-                className="group inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase transition-all duration-300"
-                style={{ color: accentColor }}
-              >
-                Enter Experience
-                <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  →
-                </span>
-              </Link>
-            </div>
-          </div>
+        <div>
+          <h4 className="font-heading font-bold text-sm tracking-widest text-foreground uppercase mb-6">Contact</h4>
+          <ul className="flex flex-col gap-3 text-sm text-foreground-muted">
+            <li><a href="mailto:hello@xrsummits.com" className="hover:text-accent transition-colors">hello@xrsummits.com</a></li>
+            <li><Link to="/contact" className="hover:text-accent transition-colors">Contact Form</Link></li>
+            <li><Link to="/sponsorship" className="hover:text-accent transition-colors">Sponsorship</Link></li>
+          </ul>
         </div>
       </div>
-    </motion.div>
+
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5 text-[0.7rem] text-foreground-muted tracking-wide">
+        <p>&copy; {new Date().getFullYear()} XR Summits. All rights reserved.</p>
+        <div className="flex gap-6 mt-4 md:mt-0">
+          <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+        </div>
+      </div>
+    </footer>
   );
 };
 
-export default GatewayCard;
+export default Footer;
 </file>
 
 <file path="src/components/hero/HeroLogo.tsx">
@@ -1970,446 +1513,698 @@ const HeroSection = () => {
 export default HeroSection;
 </file>
 
-<file path="src/components/hero/ParticleCanvas.tsx">
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+<file path="src/components/sponsors/SponsorsSection.tsx">
+import { motion } from 'framer-motion';
 
-const ParticleCanvas = () => {
-  const mountRef = useRef<HTMLDivElement>(null);
+const SPONSORS = ['NVIDIA', 'META', 'MICROSOFT', 'EPIC GAMES', 'UNITY', 'SONY', 'HTC VIVE', 'QUALCOMM'];
 
-  useEffect(() => {
-    const mount = mountRef.current;
-    if (!mount) return;
-
-    // ── Scene setup ────────────────────────────────────────────────────
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      mount.clientWidth / mount.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 3;
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(mount.clientWidth, mount.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    mount.appendChild(renderer.domElement);
-
-    // ── Particles ──────────────────────────────────────────────────────
-    const PARTICLE_COUNT = 2800;
-    const positions = new Float32Array(PARTICLE_COUNT * 3);
-    const colors = new Float32Array(PARTICLE_COUNT * 3);
-    const sizes = new Float32Array(PARTICLE_COUNT);
-
-    const colorPalette = [
-      new THREE.Color('#fb923c'), // accent orange
-      new THREE.Color('#1e3a8a'), // primary blue
-      new THREE.Color('#7e22ce'), // secondary purple
-      new THREE.Color('#93c5fd'), // light blue
-      new THREE.Color('#f0f4ff'), // near white
-    ];
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3;
-      // Spread particles in a wide sphere
-      const radius = 5 + Math.random() * 6;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-
-      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
-      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      positions[i3 + 2] = radius * Math.cos(phi) - 2;
-
-      const c = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-      colors[i3] = c.r;
-      colors[i3 + 1] = c.g;
-      colors[i3 + 2] = c.b;
-
-      sizes[i] = Math.random() * 2.5 + 0.5;
-    }
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-    // Custom shader for glowing, round particles
-    const material = new THREE.ShaderMaterial({
-      uniforms: {
-        uTime: { value: 0 },
-        uPixelRatio: { value: renderer.getPixelRatio() },
-      },
-      vertexShader: `
-        attribute float size;
-        attribute vec3 color;
-        varying vec3 vColor;
-        uniform float uTime;
-        uniform float uPixelRatio;
-
-        void main() {
-          vColor = color;
-          vec3 pos = position;
-          // Gentle drift
-          pos.x += sin(uTime * 0.18 + position.z * 0.4) * 0.08;
-          pos.y += cos(uTime * 0.14 + position.x * 0.3) * 0.06;
-          pos.z += sin(uTime * 0.10 + position.y * 0.2) * 0.05;
-
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * uPixelRatio * (280.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      `,
-      fragmentShader: `
-        varying vec3 vColor;
-
-        void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = 1.0 - smoothstep(0.1, 0.5, dist);
-          // Glow core
-          float glow = exp(-dist * 6.0) * 0.8;
-          gl_FragColor = vec4(vColor + glow * 0.4, alpha * 0.75);
-        }
-      `,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      vertexColors: true,
-    });
-
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
-
-    // ── Grid plane (subtle) ────────────────────────────────────────────
-    const gridHelper = new THREE.GridHelper(30, 40, 0x1e3a8a, 0x0d1b2e);
-    gridHelper.position.y = -4;
-    const gridMaterial = gridHelper.material as THREE.LineBasicMaterial;
-    gridMaterial.color.set(0x1e3a8a);
-    gridMaterial.transparent = true;
-    gridMaterial.opacity = 0.15;
-    scene.add(gridHelper);
-
-    // ── Mouse parallax ─────────────────────────────────────────────────
-    let mouseX = 0, mouseY = 0;
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
-    window.addEventListener('mousemove', onMouseMove);
-
-    // ── Resize ─────────────────────────────────────────────────────────
-    const onResize = () => {
-      if (!mount) return;
-      camera.aspect = mount.clientWidth / mount.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(mount.clientWidth, mount.clientHeight);
-      material.uniforms.uPixelRatio.value = renderer.getPixelRatio();
-    };
-    window.addEventListener('resize', onResize);
-
-    // ── Animation loop ─────────────────────────────────────────────────
-    let animId: number;
-    const clock = new THREE.Clock();
-
-    const animate = () => {
-      animId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
-      material.uniforms.uTime.value = t;
-
-      // Slow rotation + mouse parallax
-      particles.rotation.y = t * 0.018 + mouseX * 0.06;
-      particles.rotation.x = mouseY * 0.04;
-      gridHelper.position.x = mouseX * 0.3;
-
-      renderer.render(scene, camera);
-    };
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('resize', onResize);
-      geometry.dispose();
-      material.dispose();
-      renderer.dispose();
-      if (mount.contains(renderer.domElement)) {
-        mount.removeChild(renderer.domElement);
-      }
-    };
-  }, []);
-
+const SponsorsSection = () => {
   return (
-    <div
-      ref={mountRef}
-      className="absolute inset-0 w-full h-full"
-      aria-hidden="true"
-    />
+    <section className="py-20 border-y border-border bg-background/50 backdrop-blur-sm overflow-hidden flex flex-col justify-center">
+      <div className="text-center mb-10">
+        <span className="text-[0.6rem] font-bold tracking-[0.5em] uppercase text-foreground-muted">
+          Supported By Industry Leaders
+        </span>
+      </div>
+
+      <div className="relative w-full flex overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+
+        <motion.div
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 20, ease: 'linear', repeat: Infinity }}
+          className="flex whitespace-nowrap items-center"
+        >
+          {/* Double the array for seamless infinite scroll */}
+          {[...SPONSORS, ...SPONSORS].map((sponsor, i) => (
+            <div key={i} className="px-12 flex items-center justify-center">
+              <span className="font-heading font-bold text-2xl md:text-4xl text-foreground/20 hover:text-accent/60 transition-colors duration-300">
+                {sponsor}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 };
 
-export default ParticleCanvas;
+export default SponsorsSection;
 </file>
 
-<file path="src/components/Layout.tsx">
-import { useEffect, useRef } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import Lenis from 'lenis';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Navbar from './Navbar';
+<file path="src/components/ui/BackgroundElements.tsx">
+import { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 
-gsap.registerPlugin(ScrollTrigger);
+const BackgroundElements = () => {
+  const { scrollY } = useScroll();
+  const [pageHeight, setPageHeight] = useState(3000); // Nilai default
 
-export const lenisInstance: { current: Lenis | null } = { current: null };
-
-const Layout = () => {
-  const lenisRef = useRef<Lenis | null>(null);
-  const rafRef = useRef<number | null>(null);
-  const location = useLocation();
-
+  // Hitung tinggi halaman dinamis agar parallax akurat
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.4,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 2,
-    });
+    const updateHeight = () => {
+      setPageHeight(document.documentElement.scrollHeight - window.innerHeight);
+    };
 
-    lenisRef.current = lenis;
-    lenisInstance.current = lenis;
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
 
-    // Keep GSAP ScrollTrigger in sync with Lenis scroll position
-    lenis.on('scroll', ScrollTrigger.update);
-
-    // Lenis drives the RAF loop; we also tick GSAP's ticker
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0);
+    // Observer jika konten dinamis berubah
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(document.body);
 
     return () => {
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
-      lenis.destroy();
-      lenisInstance.current = null;
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener('resize', updateHeight);
+      observer.disconnect();
     };
   }, []);
 
-  // Scroll to top on route change
-  useEffect(() => {
-    lenisInstance.current?.scrollTo(0, { immediate: true });
-    ScrollTrigger.refresh();
-  }, [location.pathname]);
+  // Memperhalus nilai scroll (fisika pegas) agar tidak kaku
+  const smoothScrollY = useSpring(scrollY, {
+    damping: 30,
+    stiffness: 100,
+    mass: 0.5
+  });
+
+  // Kalkulasi pergerakan parallax untuk 3 elemen berbeda
+  // Elemen 1 bergerak naik perlahan
+  const y1 = useTransform(smoothScrollY, [0, pageHeight || 1000], [0, -500]);
+
+  // Elemen 2 bergerak turun (berlawanan arah scroll)
+  const y2 = useTransform(smoothScrollY, [0, pageHeight || 1000], [0, 400]);
+
+  // Elemen 3 bergerak naik lebih cepat dari Elemen 1 (ilusi lebih dekat ke kamera)
+  const y3 = useTransform(smoothScrollY, [0, pageHeight || 1000], [0, -800]);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
+    <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden">
+
+      {/* Orb 1: Top Right (Orange Accent) */}
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute top-[15%] -right-[10%] w-[600px] h-[600px] opacity-[0.06] rounded-full blur-[100px]"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [0, 90, 0]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      >
+        <div className="w-full h-full bg-gradient-to-tr from-[#fb923c] to-transparent rounded-full" />
+      </motion.div>
+
+      {/* Orb 2: Middle Left (Cyan Accent) */}
+      <motion.div
+        style={{ y: y2 }}
+        className="absolute top-[45%] -left-[15%] w-[800px] h-[800px] opacity-[0.05] rounded-full blur-[120px]"
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, -90, 0]
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+        <div className="w-full h-full bg-gradient-to-br from-[#22d3ee] to-transparent rounded-full" />
+      </motion.div>
+
+      {/* Orb 3: Bottom Right (Purple/Deep Blue Accent) */}
+      <motion.div
+        style={{ y: y3 }}
+        className="absolute top-[75%] right-[5%] w-[500px] h-[500px] opacity-[0.06] rounded-full blur-[90px]"
+        animate={{
+          scale: [1, 1.15, 1],
+          x: [0, -50, 0]
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="w-full h-full bg-gradient-to-tl from-[#7e22ce] to-[#1e3a8a] rounded-full" />
+      </motion.div>
+
     </div>
   );
 };
 
-export default Layout;
+export default BackgroundElements;
 </file>
 
-<file path="src/components/Navbar.tsx">
-import { useState, useEffect, useCallback } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+<file path="src/components/ui/CustomCursor.tsx">
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
-const NAV_LINKS = [
-  { label: 'Home', to: '/' },
-  { label: "Mothership 26' AI Bootcamp", to: '/mothership' },
-  { label: 'Awards Gala', to: '/awards' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact Us', to: '/contact' },
-];
+const CustomCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+  useEffect(() => {
+    // Deteksi jika user menggunakan perangkat touch (mobile/tablet)
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      setIsTouchDevice(true);
+      return;
+    }
 
-  const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 40);
+    const updateMousePosition = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Cek apakah elemen yang di-hover adalah link atau tombol
+      if (
+        target.tagName.toLowerCase() === 'a' ||
+        target.tagName.toLowerCase() === 'button' ||
+        target.closest('a') ||
+        target.closest('button')
+      ) {
+        setIsHovering(true);
+      } else {
+        setIsHovering(false);
+      }
+    };
+
+    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mouseover', handleMouseOver);
+
+    return () => {
+      window.removeEventListener('mousemove', updateMousePosition);
+      window.removeEventListener('mouseover', handleMouseOver);
+    };
   }, []);
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
+  // Jangan render kursor custom di perangkat mobile
+  if (isTouchDevice) return null;
 
   return (
     <>
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled
-          ? 'py-2 bg-[rgba(15,23,42,0.75)] backdrop-blur-xl border-b border-[rgba(251,146,60,0.12)] shadow-[0_0_40px_rgba(251,146,60,0.05)]'
-          : 'py-4 bg-transparent'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="group flex items-center gap-3 select-none">
-            <div className="relative">
-              <img
-                src="/logo-278x262-removebg.png"
-                alt="XR Summits"
-                className="h-9 w-auto object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                }}
-              />
-              {/* Fallback text logo */}
-              <span
-                className="font-heading text-xl font-bold tracking-[0.2em] text-foreground group-hover:text-accent transition-colors duration-300"
-                style={{ display: 'none' }}
-                ref={(el) => {
-                  if (el) {
-                    const img = el.previousElementSibling as HTMLImageElement;
-                    if (img && img.style.display === 'none') {
-                      el.style.display = 'block';
-                    }
-                  }
-                }}
-              >
-                XR
-              </span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="font-heading text-sm font-bold tracking-[0.25em] text-foreground group-hover:text-accent transition-colors duration-300">
-                XR
-              </span>
-              <span className="font-heading text-[0.5rem] font-light tracking-[0.4em] text-foreground-muted uppercase">
-                Summits
-              </span>
-            </div>
-          </Link>
+      {/* Core Dot */}
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[9999] mix-blend-screen"
+        animate={{
+          x: mousePosition.x - 4,
+          y: mousePosition.y - 4,
+          opacity: isHovering ? 0 : 1,
+        }}
+        transition={{ type: 'spring', stiffness: 1000, damping: 40, mass: 0.1 }}
+      />
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {NAV_LINKS.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  `relative px-4 py-2 text-[0.72rem] font-medium tracking-[0.12em] uppercase transition-all duration-300 rounded-sm
-                  ${isActive
-                    ? 'text-accent'
-                    : 'text-foreground-muted hover:text-foreground'
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {link.label}
-                    {isActive && (
-                      <motion.span
-                        layoutId="nav-indicator"
-                        className="absolute bottom-0 left-2 right-2 h-[1px] bg-accent shadow-[0_0_8px_rgba(251,146,60,0.8)]"
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                  </>
-                )}
-              </NavLink>
-            ))}
-
-            <a
-              href="#tickets"
-              className="ml-4 px-5 py-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase
-                border border-accent text-accent rounded-sm
-                hover:bg-accent hover:text-background
-                transition-all duration-300
-                shadow-[0_0_16px_rgba(251,146,60,0.2)]
-                hover:shadow-[0_0_24px_rgba(251,146,60,0.5)]"
-            >
-              Register
-            </a>
-          </nav>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMenuOpen((v) => !v)}
-            className="lg:hidden p-2 text-foreground-muted hover:text-accent transition-colors duration-200"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-      </motion.header>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[99] bg-[rgba(15,23,42,0.97)] backdrop-blur-2xl flex flex-col pt-24 px-8"
-          >
-            <nav className="flex flex-col gap-2">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.to}
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <NavLink
-                    to={link.to}
-                    end={link.to === '/'}
-                    className={({ isActive }) =>
-                      `block py-4 text-xl font-heading font-semibold tracking-[0.15em] uppercase border-b border-border
-                      ${isActive ? 'text-accent' : 'text-foreground-muted'}`
-                    }
-                  >
-                    {link.label}
-                  </NavLink>
-                </motion.div>
-              ))}
-
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: NAV_LINKS.length * 0.07, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-8"
-              >
-                <a
-                  href="#tickets"
-                  className="inline-block px-8 py-3 text-base font-bold tracking-[0.2em] uppercase
-                    border border-accent text-accent rounded-sm
-                    hover:bg-accent hover:text-background
-                    transition-all duration-300
-                    shadow-[0_0_24px_rgba(251,146,60,0.3)]"
-                >
-                  Register
-                </a>
-              </motion.div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Outer Ring */}
+      <motion.div
+        className="fixed top-0 left-0 w-8 h-8 border border-accent rounded-full pointer-events-none z-[9998] mix-blend-screen flex items-center justify-center"
+        animate={{
+          x: mousePosition.x - 16,
+          y: mousePosition.y - 16,
+          scale: isHovering ? 1.5 : 1,
+          backgroundColor: isHovering ? 'rgba(251, 146, 60, 0.15)' : 'transparent',
+          borderColor: isHovering ? 'rgba(251, 146, 60, 0.8)' : 'rgba(251, 146, 60, 0.4)',
+        }}
+        transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.5 }}
+      />
     </>
   );
 };
 
-export default Navbar;
+export default CustomCursor;
+</file>
+
+<file path="src/components/ui/FilmGrain.tsx">
+const FilmGrain = () => {
+  return (
+    <div className="pointer-events-none fixed inset-0 z-[999999] opacity-[0.04] mix-blend-screen">
+      <svg className="absolute inset-0 w-full h-full opacity-50">
+        <filter id="noiseFilter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.8"
+            numOctaves="3"
+            stitchTiles="stitch"
+          />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+      </svg>
+    </div>
+  );
+};
+
+export default FilmGrain;
+</file>
+
+<file path="src/components/ui/FocusReveal.tsx">
+import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
+
+interface FocusRevealProps {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+const FocusReveal = ({ children, className = '', delay = 0 }: FocusRevealProps) => {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        scale: 0.9,
+        filter: 'blur(10px)',
+        clipPath: 'inset(15% 15% 15% 15% round 16px)'
+      }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        filter: 'blur(0px)',
+        clipPath: 'inset(0% 0% 0% 0% round 16px)'
+      }}
+      viewport={{ once: true, margin: '-15%' }}
+      transition={{
+        delay,
+        duration: 1.2,
+        ease: [0.16, 1, 0.3, 1] // Custom cubic-bezier untuk pergerakan premium
+      }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export default FocusReveal;
+</file>
+
+<file path="src/components/ui/HolographicImage.tsx">
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+interface HolographicImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
+const HolographicImage = ({ src, alt, className = '' }: HolographicImageProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className={`relative overflow-hidden bg-surface ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* 1. Base Image (Hitam Putih secara default, berwarna saat di-hover) */}
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover relative z-10 transition-all duration-700
+          ${isHovered ? 'grayscale-0 scale-105' : 'grayscale scale-100'}`}
+      />
+
+      {/* 2. Channel Cyan (Bergeser ke kiri) */}
+      <motion.div
+        className="absolute inset-0 z-20 mix-blend-screen pointer-events-none"
+        animate={{
+          x: isHovered ? -6 : 0,
+          opacity: isHovered ? 0.7 : 0
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+      >
+        <img src={src} alt="" className="w-full h-full object-cover" style={{ filter: 'brightness(1.2) sepia(1) hue-rotate(140deg) saturate(3)' }} />
+      </motion.div>
+
+      {/* 3. Channel Red (Bergeser ke kanan) */}
+      <motion.div
+        className="absolute inset-0 z-20 mix-blend-screen pointer-events-none"
+        animate={{
+          x: isHovered ? 6 : 0,
+          opacity: isHovered ? 0.7 : 0
+        }}
+        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+      >
+        <img src={src} alt="" className="w-full h-full object-cover" style={{ filter: 'brightness(1.2) sepia(1) hue-rotate(-50deg) saturate(3)' }} />
+      </motion.div>
+
+      {/* 4. Scanline Digital Overlay */}
+      <div className="absolute inset-0 z-30 pointer-events-none opacity-[0.15] mix-blend-overlay"
+        style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #fff 2px, #fff 4px)' }}
+      />
+    </div>
+  );
+};
+
+export default HolographicImage;
+</file>
+
+<file path="src/components/ui/MagneticWrapper.tsx">
+import { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+
+interface MagneticWrapperProps {
+  children: React.ReactNode;
+  strength?: number; // Seberapa kuat tarikan magnetnya
+  className?: string;
+}
+
+const MagneticWrapper = ({ children, strength = 0.3, className = "" }: MagneticWrapperProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+
+    // Dapatkan posisi dan dimensi elemen
+    const { left, top, width, height } = ref.current.getBoundingClientRect();
+
+    // Hitung titik tengah elemen
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
+
+    // Hitung jarak cursor dari titik tengah, kalikan dengan kekuatan (strength)
+    const x = (e.clientX - centerX) * strength;
+    const y = (e.clientY - centerY) * strength;
+
+    setPosition({ x, y });
+  };
+
+  const handleMouseLeave = () => {
+    // Kembalikan ke posisi semula saat cursor pergi
+    setPosition({ x: 0, y: 0 });
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{ x: position.x, y: position.y }}
+      transition={{
+        type: "spring",
+        stiffness: 150,
+        damping: 15,
+        mass: 0.1
+      }}
+      className={`inline-block ${className}`}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+export default MagneticWrapper;
+</file>
+
+<file path="src/components/ui/Preloader.tsx">
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+
+interface PreloaderProps {
+  onComplete: () => void;
+}
+
+const Preloader = ({ onComplete }: PreloaderProps) => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    // Simulasi loading progress (bisa dihubungkan dengan asset loading di masa depan)
+    const duration = 2400; // 2.4 detik
+    const interval = 24;
+    let current = 0;
+    const step = 100 / (duration / interval);
+
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= 100) {
+        setProgress(100);
+        clearInterval(timer);
+        // Beri sedikit jeda setelah 100% sebelum trigger onComplete
+        setTimeout(onComplete, 400);
+      } else {
+        setProgress(Math.floor(current));
+      }
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [onComplete]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-background overflow-hidden"
+      initial={{ opacity: 1 }}
+      exit={{
+        y: '-100%',
+        opacity: 0,
+        transition: { duration: 1, ease: [0.76, 0, 0.24, 1] }
+      }}
+    >
+      {/* Background Ambient Glow */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <div className="w-[600px] h-[600px] bg-accent/5 blur-[120px] rounded-full" />
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center">
+        {/* Brand/Logo Element */}
+        <div className="overflow-hidden mb-6">
+          <motion.span
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="block font-heading text-sm font-bold tracking-[0.4em] text-accent uppercase"
+          >
+            XR Summits
+          </motion.span>
+        </div>
+
+        {/* Counter */}
+        <div className="flex items-baseline gap-1 overflow-hidden">
+          <span className="font-heading font-black text-7xl md:text-8xl text-foreground w-48 text-right">
+            {progress}
+          </span>
+          <span className="font-heading font-bold text-2xl text-accent">%</span>
+        </div>
+
+        {/* Loading Bar */}
+        <div className="w-48 h-[1px] bg-border mt-8 relative overflow-hidden">
+          <motion.div
+            className="absolute top-0 left-0 bottom-0 bg-accent"
+            initial={{ width: '0%' }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.1, ease: "linear" }}
+          />
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-6 text-[0.55rem] font-mono tracking-widest text-foreground-muted uppercase"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </motion.p>
+      </div>
+    </motion.div>
+  );
+};
+
+export default Preloader;
+</file>
+
+<file path="src/components/ui/ScrollMarquee.tsx">
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef } from 'react';
+
+const ScrollMarquee = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Deteksi scroll hanya saat elemen ini ada di layar untuk performa yang lebih baik
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Smooth spring physics agar pergerakan scroll tidak patah-patah
+  const springScroll = useSpring(scrollYProgress, { stiffness: 400, damping: 50 });
+
+  // Baris pertama bergerak ke kiri
+  const x1 = useTransform(springScroll, [0, 1], [0, -800]);
+  // Baris kedua bergerak ke kanan
+  const x2 = useTransform(springScroll, [0, 1], [-800, 0]);
+
+  const TextBlock = ({ text, outline = false }: { text: string, outline?: boolean }) => (
+    <span
+      className={`font-heading font-black text-6xl md:text-8xl tracking-wider uppercase px-4
+        ${outline
+          ? 'text-transparent'
+          : 'text-surface-2'}`}
+      style={outline ? { WebkitTextStroke: '2px rgba(251,146,60,0.3)' } : {}}
+    >
+      {text}
+    </span>
+  );
+
+  return (
+    <section
+      ref={containerRef}
+      className="relative w-full py-24 overflow-hidden bg-background border-y border-white/5 z-10"
+    >
+      {/* Ambient center glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[200px] bg-accent/5 blur-[80px] pointer-events-none" />
+
+      <div className="flex flex-col gap-2 md:gap-6 transform -rotate-2 scale-105">
+
+        {/* Row 1 */}
+        <motion.div style={{ x: x1 }} className="flex whitespace-nowrap items-center">
+          {[...Array(4)].map((_, i) => (
+            <div key={`row1-${i}`} className="flex items-center">
+              <TextBlock text="Future" outline={i % 2 !== 0} />
+              <span className="w-4 h-4 rounded-full bg-accent mx-6" />
+              <TextBlock text="Immersive" outline={i % 2 === 0} />
+              <span className="w-4 h-4 rounded-full bg-cyan-400 mx-6" />
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Row 2 */}
+        <motion.div style={{ x: x2 }} className="flex whitespace-nowrap items-center">
+          {[...Array(4)].map((_, i) => (
+            <div key={`row2-${i}`} className="flex items-center">
+              <TextBlock text="Spatial Computing" outline={i % 2 === 0} />
+              <span className="w-4 h-4 rounded-full bg-cyan-400 mx-6" />
+              <TextBlock text="AI x XR" outline={i % 2 !== 0} />
+              <span className="w-4 h-4 rounded-full bg-accent mx-6" />
+            </div>
+          ))}
+        </motion.div>
+
+      </div>
+    </section>
+  );
+};
+
+export default ScrollMarquee;
+</file>
+
+<file path="src/components/ui/ScrollProgress.tsx">
+import { motion, useScroll, useSpring } from 'framer-motion';
+
+const ScrollProgress = () => {
+  const { scrollYProgress } = useScroll();
+
+  // Menggunakan useSpring agar animasinya lebih smooth dan tidak kaku
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 right-0 h-[2px] bg-accent origin-left z-[9999]"
+      style={{
+        scaleX,
+        boxShadow: '0 0 12px rgba(251,146,60,0.8)'
+      }}
+    />
+  );
+};
+
+export default ScrollProgress;
+</file>
+
+<file path="src/components/ui/SplitTextReveal.tsx">
+import { motion, type Variants } from 'framer-motion';
+
+interface SplitTextRevealProps {
+  text: string;
+  className?: string;
+  delay?: number;
+}
+
+const SplitTextReveal = ({ text, className = '', delay = 0 }: SplitTextRevealProps) => {
+  // Pecah teks menjadi array kata
+  const words = text.split(' ');
+
+  // Varian untuk Container (mengatur jeda antar kata)
+  const container: Variants = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: delay * i
+      },
+    }),
+  };
+
+  // Varian untuk setiap kata
+  const child: Variants = {
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        type: 'spring',
+        damping: 14,
+        stiffness: 100,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      y: 40,
+      rotateX: -40,
+    },
+  };
+
+  return (
+    <motion.div
+      style={{ overflow: 'hidden', display: 'flex', flexWrap: 'wrap' }}
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }}
+      className={className}
+    >
+      {words.map((word, index) => (
+        <motion.span
+          variants={child}
+          style={{ marginRight: '0.25em', display: 'inline-block', transformOrigin: 'bottom' }}
+          key={index}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
+export default SplitTextReveal;
+</file>
+
+<file path="src/components/ui/TracerBorder.tsx">
+import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
+
+interface TracerBorderProps {
+  children: ReactNode;
+  accentColor: string;
+}
+
+const TracerBorder = ({ children, accentColor }: TracerBorderProps) => {
+  return (
+    <div className="relative w-full h-full rounded-lg p-[1px] overflow-hidden group">
+      {/* Rotating Background Glow */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+        className="absolute top-1/2 left-1/2 w-[200%] h-[200%] origin-center -translate-x-1/2 -translate-y-1/2 z-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: `conic-gradient(from 0deg, transparent 70%, ${accentColor} 100%)`,
+        }}
+      />
+
+      {/* Inner Mask (Content Container) */}
+      <div className="relative z-10 w-full h-full rounded-[7px] overflow-hidden bg-background">
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default TracerBorder;
 </file>
 
 <file path="src/hooks/useScrollAnimations.ts">
@@ -2715,6 +2510,21 @@ h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(251, 146, 60, 0.7);
 }
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a,
+  button,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    cursor: none;
+  }
+}
 </file>
 
 <file path="src/main.tsx">
@@ -2729,76 +2539,75 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 </file>
 
 <file path="src/pages/AboutPage.tsx">
-import React from 'react'
+import { Helmet } from 'react-helmet-async';
+import DemoPlaceholder from '../components/ui/DemoPlaceholder';
 
 const AboutPage = () => {
   return (
-    <div>AboutPage</div>
-  )
-}
+    <>
+      <Helmet>
+        <title>About Us | XR Summits</title>
+      </Helmet>
+      <DemoPlaceholder title="About Us" />
+    </>
+  );
+};
 
-export default AboutPage
+export default AboutPage;
 </file>
 
 <file path="src/pages/AwardsGalaPage.tsx">
-import React from 'react'
+import { Helmet } from 'react-helmet-async';
+import DemoPlaceholder from '../components/ui/DemoPlaceholder';
 
 const AwardsGalaPage = () => {
   return (
-    <div>AwardsGalaPage</div>
-  )
-}
+    <>
+      <Helmet>
+        <title>Awards Gala | XR Summits</title>
+      </Helmet>
+      <DemoPlaceholder title="Broadcast Digital Awards" />
+    </>
+  );
+};
 
-export default AwardsGalaPage
+export default AwardsGalaPage;
 </file>
 
 <file path="src/pages/ContactPage.tsx">
-import React from 'react'
+import { Helmet } from 'react-helmet-async';
+import DemoPlaceholder from '../components/ui/DemoPlaceholder';
 
 const ContactPage = () => {
   return (
-    <div>ContactPage</div>
-  )
-}
+    <>
+      <Helmet>
+        <title>Contact Us | XR Summits</title>
+      </Helmet>
+      <DemoPlaceholder title="Contact Operations" />
+    </>
+  );
+};
 
-export default ContactPage
-</file>
-
-<file path="src/pages/Home.tsx">
-import { Helmet } from 'react-helmet-async';
-import HeroSection from '../components/hero/HeroSection';
-import AboutSection from '../components/about/AboutSection';
-import EventsSection from '../components/events/EventsSection';
-
-const Home = () => (
-  <>
-    <Helmet>
-      <title>XR Summits — Asia's Premier Immersive Technology Event</title>
-      <meta
-        name="description"
-        content="XR Asia Summit 2026 — The definitive platform connecting XR innovators, enterprise leaders, and immersive tech visionaries in Asia."
-      />
-    </Helmet>
-
-    <HeroSection />
-    <AboutSection />
-    <EventsSection />
-  </>
-);
-
-export default Home;
+export default ContactPage;
 </file>
 
 <file path="src/pages/MothershipPage.tsx">
-import React from 'react'
+import { Helmet } from 'react-helmet-async';
+import DemoPlaceholder from '../components/ui/DemoPlaceholder';
 
 const MothershipPage = () => {
   return (
-    <div>MothershipPage</div>
-  )
-}
+    <>
+      <Helmet>
+        <title>Mothership AI Bootcamp | XR Summits</title>
+      </Helmet>
+      <DemoPlaceholder title="Mothership 26' AI Bootcamp" />
+    </>
+  );
+};
 
-export default MothershipPage
+export default MothershipPage;
 </file>
 
 <file path="tsconfig.app.json">
@@ -2904,6 +2713,1385 @@ export default defineConfig({
     },
   },
 });
+</file>
+
+<file path="index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>XR</title>
+
+    <meta name="title" content="" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://xr-asia.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://xr-asia.com/" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+
+    <meta property="og:image" content="/award-1600x329.jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://xr-asia.com/" />
+    <meta property="twitter:title" content="" />
+    <meta property="twitter:description" content="" />
+
+    <meta property="twitter:image" content="/award-1600x329.jpeg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="src/components/events/PastEventCard.tsx">
+import { motion } from 'framer-motion';
+import FocusReveal from '../ui/FocusReveal';
+
+interface PastEventCardProps {
+  index: number;
+  year: string;
+  title: string;
+  attendees: string;
+  speakers: string;
+  highlight: string;
+  imageSrc?: string;
+  accentColor?: string;
+}
+const PastEventCard = ({
+  index,
+  year,
+  title,
+  attendees,
+  speakers,
+  highlight,
+  imageSrc,
+  accentColor = '#fb923c',
+}: PastEventCardProps) => (
+  <motion.div
+    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    className="group relative flex gap-5 p-5 rounded-xl overflow-hidden"
+    style={{
+      background: 'rgba(13,27,46,0.5)',
+      border: '1px solid rgba(255,255,255,0.06)',
+      transition: 'border-color 0.3s, box-shadow 0.3s',
+    }}
+    whileHover={{
+      borderColor: `${accentColor}35`,
+      boxShadow: `0 0 30px ${accentColor}10`,
+      transition: { duration: 0.3 },
+    }}
+  >
+    {/* Gunakan FocusReveal pada Image thumbnail */}
+    <FocusReveal delay={0.2 + (index * 0.1)} className="relative w-28 h-28 rounded-lg overflow-hidden flex-shrink-0">
+      {imageSrc ? (
+        <>
+          <img
+            src={imageSrc}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-background/30" />
+        </>
+      ) : (
+        <div
+          className="w-full h-full flex items-center justify-center"
+          style={{ background: `${accentColor}12` }}
+        >
+          <span
+            className="font-heading text-2xl font-black"
+            style={{ color: `${accentColor}60` }}
+          >
+            {year}
+          </span>
+        </div>
+      )}
+
+      {/* Year badge */}
+      <div
+        className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded text-[0.55rem] font-bold tracking-wider"
+        style={{
+          background: `${accentColor}CC`,
+          color: '#050b18',
+        }}
+      >
+        {year}
+      </div>
+    </FocusReveal>
+    {/* Content */}
+    <div className="flex flex-col justify-between flex-1 min-w-0">
+      <div>
+        <h4 className="font-heading text-sm font-bold text-foreground leading-tight mb-1 truncate">
+          {title}
+        </h4>
+        <p className="text-xs text-foreground-muted leading-relaxed line-clamp-2">
+          {highlight}
+        </p>
+      </div>
+
+      {/* Stats row */}
+      <div className="flex items-center gap-4 mt-3">
+        <div className="flex flex-col">
+          <span
+            className="font-heading text-sm font-bold"
+            style={{ color: accentColor }}
+          >
+            {attendees}
+          </span>
+          <span className="text-[0.58rem] text-foreground-muted tracking-wide">Attendees</span>
+        </div>
+        <div className="w-px h-6 bg-border" />
+        <div className="flex flex-col">
+          <span
+            className="font-heading text-sm font-bold"
+            style={{ color: accentColor }}
+          >
+            {speakers}
+          </span>
+          <span className="text-[0.58rem] text-foreground-muted tracking-wide">Speakers</span>
+        </div>
+      </div>
+    </div>
+
+    {/* Right accent line */}
+    <div
+      className="absolute right-0 top-4 bottom-4 w-[2px] rounded-full opacity-0 group-hover:opacity-60 transition-opacity duration-300"
+      style={{ background: accentColor }}
+    />
+  </motion.div>
+);
+
+export default PastEventCard;
+</file>
+
+<file path="src/components/hero/GatewayCard.tsx">
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import TracerBorder from '../ui/TracerBorder';
+
+interface GatewayCardProps {
+  index: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  to: string;
+  accentColor: string;
+  glowColor: string;
+  tag: string;
+  icon: React.ReactNode;
+  isCenter?: boolean;
+}
+
+const GatewayCard = ({
+  index,
+  title,
+  subtitle,
+  description,
+  to,
+  accentColor,
+  glowColor,
+  tag,
+  icon,
+  isCenter = false,
+}: GatewayCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseEnter = () => {
+    if (!cardRef.current || !glowRef.current || !contentRef.current) return;
+    gsap.to(cardRef.current, {
+      scale: 1.04,
+      y: -8,
+      duration: 0.5,
+      ease: 'power3.out',
+    });
+    gsap.to(glowRef.current, {
+      opacity: 1,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+    gsap.to(contentRef.current, {
+      y: -4,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current || !glowRef.current || !contentRef.current) return;
+    gsap.to(cardRef.current, {
+      scale: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+    gsap.to(glowRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+    gsap.to(contentRef.current, {
+      y: 0,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 12;
+    gsap.to(cardRef.current, {
+      rotateY: x,
+      rotateX: -y,
+      duration: 0.4,
+      ease: 'power1.out',
+      transformPerspective: 800,
+    });
+  };
+
+  const handleMouseOut = () => {
+    if (!cardRef.current) return;
+    gsap.to(cardRef.current, {
+      rotateY: 0,
+      rotateX: 0,
+      duration: 0.6,
+      ease: 'power3.out',
+    });
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: 1.4 + index * 0.18,
+        duration: 0.9,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={`relative flex-1 ${isCenter ? 'md:flex-[1.15]' : ''}`}
+    >
+      <div
+        ref={cardRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        onMouseOut={handleMouseOut}
+        style={{ transformStyle: 'preserve-3d' }}
+        className="relative h-full cursor-pointer"
+      >
+        {/* Glow layer (Ambient hover glow) */}
+        <div
+          ref={glowRef}
+          className="absolute -inset-[1px] rounded-lg opacity-0 transition-opacity z-0"
+          style={{
+            background: `linear-gradient(135deg, ${accentColor}30, ${glowColor}20)`,
+            boxShadow: `0 0 40px ${accentColor}40, 0 0 80px ${accentColor}15`,
+          }}
+        />
+
+        {/* Card Content wrapped in TracerBorder */}
+        <div className="relative h-full rounded-lg overflow-hidden z-10">
+          <TracerBorder accentColor={accentColor}>
+            <div
+              className="relative h-full w-full"
+              style={{
+                background: 'rgba(13, 27, 46, 0.7)',
+                backdropFilter: 'blur(20px)',
+              }}
+            >
+              {/* Top accent line */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[2px] z-10"
+                style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
+              />
+
+              {/* Corner decorations */}
+              <div
+                className="absolute top-3 left-3 w-4 h-4 border-t border-l z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
+              <div
+                className="absolute top-3 right-3 w-4 h-4 border-t border-r z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
+              <div
+                className="absolute bottom-3 left-3 w-4 h-4 border-b border-l z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
+              <div
+                className="absolute bottom-3 right-3 w-4 h-4 border-b border-r z-10"
+                style={{ borderColor: `${accentColor}80` }}
+              />
+
+              <div ref={contentRef} className="p-8 flex flex-col gap-5 h-full relative z-20">
+                {/* Tag */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className="text-[0.6rem] font-bold tracking-[0.3em] uppercase px-3 py-1 rounded-full"
+                    style={{
+                      color: accentColor,
+                      background: `${accentColor}15`,
+                      border: `1px solid ${accentColor}30`,
+                    }}
+                  >
+                    {tag}
+                  </span>
+                  <span
+                    className="text-[0.6rem] font-mono tracking-widest"
+                    style={{ color: `${accentColor}70` }}
+                  >
+                    0{index + 1}
+                  </span>
+                </div>
+
+                {/* Icon */}
+                <div
+                  className="w-14 h-14 rounded-lg flex items-center justify-center text-2xl"
+                  style={{
+                    background: `${accentColor}12`,
+                    border: `1px solid ${accentColor}25`,
+                    color: accentColor,
+                  }}
+                >
+                  {icon}
+                </div>
+
+                {/* Text */}
+                <div className="flex flex-col gap-2">
+                  <p
+                    className="text-[0.65rem] font-semibold tracking-[0.25em] uppercase"
+                    style={{ color: `${accentColor}90` }}
+                  >
+                    {subtitle}
+                  </p>
+                  <h3 className="font-heading text-xl font-bold text-foreground leading-tight">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-foreground-muted leading-relaxed mt-1">
+                    {description}
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <div className="mt-auto pt-4">
+                  <Link
+                    to={to}
+                    className="group inline-flex items-center gap-2 text-[0.72rem] font-bold tracking-[0.15em] uppercase transition-all duration-300 cursor-none"
+                    style={{ color: accentColor }}
+                  >
+                    Enter Experience
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </TracerBorder>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export default GatewayCard;
+</file>
+
+<file path="src/components/hero/ParticleCanvas.tsx">
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+
+const ParticleCanvas = () => {
+  const mountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount) return;
+
+    // ── Scene setup ────────────────────────────────────────────────────
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      mount.clientWidth / mount.clientHeight,
+      0.1,
+      1000
+    );
+    camera.position.z = 3;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+    mount.appendChild(renderer.domElement);
+
+    // ── Particles ──────────────────────────────────────────────────────
+    const PARTICLE_COUNT = 2800;
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const colors = new Float32Array(PARTICLE_COUNT * 3);
+    const sizes = new Float32Array(PARTICLE_COUNT);
+
+    const colorPalette = [
+      new THREE.Color('#fb923c'), // accent orange
+      new THREE.Color('#1e3a8a'), // primary blue
+      new THREE.Color('#7e22ce'), // secondary purple
+      new THREE.Color('#93c5fd'), // light blue
+      new THREE.Color('#f0f4ff'), // near white
+    ];
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const i3 = i * 3;
+      // Spread particles in a wide sphere
+      const radius = 5 + Math.random() * 6;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i3 + 2] = radius * Math.cos(phi) - 2;
+
+      const c = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+      colors[i3] = c.r;
+      colors[i3 + 1] = c.g;
+      colors[i3 + 2] = c.b;
+
+      sizes[i] = Math.random() * 2.5 + 0.5;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    // Custom shader for glowing, round particles
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uPixelRatio: { value: renderer.getPixelRatio() },
+      },
+      glslVersion: THREE.GLSL3,
+      vertexShader: `
+        in float size;
+        in vec3 color;
+        out vec3 vColor;
+        uniform float uTime;
+        uniform float uPixelRatio;
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+          // Gentle drift
+          pos.x += sin(uTime * 0.18 + position.z * 0.4) * 0.08;
+          pos.y += cos(uTime * 0.14 + position.x * 0.3) * 0.06;
+          pos.z += sin(uTime * 0.10 + position.y * 0.2) * 0.05;
+
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = size * uPixelRatio * (280.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        in vec3 vColor;
+        out vec4 outColor;
+
+        void main() {
+          float dist = length(gl_PointCoord - vec2(0.5));
+          if (dist > 0.5) discard;
+          float alpha = 1.0 - smoothstep(0.1, 0.5, dist);
+          // Glow core
+          float glow = exp(-dist * 6.0) * 0.8;
+          outColor = vec4(vColor + glow * 0.4, alpha * 0.75);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexColors: true,
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // ── Grid plane (subtle) ────────────────────────────────────────────
+    const gridHelper = new THREE.GridHelper(30, 40, 0x1e3a8a, 0x0d1b2e);
+    gridHelper.position.y = -4;
+    const gridMaterial = gridHelper.material as THREE.LineBasicMaterial;
+    gridMaterial.color.set(0x1e3a8a);
+    gridMaterial.transparent = true;
+    gridMaterial.opacity = 0.15;
+    scene.add(gridHelper);
+
+    // ── Mouse parallax ─────────────────────────────────────────────────
+    let mouseX = 0, mouseY = 0;
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
+    // ── Resize ─────────────────────────────────────────────────────────
+    const onResize = () => {
+      if (!mount) return;
+      camera.aspect = mount.clientWidth / mount.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(mount.clientWidth, mount.clientHeight);
+      material.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+    };
+    window.addEventListener('resize', onResize);
+
+    // ── Animation loop ─────────────────────────────────────────────────
+    let animId: number;
+    const timer = new THREE.Timer();
+    timer.connect(document);
+
+    const animate = (timestamp: number) => {
+      animId = requestAnimationFrame(animate);
+      timer.update(timestamp);
+      const t = timer.getElapsed();
+      material.uniforms.uTime.value = t;
+
+      // Slow rotation + mouse parallax
+      particles.rotation.y = t * 0.018 + mouseX * 0.06;
+      particles.rotation.x = mouseY * 0.04;
+      gridHelper.position.x = mouseX * 0.3;
+
+      renderer.render(scene, camera);
+    };
+    animate(performance.now());
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', onResize);
+      timer.dispose();
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+      if (mount.contains(renderer.domElement)) {
+        mount.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={mountRef}
+      className="absolute inset-0 w-full h-full"
+      aria-hidden="true"
+    />
+  );
+};
+
+export default ParticleCanvas;
+</file>
+
+<file path="src/components/Layout.tsx">
+import { useEffect, useRef } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import Lenis from 'lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AnimatePresence, motion } from 'framer-motion';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import CustomCursor from './ui/CustomCursor';
+import ScrollProgress from './ui/ScrollProgress';
+import FilmGrain from './ui/FilmGrain';
+import BackgroundElements from './ui/BackgroundElements';
+
+gsap.registerPlugin(ScrollTrigger);
+
+export const lenisInstance: { current: Lenis | null } = { current: null };
+
+const Layout = () => {
+  const lenisRef = useRef<Lenis | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.4,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+    });
+
+    lenisRef.current = lenis;
+    lenisInstance.current = lenis;
+
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      lenis.destroy();
+      lenisInstance.current = null;
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    lenisInstance.current?.scrollTo(0, { immediate: true });
+    ScrollTrigger.refresh();
+  }, [location.pathname]);
+
+  return (
+    <div className="relative min-h-screen text-foreground flex flex-col selection:bg-accent/30 selection:text-white">
+      <BackgroundElements />
+      <FilmGrain />
+
+      <CustomCursor />
+      <ScrollProgress />
+      <Navbar />
+
+      {/* ── Konten Utama (Berada di lapisan atas, menutupi Footer) ── */}
+      <div className="relative z-10 bg-background shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+        <AnimatePresence mode="wait">
+          <motion.main
+            key={location.pathname}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-1 flex flex-col"
+          >
+            <Outlet />
+          </motion.main>
+        </AnimatePresence>
+      </div>
+
+      {/* ── Parallax Curtain Footer (Berada di lapisan paling bawah) ── */}
+      <div className="sticky bottom-0 z-0 h-auto">
+        <Footer />
+      </div>
+    </div>
+  );
+};
+
+export default Layout;
+</file>
+
+<file path="src/components/Navbar.tsx">
+import { useState, useEffect, useCallback } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import MagneticWrapper from './ui/MagneticWrapper';
+import ScrambleText from './ui/ScrambleText';
+
+const NAV_LINKS = [
+  { label: 'Home', to: '/' },
+  { label: "Mothership", to: '/mothership' },
+  { label: 'Awards Gala', to: '/awards' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
+];
+
+// ── Tick / line decoration ─────────────────────────────────────────────────
+const NavTick = ({ color }: { color: string }) => (
+  <span
+    className="w-1 h-1 rounded-full flex-shrink-0"
+    style={{ background: color }}
+    aria-hidden="true"
+  />
+);
+
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpenPath, setMenuOpenPath] = useState<string | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const location = useLocation();
+  const menuOpen = menuOpenPath === location.pathname;
+
+  const handleScroll = useCallback(() => {
+    const sy = window.scrollY;
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    setScrolled(sy > 40);
+    setScrollProgress(totalHeight > 0 ? sy / totalHeight : 0);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  return (
+    <>
+      {/* ── Main header ── */}
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-[100]"
+      >
+        {/* Glass background layer */}
+        <div
+          className="absolute inset-0 transition-all duration-700"
+          style={{
+            background: scrolled
+              ? 'rgba(5, 11, 24, 0.82)'
+              : 'transparent',
+            backdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
+            WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
+            borderBottom: scrolled
+              ? '1px solid rgba(255, 255, 255, 0.055)'
+              : '1px solid transparent',
+          }}
+        />
+
+        {/* Scroll progress line — ultra thin, accent color */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
+          <div
+            className="h-full origin-left transition-transform duration-100"
+            style={{
+              background: 'linear-gradient(90deg, #fb923c, #f0f4ff 60%, transparent)',
+              transform: `scaleX(${scrollProgress})`,
+              opacity: scrolled ? 0.7 : 0,
+              boxShadow: '0 0 8px rgba(251,146,60,0.6)',
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem]">
+
+          {/* ── Logo ── */}
+          <Link to="/" className="group flex items-center gap-3 select-none flex-shrink-0">
+            <div className="relative w-9 h-9 flex-shrink-0">
+              {/* Glow ring on hover */}
+              <div
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
+                style={{ background: 'rgba(251,146,60,0.4)' }}
+              />
+              <img
+                src="/logo-278x262-removebg.png"
+                alt="XR Summits"
+                className="relative w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div className="flex flex-col leading-none">
+              <span
+                className="font-heading font-bold tracking-[0.28em] text-foreground group-hover:text-accent transition-colors duration-400"
+                style={{ fontSize: '0.78rem' }}
+              >
+                XR SUMMITS
+              </span>
+              <span
+                className="font-heading font-light tracking-[0.45em] text-foreground-muted uppercase"
+                style={{ fontSize: '0.45rem', marginTop: '2px' }}
+              >
+                Asia · Est. 2021
+              </span>
+            </div>
+          </Link>
+
+          {/* ── Desktop nav ── */}
+          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Primary navigation">
+            {NAV_LINKS.map((link) => (
+              <MagneticWrapper key={link.to} strength={0.12}>
+                <NavLink
+                  to={link.to}
+                  end={link.to === '/'}
+                  className={({ isActive }) =>
+                    `relative group px-4 py-2.5 rounded-sm transition-colors duration-300 cursor-none
+                    text-[0.68rem] font-semibold tracking-[0.14em] uppercase
+                    ${isActive ? 'text-accent' : 'text-foreground-muted hover:text-foreground'}`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {/* Hover bg pill */}
+                      <span
+                        className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: 'rgba(255,255,255,0.035)' }}
+                        aria-hidden="true"
+                      />
+
+                      <ScrambleText text={link.label} />
+
+                      {/* Active underline */}
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-active"
+                          className="absolute bottom-1 left-3 right-3 h-[1px]"
+                          style={{
+                            background: 'linear-gradient(90deg, transparent, #fb923c, transparent)',
+                            boxShadow: '0 0 10px rgba(251,146,60,0.9)',
+                          }}
+                          transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                        />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </MagneticWrapper>
+            ))}
+          </nav>
+
+          {/* ── CTA + Hamburger ── */}
+          <div className="flex items-center gap-3">
+            {/* Register button — desktop */}
+            <div className="hidden lg:block">
+              <MagneticWrapper strength={0.22}>
+                <a
+                  href="#tickets"
+                  className="group relative inline-flex items-center gap-2 px-5 py-2 overflow-hidden cursor-none"
+                  style={{
+                    border: '1px solid rgba(251,146,60,0.5)',
+                    borderRadius: '3px',
+                  }}
+                >
+                  {/* Fill on hover */}
+                  <span
+                    className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{ background: '#fb923c' }}
+                    aria-hidden="true"
+                  />
+                  {/* Glow */}
+                  <span
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ boxShadow: '0 0 30px rgba(251,146,60,0.5)' }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="relative text-[0.68rem] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
+                    style={{ color: 'inherit' }}
+                  >
+                    <span className="text-accent group-hover:text-[#050b18] transition-colors duration-300">
+                      Register
+                    </span>
+                  </span>
+                  <span
+                    className="relative text-[0.65rem] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#050b18]"
+                    style={{ color: 'rgba(251,146,60,0.6)' }}
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                </a>
+              </MagneticWrapper>
+            </div>
+
+            {/* Hamburger — mobile */}
+            <button
+              onClick={() =>
+                setMenuOpenPath((p) => (p === location.pathname ? null : location.pathname))
+              }
+              className="lg:hidden relative w-10 h-10 flex items-center justify-center text-foreground-muted hover:text-accent transition-colors duration-200"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {menuOpen ? (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -45, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 45, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute"
+                  >
+                    <X size={20} />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="open"
+                    initial={{ rotate: 45, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -45, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute"
+                  >
+                    <Menu size={20} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* ── Mobile full-screen overlay ── */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[99] flex flex-col"
+            style={{ background: 'rgba(5, 11, 24, 0.97)', backdropFilter: 'blur(24px)' }}
+          >
+            {/* Atmospheric glow */}
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] opacity-[0.07] pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse, #fb923c 0%, transparent 70%)' }}
+              aria-hidden="true"
+            />
+
+            {/* Decorative grid */}
+            <div
+              className="absolute inset-0 opacity-[0.015] pointer-events-none"
+              style={{
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+                backgroundSize: '40px 40px',
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Top bar (mirrors header height) */}
+            <div className="h-16 flex items-center px-6 flex-shrink-0">
+              <Link to="/" className="flex items-center gap-3 select-none" onClick={() => setMenuOpenPath(null)}>
+                <img src="/logo-278x262-removebg.png" alt="XR Summits" className="w-8 h-8 object-contain" />
+                <span className="font-heading font-bold tracking-[0.28em] text-foreground" style={{ fontSize: '0.78rem' }}>
+                  XR SUMMITS
+                </span>
+              </Link>
+            </div>
+
+            {/* Divider */}
+            <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+
+            {/* Nav links */}
+            <nav className="flex flex-col flex-1 justify-center px-6 gap-1" aria-label="Mobile navigation">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.to}
+                  initial={{ x: 32, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: 32, opacity: 0 }}
+                  transition={{ delay: i * 0.055 + 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <NavLink
+                    to={link.to}
+                    end={link.to === '/'}
+                    className={({ isActive }) =>
+                      `group flex items-center gap-4 py-4 border-b transition-colors duration-200
+                      ${isActive
+                        ? 'text-accent border-white/10'
+                        : 'text-foreground-muted hover:text-foreground border-white/[0.05]'
+                      }`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <NavTick color={isActive ? '#fb923c' : 'rgba(255,255,255,0.15)'} />
+                        <span className="font-heading font-bold tracking-[0.2em] uppercase" style={{ fontSize: '1.05rem' }}>
+                          {link.label}
+                        </span>
+                        {isActive && (
+                          <span className="ml-auto text-xs font-mono tracking-widest opacity-50">
+                            ●
+                          </span>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                </motion.div>
+              ))}
+            </nav>
+
+            {/* Bottom CTA */}
+            <motion.div
+              initial={{ y: 24, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 24, opacity: 0 }}
+              transition={{ delay: 0.38, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="px-6 pb-10 pt-6"
+            >
+              {/* Edition badge */}
+              <p className="text-[0.55rem] font-bold tracking-[0.45em] text-foreground-muted uppercase mb-5">
+                4th Edition · Kuala Lumpur · 2026
+              </p>
+              <a
+                href="#tickets"
+                onClick={() => setMenuOpenPath(null)}
+                className="flex items-center justify-center gap-3 w-full py-4 font-bold tracking-[0.2em] uppercase text-[0.78rem] text-background transition-all duration-300 rounded-sm"
+                style={{
+                  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+                  boxShadow: '0 0 40px rgba(251,146,60,0.35)',
+                }}
+              >
+                Register Now
+                <span aria-hidden="true">→</span>
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Navbar;
+</file>
+
+<file path="src/components/speakers/SpeakersSection.tsx">
+import { motion } from 'framer-motion';
+import HolographicImage from '../ui/HolographicImage';
+
+const SPEAKERS = [
+  { name: 'Dr. Sarah Chen', role: 'Chief AI Scientist, Nexus', image: 'https://i.pravatar.cc/300?img=1' },
+  { name: 'Marcus V.', role: 'Head of Spatial, MetaXR', image: 'https://i.pravatar.cc/300?img=11' },
+  { name: 'Elena Rostova', role: 'VP Engineering, NeuralNet', image: 'https://i.pravatar.cc/300?img=5' },
+  { name: 'David Kim', role: 'Founder, XR Esports Arena', image: 'https://i.pravatar.cc/300?img=8' },
+];
+
+const SpeakersSection = () => {
+  return (
+    <section className="relative w-full bg-background py-24 overflow-hidden z-10">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="flex items-center gap-4 mb-14">
+          <span className="w-6 h-px bg-accent/60" />
+          <span className="text-[0.6rem] font-bold tracking-[0.5em] uppercase text-accent/80">
+            Visionary Minds
+          </span>
+        </div>
+
+        <h2 className="font-heading font-black text-4xl md:text-5xl text-foreground mb-12">
+          Keynote{' '}
+          <span className="text-transparent bg-clip-text bg-gradient-to-br from-accent to-white">
+            Speakers
+          </span>
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SPEAKERS.map((speaker, i) => (
+            <motion.div
+              key={speaker.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: i * 0.1, duration: 0.7 }}
+              className="group relative rounded-xl overflow-hidden glass p-4 cursor-pointer"
+            >
+              <div className="relative w-full aspect-square rounded-lg overflow-hidden mb-4">
+
+                {/* Ganti <img> dengan HolographicImage */}
+                <HolographicImage
+                  src={speaker.image}
+                  alt={speaker.name}
+                  className="w-full h-full rounded-lg"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1b2e] via-transparent to-transparent opacity-80 z-40 pointer-events-none" />
+              </div>
+              <h3 className="font-heading font-bold text-lg text-foreground group-hover:text-accent transition-colors relative z-50">
+                {speaker.name}
+              </h3>
+              <p className="text-xs text-foreground-muted tracking-wide mt-1 relative z-50">
+                {speaker.role}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SpeakersSection;
+</file>
+
+<file path="src/components/tickets/TicketsSection.tsx">
+import { motion } from 'framer-motion';
+import MagneticWrapper from '../ui/MagneticWrapper'; // Import komponen baru
+import SplitTextReveal from '../ui/SplitTextReveal';
+
+const TicketsSection = () => {
+  return (
+    <section id="tickets" className="relative w-full py-32 bg-background flex items-center justify-center px-6">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-[0.03] bg-radial from-accent to-transparent blur-3xl" />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 w-full max-w-4xl rounded-2xl glass-accent p-12 md:p-20 text-center overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+
+        <SplitTextReveal
+          text="Secure Your Access"
+          className="font-heading font-black text-4xl md:text-6xl text-foreground mb-6 justify-center"
+          delay={0.2}
+        />
+        <p className="text-foreground-muted mb-10 max-w-xl mx-auto leading-relaxed">
+          Join 500+ industry leaders, innovators, and creators. Early bird tickets are highly limited and closing soon.
+        </p>
+
+        {/* Bungkus tombol dengan MagneticWrapper (tarikan agak kuat: 0.4) */}
+        <MagneticWrapper strength={0.4}>
+          <button className="relative px-8 py-4 bg-accent text-background font-bold tracking-[0.2em] uppercase rounded-sm overflow-hidden group transition-all hover:scale-105 shadow-[0_0_40px_rgba(251,146,60,0.4)] hover:shadow-[0_0_60px_rgba(251,146,60,0.6)] cursor-none">
+            <span className="relative z-10">Get Tickets Now</span>
+            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+          </button>
+        </MagneticWrapper>
+
+      </motion.div>
+    </section>
+  );
+};
+
+export default TicketsSection;
+</file>
+
+<file path="src/components/ui/DemoPlaceholder.tsx">
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import SplitTextReveal from './SplitTextReveal';
+
+interface DemoPlaceholderProps {
+  title: string;
+}
+
+const DemoPlaceholder = ({ title }: DemoPlaceholderProps) => {
+  return (
+    <section className="relative w-full min-h-screen flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+        <div className="w-[500px] h-[500px] bg-accent opacity-5 blur-[120px] rounded-full mix-blend-screen" />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        className="relative z-10 glass-accent p-10 md:p-16 rounded-2xl max-w-2xl w-full text-center border border-accent/20 shadow-[0_0_40px_rgba(251,146,60,0.05)]"
+      >
+        <div className="w-16 h-16 mx-auto mb-6 bg-accent/10 border border-accent/30 rounded-xl flex items-center justify-center text-accent">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-8 h-8">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+
+        <SplitTextReveal
+          text={title}
+          className="font-heading font-black text-3xl md:text-5xl text-foreground mb-4 leading-tight justify-center"
+        />
+
+        <p className="text-foreground-muted mb-10 text-sm md:text-base leading-relaxed">
+          This module <span className="text-accent font-semibold">is currently under development</span> and will be available soon.
+        </p>
+
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-accent text-accent hover:bg-accent hover:text-background transition-colors duration-300 rounded-sm font-bold tracking-[0.15em] text-[0.7rem] uppercase shadow-[0_0_15px_rgba(251,146,60,0.15)] hover:shadow-[0_0_25px_rgba(251,146,60,0.4)]"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          </svg>
+          Return to Hub
+        </Link>
+      </motion.div>
+    </section>
+  );
+};
+
+export default DemoPlaceholder;
+</file>
+
+<file path="src/components/ui/ScrambleText.tsx">
+import { useState, useEffect } from 'react';
+
+interface ScrambleTextProps {
+  text: string;
+}
+
+// Karakter acak yang akan berkedip saat hover
+const CHARS = '!<>-_\\/[]{}—=+*^?#010101';
+
+const ScrambleText = ({ text }: ScrambleTextProps) => {
+  const [displayText, setDisplayText] = useState(text);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (!isHovered) return;
+
+    let iteration = 0;
+    const interval = setInterval(() => {
+      setDisplayText(
+        text
+          .split('')
+          .map((_, index) => {
+            // Jika iterasi sudah melewati index karakter ini, tampilkan huruf asli
+            if (index < iteration) {
+              return text[index];
+            }
+            // Jika belum, tampilkan karakter acak
+            return CHARS[Math.floor(Math.random() * CHARS.length)];
+          })
+          .join('')
+      );
+
+      // Kecepatan dekripsi (semakin besar angkanya, semakin cepat selesai)
+      iteration += 1 / 2.5;
+
+      if (iteration >= text.length) {
+        clearInterval(interval);
+      }
+    }, 30); // Berjalan setiap 30ms
+
+    return () => clearInterval(interval);
+  }, [isHovered, text]);
+
+  return (
+    <span
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setDisplayText(text);
+      }}
+      className="inline-block whitespace-nowrap"
+    >
+      {displayText}
+    </span>
+  );
+};
+
+export default ScrambleText;
+</file>
+
+<file path="src/pages/Home.tsx">
+import { Helmet } from 'react-helmet-async';
+import HeroSection from '../components/hero/HeroSection';
+import AboutSection from '../components/about/AboutSection';
+import EventsSection from '../components/events/EventsSection';
+import SpeakersSection from '../components/speakers/SpeakersSection';
+import SponsorsSection from '../components/sponsors/SponsorsSection';
+import TicketsSection from '../components/tickets/TicketsSection';
+
+// Import komponen Marquee yang baru dibuat
+import ScrollMarquee from '../components/ui/ScrollMarquee';
+
+const Home = () => (
+  <>
+    <Helmet>
+      <title>XR Summits — Asia's Premier Immersive Technology Event</title>
+      <meta
+        name="description"
+        content="XR Asia Summit 2026 — The definitive platform connecting XR innovators, enterprise leaders, and immersive tech visionaries in Asia."
+      />
+    </Helmet>
+
+    <HeroSection />
+    <AboutSection />
+    <EventsSection />
+    <SpeakersSection />
+
+    <ScrollMarquee />
+
+    <SponsorsSection />
+    <TicketsSection />
+  </>
+);
+
+export default Home;
+</file>
+
+<file path="src/App.tsx">
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
+import { LazyMotion, domAnimation } from 'framer-motion';
+import Layout from './components/Layout';
+
+// ── Pages ──────────────────────────────────────────────────────────────────
+const Home = lazy(() => import('./pages/Home'));
+const MothershipPage = lazy(() => import('./pages/MothershipPage'));
+const AwardsGalaPage = lazy(() => import('./pages/AwardsGalaPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+
+// ── Shared loader (Fallback untuk navigasi antar halaman) ─────────────────
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-background">
+    <div className="relative w-16 h-16">
+      <div className="absolute inset-0 border-t-2 border-accent rounded-full animate-spin" />
+      <div className="absolute inset-2 border-t border-primary rounded-full animate-spin [animation-direction:reverse] [animation-duration:0.6s]" />
+    </div>
+  </div>
+);
+
+// ── App ───────────────────────────────────────────────────────────────────
+const App = () => {
+
+  return (
+    <HelmetProvider>
+      <Analytics />
+      <LazyMotion features={domAnimation}>
+
+
+
+        <BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="mothership" element={<MothershipPage />} />
+                <Route path="awards" element={<AwardsGalaPage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="contact" element={<ContactPage />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </LazyMotion>
+    </HelmetProvider>
+  );
+};
+
+export default App;
 </file>
 
 </files>

@@ -138,6 +138,16 @@ const ParticleCanvas = () => {
     };
     window.addEventListener('resize', onResize);
 
+    // ── Intersection Observer (BARU) ───────────────────────────────────
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    if (mount) observer.observe(mount);
+
     // ── Animation loop ─────────────────────────────────────────────────
     let animId: number;
     const timer = new THREE.Timer();
@@ -145,6 +155,10 @@ const ParticleCanvas = () => {
 
     const animate = (timestamp: number) => {
       animId = requestAnimationFrame(animate);
+
+      // Jika kanvas tidak terlihat di layar, HENTIKAN kalkulasi & render
+      if (!isVisible) return;
+
       timer.update(timestamp);
       const t = timer.getElapsed();
       material.uniforms.uTime.value = t;
@@ -162,6 +176,7 @@ const ParticleCanvas = () => {
       cancelAnimationFrame(animId);
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
+      if (mount) observer.unobserve(mount); // Bersihkan observer
       timer.dispose();
       geometry.dispose();
       material.dispose();
