@@ -1,10 +1,10 @@
-import { Suspense, lazy, useState, useCallback } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
-import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion';
+import { LazyMotion, domAnimation } from 'framer-motion';
 import Layout from './components/Layout';
-import Preloader from './components/ui/Preloader';
+// import Preloader from './components/ui/Preloader';
 
 // ── Pages (lazy) ───────────────────────────────────────────────────────────
 const Home = lazy(() => import('./pages/Home'));
@@ -39,11 +39,11 @@ const PageLoader = () => (
 
 // ── App ────────────────────────────────────────────────────────────────────
 const App = () => {
-  const [preloaderDone, setPreloaderDone] = useState(false);
+  // const [preloaderDone, setPreloaderDone] = useState(false);
 
-  const handlePreloaderComplete = useCallback(() => {
-    setPreloaderDone(true);
-  }, []);
+  // const handlePreloaderComplete = useCallback(() => {
+  //   setPreloaderDone(true);
+  // }, []);
 
   return (
     <HelmetProvider>
@@ -51,11 +51,11 @@ const App = () => {
       <LazyMotion features={domAnimation}>
 
         {/* Preloader — shown once on first load */}
-        <AnimatePresence>
+        {/* <AnimatePresence>
           {!preloaderDone && (
             <Preloader onComplete={handlePreloaderComplete} />
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
 
         {/* Main app — rendered behind preloader, visible after it exits */}
         <BrowserRouter>
