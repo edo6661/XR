@@ -57,6 +57,7 @@ const SpotlightCard = ({
       opacity: isFeatured ? 0.14 : 0.09,
       duration: 0.38,
       ease: 'power2.out',
+      overwrite: 'auto',
     });
   }, [isFeatured]);
 
@@ -91,7 +92,7 @@ const SpotlightCard = ({
       onMouseLeave={handleMouseLeave}
       style={{ transformStyle: 'preserve-3d' }}
       className={[
-        'relative overflow-hidden rounded-xl group cursor-pointer h-full',
+        'relative overflow-hidden rounded-xl group cursor-pointer h-full will-change-transform',
         isFeatured ? 'min-h-[460px]' : 'min-h-[300px]',
       ].join(' ')}
     >
@@ -145,10 +146,9 @@ const SpotlightCard = ({
       {/* ── Cursor shine ── */}
       <div
         ref={shineRef}
-        className="absolute w-56 h-56 rounded-full pointer-events-none opacity-0 z-[1]"
+        className="absolute w-56 h-56 rounded-full pointer-events-none opacity-0 z-[1] will-change-transform"
         style={{
           background: `radial-gradient(circle, ${accentColor}50 0%, transparent 65%)`,
-          filter: 'blur(22px)',
           left: '50%', top: '50%',
           transform: 'translate(-50%, -50%)',
         }}

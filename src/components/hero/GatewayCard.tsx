@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -34,6 +34,22 @@ const GatewayCard = ({
   const arrowRef = useRef<HTMLSpanElement>(null);
   const borderRef = useRef<HTMLDivElement>(null);
 
+  // Referensi untuk GSAP quickTo agar tidak membuat instance baru setiap mouse geser
+  const xTo = useRef<gsap.QuickToFunc | null>(null);
+  const yTo = useRef<gsap.QuickToFunc>(null);
+  const glowXTo = useRef<gsap.QuickToFunc>(null);
+  const glowYTo = useRef<gsap.QuickToFunc>(null);
+
+  useEffect(() => {
+    if (!cardRef.current || !glowRef.current) return;
+
+    // Membangun animasi di awal (hanya 1 kali eksekusi saat mount)
+    xTo.current = gsap.quickTo(cardRef.current, "rotateY", { duration: 0.55, ease: "power2.out" });
+    yTo.current = gsap.quickTo(cardRef.current, "rotateX", { duration: 0.55, ease: "power2.out" });
+    glowXTo.current = gsap.quickTo(glowRef.current, "x", { duration: 0.4, ease: "power2.out" });
+    glowYTo.current = gsap.quickTo(glowRef.current, "y", { duration: 0.4, ease: "power2.out" });
+  }, []);
+
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current || !glowRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
@@ -42,20 +58,17 @@ const GatewayCard = ({
     const cx = rect.width / 2;
     const cy = rect.height / 2;
 
-    gsap.to(cardRef.current, {
-      rotateX: ((y - cy) / cy) * (isCenter ? -4 : -3.5),
-      rotateY: ((x - cx) / cx) * (isCenter ? 4 : 3.5),
-      duration: 0.55,
-      ease: 'power2.out',
-      transformPerspective: 1000,
-    });
+    // Masukkan angka/koordinat baru ke dalam instance yang sudah dibuat
+    if (xTo.current) xTo.current(((x - cx) / cx) * (isCenter ? 4 : 3.5));
+    if (yTo.current) yTo.current(((y - cy) / cy) * (isCenter ? -4 : -3.5));
+    if (glowXTo.current) glowXTo.current(x - cx);
+    if (glowYTo.current) glowYTo.current(y - cy);
 
+    // Opacity cukup pakai gsap.to biasa dan tambahkan overwrite auto
     gsap.to(glowRef.current, {
-      x: x - cx,
-      y: y - cy,
       opacity: isCenter ? 0.2 : 0.12,
       duration: 0.4,
-      ease: 'power2.out',
+      overwrite: 'auto'
     });
   }, [isCenter]);
 
@@ -75,13 +88,12 @@ const GatewayCard = ({
   const handleMouseLeave = useCallback(() => {
     if (!cardRef.current || !glowRef.current) return;
 
-    gsap.to(cardRef.current, {
-      rotateX: 0, rotateY: 0,
-      duration: 0.85, ease: 'power3.out',
-    });
-    gsap.to(glowRef.current, {
-      opacity: 0, duration: 0.45,
-    });
+    // Reset rotasi posisi 3D ke 0 melalui quickTo
+    if (xTo.current) xTo.current(0);
+    if (yTo.current) yTo.current(0);
+
+    gsap.to(glowRef.current, { opacity: 0, duration: 0.45, overwrite: 'auto' });
+
     if (contentRef.current) {
       gsap.to(contentRef.current, { y: 0, duration: 0.65, ease: 'power3.out' });
     }
@@ -115,7 +127,7 @@ const GatewayCard = ({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           style={{ transformStyle: 'preserve-3d' }}
-          className="relative h-full"
+          className="relative h-full will-change-transform"
         >
           {/* ── Outer border layer ── */}
           <div
@@ -139,8 +151,7 @@ const GatewayCard = ({
                   background: isCenter
                     ? `linear-gradient(155deg, rgba(22,38,62,0.94) 0%, rgba(13,27,46,0.97) 100%)`
                     : 'rgba(10, 20, 36, 0.78)',
-                  backdropFilter: 'blur(18px)',
-                  WebkitBackdropFilter: 'blur(18px)',
+                  // backdropFilter telah DIHAPUS agar performa scroll tidak bottleneck 
                 }}
               >
                 {/* Top edge line */}
@@ -155,10 +166,9 @@ const GatewayCard = ({
                 {/* Cursor glow blob */}
                 <div
                   ref={glowRef}
-                  className="absolute w-80 h-80 rounded-full pointer-events-none opacity-0 z-0"
+                  className="absolute w-80 h-80 rounded-full pointer-events-none opacity-0 z-0 will-change-transform"
                   style={{
                     background: `radial-gradient(circle, ${accentColor}40 0%, transparent 65%)`,
-                    filter: 'blur(32px)',
                     left: '50%', top: '50%',
                     transform: 'translate(-50%, -50%)',
                   }}
