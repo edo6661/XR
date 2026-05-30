@@ -248,3 +248,13 @@ svg {
     display: none !important;
   }
 }
+
+.optimize-gpu {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.will-change-transform {
+  will-change: transform;
+}

@@ -1,5 +1,9 @@
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useRef } from 'react';
+// src/components/ui/ScrollMarquee.tsx
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // ── Text block ─────────────────────────────────────────────────────────────
 const Word = ({ text, outline = false }: { text: string; outline?: boolean }) => (
@@ -41,25 +45,52 @@ const Diamond = ({ color = 'rgba(251,146,60,0.3)' }: { color?: string }) => (
 // ── ScrollMarquee ──────────────────────────────────────────────────────────
 const ScrollMarquee = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const spring = useSpring(scrollYProgress, { stiffness: 300, damping: 45 });
-
-  // Row 1 moves left, Row 2 moves right — reduced range for subtlety
-  const x1 = useTransform(spring, [0, 1], ['0px', '-320px']);
-  const x2 = useTransform(spring, [0, 1], ['-320px', '0px']);
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
 
   const row1Words = ['Future', 'Immersive', 'Spatial', 'Computing'];
   const row2Words = ['AI', '×', 'XR', 'Innovation'];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Row 1 bergerak ke kiri
+      gsap.fromTo(row1Ref.current,
+        { x: 0 },
+        {
+          x: -320,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5, // Angka ini memberikan efek spring/smooth
+          }
+        }
+      );
+
+      // Row 2 bergerak ke kanan
+      gsap.fromTo(row2Ref.current,
+        { x: -320 },
+        {
+          x: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          }
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       ref={containerRef}
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden optimize-gpu"
       style={{
         paddingTop: '5rem',
         paddingBottom: '5rem',
@@ -82,7 +113,7 @@ const ScrollMarquee = () => {
         style={{ transform: 'rotate(-1.5deg) scale(1.06)', transformOrigin: 'center' }}
       >
         {/* Row 1 */}
-        <motion.div style={{ x: x1 }} className="flex items-center whitespace-nowrap">
+        <div ref={row1Ref} className="flex items-center whitespace-nowrap will-change-transform">
           {[...Array(3)].map((_, gi) =>
             row1Words.map((word, wi) => (
               <div key={`r1-${gi}-${wi}`} className="flex items-center">
@@ -93,10 +124,10 @@ const ScrollMarquee = () => {
               </div>
             ))
           )}
-        </motion.div>
+        </div>
 
         {/* Row 2 */}
-        <motion.div style={{ x: x2 }} className="flex items-center whitespace-nowrap">
+        <div ref={row2Ref} className="flex items-center whitespace-nowrap will-change-transform">
           {[...Array(3)].map((_, gi) =>
             row2Words.map((word, wi) => (
               <div key={`r2-${gi}-${wi}`} className="flex items-center">
@@ -107,7 +138,7 @@ const ScrollMarquee = () => {
               </div>
             ))
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

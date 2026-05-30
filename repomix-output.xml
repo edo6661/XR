@@ -1,36 +1,4 @@
-tolong ingat kode ini, nanti saya minta bantuan terkait kode ini:
-<file path=".gitignore">
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-.vercel
-.env*.local
-
-
-.env
-</file>
-
+ada yang bisa di optimisasi tidak tanpa merusak functionality nya animasi nya, soalnya saya merasa rada berat, terus juga termasuk saya gerakin mouse juga pointer nya rada delay / lag gitu.
 <file path="eslint.config.js">
 import js from '@eslint/js'
 import globals from 'globals'
@@ -1066,245 +1034,6 @@ const AboutSection = () => {
 export default AboutSection;
 </file>
 
-<file path="src/components/about/PillarCard.tsx">
-import { motion } from 'framer-motion';
-
-interface PillarCardProps {
-  index: number;
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  accentColor: string;
-  isFeatured?: boolean;
-}
-
-const PillarCard = ({
-  index,
-  icon,
-  title,
-  description,
-  accentColor,
-  isFeatured = false,
-}: PillarCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 36 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.25 }}
-    transition={{ delay: index * 0.09, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex flex-col gap-5 rounded-xl overflow-hidden"
-    style={{
-      padding: isFeatured ? '1.75rem' : '1.4rem 1.5rem',
-      background: isFeatured
-        ? `linear-gradient(145deg, rgba(20,34,58,0.85) 0%, rgba(13,27,46,0.7) 100%)`
-        : 'rgba(10, 20, 36, 0.5)',
-      border: `1px solid ${isFeatured ? `${accentColor}28` : 'rgba(255,255,255,0.05)'}`,
-      backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)',
-      transition: 'border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease',
-    }}
-    whileHover={{ y: -5 }}
-    onMouseEnter={(e) => {
-      const el = e.currentTarget as HTMLDivElement;
-      el.style.borderColor = `${accentColor}40`;
-      el.style.boxShadow = `0 0 32px ${accentColor}0d, 0 16px 40px rgba(0,0,0,0.25)`;
-    }}
-    onMouseLeave={(e) => {
-      const el = e.currentTarget as HTMLDivElement;
-      el.style.borderColor = isFeatured ? `${accentColor}28` : 'rgba(255,255,255,0.05)';
-      el.style.boxShadow = 'none';
-    }}
-  >
-    {/* Left accent bar */}
-    <div
-      className="absolute left-0 top-5 bottom-5 w-[2px] rounded-full"
-      style={{
-        background: `linear-gradient(to bottom, transparent, ${accentColor}, transparent)`,
-        opacity: isFeatured ? 0.7 : 0.4,
-        transition: 'opacity 0.35s ease',
-      }}
-      aria-hidden="true"
-    />
-
-    {/* Top-right index */}
-    <div className="flex items-start justify-between">
-      {/* Icon container */}
-      <div
-        className="flex items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-105"
-        style={{
-          width: isFeatured ? '44px' : '38px',
-          height: isFeatured ? '44px' : '38px',
-          background: `${accentColor}12`,
-          border: `1px solid ${accentColor}22`,
-          color: accentColor,
-        }}
-      >
-        {icon}
-      </div>
-
-      {/* Index number */}
-      <span
-        className="font-heading font-black"
-        style={{
-          fontSize: '0.6rem',
-          letterSpacing: '0.35em',
-          color: `${accentColor}45`,
-        }}
-        aria-hidden="true"
-      >
-        {String(index + 1).padStart(2, '0')}
-      </span>
-    </div>
-
-    {/* Text */}
-    <div className="flex flex-col gap-1.5">
-      <h4
-        className="font-heading font-bold tracking-wide text-foreground"
-        style={{ fontSize: isFeatured ? '0.88rem' : '0.8rem' }}
-      >
-        {title}
-      </h4>
-      <p
-        className="leading-relaxed"
-        style={{
-          fontSize: '0.72rem',
-          color: 'rgba(107,127,163,0.85)',
-          lineHeight: 1.65,
-        }}
-      >
-        {description}
-      </p>
-    </div>
-
-    {/* Featured badge */}
-    {isFeatured && (
-      <div className="mt-auto pt-3 border-t" style={{ borderColor: `${accentColor}18` }}>
-        <span
-          className="text-[0.55rem] font-bold tracking-[0.35em] uppercase"
-          style={{ color: `${accentColor}70` }}
-        >
-          Core Focus
-        </span>
-      </div>
-    )}
-  </motion.div>
-);
-
-export default PillarCard;
-</file>
-
-<file path="src/components/about/StatCard.tsx">
-import { useCountUp } from '../../hooks/useScrollAnimations';
-
-interface StatCardProps {
-  value: number;
-  suffix: string;
-  label: string;
-  sublabel: string;
-  accentColor?: string;
-  index?: number;
-}
-
-const StatCard = ({
-  value,
-  suffix,
-  label,
-  sublabel,
-  accentColor = '#fb923c',
-  index = 0,
-}: StatCardProps) => {
-  const countRef = useCountUp(value, suffix, 2.2);
-
-  return (
-    <div
-      className="group relative flex flex-col gap-3 px-7 py-7 rounded-xl overflow-hidden"
-      style={{
-        background: 'rgba(13, 27, 46, 0.55)',
-        border: '1px solid rgba(255,255,255,0.055)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
-      }}
-      onMouseEnter={(e) => {
-        const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = `${accentColor}30`;
-        el.style.boxShadow = `0 0 40px ${accentColor}0e, 0 20px 48px rgba(0,0,0,0.3)`;
-      }}
-      onMouseLeave={(e) => {
-        const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = 'rgba(255,255,255,0.055)';
-        el.style.boxShadow = 'none';
-      }}
-    >
-      {/* Index number — background watermark */}
-      <span
-        className="absolute top-4 right-5 font-heading font-black pointer-events-none select-none"
-        style={{
-          fontSize: '4.5rem',
-          lineHeight: 1,
-          color: `${accentColor}07`,
-          letterSpacing: '-0.02em',
-        }}
-        aria-hidden="true"
-      >
-        {String(index + 1).padStart(2, '0')}
-      </span>
-
-      {/* Accent top line — full width, gradient */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[1.5px]"
-        style={{
-          background: `linear-gradient(90deg, ${accentColor}00, ${accentColor}80 40%, ${accentColor}80 60%, ${accentColor}00)`,
-          boxShadow: `0 0 10px ${accentColor}40`,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Value */}
-      <div className="flex items-end gap-1">
-        <span
-          ref={countRef}
-          className="font-heading font-black leading-none"
-          style={{
-            fontSize: 'clamp(2.8rem, 6vw, 4rem)',
-            background: `linear-gradient(135deg, ${accentColor} 0%, #f0f4ff 100%)`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
-          0{suffix}
-        </span>
-      </div>
-
-      {/* Divider */}
-      <div
-        className="w-8 h-px"
-        style={{ background: `${accentColor}40` }}
-        aria-hidden="true"
-      />
-
-      {/* Label + sublabel */}
-      <div className="flex flex-col gap-1">
-        <span
-          className="font-heading font-bold tracking-[0.18em] uppercase"
-          style={{ fontSize: '0.72rem', color: '#f0f4ff' }}
-        >
-          {label}
-        </span>
-        <span
-          className="tracking-wide leading-snug"
-          style={{ fontSize: '0.68rem', color: 'rgba(107,127,163,0.8)' }}
-        >
-          {sublabel}
-        </span>
-      </div>
-    </div>
-  );
-};
-
-export default StatCard;
-</file>
-
 <file path="src/components/events/EventsSection.tsx">
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
@@ -1672,943 +1401,6 @@ const EventsSection = () => {
 };
 
 export default EventsSection;
-</file>
-
-<file path="src/components/events/SpotlightCard.tsx">
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-
-interface SpotlightCardProps {
-  index: number;
-  title: string;
-  subtitle: string;
-  date: string;
-  location: string;
-  description: string;
-  accentColor: string;
-  tag: string;
-  to?: string;
-  imageSrc?: string;
-  isFeatured?: boolean;
-}
-
-const SpotlightCard = ({
-  index,
-  title,
-  subtitle,
-  date,
-  location,
-  description,
-  accentColor,
-  tag,
-  to,
-  imageSrc,
-  isFeatured = false,
-}: SpotlightCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const shineRef = useRef<HTMLDivElement>(null);
-
-  // ── 3D tilt ───────────────────────────────────────────────────────────
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || !shineRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-
-    gsap.to(cardRef.current, {
-      rotateX: ((y - cy) / cy) * -5,
-      rotateY: ((x - cx) / cx) * 5,
-      duration: 0.45,
-      ease: 'power2.out',
-      transformPerspective: 900,
-    });
-
-    gsap.to(shineRef.current, {
-      x: x - cx,
-      y: y - cy,
-      opacity: isFeatured ? 0.15 : 0.1,
-      duration: 0.35,
-      ease: 'power2.out',
-    });
-  };
-
-  const handleMouseLeave = () => {
-    if (!cardRef.current || !shineRef.current) return;
-    gsap.to(cardRef.current, {
-      rotateX: 0, rotateY: 0,
-      duration: 0.75, ease: 'power3.out',
-    });
-    gsap.to(shineRef.current, {
-      opacity: 0, duration: 0.4,
-    });
-  };
-
-  // ── Inner card ────────────────────────────────────────────────────────
-  const inner = (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transformStyle: 'preserve-3d' }}
-      className={[
-        'relative overflow-hidden rounded-xl group cursor-pointer h-full',
-        isFeatured ? 'min-h-[460px]' : 'min-h-[300px]',
-      ].join(' ')}
-    >
-      {/* ── Background ── */}
-      <div className="absolute inset-0">
-        {imageSrc ? (
-          <>
-            <img
-              src={imageSrc}
-              alt={title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-              loading="lazy"
-            />
-            {/* Gradient overlay — stronger at bottom */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(
-                  to top,
-                  rgba(5,11,24,0.97) 0%,
-                  rgba(5,11,24,0.72) 45%,
-                  rgba(5,11,24,0.28) 100%
-                )`,
-              }}
-            />
-          </>
-        ) : (
-          <div
-            className="w-full h-full"
-            style={{
-              background: `linear-gradient(145deg, rgba(13,27,46,0.95) 0%, ${accentColor}14 100%)`,
-            }}
-          />
-        )}
-      </div>
-
-      {/* ── Border (static, hover via JS) ── */}
-      <div
-        className="absolute inset-0 rounded-xl pointer-events-none transition-all duration-450"
-        style={{ border: `1px solid ${accentColor}22` }}
-        ref={(el) => {
-          if (!el) return;
-          const card = cardRef.current;
-          if (!card) return;
-          card.addEventListener('mouseenter', () => {
-            el.style.borderColor = `${accentColor}50`;
-            el.style.boxShadow = `0 0 48px ${accentColor}18, inset 0 0 24px ${accentColor}06`;
-          });
-          card.addEventListener('mouseleave', () => {
-            el.style.borderColor = `${accentColor}22`;
-            el.style.boxShadow = 'none';
-          });
-        }}
-      />
-
-      {/* ── Top edge glow line ── */}
-      <div
-        className="absolute top-0 left-8 right-8 h-px pointer-events-none"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${accentColor}${isFeatured ? '80' : '50'}, transparent)`,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Corner brackets (top-left + bottom-right only — less noise) ── */}
-      <div
-        className="absolute top-4 left-4 w-5 h-5 border-t border-l pointer-events-none"
-        style={{ borderColor: `${accentColor}55` }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-4 right-4 w-5 h-5 border-b border-r pointer-events-none"
-        style={{ borderColor: `${accentColor}55` }}
-        aria-hidden="true"
-      />
-
-      {/* ── Cursor shine ── */}
-      <div
-        ref={shineRef}
-        className="absolute w-60 h-60 rounded-full pointer-events-none opacity-0"
-        style={{
-          background: `radial-gradient(circle, ${accentColor}55 0%, transparent 68%)`,
-          filter: 'blur(24px)',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 1,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Content ── */}
-      <div className="relative z-10 flex flex-col justify-end h-full p-6 gap-3">
-
-        {/* Tag + index */}
-        <div className="flex items-center justify-between mb-1">
-          <span
-            className="text-[0.58rem] font-bold tracking-[0.3em] uppercase px-2.5 py-1 rounded-sm"
-            style={{
-              color: accentColor,
-              background: `${accentColor}18`,
-              border: `1px solid ${accentColor}30`,
-            }}
-          >
-            {tag}
-          </span>
-          <span
-            className="font-mono text-[0.52rem] tracking-[0.3em]"
-            style={{ color: `${accentColor}55` }}
-            aria-hidden="true"
-          >
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        </div>
-
-        {/* Text block */}
-        <div>
-          <p
-            className="font-semibold tracking-[0.24em] uppercase mb-1"
-            style={{ fontSize: '0.6rem', color: `${accentColor}85` }}
-          >
-            {subtitle}
-          </p>
-          <h3
-            className="font-heading font-bold text-foreground leading-tight mb-2"
-            style={{ fontSize: isFeatured ? '1.45rem' : '1.05rem' }}
-          >
-            {title}
-          </h3>
-          <p
-            className="leading-relaxed line-clamp-2"
-            style={{ fontSize: '0.75rem', color: 'rgba(107,127,163,0.85)' }}
-          >
-            {description}
-          </p>
-        </div>
-
-        {/* Meta row */}
-        <div
-          className="flex items-center gap-5 pt-3 border-t"
-          style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-        >
-          {/* Date */}
-          <span className="flex items-center gap-1.5" style={{ fontSize: '0.65rem', color: 'rgba(107,127,163,0.8)' }}>
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
-              <rect x="2" y="3" width="12" height="11" rx="1" />
-              <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
-            </svg>
-            {date}
-          </span>
-
-          {/* Location */}
-          <span className="flex items-center gap-1.5" style={{ fontSize: '0.65rem', color: 'rgba(107,127,163,0.8)' }}>
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
-              <circle cx="8" cy="6" r="1.5" />
-            </svg>
-            {location}
-          </span>
-
-          {/* Arrow — only if has link */}
-          {to && (
-            <span
-              className="ml-auto text-sm transition-transform duration-300 group-hover:translate-x-1"
-              style={{ color: `${accentColor}70` }}
-              aria-hidden="true"
-            >
-              →
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 44 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.12 }}
-      transition={{ delay: index * 0.08, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-      className="h-full"
-      style={{ perspective: '900px' }}
-    >
-      {to ? <Link to={to} className="block h-full">{inner}</Link> : inner}
-    </motion.div>
-  );
-};
-
-export default SpotlightCard;
-</file>
-
-<file path="src/components/Footer.tsx">
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-
-// ── Data ───────────────────────────────────────────────────────────────────
-const NAV_COLS = [
-  {
-    heading: 'Events',
-    links: [
-      { label: 'XR Asia Summit 2026', to: '/xr-summit' },
-      { label: "Mothership AI Bootcamp", to: '/mothership' },
-      { label: 'XR Esports', to: '/xr-esports' },
-      { label: 'Hackathon', to: '/hackathon' },
-      { label: 'Awards Gala', to: '/awards' },
-    ],
-  },
-  {
-    heading: 'Company',
-    links: [
-      { label: 'About Us', to: '/about' },
-      { label: 'Contact', to: '/contact' },
-      { label: 'Sponsorship', to: '/sponsorship' },
-      { label: 'Press & Media', to: '/press' },
-    ],
-  },
-  {
-    heading: 'Legal',
-    links: [
-      { label: 'Privacy Policy', to: '/privacy' },
-      { label: 'Terms of Service', to: '/terms' },
-      { label: 'Cookie Policy', to: '/cookies' },
-    ],
-  },
-];
-
-const SOCIALS = [
-  {
-    label: 'LinkedIn',
-    href: 'https://linkedin.com',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'X (Twitter)',
-    href: 'https://twitter.com',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.631L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Instagram',
-    href: 'https://instagram.com',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'YouTube',
-    href: 'https://youtube.com',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-        <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-      </svg>
-    ),
-  },
-];
-
-// ── Footer link item ───────────────────────────────────────────────────────
-const FooterLink = ({ label, to }: { label: string; to: string }) => (
-  <li>
-    <Link
-      to={to}
-      className="transition-colors duration-250 hover:text-foreground"
-      style={{ color: 'rgba(107,127,163,0.65)', fontSize: '0.78rem' }}
-    >
-      {label}
-    </Link>
-  </li>
-);
-
-// ── Main Footer ────────────────────────────────────────────────────────────
-const Footer = () => {
-  return (
-    <footer
-      className="relative w-full overflow-hidden"
-      style={{ background: 'rgba(3,6,12,0.98)' }}
-    >
-      {/* Top accent line */}
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.35) 30%, rgba(251,146,60,0.35) 70%, transparent)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Subtle atmospheric glow */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse, rgba(251,146,60,0.03) 0%, transparent 68%)',
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
-
-        {/* ── Top section ── */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pt-16 pb-14">
-
-          {/* Brand col — takes 4 of 12 */}
-          <div className="md:col-span-4 flex flex-col gap-6">
-            {/* Logo */}
-            <Link to="/" className="group flex items-center gap-3 w-fit select-none">
-              <div className="relative w-9 h-9">
-                <div
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-sm"
-                  style={{ background: 'rgba(251,146,60,0.35)' }}
-                  aria-hidden="true"
-                />
-                <img
-                  src="/logo-278x262-removebg.png"
-                  alt="XR Summits"
-                  className="relative w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span
-                  className="font-heading font-bold tracking-[0.28em] text-foreground group-hover:text-accent transition-colors duration-300"
-                  style={{ fontSize: '0.78rem' }}
-                >
-                  XR SUMMITS
-                </span>
-                <span
-                  className="font-heading font-light tracking-[0.45em] uppercase"
-                  style={{ fontSize: '0.45rem', marginTop: '2px', color: 'rgba(107,127,163,0.55)' }}
-                >
-                  Asia · Est. 2021
-                </span>
-              </div>
-            </Link>
-
-            {/* Tagline */}
-            <p style={{ fontSize: '0.8rem', color: 'rgba(107,127,163,0.7)', lineHeight: 1.75, maxWidth: '280px' }}>
-              Asia's definitive platform connecting innovators and shaping the future of immersive technology.
-            </p>
-
-            {/* Social icons */}
-            <div className="flex items-center gap-3">
-              {SOCIALS.map(({ label, href, icon }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex items-center justify-center w-9 h-9 rounded-lg transition-all duration-300"
-                  style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                    color: 'rgba(107,127,163,0.55)',
-                  }}
-                  whileHover={{ scale: 1.08 }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.borderColor = 'rgba(251,146,60,0.35)';
-                    el.style.color = 'rgba(251,146,60,0.8)';
-                    el.style.background = 'rgba(251,146,60,0.08)';
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.borderColor = 'rgba(255,255,255,0.07)';
-                    el.style.color = 'rgba(107,127,163,0.55)';
-                    el.style.background = 'rgba(255,255,255,0.04)';
-                  }}
-                >
-                  {icon}
-                </motion.a>
-              ))}
-            </div>
-
-            {/* Address */}
-            <address
-              className="not-italic flex flex-col gap-1"
-              style={{ fontSize: '0.72rem', color: 'rgba(107,127,163,0.5)', lineHeight: 1.7 }}
-            >
-              <span>Sunway Innovation Hub,</span>
-              <span>Bandar Sunway, 47500</span>
-              <span>Petaling Jaya, Selangor, Malaysia</span>
-            </address>
-          </div>
-
-          {/* Nav cols — 3 cols × 8/12 */}
-          <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {NAV_COLS.map((col) => (
-              <div key={col.heading} className="flex flex-col gap-4">
-                <h4
-                  className="font-heading font-bold tracking-[0.3em] uppercase"
-                  style={{ fontSize: '0.6rem', color: 'rgba(240,244,255,0.45)' }}
-                >
-                  {col.heading}
-                </h4>
-                <ul className="flex flex-col gap-2.5">
-                  {col.links.map((link) => (
-                    <FooterLink key={link.to} {...link} />
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ── Divider ── */}
-        <div
-          className="w-full h-px"
-          style={{ background: 'rgba(255,255,255,0.055)' }}
-          aria-hidden="true"
-        />
-
-        {/* ── Bottom bar ── */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-6">
-          <p style={{ fontSize: '0.68rem', color: 'rgba(107,127,163,0.4)' }}>
-            © {new Date().getFullYear()} XR Summits Sdn. Bhd. All rights reserved.
-          </p>
-
-          {/* Contact */}
-          <a
-            href="mailto:hello@xrsummits.com"
-            className="transition-colors duration-250"
-            style={{ fontSize: '0.68rem', color: 'rgba(107,127,163,0.4)' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.7)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(107,127,163,0.4)'; }}
-          >
-            hello@xrsummits.com
-          </a>
-
-          {/* Back to top */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-2 transition-colors duration-250"
-            style={{ color: 'rgba(107,127,163,0.4)', fontSize: '0.68rem' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(251,146,60,0.7)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(107,127,163,0.4)'; }}
-            aria-label="Back to top"
-          >
-            <span className="font-bold tracking-[0.22em] uppercase">Back to top</span>
-            <motion.span
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-              aria-hidden="true"
-            >
-              ↑
-            </motion.span>
-          </button>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-export default Footer;
-</file>
-
-<file path="src/components/hero/HeroLogo.tsx">
-import { motion, type Variants } from 'framer-motion';
-
-const tagline = "Asia's Premier Immersive Technology Summit";
-
-// Stagger container
-const container: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.08, delayChildren: 0.4 },
-  },
-};
-const wordItem: Variants = {
-  hidden: { y: '110%', opacity: 0 },
-  show: {
-    y: '0%',
-    opacity: 1,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const HeroLogo = () => {
-  return (
-    <div className="relative flex flex-col items-center select-none w-full max-w-4xl mx-auto">
-
-      {/* ── Edition badge ── */}
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        className="flex items-center gap-3 mb-8"
-      >
-        <span className="h-px w-8 bg-accent/50" />
-        <span
-          className="text-[0.58rem] font-bold tracking-[0.55em] uppercase"
-          style={{ color: 'rgba(251,146,60,0.75)' }}
-        >
-          4th Edition · Est. 2021 · Kuala Lumpur
-        </span>
-        <span className="h-px w-8 bg-accent/50" />
-      </motion.div>
-
-      {/* ── Logo mark + wordmark row ── */}
-      <div className="flex flex-col items-center gap-2 mb-4">
-
-        {/* Logo mark with halo */}
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0, filter: 'blur(12px)' }}
-          animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
-          transition={{ delay: 0.35, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mb-2"
-        >
-          {/* Double-ring halo */}
-          <div
-            className="absolute inset-[-20px] rounded-full opacity-20 animate-pulse"
-            style={{
-              background: 'radial-gradient(circle, rgba(251,146,60,0.6) 0%, transparent 65%)',
-              animationDuration: '3s',
-            }}
-            aria-hidden="true"
-          />
-          <div
-            className="absolute inset-[-6px] rounded-full"
-            style={{
-              border: '1px solid rgba(251,146,60,0.18)',
-              boxShadow: '0 0 24px rgba(251,146,60,0.15)',
-            }}
-            aria-hidden="true"
-          />
-          <img
-            src="/logo-278x262-removebg.png"
-            alt="XR Summits"
-            className="relative h-20 w-auto object-contain"
-            style={{ filter: 'drop-shadow(0 0 18px rgba(251,146,60,0.55))' }}
-          />
-        </motion.div>
-
-        {/* "XR" — massive display */}
-        <div className="overflow-hidden">
-          <motion.h1
-            initial={{ y: '110%' }}
-            animate={{ y: '0%' }}
-            transition={{ delay: 0.58, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-            className="font-heading font-black text-center leading-none"
-            style={{
-              fontSize: 'clamp(5.5rem, 16vw, 12rem)',
-              letterSpacing: '0.08em',
-              background: 'linear-gradient(160deg, #f0f4ff 0%, #fb923c 55%, #f0f4ff 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            XR
-          </motion.h1>
-        </div>
-
-        {/* "SUMMITS" — secondary weight */}
-        <div className="overflow-hidden -mt-3">
-          <motion.div
-            initial={{ y: '110%' }}
-            animate={{ y: '0%' }}
-            transition={{ delay: 0.7, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center gap-3"
-          >
-            {/* Left tick */}
-            <span className="h-px flex-1 max-w-[60px]" style={{ background: 'rgba(255,255,255,0.15)' }} />
-
-            <span
-              className="font-heading font-light text-center tracking-[0.55em]"
-              style={{
-                fontSize: 'clamp(0.9rem, 2.5vw, 1.5rem)',
-                color: 'rgba(240,244,255,0.65)',
-                letterSpacing: '0.55em',
-              }}
-            >
-              SUMMITS
-            </span>
-
-            {/* Right tick */}
-            <span className="h-px flex-1 max-w-[60px]" style={{ background: 'rgba(255,255,255,0.15)' }} />
-          </motion.div>
-        </div>
-      </div>
-
-      {/* ── Tagline ── */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="flex flex-wrap justify-center gap-x-2 gap-y-1 mt-4 mb-8 max-w-lg"
-        aria-label={tagline}
-      >
-        {tagline.split(' ').map((word, i) => (
-          <div key={i} className="overflow-hidden">
-            <motion.span
-              variants={wordItem}
-              className="inline-block text-sm tracking-[0.12em]"
-              style={{ color: 'rgba(107,127,163,0.9)' }}
-            >
-              {word}
-            </motion.span>
-          </div>
-        ))}
-      </motion.div>
-
-      {/* ── Accent line ── */}
-      <motion.div
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ delay: 1.15, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        className="w-24 h-px origin-center"
-        style={{
-          background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.7), transparent)',
-          boxShadow: '0 0 12px rgba(251,146,60,0.4)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Corner meta detail — top right ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
-        className="absolute top-0 right-0 hidden lg:flex flex-col items-end gap-1"
-        aria-hidden="true"
-      >
-        <span className="text-[0.5rem] font-mono tracking-[0.3em] text-foreground-muted/40 uppercase">
-          XRAS · 2026
-        </span>
-        <span className="text-[0.5rem] font-mono tracking-[0.3em] text-foreground-muted/25 uppercase">
-          KUL · 03°08′N
-        </span>
-      </motion.div>
-    </div>
-  );
-};
-
-export default HeroLogo;
-</file>
-
-<file path="src/components/hero/HeroSection.tsx">
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
-import ParticleCanvas from './ParticleCanvas';
-import HeroLogo from './HeroLogo';
-import GatewayCard from './GatewayCard';
-
-// ── Icons ──────────────────────────────────────────────────────────────────
-const XRIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M2.25 7.5l10.5-6 10.5 6v9l-10.5 6-10.5-6v-9z" />
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M12 21V3M2.25 7.5l9.75 5.5 9.75-5.5" />
-  </svg>
-);
-
-const EsportsIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877" />
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17L6.75 19.5a2.121 2.121 0 01-3-3l4.672-4.853" />
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M12 3c3.5 0 6.5 2.5 7 6l-2.5 1.5-4.5-3-4.5 3L5 9c.5-3.5 3.5-6 7-6z" />
-  </svg>
-);
-
-const HackathonIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round"
-      d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-  </svg>
-);
-
-// ── Gateway data ───────────────────────────────────────────────────────────
-const GATEWAYS = [
-  {
-    title: 'XR Esports',
-    subtitle: 'Competitive · Immersive',
-    description:
-      'Where traditional esports collides with spatial computing. Compete, spectate, and experience gaming redefined.',
-    to: '/xr-esports',
-    accentColor: '#22d3ee',
-    glowColor: '#06b6d4',
-    tag: 'Arena',
-    icon: <EsportsIcon />,
-    isCenter: false,
-  },
-  {
-    title: 'XR Asia Summit',
-    subtitle: '4th Edition · XRAS26',
-    description:
-      'The definitive platform where immersive tech visionaries, enterprise leaders, and XR innovators converge to shape Asia\'s future.',
-    to: '/xr-summit',
-    accentColor: '#fb923c',
-    glowColor: '#f97316',
-    tag: 'Flagship',
-    icon: <XRIcon />,
-    isCenter: true,
-  },
-  {
-    title: 'Hackathon',
-    subtitle: '48-Hour Build Sprint',
-    description:
-      'Build the immersive future in 48 hours. AI, XR, spatial media — bring your stack and compete for real prizes.',
-    to: '/hackathon',
-    accentColor: '#a78bfa',
-    glowColor: '#7c3aed',
-    tag: 'Build',
-    icon: <HackathonIcon />,
-    isCenter: false,
-  },
-];
-
-// ── HeroSection ────────────────────────────────────────────────────────────
-const HeroSection = () => {
-  const heroRef = useRef<HTMLElement>(null);
-
-  const handleScrollDown = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  return (
-    <section
-      ref={heroRef}
-      className="relative w-full min-h-screen flex flex-col overflow-hidden"
-      aria-label="Hero"
-    >
-
-      {/* ── Particle background ── */}
-      <div className="absolute inset-0 z-0" aria-hidden="true">
-        <ParticleCanvas />
-      </div>
-
-      {/* ── Radial center vignette ── */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 90% 70% at 50% 38%, transparent 0%, rgba(5,11,24,0.5) 60%, rgba(5,11,24,0.97) 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Bottom section bleed ── */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-56 z-[2] pointer-events-none"
-        style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.85) 60%, #050b18 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Subtle horizontal scan line ── */}
-      <motion.div
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ delay: 1.9, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute z-[3] pointer-events-none origin-left"
-        style={{
-          top: '42%',
-          left: 0,
-          right: 0,
-          height: '1px',
-          background:
-            'linear-gradient(90deg, transparent 0%, rgba(251,146,60,0.08) 15%, rgba(251,146,60,0.18) 50%, rgba(251,146,60,0.08) 85%, transparent 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* ── Corner coordinate labels ── */}
-      {[
-        { corner: 'top-20 left-6', text: '03°08′N / 101°41′E', align: 'left' },
-        { corner: 'top-20 right-6', text: 'XRAS26 · KUL', align: 'right' },
-        { corner: 'bottom-16 left-6', text: 'Spatial · AI · XR', align: 'left' },
-        { corner: 'bottom-16 right-6', text: '© 2026 XR Summits', align: 'right' },
-      ].map(({ corner, text, align }) => (
-        <motion.span
-          key={text}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.1, duration: 1 }}
-          className={`absolute z-[4] hidden lg:block font-mono text-[0.46rem] tracking-[0.3em] uppercase pointer-events-none ${corner}`}
-          style={{ color: 'rgba(107,127,163,0.3)', textAlign: align as 'left' | 'right' }}
-          aria-hidden="true"
-        >
-          {text}
-        </motion.span>
-      ))}
-
-      {/* ── Main content ── */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-28 pb-10 gap-12">
-
-        {/* Logo / wordmark */}
-        <HeroLogo />
-
-        {/* Choose your experience label */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.25, duration: 0.7 }}
-          className="text-[0.6rem] font-bold tracking-[0.55em] uppercase text-center"
-          style={{ color: 'rgba(107,127,163,0.6)' }}
-          aria-hidden="true"
-        >
-          — Choose Your Experience —
-        </motion.p>
-
-        {/* Gateway cards */}
-        <div className="w-full max-w-5xl flex flex-col md:flex-row gap-3 items-stretch">
-          {GATEWAYS.map((g, i) => (
-            <GatewayCard key={g.title} index={i} {...g} />
-          ))}
-        </div>
-
-        {/* Scroll cue */}
-        <motion.button
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.1, duration: 0.7 }}
-          onClick={handleScrollDown}
-          className="group flex flex-col items-center gap-2 cursor-pointer mt-2"
-          aria-label="Scroll to About section"
-        >
-          <span
-            className="text-[0.52rem] tracking-[0.5em] uppercase transition-colors duration-300 group-hover:text-accent"
-            style={{ color: 'rgba(107,127,163,0.45)' }}
-          >
-            Discover
-          </span>
-          {/* Animated line */}
-          <div className="relative w-px h-9 overflow-hidden" style={{ background: 'rgba(107,127,163,0.15)' }}>
-            <motion.div
-              className="absolute top-0 w-full"
-              style={{ height: '40%', background: 'rgba(251,146,60,0.7)' }}
-              animate={{ y: ['−100%', '280%'] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-              aria-hidden="true"
-            />
-          </div>
-        </motion.button>
-      </div>
-    </section>
-  );
-};
-
-export default HeroSection;
 </file>
 
 <file path="src/components/sponsors/SponsorsSection.tsx">
@@ -3731,6 +2523,263 @@ const MothershipPage = () => (
 export default MothershipPage;
 </file>
 
+<file path="src/components/about/PillarCard.tsx">
+import { motion } from 'framer-motion';
+
+interface PillarCardProps {
+  index: number;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  accentColor: string;
+  isFeatured?: boolean;
+}
+
+const PillarCard = ({
+  index,
+  icon,
+  title,
+  description,
+  accentColor,
+  isFeatured = false,
+}: PillarCardProps) => (
+  <motion.div
+    initial={{ opacity: 0, y: 32 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.22 }}
+    transition={{ delay: index * 0.09, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+    className="group relative flex flex-col gap-5 rounded-xl overflow-hidden"
+    style={{
+      padding: isFeatured ? '1.75rem' : '1.4rem 1.5rem',
+      background: isFeatured
+        ? `linear-gradient(148deg, rgba(22,38,62,0.88) 0%, rgba(13,27,46,0.75) 100%)`
+        : 'rgba(9, 18, 34, 0.52)',
+      border: `1px solid ${isFeatured ? `${accentColor}22` : 'rgba(255,255,255,0.042)'}`,
+      backdropFilter: 'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)',
+      transition: 'border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease',
+    }}
+    whileHover={{ y: -4 }}
+    onMouseEnter={(e) => {
+      const el = e.currentTarget as HTMLDivElement;
+      el.style.borderColor = `${accentColor}38`;
+      el.style.boxShadow = `0 0 36px ${accentColor}0b, 0 18px 40px rgba(0,0,0,0.28)`;
+    }}
+    onMouseLeave={(e) => {
+      const el = e.currentTarget as HTMLDivElement;
+      el.style.borderColor = isFeatured ? `${accentColor}22` : 'rgba(255,255,255,0.042)';
+      el.style.boxShadow = 'none';
+    }}
+  >
+    {/* Left accent bar */}
+    <div
+      className="absolute left-0 top-6 bottom-6 w-[1.5px] rounded-full"
+      style={{
+        background: `linear-gradient(to bottom, transparent, ${accentColor}${isFeatured ? '75' : '48'}, transparent)`,
+      }}
+      aria-hidden="true"
+    />
+
+    {/* Top-right corner accent for featured */}
+    {isFeatured && (
+      <div
+        className="absolute top-0 right-0 w-20 h-20 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at top right, ${accentColor}12 0%, transparent 68%)`,
+        }}
+        aria-hidden="true"
+      />
+    )}
+
+    {/* Icon + index row */}
+    <div className="flex items-start justify-between">
+      <div
+        className="flex items-center justify-center rounded-lg transition-transform duration-350 group-hover:scale-105"
+        style={{
+          width: isFeatured ? '42px' : '36px',
+          height: isFeatured ? '42px' : '36px',
+          background: `${accentColor}10`,
+          border: `1px solid ${accentColor}20`,
+          color: accentColor,
+        }}
+      >
+        {icon}
+      </div>
+      <span
+        className="font-heading font-black"
+        style={{
+          fontSize: '0.56rem',
+          letterSpacing: '0.38em',
+          color: `${accentColor}38`,
+        }}
+        aria-hidden="true"
+      >
+        {String(index + 1).padStart(2, '0')}
+      </span>
+    </div>
+
+    {/* Text */}
+    <div className="flex flex-col gap-1.5">
+      <h4
+        className="font-heading font-bold tracking-wide text-foreground"
+        style={{ fontSize: isFeatured ? '0.86rem' : '0.78rem' }}
+      >
+        {title}
+      </h4>
+      <p
+        className="leading-relaxed"
+        style={{
+          fontSize: '0.7rem',
+          color: 'rgba(107,127,163,0.82)',
+          lineHeight: 1.68,
+        }}
+      >
+        {description}
+      </p>
+    </div>
+
+    {/* Featured badge */}
+    {isFeatured && (
+      <div className="mt-auto pt-3.5 border-t" style={{ borderColor: `${accentColor}16` }}>
+        <span
+          className="text-[0.54rem] font-bold tracking-[0.38em] uppercase"
+          style={{ color: `${accentColor}65` }}
+        >
+          Core Focus
+        </span>
+      </div>
+    )}
+  </motion.div>
+);
+
+export default PillarCard;
+</file>
+
+<file path="src/components/about/StatCard.tsx">
+import { useCountUp } from '../../hooks/useScrollAnimations';
+
+interface StatCardProps {
+  value: number;
+  suffix: string;
+  label: string;
+  sublabel: string;
+  accentColor?: string;
+  index?: number;
+}
+
+const StatCard = ({
+  value,
+  suffix,
+  label,
+  sublabel,
+  accentColor = '#fb923c',
+  index = 0,
+}: StatCardProps) => {
+  const countRef = useCountUp(value, suffix, 2.0);
+
+  return (
+    <div
+      className="group relative flex flex-col gap-4 rounded-xl overflow-hidden"
+      style={{
+        padding: '1.75rem',
+        background: 'rgba(10, 20, 38, 0.6)',
+        border: '1px solid rgba(255,255,255,0.048)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLDivElement;
+        el.style.borderColor = `${accentColor}28`;
+        el.style.boxShadow = `0 0 48px ${accentColor}0a, 0 20px 48px rgba(0,0,0,0.32)`;
+        el.style.transform = 'translateY(-3px)';
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLDivElement;
+        el.style.borderColor = 'rgba(255,255,255,0.048)';
+        el.style.boxShadow = 'none';
+        el.style.transform = 'translateY(0)';
+      }}
+    >
+      {/* Top gradient line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[1px]"
+        style={{
+          background: `linear-gradient(90deg, transparent 0%, ${accentColor}70 30%, ${accentColor}70 70%, transparent 100%)`,
+          opacity: 0.6,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle corner accent */}
+      <div
+        className="absolute top-0 left-0 w-16 h-16 pointer-events-none opacity-40"
+        style={{
+          background: `radial-gradient(circle at top left, ${accentColor}18 0%, transparent 68%)`,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Index watermark */}
+      <span
+        className="absolute top-4 right-5 font-heading font-black pointer-events-none select-none"
+        style={{
+          fontSize: '5rem',
+          lineHeight: 1,
+          color: `${accentColor}06`,
+          letterSpacing: '-0.02em',
+        }}
+        aria-hidden="true"
+      >
+        {String(index + 1).padStart(2, '0')}
+      </span>
+
+      {/* Value display */}
+      <div>
+        <span
+          ref={countRef}
+          className="font-heading font-black leading-none block"
+          style={{
+            fontSize: 'clamp(3rem, 6vw, 4.2rem)',
+            background: `linear-gradient(140deg, ${accentColor} 0%, #f0f4ff 85%)`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          0{suffix}
+        </span>
+      </div>
+
+      {/* Divider */}
+      <div
+        className="w-10 h-px transition-all duration-500 group-hover:w-16"
+        style={{ background: `${accentColor}38` }}
+        aria-hidden="true"
+      />
+
+      {/* Labels */}
+      <div className="flex flex-col gap-1">
+        <span
+          className="font-heading font-bold tracking-[0.2em] uppercase text-foreground"
+          style={{ fontSize: '0.7rem' }}
+        >
+          {label}
+        </span>
+        <span
+          className="tracking-wide leading-relaxed"
+          style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.75)' }}
+        >
+          {sublabel}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export default StatCard;
+</file>
+
 <file path="src/components/events/PastEventCard.tsx">
 import { motion } from 'framer-motion';
 
@@ -3917,507 +2966,991 @@ const PastEventCard = ({
 export default PastEventCard;
 </file>
 
-<file path="src/components/hero/GatewayCard.tsx">
-import { useRef } from 'react';
+<file path="src/components/events/SpotlightCard.tsx">
+import { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
-import TracerBorder from '../ui/TracerBorder'; // <-- Import TracerBorder dikembalikan
 
-interface GatewayCardProps {
+interface SpotlightCardProps {
   index: number;
   title: string;
   subtitle: string;
+  date: string;
+  location: string;
   description: string;
-  to: string;
   accentColor: string;
-  glowColor?: string; // Opsional jika tidak dipakai di versi baru
   tag: string;
-  icon: React.ReactNode;
-  isCenter?: boolean;
+  to?: string;
+  imageSrc?: string;
+  isFeatured?: boolean;
 }
 
-const GatewayCard = ({
+const SpotlightCard = ({
   index,
   title,
   subtitle,
+  date,
+  location,
   description,
-  to,
   accentColor,
   tag,
-  icon,
-  isCenter = false,
-}: GatewayCardProps) => {
+  to,
+  imageSrc,
+  isFeatured = false,
+}: SpotlightCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
+  const shineRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const borderRef = useRef<HTMLDivElement>(null);
 
-  // ── 3D tilt + glow follow ──────────────────────────────────────────────
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || !glowRef.current) return;
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !shineRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const cx = rect.width / 2;
     const cy = rect.height / 2;
-    const rotX = ((y - cy) / cy) * (isCenter ? -5 : -4);
-    const rotY = ((x - cx) / cx) * (isCenter ? 5 : 4);
 
     gsap.to(cardRef.current, {
-      rotateX: rotX,
-      rotateY: rotY,
+      rotateX: ((y - cy) / cy) * -4,
+      rotateY: ((x - cx) / cx) * 4,
       duration: 0.5,
       ease: 'power2.out',
-      transformPerspective: 900,
+      transformPerspective: 1000,
     });
 
-    // Glow follows cursor
-    gsap.to(glowRef.current, {
-      x: x - rect.width / 2,
-      y: y - rect.height / 2,
-      opacity: isCenter ? 0.22 : 0.14,
-      duration: 0.4,
+    gsap.to(shineRef.current, {
+      x: x - cx,
+      y: y - cy,
+      opacity: isFeatured ? 0.14 : 0.09,
+      duration: 0.38,
       ease: 'power2.out',
     });
-  };
+  }, [isFeatured]);
 
-  const handleMouseLeave = () => {
-    if (!cardRef.current || !glowRef.current) return;
-    gsap.to(cardRef.current, {
-      rotateX: 0, rotateY: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-    });
-    gsap.to(glowRef.current, {
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.out',
-    });
-  };
+  const handleMouseEnter = useCallback(() => {
+    if (imgRef.current) {
+      gsap.to(imgRef.current, { scale: 1.04, duration: 0.7, ease: 'power3.out' });
+    }
+    if (borderRef.current) {
+      borderRef.current.style.borderColor = `${accentColor}42`;
+      borderRef.current.style.boxShadow = `0 0 52px ${accentColor}14, inset 0 0 32px ${accentColor}04`;
+    }
+  }, [accentColor]);
 
-  const handleMouseEnter = () => {
-    if (!innerRef.current) return;
-    gsap.to(innerRef.current, {
-      y: -5,
-      duration: 0.45,
-      ease: 'power3.out',
-    });
-  };
+  const handleMouseLeave = useCallback(() => {
+    if (!cardRef.current || !shineRef.current) return;
+    gsap.to(cardRef.current, { rotateX: 0, rotateY: 0, duration: 0.8, ease: 'power3.out' });
+    gsap.to(shineRef.current, { opacity: 0, duration: 0.4 });
+    if (imgRef.current) {
+      gsap.to(imgRef.current, { scale: 1, duration: 0.7, ease: 'power3.out' });
+    }
+    if (borderRef.current) {
+      borderRef.current.style.borderColor = `${accentColor}20`;
+      borderRef.current.style.boxShadow = 'none';
+    }
+  }, [accentColor]);
 
-  const handleMouseLeaveInner = () => {
-    if (!innerRef.current) return;
-    gsap.to(innerRef.current, {
-      y: 0,
-      duration: 0.6,
-      ease: 'power3.out',
-    });
-  };
+  const inner = (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{ transformStyle: 'preserve-3d' }}
+      className={[
+        'relative overflow-hidden rounded-xl group cursor-pointer h-full',
+        isFeatured ? 'min-h-[460px]' : 'min-h-[300px]',
+      ].join(' ')}
+    >
+      {/* ── Background ── */}
+      <div className="absolute inset-0 overflow-hidden">
+        {imageSrc ? (
+          <>
+            <img
+              ref={imgRef}
+              src={imageSrc}
+              alt={title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(to top, rgba(5,11,24,0.97) 0%, rgba(5,11,24,0.65) 40%, rgba(5,11,24,0.22) 100%)`,
+              }}
+            />
+          </>
+        ) : (
+          <div
+            className="w-full h-full"
+            style={{ background: `linear-gradient(148deg, rgba(13,27,46,0.96) 0%, ${accentColor}10 100%)` }}
+          />
+        )}
+      </div>
 
-  // ── Sizing & style per variant ─────────────────────────────────────────
-  const isFlanking = !isCenter;
+      {/* ── Border ── */}
+      <div
+        ref={borderRef}
+        className="absolute inset-0 rounded-xl pointer-events-none"
+        style={{
+          border: `1px solid ${accentColor}20`,
+          transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
+        }}
+      />
+
+      {/* ── Top edge glow ── */}
+      <div
+        className="absolute top-0 left-10 right-10 h-px pointer-events-none"
+        style={{ background: `linear-gradient(90deg, transparent, ${accentColor}${isFeatured ? '70' : '45'}, transparent)` }}
+        aria-hidden="true"
+      />
+
+      {/* ── Corner brackets ── */}
+      <div className="absolute top-4 left-4 w-4 h-4 border-t border-l pointer-events-none" style={{ borderColor: `${accentColor}48` }} aria-hidden="true" />
+      <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r pointer-events-none" style={{ borderColor: `${accentColor}48` }} aria-hidden="true" />
+
+      {/* ── Cursor shine ── */}
+      <div
+        ref={shineRef}
+        className="absolute w-56 h-56 rounded-full pointer-events-none opacity-0 z-[1]"
+        style={{
+          background: `radial-gradient(circle, ${accentColor}50 0%, transparent 65%)`,
+          filter: 'blur(22px)',
+          left: '50%', top: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Content ── */}
+      <div className="relative z-10 flex flex-col justify-end h-full p-5 gap-3">
+
+        {/* Tag + index */}
+        <div className="flex items-center justify-between mb-0.5">
+          <span
+            className="text-[0.56rem] font-bold tracking-[0.32em] uppercase px-2.5 py-1 rounded-sm"
+            style={{
+              color: accentColor,
+              background: `${accentColor}16`,
+              border: `1px solid ${accentColor}28`,
+            }}
+          >
+            {tag}
+          </span>
+          <span
+            className="font-mono text-[0.5rem] tracking-[0.3em]"
+            style={{ color: `${accentColor}48` }}
+            aria-hidden="true"
+          >
+            {String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
+
+        {/* Text */}
+        <div>
+          <p
+            className="font-semibold tracking-[0.26em] uppercase mb-1.5"
+            style={{ fontSize: '0.58rem', color: `${accentColor}80` }}
+          >
+            {subtitle}
+          </p>
+          <h3
+            className="font-heading font-bold text-foreground leading-tight mb-2"
+            style={{ fontSize: isFeatured ? '1.42rem' : '1.02rem' }}
+          >
+            {title}
+          </h3>
+          <p
+            className="leading-relaxed line-clamp-2"
+            style={{ fontSize: '0.73rem', color: 'rgba(107,127,163,0.82)' }}
+          >
+            {description}
+          </p>
+        </div>
+
+        {/* Meta row */}
+        <div
+          className="flex items-center gap-5 pt-3 border-t"
+          style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+        >
+          <span className="flex items-center gap-1.5" style={{ fontSize: '0.63rem', color: 'rgba(107,127,163,0.75)' }}>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
+              <rect x="2" y="3" width="12" height="11" rx="1" />
+              <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
+            </svg>
+            {date}
+          </span>
+          <span className="flex items-center gap-1.5" style={{ fontSize: '0.63rem', color: 'rgba(107,127,163,0.75)' }}>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
+              <circle cx="8" cy="6" r="1.5" />
+            </svg>
+            {location}
+          </span>
+          {to && (
+            <span
+              className="ml-auto text-sm transition-transform duration-300 group-hover:translate-x-1"
+              style={{ color: `${accentColor}65` }}
+              aria-hidden="true"
+            >
+              →
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 56 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: 1.35 + index * 0.14,
-        duration: 0.95,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className={`relative flex-1 ${isCenter ? 'md:flex-[1.22]' : 'md:flex-[0.9]'}`}
-      style={{ perspective: '900px' }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ delay: index * 0.07, duration: 0.88, ease: [0.16, 1, 0.3, 1] }}
+      className="h-full"
+      style={{ perspective: '1000px' }}
     >
-      <Link to={to} className="block h-full cursor-none">
-        <div
-          ref={cardRef}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={(e) => { handleMouseLeave(); handleMouseLeaveInner(); }}
-          onMouseEnter={handleMouseEnter}
-          style={{ transformStyle: 'preserve-3d' }}
-          className="relative h-full"
-        >
-          {/* ── Outer glow border (always visible, stronger on center) ── */}
-          <div
-            className="absolute -inset-px rounded-xl pointer-events-none z-0"
-            style={{
-              background: isCenter
-                ? `linear-gradient(135deg, ${accentColor}35 0%, transparent 60%, ${accentColor}20 100%)`
-                : `linear-gradient(135deg, ${accentColor}18 0%, transparent 70%)`,
-              borderRadius: '12px',
-            }}
-            aria-hidden="true"
-          />
-
-          {/* ── Card body wrapper ── */}
-          <div
-            className="relative overflow-hidden rounded-xl h-full group z-10"
-            style={{
-              border: `1px solid ${accentColor}${isCenter ? '35' : '20'}`,
-              minHeight: isCenter ? '360px' : '320px',
-              transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
-              boxShadow: isCenter
-                ? `0 0 60px ${accentColor}12, 0 32px 64px rgba(0,0,0,0.4)`
-                : '0 16px 40px rgba(0,0,0,0.3)',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.borderColor = `${accentColor}55`;
-              (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 50px ${accentColor}20, 0 32px 64px rgba(0,0,0,0.5)`;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLDivElement).style.borderColor = `${accentColor}${isCenter ? '35' : '20'}`;
-              (e.currentTarget as HTMLDivElement).style.boxShadow = isCenter
-                ? `0 0 60px ${accentColor}12, 0 32px 64px rgba(0,0,0,0.4)`
-                : '0 16px 40px rgba(0,0,0,0.3)';
-            }}
-          >
-            {/* ── TracerBorder membungkus konten ── */}
-            <TracerBorder accentColor={accentColor}>
-              <div
-                className="relative h-full w-full"
-                style={{
-                  background: isCenter
-                    ? `linear-gradient(160deg, rgba(20,34,58,0.92) 0%, rgba(13,27,46,0.96) 100%)`
-                    : `rgba(10, 20, 36, 0.72)`,
-                  backdropFilter: 'blur(16px)',
-                  WebkitBackdropFilter: 'blur(16px)',
-                }}
-              >
-                {/* Cursor glow blob */}
-                <div
-                  ref={glowRef}
-                  className="absolute w-72 h-72 rounded-full pointer-events-none opacity-0"
-                  style={{
-                    background: `radial-gradient(circle, ${accentColor}50 0%, transparent 65%)`,
-                    filter: 'blur(28px)',
-                    left: '50%',
-                    top: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: 0,
-                  }}
-                  aria-hidden="true"
-                />
-
-                {/* Top edge glow line */}
-                <div
-                  className="absolute top-0 left-6 right-6 h-px z-10"
-                  style={{
-                    background: `linear-gradient(90deg, transparent, ${accentColor}${isCenter ? '70' : '40'}, transparent)`,
-                  }}
-                  aria-hidden="true"
-                />
-
-                {/* Corner bracket — top left */}
-                <div
-                  className="absolute top-4 left-4 w-5 h-5 border-t border-l z-10"
-                  style={{ borderColor: `${accentColor}${isCenter ? '60' : '35'}` }}
-                  aria-hidden="true"
-                />
-                {/* Corner bracket — bottom right */}
-                <div
-                  className="absolute bottom-4 right-4 w-5 h-5 border-b border-r z-10"
-                  style={{ borderColor: `${accentColor}${isCenter ? '60' : '35'}` }}
-                  aria-hidden="true"
-                />
-
-                {/* ── Flanking card: vertical accent bar ── */}
-                {isFlanking && (
-                  <div
-                    className="absolute top-6 bottom-6 left-0 w-[2px] rounded-full opacity-50 z-10"
-                    style={{ background: `linear-gradient(to bottom, transparent, ${accentColor}, transparent)` }}
-                    aria-hidden="true"
-                  />
-                )}
-
-                {/* ── Content ── */}
-                <div ref={innerRef} className="relative z-20 flex flex-col h-full p-7 gap-5">
-                  {/* Tag row */}
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="text-[0.58rem] font-bold tracking-[0.32em] uppercase px-2.5 py-1 rounded-sm"
-                      style={{
-                        color: accentColor,
-                        background: `${accentColor}15`,
-                        border: `1px solid ${accentColor}28`,
-                      }}
-                    >
-                      {tag}
-                    </span>
-                    <span
-                      className="font-mono text-[0.55rem] tracking-[0.3em]"
-                      style={{ color: `${accentColor}50` }}
-                    >
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  {/* Icon */}
-                  <div
-                    className="flex items-center justify-center rounded-lg transition-all duration-400 group-hover:scale-105"
-                    style={{
-                      width: isCenter ? '52px' : '44px',
-                      height: isCenter ? '52px' : '44px',
-                      background: `${accentColor}10`,
-                      border: `1px solid ${accentColor}22`,
-                      color: accentColor,
-                    }}
-                  >
-                    {icon}
-                  </div>
-
-                  {/* Text block */}
-                  <div className="flex flex-col gap-2 flex-1">
-                    <p
-                      className="text-[0.6rem] font-semibold tracking-[0.28em] uppercase"
-                      style={{ color: `${accentColor}80` }}
-                    >
-                      {subtitle}
-                    </p>
-                    <h3
-                      className="font-heading font-bold text-foreground leading-tight"
-                      style={{ fontSize: isCenter ? '1.28rem' : '1.08rem' }}
-                    >
-                      {title}
-                    </h3>
-                    <p
-                      className="text-foreground-muted leading-relaxed"
-                      style={{ fontSize: isCenter ? '0.82rem' : '0.76rem', marginTop: '2px' }}
-                    >
-                      {description}
-                    </p>
-                  </div>
-
-                  {/* CTA row */}
-                  <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: `${accentColor}14` }}>
-                    <span
-                      className="text-[0.66rem] font-bold tracking-[0.18em] uppercase transition-colors duration-300 group-hover:opacity-100"
-                      style={{ color: accentColor, opacity: 0.75 }}
-                    >
-                      Explore
-                    </span>
-                    <motion.span
-                      className="text-sm"
-                      style={{ color: accentColor }}
-                      animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut', delay: index * 0.3 }}
-                      aria-hidden="true"
-                    >
-                      →
-                    </motion.span>
-                  </div>
-                </div>
-              </div>
-            </TracerBorder>
-          </div>
-        </div>
-      </Link>
+      {to ? <Link to={to} className="block h-full">{inner}</Link> : inner}
     </motion.div>
   );
 };
 
-export default GatewayCard;
+export default SpotlightCard;
 </file>
 
-<file path="src/components/hero/ParticleCanvas.tsx">
-import { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+<file path="src/components/Footer.tsx">
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-const ParticleCanvas = () => {
-  const mountRef = useRef<HTMLDivElement>(null);
+const NAV_COLS = [
+  {
+    heading: 'Events',
+    links: [
+      { label: 'XR Asia Summit 2026', to: '/xr-summit' },
+      { label: 'Mothership AI Bootcamp', to: '/mothership' },
+      { label: 'XR Esports', to: '/xr-esports' },
+      { label: 'Hackathon', to: '/hackathon' },
+      { label: 'Awards Gala', to: '/awards' },
+    ],
+  },
+  {
+    heading: 'Company',
+    links: [
+      { label: 'About Us', to: '/about' },
+      { label: 'Contact', to: '/contact' },
+      { label: 'Sponsorship', to: '/sponsorship' },
+      { label: 'Press & Media', to: '/press' },
+    ],
+  },
+  {
+    heading: 'Legal',
+    links: [
+      { label: 'Privacy Policy', to: '/privacy' },
+      { label: 'Terms of Service', to: '/terms' },
+      { label: 'Cookie Policy', to: '/cookies' },
+    ],
+  },
+];
 
-  useEffect(() => {
-    const mount = mountRef.current;
-    if (!mount) return;
+const SOCIALS = [
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'X (Twitter)',
+    href: 'https://twitter.com',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.631L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Instagram',
+    href: 'https://instagram.com',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'YouTube',
+    href: 'https://youtube.com',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+        <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+      </svg>
+    ),
+  },
+];
 
-    // ── Scene setup ────────────────────────────────────────────────────
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      mount.clientWidth / mount.clientHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 3;
+const FooterLink = ({ label, to }: { label: string; to: string }) => (
+  <li>
+    <Link
+      to={to}
+      className="group inline-flex items-center gap-1.5 transition-colors duration-250 hover:text-foreground"
+      style={{ color: 'rgba(107,127,163,0.58)', fontSize: '0.76rem' }}
+    >
+      <span
+        className="w-0 h-px transition-all duration-300 group-hover:w-3"
+        style={{ background: 'rgba(251,146,60,0.5)', flexShrink: 0 }}
+        aria-hidden="true"
+      />
+      {label}
+    </Link>
+  </li>
+);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setSize(mount.clientWidth, mount.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x000000, 0);
-    mount.appendChild(renderer.domElement);
-
-    // ── Particles ──────────────────────────────────────────────────────
-    const PARTICLE_COUNT = 2800;
-    const positions = new Float32Array(PARTICLE_COUNT * 3);
-    const colors = new Float32Array(PARTICLE_COUNT * 3);
-    const sizes = new Float32Array(PARTICLE_COUNT);
-
-    const colorPalette = [
-      new THREE.Color('#fb923c'), // accent orange
-      new THREE.Color('#1e3a8a'), // primary blue
-      new THREE.Color('#7e22ce'), // secondary purple
-      new THREE.Color('#93c5fd'), // light blue
-      new THREE.Color('#f0f4ff'), // near white
-    ];
-
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const i3 = i * 3;
-      // Spread particles in a wide sphere
-      const radius = 5 + Math.random() * 6;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(2 * Math.random() - 1);
-
-      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
-      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      positions[i3 + 2] = radius * Math.cos(phi) - 2;
-
-      const c = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-      colors[i3] = c.r;
-      colors[i3 + 1] = c.g;
-      colors[i3 + 2] = c.b;
-
-      sizes[i] = Math.random() * 2.5 + 0.5;
-    }
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-
-    // Custom shader for glowing, round particles
-    const material = new THREE.ShaderMaterial({
-      uniforms: {
-        uTime: { value: 0 },
-        uPixelRatio: { value: renderer.getPixelRatio() },
-      },
-      glslVersion: THREE.GLSL3,
-      vertexShader: `
-        in float size;
-        in vec3 color;
-        out vec3 vColor;
-        uniform float uTime;
-        uniform float uPixelRatio;
-
-        void main() {
-          vColor = color;
-          vec3 pos = position;
-          // Gentle drift
-          pos.x += sin(uTime * 0.18 + position.z * 0.4) * 0.08;
-          pos.y += cos(uTime * 0.14 + position.x * 0.3) * 0.06;
-          pos.z += sin(uTime * 0.10 + position.y * 0.2) * 0.05;
-
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = size * uPixelRatio * (280.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      `,
-      fragmentShader: `
-        in vec3 vColor;
-        out vec4 outColor;
-
-        void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = 1.0 - smoothstep(0.1, 0.5, dist);
-          // Glow core
-          float glow = exp(-dist * 6.0) * 0.8;
-          outColor = vec4(vColor + glow * 0.4, alpha * 0.75);
-        }
-      `,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      vertexColors: true,
-    });
-
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
-
-    // ── Grid plane (subtle) ────────────────────────────────────────────
-    const gridHelper = new THREE.GridHelper(30, 40, 0x1e3a8a, 0x0d1b2e);
-    gridHelper.position.y = -4;
-    const gridMaterial = gridHelper.material as THREE.LineBasicMaterial;
-    gridMaterial.color.set(0x1e3a8a);
-    gridMaterial.transparent = true;
-    gridMaterial.opacity = 0.15;
-    scene.add(gridHelper);
-
-    // ── Mouse parallax ─────────────────────────────────────────────────
-    let mouseX = 0, mouseY = 0;
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
-    window.addEventListener('mousemove', onMouseMove);
-
-    // ── Resize ─────────────────────────────────────────────────────────
-    const onResize = () => {
-      if (!mount) return;
-      camera.aspect = mount.clientWidth / mount.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(mount.clientWidth, mount.clientHeight);
-      material.uniforms.uPixelRatio.value = renderer.getPixelRatio();
-    };
-    window.addEventListener('resize', onResize);
-
-    // ── Intersection Observer (BARU) ───────────────────────────────────
-    let isVisible = true;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        isVisible = entries[0].isIntersecting;
-      },
-      { threshold: 0 }
-    );
-    if (mount) observer.observe(mount);
-
-    // ── Animation loop ─────────────────────────────────────────────────
-    let animId: number;
-    const timer = new THREE.Timer();
-    timer.connect(document);
-
-    const animate = (timestamp: number) => {
-      animId = requestAnimationFrame(animate);
-
-      // Jika kanvas tidak terlihat di layar, HENTIKAN kalkulasi & render
-      if (!isVisible) return;
-
-      timer.update(timestamp);
-      const t = timer.getElapsed();
-      material.uniforms.uTime.value = t;
-
-      // Slow rotation + mouse parallax
-      particles.rotation.y = t * 0.018 + mouseX * 0.06;
-      particles.rotation.x = mouseY * 0.04;
-      gridHelper.position.x = mouseX * 0.3;
-
-      renderer.render(scene, camera);
-    };
-    animate(performance.now());
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('resize', onResize);
-      if (mount) observer.unobserve(mount); // Bersihkan observer
-      timer.dispose();
-      geometry.dispose();
-      material.dispose();
-      renderer.dispose();
-      if (mount.contains(renderer.domElement)) {
-        mount.removeChild(renderer.domElement);
-      }
-    };
-  }, []);
-
+const Footer = () => {
   return (
-    <div
-      ref={mountRef}
-      className="absolute inset-0 w-full h-full"
-      aria-hidden="true"
-    />
+    <footer
+      className="relative w-full overflow-hidden"
+      style={{ background: 'rgba(3,6,13,0.99)' }}
+    >
+      {/* Top accent line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, rgba(251,146,60,0.28) 25%, rgba(251,146,60,0.28) 75%, transparent 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Atmospheric glow */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
+        style={{
+          width: '700px',
+          height: '280px',
+          background: 'radial-gradient(ellipse, rgba(251,146,60,0.025) 0%, transparent 68%)',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+
+        {/* ── Main section ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pt-16 pb-14">
+
+          {/* Brand col */}
+          <div className="md:col-span-4 flex flex-col gap-6">
+            <Link to="/" className="group flex items-center gap-3 w-fit select-none">
+              <div className="relative w-8 h-8">
+                <div
+                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-md"
+                  style={{ background: 'rgba(251,146,60,0.3)' }}
+                  aria-hidden="true"
+                />
+                <img
+                  src="/logo-278x262-removebg.png"
+                  alt="XR Summits"
+                  className="relative w-full h-full object-contain"
+                />
+              </div>
+              <div className="flex flex-col leading-none gap-[3px]">
+                <span
+                  className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-300"
+                  style={{ fontSize: '0.76rem' }}
+                >
+                  XR SUMMITS
+                </span>
+                <span
+                  className="font-mono tracking-[0.44em] text-foreground-muted/40 uppercase"
+                  style={{ fontSize: '0.42rem' }}
+                >
+                  Asia · Est. 2021
+                </span>
+              </div>
+            </Link>
+
+            <p style={{ fontSize: '0.78rem', color: 'rgba(107,127,163,0.65)', lineHeight: 1.8, maxWidth: '270px' }}>
+              Asia's definitive platform connecting innovators and shaping the future of immersive technology.
+            </p>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-2.5">
+              {SOCIALS.map(({ label, href, icon }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300"
+                  style={{
+                    background: 'rgba(255,255,255,0.035)',
+                    border: '1px solid rgba(255,255,255,0.055)',
+                    color: 'rgba(107,127,163,0.5)',
+                  }}
+                  whileHover={{ scale: 1.08 }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.borderColor = 'rgba(251,146,60,0.3)';
+                    el.style.color = 'rgba(251,146,60,0.75)';
+                    el.style.background = 'rgba(251,146,60,0.06)';
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.borderColor = 'rgba(255,255,255,0.055)';
+                    el.style.color = 'rgba(107,127,163,0.5)';
+                    el.style.background = 'rgba(255,255,255,0.035)';
+                  }}
+                >
+                  {icon}
+                </motion.a>
+              ))}
+            </div>
+
+            <address
+              className="not-italic flex flex-col gap-0.5"
+              style={{ fontSize: '0.7rem', color: 'rgba(107,127,163,0.42)', lineHeight: 1.75 }}
+            >
+              <span>Sunway Innovation Hub,</span>
+              <span>Bandar Sunway, 47500</span>
+              <span>Petaling Jaya, Selangor, Malaysia</span>
+            </address>
+          </div>
+
+          {/* Nav cols */}
+          <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {NAV_COLS.map((col) => (
+              <div key={col.heading} className="flex flex-col gap-4">
+                <h4
+                  className="font-heading font-bold tracking-[0.32em] uppercase"
+                  style={{ fontSize: '0.58rem', color: 'rgba(240,244,255,0.35)' }}
+                >
+                  {col.heading}
+                </h4>
+                <ul className="flex flex-col gap-2.5">
+                  {col.links.map((link) => (
+                    <FooterLink key={link.to} {...link} />
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Divider ── */}
+        <div
+          className="w-full h-px"
+          style={{ background: 'rgba(255,255,255,0.04)' }}
+          aria-hidden="true"
+        />
+
+        {/* ── Bottom bar ── */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
+          <p style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.35)' }}>
+            © {new Date().getFullYear()} XR Summits Sdn. Bhd. All rights reserved.
+          </p>
+
+          <a
+            href="mailto:hello@xrsummits.com"
+            className="transition-colors duration-250"
+            style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.35)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.65)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(107,127,163,0.35)'; }}
+          >
+            hello@xrsummits.com
+          </a>
+
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="group flex items-center gap-2 transition-colors duration-250"
+            style={{ color: 'rgba(107,127,163,0.35)', fontSize: '0.66rem' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(251,146,60,0.65)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = 'rgba(107,127,163,0.35)'; }}
+            aria-label="Back to top"
+          >
+            <span className="font-bold tracking-[0.24em] uppercase">Back to top</span>
+            <motion.span
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              aria-hidden="true"
+            >
+              ↑
+            </motion.span>
+          </button>
+        </div>
+      </div>
+    </footer>
   );
 };
 
-export default ParticleCanvas;
+export default Footer;
+</file>
+
+<file path="src/components/hero/HeroLogo.tsx">
+import { motion, type Variants } from 'framer-motion';
+
+const tagline = "Asia's Premier Immersive Technology Summit";
+
+const container: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.065, delayChildren: 0.5 },
+  },
+};
+const wordItem: Variants = {
+  hidden: { y: '120%', opacity: 0, rotateX: -25 },
+  show: {
+    y: '0%',
+    opacity: 1,
+    rotateX: 0,
+    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
+const HeroLogo = () => {
+  return (
+    <div className="relative flex flex-col items-center select-none w-full max-w-5xl mx-auto">
+
+      {/* ── Edition badge ── */}
+      <motion.div
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="flex items-center gap-4 mb-10"
+      >
+        {/* Left decorative line with dot */}
+        <div className="flex items-center gap-1.5">
+          <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
+          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
+        </div>
+
+        <span
+          className="font-bold tracking-[0.6em] uppercase"
+          style={{ fontSize: '0.54rem', color: 'rgba(251,146,60,0.65)', letterSpacing: '0.58em' }}
+        >
+          4th Edition · Est. 2021 · Kuala Lumpur
+        </span>
+
+        {/* Right decorative line with dot */}
+        <div className="flex items-center gap-1.5">
+          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
+          <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
+        </div>
+      </motion.div>
+
+      {/* ── Main logo block ── */}
+      <div className="relative flex flex-col items-center gap-0 mb-3 w-full">
+
+        {/* Logo mark */}
+        <motion.div
+          initial={{ scale: 0.6, opacity: 0, filter: 'blur(16px)' }}
+          animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
+          transition={{ delay: 0.3, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mb-5"
+        >
+          {/* Outer halo ring */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            className="absolute -inset-8 rounded-full pointer-events-none"
+            style={{
+              background: 'conic-gradient(from 0deg, transparent 70%, rgba(251,146,60,0.12) 100%)',
+            }}
+            aria-hidden="true"
+          />
+          {/* Soft pulse */}
+          <motion.div
+            animate={{ scale: [1, 1.35, 1], opacity: [0.18, 0.06, 0.18] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute -inset-5 rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.55) 0%, transparent 70%)' }}
+            aria-hidden="true"
+          />
+          {/* Inner ring */}
+          <div
+            className="absolute -inset-3 rounded-full pointer-events-none"
+            style={{ border: '1px solid rgba(251,146,60,0.12)', boxShadow: '0 0 32px rgba(251,146,60,0.1)' }}
+            aria-hidden="true"
+          />
+          <img
+            src="/logo-278x262-removebg.png"
+            alt="XR Summits"
+            className="relative h-[5.5rem] w-auto object-contain"
+            style={{ filter: 'drop-shadow(0 0 22px rgba(251,146,60,0.5)) drop-shadow(0 0 60px rgba(251,146,60,0.15))' }}
+          />
+        </motion.div>
+
+        {/* "XR" — hero display */}
+        <div className="overflow-hidden -mb-2">
+          <motion.div
+            initial={{ y: '105%' }}
+            animate={{ y: '0%' }}
+            transition={{ delay: 0.52, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1
+              className="font-heading font-black text-center leading-none"
+              style={{
+                fontSize: 'clamp(6rem, 18vw, 13.5rem)',
+                letterSpacing: '-0.01em',
+                background: 'linear-gradient(175deg, #ffffff 0%, #f0f4ff 25%, #fb923c 62%, rgba(251,146,60,0.4) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                lineHeight: 0.88,
+              }}
+            >
+              XR
+            </h1>
+          </motion.div>
+        </div>
+
+        {/* "SUMMITS" — secondary, spaced */}
+        <div className="overflow-hidden">
+          <motion.div
+            initial={{ y: '105%', opacity: 0 }}
+            animate={{ y: '0%', opacity: 1 }}
+            transition={{ delay: 0.68, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex items-center justify-center gap-4 relative"
+          >
+            {/* Left rule */}
+            <motion.span
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="h-px flex-shrink-0 origin-right"
+              style={{ width: 'clamp(28px, 4vw, 52px)', background: 'rgba(255,255,255,0.12)' }}
+            />
+
+            <span
+              className="font-heading font-extralight text-center tracking-[0.6em]"
+              style={{
+                fontSize: 'clamp(0.78rem, 2vw, 1.35rem)',
+                color: 'rgba(240,244,255,0.55)',
+                letterSpacing: '0.6em',
+              }}
+            >
+              SUMMITS
+            </span>
+
+            {/* Right rule */}
+            <motion.span
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="h-px flex-shrink-0 origin-left"
+              style={{ width: 'clamp(28px, 4vw, 52px)', background: 'rgba(255,255,255,0.12)' }}
+            />
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ── Accent divider ── */}
+      <motion.div
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ delay: 1.1, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        className="w-20 h-px origin-center mt-6 mb-7"
+        style={{
+          background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.75), transparent)',
+          boxShadow: '0 0 14px rgba(251,146,60,0.45)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Tagline — staggered word reveal ── */}
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="flex flex-wrap justify-center gap-x-[0.45em] gap-y-1 max-w-md"
+        aria-label={tagline}
+        style={{ perspective: '600px' }}
+      >
+        {tagline.split(' ').map((word, i) => (
+          <div key={i} className="overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+            <motion.span
+              variants={wordItem}
+              className="inline-block tracking-[0.1em]"
+              style={{
+                fontSize: 'clamp(0.68rem, 1.4vw, 0.82rem)',
+                color: 'rgba(107,127,163,0.85)',
+                fontWeight: 400,
+              }}
+            >
+              {word}
+            </motion.span>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* ── XRAS26 corner label — top right ── */}
+      <motion.div
+        initial={{ opacity: 0, x: 8 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.5, duration: 0.7 }}
+        className="absolute top-0 right-0 hidden xl:flex flex-col items-end gap-1.5"
+        aria-hidden="true"
+      >
+        <span className="font-mono text-[0.46rem] tracking-[0.38em] uppercase" style={{ color: 'rgba(107,127,163,0.3)' }}>
+          XRAS · 2026
+        </span>
+        <span className="font-mono text-[0.44rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(107,127,163,0.18)' }}>
+          03°08′N · 101°41′E
+        </span>
+      </motion.div>
+    </div>
+  );
+};
+
+export default HeroLogo;
+</file>
+
+<file path="src/components/hero/HeroSection.tsx">
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import ParticleCanvas from './ParticleCanvas';
+import HeroLogo from './HeroLogo';
+import GatewayCard from './GatewayCard';
+
+// ── Icons ──────────────────────────────────────────────────────────────────
+const XRIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M2.25 7.5l10.5-6 10.5 6v9l-10.5 6-10.5-6v-9z" />
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M12 21V3M2.25 7.5l9.75 5.5 9.75-5.5" />
+  </svg>
+);
+const EsportsIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877" />
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17L6.75 19.5a2.121 2.121 0 01-3-3l4.672-4.853" />
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M12 3c3.5 0 6.5 2.5 7 6l-2.5 1.5-4.5-3-4.5 3L5 9c.5-3.5 3.5-6 7-6z" />
+  </svg>
+);
+const HackathonIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+  </svg>
+);
+
+const GATEWAYS = [
+  {
+    title: 'XR Esports',
+    subtitle: 'Competitive · Immersive',
+    description: 'Where traditional esports collides with spatial computing. Compete, spectate, and experience gaming redefined.',
+    to: '/xr-esports',
+    accentColor: '#22d3ee',
+    glowColor: '#06b6d4',
+    tag: 'Arena',
+    icon: <EsportsIcon />,
+    isCenter: false,
+  },
+  {
+    title: 'XR Asia Summit',
+    subtitle: '4th Edition · XRAS26',
+    description: "The definitive platform where immersive tech visionaries, enterprise leaders, and XR innovators converge.",
+    to: '/xr-summit',
+    accentColor: '#fb923c',
+    glowColor: '#f97316',
+    tag: 'Flagship',
+    icon: <XRIcon />,
+    isCenter: true,
+  },
+  {
+    title: 'Hackathon',
+    subtitle: '48-Hour Build Sprint',
+    description: 'Build the immersive future in 48 hours. AI, XR, spatial media — bring your stack and compete for real prizes.',
+    to: '/hackathon',
+    accentColor: '#a78bfa',
+    glowColor: '#7c3aed',
+    tag: 'Build',
+    icon: <HackathonIcon />,
+    isCenter: false,
+  },
+];
+
+const HeroSection = () => {
+  const heroRef = useRef<HTMLElement>(null);
+
+  const handleScrollDown = () => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section
+      ref={heroRef}
+      className="relative w-full min-h-screen flex flex-col overflow-hidden"
+      aria-label="Hero"
+    >
+      {/* ── Particle background ── */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <ParticleCanvas />
+      </div>
+
+      {/* ── Deep radial vignette — more dramatic ── */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 65% at 50% 35%, transparent 0%, rgba(5,11,24,0.45) 50%, rgba(5,11,24,0.92) 80%, #050b18 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Side vignettes — keep focus center ── */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(90deg, rgba(5,11,24,0.55) 0%, transparent 18%, transparent 82%, rgba(5,11,24,0.55) 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Bottom fade ── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-64 z-[2] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.7) 50%, #050b18 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Horizontal scan line — cinematic ── */}
+      <motion.div
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ delay: 1.7, duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute z-[3] pointer-events-none origin-left"
+        style={{
+          top: '40%',
+          left: 0,
+          right: 0,
+          height: '1px',
+          background:
+            'linear-gradient(90deg, transparent 0%, rgba(251,146,60,0.07) 10%, rgba(251,146,60,0.15) 50%, rgba(251,146,60,0.07) 90%, transparent 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Top-left grid tick marks ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8, duration: 1 }}
+        className="absolute top-0 left-0 z-[4] pointer-events-none hidden lg:block"
+        aria-hidden="true"
+      >
+        {/* Vertical line */}
+        <div className="absolute top-20 left-12 w-px h-16" style={{ background: 'rgba(107,127,163,0.12)' }} />
+        {/* Horizontal line */}
+        <div className="absolute top-20 left-12 h-px w-16" style={{ background: 'rgba(107,127,163,0.12)' }} />
+        {/* Corner dot */}
+        <div className="absolute top-[79px] left-[47px] w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.35)' }} />
+      </motion.div>
+
+      {/* ── Corner labels ── */}
+      {[
+        { pos: 'top-[5.5rem] left-14', text: '03°08′N / 101°41′E' },
+        { pos: 'top-[5.5rem] right-14', text: 'XRAS26 · KUL' },
+        { pos: 'bottom-[4.5rem] left-14', text: 'Spatial · AI · XR' },
+        { pos: 'bottom-[4.5rem] right-14', text: '© 2026 XR Summits' },
+      ].map(({ pos, text }) => (
+        <motion.span
+          key={text}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.0, duration: 1 }}
+          className={`absolute z-[4] hidden lg:block font-mono text-[0.44rem] tracking-[0.32em] uppercase pointer-events-none ${pos}`}
+          style={{ color: 'rgba(107,127,163,0.22)' }}
+          aria-hidden="true"
+        >
+          {text}
+        </motion.span>
+      ))}
+
+      {/* ── Main content ── */}
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-28 pb-8 gap-10">
+
+        {/* Logo / wordmark */}
+        <HeroLogo />
+
+        {/* Divider label */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0.7 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ delay: 1.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center gap-5"
+          aria-hidden="true"
+        >
+          <div className="h-px w-14" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <span
+            className="font-bold tracking-[0.55em] uppercase"
+            style={{ fontSize: '0.52rem', color: 'rgba(107,127,163,0.45)' }}
+          >
+            Choose Your Experience
+          </span>
+          <div className="h-px w-14" style={{ background: 'rgba(255,255,255,0.06)' }} />
+        </motion.div>
+
+        {/* Gateway cards */}
+        <div className="w-full max-w-5xl flex flex-col md:flex-row gap-3 items-stretch">
+          {GATEWAYS.map((g, i) => (
+            <GatewayCard key={g.title} index={i} {...g} />
+          ))}
+        </div>
+
+        {/* Scroll cue */}
+        <motion.button
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.2, duration: 0.8 }}
+          onClick={handleScrollDown}
+          className="group flex flex-col items-center gap-2.5 cursor-pointer mt-1"
+          aria-label="Scroll to About section"
+        >
+          {/* Pulsing dot */}
+          <motion.div
+            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0.15, 0.5] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-1 h-1 rounded-full"
+            style={{ background: 'rgba(251,146,60,0.6)' }}
+            aria-hidden="true"
+          />
+
+          <span
+            className="font-bold tracking-[0.55em] uppercase transition-colors duration-300 group-hover:text-accent"
+            style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.4)' }}
+          >
+            Discover
+          </span>
+
+          {/* Animated scroll line */}
+          <div className="relative w-px h-10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+            <motion.div
+              className="absolute top-0 w-full"
+              style={{ height: '45%', background: 'linear-gradient(to bottom, transparent, rgba(251,146,60,0.8), transparent)' }}
+              animate={{ y: ['-100%', '320%'] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
+              aria-hidden="true"
+            />
+          </div>
+        </motion.button>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
 </file>
 
 <file path="src/components/Layout.tsx">
@@ -5074,366 +4607,496 @@ const DemoPlaceholder = ({
 export default DemoPlaceholder;
 </file>
 
-<file path="src/components/Navbar.tsx">
-import { useState, useEffect, useCallback } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import MagneticWrapper from './ui/MagneticWrapper';
-import ScrambleText from './ui/ScrambleText';
+<file path="src/components/hero/GatewayCard.tsx">
+import { useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import TracerBorder from '../ui/TracerBorder';
 
-const NAV_LINKS = [
-  { label: 'Home', to: '/' },
-  { label: "Mothership", to: '/mothership' },
-  { label: 'Awards Gala', to: '/awards' },
-  { label: 'About', to: '/about' },
-  { label: 'Contact', to: '/contact' },
-];
+interface GatewayCardProps {
+  index: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  to: string;
+  accentColor: string;
+  glowColor?: string;
+  tag: string;
+  icon: React.ReactNode;
+  isCenter?: boolean;
+}
 
-// ── Tick / line decoration ─────────────────────────────────────────────────
-const NavTick = ({ color }: { color: string }) => (
-  <span
-    className="w-1 h-1 rounded-full flex-shrink-0"
-    style={{ background: color }}
-    aria-hidden="true"
-  />
-);
+const GatewayCard = ({
+  index,
+  title,
+  subtitle,
+  description,
+  to,
+  accentColor,
+  tag,
+  icon,
+  isCenter = false,
+}: GatewayCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const arrowRef = useRef<HTMLSpanElement>(null);
+  const borderRef = useRef<HTMLDivElement>(null);
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const location = useLocation();
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !glowRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
 
-  const handleScroll = useCallback(() => {
-    const sy = window.scrollY;
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    setScrolled(sy > 40);
-    setScrollProgress(totalHeight > 0 ? sy / totalHeight : 0);
-  }, []);
+    gsap.to(cardRef.current, {
+      rotateX: ((y - cy) / cy) * (isCenter ? -4 : -3.5),
+      rotateY: ((x - cx) / cx) * (isCenter ? 4 : 3.5),
+      duration: 0.55,
+      ease: 'power2.out',
+      transformPerspective: 1000,
+    });
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+    gsap.to(glowRef.current, {
+      x: x - cx,
+      y: y - cy,
+      opacity: isCenter ? 0.2 : 0.12,
+      duration: 0.4,
+      ease: 'power2.out',
+    });
+  }, [isCenter]);
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
+  const handleMouseEnter = useCallback(() => {
+    if (contentRef.current) {
+      gsap.to(contentRef.current, { y: -4, duration: 0.5, ease: 'power3.out' });
+    }
+    if (arrowRef.current) {
+      gsap.to(arrowRef.current, { x: 5, opacity: 1, duration: 0.35, ease: 'power2.out' });
+    }
+    if (borderRef.current) {
+      borderRef.current.style.borderColor = `${accentColor}45`;
+      borderRef.current.style.boxShadow = `0 0 52px ${accentColor}18, 0 28px 56px rgba(0,0,0,0.45)`;
+    }
+  }, [accentColor]);
 
-  // Lock body scroll when mobile menu open
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
+  const handleMouseLeave = useCallback(() => {
+    if (!cardRef.current || !glowRef.current) return;
+
+    gsap.to(cardRef.current, {
+      rotateX: 0, rotateY: 0,
+      duration: 0.85, ease: 'power3.out',
+    });
+    gsap.to(glowRef.current, {
+      opacity: 0, duration: 0.45,
+    });
+    if (contentRef.current) {
+      gsap.to(contentRef.current, { y: 0, duration: 0.65, ease: 'power3.out' });
+    }
+    if (arrowRef.current) {
+      gsap.to(arrowRef.current, { x: 0, opacity: 0.5, duration: 0.35 });
+    }
+    if (borderRef.current) {
+      borderRef.current.style.borderColor = `${accentColor}${isCenter ? '30' : '18'}`;
+      borderRef.current.style.boxShadow = isCenter
+        ? `0 0 48px ${accentColor}0e, 0 24px 48px rgba(0,0,0,0.35)`
+        : '0 12px 32px rgba(0,0,0,0.25)';
+    }
+  }, [accentColor, isCenter]);
 
   return (
-    <>
-      {/* ── Main header ── */}
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-[100]"
-      >
-        {/* Glass background layer */}
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: 1.3 + index * 0.12,
+        duration: 1,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className={`relative flex-1 ${isCenter ? 'md:flex-[1.25]' : 'md:flex-[0.88]'}`}
+      style={{ perspective: '1000px' }}
+    >
+      <Link to={to} className="block h-full cursor-none">
         <div
-          className="absolute inset-0 transition-all duration-700"
-          style={{
-            background: scrolled
-              ? 'rgba(5, 11, 24, 0.82)'
-              : 'transparent',
-            backdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
-            WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(180%)' : 'none',
-            borderBottom: scrolled
-              ? '1px solid rgba(255, 255, 255, 0.055)'
-              : '1px solid transparent',
-          }}
-        />
-
-        {/* Scroll progress line — ultra thin, accent color */}
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{ transformStyle: 'preserve-3d' }}
+          className="relative h-full"
+        >
+          {/* ── Outer border layer ── */}
           <div
-            className="h-full origin-left transition-transform duration-100"
+            ref={borderRef}
+            className="relative overflow-hidden rounded-xl h-full group"
             style={{
-              background: 'linear-gradient(90deg, #fb923c, #f0f4ff 60%, transparent)',
-              transform: `scaleX(${scrollProgress})`,
-              opacity: scrolled ? 0.7 : 0,
-              boxShadow: '0 0 8px rgba(251,146,60,0.6)',
+              border: `1px solid ${accentColor}${isCenter ? '30' : '18'}`,
+              minHeight: isCenter ? '370px' : '330px',
+              transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
+              boxShadow: isCenter
+                ? `0 0 48px ${accentColor}0e, 0 24px 48px rgba(0,0,0,0.35)`
+                : '0 12px 32px rgba(0,0,0,0.25)',
             }}
-          />
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem]">
-
-          {/* ── Logo ── */}
-          <Link to="/" className="group flex items-center gap-3 select-none flex-shrink-0">
-            <div className="relative w-9 h-9 flex-shrink-0">
-              {/* Glow ring on hover */}
-              <div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
-                style={{ background: 'rgba(251,146,60,0.4)' }}
-              />
-              <img
-                src="/logo-278x262-removebg.png"
-                alt="XR Summits"
-                className="relative w-full h-full object-contain transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
-            <div className="flex flex-col leading-none">
-              <span
-                className="font-heading font-bold tracking-[0.28em] text-foreground group-hover:text-accent transition-colors duration-400"
-                style={{ fontSize: '0.78rem' }}
-              >
-                XR SUMMITS
-              </span>
-              <span
-                className="font-heading font-light tracking-[0.45em] text-foreground-muted uppercase"
-                style={{ fontSize: '0.45rem', marginTop: '2px' }}
-              >
-                Asia · Est. 2021
-              </span>
-            </div>
-          </Link>
-
-          {/* ── Desktop nav ── */}
-          <nav className="hidden lg:flex items-center gap-0.5" aria-label="Primary navigation">
-            {NAV_LINKS.map((link) => (
-              <MagneticWrapper key={link.to} strength={0.12}>
-                <NavLink
-                  to={link.to}
-                  end={link.to === '/'}
-                  className={({ isActive }) =>
-                    `relative group px-4 py-2.5 rounded-sm transition-colors duration-300 cursor-none
-                    text-[0.68rem] font-semibold tracking-[0.14em] uppercase
-                    ${isActive ? 'text-accent' : 'text-foreground-muted hover:text-foreground'}`
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      {/* Hover bg pill */}
-                      <span
-                        className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ background: 'rgba(255,255,255,0.035)' }}
-                        aria-hidden="true"
-                      />
-
-                      <ScrambleText text={link.label} />
-
-                      {/* Active underline */}
-                      {isActive && (
-                        <motion.span
-                          layoutId="nav-active"
-                          className="absolute bottom-1 left-3 right-3 h-[1px]"
-                          style={{
-                            background: 'linear-gradient(90deg, transparent, #fb923c, transparent)',
-                            boxShadow: '0 0 10px rgba(251,146,60,0.9)',
-                          }}
-                          transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-                        />
-                      )}
-                    </>
-                  )}
-                </NavLink>
-              </MagneticWrapper>
-            ))}
-          </nav>
-
-          {/* ── CTA + Hamburger ── */}
-          <div className="flex items-center gap-3">
-            {/* Register button — desktop */}
-            <div className="hidden lg:block">
-              <MagneticWrapper strength={0.22}>
-                <a
-                  href="#tickets"
-                  className="group relative inline-flex items-center gap-2 px-5 py-2 overflow-hidden cursor-none"
-                  style={{
-                    border: '1px solid rgba(251,146,60,0.5)',
-                    borderRadius: '3px',
-                  }}
-                >
-                  {/* Fill on hover */}
-                  <span
-                    className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    style={{ background: '#fb923c' }}
-                    aria-hidden="true"
-                  />
-                  {/* Glow */}
-                  <span
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ boxShadow: '0 0 30px rgba(251,146,60,0.5)' }}
-                    aria-hidden="true"
-                  />
-                  <span
-                    className="relative text-[0.68rem] font-bold tracking-[0.2em] uppercase transition-colors duration-300"
-                    style={{ color: 'inherit' }}
-                  >
-                    <span className="text-accent group-hover:text-[#050b18] transition-colors duration-300">
-                      Register
-                    </span>
-                  </span>
-                  <span
-                    className="relative text-[0.65rem] transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-[#050b18]"
-                    style={{ color: 'rgba(251,146,60,0.6)' }}
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                </a>
-              </MagneticWrapper>
-            </div>
-
-            {/* Hamburger — mobile */}
-            <button
-              onClick={() => setMenuOpen((v) => !v)}
-              className="lg:hidden relative w-10 h-10 flex items-center justify-center text-foreground-muted hover:text-accent transition-colors duration-200"
-              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-              aria-expanded={menuOpen}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                {menuOpen ? (
-                  <motion.span
-                    key="close"
-                    initial={{ rotate: -45, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 45, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute"
-                  >
-                    <X size={20} />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="open"
-                    initial={{ rotate: 45, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -45, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute"
-                  >
-                    <Menu size={20} />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
-        </div>
-      </motion.header>
-
-      {/* ── Mobile full-screen overlay ── */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[99] flex flex-col"
-            style={{ background: 'rgba(5, 11, 24, 0.97)', backdropFilter: 'blur(24px)' }}
           >
-            {/* Atmospheric glow */}
-            <div
-              className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] opacity-[0.07] pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse, #fb923c 0%, transparent 70%)' }}
-              aria-hidden="true"
-            />
-
-            {/* Decorative grid */}
-            <div
-              className="absolute inset-0 opacity-[0.015] pointer-events-none"
-              style={{
-                backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-              }}
-              aria-hidden="true"
-            />
-
-            {/* Top bar (mirrors header height) */}
-            <div className="h-16 flex items-center px-6 flex-shrink-0">
-              <Link to="/" className="flex items-center gap-3 select-none" onClick={() => setMenuOpen(false)}>
-                <img src="/logo-278x262-removebg.png" alt="XR Summits" className="w-8 h-8 object-contain" />
-                <span className="font-heading font-bold tracking-[0.28em] text-foreground" style={{ fontSize: '0.78rem' }}>
-                  XR SUMMITS
-                </span>
-              </Link>
-            </div>
-
-            {/* Divider */}
-            <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
-
-            {/* Nav links */}
-            <nav className="flex flex-col flex-1 justify-center px-6 gap-1" aria-label="Mobile navigation">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.to}
-                  initial={{ x: 32, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: 32, opacity: 0 }}
-                  transition={{ delay: i * 0.055 + 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <NavLink
-                    to={link.to}
-                    end={link.to === '/'}
-                    className={({ isActive }) =>
-                      `group flex items-center gap-4 py-4 border-b transition-colors duration-200
-                      ${isActive
-                        ? 'text-accent border-white/10'
-                        : 'text-foreground-muted hover:text-foreground border-white/[0.05]'
-                      }`
-                    }
-                  >
-                    {({ isActive }) => (
-                      <>
-                        <NavTick color={isActive ? '#fb923c' : 'rgba(255,255,255,0.15)'} />
-                        <span className="font-heading font-bold tracking-[0.2em] uppercase" style={{ fontSize: '1.05rem' }}>
-                          {link.label}
-                        </span>
-                        {isActive && (
-                          <span className="ml-auto text-xs font-mono tracking-widest opacity-50">
-                            ●
-                          </span>
-                        )}
-                      </>
-                    )}
-                  </NavLink>
-                </motion.div>
-              ))}
-            </nav>
-
-            {/* Bottom CTA */}
-            <motion.div
-              initial={{ y: 24, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 24, opacity: 0 }}
-              transition={{ delay: 0.38, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="px-6 pb-10 pt-6"
-            >
-              {/* Edition badge */}
-              <p className="text-[0.55rem] font-bold tracking-[0.45em] text-foreground-muted uppercase mb-5">
-                4th Edition · Kuala Lumpur · 2026
-              </p>
-              <a
-                href="#tickets"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-center gap-3 w-full py-4 font-bold tracking-[0.2em] uppercase text-[0.78rem] text-background transition-all duration-300 rounded-sm"
+            {/* TracerBorder wrapping content */}
+            <TracerBorder accentColor={accentColor}>
+              {/* Card body */}
+              <div
+                className="relative h-full w-full"
                 style={{
-                  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-                  boxShadow: '0 0 40px rgba(251,146,60,0.35)',
+                  background: isCenter
+                    ? `linear-gradient(155deg, rgba(22,38,62,0.94) 0%, rgba(13,27,46,0.97) 100%)`
+                    : 'rgba(10, 20, 36, 0.78)',
+                  backdropFilter: 'blur(18px)',
+                  WebkitBackdropFilter: 'blur(18px)',
                 }}
               >
-                Register Now
-                <span aria-hidden="true">→</span>
-              </a>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+                {/* Top edge line */}
+                <div
+                  className="absolute top-0 inset-x-0 h-px"
+                  style={{
+                    background: `linear-gradient(90deg, transparent 5%, ${accentColor}${isCenter ? '55' : '35'} 40%, ${accentColor}${isCenter ? '55' : '35'} 60%, transparent 95%)`,
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Cursor glow blob */}
+                <div
+                  ref={glowRef}
+                  className="absolute w-80 h-80 rounded-full pointer-events-none opacity-0 z-0"
+                  style={{
+                    background: `radial-gradient(circle, ${accentColor}40 0%, transparent 65%)`,
+                    filter: 'blur(32px)',
+                    left: '50%', top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Corner brackets */}
+                <div
+                  className="absolute top-3.5 left-3.5 w-4 h-4 border-t border-l z-10"
+                  style={{ borderColor: `${accentColor}${isCenter ? '50' : '30'}` }}
+                  aria-hidden="true"
+                />
+                <div
+                  className="absolute bottom-3.5 right-3.5 w-4 h-4 border-b border-r z-10"
+                  style={{ borderColor: `${accentColor}${isCenter ? '50' : '30'}` }}
+                  aria-hidden="true"
+                />
+
+                {/* Side accent bar for flanking cards */}
+                {!isCenter && (
+                  <div
+                    className="absolute left-0 top-8 bottom-8 w-[1.5px] rounded-full z-10"
+                    style={{ background: `linear-gradient(to bottom, transparent, ${accentColor}55, transparent)` }}
+                    aria-hidden="true"
+                  />
+                )}
+
+                {/* ── Content ── */}
+                <div ref={contentRef} className="relative z-20 flex flex-col h-full p-6 gap-4">
+
+                  {/* Tag + index row */}
+                  <div className="flex items-center justify-between">
+                    <span
+                      className="text-[0.56rem] font-bold tracking-[0.35em] uppercase px-2.5 py-1 rounded-sm"
+                      style={{
+                        color: accentColor,
+                        background: `${accentColor}14`,
+                        border: `1px solid ${accentColor}25`,
+                        letterSpacing: '0.3em',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                    <span
+                      className="font-mono text-[0.5rem] tracking-[0.3em]"
+                      style={{ color: `${accentColor}45` }}
+                      aria-hidden="true"
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  {/* Icon */}
+                  <motion.div
+                    className="flex items-center justify-center rounded-lg"
+                    style={{
+                      width: isCenter ? '50px' : '42px',
+                      height: isCenter ? '50px' : '42px',
+                      background: `${accentColor}0e`,
+                      border: `1px solid ${accentColor}20`,
+                      color: accentColor,
+                    }}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {icon}
+                  </motion.div>
+
+                  {/* Text block */}
+                  <div className="flex flex-col gap-1.5 flex-1">
+                    <p
+                      className="font-semibold tracking-[0.28em] uppercase"
+                      style={{ fontSize: '0.57rem', color: `${accentColor}75` }}
+                    >
+                      {subtitle}
+                    </p>
+                    <h3
+                      className="font-heading font-bold text-foreground leading-tight"
+                      style={{ fontSize: isCenter ? '1.22rem' : '1.04rem' }}
+                    >
+                      {title}
+                    </h3>
+                    <p
+                      className="text-foreground-muted leading-relaxed"
+                      style={{ fontSize: isCenter ? '0.8rem' : '0.74rem', marginTop: '3px', lineHeight: 1.7 }}
+                    >
+                      {description}
+                    </p>
+                  </div>
+
+                  {/* CTA row */}
+                  <div
+                    className="flex items-center justify-between pt-4 mt-auto border-t"
+                    style={{ borderColor: `${accentColor}12` }}
+                  >
+                    <span
+                      className="text-[0.64rem] font-bold tracking-[0.2em] uppercase"
+                      style={{ color: accentColor, opacity: 0.7 }}
+                    >
+                      Explore
+                    </span>
+                    <span
+                      ref={arrowRef}
+                      className="text-sm"
+                      style={{ color: accentColor, opacity: 0.5 }}
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </TracerBorder>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
   );
 };
 
-export default Navbar;
+export default GatewayCard;
+</file>
+
+<file path="src/components/hero/ParticleCanvas.tsx">
+import { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+
+/**
+ * ParticleCanvas — optimasi:
+ * - Kurangi particle count (2800 → 1800) untuk GPU mid-range
+ * - Gunakan Float16Array di mana mungkin
+ * - Pause saat tidak visible (IntersectionObserver)
+ * - Limit pixel ratio max 1.5 (bukan 2)
+ * - Hapus GridHelper (draw call tambahan, tidak terlalu terlihat)
+ * - Tambah disposal yang benar
+ */
+const ParticleCanvas = () => {
+  const mountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mount = mountRef.current;
+    if (!mount) return;
+
+    // ── Scene setup ─────────────────────────────────────────────────────
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      70,
+      mount.clientWidth / mount.clientHeight,
+      0.1,
+      800
+    );
+    camera.position.z = 3.2;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'high-performance' });
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    // Cap pixel ratio ke 1.5 — tidak perlu 2x untuk partikel background
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.setClearColor(0x000000, 0);
+    mount.appendChild(renderer.domElement);
+
+    // ── Particles ────────────────────────────────────────────────────────
+    const PARTICLE_COUNT = 1800; // dikurangi dari 2800
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const colors = new Float32Array(PARTICLE_COUNT * 3);
+    const sizes = new Float32Array(PARTICLE_COUNT);
+
+    const palette = [
+      new THREE.Color('#fb923c'),
+      new THREE.Color('#1e3a8a'),
+      new THREE.Color('#7e22ce'),
+      new THREE.Color('#93c5fd'),
+      new THREE.Color('#f0f4ff'),
+    ];
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const i3 = i * 3;
+      const radius = 4.5 + Math.random() * 6.5;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(2 * Math.random() - 1);
+
+      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i3 + 2] = radius * Math.cos(phi) - 1.5;
+
+      const c = palette[Math.floor(Math.random() * palette.length)];
+      colors[i3] = c.r; colors[i3 + 1] = c.g; colors[i3 + 2] = c.b;
+
+      sizes[i] = Math.random() * 2.2 + 0.4;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+    // Shader sederhana — hindari branching kompleks
+    const material = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uPixelRatio: { value: renderer.getPixelRatio() },
+      },
+      glslVersion: THREE.GLSL3,
+      vertexShader: `
+        in float size;
+        in vec3 color;
+        out vec3 vColor;
+        out float vAlpha;
+        uniform float uTime;
+        uniform float uPixelRatio;
+
+        void main() {
+          vColor = color;
+          vec3 pos = position;
+          float t = uTime;
+          pos.x += sin(t * 0.16 + position.z * 0.35) * 0.07;
+          pos.y += cos(t * 0.12 + position.x * 0.28) * 0.055;
+          pos.z += sin(t * 0.09 + position.y * 0.2)  * 0.045;
+
+          vec4 mvPos = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = size * uPixelRatio * (260.0 / -mvPos.z);
+          gl_Position  = projectionMatrix * mvPos;
+          // depth-based fade untuk partikel jauh
+          vAlpha = clamp(1.0 + mvPos.z * 0.18, 0.3, 1.0);
+        }
+      `,
+      fragmentShader: `
+        in vec3 vColor;
+        in float vAlpha;
+        out vec4 outColor;
+
+        void main() {
+          float d = length(gl_PointCoord - vec2(0.5));
+          if (d > 0.5) discard;
+          float alpha = (1.0 - smoothstep(0.15, 0.5, d)) * vAlpha * 0.72;
+          float glow  = exp(-d * 5.5) * 0.65;
+          outColor = vec4(vColor + glow * 0.35, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      vertexColors: true,
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // ── Mouse parallax (throttled) ────────────────────────────────────────
+    let mouseX = 0, mouseY = 0;
+    let ticking = false;
+    const onMouseMove = (e: MouseEvent) => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+          mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+
+    // ── Resize ────────────────────────────────────────────────────────────
+    const onResize = () => {
+      if (!mount) return;
+      camera.aspect = mount.clientWidth / mount.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(mount.clientWidth, mount.clientHeight);
+    };
+    window.addEventListener('resize', onResize, { passive: true });
+
+    // ── Visibility: stop rendering when off-screen ────────────────────────
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      (entries) => { isVisible = entries[0].isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(mount);
+
+    // ── Animation loop ────────────────────────────────────────────────────
+    let animId: number;
+    let lastTime = 0;
+    let elapsed = 0;
+    const FPS_CAP = 1000 / 60; // 60fps cap
+
+    const animate = (timestamp: number) => {
+      animId = requestAnimationFrame(animate);
+      if (!isVisible) return;
+
+      const delta = timestamp - lastTime;
+      if (delta < FPS_CAP) return; // throttle
+      lastTime = timestamp;
+      elapsed += delta * 0.001;
+
+      material.uniforms.uTime.value = elapsed;
+
+      // Very gentle rotation + parallax
+      particles.rotation.y = elapsed * 0.014 + mouseX * 0.05;
+      particles.rotation.x = mouseY * 0.032;
+
+      renderer.render(scene, camera);
+    };
+    animId = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', onResize);
+      observer.disconnect();
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+      if (mount.contains(renderer.domElement)) {
+        mount.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={mountRef}
+      className="absolute inset-0 w-full h-full"
+      aria-hidden="true"
+    />
+  );
+};
+
+export default ParticleCanvas;
 </file>
 
 <file path="src/components/tickets/TicketsSection.tsx">
@@ -5804,6 +5467,340 @@ const App = () => {
 };
 
 export default App;
+</file>
+
+<file path="src/components/Navbar.tsx">
+import { useState, useEffect, useCallback } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import MagneticWrapper from './ui/MagneticWrapper';
+import ScrambleText from './ui/ScrambleText';
+
+const NAV_LINKS = [
+  { label: 'Home', to: '/' },
+  { label: 'Mothership', to: '/mothership' },
+  { label: 'Awards Gala', to: '/awards' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
+];
+
+const Navbar = () => {
+  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuPathname, setMenuPathname] = useState(() => location.pathname);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  if (location.pathname !== menuPathname) {
+    setMenuPathname(location.pathname);
+    setMenuOpen(false);
+  }
+
+  const handleScroll = useCallback(() => {
+    const sy = window.scrollY;
+    const totalH = document.documentElement.scrollHeight - window.innerHeight;
+    setScrolled(sy > 50);
+    setScrollProgress(totalH > 0 ? sy / totalH : 0);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  return (
+    <>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-[100]"
+      >
+        {/* Glass layer */}
+        <div
+          className="absolute inset-0 transition-all duration-600"
+          style={{
+            background: scrolled ? 'rgba(5, 11, 24, 0.88)' : 'transparent',
+            backdropFilter: scrolled ? 'blur(28px) saturate(160%)' : 'none',
+            WebkitBackdropFilter: scrolled ? 'blur(28px) saturate(160%)' : 'none',
+            borderBottom: scrolled ? '1px solid rgba(255,255,255,0.045)' : '1px solid transparent',
+          }}
+        />
+
+        {/* Scroll progress — ultra thin */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden z-10">
+          <div
+            className="h-full origin-left"
+            style={{
+              background: 'linear-gradient(90deg, #fb923c 0%, rgba(240,244,255,0.6) 100%)',
+              transform: `scaleX(${scrollProgress})`,
+              opacity: scrolled ? 0.65 : 0,
+              transition: 'opacity 0.4s ease',
+              boxShadow: '0 0 6px rgba(251,146,60,0.5)',
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem]">
+
+          {/* ── Logo ── */}
+          <Link to="/" className="group flex items-center gap-3 select-none flex-shrink-0">
+            <div className="relative w-8 h-8 flex-shrink-0">
+              <motion.div
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-md"
+                style={{ background: 'rgba(251,146,60,0.4)' }}
+                transition={{ duration: 0.4 }}
+                aria-hidden="true"
+              />
+              <img
+                src="/logo-278x262-removebg.png"
+                alt="XR Summits"
+                className="relative w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="flex flex-col leading-none gap-[3px]">
+              <span
+                className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
+                style={{ fontSize: '0.76rem' }}
+              >
+                XR SUMMITS
+              </span>
+              <span
+                className="font-mono tracking-[0.44em] text-foreground-muted/50 uppercase"
+                style={{ fontSize: '0.42rem' }}
+              >
+                Asia · Est. 2021
+              </span>
+            </div>
+          </Link>
+
+          {/* ── Desktop nav ── */}
+          <nav className="hidden lg:flex items-center" aria-label="Primary navigation">
+            {/* Left separator */}
+            <div className="w-px h-4 mr-6" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
+
+            {NAV_LINKS.map((link) => (
+              <MagneticWrapper key={link.to} strength={0.1}>
+                <NavLink
+                  to={link.to}
+                  end={link.to === '/'}
+                  className={({ isActive }) =>
+                    `relative group px-3.5 py-2 rounded-sm transition-colors duration-300 cursor-none
+                    text-[0.66rem] font-semibold tracking-[0.16em] uppercase
+                    ${isActive ? 'text-accent' : 'text-foreground-muted hover:text-foreground'}`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {/* Hover bg */}
+                      <span
+                        className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: 'rgba(255,255,255,0.03)' }}
+                        aria-hidden="true"
+                      />
+                      <ScrambleText text={link.label} />
+                      {/* Active indicator */}
+                      {isActive && (
+                        <motion.span
+                          layoutId="nav-active"
+                          className="absolute bottom-0.5 left-3 right-3 h-px"
+                          style={{
+                            background: 'linear-gradient(90deg, transparent, #fb923c, transparent)',
+                            boxShadow: '0 0 8px rgba(251,146,60,0.8)',
+                          }}
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                        />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </MagneticWrapper>
+            ))}
+
+            {/* Right separator */}
+            <div className="w-px h-4 ml-6 mr-4" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
+          </nav>
+
+          {/* ── CTA + Hamburger ── */}
+          <div className="flex items-center gap-3">
+            {/* Register button */}
+            <div className="hidden lg:block">
+              <MagneticWrapper strength={0.2}>
+                <a
+                  href="#tickets"
+                  className="group relative inline-flex items-center gap-2 px-5 py-2 overflow-hidden rounded-sm cursor-none"
+                  style={{ border: '1px solid rgba(251,146,60,0.4)' }}
+                >
+                  {/* Fill sweep */}
+                  <span
+                    className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-450"
+                    style={{ background: '#fb923c', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200"
+                  >
+                    Register
+                  </span>
+                  <span
+                    className="relative text-[0.62rem] transition-all duration-300 text-accent/55 group-hover:text-[#050b18] group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                </a>
+              </MagneticWrapper>
+            </div>
+
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="lg:hidden relative w-10 h-10 flex items-center justify-center text-foreground-muted hover:text-accent transition-colors duration-200"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {menuOpen ? (
+                  <motion.span key="close" initial={{ rotate: -45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 45, opacity: 0 }} transition={{ duration: 0.2 }} className="absolute">
+                    <X size={18} />
+                  </motion.span>
+                ) : (
+                  <motion.span key="open" initial={{ rotate: 45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -45, opacity: 0 }} transition={{ duration: 0.2 }} className="absolute">
+                    <Menu size={18} />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* ── Mobile full-screen overlay ── */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.28 }}
+            className="fixed inset-0 z-[99] flex flex-col"
+            style={{ background: 'rgba(5, 11, 24, 0.97)', backdropFilter: 'blur(28px)' }}
+          >
+            {/* Atmospheric glow */}
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
+              style={{
+                width: '500px', height: '260px',
+                background: 'radial-gradient(ellipse, rgba(251,146,60,0.07) 0%, transparent 68%)',
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Grid */}
+            <div
+              className="absolute inset-0 opacity-[0.012] pointer-events-none"
+              style={{
+                backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+                backgroundSize: '48px 48px',
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Header bar */}
+            <div className="h-16 flex items-center px-6 flex-shrink-0">
+              <Link to="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
+                <img src="/logo-278x262-removebg.png" alt="XR Summits" className="w-7 h-7 object-contain" />
+                <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
+                  XR SUMMITS
+                </span>
+              </Link>
+            </div>
+
+            <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
+
+            {/* Links */}
+            <nav className="flex flex-col flex-1 justify-center px-6 gap-0.5" aria-label="Mobile navigation">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.to}
+                  initial={{ x: 28, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  exit={{ x: 28, opacity: 0 }}
+                  transition={{ delay: i * 0.05 + 0.08, duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <NavLink
+                    to={link.to}
+                    end={link.to === '/'}
+                    className={({ isActive }) =>
+                      `group flex items-center gap-4 py-4 border-b transition-all duration-200
+                      ${isActive ? 'text-accent border-white/10' : 'text-foreground-muted hover:text-foreground border-white/[0.04]'}`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <span
+                          className="w-1 h-1 rounded-full flex-shrink-0 transition-colors duration-200"
+                          style={{ background: isActive ? '#fb923c' : 'rgba(255,255,255,0.12)' }}
+                          aria-hidden="true"
+                        />
+                        <span className="font-heading font-bold tracking-[0.22em] uppercase" style={{ fontSize: '1.05rem' }}>
+                          {link.label}
+                        </span>
+                        {isActive && (
+                          <motion.span
+                            initial={{ opacity: 0, x: -4 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="ml-auto font-mono text-[0.5rem] tracking-widest text-accent/50"
+                          >
+                            ●
+                          </motion.span>
+                        )}
+                      </>
+                    )}
+                  </NavLink>
+                </motion.div>
+              ))}
+            </nav>
+
+            {/* Bottom CTA */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 20, opacity: 0 }}
+              transition={{ delay: 0.34, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="px-6 pb-10 pt-5"
+            >
+              <p className="font-mono text-[0.5rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
+                4th Edition · Kuala Lumpur · 2026
+              </p>
+              <a
+                href="#tickets"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
+                style={{
+                  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+                  boxShadow: '0 0 36px rgba(251,146,60,0.3)',
+                }}
+              >
+                Register Now
+                <span aria-hidden="true">→</span>
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Navbar;
 </file>
 
 </files>

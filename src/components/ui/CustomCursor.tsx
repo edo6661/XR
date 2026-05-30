@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+// src/components/ui/CustomCursor.tsx
+import { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
@@ -7,37 +8,50 @@ const CustomCursor = () => {
     () => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
   );
 
-  // Titik inti (Core) melacak 1:1 TANPA delay
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // Outer ring menggunakan spring untuk efek "trailing" yang smooth
   const springConfigOuter = { stiffness: 600, damping: 30, mass: 0.5 };
   const outerX = useSpring(cursorX, springConfigOuter);
   const outerY = useSpring(cursorY, springConfigOuter);
 
+  const requestRef = useRef<number>(0);
+  const mousePos = useRef({ x: -100, y: -100 });
+
   useEffect(() => {
     if (isTouchDevice) return;
 
-    const updateMousePosition = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+    // Pisahkan logic update dari event listener
+    const updateCursor = () => {
+      cursorX.set(mousePos.current.x);
+      cursorY.set(mousePos.current.y);
+      requestRef.current = requestAnimationFrame(updateCursor);
+    };
+    requestRef.current = requestAnimationFrame(updateCursor);
+
+    const onMouseMove = (e: MouseEvent) => {
+      mousePos.current.x = e.clientX;
+      mousePos.current.y = e.clientY;
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
+    const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Seleksi elemen interaktif yang lebih akurat
-      const isInteractable = target.closest('a, button, [role="button"], input, select, textarea');
+      // Gunakan tagName atau class khusus untuk deteksi yang lebih ringan daripada closest()
+      const isInteractable =
+        target.tagName === 'A' ||
+        target.tagName === 'BUTTON' ||
+        target.closest('a, button');
+
       setIsHovering(!!isInteractable);
     };
 
-    // Tambahkan { passive: true } agar event listener tidak memblokir UI thread
-    window.addEventListener('mousemove', updateMousePosition, { passive: true });
-    window.addEventListener('mouseover', handleMouseOver, { passive: true });
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mouseover', onMouseOver, { passive: true });
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseover', onMouseOver);
+      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, [cursorX, cursorY, isTouchDevice]);
 
@@ -45,7 +59,6 @@ const CustomCursor = () => {
 
   return (
     <>
-      {/* Core Dot - 1:1 Instant Tracking Tanpa Spring */}
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[9999]"
         style={{
@@ -53,13 +66,11 @@ const CustomCursor = () => {
           y: cursorY,
           translateX: '-50%',
           translateY: '-50%',
-          willChange: 'transform' // Paksa GPU Acceleration
+          willChange: 'transform'
         }}
         animate={{ opacity: isHovering ? 0 : 1 }}
         transition={{ duration: 0.15 }}
       />
-
-      {/* Outer Ring - Smooth Trailing */}
       <motion.div
         className="fixed top-0 left-0 w-8 h-8 border border-accent rounded-full pointer-events-none z-[9998] flex items-center justify-center"
         style={{
@@ -67,7 +78,7 @@ const CustomCursor = () => {
           y: outerY,
           translateX: '-50%',
           translateY: '-50%',
-          willChange: 'transform' // Paksa GPU Acceleration
+          willChange: 'transform'
         }}
         animate={{
           scale: isHovering ? 1.5 : 1,
