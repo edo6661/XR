@@ -1,9 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticWrapper from './ui/MagneticWrapper';
 import ScrambleText from './ui/ScrambleText';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const NAV_LINKS = [
   { label: 'Home', to: '/' },
@@ -18,24 +22,46 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(() => location.pathname);
-  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Ref untuk GSAP Scroll Progress
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   if (location.pathname !== menuPathname) {
     setMenuPathname(location.pathname);
     setMenuOpen(false);
   }
 
-  const handleScroll = useCallback(() => {
-    const sy = window.scrollY;
-    const totalH = document.documentElement.scrollHeight - window.innerHeight;
-    setScrolled(sy > 50);
-    setScrollProgress(totalH > 0 ? sy / totalH : 0);
-  }, []);
-
   useEffect(() => {
+    // Optimasi: Hanya update state jika melewati threshold 50px
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled((prev) => {
+        if (prev !== isScrolled) return isScrolled;
+        return prev;
+      });
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+
+    // Animasikan garis bawah Navbar langsung dengan GSAP (bypass React render)
+    const ctx = gsap.context(() => {
+      gsap.to(progressBarRef.current, {
+        scaleX: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.documentElement,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 0.1, // Smoothness
+        }
+      });
+    });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      ctx.revert();
+    };
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -64,10 +90,11 @@ const Navbar = () => {
         {/* Scroll progress — ultra thin */}
         <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden z-10">
           <div
-            className="h-full origin-left"
+            ref={progressBarRef}
+            className="h-full origin-left will-change-transform optimize-gpu"
             style={{
               background: 'linear-gradient(90deg, #fb923c 0%, rgba(240,244,255,0.6) 100%)',
-              transform: `scaleX(${scrollProgress})`,
+              transform: 'scaleX(0)', // Inisialisasi awal 0, GSAP yang menggerakkan
               opacity: scrolled ? 0.65 : 0,
               transition: 'opacity 0.4s ease',
               boxShadow: '0 0 6px rgba(251,146,60,0.5)',
@@ -76,7 +103,6 @@ const Navbar = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem]">
-
           {/* ── Logo ── */}
           <Link to="/" className="group flex items-center gap-3 select-none flex-shrink-0">
             <div className="relative w-8 h-8 flex-shrink-0">
@@ -110,7 +136,6 @@ const Navbar = () => {
 
           {/* ── Desktop nav ── */}
           <nav className="hidden lg:flex items-center" aria-label="Primary navigation">
-            {/* Left separator */}
             <div className="w-px h-4 mr-6" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
 
             {NAV_LINKS.map((link) => (
@@ -126,14 +151,12 @@ const Navbar = () => {
                 >
                   {({ isActive }) => (
                     <>
-                      {/* Hover bg */}
                       <span
                         className="absolute inset-0 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         style={{ background: 'rgba(255,255,255,0.03)' }}
                         aria-hidden="true"
                       />
                       <ScrambleText text={link.label} />
-                      {/* Active indicator */}
                       {isActive && (
                         <motion.span
                           layoutId="nav-active"
@@ -151,13 +174,11 @@ const Navbar = () => {
               </MagneticWrapper>
             ))}
 
-            {/* Right separator */}
             <div className="w-px h-4 ml-6 mr-4" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
           </nav>
 
           {/* ── CTA + Hamburger ── */}
           <div className="flex items-center gap-3">
-            {/* Register button */}
             <div className="hidden lg:block">
               <MagneticWrapper strength={0.2}>
                 <a
@@ -165,7 +186,6 @@ const Navbar = () => {
                   className="group relative inline-flex items-center gap-2 px-5 py-2 overflow-hidden rounded-sm cursor-none"
                   style={{ border: '1px solid rgba(251,146,60,0.4)' }}
                 >
-                  {/* Fill sweep */}
                   <span
                     className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-450"
                     style={{ background: '#fb923c', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
@@ -186,7 +206,6 @@ const Navbar = () => {
               </MagneticWrapper>
             </div>
 
-            {/* Hamburger */}
             <button
               onClick={() => setMenuOpen((v) => !v)}
               className="lg:hidden relative w-10 h-10 flex items-center justify-center text-foreground-muted hover:text-accent transition-colors duration-200"
@@ -221,7 +240,6 @@ const Navbar = () => {
             className="fixed inset-0 z-[99] flex flex-col"
             style={{ background: 'rgba(5, 11, 24, 0.97)', backdropFilter: 'blur(28px)' }}
           >
-            {/* Atmospheric glow */}
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 pointer-events-none"
               style={{
@@ -230,8 +248,6 @@ const Navbar = () => {
               }}
               aria-hidden="true"
             />
-
-            {/* Grid */}
             <div
               className="absolute inset-0 opacity-[0.012] pointer-events-none"
               style={{
@@ -241,7 +257,6 @@ const Navbar = () => {
               aria-hidden="true"
             />
 
-            {/* Header bar */}
             <div className="h-16 flex items-center px-6 flex-shrink-0">
               <Link to="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
                 <img src="/logo-278x262-removebg.png" alt="XR Summits" className="w-7 h-7 object-contain" />
@@ -253,7 +268,6 @@ const Navbar = () => {
 
             <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
 
-            {/* Links */}
             <nav className="flex flex-col flex-1 justify-center px-6 gap-0.5" aria-label="Mobile navigation">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
@@ -270,6 +284,7 @@ const Navbar = () => {
                       `group flex items-center gap-4 py-4 border-b transition-all duration-200
                       ${isActive ? 'text-accent border-white/10' : 'text-foreground-muted hover:text-foreground border-white/[0.04]'}`
                     }
+                    onClick={() => setMenuOpen(false)}
                   >
                     {({ isActive }) => (
                       <>
@@ -297,7 +312,6 @@ const Navbar = () => {
               ))}
             </nav>
 
-            {/* Bottom CTA */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
