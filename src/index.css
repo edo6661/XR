@@ -6,15 +6,12 @@ html.lenis,
 html.lenis body {
   height: auto;
 }
-
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
-
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
-
 .lenis.lenis-stopped {
   overflow: hidden;
 }
@@ -23,53 +20,83 @@ html.lenis body {
 @theme {
   --font-sans: "Montserrat", system-ui, sans-serif;
   --font-heading: "Orbitron", var(--font-sans);
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 
   --color-primary: var(--theme-primary);
   --color-secondary: var(--theme-secondary);
   --color-accent: var(--theme-accent);
-
   --color-background: var(--theme-background);
   --color-surface: var(--theme-surface);
-
   --color-foreground: var(--theme-foreground);
   --color-foreground-muted: var(--theme-foreground-muted);
-
   --color-border: var(--theme-border);
 
-  --radius-btn: 4px;
-  --radius-card: 8px;
+  --radius-btn: 3px;
+  --radius-card: 10px;
 
   --shadow-card:
-    0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    0 4px 6px -1px rgba(0, 0, 0, 0.32), 0 2px 4px -1px rgba(0, 0, 0, 0.22);
   --shadow-hover:
-    0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    0 12px 20px -3px rgba(0, 0, 0, 0.45), 0 4px 8px -2px rgba(0, 0, 0, 0.24);
 }
 
-/* ── CSS Variables ─────────────────────────────────────────────────────── */
+/* ── Design tokens ─────────────────────────────────────────────────────── */
 :root {
+  /* Brand palette */
   --theme-primary: #1e3a8a;
   --theme-secondary: #7e22ce;
   --theme-accent: #fb923c;
-  --theme-accent-glow: rgba(251, 146, 60, 0.4);
+  --theme-accent-glow: rgba(251, 146, 60, 0.38);
 
+  /* Surfaces */
   --theme-background: #050b18;
   --theme-surface: #0d1b2e;
   --theme-surface-2: #1a2540;
 
+  /* Text */
   --theme-foreground: #f0f4ff;
   --theme-foreground-muted: #6b7fa3;
 
-  --theme-border: rgba(255, 255, 255, 0.08);
-  --theme-border-accent: rgba(251, 146, 60, 0.25);
+  /* Borders */
+  --theme-border: rgba(255, 255, 255, 0.07);
+  --theme-border-accent: rgba(251, 146, 60, 0.22);
 
-  --section-padding-y: 7rem;
-  --transition-base: all 0.3s ease-in-out;
+  /* Layout */
+  --section-padding-y: clamp(5rem, 8vw, 8rem);
+  --content-max-width: 72rem; /* 1152px — max-w-6xl */
+  --content-padding-x: 1.5rem; /* px-6    */
+
+  /* Transitions */
+  --transition-fast: all 0.2s ease;
+  --transition-base: all 0.35s ease;
+  --transition-slow: all 0.6s ease;
+
+  /* Typography scale (fluid) */
+  --text-display: clamp(3.5rem, 10vw, 8rem);
+  --text-h1: clamp(2.4rem, 5.5vw, 4rem);
+  --text-h2: clamp(2rem, 4vw, 3rem);
+  --text-h3: clamp(1.2rem, 2vw, 1.5rem);
+  --text-body-lg: 1rem;
+  --text-body: 0.875rem;
+  --text-sm: 0.8rem;
+  --text-xs: 0.72rem;
+  --text-2xs: 0.62rem;
+  --text-label: 0.57rem;
+  --text-micro: 0.5rem;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -78,6 +105,9 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent layout shift from scrollbar appearing */
+  scrollbar-gutter: stable;
 }
 
 h1,
@@ -87,10 +117,50 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
-/* ── Glassmorphism utility ─────────────────────────────────────────────── */
+p {
+  line-height: 1.75;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Focus visible — accessibility ────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(251, 146, 60, 0.7);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Selection ─────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(251, 146, 60, 0.28);
+  color: #f0f4ff;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--theme-background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(251, 146, 60, 0.35);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 146, 60, 0.6);
+}
+
+/* ── Glass utilities ───────────────────────────────────────────────────── */
 .glass {
   background: rgba(13, 27, 46, 0.55);
   backdrop-filter: blur(16px);
@@ -103,23 +173,31 @@ h6 {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--theme-border-accent);
-  box-shadow: 0 0 30px rgba(251, 146, 60, 0.06);
+  box-shadow: 0 0 30px rgba(251, 146, 60, 0.05);
 }
 
 /* ── Glow utilities ────────────────────────────────────────────────────── */
 .glow-accent {
   box-shadow:
-    0 0 20px rgba(251, 146, 60, 0.3),
-    0 0 60px rgba(251, 146, 60, 0.1);
+    0 0 20px rgba(251, 146, 60, 0.28),
+    0 0 60px rgba(251, 146, 60, 0.08);
 }
 
 .glow-text-accent {
   text-shadow:
-    0 0 20px rgba(251, 146, 60, 0.6),
-    0 0 40px rgba(251, 146, 60, 0.3);
+    0 0 20px rgba(251, 146, 60, 0.55),
+    0 0 40px rgba(251, 146, 60, 0.25);
 }
 
-/* ── Scan-line overlay (atmospheric) ─────────────────────────────────── */
+/* ── Gradient text utility ─────────────────────────────────────────────── */
+.gradient-text-accent {
+  background: linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Scanlines overlay ─────────────────────────────────────────────────── */
 .scanlines::after {
   content: "";
   position: absolute;
@@ -128,33 +206,16 @@ h6 {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
+    rgba(0, 0, 0, 0.025) 2px,
+    rgba(0, 0, 0, 0.025) 4px
   );
   pointer-events: none;
   z-index: 1;
 }
 
-/* ── Scrollbar ─────────────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: var(--theme-background);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(251, 146, 60, 0.4);
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(251, 146, 60, 0.7);
-}
-
+/* ── Custom cursor (desktop pointer devices only) ──────────────────────── */
 @media (pointer: fine) {
-  body {
-    cursor: none;
-  }
-
+  body,
   a,
   button,
   [role="button"],
@@ -162,5 +223,28 @@ h6 {
   select,
   textarea {
     cursor: none;
+  }
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Print ─────────────────────────────────────────────────────────────── */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .no-print {
+    display: none !important;
   }
 }
