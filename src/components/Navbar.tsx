@@ -24,10 +24,9 @@ const NavTick = ({ color }: { color: string }) => (
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpenPath, setMenuOpenPath] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
-  const menuOpen = menuOpenPath === location.pathname;
 
   const handleScroll = useCallback(() => {
     const sy = window.scrollY;
@@ -40,6 +39,10 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
 
   // Lock body scroll when mobile menu open
   useEffect(() => {
@@ -205,9 +208,7 @@ const Navbar = () => {
 
             {/* Hamburger — mobile */}
             <button
-              onClick={() =>
-                setMenuOpenPath((p) => (p === location.pathname ? null : location.pathname))
-              }
+              onClick={() => setMenuOpen((v) => !v)}
               className="lg:hidden relative w-10 h-10 flex items-center justify-center text-foreground-muted hover:text-accent transition-colors duration-200"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
@@ -273,7 +274,7 @@ const Navbar = () => {
 
             {/* Top bar (mirrors header height) */}
             <div className="h-16 flex items-center px-6 flex-shrink-0">
-              <Link to="/" className="flex items-center gap-3 select-none" onClick={() => setMenuOpenPath(null)}>
+              <Link to="/" className="flex items-center gap-3 select-none" onClick={() => setMenuOpen(false)}>
                 <img src="/logo-278x262-removebg.png" alt="XR Summits" className="w-8 h-8 object-contain" />
                 <span className="font-heading font-bold tracking-[0.28em] text-foreground" style={{ fontSize: '0.78rem' }}>
                   XR SUMMITS
@@ -337,7 +338,7 @@ const Navbar = () => {
               </p>
               <a
                 href="#tickets"
-                onClick={() => setMenuOpenPath(null)}
+                onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-3 w-full py-4 font-bold tracking-[0.2em] uppercase text-[0.78rem] text-background transition-all duration-300 rounded-sm"
                 style={{
                   background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',

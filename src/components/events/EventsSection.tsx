@@ -7,7 +7,7 @@ import PastEventCard from './PastEventCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Upcoming events data ───────────────────────────────────────────────────
+// ── Data ───────────────────────────────────────────────────────────────────
 const UPCOMING_EVENTS = [
   {
     title: '4th XR Asia Summit 2026',
@@ -15,7 +15,7 @@ const UPCOMING_EVENTS = [
     date: 'TBC 2026',
     location: 'Kuala Lumpur, MY',
     description:
-      'The fourth edition of Asia\'s premier XR event. Bigger keynotes, deeper workshops, and the most ambitious immersive showcase yet.',
+      "The fourth edition of Asia's premier XR event. Bigger keynotes, deeper workshops, and the most ambitious immersive showcase yet.",
     accentColor: '#fb923c',
     tag: 'Flagship',
     to: '/xr-summit',
@@ -40,7 +40,7 @@ const UPCOMING_EVENTS = [
     date: 'Nov 2025',
     location: 'Tokyo, JP',
     description:
-      'The world\'s leading conference and exhibition on computer graphics, interactive techniques, and immersive experiences.',
+      "The world's leading conference on computer graphics, interactive techniques, and immersive experiences.",
     accentColor: '#4ade80',
     tag: 'Partner',
     isFeatured: false,
@@ -51,7 +51,7 @@ const UPCOMING_EVENTS = [
     date: 'TBC 2026',
     location: 'Asia Pacific',
     description:
-      'Augmented World Expo — the world\'s largest XR industry event returns to Asia with cutting-edge AR/VR showcases.',
+      "Augmented World Expo — the world's largest XR industry event returns to Asia with cutting-edge AR/VR showcases.",
     accentColor: '#a78bfa',
     tag: 'Partner',
     isFeatured: false,
@@ -62,14 +62,13 @@ const UPCOMING_EVENTS = [
     date: 'TBC 2026',
     location: 'Singapore, SG',
     description:
-      'Asia\'s premier broadcast and media technology show, featuring immersive production and spatial media tracks.',
+      "Asia's premier broadcast and media technology show, featuring immersive production and spatial media tracks.",
     accentColor: '#f472b6',
     tag: 'Partner',
     isFeatured: false,
   },
 ];
 
-// ── Past events data ────────────────────────────────────────────────────────
 const PAST_EVENTS = [
   {
     year: '2023',
@@ -77,7 +76,7 @@ const PAST_EVENTS = [
     attendees: '300+',
     speakers: '35+',
     highlight:
-      'Third edition brought together Southeast Asia\'s largest gathering of XR professionals with live metaverse demos and enterprise case studies.',
+      "Third edition brought together Southeast Asia's largest gathering of XR professionals with live metaverse demos and enterprise case studies.",
     imageSrc: '/xr-asia-summit-2023.jpeg',
     accentColor: '#fb923c',
   },
@@ -87,7 +86,7 @@ const PAST_EVENTS = [
     attendees: '250+',
     speakers: '30+',
     highlight:
-      'Landmark edition featuring the first-ever XR × Sports track and the Broadcast Digital Awards ceremony recognising Asia\'s innovators.',
+      "Landmark edition featuring the first-ever XR × Sports track and the Broadcast Digital Awards ceremony recognising Asia's innovators.",
     imageSrc: '/xr-asia-summit-2022.jpeg',
     accentColor: '#22d3ee',
   },
@@ -113,14 +112,23 @@ const PAST_EVENTS = [
   },
 ];
 
-// ── Section label component ────────────────────────────────────────────────
-const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex items-center gap-4 mb-14">
-    <span className="w-6 h-px bg-accent/60" />
-    <span className="text-[0.6rem] font-bold tracking-[0.5em] uppercase text-accent/80">
+// ── Section eyebrow (konsisten dengan AboutSection) ────────────────────────
+const SectionEyebrow = ({ children }: { children: React.ReactNode }) => (
+  <motion.div
+    initial={{ opacity: 0, x: -16 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, amount: 0.6 }}
+    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    className="flex items-center gap-3 mb-10"
+  >
+    <span className="w-5 h-px" style={{ background: 'rgba(251,146,60,0.55)' }} aria-hidden="true" />
+    <span
+      className="font-bold tracking-[0.52em] uppercase"
+      style={{ fontSize: '0.57rem', color: 'rgba(251,146,60,0.72)' }}
+    >
       {children}
     </span>
-  </div>
+  </motion.div>
 );
 
 // ── Main component ─────────────────────────────────────────────────────────
@@ -130,19 +138,17 @@ const EventsSection = () => {
   const pastHeadRef = useRef<HTMLHeadingElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  // Heading reveals
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Heading reveals
       [headingRef, pastHeadRef].forEach((ref) => {
         if (!ref.current) return;
         gsap.fromTo(
           ref.current,
-          { y: 50, opacity: 0 },
+          { y: 44, opacity: 0 },
           {
-            y: 0,
-            opacity: 1,
-            duration: 0.9,
-            ease: 'power3.out',
+            y: 0, opacity: 1,
+            duration: 0.95, ease: 'power3.out',
             scrollTrigger: {
               trigger: ref.current,
               start: 'top 82%',
@@ -152,16 +158,16 @@ const EventsSection = () => {
         );
       });
 
-      // Subtle marquee-like horizontal scroll on the award image row
+      // Award banner parallax
       if (marqueeRef.current) {
         gsap.to(marqueeRef.current, {
-          x: '-8%',
+          x: '-6%',
           ease: 'none',
           scrollTrigger: {
             trigger: marqueeRef.current,
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 2,
+            scrub: 2.5,
           },
         });
       }
@@ -170,7 +176,6 @@ const EventsSection = () => {
     return () => ctx.revert();
   }, []);
 
-  // Split upcoming: 1 featured + 2 rows of 2
   const featured = UPCOMING_EVENTS[0];
   const secondary = UPCOMING_EVENTS.slice(1, 3);
   const tertiary = UPCOMING_EVENTS.slice(3);
@@ -182,22 +187,22 @@ const EventsSection = () => {
       className="relative w-full bg-background overflow-hidden"
       style={{ paddingTop: 'var(--section-padding-y)', paddingBottom: 'var(--section-padding-y)' }}
     >
-      {/* ── Atmospheric background ── */}
+      {/* ── Atmospheric bg ── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="absolute top-0 right-0 w-[700px] h-[700px] opacity-[0.05] rounded-full"
-          style={{ background: 'radial-gradient(circle, #fb923c 0%, transparent 70%)' }}
+          className="absolute top-0 right-0 w-[650px] h-[650px] opacity-[0.045] rounded-full"
+          style={{ background: 'radial-gradient(circle, #fb923c 0%, transparent 68%)' }}
         />
         <div
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-[0.05] rounded-full"
-          style={{ background: 'radial-gradient(circle, #22d3ee 0%, transparent 70%)' }}
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-[0.04] rounded-full"
+          style={{ background: 'radial-gradient(circle, #22d3ee 0%, transparent 68%)' }}
         />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
 
-        {/* ══ UPCOMING EVENTS ════════════════════════════════════════════ */}
-        <SectionLabel>Upcoming Events</SectionLabel>
+        {/* ══ UPCOMING ═══════════════════════════════════════════════════ */}
+        <SectionEyebrow>Upcoming Events</SectionEyebrow>
 
         <h2
           ref={headingRef}
@@ -207,7 +212,7 @@ const EventsSection = () => {
           Event{' '}
           <span
             style={{
-              background: 'linear-gradient(135deg, #fb923c 0%, #f0f4ff 80%)',
+              background: 'linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -217,20 +222,20 @@ const EventsSection = () => {
           </span>
         </h2>
 
-        {/* Featured + two secondary */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+        {/* Featured 2/3 + secondary stack 1/3 */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3">
           <div className="lg:col-span-2">
             <SpotlightCard index={0} {...featured} />
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {secondary.map((ev, i) => (
               <SpotlightCard key={ev.title} index={i + 1} {...ev} />
             ))}
           </div>
         </div>
 
-        {/* Two tertiary */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-28">
+        {/* Tertiary row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-28">
           {tertiary.map((ev, i) => (
             <SpotlightCard key={ev.title} index={i + 3} {...ev} />
           ))}
@@ -238,53 +243,75 @@ const EventsSection = () => {
 
         {/* ══ AWARD BANNER ═══════════════════════════════════════════════ */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="relative rounded-xl overflow-hidden mb-28"
           style={{
-            background: 'rgba(13,27,46,0.7)',
-            border: '1px solid rgba(251,146,60,0.2)',
-            boxShadow: '0 0 60px rgba(251,146,60,0.06)',
+            background: 'rgba(13,27,46,0.75)',
+            border: '1px solid rgba(251,146,60,0.18)',
+            boxShadow: '0 0 60px rgba(251,146,60,0.05)',
           }}
         >
+          {/* Parallax image behind */}
           <div className="absolute inset-0 overflow-hidden">
-            <div ref={marqueeRef} className="flex items-center h-full w-[110%]">
+            <div ref={marqueeRef} className="flex items-center h-full w-[112%]">
               <img
                 src="/award-1600x329-removebg-preview.png"
-                alt="XR Summits Award"
-                className="w-full object-contain opacity-20"
+                alt=""
+                className="w-full object-contain opacity-[0.12]"
                 loading="lazy"
+                aria-hidden="true"
                 onError={(e) => { e.currentTarget.style.display = 'none'; }}
               />
             </div>
           </div>
+
+          {/* Top accent line */}
+          <div
+            className="absolute top-0 left-0 right-0 h-[1.5px]"
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.6) 40%, rgba(251,146,60,0.6) 60%, transparent)',
+            }}
+            aria-hidden="true"
+          />
+
           <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 px-10 py-10">
             <div className="flex flex-col gap-2 text-center sm:text-left">
-              <p className="text-[0.6rem] font-bold tracking-[0.4em] uppercase text-accent/80">
+              <p
+                className="font-bold tracking-[0.45em] uppercase"
+                style={{ fontSize: '0.57rem', color: 'rgba(251,146,60,0.72)' }}
+              >
                 Industry Recognition
               </p>
-              <h3 className="font-heading text-xl font-bold text-foreground">
+              <h3
+                className="font-heading font-bold text-foreground"
+                style={{ fontSize: '1.2rem' }}
+              >
                 Award-Winning Event Series
               </h3>
-              <p className="text-sm text-foreground-muted max-w-md">
+              <p
+                className="max-w-md leading-relaxed"
+                style={{ fontSize: '0.8rem', color: 'rgba(107,127,163,0.85)' }}
+              >
                 Recognised by leading industry bodies for advancing immersive technology adoption across Asia.
               </p>
             </div>
             <img
               src="/award-1600x329-removebg-preview.png"
               alt="Award logo"
-              className="h-14 w-auto object-contain flex-shrink-0"
+              className="h-12 w-auto object-contain flex-shrink-0 opacity-80"
               loading="lazy"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}
             />
           </div>
         </motion.div>
 
-        {/* ══ PAST EVENTS ═════════════════════════════════════════════════ */}
-        <SectionLabel>Track Record</SectionLabel>
+        {/* ══ PAST EVENTS ════════════════════════════════════════════════ */}
+        <SectionEyebrow>Track Record</SectionEyebrow>
 
+        {/* Past heading + timeline */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <h2
             ref={pastHeadRef}
@@ -294,7 +321,7 @@ const EventsSection = () => {
             Past{' '}
             <span
               style={{
-                background: 'linear-gradient(135deg, #22d3ee 0%, #f0f4ff 80%)',
+                background: 'linear-gradient(130deg, #22d3ee 0%, #f0f4ff 85%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -305,24 +332,27 @@ const EventsSection = () => {
           </h2>
 
           {/* Timeline decoration */}
-          <div className="hidden sm:flex items-center gap-2 pb-1">
+          <div className="hidden sm:flex items-center gap-0 pb-1" aria-hidden="true">
             {['2021', '2022', '2023', '2026'].map((yr, i, arr) => (
-              <div key={yr} className="flex items-center gap-2">
+              <div key={yr} className="flex items-center gap-0">
                 <span
-                  className="text-[0.6rem] font-heading font-bold tracking-widest"
-                  style={{ color: i === arr.length - 1 ? '#fb923c' : '#6b7fa3' }}
+                  className="font-heading font-bold tracking-widest px-2"
+                  style={{
+                    fontSize: '0.6rem',
+                    color: i === arr.length - 1 ? '#fb923c' : 'rgba(107,127,163,0.4)',
+                  }}
                 >
                   {yr}
                 </span>
                 {i < arr.length - 1 && (
-                  <div className="w-6 h-px bg-border" />
+                  <div className="w-8 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
                 )}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {PAST_EVENTS.map((ev, i) => (
             <PastEventCard key={`${ev.year}-${ev.title}`} index={i} {...ev} />
           ))}
