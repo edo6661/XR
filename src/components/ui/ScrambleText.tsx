@@ -1,56 +1,54 @@
-import { useState, useEffect } from 'react';
+// src/components/ui/ScrambleText.tsx
+import { useRef, useEffect } from 'react';
 
-interface ScrambleTextProps {
-  text: string;
-}
-
-// Karakter acak yang akan berkedip saat hover
 const CHARS = '!<>-_\\/[]{}—=+*^?#010101';
 
-const ScrambleText = ({ text }: ScrambleTextProps) => {
-  const [displayText, setDisplayText] = useState(text);
-  const [isHovered, setIsHovered] = useState(false);
+const ScrambleText = ({ text }: { text: string }) => {
+  const textRef = useRef<HTMLSpanElement>(null);
+  const intervalRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (!isHovered) return;
-
+  const handleMouseEnter = () => {
+    if (!textRef.current) return;
     let iteration = 0;
-    const interval = setInterval(() => {
-      setDisplayText(
-        text
-          .split('')
-          .map((_, index) => {
-            // Jika iterasi sudah melewati index karakter ini, tampilkan huruf asli
-            if (index < iteration) {
-              return text[index];
-            }
-            // Jika belum, tampilkan karakter acak
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join('')
-      );
 
-      // Kecepatan dekripsi (semakin besar angkanya, semakin cepat selesai)
+    // Bersihkan interval sebelumnya jika ada
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    intervalRef.current = window.setInterval(() => {
+      // Mutasi DOM langsung, TANPA trigger React re-render
+      textRef.current!.textContent = text
+        .split('')
+        .map((_, index) => {
+          if (index < iteration) return text[index];
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        })
+        .join('');
+
       iteration += 1 / 2.5;
 
-      if (iteration >= text.length) {
-        clearInterval(interval);
-      }
-    }, 30); // Berjalan setiap 30ms
+      if (iteration >= text.length) clearInterval(intervalRef.current!);
+    }, 30);
+  };
 
-    return () => clearInterval(interval);
-  }, [isHovered, text]);
+  const handleMouseLeave = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    if (textRef.current) textRef.current.textContent = text; // Kembalikan ke teks asli
+  };
+
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <span
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setDisplayText(text);
-      }}
+      ref={textRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="inline-block whitespace-nowrap"
     >
-      {displayText}
+      {text}
     </span>
   );
 };
