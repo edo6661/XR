@@ -29,8 +29,6 @@ const PillarCard = ({
         ? `linear-gradient(148deg, rgba(22,38,62,0.88) 0%, rgba(13,27,46,0.75) 100%)`
         : 'rgba(9, 18, 34, 0.52)',
       border: `1px solid ${isFeatured ? `${accentColor}22` : 'rgba(255,255,255,0.042)'}`,
-      backdropFilter: 'blur(12px)',
-      WebkitBackdropFilter: 'blur(12px)',
       transition: 'border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease',
     }}
     whileHover={{ y: -4 }}

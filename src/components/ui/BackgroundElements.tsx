@@ -1,5 +1,4 @@
-// src/components/ui/BackgroundElements.tsx
-import { useEffect, useRef, type RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,12 +11,8 @@ const BackgroundElements = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Parallax Scroll Animasi
-      const createParallax = (ref: RefObject<HTMLDivElement | null>, yValue: number) => {
-        const element = ref.current;
-        if (!element) return;
-
-        gsap.to(element, {
+      const createParallax = (ref: React.RefObject<HTMLDivElement | null>, yValue: number) => {
+        gsap.to(ref.current, {
           y: yValue,
           ease: "none",
           scrollTrigger: {
@@ -33,7 +28,6 @@ const BackgroundElements = () => {
       createParallax(orb2Ref, 250);
       createParallax(orb3Ref, -480);
 
-      // 2. Idle Floating Animasi (menggantikan Framer Motion repeat/yoyo)
       gsap.to(orb1Ref.current, { scale: 1.08, duration: 9, repeat: -1, yoyo: true, ease: "sine.inOut" });
       gsap.to(orb2Ref.current, { scale: 1.12, duration: 11, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 1.5 });
       gsap.to(orb3Ref.current, { scale: 1.1, x: -30, duration: 7, repeat: -1, yoyo: true, ease: "sine.inOut", delay: 3 });
@@ -44,12 +38,11 @@ const BackgroundElements = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[0] overflow-hidden" aria-hidden="true">
-      {/* Orb 1 */}
+      {/* Orb 1 - HAPUS filter: blur, mainkan alpha langsung di hex color gradient */}
       <div ref={orb1Ref} className="absolute rounded-full will-change-transform">
         <div style={{
           position: 'absolute', top: '8%', right: '-8%', width: '480px', height: '480px',
-          borderRadius: '50%', background: 'radial-gradient(circle, rgba(251,146,60,1) 0%, transparent 68%)',
-          opacity: 0.04, filter: 'blur(60px)',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(251,146,60,0.06) 0%, transparent 70%)',
         }} />
       </div>
 
@@ -57,8 +50,7 @@ const BackgroundElements = () => {
       <div ref={orb2Ref} className="absolute rounded-full will-change-transform">
         <div style={{
           position: 'absolute', top: '42%', left: '-10%', width: '560px', height: '560px',
-          borderRadius: '50%', background: 'radial-gradient(circle, rgba(34,211,238,1) 0%, transparent 68%)',
-          opacity: 0.035, filter: 'blur(80px)',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(34,211,238,0.05) 0%, transparent 70%)',
         }} />
       </div>
 
@@ -66,8 +58,7 @@ const BackgroundElements = () => {
       <div ref={orb3Ref} className="absolute rounded-full will-change-transform">
         <div style={{
           position: 'absolute', top: '72%', right: '2%', width: '400px', height: '400px',
-          borderRadius: '50%', background: 'radial-gradient(circle, rgba(126,34,206,1) 0%, rgba(30,58,138,1) 60%, transparent 100%)',
-          opacity: 0.045, filter: 'blur(70px)',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(126,34,206,0.06) 0%, rgba(30,58,138,0.04) 60%, transparent 100%)',
         }} />
       </div>
     </div>

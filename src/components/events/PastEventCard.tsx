@@ -30,8 +30,6 @@ const PastEventCard = ({
     style={{
       background: 'rgba(10, 20, 36, 0.6)',
       border: '1px solid rgba(255,255,255,0.055)',
-      backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)',
       transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
     }}
     onMouseEnter={(e) => {

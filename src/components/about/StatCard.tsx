@@ -26,8 +26,6 @@ const StatCard = ({
         padding: '1.75rem',
         background: 'rgba(10, 20, 38, 0.6)',
         border: '1px solid rgba(255,255,255,0.048)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
         transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
       }}
       onMouseEnter={(e) => {
