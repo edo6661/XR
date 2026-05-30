@@ -17,36 +17,58 @@ const StatCard = ({
   accentColor = '#fb923c',
   index = 0,
 }: StatCardProps) => {
-  const countRef = useCountUp(value, suffix, 2.2);
+  const countRef = useCountUp(value, suffix, 2.0);
 
   return (
     <div
-      className="group relative flex flex-col gap-3 px-7 py-7 rounded-xl overflow-hidden"
+      className="group relative flex flex-col gap-4 rounded-xl overflow-hidden"
       style={{
-        background: 'rgba(13, 27, 46, 0.55)',
-        border: '1px solid rgba(255,255,255,0.055)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
+        padding: '1.75rem',
+        background: 'rgba(10, 20, 38, 0.6)',
+        border: '1px solid rgba(255,255,255,0.048)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = `${accentColor}30`;
-        el.style.boxShadow = `0 0 40px ${accentColor}0e, 0 20px 48px rgba(0,0,0,0.3)`;
+        el.style.borderColor = `${accentColor}28`;
+        el.style.boxShadow = `0 0 48px ${accentColor}0a, 0 20px 48px rgba(0,0,0,0.32)`;
+        el.style.transform = 'translateY(-3px)';
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = 'rgba(255,255,255,0.055)';
+        el.style.borderColor = 'rgba(255,255,255,0.048)';
         el.style.boxShadow = 'none';
+        el.style.transform = 'translateY(0)';
       }}
     >
-      {/* Index number — background watermark */}
+      {/* Top gradient line */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[1px]"
+        style={{
+          background: `linear-gradient(90deg, transparent 0%, ${accentColor}70 30%, ${accentColor}70 70%, transparent 100%)`,
+          opacity: 0.6,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle corner accent */}
+      <div
+        className="absolute top-0 left-0 w-16 h-16 pointer-events-none opacity-40"
+        style={{
+          background: `radial-gradient(circle at top left, ${accentColor}18 0%, transparent 68%)`,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Index watermark */}
       <span
         className="absolute top-4 right-5 font-heading font-black pointer-events-none select-none"
         style={{
-          fontSize: '4.5rem',
+          fontSize: '5rem',
           lineHeight: 1,
-          color: `${accentColor}07`,
+          color: `${accentColor}06`,
           letterSpacing: '-0.02em',
         }}
         aria-hidden="true"
@@ -54,24 +76,14 @@ const StatCard = ({
         {String(index + 1).padStart(2, '0')}
       </span>
 
-      {/* Accent top line — full width, gradient */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[1.5px]"
-        style={{
-          background: `linear-gradient(90deg, ${accentColor}00, ${accentColor}80 40%, ${accentColor}80 60%, ${accentColor}00)`,
-          boxShadow: `0 0 10px ${accentColor}40`,
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Value */}
-      <div className="flex items-end gap-1">
+      {/* Value display */}
+      <div>
         <span
           ref={countRef}
-          className="font-heading font-black leading-none"
+          className="font-heading font-black leading-none block"
           style={{
-            fontSize: 'clamp(2.8rem, 6vw, 4rem)',
-            background: `linear-gradient(135deg, ${accentColor} 0%, #f0f4ff 100%)`,
+            fontSize: 'clamp(3rem, 6vw, 4.2rem)',
+            background: `linear-gradient(140deg, ${accentColor} 0%, #f0f4ff 85%)`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -83,22 +95,22 @@ const StatCard = ({
 
       {/* Divider */}
       <div
-        className="w-8 h-px"
-        style={{ background: `${accentColor}40` }}
+        className="w-10 h-px transition-all duration-500 group-hover:w-16"
+        style={{ background: `${accentColor}38` }}
         aria-hidden="true"
       />
 
-      {/* Label + sublabel */}
+      {/* Labels */}
       <div className="flex flex-col gap-1">
         <span
-          className="font-heading font-bold tracking-[0.18em] uppercase"
-          style={{ fontSize: '0.72rem', color: '#f0f4ff' }}
+          className="font-heading font-bold tracking-[0.2em] uppercase text-foreground"
+          style={{ fontSize: '0.7rem' }}
         >
           {label}
         </span>
         <span
-          className="tracking-wide leading-snug"
-          style={{ fontSize: '0.68rem', color: 'rgba(107,127,163,0.8)' }}
+          className="tracking-wide leading-relaxed"
+          style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.75)' }}
         >
           {sublabel}
         </span>

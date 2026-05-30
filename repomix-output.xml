@@ -1,118 +1,4 @@
-This file is a merged representation of the entire codebase, combined into a single document by Repomix.
-
-<file_summary>
-This section contains a summary of this file.
-
-<purpose>
-This file contains a packed representation of the entire repository's contents.
-It is designed to be easily consumable by AI systems for analysis, code review,
-or other automated processes.
-</purpose>
-
-<file_format>
-The content is organized as follows:
-1. This summary section
-2. Repository information
-3. Directory structure
-4. Repository files (if enabled)
-5. Multiple file entries, each consisting of:
-  - File path as an attribute
-  - Full contents of the file
-</file_format>
-
-<usage_guidelines>
-- This file should be treated as read-only. Any changes should be made to the
-  original repository files, not this packed version.
-- When processing this file, use the file path to distinguish
-  between different files in the repository.
-- Be aware that this file may contain sensitive information. Handle it with
-  the same level of security as you would the original repository.
-</usage_guidelines>
-
-<notes>
-- Some files may have been excluded based on .gitignore rules and Repomix's configuration
-- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
-- Files matching patterns in .gitignore are excluded
-- Files matching default ignore patterns are excluded
-- Files are sorted by Git change count (files with more changes are at the bottom)
-</notes>
-
-</file_summary>
-
-<directory_structure>
-.gitignore
-eslint.config.js
-index.html
-package.json
-public/award-1600x329-removebg-preview.png
-public/award-1600x329.jpeg
-public/broadcast-digital-award-2022.jpeg
-public/favicon/android-chrome-192x192.png
-public/favicon/android-chrome-512x512.png
-public/favicon/apple-touch-icon.png
-public/favicon/favicon-16x16.png
-public/favicon/favicon-32x32.png
-public/favicon/favicon.ico
-public/favicon/site.webmanifest
-public/logo-278x262-removebg.png
-public/logo-278x262.jpeg
-public/robots.txt
-public/sitemap.xml
-public/XR_SUMMITS_Advertorial_200x130mm_300dpi.pdf
-public/xr-asia-summit-2021.jpeg
-public/xr-asia-summit-2022.jpeg
-public/xr-asia-summit-2023.jpeg
-public/xr-asia-summit-4th-coming-soon.png
-src/App.tsx
-src/components/about/AboutSection.tsx
-src/components/about/PillarCard.tsx
-src/components/about/StatCard.tsx
-src/components/events/EventsSection.tsx
-src/components/events/PastEventCard.tsx
-src/components/events/SpotlightCard.tsx
-src/components/Footer.tsx
-src/components/hero/GatewayCard.tsx
-src/components/hero/HeroLogo.tsx
-src/components/hero/HeroSection.tsx
-src/components/hero/ParticleCanvas.tsx
-src/components/Layout.tsx
-src/components/Navbar.tsx
-src/components/speakers/SpeakersSection.tsx
-src/components/sponsors/SponsorsSection.tsx
-src/components/tickets/TicketsSection.tsx
-src/components/ui/BackgroundElements.tsx
-src/components/ui/CustomCursor.tsx
-src/components/ui/DemoPlaceholder.tsx
-src/components/ui/FilmGrain.tsx
-src/components/ui/FocusReveal.tsx
-src/components/ui/HolographicImage.tsx
-src/components/ui/MagneticWrapper.tsx
-src/components/ui/Preloader.tsx
-src/components/ui/ScrambleText.tsx
-src/components/ui/ScrollMarquee.tsx
-src/components/ui/ScrollProgress.tsx
-src/components/ui/SectionEyebrow.tsx
-src/components/ui/SplitTextReveal.tsx
-src/components/ui/TracerBorder.tsx
-src/hooks/useScrollAnimations.ts
-src/i18n.ts
-src/index.css
-src/lib/lenisInstance.ts
-src/main.tsx
-src/pages/AboutPage.tsx
-src/pages/AwardsGalaPage.tsx
-src/pages/ContactPage.tsx
-src/pages/Home.tsx
-src/pages/MothershipPage.tsx
-tsconfig.app.json
-tsconfig.json
-tsconfig.node.json
-vite.config.ts
-</directory_structure>
-
-<files>
-This section contains the contents of the repository's files.
-
+tolong ingat kode ini, nanti saya minta bantuan terkait kode ini:
 <file path=".gitignore">
 # Logs
 logs
@@ -5188,89 +5074,6 @@ const DemoPlaceholder = ({
 export default DemoPlaceholder;
 </file>
 
-<file path="src/App.tsx">
-import { Suspense, lazy, useState, useCallback } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import { Analytics } from '@vercel/analytics/react';
-import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion';
-import Layout from './components/Layout';
-import Preloader from './components/ui/Preloader';
-
-// ── Pages (lazy) ───────────────────────────────────────────────────────────
-const Home = lazy(() => import('./pages/Home'));
-const MothershipPage = lazy(() => import('./pages/MothershipPage'));
-const AwardsGalaPage = lazy(() => import('./pages/AwardsGalaPage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
-
-// ── Page loading spinner (between lazy route loads) ────────────────────────
-const PageLoader = () => (
-  <div
-    className="min-h-screen flex items-center justify-center"
-    style={{ background: '#050b18' }}
-  >
-    <div className="relative w-12 h-12">
-      <div
-        className="absolute inset-0 rounded-full animate-spin"
-        style={{ borderTop: '1.5px solid rgba(251,146,60,0.8)', borderRight: '1.5px solid transparent' }}
-      />
-      <div
-        className="absolute inset-[4px] rounded-full animate-spin"
-        style={{
-          borderTop: '1px solid rgba(147,197,253,0.4)',
-          borderLeft: '1px solid transparent',
-          animationDirection: 'reverse',
-          animationDuration: '0.6s',
-        }}
-      />
-    </div>
-  </div>
-);
-
-// ── App ────────────────────────────────────────────────────────────────────
-const App = () => {
-  const [preloaderDone, setPreloaderDone] = useState(false);
-
-  const handlePreloaderComplete = useCallback(() => {
-    setPreloaderDone(true);
-  }, []);
-
-  return (
-    <HelmetProvider>
-      <Analytics />
-      <LazyMotion features={domAnimation}>
-
-        {/* Preloader — shown once on first load */}
-        <AnimatePresence>
-          {!preloaderDone && (
-            <Preloader onComplete={handlePreloaderComplete} />
-          )}
-        </AnimatePresence>
-
-        {/* Main app — rendered behind preloader, visible after it exits */}
-        <BrowserRouter>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="mothership" element={<MothershipPage />} />
-                <Route path="awards" element={<AwardsGalaPage />} />
-                <Route path="about" element={<AboutPage />} />
-                <Route path="contact" element={<ContactPage />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-
-      </LazyMotion>
-    </HelmetProvider>
-  );
-};
-
-export default App;
-</file>
-
 <file path="src/components/Navbar.tsx">
 import { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -5918,6 +5721,89 @@ const TicketsSection = () => {
 };
 
 export default TicketsSection;
+</file>
+
+<file path="src/App.tsx">
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
+import { LazyMotion, domAnimation } from 'framer-motion';
+import Layout from './components/Layout';
+// import Preloader from './components/ui/Preloader';
+
+// ── Pages (lazy) ───────────────────────────────────────────────────────────
+const Home = lazy(() => import('./pages/Home'));
+const MothershipPage = lazy(() => import('./pages/MothershipPage'));
+const AwardsGalaPage = lazy(() => import('./pages/AwardsGalaPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+
+// ── Page loading spinner (between lazy route loads) ────────────────────────
+const PageLoader = () => (
+  <div
+    className="min-h-screen flex items-center justify-center"
+    style={{ background: '#050b18' }}
+  >
+    <div className="relative w-12 h-12">
+      <div
+        className="absolute inset-0 rounded-full animate-spin"
+        style={{ borderTop: '1.5px solid rgba(251,146,60,0.8)', borderRight: '1.5px solid transparent' }}
+      />
+      <div
+        className="absolute inset-[4px] rounded-full animate-spin"
+        style={{
+          borderTop: '1px solid rgba(147,197,253,0.4)',
+          borderLeft: '1px solid transparent',
+          animationDirection: 'reverse',
+          animationDuration: '0.6s',
+        }}
+      />
+    </div>
+  </div>
+);
+
+// ── App ────────────────────────────────────────────────────────────────────
+const App = () => {
+  // const [preloaderDone, setPreloaderDone] = useState(false);
+
+  // const handlePreloaderComplete = useCallback(() => {
+  //   setPreloaderDone(true);
+  // }, []);
+
+  return (
+    <HelmetProvider>
+      <Analytics />
+      <LazyMotion features={domAnimation}>
+
+        {/* Preloader — shown once on first load */}
+        {/* <AnimatePresence>
+          {!preloaderDone && (
+            <Preloader onComplete={handlePreloaderComplete} />
+          )}
+        </AnimatePresence> */}
+
+        {/* Main app — rendered behind preloader, visible after it exits */}
+        <BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="mothership" element={<MothershipPage />} />
+                <Route path="awards" element={<AwardsGalaPage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="contact" element={<ContactPage />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+
+      </LazyMotion>
+    </HelmetProvider>
+  );
+};
+
+export default App;
 </file>
 
 </files>

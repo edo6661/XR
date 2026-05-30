@@ -13,7 +13,6 @@ const XRIcon = () => (
       d="M12 21V3M2.25 7.5l9.75 5.5 9.75-5.5" />
   </svg>
 );
-
 const EsportsIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -24,7 +23,6 @@ const EsportsIcon = () => (
       d="M12 3c3.5 0 6.5 2.5 7 6l-2.5 1.5-4.5-3-4.5 3L5 9c.5-3.5 3.5-6 7-6z" />
   </svg>
 );
-
 const HackathonIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -32,13 +30,11 @@ const HackathonIcon = () => (
   </svg>
 );
 
-// ── Gateway data ───────────────────────────────────────────────────────────
 const GATEWAYS = [
   {
     title: 'XR Esports',
     subtitle: 'Competitive · Immersive',
-    description:
-      'Where traditional esports collides with spatial computing. Compete, spectate, and experience gaming redefined.',
+    description: 'Where traditional esports collides with spatial computing. Compete, spectate, and experience gaming redefined.',
     to: '/xr-esports',
     accentColor: '#22d3ee',
     glowColor: '#06b6d4',
@@ -49,8 +45,7 @@ const GATEWAYS = [
   {
     title: 'XR Asia Summit',
     subtitle: '4th Edition · XRAS26',
-    description:
-      'The definitive platform where immersive tech visionaries, enterprise leaders, and XR innovators converge to shape Asia\'s future.',
+    description: "The definitive platform where immersive tech visionaries, enterprise leaders, and XR innovators converge.",
     to: '/xr-summit',
     accentColor: '#fb923c',
     glowColor: '#f97316',
@@ -61,8 +56,7 @@ const GATEWAYS = [
   {
     title: 'Hackathon',
     subtitle: '48-Hour Build Sprint',
-    description:
-      'Build the immersive future in 48 hours. AI, XR, spatial media — bring your stack and compete for real prizes.',
+    description: 'Build the immersive future in 48 hours. AI, XR, spatial media — bring your stack and compete for real prizes.',
     to: '/hackathon',
     accentColor: '#a78bfa',
     glowColor: '#7c3aed',
@@ -72,7 +66,6 @@ const GATEWAYS = [
   },
 ];
 
-// ── HeroSection ────────────────────────────────────────────────────────────
 const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
 
@@ -86,62 +79,87 @@ const HeroSection = () => {
       className="relative w-full min-h-screen flex flex-col overflow-hidden"
       aria-label="Hero"
     >
-
       {/* ── Particle background ── */}
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <ParticleCanvas />
       </div>
 
-      {/* ── Radial center vignette ── */}
+      {/* ── Deep radial vignette — more dramatic ── */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 90% 70% at 50% 38%, transparent 0%, rgba(5,11,24,0.5) 60%, rgba(5,11,24,0.97) 100%)',
+            'radial-gradient(ellipse 80% 65% at 50% 35%, transparent 0%, rgba(5,11,24,0.45) 50%, rgba(5,11,24,0.92) 80%, #050b18 100%)',
         }}
         aria-hidden="true"
       />
 
-      {/* ── Bottom section bleed ── */}
+      {/* ── Side vignettes — keep focus center ── */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-56 z-[2] pointer-events-none"
+        className="absolute inset-0 z-[1] pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.85) 60%, #050b18 100%)',
+          background:
+            'linear-gradient(90deg, rgba(5,11,24,0.55) 0%, transparent 18%, transparent 82%, rgba(5,11,24,0.55) 100%)',
         }}
         aria-hidden="true"
       />
 
-      {/* ── Subtle horizontal scan line ── */}
+      {/* ── Bottom fade ── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-64 z-[2] pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.7) 50%, #050b18 100%)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* ── Horizontal scan line — cinematic ── */}
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ delay: 1.9, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ delay: 1.7, duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
         className="absolute z-[3] pointer-events-none origin-left"
         style={{
-          top: '42%',
+          top: '40%',
           left: 0,
           right: 0,
           height: '1px',
           background:
-            'linear-gradient(90deg, transparent 0%, rgba(251,146,60,0.08) 15%, rgba(251,146,60,0.18) 50%, rgba(251,146,60,0.08) 85%, transparent 100%)',
+            'linear-gradient(90deg, transparent 0%, rgba(251,146,60,0.07) 10%, rgba(251,146,60,0.15) 50%, rgba(251,146,60,0.07) 90%, transparent 100%)',
         }}
         aria-hidden="true"
       />
 
-      {/* ── Corner coordinate labels ── */}
+      {/* ── Top-left grid tick marks ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8, duration: 1 }}
+        className="absolute top-0 left-0 z-[4] pointer-events-none hidden lg:block"
+        aria-hidden="true"
+      >
+        {/* Vertical line */}
+        <div className="absolute top-20 left-12 w-px h-16" style={{ background: 'rgba(107,127,163,0.12)' }} />
+        {/* Horizontal line */}
+        <div className="absolute top-20 left-12 h-px w-16" style={{ background: 'rgba(107,127,163,0.12)' }} />
+        {/* Corner dot */}
+        <div className="absolute top-[79px] left-[47px] w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.35)' }} />
+      </motion.div>
+
+      {/* ── Corner labels ── */}
       {[
-        { corner: 'top-20 left-6', text: '03°08′N / 101°41′E', align: 'left' },
-        { corner: 'top-20 right-6', text: 'XRAS26 · KUL', align: 'right' },
-        { corner: 'bottom-16 left-6', text: 'Spatial · AI · XR', align: 'left' },
-        { corner: 'bottom-16 right-6', text: '© 2026 XR Summits', align: 'right' },
-      ].map(({ corner, text, align }) => (
+        { pos: 'top-[5.5rem] left-14', text: '03°08′N / 101°41′E' },
+        { pos: 'top-[5.5rem] right-14', text: 'XRAS26 · KUL' },
+        { pos: 'bottom-[4.5rem] left-14', text: 'Spatial · AI · XR' },
+        { pos: 'bottom-[4.5rem] right-14', text: '© 2026 XR Summits' },
+      ].map(({ pos, text }) => (
         <motion.span
           key={text}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.1, duration: 1 }}
-          className={`absolute z-[4] hidden lg:block font-mono text-[0.46rem] tracking-[0.3em] uppercase pointer-events-none ${corner}`}
-          style={{ color: 'rgba(107,127,163,0.3)', textAlign: align as 'left' | 'right' }}
+          transition={{ delay: 2.0, duration: 1 }}
+          className={`absolute z-[4] hidden lg:block font-mono text-[0.44rem] tracking-[0.32em] uppercase pointer-events-none ${pos}`}
+          style={{ color: 'rgba(107,127,163,0.22)' }}
           aria-hidden="true"
         >
           {text}
@@ -149,22 +167,28 @@ const HeroSection = () => {
       ))}
 
       {/* ── Main content ── */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-28 pb-10 gap-12">
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-28 pb-8 gap-10">
 
         {/* Logo / wordmark */}
         <HeroLogo />
 
-        {/* Choose your experience label */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.25, duration: 0.7 }}
-          className="text-[0.6rem] font-bold tracking-[0.55em] uppercase text-center"
-          style={{ color: 'rgba(107,127,163,0.6)' }}
+        {/* Divider label */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0.7 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ delay: 1.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center gap-5"
           aria-hidden="true"
         >
-          — Choose Your Experience —
-        </motion.p>
+          <div className="h-px w-14" style={{ background: 'rgba(255,255,255,0.06)' }} />
+          <span
+            className="font-bold tracking-[0.55em] uppercase"
+            style={{ fontSize: '0.52rem', color: 'rgba(107,127,163,0.45)' }}
+          >
+            Choose Your Experience
+          </span>
+          <div className="h-px w-14" style={{ background: 'rgba(255,255,255,0.06)' }} />
+        </motion.div>
 
         {/* Gateway cards */}
         <div className="w-full max-w-5xl flex flex-col md:flex-row gap-3 items-stretch">
@@ -175,26 +199,36 @@ const HeroSection = () => {
 
         {/* Scroll cue */}
         <motion.button
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.1, duration: 0.7 }}
+          transition={{ delay: 2.2, duration: 0.8 }}
           onClick={handleScrollDown}
-          className="group flex flex-col items-center gap-2 cursor-pointer mt-2"
+          className="group flex flex-col items-center gap-2.5 cursor-pointer mt-1"
           aria-label="Scroll to About section"
         >
+          {/* Pulsing dot */}
+          <motion.div
+            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0.15, 0.5] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+            className="w-1 h-1 rounded-full"
+            style={{ background: 'rgba(251,146,60,0.6)' }}
+            aria-hidden="true"
+          />
+
           <span
-            className="text-[0.52rem] tracking-[0.5em] uppercase transition-colors duration-300 group-hover:text-accent"
-            style={{ color: 'rgba(107,127,163,0.45)' }}
+            className="font-bold tracking-[0.55em] uppercase transition-colors duration-300 group-hover:text-accent"
+            style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.4)' }}
           >
             Discover
           </span>
-          {/* Animated line */}
-          <div className="relative w-px h-9 overflow-hidden" style={{ background: 'rgba(107,127,163,0.15)' }}>
+
+          {/* Animated scroll line */}
+          <div className="relative w-px h-10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
             <motion.div
               className="absolute top-0 w-full"
-              style={{ height: '40%', background: 'rgba(251,146,60,0.7)' }}
-              animate={{ y: ['−100%', '280%'] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+              style={{ height: '45%', background: 'linear-gradient(to bottom, transparent, rgba(251,146,60,0.8), transparent)' }}
+              animate={{ y: ['-100%', '320%'] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
               aria-hidden="true"
             />
           </div>
