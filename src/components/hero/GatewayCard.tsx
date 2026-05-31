@@ -36,9 +36,9 @@ const GatewayCard = ({
 
   // Referensi untuk GSAP quickTo agar tidak membuat instance baru setiap mouse geser
   const xTo = useRef<gsap.QuickToFunc | null>(null);
-  const yTo = useRef<gsap.QuickToFunc>(null);
-  const glowXTo = useRef<gsap.QuickToFunc>(null);
-  const glowYTo = useRef<gsap.QuickToFunc>(null);
+  const yTo = useRef<gsap.QuickToFunc | null>(null);
+  const glowXTo = useRef<gsap.QuickToFunc | null>(null);
+  const glowYTo = useRef<gsap.QuickToFunc | null>(null);
 
   useEffect(() => {
     if (!cardRef.current || !glowRef.current) return;
@@ -117,8 +117,12 @@ const GatewayCard = ({
         duration: 1,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className={`relative flex-1 ${isCenter ? 'md:flex-[1.25]' : 'md:flex-[0.88]'}`}
-      style={{ perspective: '1000px' }}
+      className="relative w-full"
+      style={{
+        perspective: '1000px',
+        height: isCenter ? '370px' : '330px',
+        transition: 'height 0.4s ease'
+      }}
     >
       <Link to={to} className="block h-full cursor-none">
         <div
@@ -135,7 +139,6 @@ const GatewayCard = ({
             className="relative overflow-hidden rounded-xl h-full group"
             style={{
               border: `1px solid ${accentColor}${isCenter ? '30' : '18'}`,
-              minHeight: isCenter ? '370px' : '330px',
               transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
               boxShadow: isCenter
                 ? `0 0 48px ${accentColor}0e, 0 24px 48px rgba(0,0,0,0.35)`
@@ -151,7 +154,6 @@ const GatewayCard = ({
                   background: isCenter
                     ? `linear-gradient(155deg, rgba(22,38,62,0.94) 0%, rgba(13,27,46,0.97) 100%)`
                     : 'rgba(10, 20, 36, 0.78)',
-                  // backdropFilter telah DIHAPUS agar performa scroll tidak bottleneck 
                 }}
               >
                 {/* Top edge line */}

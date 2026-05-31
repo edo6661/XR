@@ -5,9 +5,8 @@ import EventsSection from '../components/events/EventsSection';
 import SpeakersSection from '../components/speakers/SpeakersSection';
 import SponsorsSection from '../components/sponsors/SponsorsSection';
 import TicketsSection from '../components/tickets/TicketsSection';
-
-// Import komponen Marquee yang baru dibuat
 import ScrollMarquee from '../components/ui/ScrollMarquee';
+import StackedSection from '../components/ui/StackedSection';
 
 const Home = () => (
   <>
@@ -19,15 +18,35 @@ const Home = () => (
       />
     </Helmet>
 
-    <HeroSection />
-    <AboutSection />
-    <EventsSection />
-    <SpeakersSection />
+    {/* Z-Index diatur berurutan naik, agar section di bawah merender di atas section sebelumnya */}
+    <StackedSection zIndex={10}>
+      <HeroSection />
+    </StackedSection>
 
-    <ScrollMarquee />
+    <StackedSection zIndex={20}>
+      <AboutSection />
+    </StackedSection>
 
-    <SponsorsSection />
-    <TicketsSection />
+    <StackedSection zIndex={30}>
+      <EventsSection />
+    </StackedSection>
+
+    <StackedSection zIndex={40}>
+      <SpeakersSection />
+    </StackedSection>
+
+    <StackedSection zIndex={50}>
+      <ScrollMarquee />
+    </StackedSection>
+
+    <StackedSection zIndex={60}>
+      <SponsorsSection />
+    </StackedSection>
+
+    {/* Section terakhir tidak perlu di-pin agar footer dapat muncul dengan natural */}
+    <StackedSection zIndex={70} isLast={true}>
+      <TicketsSection />
+    </StackedSection>
   </>
 );
 
