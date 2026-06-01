@@ -209,72 +209,133 @@ const HeroSection = () => {
 
         <HeroLogo />
 
-        {/* Divider label */}
+        {/* ── HoloLens HUD Interface ─────────────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, scaleX: 0.7 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ delay: 1.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-5"
-          aria-hidden="true"
+          initial={{ opacity: 0, scale: 0.93, y: 26, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ delay: 0.95, duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-6xl mx-auto mt-2 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 px-4 sm:px-8 lg:px-10 pt-5 pb-7"
+          style={{
+            boxShadow:
+              'inset 0 1px 0 0 rgba(255,255,255,0.06), inset 0 0 0 1px rgba(255,255,255,0.02), 0 30px 80px -32px rgba(0,0,0,0.65)',
+          }}
         >
-          <div className="h-px w-14" style={{ background: 'rgba(255,255,255,0.06)' }} />
-          <span
-            className="font-bold tracking-[0.55em] uppercase"
-            style={{ fontSize: '0.52rem', color: 'rgba(107,127,163,0.45)' }}
-          >
-            Choose Your Experience
-          </span>
-          <div className="h-px w-14" style={{ background: 'rgba(255,255,255,0.06)' }} />
-        </motion.div>
+          {/* Top inner sheen */}
+          <div
+            className="absolute inset-x-6 top-0 h-px pointer-events-none"
+            style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent)' }}
+            aria-hidden="true"
+          />
 
-        {/* ── Penampung 3D Orbit Carousel ── */}
-        <div
-          className="relative w-full max-w-5xl mx-auto h-[480px] perspective-1000 mt-4"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {GATEWAYS.map((g, i) => {
-            // Kalkulasi posisi elips (Orbit Trigonometri)
-            const angle = angleOffset + (i * (Math.PI * 2)) / GATEWAYS.length;
+          {/* AR corner framing brackets */}
+          {[
+            'top-3 left-3 border-t border-l',
+            'top-3 right-3 border-t border-r',
+            'bottom-3 left-3 border-b border-l',
+            'bottom-3 right-3 border-b border-r',
+          ].map((corner) => (
+            <span
+              key={corner}
+              className={`absolute w-5 h-5 rounded-sm border-white/25 ${corner}`}
+              aria-hidden="true"
+            />
+          ))}
 
-            // Jari-jari elips: responsif agar tidak overlap di mobile
-            const radiusX = typeof window !== 'undefined' && window.innerWidth < 768 ? 130 : 360;
-            const radiusZ = 220; // Kedalaman 3D
-
-            const x = Math.cos(angle) * radiusX;
-            const z = Math.sin(angle) * radiusZ;
-
-            // Normalisasi Z (-220 sampai 220) menjadi angka 0 sampai 1
-            const normalizedZ = (z + radiusZ) / (radiusZ * 2);
-
-            // Logika Ilusi Spasial
-            const scale = 0.75 + (normalizedZ * 0.25);
-            const opacity = 0.3 + (normalizedZ * 0.7);
-            const zIndex = Math.round(normalizedZ * 100);
-
-            // Tandai kartu yang sedang berada di paling depan
-            const isFront = normalizedZ > 0.85;
-
-            return (
-              <div
-                key={g.title}
-                className="absolute top-1/2 left-1/2 w-full max-w-[320px] lg:max-w-[360px] will-change-transform"
-                style={{
-                  transform: `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) scale(${scale})`,
-                  opacity,
-                  zIndex,
-                  transition: 'opacity 0.3s ease',
-                }}
+          {/* HUD top status bar */}
+          <div className="relative z-10 flex items-center justify-between gap-4 px-1 pb-4">
+            <div className="flex items-center gap-2.5">
+              <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-accent/60 animate-ping" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+              </span>
+              <span
+                className="font-bold uppercase"
+                style={{ fontSize: '0.5rem', letterSpacing: '0.4em', color: 'rgba(107,127,163,0.7)' }}
               >
-                <GatewayCard
-                  index={i}
-                  {...g}
-                  isCenter={isFront}
+                Choose Your Experience
+              </span>
+            </div>
+            <span
+              className="hidden sm:block font-mono uppercase"
+              style={{ fontSize: '0.46rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.22)' }}
+              aria-hidden="true"
+            >
+              TRK · 03°08′N 101°41′E · SYS ONLINE
+            </span>
+          </div>
+
+          {/* ── Penampung 3D Orbit Carousel ── */}
+          <div
+            className="relative w-full h-[440px] sm:h-[480px] perspective-1000"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {GATEWAYS.map((g, i) => {
+              // Kalkulasi posisi elips (Orbit Trigonometri)
+              const angle = angleOffset + (i * (Math.PI * 2)) / GATEWAYS.length;
+
+              // Jari-jari elips: responsif agar tidak overlap di mobile
+              const radiusX = typeof window !== 'undefined' && window.innerWidth < 768 ? 120 : 320;
+              const radiusZ = 220; // Kedalaman 3D
+
+              const x = Math.cos(angle) * radiusX;
+              const z = Math.sin(angle) * radiusZ;
+
+              // Normalisasi Z (-220 sampai 220) menjadi angka 0 sampai 1
+              const normalizedZ = (z + radiusZ) / (radiusZ * 2);
+
+              // Logika Ilusi Spasial
+              const scale = 0.75 + (normalizedZ * 0.25);
+              const opacity = 0.3 + (normalizedZ * 0.7);
+              const zIndex = Math.round(normalizedZ * 100);
+
+              // Tandai kartu yang sedang berada di paling depan
+              const isFront = normalizedZ > 0.85;
+
+              return (
+                <div
+                  key={g.title}
+                  className="absolute top-1/2 left-1/2 w-full max-w-[300px] lg:max-w-[340px] will-change-transform"
+                  style={{
+                    transform: `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) scale(${scale})`,
+                    opacity,
+                    zIndex,
+                    transition: 'opacity 0.3s ease',
+                  }}
+                >
+                  <GatewayCard
+                    index={i}
+                    {...g}
+                    isCenter={isFront}
+                  />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* HUD bottom status bar */}
+          <div className="relative z-10 mt-5 flex items-center justify-between gap-4 px-1">
+            <span
+              className="font-mono uppercase"
+              style={{ fontSize: '0.46rem', letterSpacing: '0.3em', color: 'rgba(255,255,255,0.2)' }}
+              aria-hidden="true"
+            >
+              // HOLO-INTERFACE · v2.6
+            </span>
+            <div className="hidden sm:flex items-center gap-[3px]" aria-hidden="true">
+              {Array.from({ length: 14 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="w-px"
+                  style={{
+                    height: i % 4 === 0 ? '8px' : '4px',
+                    background: i % 4 === 0 ? 'rgba(251,146,60,0.4)' : 'rgba(255,255,255,0.14)',
+                  }}
                 />
-              </div>
-            );
-          })}
-        </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* Scroll cue */}
         <motion.button

@@ -165,6 +165,22 @@ const GatewayCard = ({
                   aria-hidden="true"
                 />
 
+                {/* Premium top-down glass sheen */}
+                <div
+                  className="absolute inset-x-0 top-0 h-1/2 pointer-events-none z-0"
+                  style={{
+                    background: 'linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, transparent 100%)',
+                  }}
+                  aria-hidden="true"
+                />
+
+                {/* Diagonal specular highlight */}
+                <div
+                  className="absolute -top-px -left-px w-2/3 h-px pointer-events-none z-0"
+                  style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.22), transparent)' }}
+                  aria-hidden="true"
+                />
+
                 {/* Cursor glow blob */}
                 <div
                   ref={glowRef}
