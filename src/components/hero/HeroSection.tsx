@@ -18,9 +18,11 @@ const EsportsIcon = () => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c3.5 0 6.5 2.5 7 6l-2.5 1.5-4.5-3-4.5 3L5 9c.5-3.5 3.5-6 7-6z" />
   </svg>
 );
-const HackathonIcon = () => (
+const GalaIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h7.5M9 3h6v3.75a3 3 0 11-6 0V3z" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M6 4.5H4.125A1.125 1.125 0 003 5.625v.75A3.375 3.375 0 006.375 9.75M18 4.5h1.875A1.125 1.125 0 0121 5.625v.75A3.375 3.375 0 0117.625 9.75" />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 12.75v4.5m-3 3.75h6m-4.5 0a1.5 1.5 0 013 0" />
   </svg>
 );
 
@@ -48,14 +50,14 @@ const GATEWAYS = [
     isCenter: true,
   },
   {
-    title: 'Hackathon',
-    subtitle: '48-Hour Build Sprint',
-    description: 'Build the immersive future in 48 hours. AI, XR, spatial media — bring your stack and compete for real prizes.',
-    to: '/hackathon',
+    title: 'XR Gala',
+    subtitle: 'Awards · Black Tie',
+    description: 'The flagship awards night honouring the visionaries, studios, and breakthroughs defining immersive technology in Asia.',
+    to: '/awards',
     accentColor: '#a78bfa',
     glowColor: '#7c3aed',
-    tag: 'Build',
-    icon: <HackathonIcon />,
+    tag: 'Gala',
+    icon: <GalaIcon />,
     isCenter: false,
   },
 ];
@@ -270,6 +272,55 @@ const HeroSection = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
+            {/* ── Holographic projection — "the cards are projected in" ── */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.85, duration: 1.4, ease: 'easeOut' }}
+              className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+              aria-hidden="true"
+            >
+              {/* Soft up-light pool from the projector base */}
+              <div
+                className="absolute left-1/2 bottom-2 -translate-x-1/2 w-[90%] h-[72%]"
+                style={{
+                  background:
+                    'radial-gradient(ellipse 60% 90% at 50% 100%, rgba(56,189,248,0.16) 0%, rgba(56,189,248,0.05) 38%, transparent 70%)',
+                  filter: 'blur(2px)',
+                }}
+              />
+              {/* Twin projector beams spreading upward */}
+              <div
+                className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[58%] h-full origin-bottom"
+                style={{
+                  background:
+                    'conic-gradient(from 180deg at 50% 100%, transparent 158deg, rgba(125,211,252,0.10) 175deg, rgba(125,211,252,0.16) 180deg, rgba(125,211,252,0.10) 185deg, transparent 202deg)',
+                }}
+              />
+              {/* Projector source point */}
+              <motion.span
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute left-1/2 bottom-1 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
+                style={{ background: '#7dd3fc', boxShadow: '0 0 12px 3px rgba(125,211,252,0.7)' }}
+              />
+            </motion.div>
+
+            {/* ── AR lens scan — sweeps once as the interface boots ── */}
+            <motion.div
+              initial={{ y: '-12%', opacity: 0 }}
+              animate={{ y: ['-12%', '112%'], opacity: [0, 0.9, 0.9, 0] }}
+              transition={{ delay: 0.95, duration: 1.5, ease: [0.16, 1, 0.3, 1], times: [0, 0.1, 0.85, 1] }}
+              className="absolute inset-x-0 z-30 h-24 pointer-events-none"
+              style={{
+                background:
+                  'linear-gradient(to bottom, transparent, rgba(125,211,252,0.10) 45%, rgba(125,211,252,0.5) 50%, rgba(125,211,252,0.10) 55%, transparent)',
+                maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+              }}
+              aria-hidden="true"
+            />
+
             {GATEWAYS.map((g, i) => {
               // Kalkulasi posisi elips (Orbit Trigonometri)
               const angle = angleOffset + (i * (Math.PI * 2)) / GATEWAYS.length;
