@@ -113,8 +113,8 @@ const GatewayCard = ({
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
-        delay: 1.3 + index * 0.12,
-        duration: 1,
+        delay: index * 0.1,
+        duration: 0.9,
         ease: [0.16, 1, 0.3, 1],
       }}
       className="relative w-full"
