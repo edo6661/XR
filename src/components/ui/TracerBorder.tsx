@@ -11,13 +11,13 @@ const TracerBorder = ({ children, accentColor }: TracerBorderProps) => {
     // 1. Ubah rounded-lg menjadi rounded-xl (12px)
     <div className="relative w-full h-full rounded-xl p-[1px] overflow-hidden group">
 
-      {/* Rotating Background Glow */}
+      {/* Rotating Background Glow — slowed + softened for an elegant, non-gamer read */}
       <motion.div
         animate={{ rotate: 360 }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
-        className="absolute top-1/2 left-1/2 w-[200%] h-[200%] origin-center -translate-x-1/2 -translate-y-1/2 z-0 opacity-40 group-hover:opacity-100 transition-opacity duration-500 will-change-transform optimize-gpu"
+        transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
+        className="absolute top-1/2 left-1/2 w-[200%] h-[200%] origin-center -translate-x-1/2 -translate-y-1/2 z-0 opacity-[0.22] group-hover:opacity-60 transition-opacity duration-500 will-change-transform optimize-gpu"
         style={{
-          background: `conic-gradient(from 0deg, transparent 70%, ${accentColor} 100%)`,
+          background: `conic-gradient(from 0deg, transparent 80%, ${accentColor} 100%)`,
         }}
       />
 

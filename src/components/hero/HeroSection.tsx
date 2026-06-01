@@ -32,14 +32,17 @@ const GalaIcon = () => (
   </svg>
 );
 
+// Refined, low-chroma triad anchored to the navy + brand-orange system:
+// a cool steel-cyan, the brand orange (flagship), and a champagne gold for the
+// black-tie gala. Reads "expensive / corporate" rather than neon / gamer.
 const GATEWAYS = [
   {
     title: 'XR Esports',
     subtitle: 'Competitive · Immersive',
     description: 'Where traditional esports collides with spatial computing. Compete, spectate, and experience gaming redefined.',
     to: '/xr-esports',
-    accentColor: '#22d3ee',
-    glowColor: '#06b6d4',
+    accentColor: '#6fb6cf',
+    glowColor: '#4f93ad',
     tag: 'Arena',
     icon: <EsportsIcon />,
     isCenter: false,
@@ -50,7 +53,7 @@ const GATEWAYS = [
     description: "The definitive platform where immersive tech visionaries, enterprise leaders, and XR innovators converge.",
     to: '/xr-summit',
     accentColor: '#fb923c',
-    glowColor: '#f97316',
+    glowColor: '#e0843a',
     tag: 'Flagship',
     icon: <XRIcon />,
     isCenter: true,
@@ -60,8 +63,8 @@ const GATEWAYS = [
     subtitle: 'Awards · Black Tie',
     description: 'The flagship awards night honouring the visionaries, studios, and breakthroughs defining immersive technology in Asia.',
     to: '/awards',
-    accentColor: '#a78bfa',
-    glowColor: '#7c3aed',
+    accentColor: '#d9b27a',
+    glowColor: '#b8915a',
     tag: 'Gala',
     icon: <GalaIcon />,
     isCenter: false,
@@ -90,11 +93,39 @@ const HeroSection = () => {
 
   useEffect(() => {
     if (prefersReducedMotion) return;
-    const t1 = setTimeout(() => setPhase('visor'), 1300);
-    const t2 = setTimeout(() => setPhase('reveal'), 2050);
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    timers.push(setTimeout(() => setPhase('visor'), 1300));
+    timers.push(setTimeout(() => setPhase('reveal'), 2050));
+
+    // Brief: "after ~1s delay OR triggered by scroll." If the user scrolls or
+    // interacts early, compress the sequence so they aren't left waiting.
+    let advanced = false;
+    const fastForward = () => {
+      if (advanced) return;
+      advanced = true;
+      timers.forEach(clearTimeout);
+      setPhase('visor');
+      timers.push(setTimeout(() => setPhase('reveal'), 620));
+      removeListeners();
+    };
+
+    const events: (keyof WindowEventMap)[] = [
+      'wheel',
+      'touchmove',
+      'scroll',
+      'pointerdown',
+      'keydown',
+    ];
+    const removeListeners = () =>
+      events.forEach((ev) => window.removeEventListener(ev, fastForward));
+    events.forEach((ev) =>
+      window.addEventListener(ev, fastForward, { passive: true }),
+    );
+
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
+      timers.forEach(clearTimeout);
+      removeListeners();
     };
   }, [prefersReducedMotion]);
 
@@ -114,6 +145,28 @@ const HeroSection = () => {
   const draggingRef = useRef(false);
   const startXRef = useRef(0);
   const startAngleRef = useRef(0);
+  const rafRef = useRef(0);
+  const runningRef = useRef(false);
+
+  // Spring the ring toward its target, then *stop* — no idle per-frame renders.
+  const tick = useCallback(() => {
+    const diff = targetRef.current - angleRef.current;
+    angleRef.current += diff * 0.08;
+    setAngleOffset(angleRef.current);
+    if (!draggingRef.current && Math.abs(diff) < 0.0006) {
+      angleRef.current = targetRef.current;
+      setAngleOffset(targetRef.current);
+      runningRef.current = false;
+      return;
+    }
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  const kick = useCallback(() => {
+    if (runningRef.current || prefersReducedMotion) return;
+    runningRef.current = true;
+    rafRef.current = requestAnimationFrame(tick);
+  }, [tick, prefersReducedMotion]);
 
   useEffect(() => {
     if (phase !== 'reveal') return;
@@ -125,18 +178,15 @@ const HeroSection = () => {
       return;
     }
 
-    let raf = 0;
     angleRef.current = SETTLE - 0.62; // start rotated so it "projects" into place
     targetRef.current = SETTLE;
+    kick();
 
-    const loop = () => {
-      angleRef.current += (targetRef.current - angleRef.current) * 0.08;
-      setAngleOffset(angleRef.current);
-      raf = requestAnimationFrame(loop);
+    return () => {
+      runningRef.current = false;
+      cancelAnimationFrame(rafRef.current);
     };
-    raf = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(raf);
-  }, [phase, prefersReducedMotion]);
+  }, [phase, prefersReducedMotion, kick]);
 
   // Pointer drag — feels like physically spinning the holographic ring
   const onPointerDown = useCallback((e: React.PointerEvent) => {
@@ -145,19 +195,22 @@ const HeroSection = () => {
     startXRef.current = e.clientX;
     startAngleRef.current = targetRef.current;
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  }, [prefersReducedMotion]);
+    kick();
+  }, [prefersReducedMotion, kick]);
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
     if (!draggingRef.current) return;
     const dx = e.clientX - startXRef.current;
     targetRef.current = startAngleRef.current + dx * 0.006;
-  }, []);
+    kick();
+  }, [kick]);
 
   const endDrag = useCallback(() => {
     if (!draggingRef.current) return;
     draggingRef.current = false;
     targetRef.current = snapAngle(targetRef.current);
-  }, []);
+    kick();
+  }, [kick]);
 
   const goToIndex = useCallback((i: number) => {
     const base = FRONT_ANGLE - i * SEG;
@@ -166,8 +219,10 @@ const HeroSection = () => {
     if (prefersReducedMotion) {
       angleRef.current = targetRef.current;
       setAngleOffset(targetRef.current);
+    } else {
+      kick();
     }
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, kick]);
 
   // Which card currently faces the viewer (drives the nav dots)
   let frontIndex = Math.round((FRONT_ANGLE - angleOffset) / SEG) % GATEWAYS.length;
@@ -329,15 +384,8 @@ const HeroSection = () => {
                 className="absolute left-1/2 bottom-2 -translate-x-1/2 w-[90%] h-[72%]"
                 style={{
                   background:
-                    'radial-gradient(ellipse 60% 90% at 50% 100%, rgba(56,189,248,0.16) 0%, rgba(56,189,248,0.05) 38%, transparent 70%)',
-                  filter: 'blur(2px)',
-                }}
-              />
-              <div
-                className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[58%] h-full origin-bottom"
-                style={{
-                  background:
-                    'conic-gradient(from 180deg at 50% 100%, transparent 158deg, rgba(125,211,252,0.10) 175deg, rgba(125,211,252,0.16) 180deg, rgba(125,211,252,0.10) 185deg, transparent 202deg)',
+                    'radial-gradient(ellipse 60% 90% at 50% 100%, rgba(56,189,248,0.12) 0%, rgba(56,189,248,0.04) 40%, transparent 72%)',
+                  filter: 'blur(3px)',
                 }}
               />
               <motion.span
@@ -352,12 +400,12 @@ const HeroSection = () => {
             {showReveal && !prefersReducedMotion && (
               <motion.div
                 initial={{ y: '-12%', opacity: 0 }}
-                animate={{ y: ['-12%', '112%'], opacity: [0, 0.9, 0.9, 0] }}
+                animate={{ y: ['-12%', '112%'], opacity: [0, 0.55, 0.55, 0] }}
                 transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], times: [0, 0.1, 0.85, 1] }}
                 className="absolute inset-x-0 z-30 h-24 pointer-events-none"
                 style={{
                   background:
-                    'linear-gradient(to bottom, transparent, rgba(125,211,252,0.10) 45%, rgba(125,211,252,0.5) 50%, rgba(125,211,252,0.10) 55%, transparent)',
+                    'linear-gradient(to bottom, transparent, rgba(125,211,252,0.07) 45%, rgba(125,211,252,0.32) 50%, rgba(125,211,252,0.07) 55%, transparent)',
                   maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
                   WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
                 }}
@@ -367,24 +415,27 @@ const HeroSection = () => {
 
             {showReveal && GATEWAYS.map((g, i) => {
               const angle = angleOffset + i * SEG;
-              const radiusX = isMobile ? 120 : 320;
-              const radiusZ = 220;
+              const radiusX = isMobile ? 124 : 322;
+              // Flatter depth → a "coverflow" read where all three stay legible.
+              const radiusZ = isMobile ? 90 : 132;
 
               const x = Math.cos(angle) * radiusX;
               const z = Math.sin(angle) * radiusZ;
               const normalizedZ = (z + radiusZ) / (radiusZ * 2);
 
-              const scale = 0.75 + normalizedZ * 0.25;
-              const opacity = 0.3 + normalizedZ * 0.7;
+              const scale = 0.84 + normalizedZ * 0.16;
+              const opacity = 0.58 + normalizedZ * 0.42;
               const zIndex = Math.round(normalizedZ * 100);
               const isFront = normalizedZ > 0.85;
+              // Side cards angle inward toward the viewer (coverflow signature).
+              const yaw = -(x / radiusX) * 20;
 
               return (
                 <div
                   key={g.title}
                   className="absolute top-1/2 left-1/2 w-full max-w-[300px] lg:max-w-[340px] will-change-transform"
                   style={{
-                    transform: `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) scale(${scale})`,
+                    transform: `translate(-50%, -50%) translateX(${x}px) translateZ(${z}px) rotateY(${yaw}deg) scale(${scale})`,
                     opacity,
                     zIndex,
                     transition: draggingRef.current ? 'none' : 'opacity 0.3s ease',
@@ -512,18 +563,16 @@ const VisorOverlay = ({
         }}
       />
 
-      {/* One-shot boot reticle in the centre as the visor engages */}
+      {/* One-shot focus ring as the visor engages — a single, quiet pulse */}
       {active && !reduced && (
         <motion.div
-          initial={{ opacity: 0, scale: 1.4 }}
-          animate={{ opacity: [0, 0.6, 0], scale: [1.4, 1, 0.92] }}
+          initial={{ opacity: 0, scale: 1.3 }}
+          animate={{ opacity: [0, 0.4, 0], scale: [1.3, 1, 0.95] }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
           className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2"
         >
           <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-            <circle cx="60" cy="60" r="46" stroke="rgba(125,211,252,0.35)" strokeWidth="0.75" strokeDasharray="3 6" />
-            <circle cx="60" cy="60" r="30" stroke="rgba(125,211,252,0.25)" strokeWidth="0.75" />
-            <path d="M60 6v22M60 92v22M6 60h22M92 60h22" stroke="rgba(251,146,60,0.4)" strokeWidth="0.75" />
+            <circle cx="60" cy="60" r="46" stroke="rgba(125,211,252,0.22)" strokeWidth="0.75" strokeDasharray="2 8" />
           </svg>
         </motion.div>
       )}

@@ -66,7 +66,7 @@ const GatewayCard = ({
 
     // Opacity cukup pakai gsap.to biasa dan tambahkan overwrite auto
     gsap.to(glowRef.current, {
-      opacity: isCenter ? 0.2 : 0.12,
+      opacity: isCenter ? 0.14 : 0.09,
       duration: 0.4,
       overwrite: 'auto'
     });
@@ -80,8 +80,8 @@ const GatewayCard = ({
       gsap.to(arrowRef.current, { x: 5, opacity: 1, duration: 0.35, ease: 'power2.out' });
     }
     if (borderRef.current) {
-      borderRef.current.style.borderColor = `${accentColor}45`;
-      borderRef.current.style.boxShadow = `0 0 52px ${accentColor}18, 0 28px 56px rgba(0,0,0,0.45)`;
+      borderRef.current.style.borderColor = `${accentColor}3a`;
+      borderRef.current.style.boxShadow = `0 0 40px ${accentColor}12, 0 28px 56px rgba(0,0,0,0.45)`;
     }
   }, [accentColor]);
 
@@ -186,7 +186,7 @@ const GatewayCard = ({
                   ref={glowRef}
                   className="absolute w-80 h-80 rounded-full pointer-events-none opacity-0 z-0 will-change-transform"
                   style={{
-                    background: `radial-gradient(circle, ${accentColor}40 0%, transparent 65%)`,
+                    background: `radial-gradient(circle, ${accentColor}30 0%, transparent 65%)`,
                     left: '50%', top: '50%',
                     transform: 'translate(-50%, -50%)',
                   }}
