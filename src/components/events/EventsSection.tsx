@@ -18,7 +18,7 @@ const UPCOMING_EVENTS = [
       "The fourth edition of Asia's premier XR event. Bigger keynotes, deeper workshops, and the most ambitious immersive showcase yet.",
     accentColor: '#fb923c',
     tag: 'Flagship',
-    to: '/xr-summit',
+    to: '/xras-kl-2026',
     imageSrc: '/xr-asia-summit-4th-coming-soon.png',
     isFeatured: true,
   },
@@ -31,7 +31,7 @@ const UPCOMING_EVENTS = [
       'A hands-on AI × XR intensive bootcamp for builders, artists, and technologists ready to ship immersive AI products.',
     accentColor: '#22d3ee',
     tag: 'Bootcamp',
-    to: '/mothership',
+    to: '/xras-kl-2026',
     isFeatured: false,
   },
   {

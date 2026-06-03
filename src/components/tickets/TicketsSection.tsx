@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import MagneticWrapper from '../ui/MagneticWrapper';
+import PaymentPlaceholders from './PaymentPlaceholders';
+import { COMPANY } from '../../core/navigation/routes';
 
 // ── Decorative checkmark icon ──────────────────────────────────────────────
 const CheckIcon = () => (
@@ -229,7 +231,7 @@ const TicketsSection = () => {
               <MagneticWrapper strength={0.2}>
                 <a
                   ref={btnRef}
-                  href="mailto:hello@xrsummits.com?subject=XRAS26 Ticket Interest"
+                  href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('XRAS26 Ticket Interest')}`}
                   className="relative flex items-center justify-center gap-3 w-full py-4 rounded-sm overflow-hidden cursor-none group"
                   style={{
                     border: '1px solid rgba(251,146,60,0.55)',
@@ -276,6 +278,8 @@ const TicketsSection = () => {
             </div>
           </motion.div>
         </div>
+
+        <PaymentPlaceholders />
       </div>
     </section>
   );

@@ -1,0 +1,58 @@
+# Project Context: XR Summits Phase 1
+
+You are an expert Frontend Developer assisting a Software Engineer in building the "XR Summits Phase 1" website.
+Don't write any test file.
+If there's no image or assets, just mock the image or assets first.
+
+# Phase 1 Scope & Limitations (CRITICAL)
+
+- This is PHASE 1 ONLY.
+- DO NOT build complex backend systems, database integrations, full user login, or advanced registration management.
+- DO NOT set up full Stripe backend infrastructure. Use UI placeholders for Stripe, Bank-in options, and QR codes.
+- Only implement UI placeholders for Terms & Conditions, Privacy Policy, Data Collection Notice, and Event Disclaimers.
+
+# UI/UX & Design Guidelines
+
+- The design must be modern, cinematic, and mobile-friendly across all devices.
+- Utilize smooth transitions and 3D-inspired background elements (utilizing existing components like `GlobeCanvas.tsx` and `HolographicImage.tsx`).
+
+# Core Positioning & Copywriting (Use exactly as provided)
+
+- Tagline: "Asia’s Premier Platform for AI • XR • Spatial Media • Virtual Production • Immersive Technology"
+- Supporting Text: "Connecting industry leaders, creators, educators, broadcasters, governments and technology innovators through deployment-ready immersive experiences."
+- Main Contact Email: register@xr-summits.com
+
+# Required Page Structure & Content
+
+## 1. Main Homepage (/)
+
+- Must act as the master gateway.
+- Required Sections: Hero section, About XR Summits, Choose Your Experience, Partner logos, Contact details, Social media links.
+- Required Gateways: Prominent links to XRAS KL 2026 and AIXR 2026 Sarawak.
+- Primary Call-To-Action (CTA) buttons: "Explore XRAS26", "Explore AIXR Sarawak", "Become Exhibitor", "Register Interest".
+
+## 2. About Us (/about)
+
+- Required Sections: Company Overview, Our Mission, Why XR Summits (Industry Focus, Regional Network), Track Record (2021-2026 Timeline), Awards & Recognition, Strategic Partners, Our Team, Media & Press.
+
+## 3. XRAS KL 2026 Gateway (/xras-kl-2026)
+
+- Role: Main landing page for the Kuala Lumpur flagship event.
+- Required Sections: Conference, Expo, 2 Workshops, 2 Coaching / AI Industry Startup sessions, 2 Masterclasses, AI Filmmaking Hackathon Grand Finals, Esports Grand Finals, AI/XR Awards Gala Dinner.
+- Required Actions: Brochure download button, Registration/enquiry CTA.
+
+## 4. AIXR 2026 Sarawak Gateway (/aixr-2026-sarawak)
+
+- Role: Main landing page for the Sarawak regional event.
+- Positioning Text: "Innovation • Culture • Technology • Future Talent"
+- Required Sections: Conference, Expo, 2 Workshops, 2 Masterclasses, AI Filmmaking Hackathon Semi Finals, Esports Semi Finals.
+- Required Actions: Brochure download button, Registration/enquiry CTA.
+
+## 5. Contact Us (/contact)
+
+- Required Enquiry Pathways: General enquiries, Partnerships (Sponsors, Exhibitors, Government, Universities), Speaker applications, Media enquiries (Press accreditation).
+- Required Elements: Interactive map placeholder, Social media links, WhatsApp or AI agent contact placeholder.
+
+# Development Workflow
+
+When asked to build or update a component, ALWAYS reference the sitemap and requirements above to ensure the content aligns with the client's contract for Phase 1. Do not hallucinate extra pages or complex backend logic.

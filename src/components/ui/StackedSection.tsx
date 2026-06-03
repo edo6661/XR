@@ -1,6 +1,7 @@
-import { useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { killScrollTriggersIn } from '../../lib/scrollTriggerCleanup';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,6 +12,7 @@ interface StackedSectionProps {
 }
 
 const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProps) => {
+  const outerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -20,11 +22,8 @@ const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProp
     if (!section || !content || isLast) return;
 
     const ctx = gsap.context(() => {
-      // Fungsi untuk menentukan titik pusat animasi (transform-origin)
       const handleResize = () => {
         const isTall = section.offsetHeight > window.innerHeight;
-        // Jika elemen tinggi, animasi mengecil ke bawah agar tidak ada gap
-        // Jika elemen pendek, animasi mengecil ke atas
         gsap.set(content, { transformOrigin: isTall ? 'center bottom' : 'center top' });
       };
 
@@ -37,15 +36,14 @@ const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProp
         ease: 'power2.inOut',
         scrollTrigger: {
           trigger: section,
-          // BEST PRACTICE: Handle section tinggi vs pendek
           start: () =>
             section.offsetHeight > window.innerHeight
               ? 'bottom bottom'
               : 'top top',
           end: () => `+=${window.innerHeight}`,
-          scrub: 0.5, // Smooth scrubbing
+          scrub: 0.5,
           pin: true,
-          pinSpacing: false, // Membiarkan section di bawahnya menimpa (stacking)
+          pinSpacing: false,
           invalidateOnRefresh: true,
         },
       });
@@ -53,19 +51,26 @@ const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProp
       return () => {
         window.removeEventListener('resize', handleResize);
       };
-    }, sectionRef);
+    }, outerRef);
 
     return () => ctx.revert();
   }, [isLast]);
 
+  useLayoutEffect(() => {
+    return () => {
+      killScrollTriggersIn(outerRef.current);
+    };
+  }, [isLast]);
+
   return (
-    <div
-      ref={sectionRef}
-      className="relative w-full bg-background will-change-transform"
-      style={{ zIndex }}
-    >
-      <div ref={contentRef} className="w-full h-full relative">
-        {children}
+    <div ref={outerRef} className="relative w-full" style={{ zIndex }}>
+      <div
+        ref={sectionRef}
+        className="relative w-full bg-background will-change-transform"
+      >
+        <div ref={contentRef} className="w-full h-full relative">
+          {children}
+        </div>
       </div>
     </div>
   );

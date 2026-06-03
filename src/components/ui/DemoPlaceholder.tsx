@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { COMPANY } from '../../core/navigation/routes';
 
 interface DemoPlaceholderProps {
   title: string;
@@ -123,7 +124,7 @@ const DemoPlaceholder = ({
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 w-full">
             <a
-              href="mailto:hello@xrsummits.com"
+              href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('XR Summits Interest')}`}
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-sm font-bold tracking-[0.18em] uppercase transition-all duration-300 group"
               style={{
                 fontSize: '0.7rem',

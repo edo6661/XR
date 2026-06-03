@@ -588,9 +588,7 @@ const GlobeCanvas = () => {
       img.onerror = null;
       disposables.forEach((d) => d.dispose());
       renderer.dispose();
-      if (mount.contains(renderer.domElement)) {
-        mount.removeChild(renderer.domElement);
-      }
+      renderer.domElement.remove();
     };
   }, []);
 
