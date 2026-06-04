@@ -8,7 +8,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="flex items-center gap-4 mb-10"
+        className="flex items-center gap-4 mb-4 sm:mb-6"
       >
         <div className="flex items-center gap-1.5">
           <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
@@ -33,7 +33,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
           initial={{ scale: 0.6, opacity: 0, filter: 'blur(16px)' }}
           animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
           transition={{ delay: 0.3, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mb-5"
+          className="relative mb-2 sm:mb-5"
         >
           <motion.div
             animate={{ rotate: 360 }}
@@ -59,8 +59,11 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
           <img
             src="/logo-278x262-removebg.png"
             alt="XR Summits"
-            className="relative h-[5.5rem] w-auto object-contain"
-            style={{ filter: 'drop-shadow(0 0 22px rgba(251,146,60,0.5)) drop-shadow(0 0 60px rgba(251,146,60,0.15))' }}
+            className="relative w-auto object-contain"
+            style={{
+              height: 'clamp(3rem, 7.5vh, 5.5rem)',
+              filter: 'drop-shadow(0 0 22px rgba(251,146,60,0.5)) drop-shadow(0 0 60px rgba(251,146,60,0.15))',
+            }}
           />
         </motion.div>
 
@@ -73,7 +76,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             <h1
               className="font-heading font-black text-center leading-none"
               style={{
-                fontSize: 'clamp(6rem, 18vw, 13.5rem)',
+                fontSize: 'clamp(3.5rem, min(16vw, 19vh), 12rem)',
                 letterSpacing: '-0.01em',
                 background: 'linear-gradient(175deg, #ffffff 0%, #f0f4ff 25%, #fb923c 62%, rgba(251,146,60,0.4) 100%)',
                 WebkitBackgroundClip: 'text',

@@ -200,7 +200,7 @@ const HeroSection = () => {
       {/* ── The "zap zap" cold open (sits above everything, then unmounts) ── */}
       {!prefersReducedMotion && <HeroIntroOverlay step={step} />}
 
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-28 pb-12 gap-6">
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 pt-20 sm:pt-24 pb-12 gap-2 sm:gap-4">
         <AnimatePresence>
           {showLogo && (
             <motion.div
@@ -208,8 +208,35 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.7, filter: 'blur(14px)' }}
               animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
               transition={{ duration: 0.7, ease: [0.22, 1.3, 0.4, 1] }}
-              className="flex flex-col items-center"
+              className="relative flex flex-col items-center"
             >
+              {/* WOW — shockwave ring + light burst when the logo lands */}
+              {!prefersReducedMotion && (
+                <>
+                  <motion.div
+                    className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+                    style={{ zIndex: -1, border: '2px solid rgba(125,211,252,0.55)' }}
+                    initial={{ width: 60, height: 60, opacity: 0 }}
+                    animate={{ width: [60, 560], height: [60, 560], opacity: [0.7, 0] }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                    aria-hidden="true"
+                  />
+                  <motion.div
+                    className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+                    style={{
+                      zIndex: -1,
+                      width: 360,
+                      height: 360,
+                      background:
+                        'radial-gradient(circle, rgba(251,146,60,0.28) 0%, rgba(56,189,248,0.12) 35%, transparent 65%)',
+                    }}
+                    initial={{ scale: 0.2, opacity: 0 }}
+                    animate={{ scale: [0.2, 2.3], opacity: [0.55, 0] }}
+                    transition={{ duration: 1.05, ease: 'easeOut' }}
+                    aria-hidden="true"
+                  />
+                </>
+              )}
               <HeroLogo showText={false} />
             </motion.div>
           )}
@@ -219,9 +246,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 14 }}
           transition={{ duration: 0.7, delay: showLogo ? 0.25 : 0, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading font-semibold text-center -mt-2"
+          className="font-heading font-semibold text-center"
           style={{
-            fontSize: 'clamp(0.95rem, 2.4vw, 1.5rem)',
+            fontSize: 'clamp(0.9rem, 2.4vw, 1.5rem)',
             color: 'rgba(240,244,255,0.94)',
             letterSpacing: '0.01em',
           }}
@@ -240,36 +267,38 @@ const HeroSection = () => {
         </motion.h2>
 
         <HeroGatewayTiles active={showTiles} />
-
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: showHint ? 1 : 0, y: showHint ? 0 : 10 }}
-          transition={{ duration: 0.8, delay: showHint ? 0.2 : 0 }}
-          onClick={handleScrollDown}
-          className="group flex flex-col items-center gap-2.5 cursor-pointer mt-2"
-          aria-label="Scroll to Choose Your Experience"
-          style={{ pointerEvents: showHint ? 'auto' : 'none' }}
-        >
-          <span
-            className="font-bold tracking-[0.55em] uppercase transition-colors duration-300 group-hover:text-accent"
-            style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.4)' }}
-          >
-            Or scroll to explore
-          </span>
-          <div className="relative w-px h-10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
-            <motion.div
-              className="absolute top-0 w-full"
-              style={{
-                height: '45%',
-                background: 'linear-gradient(to bottom, transparent, rgba(251,146,60,0.8), transparent)',
-              }}
-              animate={{ y: ['-100%', '320%'] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
-              aria-hidden="true"
-            />
-          </div>
-        </motion.button>
       </div>
+
+      {/* Scroll hint — pulled out of the content flow so it can never push the
+          tiles off-screen on short / windowed viewports. */}
+      <motion.button
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: showHint ? 1 : 0, y: showHint ? 0 : 10 }}
+        transition={{ duration: 0.8, delay: showHint ? 0.2 : 0 }}
+        onClick={handleScrollDown}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 group hidden sm:flex flex-col items-center gap-2 cursor-pointer"
+        aria-label="Scroll to Choose Your Experience"
+        style={{ pointerEvents: showHint ? 'auto' : 'none' }}
+      >
+        <span
+          className="font-bold tracking-[0.55em] uppercase transition-colors duration-300 group-hover:text-accent"
+          style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.4)' }}
+        >
+          Or scroll to explore
+        </span>
+        <div className="relative w-px h-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+          <motion.div
+            className="absolute top-0 w-full"
+            style={{
+              height: '45%',
+              background: 'linear-gradient(to bottom, transparent, rgba(251,146,60,0.8), transparent)',
+            }}
+            animate={{ y: ['-100%', '320%'] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
+            aria-hidden="true"
+          />
+        </div>
+      </motion.button>
     </section>
   );
 };
