@@ -9,7 +9,46 @@ import {
   type MotionValue,
 } from 'framer-motion';
 import GlobeCanvas from './GlobeCanvas';
+import HeroVideoBackdrop, { type HeroVideoConfig } from './HeroVideoBackdrop';
+import SplatField from './SplatField';
 import HeroLogo from './HeroLogo';
+
+/**
+ * ── Hero backdrop switch ─────────────────────────────────────────────────
+ * The client asked us to trial three cinematic clips one by one. Each entry
+ * below is pre-graded toward the brand palette; flip ACTIVE_BACKDROP to
+ * preview a different one (or 'globe' to compare with the original 3D canvas).
+ *
+ *   'globe-3d'  → /hero/videos/3d_digital_globe.mp4  (recommended Stage-1 fit:
+ *                 matches the brief's "Animatic 3D Globe" background)
+ *   'spatial'   → spatial_computing_businessman…     (most overtly B2B / human;
+ *                 great "Corporate + Metaverse" read, heaviest file)
+ *   'network'   → digital_technology_network…        (abstract data-network;
+ *                 cleanest, lightest, very "next-worldly")
+ *   'globe'     → original three.js GlobeCanvas      (the current build)
+ */
+type BackdropId = 'globe-3d' | 'spatial' | 'network' | 'globe';
+
+const VIDEO_BACKDROPS: Record<Exclude<BackdropId, 'globe'>, HeroVideoConfig> = {
+  'globe-3d': {
+    src: '/hero/videos/3d_digital_globe.mp4',
+    poster: '/hero/earth-dark.jpg',
+    objectPosition: '50% 50%',
+    filter: 'brightness(0.92) contrast(1.05) saturate(1.06)',
+  },
+  spatial: {
+    src: '/hero/videos/spatial_computing_businessman_working_with_virtual.mp4',
+    objectPosition: '50% 38%',
+    filter: 'brightness(0.8) contrast(1.08) saturate(0.92)',
+  },
+  network: {
+    src: '/hero/videos/digital_technology_network_word_work_cloud_backgrounds.mp4',
+    objectPosition: '50% 50%',
+    filter: 'brightness(0.88) contrast(1.06) saturate(1.02)',
+  },
+};
+
+const ACTIVE_BACKDROP = 'spatial' as BackdropId;
 
 const HERO_CTAS = [
   { label: 'Explore XRAS26', to: '/xras-kl-2026', variant: 'primary' as const },
@@ -97,7 +136,11 @@ const HeroSection = () => {
         transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         style={{ x: prefersReducedMotion ? 0 : globeX, y: prefersReducedMotion ? 0 : globeY }}
       >
-        <GlobeCanvas />
+        {ACTIVE_BACKDROP === 'globe' ? (
+          <GlobeCanvas />
+        ) : (
+          <HeroVideoBackdrop {...VIDEO_BACKDROPS[ACTIVE_BACKDROP]} />
+        )}
       </motion.div>
 
       <motion.div
@@ -118,6 +161,18 @@ const HeroSection = () => {
         }}
         aria-hidden="true"
       />
+
+      {ACTIVE_BACKDROP !== 'globe' && (
+        <motion.div
+          className="absolute inset-0 z-3 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: phase === 'boot' ? 0.95 : showReveal ? 0.7 : 0.5 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          aria-hidden="true"
+        >
+          <SplatField />
+        </motion.div>
+      )}
 
       <BootOverlay phase={phase} reduced={prefersReducedMotion} mvX={pX} mvY={pY} />
 
