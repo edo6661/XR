@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import {
   motion,
   useMotionValue,
@@ -12,6 +11,8 @@ import GlobeCanvas from './GlobeCanvas';
 import HeroVideoBackdrop, { type HeroVideoConfig } from './HeroVideoBackdrop';
 import SplatField from './SplatField';
 import HeroLogo from './HeroLogo';
+import HeroIntroOverlay from './HeroIntroOverlay';
+import HeroGatewayTiles from './HeroGatewayTiles';
 
 /**
  * ── Hero backdrop switch ─────────────────────────────────────────────────
@@ -50,14 +51,25 @@ const VIDEO_BACKDROPS: Record<Exclude<BackdropId, 'globe'>, HeroVideoConfig> = {
 
 const ACTIVE_BACKDROP = 'spatial' as BackdropId;
 
-const HERO_CTAS = [
-  { label: 'Explore XRAS26', to: '/xras-kl-2026', variant: 'primary' as const },
-  { label: 'Explore AIXR Sarawak', to: '/aixr-2026-sarawak', variant: 'primary' as const },
-  { label: 'Become Exhibitor', to: '/contact', variant: 'secondary' as const },
-  { label: 'Register Interest', to: '/contact', variant: 'secondary' as const },
-] as const;
-
 type Phase = 'globe' | 'boot' | 'reveal';
+
+/**
+ * ── "Zap zap" intro timeline ─────────────────────────────────────────────
+ * step 0  "The Internet was flat."
+ * step 1  "The future is spatial. Powered by AI"
+ * step 2  ⚡ zap flash — veil tears away, video revealed
+ * step 3  XR logo pop + "Join us to the Immersive Spatial Future"
+ * step 4  BOOM — 3 glassmorphic tiles fly in
+ * step 5  done (scroll hint live; scroll → hero closes → About Us)
+ */
+const STEP_TIMELINE: { at: number; step: number }[] = [
+  { at: 1000, step: 1 },
+  { at: 2000, step: 2 },
+  { at: 2420, step: 3 },
+  { at: 3180, step: 4 },
+  { at: 3980, step: 5 },
+];
+const LAST_STEP = 5;
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -66,27 +78,29 @@ const HeroSection = () => {
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const [phase, setPhase] = useState<Phase>(prefersReducedMotion ? 'reveal' : 'globe');
+  // step 0..5 — see STEP_TIMELINE. Reduced motion jumps straight to the finale.
+  const [step, setStep] = useState<number>(prefersReducedMotion ? LAST_STEP : 0);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
-    timers.push(setTimeout(() => setPhase('boot'), 1100));
-    timers.push(setTimeout(() => setPhase('reveal'), 2250));
+    STEP_TIMELINE.forEach(({ at, step: s }) => {
+      timers.push(setTimeout(() => setStep(s), at));
+    });
 
-    let advanced = false;
+    // Let an impatient visitor skip the cold open → snap to the live finale.
+    let skipped = false;
     const fastForward = () => {
-      if (advanced) return;
-      advanced = true;
+      if (skipped) return;
+      skipped = true;
       timers.forEach(clearTimeout);
-      setPhase('boot');
-      timers.push(setTimeout(() => setPhase('reveal'), 760));
+      setStep(LAST_STEP);
       removeListeners();
     };
-
-    const events: (keyof WindowEventMap)[] = ['wheel', 'touchmove', 'scroll', 'pointerdown', 'keydown'];
-    const removeListeners = () => events.forEach((ev) => window.removeEventListener(ev, fastForward));
+    const events: (keyof WindowEventMap)[] = ['wheel', 'touchmove', 'pointerdown', 'keydown'];
+    const removeListeners = () =>
+      events.forEach((ev) => window.removeEventListener(ev, fastForward));
     events.forEach((ev) => window.addEventListener(ev, fastForward, { passive: true }));
 
     return () => {
@@ -115,9 +129,16 @@ const HeroSection = () => {
     document.getElementById('choose-experience')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const showReveal = phase === 'reveal';
-  const globeBlur = phase === 'globe' ? 0 : phase === 'boot' ? 7 : 1.4;
-  const globeBrightness = phase === 'globe' ? 1 : phase === 'boot' ? 0.78 : 0.82;
+  // Derived stage flags
+  const videoRevealed = step >= 3; // veil has torn away
+  const showLogo = step >= 3;
+  const showTiles = step >= 4;
+  const showHint = step >= LAST_STEP;
+
+  // Background focus-pull: blurred while veiled → punchy boot → settle.
+  const hudPhase: Phase = step < 3 ? 'globe' : step === 3 ? 'boot' : 'reveal';
+  const bgBlur = step >= 4 ? 1.4 : step === 3 ? 7 : 5;
+  const bgBrightness = step >= 4 ? 0.82 : 0.76;
 
   return (
     <section
@@ -130,8 +151,8 @@ const HeroSection = () => {
         className="absolute inset-0 z-0"
         aria-hidden="true"
         animate={{
-          filter: prefersReducedMotion ? 'none' : `blur(${globeBlur}px) brightness(${globeBrightness})`,
-          scale: showReveal && !prefersReducedMotion ? 1.06 : 1,
+          filter: prefersReducedMotion ? 'none' : `blur(${bgBlur}px) brightness(${bgBrightness})`,
+          scale: videoRevealed && !prefersReducedMotion ? 1.06 : 1.12,
         }}
         transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         style={{ x: prefersReducedMotion ? 0 : globeX, y: prefersReducedMotion ? 0 : globeY }}
@@ -145,7 +166,7 @@ const HeroSection = () => {
 
       <motion.div
         className="absolute inset-0 z-1 pointer-events-none"
-        animate={{ opacity: showReveal ? 1 : 0.7 }}
+        animate={{ opacity: showTiles ? 1 : 0.7 }}
         transition={{ duration: 1.2 }}
         style={{
           background:
@@ -166,7 +187,7 @@ const HeroSection = () => {
         <motion.div
           className="absolute inset-0 z-3 pointer-events-none"
           initial={{ opacity: 0 }}
-          animate={{ opacity: phase === 'boot' ? 0.95 : showReveal ? 0.7 : 0.5 }}
+          animate={{ opacity: step === 3 ? 0.95 : step >= 4 ? 0.7 : 0.4 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           aria-hidden="true"
         >
@@ -174,69 +195,66 @@ const HeroSection = () => {
         </motion.div>
       )}
 
-      <BootOverlay phase={phase} reduced={prefersReducedMotion} mvX={pX} mvY={pY} />
+      <BootOverlay phase={hudPhase} reduced={prefersReducedMotion} mvX={pX} mvY={pY} />
+
+      {/* ── The "zap zap" cold open (sits above everything, then unmounts) ── */}
+      {!prefersReducedMotion && <HeroIntroOverlay step={step} />}
 
       <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 pt-28 pb-12 gap-6">
-        <HeroLogo />
-
-        <motion.nav
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: showReveal ? 1 : 0, y: showReveal ? 0 : 16 }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          aria-label="Primary calls to action"
-          className="relative z-20 w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2"
-        >
-          {HERO_CTAS.map(({ label, to, variant }) => (
-            <Link
-              key={label}
-              to={to}
-              className={`group relative flex items-center justify-center gap-2 px-5 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] transition-all duration-300 cursor-none ${variant === 'primary'
-                ? 'text-[#050b18] hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]'
-                : 'text-accent hover:text-foreground'
-                }`}
-              style={
-                variant === 'primary'
-                  ? {
-                    background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-                    border: '1px solid rgba(251,146,60,0.5)',
-                  }
-                  : {
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(251,146,60,0.35)',
-                  }
-              }
+        <AnimatePresence>
+          {showLogo && (
+            <motion.div
+              key="logo"
+              initial={{ opacity: 0, scale: 0.7, filter: 'blur(14px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              transition={{ duration: 0.7, ease: [0.22, 1.3, 0.4, 1] }}
+              className="flex flex-col items-center"
             >
-              <span>{label}</span>
-              <span
-                className="transition-transform duration-300 group-hover:translate-x-0.5"
-                aria-hidden="true"
-              >
-                →
-              </span>
-            </Link>
-          ))}
-        </motion.nav>
+              <HeroLogo showText={false} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 14 }}
+          transition={{ duration: 0.7, delay: showLogo ? 0.25 : 0, ease: [0.16, 1, 0.3, 1] }}
+          className="font-heading font-semibold text-center -mt-2"
+          style={{
+            fontSize: 'clamp(0.95rem, 2.4vw, 1.5rem)',
+            color: 'rgba(240,244,255,0.94)',
+            letterSpacing: '0.01em',
+          }}
+        >
+          Join us to the{' '}
+          <span
+            style={{
+              background: 'linear-gradient(120deg, #fb923c 0%, #fdba74 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Immersive Spatial Future
+          </span>
+        </motion.h2>
+
+        <HeroGatewayTiles active={showTiles} />
 
         <motion.button
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: showReveal ? 1 : 0, y: showReveal ? 0 : 10 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          animate={{ opacity: showHint ? 1 : 0, y: showHint ? 0 : 10 }}
+          transition={{ duration: 0.8, delay: showHint ? 0.2 : 0 }}
           onClick={handleScrollDown}
           className="group flex flex-col items-center gap-2.5 cursor-pointer mt-2"
           aria-label="Scroll to Choose Your Experience"
+          style={{ pointerEvents: showHint ? 'auto' : 'none' }}
         >
-          <motion.div
-            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0.15, 0.5] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-1 h-1 rounded-full"
-            style={{ background: 'rgba(251,146,60,0.6)' }}
-            aria-hidden="true"
-          />
           <span
             className="font-bold tracking-[0.55em] uppercase transition-colors duration-300 group-hover:text-accent"
             style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.4)' }}
           >
-            Discover
+            Or scroll to explore
           </span>
           <div className="relative w-px h-10 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
             <motion.div

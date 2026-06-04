@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { COMPANY } from '../../core/navigation/routes';
 
-const HeroLogo = () => {
+const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center select-none w-full max-w-4xl mx-auto">
       <motion.div
@@ -122,60 +122,64 @@ const HeroLogo = () => {
         </div>
       </div>
 
-      <motion.div
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ delay: 1.1, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        className="w-20 h-px origin-center mt-6 mb-6"
-        style={{
-          background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.75), transparent)',
-          boxShadow: '0 0 14px rgba(251,146,60,0.45)',
-        }}
-        aria-hidden="true"
-      />
+      {showText && (
+        <>
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ delay: 1.1, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            className="w-20 h-px origin-center mt-6 mb-6"
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.75), transparent)',
+              boxShadow: '0 0 14px rgba(251,146,60,0.45)',
+            }}
+            aria-hidden="true"
+          />
 
-      <motion.p
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center font-medium leading-relaxed max-w-2xl px-2"
-        style={{
-          fontSize: 'clamp(0.72rem, 1.5vw, 0.88rem)',
-          color: 'rgba(240,244,255,0.82)',
-          letterSpacing: '0.02em',
-        }}
-      >
-        {COMPANY.tagline}
-      </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center font-medium leading-relaxed max-w-2xl px-2"
+            style={{
+              fontSize: 'clamp(0.72rem, 1.5vw, 0.88rem)',
+              color: 'rgba(240,244,255,0.82)',
+              letterSpacing: '0.02em',
+            }}
+          >
+            {COMPANY.tagline}
+          </motion.p>
 
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.28, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center leading-relaxed max-w-xl mt-4 px-4"
-        style={{
-          fontSize: 'clamp(0.68rem, 1.2vw, 0.78rem)',
-          color: 'rgba(107,127,163,0.75)',
-          lineHeight: 1.75,
-        }}
-      >
-        {COMPANY.supportingText}
-      </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.28, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center leading-relaxed max-w-xl mt-4 px-4"
+            style={{
+              fontSize: 'clamp(0.68rem, 1.2vw, 0.78rem)',
+              color: 'rgba(107,127,163,0.75)',
+              lineHeight: 1.75,
+            }}
+          >
+            {COMPANY.supportingText}
+          </motion.p>
 
-      <motion.div
-        initial={{ opacity: 0, x: 8 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.5, duration: 0.7 }}
-        className="absolute top-0 right-0 hidden xl:flex flex-col items-end gap-1.5"
-        aria-hidden="true"
-      >
-        <span className="font-mono text-[0.46rem] tracking-[0.38em] uppercase" style={{ color: 'rgba(107,127,163,0.3)' }}>
-          XRAS · AIXR · 2026
-        </span>
-        <span className="font-mono text-[0.44rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(107,127,163,0.18)' }}>
-          03°08′N · 101°41′E
-        </span>
-      </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.5, duration: 0.7 }}
+            className="absolute top-0 right-0 hidden xl:flex flex-col items-end gap-1.5"
+            aria-hidden="true"
+          >
+            <span className="font-mono text-[0.46rem] tracking-[0.38em] uppercase" style={{ color: 'rgba(107,127,163,0.3)' }}>
+              XRAS · AIXR · 2026
+            </span>
+            <span className="font-mono text-[0.44rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(107,127,163,0.18)' }}>
+              03°08′N · 101°41′E
+            </span>
+          </motion.div>
+        </>
+      )}
     </div>
   );
 };
