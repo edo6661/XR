@@ -62,12 +62,17 @@ type Phase = 'globe' | 'boot' | 'reveal';
  * step 4  BOOM — 3 glassmorphic tiles fly in
  * step 5  done (scroll hint live; scroll → hero closes → About Us)
  */
+/**
+ * Tightened for the client's "zap zap FAST" note — each line snaps in under a
+ * second, the double-zap fires, then the logo + tiles land in quick succession.
+ * Total cold open ≈ 3.4s (was ~4s) so it reads energetic, not sluggish.
+ */
 const STEP_TIMELINE: { at: number; step: number }[] = [
-  { at: 1000, step: 1 },
-  { at: 2000, step: 2 },
-  { at: 2420, step: 3 },
-  { at: 3180, step: 4 },
-  { at: 3980, step: 5 },
+  { at: 820, step: 1 },
+  { at: 1640, step: 2 },
+  { at: 2320, step: 3 },
+  { at: 3020, step: 4 },
+  { at: 3700, step: 5 },
 ];
 const LAST_STEP = 5;
 
@@ -126,7 +131,9 @@ const HeroSection = () => {
   );
 
   const handleScrollDown = () => {
-    document.getElementById('choose-experience')?.scrollIntoView({ behavior: 'smooth' });
+    // The hero is a pinned StackedSection; scrolling one viewport closes it and
+    // brings the About Us section up underneath (the client's desired beat).
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
   // Derived stage flags
@@ -200,7 +207,16 @@ const HeroSection = () => {
       {/* ── The "zap zap" cold open (sits above everything, then unmounts) ── */}
       {!prefersReducedMotion && <HeroIntroOverlay step={step} />}
 
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 pt-20 sm:pt-24 pb-12 gap-2 sm:gap-4">
+      <motion.div
+        className="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 pt-20 sm:pt-24 pb-12 gap-2 sm:gap-4"
+        // Camera-shake the whole stage the instant the tiles BOOM in.
+        animate={
+          showTiles && !prefersReducedMotion
+            ? { x: [0, -7, 6, -4, 3, -1.5, 0], y: [0, 5, -4, 3, -2, 1, 0] }
+            : { x: 0, y: 0 }
+        }
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <AnimatePresence>
           {showLogo && (
             <motion.div
@@ -235,6 +251,33 @@ const HeroSection = () => {
                     transition={{ duration: 1.05, ease: 'easeOut' }}
                     aria-hidden="true"
                   />
+                  {/* Spark burst — shards of light fly outward as the logo lands */}
+                  {Array.from({ length: 14 }).map((_, i) => {
+                    const angle = (i / 14) * Math.PI * 2;
+                    const dist = 150 + (i % 3) * 46;
+                    return (
+                      <motion.span
+                        key={i}
+                        className="absolute left-1/2 top-[40%] rounded-full pointer-events-none"
+                        style={{
+                          zIndex: -1,
+                          width: i % 2 === 0 ? 3 : 2,
+                          height: i % 2 === 0 ? 3 : 2,
+                          background: i % 3 === 0 ? '#fdba74' : '#7dd3fc',
+                          boxShadow: `0 0 8px ${i % 3 === 0 ? '#fb923c' : '#38bdf8'}`,
+                        }}
+                        initial={{ x: 0, y: 0, opacity: 0, scale: 1 }}
+                        animate={{
+                          x: Math.cos(angle) * dist,
+                          y: Math.sin(angle) * dist,
+                          opacity: [0, 1, 0],
+                          scale: [1, 0.3],
+                        }}
+                        transition={{ duration: 0.85, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
+                        aria-hidden="true"
+                      />
+                    );
+                  })}
                 </>
               )}
               <HeroLogo showText={false} />
@@ -267,7 +310,7 @@ const HeroSection = () => {
         </motion.h2>
 
         <HeroGatewayTiles active={showTiles} />
-      </div>
+      </motion.div>
 
       {/* Scroll hint — pulled out of the content flow so it can never push the
           tiles off-screen on short / windowed viewports. */}

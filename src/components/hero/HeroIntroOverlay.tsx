@@ -20,20 +20,27 @@ type HeroIntroOverlayProps = {
 };
 
 const lineVariants: Variants = {
-  initial: { opacity: 0, y: 22, scale: 1.08, filter: 'blur(16px)' },
+  initial: { opacity: 0, y: 18, scale: 1.1, filter: 'blur(18px)' },
   enter: {
     opacity: 1,
     y: 0,
     scale: 1,
     filter: 'blur(0px)',
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+    // Snappier than before + a quick chromatic-split flicker so each line
+    // "zaps" into place instead of gently fading.
+    textShadow: [
+      '3px 0 rgba(56,189,248,0.9), -3px 0 rgba(251,146,60,0.9)',
+      '1px 0 rgba(56,189,248,0.5), -1px 0 rgba(251,146,60,0.5)',
+      '0px 0 rgba(0,0,0,0)',
+    ],
+    transition: { duration: 0.42, ease: [0.16, 1, 0.3, 1] as const },
   },
   exit: {
     opacity: 0,
-    y: -18,
-    scale: 0.98,
+    y: -16,
+    scale: 0.97,
     filter: 'blur(12px)',
-    transition: { duration: 0.3, ease: [0.4, 0, 1, 1] as const },
+    transition: { duration: 0.24, ease: [0.4, 0, 1, 1] as const },
   },
 };
 
@@ -98,7 +105,7 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
                     letterSpacing: '0.01em',
                   }}
                 >
-                  The Internet was <span style={{ color: 'rgba(107,127,163,0.7)' }}>flat.</span>
+                  The Internet is <span style={{ color: 'rgba(107,127,163,0.7)' }}>flat…</span>
                 </motion.h2>
               )}
 
@@ -143,26 +150,80 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
             </AnimatePresence>
           </div>
 
-          {/* ── ZAP: a fast double light-flash ── */}
+          {/* ── ZAP ZAP: two hard light-flashes that tear the veil away ── */}
           {step === 2 && (
             <>
+              {/* The double flash itself — two distinct white pulses ("zap zap") */}
               <motion.div
                 className="absolute inset-0 z-20 bg-white"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 0.95, 0.15, 0.85, 0] }}
-                transition={{ duration: 0.5, times: [0, 0.15, 0.45, 0.6, 1], ease: 'easeOut' }}
+                animate={{ opacity: [0, 1, 0.05, 0, 0.95, 0] }}
+                transition={{
+                  duration: 0.62,
+                  times: [0, 0.1, 0.26, 0.4, 0.52, 1],
+                  ease: 'easeOut',
+                }}
                 aria-hidden="true"
               />
-              {/* horizontal scan streak */}
+
+              {/* RGB-split punch — cyan + orange flashes offset for a glitch hit */}
+              <motion.div
+                className="absolute inset-0 z-20 mix-blend-screen"
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: [0, 0.8, 0, 0.7, 0], x: [-18, 14, -10, 8, 0] }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                style={{ background: 'radial-gradient(circle at 50% 50%, rgba(56,189,248,0.6), transparent 60%)' }}
+                aria-hidden="true"
+              />
+              <motion.div
+                className="absolute inset-0 z-20 mix-blend-screen"
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: [0, 0.7, 0, 0.6, 0], x: [18, -14, 10, -8, 0] }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+                style={{ background: 'radial-gradient(circle at 50% 50%, rgba(251,146,60,0.55), transparent 60%)' }}
+                aria-hidden="true"
+              />
+
+              {/* Electric bolt streaks — quick diagonal cracks of light */}
+              {[18, 42, 63, 81].map((top, i) => (
+                <motion.div
+                  key={top}
+                  className="absolute left-[-10%] right-[-10%] z-20 origin-center"
+                  style={{
+                    top: `${top}%`,
+                    height: i % 2 === 0 ? 2 : 1,
+                    rotate: i % 2 === 0 ? -8 : 6,
+                    background:
+                      'linear-gradient(90deg, transparent, rgba(125,211,252,0.9) 35%, #ffffff 50%, rgba(251,146,60,0.9) 65%, transparent)',
+                    boxShadow: '0 0 12px rgba(125,211,252,0.7)',
+                  }}
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: [0, 1, 1], opacity: [0, 1, 0] }}
+                  transition={{ duration: 0.34, delay: i * 0.045, ease: [0.22, 1, 0.36, 1] }}
+                  aria-hidden="true"
+                />
+              ))}
+
+              {/* Vertical scan streak sweeping down as the reveal lands */}
               <motion.div
                 className="absolute left-0 right-0 z-20 h-[40%]"
                 initial={{ top: '-40%', opacity: 0 }}
                 animate={{ top: ['-40%', '110%'], opacity: [0, 1, 0] }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   background:
                     'linear-gradient(to bottom, transparent, rgba(125,211,252,0.25) 70%, rgba(255,255,255,0.9) 100%)',
                 }}
+                aria-hidden="true"
+              />
+
+              {/* Shockwave ring blasting outward from centre */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full"
+                style={{ border: '2px solid rgba(125,211,252,0.6)' }}
+                initial={{ width: 40, height: 40, opacity: 0 }}
+                animate={{ width: [40, 1400], height: [40, 1400], opacity: [0.9, 0] }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 aria-hidden="true"
               />
             </>
