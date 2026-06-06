@@ -49,7 +49,7 @@ const VIDEO_BACKDROPS: Record<Exclude<BackdropId, 'globe'>, HeroVideoConfig> = {
   },
 };
 
-const ACTIVE_BACKDROP = 'spatial' as BackdropId;
+const ACTIVE_BACKDROP = 'globe-3d' as BackdropId;
 
 type Phase = 'globe' | 'boot' | 'reveal';
 
