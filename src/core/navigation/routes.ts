@@ -30,10 +30,18 @@ export const COMPANY = {
 } as const;
 
 export const SOCIAL_LINKS = [
-  { label: "LinkedIn", href: "https://linkedin.com/company/xr-summits" },
-  { label: "X (Twitter)", href: "https://twitter.com/xrsummits" },
-  { label: "Instagram", href: "https://instagram.com/xrsummits" },
-  { label: "YouTube", href: "https://youtube.com/@xrsummits" },
-  { label: "Facebook", href: "https://facebook.com/xrsummits" },
-  { label: "TikTok", href: "https://tiktok.com/@xrsummits" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/xr-summits/posts/?feedView=all",
+  },
+  {
+    label: "YouTube",
+    href: "http://www.youtube.com/@XR-SUMMITS?sub_confirmation=1",
+  },
+  { label: "TikTok", href: "https://www.tiktok.com/@xrsummits" },
+  { label: "Instagram", href: "https://www.instagram.com/xrsummits" },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61583955069948",
+  },
 ] as const;

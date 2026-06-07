@@ -12,6 +12,7 @@ interface GatewayCardProps {
   to: string;
   accentColor: string;
   glowColor?: string;
+  cta?: string;
   tag: string;
   icon: React.ReactNode;
   isCenter?: boolean;
@@ -24,6 +25,7 @@ const GatewayCard = ({
   description,
   to,
   accentColor,
+  cta = "Explore",
   tag,
   icon,
   isCenter = false,
@@ -34,18 +36,12 @@ const GatewayCard = ({
   const arrowRef = useRef<HTMLSpanElement>(null);
   const borderRef = useRef<HTMLDivElement>(null);
 
-  // Referensi untuk GSAP quickTo agar tidak membuat instance baru setiap mouse geser
-  const xTo = useRef<gsap.QuickToFunc | null>(null);
-  const yTo = useRef<gsap.QuickToFunc | null>(null);
+
   const glowXTo = useRef<gsap.QuickToFunc | null>(null);
   const glowYTo = useRef<gsap.QuickToFunc | null>(null);
 
   useEffect(() => {
     if (!cardRef.current || !glowRef.current) return;
-
-    // Membangun animasi di awal (hanya 1 kali eksekusi saat mount)
-    xTo.current = gsap.quickTo(cardRef.current, "rotateY", { duration: 0.55, ease: "power2.out" });
-    yTo.current = gsap.quickTo(cardRef.current, "rotateX", { duration: 0.55, ease: "power2.out" });
     glowXTo.current = gsap.quickTo(glowRef.current, "x", { duration: 0.4, ease: "power2.out" });
     glowYTo.current = gsap.quickTo(glowRef.current, "y", { duration: 0.4, ease: "power2.out" });
   }, []);
@@ -58,27 +54,27 @@ const GatewayCard = ({
     const cx = rect.width / 2;
     const cy = rect.height / 2;
 
-    // Masukkan angka/koordinat baru ke dalam instance yang sudah dibuat
-    if (xTo.current) xTo.current(((x - cx) / cx) * (isCenter ? 4 : 3.5));
-    if (yTo.current) yTo.current(((y - cy) / cy) * (isCenter ? -4 : -3.5));
+    // Gunakan gsap.to biasa untuk rotasi agar tidak muncul warning "not eligible for reset"
+    gsap.to(cardRef.current, {
+      rotateY: ((x - cx) / cx) * (isCenter ? 4 : 3.5),
+      rotateX: ((y - cy) / cy) * (isCenter ? -4 : -3.5),
+      duration: 0.5,
+      ease: "power2.out",
+      overwrite: "auto"
+    });
+
     if (glowXTo.current) glowXTo.current(x - cx);
     if (glowYTo.current) glowYTo.current(y - cy);
 
-    // Opacity cukup pakai gsap.to biasa dan tambahkan overwrite auto
     gsap.to(glowRef.current, {
       opacity: isCenter ? 0.14 : 0.09,
       duration: 0.4,
       overwrite: 'auto'
     });
   }, [isCenter]);
-
   const handleMouseEnter = useCallback(() => {
-    if (contentRef.current) {
-      gsap.to(contentRef.current, { y: -4, duration: 0.5, ease: 'power3.out' });
-    }
-    if (arrowRef.current) {
-      gsap.to(arrowRef.current, { x: 5, opacity: 1, duration: 0.35, ease: 'power2.out' });
-    }
+    if (contentRef.current) gsap.to(contentRef.current, { y: -4, duration: 0.5, ease: 'power3.out' });
+    if (arrowRef.current) gsap.to(arrowRef.current, { x: 5, opacity: 1, duration: 0.35, ease: 'power2.out' });
     if (borderRef.current) {
       borderRef.current.style.borderColor = `${accentColor}3a`;
       borderRef.current.style.boxShadow = `0 0 40px ${accentColor}12, 0 28px 56px rgba(0,0,0,0.45)`;
@@ -88,18 +84,12 @@ const GatewayCard = ({
   const handleMouseLeave = useCallback(() => {
     if (!cardRef.current || !glowRef.current) return;
 
-    // Reset rotasi posisi 3D ke 0 melalui quickTo
-    if (xTo.current) xTo.current(0);
-    if (yTo.current) yTo.current(0);
-
+    // Kembalikan rotasi ke 0 dengan gsap.to
+    gsap.to(cardRef.current, { rotateY: 0, rotateX: 0, duration: 0.65, ease: "power3.out", overwrite: "auto" });
     gsap.to(glowRef.current, { opacity: 0, duration: 0.45, overwrite: 'auto' });
 
-    if (contentRef.current) {
-      gsap.to(contentRef.current, { y: 0, duration: 0.65, ease: 'power3.out' });
-    }
-    if (arrowRef.current) {
-      gsap.to(arrowRef.current, { x: 0, opacity: 0.5, duration: 0.35 });
-    }
+    if (contentRef.current) gsap.to(contentRef.current, { y: 0, duration: 0.65, ease: 'power3.out' });
+    if (arrowRef.current) gsap.to(arrowRef.current, { x: 0, opacity: 0.5, duration: 0.35 });
     if (borderRef.current) {
       borderRef.current.style.borderColor = `${accentColor}${isCenter ? '30' : '18'}`;
       borderRef.current.style.boxShadow = isCenter
@@ -107,24 +97,15 @@ const GatewayCard = ({
         : '0 12px 32px rgba(0,0,0,0.25)';
     }
   }, [accentColor, isCenter]);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: index * 0.1,
-        duration: 0.9,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className="relative w-full"
-      style={{
-        perspective: '1000px',
-        height: isCenter ? '370px' : '330px',
-        transition: 'height 0.4s ease'
-      }}
+      transition={{ delay: index * 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      className="relative w-full h-full flex"
+      style={{ perspective: '1000px' }}
     >
-      <Link to={to} className="block h-full cursor-none">
+      <Link to={to} className="block w-full h-full cursor-none flex-1">
         <div
           ref={cardRef}
           onMouseMove={handleMouseMove}
@@ -286,7 +267,7 @@ const GatewayCard = ({
                       className="text-[0.64rem] font-bold tracking-[0.2em] uppercase"
                       style={{ color: accentColor, opacity: 0.7 }}
                     >
-                      Explore
+                      {cta}
                     </span>
                     <span
                       ref={arrowRef}

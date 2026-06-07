@@ -296,7 +296,7 @@ const HeroSection = () => {
             letterSpacing: '0.01em',
           }}
         >
-          Join us to the{' '}
+          This is the Next Phase where Asia Builds Its {' '}
           <span
             style={{
               background: 'linear-gradient(120deg, #fb923c 0%, #fdba74 100%)',
@@ -305,7 +305,7 @@ const HeroSection = () => {
               backgroundClip: 'text',
             }}
           >
-            Immersive Spatial Future
+            Spatial Future
           </span>
         </motion.h2>
 
@@ -319,7 +319,7 @@ const HeroSection = () => {
         animate={{ opacity: showHint ? 1 : 0, y: showHint ? 0 : 10 }}
         transition={{ duration: 0.8, delay: showHint ? 0.2 : 0 }}
         onClick={handleScrollDown}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 group hidden sm:flex flex-col items-center gap-2 cursor-pointer"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 group hidden sm:flex flex-col items-center gap-2 cursor-pointer"
         aria-label="Scroll to Choose Your Experience"
         style={{ pointerEvents: showHint ? 'auto' : 'none' }}
       >
@@ -327,7 +327,7 @@ const HeroSection = () => {
           className="font-bold tracking-[0.55em] uppercase transition-colors duration-300 group-hover:text-accent"
           style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.4)' }}
         >
-          Or scroll to explore
+          Experience More
         </span>
         <div className="relative w-px h-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
           <motion.div

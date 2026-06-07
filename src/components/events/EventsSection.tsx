@@ -58,31 +58,31 @@ const UPCOMING_EVENTS = [
 const PAST_EVENTS = [
   {
     year: '2021',
-    title: 'Inaugural XR Asia Summit 2021',
+    title: 'XR Asia Summit',
     attendees: '100+',
     speakers: '25+',
     highlight:
-      'The inaugural XR Asia Summit — a pioneering event that set the benchmark for immersive technology conferences in Asia, held 25–27 Nov.',
+      '',
     imageSrc: '/event-highlight-images/XRAS22 (a).png',
     accentColor: '#a78bfa',
   },
   {
     year: '2022',
-    title: 'XR Asia Summit 2022',
+    title: '2nd XR Asia Summit ',
     attendees: '200+',
     speakers: '30+',
     highlight:
-      'Dynamic gathering featuring XR solutions showcase and hands-on workshops, 11–13 Nov. First dedicated Broadcast Digital Awards ceremony.',
+      'The 2nd XR Asia Summits was a dynamic gathering that brought together leading minds and influencers in the Extended Reality industry, featuring an innovative XR solutions showcase, hands-on workshops, and engaging sessions that provided participants with the opportunity to explore cutting-edge technologies, exchange insights, and expand their professional network — leaving attendees inspired and eager to embrace the future of XR. ',
     imageSrc: '/event-highlight-images/XRAS22 (b).png',
     accentColor: '#22d3ee',
   },
   {
     year: '2023',
-    title: 'XR Asia Summit 2023',
+    title: '3rd XR Asia Summit',
     attendees: '500+',
     speakers: '40+',
     highlight:
-      'Held as part of Malaysia Digital Content Festival, 27–29 Sep — a landmark collaboration between Broadcast Elements and MDEC that brought together Southeast Asia\'s XR community.',
+      "The 3rd XR Asia Summits brought together leading experts and visionaries across Virtual Production, XR technology, and immersive tech. Held as part of the Malaysia Digital Content Festival 2023, the Summit's Conference, Workshops, and Expo was a joint collaboration between Broadcast Elements Sdn Bhd and the Malaysia Digital Economy Corporation(MDEC), reinforcing its position as a premier platform for driving innovation and industry collaboration within the XR ecosystem.",
     imageSrc: '/event-highlight-images/XRAS23 (a).png',
     accentColor: '#fb923c',
   },
@@ -283,42 +283,7 @@ const EventsSection = () => {
           ))}
         </div>
 
-        {/* Placeholder for XRAS21 */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="mt-3 rounded-xl px-6 py-5 flex items-center justify-between gap-4"
-          style={{
-            border: '1px dashed rgba(255,255,255,0.1)',
-            background: 'rgba(255,255,255,0.02)',
-          }}
-        >
-          <div className="flex items-center gap-4">
-            <div
-              className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 font-heading font-black text-foreground-muted/40"
-              style={{
-                fontSize: '0.85rem',
-                border: '1px dashed rgba(255,255,255,0.1)',
-                background: 'rgba(255,255,255,0.02)',
-              }}
-            >
-              '21
-            </div>
-            <div>
-              <p className="font-heading font-bold text-foreground" style={{ fontSize: '0.82rem' }}>
-                XR Asia Summit 2021
-              </p>
-              <p style={{ fontSize: '0.65rem', color: 'rgba(107,127,163,0.5)' }}>
-                25–27 Nov · 100+ Attendees · Photo archive coming soon
-              </p>
-            </div>
-          </div>
-          <span className="font-mono text-[0.5rem] tracking-[0.28em] uppercase text-foreground-muted/35">
-            Inaugural
-          </span>
-        </motion.div>
+
       </div>
     </section>
   );

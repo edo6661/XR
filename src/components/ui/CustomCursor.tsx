@@ -60,7 +60,7 @@ const CustomCursor = () => {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[9999]"
+        className="fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[100001]"
         style={{
           x: cursorX,
           y: cursorY,
@@ -72,7 +72,7 @@ const CustomCursor = () => {
         transition={{ duration: 0.15 }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-accent rounded-full pointer-events-none z-[9998] flex items-center justify-center"
+        className="fixed top-0 left-0 w-8 h-8 border border-accent rounded-full pointer-events-none z-[100000] flex items-center justify-center"
         style={{
           x: outerX,
           y: outerY,

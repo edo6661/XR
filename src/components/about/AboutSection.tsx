@@ -30,26 +30,34 @@ const CommunityIcon = () => (
 const PILLARS = [
   {
     icon: <EventIcon />,
-    title: 'Premier Event Organiser',
+    title: 'Centralised AI Creation',
     description:
-      'World-class Virtual Production, XR, and Immersive Technology events connecting Asia\u2019s leading innovators with global industry.',
+      'Efficiently manage all AI content creation from a single, integrated hub.',
     accentColor: '#fb923c',
     isFeatured: true,
   },
   {
     icon: <MasterclassIcon />,
-    title: 'World-Class Masterclass',
+    title: 'Flexible & Customisable',
     description:
-      'Expert-led intensives on XR & AI, virtual production techniques, and spatial storytelling for creators and enterprise teams.',
+      'Access scalable service tiers that adapt precisely to your evolving project demands.',
     accentColor: '#22d3ee',
     isFeatured: false,
   },
   {
     icon: <CommunityIcon />,
-    title: 'Global XR Community',
+    title: 'Expert Support',
     description:
-      'Connect with brilliant minds and receive expert advice through our growing pan-Asia network of industry leaders and innovators.',
+      'Benefit from expert creative support and cutting-edge immersive technology integration.',
     accentColor: '#a78bfa',
+    isFeatured: false,
+  },
+  {
+    icon: <CommunityIcon />,
+    title: 'Optimised Productivity',
+    description:
+      'Save valuable time, significantly reduce costs, and dramatically boost overall productivity.',
+    accentColor: '#4ade80',
     isFeatured: false,
   },
 ];
@@ -257,7 +265,7 @@ const AboutSection = () => {
               AVXR, immersive technologies, and the evolving future of esports.
             </p>
             <p data-para style={{ fontSize: '0.85rem', color: 'rgba(107,127,163,0.9)', lineHeight: 1.8 }}>
-              It serves as the region\u2019s central hub for showcasing production-ready solutions and forging
+              It serves as the region's central hub for showcasing production-ready solutions and forging
               high-value commercial partnerships. XR Summits represents a decisive shift in the immersive industry.
             </p>
             <p
@@ -268,27 +276,7 @@ const AboutSection = () => {
               Deployment Ready. Innovation in Action. Reality Redefined.
             </p>
 
-            <motion.a
-              data-para
-              href="#events"
-              className="inline-flex items-center gap-2 w-fit group"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.25 }}
-            >
-              <span
-                className="font-bold tracking-[0.22em] uppercase transition-colors duration-300 group-hover:text-foreground"
-                style={{ fontSize: '0.7rem', color: '#fb923c' }}
-              >
-                Explore Events
-              </span>
-              <span
-                className="text-sm transition-all duration-300 group-hover:translate-x-1"
-                style={{ color: 'rgba(251,146,60,0.7)' }}
-                aria-hidden="true"
-              >
-                →
-              </span>
-            </motion.a>
+
           </div>
         </div>
 

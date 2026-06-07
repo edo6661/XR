@@ -29,20 +29,20 @@ const HackathonIcon = () => (
  */
 const EVENT_GATEWAYS = [
   {
-    title: "XRAS KL 26'",
-    subtitle: '4th Edition · Kuala Lumpur',
+    title: "4th XR Asia Summits 2026",
+    subtitle: '1 - 3 December 2026',
     description:
-      'Flagship summit — conference, expo, workshops, coaching, masterclasses, hackathon & esports grand finals, and the AI/XR Awards Gala Dinner. 1–3 Dec 2026, MITEC.',
+      'Malaysia International Trade and Exhibition Centre',
     to: '/xras-kl-2026',
     accentColor: '#fb923c',
     tag: 'XRAS26',
     icon: <XRIcon />,
   },
   {
-    title: "AIXR 26' Sarawak",
-    subtitle: 'Regional · Sarawak',
+    title: "AI-XR Cultural Innovation Forum",
+    subtitle: '16 - 17 October 2026',
     description:
-      'Innovation • Culture • Technology • Future Talent — conference, expo, workshops, and semi-finals. 16–17 Oct 2026, BCCK.',
+      'Borneo Convention Centre Kuching (BCCK)',
     to: '/aixr-2026-sarawak',
     accentColor: '#22d3ee',
     tag: 'AIXR',
@@ -50,9 +50,9 @@ const EVENT_GATEWAYS = [
   },
   {
     title: 'AI Filmmaking Hackathon',
-    subtitle: 'Grand Finals · XRAS KL',
+    subtitle: '',
     description:
-      'Teams compete with AI-generated films before industry judges and live audiences. Semi-finals at AIXR Sarawak, grand finals at XRAS KL.',
+      '',
     to: '/xras-kl-2026',
     accentColor: '#a78bfa',
     tag: 'Hackathon',
@@ -113,6 +113,7 @@ const ChooseExperienceSection = () => (
             index={index}
             {...gateway}
             isCenter={index === 0}
+            cta='Join the Movement'
           />
         ))}
       </div>

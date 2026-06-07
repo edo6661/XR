@@ -1,110 +1,123 @@
-export const ABOUT_ACCENT = "#fb923c";
+export const ABOUT_ACCENT = "#ef783d";
 
 export const COMPANY_OVERVIEW = {
   title:
     "The Definitive Platform Connecting Innovators Across Asia's Immersive Future",
   body: [
-    "XR Summits Sdn Bhd is the definitive platform connecting innovators across Extended Reality (XR), Spatial Media, AVXR, immersive technologies, and the evolving future of esports. It serves as the region's central hub for showcasing production-ready solutions and forging high-value commercial partnerships.",
-    "XR Summits represents a decisive shift in the immersive industry — Deployment Ready. Innovation in Action. Reality Redefined.",
+    "XR Asia Summits (XRAS), founded by Louis Clovis, is a premier AI XR EVENT focused on the latest advancements in AI, Virtual, Augmented, and Extended Reality (XR). The three-day summit connects global XR creators and industry leaders, showcasing innovative production techniques and immersive, story-driven content.",
+    "The event features live sessions from top global speakers, covering industries such as film, broadcast, virtual travel, gaming /esports and education. XRAS also offers virtual networking and presentations, fostering discussions on how XR technology is transforming XR storytelling and shaping the future of immersive experiences.",
   ],
 } as const;
 
 export const OUR_MISSION = {
-  title: "Connecting ecosystems. Accelerating deployment.",
-  body: "Our mission is to unite Asia\u2019s immersive technology ecosystem through flagship summits, regional gateways, and year-round programmes that turn innovation into measurable outcomes \u2014 for enterprise, culture, education, and future talent. We advance XR production, connect leaders, and support real-world adoption across ASEAN and beyond.",
+  title: "Double business with half the impact.",
+  body: "Our mission is to advance XR production techniques, foster upskilling opportunities, and highlight case studies on immersive, story-driven content. By connecting top XR creators and industry leaders from around the globe, XR Summits serves as a catalyst for innovation in XR technology and storytelling via it’s signature event XR Asia Summits.",
+  highlight:
+    "Connecting industry leaders, creators, educators, broadcasters, governments and technology innovators through deployment-ready immersive experiences.",
 } as const;
 
-export const INDUSTRY_FOCUS_PILLARS = [
+export const WHY_XR_PILLARS = [
   {
-    title: "Premier Event Organiser",
+    title: "Centralised AI Creation",
     description:
-      "Delivering world-class Virtual Production, XR, and Immersive Technology events that connect Asia\u2019s leading innovators with global industry.",
-    accentColor: "#fb923c",
+      "Efficiently manage all AI content creation from a single, integrated hub.",
+    accentColor: "#ef783d",
     featured: true,
   },
   {
-    title: "World-Class Masterclass",
+    title: "Flexible & Customisable",
     description:
-      "Expert-led intensives on XR & AI, virtual production techniques, and spatial storytelling for creators and enterprise teams.",
-    accentColor: "#22d3ee",
+      "Access scalable service tiers that adapt precisely to your evolving project demands.",
+    accentColor: "#3953a3",
     featured: false,
   },
   {
-    title: "Global XR Community",
+    title: "Expert Support",
     description:
-      "Connect with brilliant minds and receive expert advice through our growing pan-Asia network of industry leaders and innovators.",
-    accentColor: "#a78bfa",
+      "Benefit from expert creative support and cutting-edge immersive technology integration.",
+    accentColor: "#fedb21",
     featured: false,
   },
   {
-    title: "Talent & Future Development",
+    title: "Optimised Productivity",
     description:
-      "Film, esports, hackathons, and masterclasses developing the next generation of immersive creators and spatial computing professionals.",
-    accentColor: "#4ade80",
+      "Save valuable time, significantly reduce costs, and dramatically boost overall productivity.",
+    accentColor: "#ef783d",
     featured: false,
   },
 ] as const;
 
-export const REGIONAL_NETWORK_PILLARS = [
-  {
-    title: "Kuala Lumpur Flagship",
-    description:
-      "XRAS KL hosts the conference, expo, grand finals, and AI/XR Awards Gala \u2014 the anchor of the regional calendar. 1\u20133 Dec 2026, MITEC.",
-    accentColor: "#fb923c",
-    featured: true,
-  },
-  {
-    title: "Sarawak Regional Gateway",
-    description:
-      "AIXR Sarawak extends the network with culture-forward programming, semi-finals, and Borneo talent development. 16\u201317 Oct 2026, BCCK.",
-    accentColor: "#22d3ee",
-    featured: false,
-  },
-  {
-    title: "Pan-Asia Network",
-    description:
-      "Partnerships with governments, universities, studios, and global technology leaders across ASEAN and beyond.",
-    accentColor: "#d9b27a",
-    featured: false,
-  },
-] as const;
+export const INDUSTRY_FOCUS = {
+  description:
+    "XR Summits focus on how immersive technologies like Virtual Reality (VR), Augmented Reality (AR), and Extended Reality (XR) are transforming various industries. Key sectors include:",
+  sectors: [
+    {
+      title: "Film & Broadcast",
+      desc: "Virtual sets and real-time effects are revolutionising production.",
+    },
+    {
+      title: "Education",
+      desc: "XR creates engaging, experiential learning environments.",
+    },
+    {
+      title: "Virtual Travel & Tourism",
+      desc: "Immersive tools allow virtual exploration of destinations.",
+    },
+    {
+      title: "Events & Entertainment",
+      desc: "XR enhances live performances and audience interaction.",
+    },
+    {
+      title: "Gaming & Esports",
+      desc: "XR innovations drive immersive gameplay and competitions.",
+    },
+  ],
+  footer:
+    "XR Summits explore the latest trends and innovations across these sectors, showcasing how XR is reshaping industries.",
+} as const;
+
+export const AWARDS_RECOGNITION = {
+  intro:
+    "The XR Asia Summit is to honor XR content development in Malaysia & Asia regardless of it size or location, which shows excellence in all aspects of their creation. It is also known as the “OSCAR” award for the film, broadcast, gaming and education in AR/VR/XR development. The XR Asia Awards would lead up to be a prestigious award that many content creators desire as a benchmark for excellence in their amazing talent and work. It represents highest accolades and standards of professionalism.",
+  invitation:
+    "We cordially invite you to join this black-tie event, come to network with industry peers, meet old friends and make new ones while celebrating the achievements of our Winners and Awards Recipients.",
+  sections: [
+    {
+      title: "WHY ATTEND",
+      desc: "The XR Asia Awards ceremony promises to be a brilliant night of celebration, recognising the Asia’s best digital content and creators. Don’t miss out on your chance to celebrate with your peers, clients and the wider industry by joining us on the night. We look forward to seeing you on the night and, if you’re entering the awards, wish you the best of luck with your entry.",
+    },
+    {
+      title: "AWARDS NIGHT",
+      desc: "Winning a XR Asia Award is a huge accolade, and the awards night is a massive celebration of your success, showcasing your talents in front of more than 600 of your peers and clients.",
+    },
+    {
+      title: "WHY ENTER?",
+      desc: "The awards celebrate Asia’s very best digital content & creators with focus on emphasising the context of how shows and channels perform. The judges assess entries based on their understanding of the industry, as well as the resources available to broadcasters and producers.",
+    },
+    {
+      title: "JUDGING PROCESS",
+      desc: "The awards are judged by a panel of more than 10 industry experts, handpicked by the Broadcast team. The judges are split into groups, and each allocated a category.",
+    },
+  ],
+} as const;
 
 export const TRACK_RECORD = [
   {
     year: "2021",
-    title: "Inaugural XR Asia Summit",
-    detail:
-      "25\u201327 Nov. First edition establishes KL as a regional immersive hub with 100+ attendees.",
+    title: "XR Asia Summit",
+    detail: "The inaugural summit welcomed 100+ attendees and 25+ speakers to kick off Asia's immersive technology gathering.",
   },
   {
     year: "2022",
-    title: "XR Asia Summit + Broadcast Digital Awards",
+    title: "2nd XR Asia Summit",
     detail:
-      "11\u201313 Nov. 200+ attendees. Dynamic gathering featuring XR solutions showcase, hands-on workshops, and inaugural awards ceremony.",
+      "A dynamic gathering with 200+ attendees, hands-on workshops, and an XR solutions showcase connecting industry leaders across the region.",
   },
   {
     year: "2023",
-    title: "AI \u00d7 XR Convergence — Malaysia Digital Content Festival",
+    title: "3rd XR Asia Summit",
     detail:
-      "27\u201329 Sep. 500+ attendees. Held as part of MDCF, a landmark collaboration between Broadcast Elements and MDEC.",
-  },
-  {
-    year: "2024",
-    title: "4th Edition Growth",
-    detail:
-      "Record engagement across keynotes, hackathon, and esports. 40+ workshops across all editions, 75+ partners.",
-  },
-  {
-    year: "2025",
-    title: "Regional Expansion",
-    detail:
-      "Strengthened government, university, and studio partnerships. Total 1,430+ attendees across all editions.",
-  },
-  {
-    year: "2026",
-    title: "Dual Gateway Model",
-    detail:
-      "XRAS KL flagship (MITEC, 1\u20133 Dec) plus AIXR Sarawak regional summit (BCCK, 16\u201317 Oct).",
+      "500+ attendees at the Malaysia Digital Content Festival 2023, in collaboration with MDEC — cementing XRAS as a premier regional platform.",
   },
 ] as const;
 
@@ -113,67 +126,30 @@ export const ABOUT_STATS = [
     value: 1430,
     suffix: "+",
     label: "Total Attendees",
-    sublabel: "Across all editions 2021\u20132024",
-    accentColor: "#fb923c",
+    sublabel: "Across all editions 2021–2024",
+    accentColor: "#ef783d",
   },
   {
     value: 40,
     suffix: "+",
     label: "Total Workshops",
     sublabel: "Expert-led sessions delivered",
-    accentColor: "#22d3ee",
+    accentColor: "#3953a3",
   },
   {
     value: 75,
     suffix: "+",
     label: "Partners",
     sublabel: "Government, industry & studios",
-    accentColor: "#a78bfa",
-  },
-] as const;
-
-export const AWARDS = [
-  { title: "AI/XR Innovation Award", year: "Annual", category: "Excellence" },
-  {
-    title: "Spatial Media Studio of the Year",
-    year: "Annual",
-    category: "Industry",
-  },
-  { title: "Future Talent Recognition", year: "Annual", category: "Education" },
-  {
-    title: "Government & Deployment Award",
-    year: "Annual",
-    category: "Impact",
+    accentColor: "#fedb21",
   },
 ] as const;
 
 export const STRATEGIC_PARTNER_SLOTS = 8;
-
-export const TEAM_MEMBERS = [
-  {
-    name: "Louis Clovis",
-    role: "Founder & Summit Director",
-    department: "Executive",
-  },
-  { name: "Programme", role: "Head of Content", department: "Operations" },
-  { name: "Partnerships", role: "Strategic Alliances", department: "Growth" },
-  { name: "Experience", role: "Immersive Production", department: "Creative" },
-  { name: "Regional", role: "Sarawak Gateway Lead", department: "AIXR" },
-  { name: "Community", role: "Talent & Hackathon", department: "Engagement" },
-] as const;
 
 export const MEDIA_PRESS = [
   { outlet: "Press Release", type: "Announcement", date: "2026" },
   { outlet: "Industry Coverage", type: "Feature", date: "Placeholder" },
   { outlet: "Photo Gallery", type: "Media Kit", date: "Coming soon" },
   { outlet: "Accreditation", type: "Press Pass", date: "Apply via Contact" },
-] as const;
-
-/** Industry sectors XR Summits covers */
-export const INDUSTRY_SECTORS = [
-  "Film & Broadcast",
-  "Education",
-  "Virtual Travel & Tourism",
-  "Events & Entertainment",
-  "Gaming & Esports",
 ] as const;

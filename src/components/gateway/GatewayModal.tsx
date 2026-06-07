@@ -1,6 +1,8 @@
 import { useEffect, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
+import { lenisInstance } from '../../lib/lenisInstance';
 
 type GatewayModalProps = {
   open: boolean;
@@ -13,18 +15,34 @@ type GatewayModalProps = {
 const GatewayModal = ({ open, onClose, title, children, accentColor = '#fb923c' }: GatewayModalProps) => {
   useEffect(() => {
     if (!open) return;
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-    document.body.style.overflow = 'hidden';
+
+    const lenis = lenisInstance.current;
+    lenis?.stop();
+
+    const html = document.documentElement;
+    const { style: htmlStyle } = html;
+    const { style: bodyStyle } = document.body;
+    const prevHtmlOverflow = htmlStyle.overflow;
+    const prevBodyOverflow = bodyStyle.overflow;
+
+    htmlStyle.overflow = 'hidden';
+    bodyStyle.overflow = 'hidden';
+
     window.addEventListener('keydown', onKey);
+
     return () => {
-      document.body.style.overflow = '';
+      htmlStyle.overflow = prevHtmlOverflow;
+      bodyStyle.overflow = prevBodyOverflow;
+      lenis?.start();
       window.removeEventListener('keydown', onKey);
     };
   }, [open, onClose]);
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -32,7 +50,7 @@ const GatewayModal = ({ open, onClose, title, children, accentColor = '#fb923c' 
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6"
+          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 bg-[#050505]/90 backdrop-blur-sm overscroll-none"
           role="dialog"
           aria-modal="true"
           aria-labelledby="gateway-modal-title"
@@ -49,7 +67,7 @@ const GatewayModal = ({ open, onClose, title, children, accentColor = '#fb923c' 
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-[99999] w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-xl"
+            className="relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-xl overscroll-contain"
             style={{
               background: 'linear-gradient(155deg, rgba(22,38,62,0.96) 0%, rgba(10,20,36,0.98) 100%)',
               border: `1px solid ${accentColor}30`,
@@ -87,7 +105,8 @@ const GatewayModal = ({ open, onClose, title, children, accentColor = '#fb923c' 
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 };
 
