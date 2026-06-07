@@ -24,23 +24,23 @@ type Tile = {
 };
 const TILES: Tile[] = [
   {
-    tag: 'Flagship · KL',
+    tag: '',
     title: "XR Asia Summits",
-    subtitle: '1-3 Dec 2026 · MITEC',
+    subtitle: '',
     to: '/xras-kl-2026',
     accent: '#fb923c',
   },
   {
-    tag: 'Hackathon',
-    title: 'AI Filmmaking',
-    subtitle: 'Grand Finals',
+    tag: '',
+    title: 'AI-XR Cultural Innovation Forum',
+    subtitle: '',
     to: '/xras-kl-2026',
     accent: '#a855f7',
   },
   {
-    tag: 'Forum · Sarawak',
-    title: 'AI-XR Cultural Forum',
-    subtitle: '16-17 Oct 2026 · BCCK',
+    tag: '',
+    title: 'AI Filmmaking Hackathon',
+    subtitle: '',
     to: '/aixr-2026-sarawak',
     accent: '#22d3ee',
   },
@@ -215,7 +215,7 @@ const TileCard = ({
 
             <div className="relative z-10 flex flex-col h-full p-5">
               <span
-                className="self-start text-[0.52rem] font-bold tracking-[0.3em] uppercase px-2 py-1 rounded-sm"
+                className="self-start text-[0.52rem] font-bold tracking-[0.3em] uppercase px-2 py-1 rounded-sm mb-2"
                 style={{
                   color: tile.accent,
                   background: `${tile.accent}16`,

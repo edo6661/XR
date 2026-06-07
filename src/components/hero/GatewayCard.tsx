@@ -1,18 +1,21 @@
 import { useRef, useCallback, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import TracerBorder from '../ui/TracerBorder';
+
+const REGISTER_MAILTO = 'mailto:register@xr-summits.com';
 
 interface GatewayCardProps {
   index: number;
   title: string;
   subtitle: string;
   description: string;
-  to: string;
+  to?: string;
   accentColor: string;
   glowColor?: string;
   cta?: string;
+  ctaHref?: string;
   tag: string;
   icon: React.ReactNode;
   isCenter?: boolean;
@@ -26,17 +29,20 @@ const GatewayCard = ({
   to,
   accentColor,
   cta = "Explore",
+  ctaHref = REGISTER_MAILTO,
   tag,
   icon,
   isCenter = false,
 }: GatewayCardProps) => {
+  const navigate = useNavigate();
   const cardRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLAnchorElement>(null);
+  const ctaTextRef = useRef<HTMLSpanElement>(null);
   const arrowRef = useRef<HTMLSpanElement>(null);
   const borderRef = useRef<HTMLDivElement>(null);
-
-
+  const isCardHoveredRef = useRef(false);
   const glowXTo = useRef<gsap.QuickToFunc | null>(null);
   const glowYTo = useRef<gsap.QuickToFunc | null>(null);
 
@@ -54,7 +60,6 @@ const GatewayCard = ({
     const cx = rect.width / 2;
     const cy = rect.height / 2;
 
-    // Gunakan gsap.to biasa untuk rotasi agar tidak muncul warning "not eligible for reset"
     gsap.to(cardRef.current, {
       rotateY: ((x - cx) / cx) * (isCenter ? 4 : 3.5),
       rotateX: ((y - cy) / cy) * (isCenter ? -4 : -3.5),
@@ -72,7 +77,9 @@ const GatewayCard = ({
       overwrite: 'auto'
     });
   }, [isCenter]);
+
   const handleMouseEnter = useCallback(() => {
+    isCardHoveredRef.current = true;
     if (contentRef.current) gsap.to(contentRef.current, { y: -4, duration: 0.5, ease: 'power3.out' });
     if (arrowRef.current) gsap.to(arrowRef.current, { x: 5, opacity: 1, duration: 0.35, ease: 'power2.out' });
     if (borderRef.current) {
@@ -83,13 +90,19 @@ const GatewayCard = ({
 
   const handleMouseLeave = useCallback(() => {
     if (!cardRef.current || !glowRef.current) return;
-
-    // Kembalikan rotasi ke 0 dengan gsap.to
+    isCardHoveredRef.current = false;
     gsap.to(cardRef.current, { rotateY: 0, rotateX: 0, duration: 0.65, ease: "power3.out", overwrite: "auto" });
     gsap.to(glowRef.current, { opacity: 0, duration: 0.45, overwrite: 'auto' });
-
     if (contentRef.current) gsap.to(contentRef.current, { y: 0, duration: 0.65, ease: 'power3.out' });
     if (arrowRef.current) gsap.to(arrowRef.current, { x: 0, opacity: 0.5, duration: 0.35 });
+    if (ctaTextRef.current) gsap.to(ctaTextRef.current, { opacity: 0.7, duration: 0.3 });
+    if (ctaRef.current) {
+      gsap.to(ctaRef.current, {
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderTopColor: `${accentColor}12`,
+        duration: 0.3,
+      });
+    }
     if (borderRef.current) {
       borderRef.current.style.borderColor = `${accentColor}${isCenter ? '30' : '18'}`;
       borderRef.current.style.boxShadow = isCenter
@@ -97,6 +110,233 @@ const GatewayCard = ({
         : '0 12px 32px rgba(0,0,0,0.25)';
     }
   }, [accentColor, isCenter]);
+
+  const handleCtaMouseEnter = useCallback(() => {
+    if (ctaTextRef.current) gsap.to(ctaTextRef.current, { opacity: 1, duration: 0.25, ease: 'power2.out' });
+    if (arrowRef.current) gsap.to(arrowRef.current, { x: 9, opacity: 1, duration: 0.3, ease: 'power2.out' });
+    if (ctaRef.current) {
+      gsap.to(ctaRef.current, {
+        backgroundColor: `${accentColor}10`,
+        borderTopColor: `${accentColor}35`,
+        duration: 0.3,
+        ease: 'power2.out',
+      });
+    }
+  }, [accentColor]);
+
+  const handleCtaMouseLeave = useCallback(() => {
+    if (ctaTextRef.current) gsap.to(ctaTextRef.current, { opacity: 0.7, duration: 0.25 });
+    if (ctaRef.current) {
+      gsap.to(ctaRef.current, {
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderTopColor: `${accentColor}12`,
+        duration: 0.3,
+      });
+    }
+    if (arrowRef.current) {
+      const x = isCardHoveredRef.current ? 5 : 0;
+      const opacity = isCardHoveredRef.current ? 1 : 0.5;
+      gsap.to(arrowRef.current, { x, opacity, duration: 0.3, ease: 'power2.out' });
+    }
+  }, [accentColor]);
+
+  const handleCardClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).closest('[data-gateway-cta]')) return;
+    if (to) {
+      navigate(to);
+      return;
+    }
+    window.location.href = REGISTER_MAILTO;
+  }, [navigate, to]);
+
+  const handleCardKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLElement).closest('[data-gateway-cta]')) return;
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    if (to) {
+      navigate(to);
+      return;
+    }
+    window.location.href = REGISTER_MAILTO;
+  }, [navigate, to]);
+
+  const cardInner = (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{ transformStyle: 'preserve-3d' }}
+      className="relative h-full will-change-transform"
+    >
+      {/* ── Outer border layer ── */}
+      <div
+        ref={borderRef}
+        className="relative overflow-hidden rounded-xl h-full group"
+        style={{
+          border: `1px solid ${accentColor}${isCenter ? '30' : '18'}`,
+          transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
+          boxShadow: isCenter
+            ? `0 0 48px ${accentColor}0e, 0 24px 48px rgba(0,0,0,0.35)`
+            : '0 12px 32px rgba(0,0,0,0.25)',
+        }}
+      >
+        {/* TracerBorder wrapping content */}
+        <TracerBorder accentColor={accentColor}>
+          {/* Card body */}
+          <div
+            className="relative h-full w-full"
+            style={{
+              background: isCenter
+                ? `linear-gradient(155deg, rgba(22,38,62,0.94) 0%, rgba(13,27,46,0.97) 100%)`
+                : 'rgba(10, 20, 36, 0.78)',
+            }}
+          >
+            {/* Top edge line */}
+            <div
+              className="absolute top-0 inset-x-0 h-px"
+              style={{
+                background: `linear-gradient(90deg, transparent 5%, ${accentColor}${isCenter ? '55' : '35'} 40%, ${accentColor}${isCenter ? '55' : '35'} 60%, transparent 95%)`,
+              }}
+              aria-hidden="true"
+            />
+            {/* Premium top-down glass sheen */}
+            <div
+              className="absolute inset-x-0 top-0 h-1/2 pointer-events-none z-0"
+              style={{
+                background: 'linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, transparent 100%)',
+              }}
+              aria-hidden="true"
+            />
+            {/* Diagonal specular highlight */}
+            <div
+              className="absolute -top-px -left-px w-2/3 h-px pointer-events-none z-0"
+              style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.22), transparent)' }}
+              aria-hidden="true"
+            />
+            {/* Cursor glow blob */}
+            <div
+              ref={glowRef}
+              className="absolute w-80 h-80 rounded-full pointer-events-none opacity-0 z-0 will-change-transform"
+              style={{
+                background: `radial-gradient(circle, ${accentColor}30 0%, transparent 65%)`,
+                left: '50%', top: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+              aria-hidden="true"
+            />
+            {/* Corner brackets */}
+            <div
+              className="absolute top-3.5 left-3.5 w-4 h-4 border-t border-l z-10"
+              style={{ borderColor: `${accentColor}${isCenter ? '50' : '30'}` }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute bottom-3.5 right-3.5 w-4 h-4 border-b border-r z-10"
+              style={{ borderColor: `${accentColor}${isCenter ? '50' : '30'}` }}
+              aria-hidden="true"
+            />
+            {/* Side accent bar for flanking cards */}
+            {!isCenter && (
+              <div
+                className="absolute left-0 top-8 bottom-8 w-[1.5px] rounded-full z-10"
+                style={{ background: `linear-gradient(to bottom, transparent, ${accentColor}55, transparent)` }}
+                aria-hidden="true"
+              />
+            )}
+            {/* ── Content ── */}
+            <div ref={contentRef} className="relative z-20 flex flex-col h-full p-6 gap-4">
+              {/* Tag + index row */}
+              <div className="flex items-center justify-between">
+                <span
+                  className="text-[0.56rem] font-bold tracking-[0.35em] uppercase px-2.5 py-1 rounded-sm"
+                  style={{
+                    color: accentColor,
+                    background: `${accentColor}14`,
+                    border: `1px solid ${accentColor}25`,
+                    letterSpacing: '0.3em',
+                  }}
+                >
+                  {tag}
+                </span>
+                <span
+                  className="font-mono text-[0.5rem] tracking-[0.3em]"
+                  style={{ color: `${accentColor}45` }}
+                  aria-hidden="true"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              </div>
+              {/* Icon */}
+              <motion.div
+                className="flex items-center justify-center rounded-lg"
+                style={{
+                  width: isCenter ? '50px' : '42px',
+                  height: isCenter ? '50px' : '42px',
+                  background: `${accentColor}0e`,
+                  border: `1px solid ${accentColor}20`,
+                  color: accentColor,
+                }}
+                whileHover={{ scale: 1.08 }}
+                transition={{ duration: 0.3 }}
+              >
+                {icon}
+              </motion.div>
+              {/* Text block */}
+              <div className="flex flex-col gap-1.5 flex-1">
+                <p
+                  className="font-semibold tracking-[0.28em] uppercase"
+                  style={{ fontSize: '0.57rem', color: `${accentColor}75` }}
+                >
+                  {subtitle}
+                </p>
+                <h3
+                  className="font-heading font-bold text-foreground leading-tight"
+                  style={{ fontSize: isCenter ? '1.22rem' : '1.04rem' }}
+                >
+                  {title}
+                </h3>
+                <p
+                  className="text-foreground-muted leading-relaxed"
+                  style={{ fontSize: isCenter ? '0.8rem' : '0.74rem', marginTop: '3px', lineHeight: 1.7 }}
+                >
+                  {description}
+                </p>
+              </div>
+              {/* CTA row */}
+              <a
+                ref={ctaRef}
+                href={ctaHref}
+                data-gateway-cta
+                onClick={(e) => e.stopPropagation()}
+                onMouseEnter={handleCtaMouseEnter}
+                onMouseLeave={handleCtaMouseLeave}
+                className="relative z-30 -mx-2 px-2 flex items-center justify-between pt-4 mt-auto border-t cursor-none rounded-b-lg transition-shadow duration-300"
+                style={{ borderColor: `${accentColor}12` }}
+              >
+                <span
+                  ref={ctaTextRef}
+                  className="text-[0.64rem] font-bold tracking-[0.2em] uppercase"
+                  style={{ color: accentColor, opacity: 0.7 }}
+                >
+                  {cta}
+                </span>
+                <span
+                  ref={arrowRef}
+                  className="text-sm"
+                  style={{ color: accentColor, opacity: 0.5 }}
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              </a>
+            </div>
+          </div>
+        </TracerBorder>
+      </div>
+    </div>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
@@ -105,185 +345,16 @@ const GatewayCard = ({
       className="relative w-full h-full flex"
       style={{ perspective: '1000px' }}
     >
-      <Link to={to} className="block w-full h-full cursor-none flex-1">
-        <div
-          ref={cardRef}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          style={{ transformStyle: 'preserve-3d' }}
-          className="relative h-full will-change-transform"
-        >
-          {/* ── Outer border layer ── */}
-          <div
-            ref={borderRef}
-            className="relative overflow-hidden rounded-xl h-full group"
-            style={{
-              border: `1px solid ${accentColor}${isCenter ? '30' : '18'}`,
-              transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
-              boxShadow: isCenter
-                ? `0 0 48px ${accentColor}0e, 0 24px 48px rgba(0,0,0,0.35)`
-                : '0 12px 32px rgba(0,0,0,0.25)',
-            }}
-          >
-            {/* TracerBorder wrapping content */}
-            <TracerBorder accentColor={accentColor}>
-              {/* Card body */}
-              <div
-                className="relative h-full w-full"
-                style={{
-                  background: isCenter
-                    ? `linear-gradient(155deg, rgba(22,38,62,0.94) 0%, rgba(13,27,46,0.97) 100%)`
-                    : 'rgba(10, 20, 36, 0.78)',
-                }}
-              >
-                {/* Top edge line */}
-                <div
-                  className="absolute top-0 inset-x-0 h-px"
-                  style={{
-                    background: `linear-gradient(90deg, transparent 5%, ${accentColor}${isCenter ? '55' : '35'} 40%, ${accentColor}${isCenter ? '55' : '35'} 60%, transparent 95%)`,
-                  }}
-                  aria-hidden="true"
-                />
-
-                {/* Premium top-down glass sheen */}
-                <div
-                  className="absolute inset-x-0 top-0 h-1/2 pointer-events-none z-0"
-                  style={{
-                    background: 'linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, transparent 100%)',
-                  }}
-                  aria-hidden="true"
-                />
-
-                {/* Diagonal specular highlight */}
-                <div
-                  className="absolute -top-px -left-px w-2/3 h-px pointer-events-none z-0"
-                  style={{ background: 'linear-gradient(90deg, rgba(255,255,255,0.22), transparent)' }}
-                  aria-hidden="true"
-                />
-
-                {/* Cursor glow blob */}
-                <div
-                  ref={glowRef}
-                  className="absolute w-80 h-80 rounded-full pointer-events-none opacity-0 z-0 will-change-transform"
-                  style={{
-                    background: `radial-gradient(circle, ${accentColor}30 0%, transparent 65%)`,
-                    left: '50%', top: '50%',
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                  aria-hidden="true"
-                />
-
-                {/* Corner brackets */}
-                <div
-                  className="absolute top-3.5 left-3.5 w-4 h-4 border-t border-l z-10"
-                  style={{ borderColor: `${accentColor}${isCenter ? '50' : '30'}` }}
-                  aria-hidden="true"
-                />
-                <div
-                  className="absolute bottom-3.5 right-3.5 w-4 h-4 border-b border-r z-10"
-                  style={{ borderColor: `${accentColor}${isCenter ? '50' : '30'}` }}
-                  aria-hidden="true"
-                />
-
-                {/* Side accent bar for flanking cards */}
-                {!isCenter && (
-                  <div
-                    className="absolute left-0 top-8 bottom-8 w-[1.5px] rounded-full z-10"
-                    style={{ background: `linear-gradient(to bottom, transparent, ${accentColor}55, transparent)` }}
-                    aria-hidden="true"
-                  />
-                )}
-
-                {/* ── Content ── */}
-                <div ref={contentRef} className="relative z-20 flex flex-col h-full p-6 gap-4">
-
-                  {/* Tag + index row */}
-                  <div className="flex items-center justify-between">
-                    <span
-                      className="text-[0.56rem] font-bold tracking-[0.35em] uppercase px-2.5 py-1 rounded-sm"
-                      style={{
-                        color: accentColor,
-                        background: `${accentColor}14`,
-                        border: `1px solid ${accentColor}25`,
-                        letterSpacing: '0.3em',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                    <span
-                      className="font-mono text-[0.5rem] tracking-[0.3em]"
-                      style={{ color: `${accentColor}45` }}
-                      aria-hidden="true"
-                    >
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  </div>
-
-                  {/* Icon */}
-                  <motion.div
-                    className="flex items-center justify-center rounded-lg"
-                    style={{
-                      width: isCenter ? '50px' : '42px',
-                      height: isCenter ? '50px' : '42px',
-                      background: `${accentColor}0e`,
-                      border: `1px solid ${accentColor}20`,
-                      color: accentColor,
-                    }}
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {icon}
-                  </motion.div>
-
-                  {/* Text block */}
-                  <div className="flex flex-col gap-1.5 flex-1">
-                    <p
-                      className="font-semibold tracking-[0.28em] uppercase"
-                      style={{ fontSize: '0.57rem', color: `${accentColor}75` }}
-                    >
-                      {subtitle}
-                    </p>
-                    <h3
-                      className="font-heading font-bold text-foreground leading-tight"
-                      style={{ fontSize: isCenter ? '1.22rem' : '1.04rem' }}
-                    >
-                      {title}
-                    </h3>
-                    <p
-                      className="text-foreground-muted leading-relaxed"
-                      style={{ fontSize: isCenter ? '0.8rem' : '0.74rem', marginTop: '3px', lineHeight: 1.7 }}
-                    >
-                      {description}
-                    </p>
-                  </div>
-
-                  {/* CTA row */}
-                  <div
-                    className="flex items-center justify-between pt-4 mt-auto border-t"
-                    style={{ borderColor: `${accentColor}12` }}
-                  >
-                    <span
-                      className="text-[0.64rem] font-bold tracking-[0.2em] uppercase"
-                      style={{ color: accentColor, opacity: 0.7 }}
-                    >
-                      {cta}
-                    </span>
-                    <span
-                      ref={arrowRef}
-                      className="text-sm"
-                      style={{ color: accentColor, opacity: 0.5 }}
-                      aria-hidden="true"
-                    >
-                      →
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </TracerBorder>
-          </div>
-        </div>
-      </Link>
+      <div
+        role="link"
+        tabIndex={0}
+        onClick={handleCardClick}
+        onKeyDown={handleCardKeyDown}
+        aria-label={title}
+        className="block w-full h-full cursor-none flex-1"
+      >
+        {cardInner}
+      </div>
     </motion.div>
   );
 };

@@ -173,9 +173,11 @@ const Navbar = () => {
                     style={{ background: '#fb923c', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
                     aria-hidden="true"
                   />
-                  <span className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200">
+                  <a className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200"
+                    href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement')}`}
+                  >
                     Join Us
-                  </span>
+                  </a>
                   <span
                     className="relative text-[0.62rem] transition-all duration-300 text-accent/55 group-hover:text-[#050b18] group-hover:translate-x-0.5"
                     aria-hidden="true"

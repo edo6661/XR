@@ -30,36 +30,29 @@ const CommunityIcon = () => (
 const PILLARS = [
   {
     icon: <EventIcon />,
-    title: 'Centralised AI Creation',
+    title: 'Premier Event Organiser',
     description:
-      'Efficiently manage all AI content creation from a single, integrated hub.',
+      'XR Summits is the leading platform for immersive XR technology, bringing together visionaries in Virtual Production, XR technology, and Immersive tech.',
     accentColor: '#fb923c',
     isFeatured: true,
   },
   {
     icon: <MasterclassIcon />,
-    title: 'Flexible & Customisable',
+    title: 'World-Class Masterclass',
     description:
-      'Access scalable service tiers that adapt precisely to your evolving project demands.',
+      'Learn from industry experts through our comprehensive masterclass programs covering XR & AI, and cutting-edge virtual production techniques.',
     accentColor: '#22d3ee',
     isFeatured: false,
   },
   {
     icon: <CommunityIcon />,
-    title: 'Expert Support',
+    title: 'Global XR Community',
     description:
-      'Benefit from expert creative support and cutting-edge immersive technology integration.',
+      'Connect with brilliant minds and exceptional leaders who share first-hand experiences, invaluable insights, and expert advice on implementing immersive XR programs.',
     accentColor: '#a78bfa',
     isFeatured: false,
   },
-  {
-    icon: <CommunityIcon />,
-    title: 'Optimised Productivity',
-    description:
-      'Save valuable time, significantly reduce costs, and dramatically boost overall productivity.',
-    accentColor: '#4ade80',
-    isFeatured: false,
-  },
+
 ];
 
 const STATS = [

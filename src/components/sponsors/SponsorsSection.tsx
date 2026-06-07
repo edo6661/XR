@@ -7,12 +7,12 @@ import SectionEyebrow from '../ui/SectionEyebrow';
  * Partner logos — derived from the actual assets in /public/all-partner-logos/
  * Group 1: Government / Ecosystem Partners
  * Group 2: Technology Partners
+ * All merged into one infinite slider.
  */
-
 type Partner = {
   name: string;
   src: string;
-  needsInvert?: boolean; // logos that are dark and need CSS invert on dark bg
+  needsInvert?: boolean;
 };
 
 const GOVERNMENT_PARTNERS: Partner[] = [
@@ -44,36 +44,32 @@ const TECH_PARTNERS: Partner[] = [
   { name: 'Vivemars', src: '/all-partner-logos/vivemars_logo.jpg' },
 ];
 
-const PartnerLogo = ({
-  partner,
-  index,
-  accentColor,
-}: {
-  partner: Partner;
-  index: number;
-  accentColor: string;
-}) => {
+// Merge all partners into one flat list for the slider
+const ALL_PARTNERS: Partner[] = [...GOVERNMENT_PARTNERS, ...TECH_PARTNERS];
+
+// ─── Single Logo Card (for slider) ──────────────────────────────────────────
+const SliderLogoCard = ({ partner }: { partner: Partner }) => {
   const reduce = useReducedMotion();
   const imgRef = useRef<HTMLImageElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ delay: index * 0.035, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative flex items-center justify-center px-4 py-5 rounded-xl overflow-hidden transition-all duration-400"
+    <div
+      ref={cardRef}
+      className="relative flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden transition-all duration-400"
       style={{
+        width: '140px',
+        minHeight: '72px',
         background: 'rgba(255,255,255,0.025)',
         border: '1px solid rgba(255,255,255,0.07)',
-        minHeight: '72px',
+        padding: '16px 20px',
       }}
       onMouseEnter={(e) => {
         if (reduce) return;
         const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = `${accentColor}44`;
-        el.style.background = `${accentColor}08`;
-        el.style.boxShadow = `0 0 28px ${accentColor}12`;
+        el.style.borderColor = 'rgba(251,146,60,0.35)';
+        el.style.background = 'rgba(251,146,60,0.05)';
+        el.style.boxShadow = '0 0 28px rgba(251,146,60,0.10)';
         if (imgRef.current) {
           imgRef.current.style.filter = partner.needsInvert
             ? 'invert(1) brightness(1.1) grayscale(0)'
@@ -97,16 +93,16 @@ const PartnerLogo = ({
     >
       {/* Top shimmer line on hover */}
       <div
-        className="absolute top-0 inset-x-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-        style={{ background: `linear-gradient(90deg, transparent, ${accentColor}70, transparent)` }}
+        className="absolute top-0 inset-x-0 h-px opacity-0 hover:opacity-100 transition-opacity duration-400"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.55), transparent)' }}
         aria-hidden="true"
       />
-
       <img
         ref={imgRef}
         src={partner.src}
         alt={partner.name}
-        className="max-h-9 max-w-full object-contain transition-all duration-400"
+        title={partner.name}
+        className="max-h-9 w-full object-contain transition-all duration-400"
         style={{
           filter: partner.needsInvert
             ? 'invert(1) brightness(0.85) grayscale(0.2)'
@@ -115,23 +111,74 @@ const PartnerLogo = ({
         }}
         loading="lazy"
         onError={(e) => {
-          // If image fails, show text fallback
           const img = e.currentTarget;
           img.style.display = 'none';
           const parent = img.parentElement;
           if (parent) {
             const fallback = document.createElement('span');
             fallback.style.cssText =
-              'font-size:0.58rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(107,127,163,0.55);text-align:center;';
+              'font-size:0.55rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(107,127,163,0.55);text-align:center;line-height:1.4;';
             fallback.textContent = partner.name;
             parent.appendChild(fallback);
           }
         }}
       />
-    </motion.div>
+    </div>
   );
 };
 
+// ─── Infinite Slider ─────────────────────────────────────────────────────────
+// Uses pure CSS animation — no JS scroll loop, no RAF, GPU-friendly.
+// We duplicate the list once to create the seamless loop illusion.
+const InfiniteSlider = ({ partners }: { partners: Partner[] }) => {
+  const reduce = useReducedMotion();
+  // Duplicate for seamless loop
+  const doubled = [...partners, ...partners];
+
+  // Each card is 140px wide + 12px gap = 152px per item
+  const itemWidth = 152;
+  const totalWidth = partners.length * itemWidth;
+
+  return (
+    <div
+      className="relative w-full overflow-hidden"
+      aria-label="Partner logos slider"
+      // Fade edges
+      style={{
+        maskImage:
+          'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+        WebkitMaskImage:
+          'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+      }}
+    >
+      <div
+        className="flex gap-3"
+        style={{
+          width: `${totalWidth * 2}px`,
+          animation: reduce ? 'none' : `xr-marquee 38s linear infinite`,
+          willChange: 'transform',
+        }}
+      >
+        {doubled.map((partner, i) => (
+          <SliderLogoCard key={`${partner.name}-${i}`} partner={partner} />
+        ))}
+      </div>
+
+      {/* Inline keyframe injected via style tag — avoids needing global CSS change */}
+      <style>{`
+        @keyframes xr-marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-${totalWidth}px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          @keyframes xr-marquee { 0%, 100% { transform: none; } }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+// ─── Section ─────────────────────────────────────────────────────────────────
 const SponsorsSection = () => (
   <section
     className="relative w-full overflow-hidden"
@@ -142,6 +189,7 @@ const SponsorsSection = () => (
     }}
     aria-labelledby="partners-heading"
   >
+    {/* Subtle background tint */}
     <div
       className="absolute inset-0 pointer-events-none"
       style={{ background: 'rgba(13,27,46,0.35)' }}
@@ -171,48 +219,16 @@ const SponsorsSection = () => (
         </p>
       </motion.div>
 
-      {/* Government & Ecosystem Partners */}
-      <div className="mb-12">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="font-bold tracking-[0.38em] uppercase text-center mb-6"
-          style={{ fontSize: '0.52rem', color: 'rgba(251,146,60,0.7)' }}
-        >
-          Government & Ecosystem Partners
-        </motion.p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-          {GOVERNMENT_PARTNERS.map((partner, i) => (
-            <PartnerLogo key={partner.name} partner={partner} index={i} accentColor="#fb923c" />
-          ))}
-        </div>
-      </div>
-
-      {/* Technology Partners */}
-      <div className="mb-12">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="font-bold tracking-[0.38em] uppercase text-center mb-6"
-          style={{ fontSize: '0.52rem', color: 'rgba(34,211,238,0.7)' }}
-        >
-          Technology Partners
-        </motion.p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-          {TECH_PARTNERS.map((partner, i) => (
-            <PartnerLogo
-              key={partner.name}
-              partner={partner}
-              index={i}
-              accentColor="#22d3ee"
-            />
-          ))}
-        </div>
-      </div>
+      {/* ── Single Infinite Slider ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-14"
+      >
+        <InfiniteSlider partners={ALL_PARTNERS} />
+      </motion.div>
 
       {/* Global stats */}
       <motion.div
@@ -254,6 +270,7 @@ const SponsorsSection = () => (
         ))}
       </motion.div>
 
+      {/* Become a partner CTA */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}

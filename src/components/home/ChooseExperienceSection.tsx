@@ -8,12 +8,14 @@ const XRIcon = () => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21V3M2.25 7.5l9.75 5.5 9.75-5.5" />
   </svg>
 );
+
 const SarawakIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 12l8-4.5M12 12v9M12 12L4 7.5" />
   </svg>
 );
+
 const HackathonIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -21,18 +23,11 @@ const HackathonIcon = () => (
   </svg>
 );
 
-/**
- * 3 Gateways sesuai cursorrules:
- * 1. 4th XR Asia Summits 2026 (1-3 Dec 2026, MITEC)
- * 2. AI-XR Cultural Innovation Forum (16-17 Oct 2026, BCCK)
- * 3. AI Filmmaking Hackathon
- */
 const EVENT_GATEWAYS = [
   {
     title: "4th XR Asia Summits 2026",
     subtitle: '1 - 3 December 2026',
-    description:
-      'Malaysia International Trade and Exhibition Centre',
+    description: 'Malaysia International Trade and Exhibition Centre',
     to: '/xras-kl-2026',
     accentColor: '#fb923c',
     tag: 'XRAS26',
@@ -41,8 +36,7 @@ const EVENT_GATEWAYS = [
   {
     title: "AI-XR Cultural Innovation Forum",
     subtitle: '16 - 17 October 2026',
-    description:
-      'Borneo Convention Centre Kuching (BCCK)',
+    description: 'Borneo Convention Centre Kuching (BCCK)',
     to: '/aixr-2026-sarawak',
     accentColor: '#22d3ee',
     tag: 'AIXR',
@@ -51,9 +45,7 @@ const EVENT_GATEWAYS = [
   {
     title: 'AI Filmmaking Hackathon',
     subtitle: '',
-    description:
-      '',
-    to: '/xras-kl-2026',
+    description: '',
     accentColor: '#a78bfa',
     tag: 'Hackathon',
     icon: <HackathonIcon />,
@@ -79,10 +71,8 @@ const ChooseExperienceSection = () => (
       }}
       aria-hidden="true"
     />
-
     <div className="relative z-10 max-w-6xl mx-auto px-6">
       <SectionEyebrow align="center">Choose Your Experience</SectionEyebrow>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -105,11 +95,10 @@ const ChooseExperienceSection = () => (
           Filmmaking Hackathon — each built for deployment-ready immersive innovation.
         </p>
       </motion.div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
         {EVENT_GATEWAYS.map((gateway, index) => (
           <GatewayCard
-            key={gateway.to + gateway.title}
+            key={gateway.title}
             index={index}
             {...gateway}
             isCenter={index === 0}
