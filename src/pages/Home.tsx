@@ -54,7 +54,9 @@ const Home = () => {
         <SponsorsSection />
       </StackedSection>
 
-      <StackedSection zIndex={70}>
+      <StackedSection zIndex={70}
+        isLast
+      >
         <ContactDetailsSection />
       </StackedSection>
 
