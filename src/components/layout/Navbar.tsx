@@ -94,7 +94,7 @@ const Navbar = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem]">
           <Link to="/" className="group flex items-center gap-3 select-none flex-shrink-0">
-            <div className="relative w-8 h-8 flex-shrink-0">
+            <div className="relative w-12 h-12 flex-shrink-0">
               <motion.div
                 className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-md"
                 style={{ background: 'rgba(251,146,60,0.4)' }}
@@ -114,12 +114,7 @@ const Navbar = () => {
               >
                 XR SUMMITS
               </span>
-              <span
-                className="font-mono tracking-[0.44em] text-foreground-muted/50 uppercase"
-                style={{ fontSize: '0.42rem' }}
-              >
-                Asia · Est. 2021
-              </span>
+
             </div>
           </Link>
 
@@ -179,7 +174,7 @@ const Navbar = () => {
                     aria-hidden="true"
                   />
                   <span className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200">
-                    Register
+                    Join Us
                   </span>
                   <span
                     className="relative text-[0.62rem] transition-all duration-300 text-accent/55 group-hover:text-[#050b18] group-hover:translate-x-0.5"
@@ -298,6 +293,7 @@ const Navbar = () => {
               ))}
             </nav>
 
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -308,29 +304,18 @@ const Navbar = () => {
               <p className="font-mono text-[0.5rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
                 4th Edition · Kuala Lumpur · 2026
               </p>
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 20, opacity: 0 }}
-                transition={{ delay: 0.34, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="px-6 pb-10 pt-5"
+              <a
+                href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement')}`}
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
+                style={{
+                  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+                  boxShadow: '0 0 36px rgba(251,146,60,0.3)',
+                }}
               >
-                <p className="font-mono text-[0.5rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
-                  4th Edition · Kuala Lumpur · 2026
-                </p>
-                <a
-                  href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement')}`}
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
-                  style={{
-                    background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-                    boxShadow: '0 0 36px rgba(251,146,60,0.3)',
-                  }}
-                >
-                  Join the Movement
-                  <span aria-hidden="true">→</span>
-                </a>
-              </motion.div>
+                Join the Movement
+                <span aria-hidden="true">→</span>
+              </a>
             </motion.div>
           </motion.div>
         )}

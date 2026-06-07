@@ -251,7 +251,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
           <p style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.35)' }}>
-            XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) ©{new Date().getFullYear()}. All Rights Reserved.
+            XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) ©2026. All Rights Reserved.
           </p>
 
           <a

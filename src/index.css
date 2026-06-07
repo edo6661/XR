@@ -90,7 +90,6 @@ html.lenis body {
   --font-sans: "Satoshi", system-ui, sans-serif;
   --font-heading: "Space Grotesk", var(--font-sans);
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-
   --color-primary: var(--theme-primary);
   --color-secondary: var(--theme-secondary);
   --color-accent: var(--theme-accent);
@@ -104,33 +103,33 @@ html.lenis body {
   --radius-card: 10px;
 
   --shadow-card:
-    0 4px 6px -1px rgba(0, 0, 0, 0.32), 0 2px 4px -1px rgba(0, 0, 0, 0.22);
+    0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   --shadow-hover:
-    0 12px 20px -3px rgba(0, 0, 0, 0.45), 0 4px 8px -2px rgba(0, 0, 0, 0.24);
+    0 12px 20px -3px rgba(0, 0, 0, 0.5), 0 4px 8px -2px rgba(0, 0, 0, 0.3);
 }
 
 /* ── Design tokens ─────────────────────────────────────────────────────── */
 :root {
-  /* Brand palette — from Brand Colour HEX Code client doc */
+  /* Brand palette — disesuaikan dengan cursorrules */
   --theme-primary: #1e3a8a;
   --theme-secondary: #7e22ce;
-  --theme-accent: #fb923c; /* Orange */
-  --theme-accent-yellow: #fedb21; /* Yellow */
-  --theme-accent-blue: #3953a3; /* Blue */
-  --theme-accent-glow: rgba(251, 146, 60, 0.38);
+  --theme-accent: #ef783d; /* Berubah: Official Client Orange */
+  --theme-accent-yellow: #fedb21; /* Official Client Yellow */
+  --theme-accent-blue: #3953a3; /* Official Client Blue */
+  --theme-accent-glow: rgba(239, 120, 61, 0.38);
 
-  /* Surfaces */
-  --theme-background: #050b18;
-  --theme-surface: #0d1b2e;
-  --theme-surface-2: #1a2540;
+  /* Surfaces - Disesuaikan menjadi Deep Black / Charcoal */
+  --theme-background: #050505; /* Berubah dari #050b18 */
+  --theme-surface: #0a0a0a; /* Berubah ke charcoal gelap */
+  --theme-surface-2: #121212;
 
   /* Text */
   --theme-foreground: #f0f4ff;
-  --theme-foreground-muted: #6b7fa3;
+  --theme-foreground-muted: #8b9bb4; /* Sedikit diterangkan agar kontras di bg hitam */
 
   /* Borders */
-  --theme-border: rgba(255, 255, 255, 0.07);
-  --theme-border-accent: rgba(251, 146, 60, 0.22);
+  --theme-border: rgba(255, 255, 255, 0.08);
+  --theme-border-accent: rgba(239, 120, 61, 0.25);
 
   /* Layout */
   --section-padding-y: clamp(5rem, 8vw, 8rem);
@@ -201,17 +200,15 @@ svg {
   display: block;
   max-width: 100%;
 }
-
-/* ── Focus visible ─────────────────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid rgba(251, 146, 60, 0.7);
+  outline: 2px solid rgba(239, 120, 61, 0.7);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 /* ── Selection ─────────────────────────────────────────────────────────── */
 ::selection {
-  background: rgba(251, 146, 60, 0.28);
+  background: rgba(239, 120, 61, 0.28);
   color: #f0f4ff;
 }
 
@@ -223,11 +220,11 @@ svg {
   background: var(--theme-background);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(251, 146, 60, 0.35);
+  background: rgba(239, 120, 61, 0.35);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(251, 146, 60, 0.6);
+  background: rgba(239, 120, 61, 0.6);
 }
 
 /* ── Glass utilities ───────────────────────────────────────────────────── */
@@ -245,18 +242,24 @@ svg {
   border: 1px solid var(--theme-border-accent);
   box-shadow: 0 0 30px rgba(251, 146, 60, 0.05);
 }
-
-/* ── Glow utilities ────────────────────────────────────────────────────── */
 .glow-accent {
   box-shadow:
-    0 0 20px rgba(251, 146, 60, 0.28),
-    0 0 60px rgba(251, 146, 60, 0.08);
+    0 0 20px rgba(239, 120, 61, 0.28),
+    0 0 60px rgba(239, 120, 61, 0.08);
 }
 
 .glow-text-accent {
   text-shadow:
-    0 0 20px rgba(251, 146, 60, 0.55),
-    0 0 40px rgba(251, 146, 60, 0.25);
+    0 0 20px rgba(239, 120, 61, 0.55),
+    0 0 40px rgba(239, 120, 61, 0.25);
+}
+
+/* ── Gradient text utility ─────────────────────────────────────────────── */
+.gradient-text-accent {
+  background: linear-gradient(130deg, #ef783d 0%, #f0f4ff 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ── Gradient text utility ─────────────────────────────────────────────── */

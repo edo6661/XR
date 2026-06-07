@@ -25,7 +25,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
           className="font-bold tracking-[0.6em] uppercase"
           style={{ fontSize: '0.54rem', color: 'rgba(251,146,60,0.65)', letterSpacing: '0.58em' }}
         >
-          4th Edition · Est. 2021 · Kuala Lumpur
+          The future will not be viewed. It will be experienced
         </span>
         <div className="flex items-center gap-1.5">
           <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
