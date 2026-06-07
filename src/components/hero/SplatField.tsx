@@ -29,7 +29,7 @@ const SplatField = () => {
       '(prefers-reduced-motion: reduce)',
     ).matches;
     const isMobile = window.innerWidth < 768;
-    const PIXEL = Math.min(window.devicePixelRatio, 1.5);
+    const PIXEL = Math.min(window.devicePixelRatio, isMobile ? 1 : 1.25);
 
     // ── Scene · Camera · Renderer ──────────────────────────────────────────
     const scene = new THREE.Scene();
@@ -42,7 +42,7 @@ const SplatField = () => {
     camera.position.set(0, 0, 8);
 
     const renderer = new THREE.WebGLRenderer({
-      antialias: true,
+      antialias: false,
       alpha: true, // transparent — the video shows through behind the splats
       powerPreference: 'high-performance',
     });
@@ -64,7 +64,7 @@ const SplatField = () => {
     // ── Volumetric splat cloud ─────────────────────────────────────────────
     // Points are biased toward clustered "filaments" rather than uniform noise
     // so it reads as a captured structure, not TV static.
-    const COUNT = isMobile ? 2600 : 6000;
+    const COUNT = isMobile ? 1600 : 3200;
     const HALF_X = 11;
     const HALF_Y = 6.5;
     const Z_NEAR = 3.0; // closest splats (in front of camera focal plane)
@@ -198,15 +198,6 @@ const SplatField = () => {
     const splats = new THREE.Points(geo, mat);
     cloud.add(splats);
 
-    // ── Mouse parallax ─────────────────────────────────────────────────────
-    let mouseX = 0;
-    let mouseY = 0;
-    const onMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-      mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-    };
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-
     // ── Animation loop ──────────────────────────────────────────────────────
     let animId = 0;
     let running = false;
@@ -216,17 +207,13 @@ const SplatField = () => {
       const t = clock.getElapsedTime();
       mat.uniforms.uTime.value = t;
 
-      // Very slow cloud roll for life even when the mouse is still.
+      // Slow cloud roll only — mouse parallax removed (was doubling work with hero layer).
       if (!prefersReducedMotion) {
         cloud.rotation.y = Math.sin(t * 0.05) * 0.06;
         cloud.rotation.x = Math.cos(t * 0.04) * 0.04;
       }
 
-      // Smooth camera parallax → the depth "fly-through" feel.
-      const tx = mouseX * 1.1;
-      const ty = mouseY * 0.7;
-      camera.position.x += (tx - camera.position.x) * 0.035;
-      camera.position.y += (ty - camera.position.y) * 0.035;
+      camera.position.set(0, 0, 8);
       camera.lookAt(0, 0, -6);
 
       renderer.render(scene, camera);
@@ -273,7 +260,6 @@ const SplatField = () => {
       stop();
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
       disposables.forEach((d) => d.dispose());
       renderer.dispose();

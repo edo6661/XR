@@ -110,15 +110,8 @@ const TileCard = ({
     ry.set(0);
   }, [rx, ry]);
 
-  // Per-tile shake signature so they don't jitter in lockstep.
-  const shake =
-    reduce || hovered
-      ? { x: 0, y: 0, rotate: 0 }
-      : {
-        x: [0, index % 2 === 0 ? 1.6 : -1.6, 0, index % 2 === 0 ? -1.2 : 1.2, 0],
-        y: [0, -1.4, 1, -0.6, 0],
-        rotate: [0, index % 2 === 0 ? 0.35 : -0.35, 0, index % 2 === 0 ? -0.25 : 0.25, 0],
-      };
+  // Idle shake removed — infinite transform on backdrop-filter tiles was costly.
+  const shake = { x: 0, y: 0, rotate: 0 };
 
   return (
     <motion.div
@@ -139,15 +132,6 @@ const TileCard = ({
       {/* Shake wrapper (separate so it composes with the entrance transform) */}
       <motion.div
         animate={shake}
-        transition={
-          reduce || hovered
-            ? { duration: 0.4, ease: 'easeOut' }
-            : {
-              duration: 5.5 + index * 0.8,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }
-        }
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Tilt wrapper */}

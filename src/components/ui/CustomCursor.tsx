@@ -1,5 +1,5 @@
 // src/components/ui/CustomCursor.tsx
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
@@ -15,23 +15,12 @@ const CustomCursor = () => {
   const outerX = useSpring(cursorX, springConfigOuter);
   const outerY = useSpring(cursorY, springConfigOuter);
 
-  const requestRef = useRef<number>(0);
-  const mousePos = useRef({ x: -100, y: -100 });
-
   useEffect(() => {
     if (isTouchDevice) return;
 
-    // Pisahkan logic update dari event listener
-    const updateCursor = () => {
-      cursorX.set(mousePos.current.x);
-      cursorY.set(mousePos.current.y);
-      requestRef.current = requestAnimationFrame(updateCursor);
-    };
-    requestRef.current = requestAnimationFrame(updateCursor);
-
     const onMouseMove = (e: MouseEvent) => {
-      mousePos.current.x = e.clientX;
-      mousePos.current.y = e.clientY;
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     const onMouseOver = (e: MouseEvent) => {
@@ -51,7 +40,6 @@ const CustomCursor = () => {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseover', onMouseOver);
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
   }, [cursorX, cursorY, isTouchDevice]);
 

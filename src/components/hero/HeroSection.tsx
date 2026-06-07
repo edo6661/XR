@@ -1,12 +1,5 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
-import {
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-  AnimatePresence,
-  type MotionValue,
-} from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import GlobeCanvas from './GlobeCanvas';
 import HeroVideoBackdrop, { type HeroVideoConfig } from './HeroVideoBackdrop';
 import SplatField from './SplatField';
@@ -114,22 +107,6 @@ const HeroSection = () => {
     };
   }, [prefersReducedMotion]);
 
-  const mvX = useMotionValue(0);
-  const mvY = useMotionValue(0);
-  const pX = useSpring(mvX, { stiffness: 50, damping: 18, mass: 0.7 });
-  const pY = useSpring(mvY, { stiffness: 50, damping: 18, mass: 0.7 });
-  const globeX = useTransform(pX, (v) => v * -14);
-  const globeY = useTransform(pY, (v) => v * -10);
-
-  const onSectionMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (prefersReducedMotion) return;
-      mvX.set((e.clientX / window.innerWidth) * 2 - 1);
-      mvY.set((e.clientY / window.innerHeight) * 2 - 1);
-    },
-    [mvX, mvY, prefersReducedMotion],
-  );
-
   const handleScrollDown = () => {
     // The hero is a pinned StackedSection; scrolling one viewport closes it and
     // brings the About Us section up underneath (the client's desired beat).
@@ -150,26 +127,36 @@ const HeroSection = () => {
   return (
     <section
       ref={heroRef}
-      onMouseMove={onSectionMouseMove}
       className="relative w-full min-h-screen flex flex-col overflow-hidden"
       aria-label="Hero"
     >
-      <motion.div
-        className="absolute inset-0 z-0"
-        aria-hidden="true"
-        animate={{
-          filter: prefersReducedMotion ? 'none' : `blur(${bgBlur}px) brightness(${bgBrightness})`,
-          scale: videoRevealed && !prefersReducedMotion ? 1.06 : 1.12,
-        }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        style={{ x: prefersReducedMotion ? 0 : globeX, y: prefersReducedMotion ? 0 : globeY }}
-      >
-        {ACTIVE_BACKDROP === 'globe' ? (
-          <GlobeCanvas />
-        ) : (
-          <HeroVideoBackdrop {...VIDEO_BACKDROPS[ACTIVE_BACKDROP]} />
-        )}
-      </motion.div>
+      {/* Backdrop: video scale only. Blur/dim live on a static overlay so mouse
+          movement never repaints a filtered full-screen layer (major perf win). */}
+      <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            scale: videoRevealed && !prefersReducedMotion ? 1.06 : 1.12,
+          }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {ACTIVE_BACKDROP === 'globe' ? (
+            <GlobeCanvas />
+          ) : (
+            <HeroVideoBackdrop {...VIDEO_BACKDROPS[ACTIVE_BACKDROP]} />
+          )}
+        </motion.div>
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          animate={{
+            backdropFilter: prefersReducedMotion ? 'none' : `blur(${bgBlur}px)`,
+            backgroundColor: prefersReducedMotion
+              ? 'transparent'
+              : `rgba(5, 11, 24, ${(1 - bgBrightness).toFixed(2)})`,
+          }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </div>
 
       <motion.div
         className="absolute inset-0 z-1 pointer-events-none"
@@ -202,7 +189,7 @@ const HeroSection = () => {
         </motion.div>
       )}
 
-      <BootOverlay phase={hudPhase} reduced={prefersReducedMotion} mvX={pX} mvY={pY} />
+      <BootOverlay phase={hudPhase} reduced={prefersReducedMotion} />
 
       {/* ── The "zap zap" cold open (sits above everything, then unmounts) ── */}
       {!prefersReducedMotion && <HeroIntroOverlay step={step} />}
@@ -346,21 +333,9 @@ const HeroSection = () => {
   );
 };
 
-const BootOverlay = ({
-  phase,
-  reduced,
-  mvX,
-  mvY,
-}: {
-  phase: Phase;
-  reduced: boolean;
-  mvX: MotionValue<number>;
-  mvY: MotionValue<number>;
-}) => {
+const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => {
   const active = phase !== 'globe';
   const booting = phase === 'boot';
-  const glassX = useTransform(mvX, (v) => v * -20);
-  const glassY = useTransform(mvY, (v) => v * -16);
 
   const corners = [
     { c: 'top-6 left-6 border-t border-l', label: 'CALIBRATING', align: 'items-start' },
@@ -377,11 +352,9 @@ const BootOverlay = ({
       className="absolute inset-0 z-5 pointer-events-none"
       aria-hidden="true"
     >
-      <motion.div
+      <div
         className="absolute inset-0"
         style={{
-          x: reduced ? 0 : glassX,
-          y: reduced ? 0 : glassY,
           background:
             'radial-gradient(120% 120% at 50% 45%, transparent 50%, rgba(56,189,248,0.05) 70%, rgba(5,11,24,0.55) 88%, rgba(5,11,24,0.85) 100%)',
         }}
