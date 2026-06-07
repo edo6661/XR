@@ -4,197 +4,140 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
 import PastEventCard from './PastEventCard';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// ── Data ───────────────────────────────────────────────────────────────────
+/**
+ * Data from cursorrules — exact content the client provided:
+ * Past events: 2021 / 2022 / 2023 with real attendee numbers
+ * Global stats: 1,430+ Total Attendees | 40+ Workshops | 75+ Partners
+ */
 const UPCOMING_EVENTS = [
   {
     title: '4th XR Asia Summit 2026',
     subtitle: 'Flagship · XRAS26',
-    date: 'TBC 2026',
-    location: 'Kuala Lumpur, MY',
+    date: '1 – 3 Dec 2026',
+    location: 'MITEC, Kuala Lumpur',
     description:
-      "The fourth edition of Asia's premier XR event. Bigger keynotes, deeper workshops, and the most ambitious immersive showcase yet.",
+      "Asia's definitive immersive technology summit — conference, expo, workshops, masterclasses, hackathon grand finals, esports championship, and AI/XR Awards Gala Dinner.",
     accentColor: '#fb923c',
     tag: 'Flagship',
     to: '/xras-kl-2026',
-    imageSrc: '/xr-asia-summit-4th-coming-soon.png',
+    imageSrc: '/3-gateway-images/XR AI Summit 2026_Main Image.jpeg',
     isFeatured: true,
   },
   {
-    title: "Mothership 26' AI Bootcamp",
-    subtitle: 'Intensive · 3 Days',
-    date: 'TBC 2026',
-    location: 'Kuala Lumpur, MY',
+    title: "AI-XR Cultural Innovation Forum",
+    subtitle: 'Regional · Sarawak',
+    date: '16 – 17 Oct 2026',
+    location: 'BCCK, Sarawak',
     description:
-      'A hands-on AI × XR intensive bootcamp for builders, artists, and technologists ready to ship immersive AI products.',
+      'Innovation • Culture • Technology • Future Talent — regional conference, expo, workshops, and semi-finals.',
     accentColor: '#22d3ee',
-    tag: 'Bootcamp',
-    to: '/xras-kl-2026',
+    tag: 'Regional',
+    to: '/aixr-2026-sarawak',
+    imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image.jpeg',
     isFeatured: false,
   },
   {
-    title: 'Siggraph Asia 2025',
-    subtitle: 'Partner Event',
-    date: 'Nov 2025',
-    location: 'Tokyo, JP',
+    title: 'AI Filmmaking Hackathon',
+    subtitle: 'Grand Finals at XRAS KL',
+    date: '1 – 3 Dec 2026',
+    location: 'MITEC, Kuala Lumpur',
     description:
-      "The world's leading conference on computer graphics, interactive techniques, and immersive experiences.",
-    accentColor: '#4ade80',
-    tag: 'Partner',
-    isFeatured: false,
-  },
-  {
-    title: 'AWE Asia 2026',
-    subtitle: 'Partner Event',
-    date: 'TBC 2026',
-    location: 'Asia Pacific',
-    description:
-      "Augmented World Expo — the world's largest XR industry event returns to Asia with cutting-edge AR/VR showcases.",
+      'The culminating AI filmmaking showcase — teams compete with AI-generated films before industry judges and live audiences.',
     accentColor: '#a78bfa',
-    tag: 'Partner',
-    isFeatured: false,
-  },
-  {
-    title: 'Broadcast Asia 2026',
-    subtitle: 'Partner Event',
-    date: 'TBC 2026',
-    location: 'Singapore, SG',
-    description:
-      "Asia's premier broadcast and media technology show, featuring immersive production and spatial media tracks.",
-    accentColor: '#f472b6',
-    tag: 'Partner',
+    tag: 'Hackathon',
+    to: '/xras-kl-2026',
+    imageSrc: '/3-gateway-images/AI Filmmaking Hackathon.png',
     isFeatured: false,
   },
 ];
 
 const PAST_EVENTS = [
   {
-    year: '2023',
-    title: 'XR Asia Summit 2023',
-    attendees: '300+',
-    speakers: '35+',
+    year: '2021',
+    title: 'Inaugural XR Asia Summit 2021',
+    attendees: '100+',
+    speakers: '25+',
     highlight:
-      "Third edition brought together Southeast Asia's largest gathering of XR professionals with live metaverse demos and enterprise case studies.",
-    imageSrc: '/xr-asia-summit-2023.jpeg',
-    accentColor: '#fb923c',
+      'The inaugural XR Asia Summit — a pioneering event that set the benchmark for immersive technology conferences in Asia, held 25–27 Nov.',
+    imageSrc: '/event-highlight-images/XRAS22 (a).png',
+    accentColor: '#a78bfa',
   },
   {
     year: '2022',
     title: 'XR Asia Summit 2022',
-    attendees: '250+',
+    attendees: '200+',
     speakers: '30+',
     highlight:
-      "Landmark edition featuring the first-ever XR × Sports track and the Broadcast Digital Awards ceremony recognising Asia's innovators.",
-    imageSrc: '/xr-asia-summit-2022.jpeg',
+      'Dynamic gathering featuring XR solutions showcase and hands-on workshops, 11–13 Nov. First dedicated Broadcast Digital Awards ceremony.',
+    imageSrc: '/event-highlight-images/XRAS22 (b).png',
     accentColor: '#22d3ee',
   },
   {
-    year: '2022',
-    title: 'Broadcast Digital Award 2022',
-    attendees: '200+',
-    speakers: '20+',
+    year: '2023',
+    title: 'XR Asia Summit 2023',
+    attendees: '500+',
+    speakers: '40+',
     highlight:
-      'Celebrating excellence in digital broadcasting and immersive media production across the Asia-Pacific region.',
-    imageSrc: '/broadcast-digital-award-2022.jpeg',
-    accentColor: '#4ade80',
-  },
-  {
-    year: '2021',
-    title: 'XR Asia Summit 2021',
-    attendees: '150+',
-    speakers: '25+',
-    highlight:
-      'The inaugural XR Asia Summit — a pioneering hybrid event that set the benchmark for immersive technology conferences in Asia.',
-    imageSrc: '/xr-asia-summit-2021.jpeg',
-    accentColor: '#a78bfa',
+      'Held as part of Malaysia Digital Content Festival, 27–29 Sep — a landmark collaboration between Broadcast Elements and MDEC that brought together Southeast Asia\'s XR community.',
+    imageSrc: '/event-highlight-images/XRAS23 (a).png',
+    accentColor: '#fb923c',
   },
 ];
-
-// ── Section eyebrow (konsisten dengan AboutSection) ────────────────────────
-const SectionEyebrow = ({ children }: { children: React.ReactNode }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -16 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true, amount: 0.6 }}
-    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    className="flex items-center gap-3 mb-10"
-  >
-    <span className="w-5 h-px" style={{ background: 'rgba(251,146,60,0.55)' }} aria-hidden="true" />
-    <span
-      className="font-bold tracking-[0.52em] uppercase"
-      style={{ fontSize: '0.57rem', color: 'rgba(251,146,60,0.72)' }}
-    >
-      {children}
-    </span>
-  </motion.div>
-);
 
 // ── Main component ─────────────────────────────────────────────────────────
 const EventsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const pastHeadRef = useRef<HTMLHeadingElement>(null);
-  const marqueeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Heading reveals
       [headingRef, pastHeadRef].forEach((ref) => {
         if (!ref.current) return;
         gsap.fromTo(
           ref.current,
           { y: 44, opacity: 0 },
           {
-            y: 0, opacity: 1,
-            duration: 0.95, ease: 'power3.out',
+            y: 0,
+            opacity: 1,
+            duration: 0.95,
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: ref.current,
               start: 'top 82%',
               toggleActions: 'play none none none',
             },
-          }
+          },
         );
       });
-
-      // Award banner parallax
-      if (marqueeRef.current) {
-        gsap.to(marqueeRef.current, {
-          x: '-6%',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: marqueeRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 2.5,
-          },
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  const featured = UPCOMING_EVENTS[0];
-  const secondary = UPCOMING_EVENTS.slice(1, 3);
-  const tertiary = UPCOMING_EVENTS.slice(3);
-
   return (
     <section
       id="events"
       ref={sectionRef}
-      className="relative w-full bg-background overflow-hidden"
-      style={{ paddingTop: 'var(--section-padding-y)', paddingBottom: 'var(--section-padding-y)' }}
+      className="relative w-full overflow-hidden"
+      style={{
+        paddingTop: 'var(--section-padding-y)',
+        paddingBottom: 'var(--section-padding-y)',
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+      }}
     >
-      {/* ── Atmospheric bg ── */}
+      {/* Atmospheric bg */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="absolute top-0 right-0 w-[650px] h-[650px] opacity-[0.045] rounded-full"
+          className="absolute top-0 right-0 w-[600px] h-[600px] opacity-[0.04] rounded-full"
           style={{ background: 'radial-gradient(circle, #fb923c 0%, transparent 68%)' }}
         />
         <div
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-[0.04] rounded-full"
+          className="absolute bottom-0 left-0 w-[480px] h-[480px] opacity-[0.035] rounded-full"
           style={{ background: 'radial-gradient(circle, #22d3ee 0%, transparent 68%)' }}
         />
       </div>
@@ -207,9 +150,9 @@ const EventsSection = () => {
         <h2
           ref={headingRef}
           className="font-heading font-black text-foreground mb-12 opacity-0"
-          style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '0.04em' }}
+          style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
         >
-          Event{' '}
+          Choose Your{' '}
           <span
             style={{
               background: 'linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%)',
@@ -218,105 +161,83 @@ const EventsSection = () => {
               backgroundClip: 'text',
             }}
           >
-            Spotlights
+            Gateway
           </span>
         </h2>
 
-        {/* Featured 2/3 + secondary stack 1/3 */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3">
+        {/* Featured + secondary grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-4">
           <div className="lg:col-span-2">
-            <SpotlightCard index={0} {...featured} />
+            <SpotlightCard index={0} {...UPCOMING_EVENTS[0]} />
           </div>
           <div className="flex flex-col gap-3">
-            {secondary.map((ev, i) => (
+            {UPCOMING_EVENTS.slice(1).map((ev, i) => (
               <SpotlightCard key={ev.title} index={i + 1} {...ev} />
             ))}
           </div>
         </div>
 
-        {/* Tertiary row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-28">
-          {tertiary.map((ev, i) => (
-            <SpotlightCard key={ev.title} index={i + 3} {...ev} />
-          ))}
-        </div>
-
-        {/* ══ AWARD BANNER ═══════════════════════════════════════════════ */}
+        {/* Global stats banner */}
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-xl overflow-hidden mb-28"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          className="relative rounded-xl overflow-hidden mb-20 mt-12"
           style={{
-            background: 'rgba(13,27,46,0.75)',
-            border: '1px solid rgba(251,146,60,0.18)',
-            boxShadow: '0 0 60px rgba(251,146,60,0.05)',
+            background: 'rgba(13,27,46,0.7)',
+            border: '1px solid rgba(251,146,60,0.15)',
           }}
         >
-          {/* Parallax image behind */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div ref={marqueeRef} className="flex items-center h-full w-[112%]">
-              <img
-                src="/award-1600x329-removebg-preview.png"
-                alt=""
-                className="w-full object-contain opacity-[0.12]"
-                loading="lazy"
-                aria-hidden="true"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-              />
-            </div>
-          </div>
-
-          {/* Top accent line */}
           <div
-            className="absolute top-0 left-0 right-0 h-[1.5px]"
+            className="absolute top-0 inset-x-0 h-px"
             style={{
-              background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.6) 40%, rgba(251,146,60,0.6) 60%, transparent)',
+              background:
+                'linear-gradient(90deg, transparent, rgba(251,146,60,0.6) 40%, rgba(251,146,60,0.6) 60%, transparent)',
             }}
             aria-hidden="true"
           />
-
-          <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6 px-10 py-10">
-            <div className="flex flex-col gap-2 text-center sm:text-left">
-              <p
-                className="font-bold tracking-[0.45em] uppercase"
-                style={{ fontSize: '0.57rem', color: 'rgba(251,146,60,0.72)' }}
-              >
-                Industry Recognition
-              </p>
-              <h3
-                className="font-heading font-bold text-foreground"
-                style={{ fontSize: '1.2rem' }}
-              >
-                Award-Winning Event Series
-              </h3>
-              <p
-                className="max-w-md leading-relaxed"
-                style={{ fontSize: '0.8rem', color: 'rgba(107,127,163,0.85)' }}
-              >
-                Recognised by leading industry bodies for advancing immersive technology adoption across Asia.
-              </p>
-            </div>
-            <img
-              src="/award-1600x329-removebg-preview.png"
-              alt="Award logo"
-              className="h-12 w-auto object-contain flex-shrink-0 opacity-80"
-              loading="lazy"
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/[0.06] p-8">
+            {[
+              { value: '1,430+', label: 'Total Attendees', sub: 'Across all editions' },
+              { value: '40+', label: 'Workshops Delivered', sub: 'Expert-led sessions' },
+              { value: '75+', label: 'Partners', sub: 'Government, industry & studios' },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center py-4 sm:py-0 text-center gap-1">
+                <span
+                  className="font-heading font-black"
+                  style={{
+                    fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+                    background: 'linear-gradient(135deg, #fb923c 0%, #f0f4ff 80%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  {stat.value}
+                </span>
+                <span
+                  className="font-heading font-bold text-foreground"
+                  style={{ fontSize: '0.75rem' }}
+                >
+                  {stat.label}
+                </span>
+                <span style={{ fontSize: '0.62rem', color: 'rgba(107,127,163,0.6)' }}>
+                  {stat.sub}
+                </span>
+              </div>
+            ))}
           </div>
         </motion.div>
 
         {/* ══ PAST EVENTS ════════════════════════════════════════════════ */}
         <SectionEyebrow>Track Record</SectionEyebrow>
 
-        {/* Past heading + timeline */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
           <h2
             ref={pastHeadRef}
             className="font-heading font-black text-foreground opacity-0"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '0.04em' }}
+            style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
           >
             Past{' '}
             <span
@@ -339,25 +260,65 @@ const EventsSection = () => {
                   className="font-heading font-bold tracking-widest px-2"
                   style={{
                     fontSize: '0.6rem',
-                    color: i === arr.length - 1 ? '#fb923c' : 'rgba(107,127,163,0.4)',
+                    color:
+                      i === arr.length - 1 ? '#fb923c' : 'rgba(107,127,163,0.4)',
                   }}
                 >
                   {yr}
                 </span>
                 {i < arr.length - 1 && (
-                  <div className="w-8 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />
+                  <div
+                    className="w-8 h-px"
+                    style={{ background: 'rgba(255,255,255,0.08)' }}
+                  />
                 )}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {PAST_EVENTS.map((ev, i) => (
             <PastEventCard key={`${ev.year}-${ev.title}`} index={i} {...ev} />
           ))}
         </div>
 
+        {/* Placeholder for XRAS21 */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="mt-3 rounded-xl px-6 py-5 flex items-center justify-between gap-4"
+          style={{
+            border: '1px dashed rgba(255,255,255,0.1)',
+            background: 'rgba(255,255,255,0.02)',
+          }}
+        >
+          <div className="flex items-center gap-4">
+            <div
+              className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 font-heading font-black text-foreground-muted/40"
+              style={{
+                fontSize: '0.85rem',
+                border: '1px dashed rgba(255,255,255,0.1)',
+                background: 'rgba(255,255,255,0.02)',
+              }}
+            >
+              '21
+            </div>
+            <div>
+              <p className="font-heading font-bold text-foreground" style={{ fontSize: '0.82rem' }}>
+                XR Asia Summit 2021
+              </p>
+              <p style={{ fontSize: '0.65rem', color: 'rgba(107,127,163,0.5)' }}>
+                25–27 Nov · 100+ Attendees · Photo archive coming soon
+              </p>
+            </div>
+          </div>
+          <span className="font-mono text-[0.5rem] tracking-[0.28em] uppercase text-foreground-muted/35">
+            Inaugural
+          </span>
+        </motion.div>
       </div>
     </section>
   );

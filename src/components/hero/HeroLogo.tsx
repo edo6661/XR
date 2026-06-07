@@ -1,9 +1,16 @@
 import { motion } from 'framer-motion';
 import { COMPANY } from '../../core/navigation/routes';
 
+/**
+ * HeroLogo — updated sesuai cursorrules:
+ * - Headline: "The Internet was Flat. The Future is Spatial. Powered by AI."
+ * - Subtext A: "The future will not be viewed. It will be experienced."
+ * - Subtext B: "This is the Next Phase where Asia Builds Its Spatial Future."
+ */
 const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center select-none w-full max-w-4xl mx-auto">
+      {/* Edition badge */}
       <motion.div
         initial={{ opacity: 0, y: -12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -14,20 +21,19 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
           <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
           <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
         </div>
-
         <span
           className="font-bold tracking-[0.6em] uppercase"
           style={{ fontSize: '0.54rem', color: 'rgba(251,146,60,0.65)', letterSpacing: '0.58em' }}
         >
           4th Edition · Est. 2021 · Kuala Lumpur
         </span>
-
         <div className="flex items-center gap-1.5">
           <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
           <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
         </div>
       </motion.div>
 
+      {/* Logo mark + XR SUMMITS wordmark */}
       <div className="relative flex flex-col items-center gap-0 mb-3 w-full">
         <motion.div
           initial={{ scale: 0.6, opacity: 0, filter: 'blur(16px)' }}
@@ -39,9 +45,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             className="absolute -inset-8 rounded-full pointer-events-none"
-            style={{
-              background: 'conic-gradient(from 0deg, transparent 70%, rgba(251,146,60,0.12) 100%)',
-            }}
+            style={{ background: 'conic-gradient(from 0deg, transparent 70%, rgba(251,146,60,0.12) 100%)' }}
             aria-hidden="true"
           />
           <motion.div
@@ -106,11 +110,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             />
             <span
               className="font-heading font-extralight text-center tracking-[0.6em]"
-              style={{
-                fontSize: 'clamp(0.78rem, 2vw, 1.35rem)',
-                color: 'rgba(240,244,255,0.55)',
-                letterSpacing: '0.6em',
-              }}
+              style={{ fontSize: 'clamp(0.78rem, 2vw, 1.35rem)', color: 'rgba(240,244,255,0.55)', letterSpacing: '0.6em' }}
             >
               SUMMITS
             </span>
@@ -139,34 +139,40 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             aria-hidden="true"
           />
 
+          {/* Tagline dari cursorrules */}
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="text-center font-medium leading-relaxed max-w-2xl px-2"
-            style={{
-              fontSize: 'clamp(0.72rem, 1.5vw, 0.88rem)',
-              color: 'rgba(240,244,255,0.82)',
-              letterSpacing: '0.02em',
-            }}
+            style={{ fontSize: 'clamp(0.72rem, 1.5vw, 0.88rem)', color: 'rgba(240,244,255,0.82)', letterSpacing: '0.02em' }}
           >
             {COMPANY.tagline}
           </motion.p>
 
+          {/* Subtext A: cursorrules */}
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.28, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center leading-relaxed max-w-xl mt-4 px-4"
-            style={{
-              fontSize: 'clamp(0.68rem, 1.2vw, 0.78rem)',
-              color: 'rgba(107,127,163,0.75)',
-              lineHeight: 1.75,
-            }}
+            className="text-center leading-relaxed mt-3 px-4"
+            style={{ fontSize: 'clamp(0.68rem, 1.2vw, 0.78rem)', color: 'rgba(107,127,163,0.7)', lineHeight: 1.75 }}
           >
-            {COMPANY.supportingText}
+            The future will not be viewed. It will be experienced.
           </motion.p>
 
+          {/* Subtext B: cursorrules */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.38, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center leading-relaxed mt-1 px-4"
+            style={{ fontSize: 'clamp(0.68rem, 1.2vw, 0.78rem)', color: 'rgba(107,127,163,0.55)', lineHeight: 1.75 }}
+          >
+            This is the Next Phase where Asia Builds Its Spatial Future.
+          </motion.p>
+
+          {/* Coordinate meta */}
           <motion.div
             initial={{ opacity: 0, x: 8 }}
             animate={{ opacity: 1, x: 0 }}

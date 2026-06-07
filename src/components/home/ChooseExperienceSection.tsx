@@ -8,20 +8,31 @@ const XRIcon = () => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21V3M2.25 7.5l9.75 5.5 9.75-5.5" />
   </svg>
 );
-
 const SarawakIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 12l8-4.5M12 12v9M12 12L4 7.5" />
   </svg>
 );
+const HackathonIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} className="w-6 h-6">
+    <path strokeLinecap="round" strokeLinejoin="round"
+      d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+  </svg>
+);
 
+/**
+ * 3 Gateways sesuai cursorrules:
+ * 1. 4th XR Asia Summits 2026 (1-3 Dec 2026, MITEC)
+ * 2. AI-XR Cultural Innovation Forum (16-17 Oct 2026, BCCK)
+ * 3. AI Filmmaking Hackathon
+ */
 const EVENT_GATEWAYS = [
   {
     title: "XRAS KL 26'",
-    subtitle: 'Flagship · Kuala Lumpur',
+    subtitle: '4th Edition · Kuala Lumpur',
     description:
-      'Conference, expo, workshops, masterclasses, hackathon & esports grand finals, and the AI/XR Awards Gala Dinner.',
+      'Flagship summit — conference, expo, workshops, coaching, masterclasses, hackathon & esports grand finals, and the AI/XR Awards Gala Dinner. 1–3 Dec 2026, MITEC.',
     to: '/xras-kl-2026',
     accentColor: '#fb923c',
     tag: 'XRAS26',
@@ -31,11 +42,21 @@ const EVENT_GATEWAYS = [
     title: "AIXR 26' Sarawak",
     subtitle: 'Regional · Sarawak',
     description:
-      'Innovation • Culture • Technology • Future Talent — conference, expo, workshops, and semi-finals.',
+      'Innovation • Culture • Technology • Future Talent — conference, expo, workshops, and semi-finals. 16–17 Oct 2026, BCCK.',
     to: '/aixr-2026-sarawak',
     accentColor: '#22d3ee',
     tag: 'AIXR',
     icon: <SarawakIcon />,
+  },
+  {
+    title: 'AI Filmmaking Hackathon',
+    subtitle: 'Grand Finals · XRAS KL',
+    description:
+      'Teams compete with AI-generated films before industry judges and live audiences. Semi-finals at AIXR Sarawak, grand finals at XRAS KL.',
+    to: '/xras-kl-2026',
+    accentColor: '#a78bfa',
+    tag: 'Hackathon',
+    icon: <HackathonIcon />,
   },
 ] as const;
 
@@ -46,6 +67,7 @@ const ChooseExperienceSection = () => (
     style={{
       paddingTop: 'var(--section-padding-y)',
       paddingBottom: 'var(--section-padding-y)',
+      borderTop: '1px solid rgba(255,255,255,0.05)',
     }}
     aria-labelledby="choose-experience-heading"
   >
@@ -73,20 +95,25 @@ const ChooseExperienceSection = () => (
           className="font-heading font-bold text-foreground leading-tight mb-4"
           style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.25rem)' }}
         >
-          Two gateways. One immersive future.
+          Three gateways. One immersive future.
         </h2>
         <p
           className="text-foreground-muted leading-relaxed"
           style={{ fontSize: '0.88rem', lineHeight: 1.8 }}
         >
-          Select the flagship Kuala Lumpur summit or the Sarawak regional experience — each built for
-          deployment-ready immersive innovation.
+          Select the flagship Kuala Lumpur summit, the Sarawak regional experience, or the AI
+          Filmmaking Hackathon — each built for deployment-ready immersive innovation.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
         {EVENT_GATEWAYS.map((gateway, index) => (
-          <GatewayCard key={gateway.to} index={index} {...gateway} isCenter={index === 0} />
+          <GatewayCard
+            key={gateway.to + gateway.title}
+            index={index}
+            {...gateway}
+            isCenter={index === 0}
+          />
         ))}
       </div>
     </div>

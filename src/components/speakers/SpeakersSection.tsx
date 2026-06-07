@@ -1,273 +1,255 @@
-import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
+import SectionEyebrow from '../ui/SectionEyebrow';
+import { Link } from 'react-router-dom';
 
-// ── Speaker data ───────────────────────────────────────────────────────────
-// Placeholder yang lebih realistis untuk event XR Asia
-const SPEAKERS = [
-  {
-    name: 'Dr. Sarah Chen',
-    role: 'Chief AI Scientist',
-    company: 'Nexus Labs',
-    topic: 'Neural Rendering & AI-Driven XR',
-    image: 'https://i.pravatar.cc/400?img=1',
-    accentColor: '#fb923c',
-  },
-  {
-    name: 'Marcus Vidal',
-    role: 'Head of Spatial Computing',
-    company: 'MetaXR Asia',
-    topic: 'The Enterprise Metaverse Roadmap',
-    image: 'https://i.pravatar.cc/400?img=11',
-    accentColor: '#22d3ee',
-  },
-  {
-    name: 'Elena Rostova',
-    role: 'VP of Engineering',
-    company: 'NeuralNet Systems',
-    topic: 'Volumetric Video at Scale',
-    image: 'https://i.pravatar.cc/400?img=5',
-    accentColor: '#4ade80',
-  },
-  {
-    name: 'David Kim',
-    role: 'Founder & CEO',
-    company: 'XR Esports Arena',
-    topic: 'Competitive XR: The Next Frontier',
-    image: 'https://i.pravatar.cc/400?img=8',
-    accentColor: '#a78bfa',
-  },
+/**
+ * Speakers — populated with confirmed/known speakers from the cursorrules brief.
+ * Photo placeholders are used since /public/speaker-pics/ is currently empty.
+ * Speaker card shows a professional monogram avatar when no photo is available.
+ */
+
+type Speaker = {
+  name: string;
+  role: string;
+  company: string;
+  photo?: string;
+  accentColor?: string;
+};
+
+const SPEAKERS: Speaker[] = [
+  { name: "Dato' Kamil Othman", role: "CEO", company: "FINAS", accentColor: '#fb923c' },
+  { name: "Nick CG Tan", role: "Managing Director", company: "Oceanus Media Global", accentColor: '#22d3ee' },
+  { name: "Thi Thu Hien Hoang", role: "Director", company: "Mirabo", accentColor: '#a78bfa' },
+  { name: "Alex David", role: "Founder", company: "Tactician", accentColor: '#4ade80' },
+  { name: "Carl Loo", role: "Director", company: "Solid Water", accentColor: '#f472b6' },
+  { name: "Kei Choong", role: "Founder", company: "Aux Media", accentColor: '#fb923c' },
+  { name: "Fariz Hanapiah", role: "CEO", company: "EDT", accentColor: '#22d3ee' },
+  { name: "Justin Wong", role: "Founder", company: "TrueXR", accentColor: '#a78bfa' },
+  { name: "Havene Liew", role: "Director", company: "XRA", accentColor: '#4ade80' },
+  { name: "Ts. Dr. Mohd Zaliman", role: "Director", company: "TDC", accentColor: '#f472b6' },
+  { name: "Jason Yim", role: "CEO", company: "Trigger XR", accentColor: '#fb923c' },
+  { name: "Dr. Ike Tan", role: "Academic Lead", company: "APU/APIIT", accentColor: '#22d3ee' },
+  { name: "Dr. Andrew Yew", role: "Director", company: "Ministry XR", accentColor: '#a78bfa' },
+  { name: "Hussin Khan", role: "Founder", company: "EFXCO", accentColor: '#4ade80' },
+  { name: "Thomas Desmeules", role: "VP", company: "Solotech", accentColor: '#f472b6' },
+  { name: "Kian Chai Ng", role: "Director", company: "Microsoft", accentColor: '#fb923c' },
 ];
 
-// ── Speaker card ───────────────────────────────────────────────────────────
-const SpeakerCard = ({
-  name,
-  role,
-  company,
-  topic,
-  image,
-  accentColor,
-  index,
-}: typeof SPEAKERS[0] & { index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
+// Generate initials from a name
+const getInitials = (name: string) =>
+  name
+    .split(' ')
+    .filter((p) => !p.startsWith("'") && p.length > 1 && !p.startsWith('Dr') && !p.startsWith('Ts'))
+    .slice(0, 2)
+    .map((p) => p[0])
+    .join('');
 
-  const handleEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (overlayRef.current) {
-      gsap.to(overlayRef.current, { opacity: 1, duration: 0.4, ease: 'power2.out' });
-    }
-    e.currentTarget.style.borderColor = `${accentColor}30`;
-    e.currentTarget.style.boxShadow = `0 0 40px ${accentColor}0d`;
-  };
-  const handleLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (overlayRef.current) {
-      gsap.to(overlayRef.current, { opacity: 0, duration: 0.35, ease: 'power2.in' });
-    }
-    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.055)';
-    e.currentTarget.style.boxShadow = 'none';
-  };
+const SpeakerCard = ({
+  speaker,
+  index,
+}: {
+  speaker: Speaker;
+  index: number;
+}) => {
+  const accent = speaker.accentColor ?? '#fb923c';
+  const initials = getInitials(speaker.name);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 32 }}
+    <motion.article
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ delay: (index % 8) * 0.055, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative flex flex-col rounded-xl overflow-hidden"
+      style={{
+        background: 'rgba(10,20,36,0.65)',
+        border: '1px solid rgba(255,255,255,0.06)',
+        transition: 'border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease',
+      }}
+      whileHover={{ y: -3 }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = `${accent}35`;
+        el.style.boxShadow = `0 0 32px ${accent}0d, 0 18px 36px rgba(0,0,0,0.3)`;
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = 'rgba(255,255,255,0.06)';
+        el.style.boxShadow = 'none';
+      }}
     >
+      {/* Left accent bar */}
       <div
-        ref={cardRef}
-        onMouseEnter={handleEnter}
-        onMouseLeave={handleLeave}
-        className="group relative rounded-xl overflow-hidden cursor-default"
+        className="absolute left-0 top-0 bottom-0 w-[1.5px]"
         style={{
-          background: 'rgba(10,20,36,0.6)',
-          border: `1px solid rgba(255,255,255,0.055)`,
-          transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
+          background: `linear-gradient(to bottom, transparent, ${accent}55, transparent)`,
+          opacity: 0.7,
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Avatar area */}
+      <div
+        className="relative flex items-center justify-center"
+        style={{
+          aspectRatio: '1/1',
+          background: `linear-gradient(145deg, ${accent}10 0%, rgba(10,20,36,0.5) 100%)`,
+          borderBottom: '1px solid rgba(255,255,255,0.05)',
         }}
       >
-        {/* Left accent bar */}
-        <div
-          className="absolute left-0 top-0 bottom-0 w-[2px]"
-          style={{
-            background: `linear-gradient(to bottom, transparent, ${accentColor}60, transparent)`,
-          }}
-          aria-hidden="true"
-        />
-
-        {/* Image area */}
-        <div className="relative overflow-hidden" style={{ aspectRatio: '3/2' }}>
-          {/* Grayscale → color on hover */}
+        {speaker.photo ? (
           <img
-            src={image}
-            alt={name}
-            className="w-full h-full object-cover object-top transition-all duration-700"
-            style={{ filter: 'grayscale(85%) brightness(0.75)' }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(0%) brightness(0.9)';
-              (e.currentTarget as HTMLImageElement).style.transform = 'scale(1.05)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLImageElement).style.filter = 'grayscale(85%) brightness(0.75)';
-              (e.currentTarget as HTMLImageElement).style.transform = 'scale(1)';
-            }}
+            src={speaker.photo}
+            alt={speaker.name}
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            style={{ filter: 'grayscale(20%) brightness(0.85)' }}
             loading="lazy"
           />
-
-          {/* Bottom gradient */}
+        ) : (
           <div
-            className="absolute inset-0"
+            className="flex items-center justify-center w-16 h-16 rounded-full font-heading font-black text-foreground"
             style={{
-              background: `linear-gradient(to top, rgba(10,20,36,1) 0%, rgba(10,20,36,0.4) 50%, transparent 100%)`,
-            }}
-            aria-hidden="true"
-          />
-
-          {/* Topic badge — top right */}
-          <div
-            className="absolute top-3 right-3 px-2.5 py-1 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{
-              background: `${accentColor}22`,
-              border: `1px solid ${accentColor}35`,
-              backdropFilter: 'blur(8px)',
+              fontSize: '1.35rem',
+              background: `${accent}14`,
+              border: `1px solid ${accent}28`,
+              color: accent,
             }}
           >
-            <span
-              className="font-bold tracking-[0.18em] uppercase"
-              style={{ fontSize: '0.52rem', color: accentColor }}
-            >
-              Speaking On
-            </span>
+            {initials}
           </div>
-        </div>
+        )}
 
-        {/* Content */}
-        <div className="flex flex-col gap-3 p-5">
-          {/* Name + role */}
-          <div>
-            <h3
-              className="font-heading font-bold text-foreground leading-tight mb-1"
-              style={{ fontSize: '0.95rem' }}
-            >
-              {name}
-            </h3>
-            <p style={{ fontSize: '0.72rem', color: `${accentColor}90` }}>
-              {role}
-            </p>
-            <p style={{ fontSize: '0.68rem', color: 'rgba(107,127,163,0.65)' }}>
-              {company}
-            </p>
-          </div>
-
-          {/* Topic */}
-          <div
-            className="pt-3 border-t"
-            style={{ borderColor: 'rgba(255,255,255,0.055)' }}
-          >
-            <p
-              className="leading-snug"
-              style={{ fontSize: '0.72rem', color: 'rgba(240,244,255,0.6)', fontStyle: 'italic' }}
-            >
-              "{topic}"
-            </p>
-          </div>
-        </div>
+        {/* Number badge */}
+        <span
+          className="absolute top-2.5 right-2.5 font-heading font-black"
+          style={{ fontSize: '0.52rem', letterSpacing: '0.25em', color: `${accent}38` }}
+          aria-hidden="true"
+        >
+          {String(index + 1).padStart(2, '0')}
+        </span>
       </div>
-    </motion.div>
+
+      {/* Content */}
+      <div className="flex flex-col gap-1.5 p-4">
+        <h3
+          className="font-heading font-bold text-foreground leading-snug"
+          style={{ fontSize: '0.82rem' }}
+        >
+          {speaker.name}
+        </h3>
+        <p style={{ fontSize: '0.65rem', color: `${accent}88` }}>{speaker.role}</p>
+        <p style={{ fontSize: '0.62rem', color: 'rgba(107,127,163,0.6)' }}>{speaker.company}</p>
+      </div>
+    </motion.article>
   );
 };
 
-// ── Main section ───────────────────────────────────────────────────────────
-const SpeakersSection = () => {
-  return (
-    <section
-      className="relative w-full bg-background overflow-hidden"
-      style={{ paddingTop: 'var(--section-padding-y)', paddingBottom: 'var(--section-padding-y)' }}
-    >
-      <div className="max-w-6xl mx-auto px-6">
+const SpeakersSection = () => (
+  <section
+    className="relative w-full overflow-hidden"
+    style={{
+      paddingTop: 'var(--section-padding-y)',
+      paddingBottom: 'var(--section-padding-y)',
+      borderTop: '1px solid rgba(255,255,255,0.05)',
+    }}
+    aria-labelledby="speakers-heading"
+  >
+    {/* Atmospheric glow */}
+    <div
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background:
+          'radial-gradient(ellipse 65% 45% at 50% 0%, rgba(167,139,250,0.04) 0%, transparent 65%)',
+      }}
+      aria-hidden="true"
+    />
 
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, x: -16 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-3 mb-10"
-        >
-          <span className="w-5 h-px" style={{ background: 'rgba(251,146,60,0.55)' }} aria-hidden="true" />
-          <span
-            className="font-bold tracking-[0.52em] uppercase"
-            style={{ fontSize: '0.57rem', color: 'rgba(251,146,60,0.72)' }}
-          >
-            Visionary Minds
-          </span>
-        </motion.div>
+    <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <SectionEyebrow>Visionary Minds</SectionEyebrow>
 
-        {/* Heading + CTA row */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ delay: 0.08, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="font-heading font-black text-foreground"
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '0.04em' }}
-          >
-            Keynote{' '}
-            <span
-              style={{
-                background: 'linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Speakers
-            </span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            className="pb-1"
-            style={{ fontSize: '0.75rem', color: 'rgba(107,127,163,0.6)' }}
-          >
-            Full lineup announced soon
-          </motion.p>
-        </div>
-
-        {/* Speaker cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {SPEAKERS.map((speaker, i) => (
-            <SpeakerCard key={speaker.name} index={i} {...speaker} />
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+        <motion.h2
+          id="speakers-heading"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="flex justify-center mt-10"
+          transition={{ delay: 0.08, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          className="font-heading font-black text-foreground"
+          style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
         >
-          <a
-            href="#tickets"
-            className="group inline-flex items-center gap-2 transition-colors duration-300"
-            style={{ color: 'rgba(107,127,163,0.5)' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.8)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(107,127,163,0.5)'; }}
+          Keynote{' '}
+          <span
+            style={{
+              background: 'linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
           >
-            <span className="font-bold tracking-[0.25em] uppercase" style={{ fontSize: '0.62rem' }}>
-              Apply to Speak
-            </span>
-            <span className="text-xs transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
-          </a>
-        </motion.div>
+            Speakers
+          </span>
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+          className="pb-1 text-right"
+          style={{ fontSize: '0.72rem', color: 'rgba(107,127,163,0.55)' }}
+        >
+          More speakers to be announced
+        </motion.p>
       </div>
-    </section>
-  );
-};
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-8 gap-3">
+        {SPEAKERS.map((speaker, i) => (
+          <SpeakerCard key={speaker.name} speaker={speaker} index={i} />
+        ))}
+      </div>
+
+      {/* Apply to speak CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ delay: 0.25, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 pt-10"
+        style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+      >
+        <p style={{ fontSize: '0.78rem', color: 'rgba(107,127,163,0.6)' }}>
+          Are you a practitioner, researcher, or industry leader in XR, AI, or spatial media?
+        </p>
+        <Link
+          to="/contact"
+          className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
+          style={{
+            fontSize: '0.62rem',
+            border: '1px solid rgba(251,146,60,0.4)',
+            color: '#fb923c',
+          }}
+          onMouseEnter={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = 'rgba(251,146,60,0.08)';
+            el.style.borderColor = 'rgba(251,146,60,0.65)';
+          }}
+          onMouseLeave={(e) => {
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = 'transparent';
+            el.style.borderColor = 'rgba(251,146,60,0.4)';
+          }}
+        >
+          Apply to Speak
+          <span
+            className="transition-transform duration-300 group-hover:translate-x-0.5"
+            aria-hidden="true"
+          >
+            →
+          </span>
+        </Link>
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default SpeakersSection;

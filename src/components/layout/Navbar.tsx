@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticWrapper from '../ui/MagneticWrapper';
 import ScrambleText from '../ui/ScrambleText';
-import { PRIMARY_NAV_LINKS } from '../../core/navigation/routes';
+import { COMPANY, PRIMARY_NAV_LINKS } from '../../core/navigation/routes';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -308,18 +308,29 @@ const Navbar = () => {
               <p className="font-mono text-[0.5rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
                 4th Edition · Kuala Lumpur · 2026
               </p>
-              <a
-                href="#tickets"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
-                style={{
-                  background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-                  boxShadow: '0 0 36px rgba(251,146,60,0.3)',
-                }}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ delay: 0.34, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="px-6 pb-10 pt-5"
               >
-                Register Now
-                <span aria-hidden="true">→</span>
-              </a>
+                <p className="font-mono text-[0.5rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
+                  4th Edition · Kuala Lumpur · 2026
+                </p>
+                <a
+                  href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement')}`}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
+                  style={{
+                    background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+                    boxShadow: '0 0 36px rgba(251,146,60,0.3)',
+                  }}
+                >
+                  Join the Movement
+                  <span aria-hidden="true">→</span>
+                </a>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}

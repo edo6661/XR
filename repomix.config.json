@@ -1,0 +1,31 @@
+{
+  "output": {
+    "filePath": "repomix-output.xml",
+    "style": "xml",
+    "removeComments": false,
+    "showLineNumbers": true
+  },
+  "ignore": {
+    "useGitignore": true,
+    "useDefaultPatterns": true,
+    "customPatterns": [
+      "public/**/*.png",
+      "public/**/*.jpg",
+      "public/**/*.jpeg",
+      "public/**/*.webp",
+      "public/**/*.svg",
+      "public/**/*.ico",
+      "public/**/*.mp4",
+      "public/**/*.ttf",
+      "public/**/*.otf",
+      "public/**/*.ai",
+      "public/**/*.pdf",
+      "public/**/*.docx",
+      "public/font/**",
+      "public/hero/videos/**",
+      "package-lock.json",
+      "repomix-output.xml",
+      "**/*.map"
+    ]
+  }
+}

@@ -22,26 +22,25 @@ type Tile = {
   to: string;
   accent: string;
 };
-
 const TILES: Tile[] = [
   {
     tag: 'Flagship · KL',
-    title: "XRAS KL 26'",
-    subtitle: 'The XR Asia Summit',
+    title: "XR Asia Summits",
+    subtitle: '1-3 Dec 2026 · MITEC',
     to: '/xras-kl-2026',
     accent: '#fb923c',
   },
   {
-    tag: 'Grand Finals',
-    title: 'XR Esports & Gala',
-    subtitle: 'Finals · AI/XR Awards Night',
+    tag: 'Hackathon',
+    title: 'AI Filmmaking',
+    subtitle: 'Grand Finals',
     to: '/xras-kl-2026',
     accent: '#a855f7',
   },
   {
-    tag: 'Regional · Sarawak',
-    title: "AIXR 26'",
-    subtitle: 'Innovation · Culture · Talent',
+    tag: 'Forum · Sarawak',
+    title: 'AI-XR Cultural Forum',
+    subtitle: '16-17 Oct 2026 · BCCK',
     to: '/aixr-2026-sarawak',
     accent: '#22d3ee',
   },

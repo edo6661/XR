@@ -25,6 +25,16 @@ const SOCIAL_ICONS: Record<string, ReactNode> = {
       <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
     </svg>
   ),
+  Facebook: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  ),
+  TikTok: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z" />
+    </svg>
+  ),
 };
 
 const FooterLink = ({ label, to }: { label: string; to: string }) => (
@@ -45,11 +55,16 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => (
 );
 
 const Footer = () => {
-  const eventLinks = PRIMARY_NAV_LINKS.filter((l) => l.to !== '/' && l.to !== '/about' && l.to !== '/contact');
-  const companyLinks = PRIMARY_NAV_LINKS.filter((l) => l.to === '/' || l.to === '/about' || l.to === '/contact');
+  const eventLinks = PRIMARY_NAV_LINKS.filter(
+    (l) => l.to !== '/' && l.to !== '/about' && l.to !== '/contact',
+  );
+  const companyLinks = PRIMARY_NAV_LINKS.filter(
+    (l) => l.to === '/' || l.to === '/about' || l.to === '/contact',
+  );
 
   return (
     <footer className="relative w-full overflow-hidden" style={{ background: 'rgba(3,6,13,0.99)' }}>
+      {/* Top line */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
@@ -59,6 +74,7 @@ const Footer = () => {
         aria-hidden="true"
       />
 
+      {/* Bottom glow */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
         style={{
@@ -71,6 +87,7 @@ const Footer = () => {
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pt-16 pb-14">
+          {/* Brand column */}
           <div className="md:col-span-5 flex flex-col gap-6">
             <Link to="/" className="group flex items-center gap-3 w-fit select-none">
               <div className="relative w-8 h-8">
@@ -79,7 +96,11 @@ const Footer = () => {
                   style={{ background: 'rgba(251,146,60,0.3)' }}
                   aria-hidden="true"
                 />
-                <img src="/logo-278x262-removebg.png" alt="XR Summits" className="relative w-full h-full object-contain" />
+                <img
+                  src="/logo-278x262-removebg.png"
+                  alt="XR Summits"
+                  className="relative w-full h-full object-contain"
+                />
               </div>
               <div className="flex flex-col leading-none gap-[3px]">
                 <span
@@ -97,15 +118,30 @@ const Footer = () => {
               </div>
             </Link>
 
-            <p style={{ fontSize: '0.78rem', color: 'rgba(107,127,163,0.65)', lineHeight: 1.8, maxWidth: '320px' }}>
+            <p
+              style={{
+                fontSize: '0.78rem',
+                color: 'rgba(107,127,163,0.65)',
+                lineHeight: 1.8,
+                maxWidth: '320px',
+              }}
+            >
               {COMPANY.tagline}
             </p>
 
-            <p style={{ fontSize: '0.72rem', color: 'rgba(107,127,163,0.5)', lineHeight: 1.75, maxWidth: '320px' }}>
+            <p
+              style={{
+                fontSize: '0.72rem',
+                color: 'rgba(107,127,163,0.5)',
+                lineHeight: 1.75,
+                maxWidth: '320px',
+              }}
+            >
               {COMPANY.supportingText}
             </p>
 
-            <div className="flex items-center gap-2.5">
+            {/* Social links */}
+            <div className="flex items-center flex-wrap gap-2">
               {SOCIAL_LINKS.map(({ label, href }) => (
                 <motion.a
                   key={label}
@@ -138,16 +174,32 @@ const Footer = () => {
               ))}
             </div>
 
-            <address
-              className="not-italic flex flex-col gap-0.5"
-              style={{ fontSize: '0.7rem', color: 'rgba(107,127,163,0.42)', lineHeight: 1.75 }}
+            {/* Contact info */}
+            <div
+              className="flex flex-col gap-1.5"
+              style={{ fontSize: '0.7rem', color: 'rgba(107,127,163,0.42)', lineHeight: 1.8 }}
             >
-              <span>{COMPANY.address.line1}</span>
-              <span>{COMPANY.address.line2}</span>
-              <span>{COMPANY.address.line3}</span>
-            </address>
+              <a
+                href={`tel:${COMPANY.phone}`}
+                className="hover:text-accent transition-colors duration-200"
+              >
+                {COMPANY.phone}
+              </a>
+              <a
+                href={`mailto:${COMPANY.email}`}
+                className="hover:text-accent transition-colors duration-200"
+              >
+                {COMPANY.email}
+              </a>
+              <address className="not-italic flex flex-col gap-0.5 mt-1">
+                <span>{COMPANY.address.line1}</span>
+                <span>{COMPANY.address.line2}</span>
+                <span>{COMPANY.address.line3}</span>
+              </address>
+            </div>
           </div>
 
+          {/* Links columns */}
           <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="flex flex-col gap-4">
               <h4
@@ -193,11 +245,13 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Divider */}
         <div className="w-full h-px" style={{ background: 'rgba(255,255,255,0.04)' }} aria-hidden="true" />
 
+        {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
           <p style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.35)' }}>
-            © {new Date().getFullYear()} XR Summits Sdn. Bhd. All rights reserved.
+            XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) ©{new Date().getFullYear()}. All Rights Reserved.
           </p>
 
           <a

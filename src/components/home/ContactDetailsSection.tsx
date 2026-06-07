@@ -25,6 +25,16 @@ const SOCIAL_ICONS: Record<string, ReactNode> = {
       <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
     </svg>
   ),
+  Facebook: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  ),
+  TikTok: (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.17 8.17 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z" />
+    </svg>
+  ),
 };
 
 const ContactDetailsSection = () => (
@@ -76,34 +86,61 @@ const ContactDetailsSection = () => (
             className="font-heading font-bold text-foreground"
             style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)' }}
           >
-            Get in touch with XR Summits
+            Join the Next Phase Where Asia Builds Its Spatial Future
           </h2>
 
           <p
             className="text-foreground-muted max-w-lg leading-relaxed"
             style={{ fontSize: '0.85rem', lineHeight: 1.8 }}
           >
-            General enquiries, partnerships, exhibitor applications, and registration interest — our team
-            will respond via your preferred channel.
+            Whether you're attending, exhibiting, sponsoring, or speaking — XR Summits connects you
+            to the conversations and partnerships that matter.
           </p>
 
-          <a
-            href={`mailto:${COMPANY.email}`}
-            className="group inline-flex flex-col items-center gap-1 transition-colors duration-300"
-          >
-            <span
-              className="font-mono text-[0.5rem] tracking-[0.4em] uppercase"
-              style={{ color: 'rgba(107,127,163,0.55)' }}
+          {/* Contact info */}
+          <div className="flex flex-col sm:flex-row items-center gap-6">
+            <a
+              href={`tel:${COMPANY.phone}`}
+              className="group inline-flex flex-col items-center gap-1 transition-colors duration-300"
             >
-              Email us
-            </span>
-            <span
-              className="font-heading font-bold tracking-wide text-accent group-hover:text-foreground transition-colors duration-300"
-              style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)' }}
+              <span
+                className="font-mono text-[0.5rem] tracking-[0.4em] uppercase"
+                style={{ color: 'rgba(107,127,163,0.55)' }}
+              >
+                Call us
+              </span>
+              <span
+                className="font-heading font-bold tracking-wide text-foreground group-hover:text-accent transition-colors duration-300"
+                style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.1rem)' }}
+              >
+                {COMPANY.phone}
+              </span>
+            </a>
+
+            <div
+              className="w-px h-8 hidden sm:block"
+              style={{ background: 'rgba(255,255,255,0.08)' }}
+              aria-hidden="true"
+            />
+
+            <a
+              href={`mailto:${COMPANY.email}`}
+              className="group inline-flex flex-col items-center gap-1 transition-colors duration-300"
             >
-              {COMPANY.email}
-            </span>
-          </a>
+              <span
+                className="font-mono text-[0.5rem] tracking-[0.4em] uppercase"
+                style={{ color: 'rgba(107,127,163,0.55)' }}
+              >
+                Email us
+              </span>
+              <span
+                className="font-heading font-bold tracking-wide text-accent group-hover:text-foreground transition-colors duration-300"
+                style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.1rem)' }}
+              >
+                {COMPANY.email}
+              </span>
+            </a>
+          </div>
 
           <address
             className="not-italic flex flex-col gap-0.5"
@@ -114,6 +151,7 @@ const ContactDetailsSection = () => (
             <span>{COMPANY.address.line3}</span>
           </address>
 
+          {/* Social icons */}
           <div className="flex items-center gap-2.5 pt-2">
             {SOCIAL_LINKS.map(({ label, href }) => (
               <motion.a
@@ -135,16 +173,31 @@ const ContactDetailsSection = () => (
             ))}
           </div>
 
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.68rem] text-[#050b18] transition-shadow duration-300 hover:shadow-[0_0_28px_rgba(251,146,60,0.35)]"
+          {/* CTA */}
+          <a
+            href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement — XR Summits')}`}
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.68rem] text-[#050b18] transition-shadow duration-300 hover:shadow-[0_0_28px_rgba(251,146,60,0.35)]"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',
             }}
           >
-            Full contact form
+            Join the Movement
             <span aria-hidden="true">→</span>
+          </a>
+
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-1 transition-colors duration-250"
+            style={{ fontSize: '0.68rem', color: 'rgba(107,127,163,0.45)' }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.65)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(107,127,163,0.45)';
+            }}
+          >
+            Full contact form →
           </Link>
         </div>
       </motion.div>

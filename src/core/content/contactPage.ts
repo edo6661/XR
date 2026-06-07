@@ -10,17 +10,18 @@ export const CONTACT_SUBJECTS = [
   "Press accreditation",
 ] as const;
 
-/** Placeholder — replace with production number */
+/** Real WhatsApp number from cursorrules */
 export const WHATSAPP_PLACEHOLDER = {
-  phone: "60123456789",
-  href: "https://wa.me/60123456789?text=Hello%20XR%20Summits",
+  phone: "60122020624",
+  href: "https://wa.me/60122020624?text=Hello%20XR%20Summits",
   label: "Chat on WhatsApp",
+  display: "+6012-2020624",
 } as const;
 
 export const BNI_BANK_DETAILS = {
-  bank: "Bank Negara Indonesia (BNI)",
+  bank: "Bank Negara Malaysia (BNM)",
   accountName: "XR Summits Sdn. Bhd.",
-  accountNumber: "1234567890",
-  swift: "BNINIDJA",
-  branch: "Kuala Lumpur Branch",
+  accountNumber: "Placeholder — TBC",
+  swift: "Placeholder — TBC",
+  branch: "Petaling Jaya Branch",
 } as const;
