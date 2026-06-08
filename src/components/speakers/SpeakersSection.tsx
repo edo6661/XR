@@ -1,43 +1,20 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SectionEyebrow from '../ui/SectionEyebrow';
-import GatewayModal from '../gateway/GatewayModal';
 
+// 1. Tipe data disederhanakan, hapus bio, syllabus, cost, stripeLink
 type Speaker = {
   name: string;
   role: string;
   company: string;
   photo?: string;
   accentColor?: string;
-  // Tambahan field untuk Masterclass/Coaching sesuai request klien
-  bio?: string;
-  syllabus?: string[];
-  cost?: string;
-  stripeLink?: string;
 };
 
+// 2. Data speakers dibersihkan dari atribut masterclass
 const SPEAKERS: Speaker[] = [
-  {
-    name: "Dato' Kamil Othman",
-    role: "CEO",
-    company: "FINAS",
-    accentColor: '#ef783d',
-    bio: "Dato' Kamil Othman is a visionary leader driving the digital and immersive transformation of the Malaysian film and broadcast industry.",
-    syllabus: ["The Future of Asian Cinema", "Integrating XR in National Broadcasting", "Funding and Grants for Immersive Tech"],
-    cost: "MYR 1,500 / Session",
-    stripeLink: "#"
-  },
-  {
-    name: "Nick CG Tan",
-    role: "Managing Director",
-    company: "Oceanus Media Global",
-    accentColor: '#3953a3',
-    bio: "Pioneer in Virtual Production and mixed reality broadcasting, bridging the gap between traditional media and spatial computing.",
-    syllabus: ["Virtual Production Pipelines", "Real-time Rendering with Unreal Engine", "Case Study: Live AR Broadcasting"],
-    cost: "MYR 2,200 / Masterclass",
-    stripeLink: "#"
-  },
+  { name: "Dato' Kamil Othman", role: "CEO", company: "FINAS", accentColor: '#ef783d' },
+  { name: "Nick CG Tan", role: "Managing Director", company: "Oceanus Media Global", accentColor: '#3953a3' },
   { name: "Thi Thu Hien Hoang", role: "Director", company: "Mirabo", accentColor: '#fedb21' },
   { name: "Alex David", role: "Founder", company: "Tactician", accentColor: '#ef783d' },
   { name: "Carl Loo", role: "Director", company: "Solid Water", accentColor: '#3953a3' },
@@ -65,23 +42,21 @@ const getInitials = (name: string) =>
 const SpeakerCard = ({
   speaker,
   index,
-  onClick,
 }: {
   speaker: Speaker;
   index: number;
-  onClick: () => void;
 }) => {
   const accent = speaker.accentColor ?? '#ef783d';
   const initials = getInitials(speaker.name);
 
   return (
-    <motion.button
-      onClick={onClick}
+    // 3. Ubah motion.button jadi motion.div, hapus cursor-pointer, hapus onClick
+    <motion.div
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ delay: (index % 8) * 0.055, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative flex flex-col rounded-xl overflow-hidden text-left w-full h-full cursor-pointer"
+      className="group relative flex flex-col rounded-xl overflow-hidden text-left w-full h-full"
       style={{
         background: 'rgba(10,10,10,0.65)',
         border: '1px solid rgba(255,255,255,0.06)',
@@ -157,12 +132,12 @@ const SpeakerCard = ({
         <p style={{ fontSize: '0.65rem', color: `${accent}99` }}>{speaker.role}</p>
         <p style={{ fontSize: '0.62rem', color: 'rgba(240,244,255,0.5)' }}>{speaker.company}</p>
       </div>
-    </motion.button>
+    </motion.div>
   );
 };
 
 const SpeakersSection = () => {
-  const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null);
+  // 4. Hapus useState untuk selectedSpeaker dan hilangkan pemanggilan <GatewayModal />
 
   return (
     <section
@@ -216,7 +191,7 @@ const SpeakersSection = () => {
             className="pb-1 text-right"
             style={{ fontSize: '0.72rem', color: 'rgba(139,155,180,0.55)' }}
           >
-            Schedules & Masterclasses
+            Past & Present Visionaries
           </motion.p>
         </div>
 
@@ -226,11 +201,9 @@ const SpeakersSection = () => {
               key={speaker.name}
               speaker={speaker}
               index={i}
-              onClick={() => setSelectedSpeaker(speaker)}
             />
           ))}
 
-          {/* Kartu Kosong: Indikator "More to come" sesuai request klien */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -282,86 +255,6 @@ const SpeakersSection = () => {
           </Link>
         </motion.div>
       </div>
-
-      {/* MODAL PROFIL & PAYMENT (STRIPE) */}
-      <GatewayModal
-        open={!!selectedSpeaker}
-        onClose={() => setSelectedSpeaker(null)}
-        title="Speaker & Masterclass Profile"
-        accentColor={selectedSpeaker?.accentColor || '#ef783d'}
-      >
-        {selectedSpeaker && (
-          <div className="flex flex-col gap-6 text-foreground">
-            {/* Header: Avatar & Title */}
-            <div className="flex items-center gap-5">
-              <div
-                className="w-16 h-16 rounded-full flex items-center justify-center font-heading font-black text-xl flex-shrink-0"
-                style={{
-                  background: `${selectedSpeaker.accentColor}15`,
-                  border: `1px solid ${selectedSpeaker.accentColor}40`,
-                  color: selectedSpeaker.accentColor
-                }}
-              >
-                {getInitials(selectedSpeaker.name)}
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3 className="font-heading font-bold text-lg">{selectedSpeaker.name}</h3>
-                <p className="text-sm text-foreground-muted">{selectedSpeaker.role} at <span style={{ color: selectedSpeaker.accentColor }}>{selectedSpeaker.company}</span></p>
-              </div>
-            </div>
-
-            {/* Bio */}
-            <div className="flex flex-col gap-2">
-              <span className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-foreground-muted/60">Biography</span>
-              <p className="text-sm leading-relaxed text-foreground-muted">
-                {selectedSpeaker.bio || "Full biography and session details will be updated shortly by the XR Summits content team."}
-              </p>
-            </div>
-
-            {/* Syllabus */}
-            {selectedSpeaker.syllabus && selectedSpeaker.syllabus.length > 0 && (
-              <div className="flex flex-col gap-2">
-                <span className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-foreground-muted/60">Masterclass Syllabus</span>
-                <ul className="flex flex-col gap-2">
-                  {selectedSpeaker.syllabus.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-sm text-foreground-muted">
-                      <span className="mt-1 w-1 h-1 rounded-full flex-shrink-0" style={{ background: selectedSpeaker.accentColor }} />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Footer / Stripe Action */}
-            <div className="mt-4 pt-5 border-t border-white/10 flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[0.55rem] tracking-[0.2em] uppercase text-foreground-muted/60">Session Cost</span>
-                <span className="font-heading font-bold" style={{ color: selectedSpeaker.accentColor }}>
-                  {selectedSpeaker.cost || "TBA"}
-                </span>
-              </div>
-
-              <a
-                href={selectedSpeaker.stripeLink || "#"}
-                target={selectedSpeaker.stripeLink !== "#" ? "_blank" : "_self"}
-                rel="noopener noreferrer"
-                className="w-full py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-center transition-all duration-300"
-                style={{
-                  background: selectedSpeaker.stripeLink !== "#"
-                    ? `linear-gradient(135deg, ${selectedSpeaker.accentColor} 0%, ${selectedSpeaker.accentColor}cc 100%)`
-                    : 'rgba(255,255,255,0.05)',
-                  color: selectedSpeaker.stripeLink !== "#" ? '#050505' : 'rgba(255,255,255,0.4)',
-                  border: `1px solid ${selectedSpeaker.stripeLink !== "#" ? selectedSpeaker.accentColor : 'rgba(255,255,255,0.1)'}`,
-                  pointerEvents: selectedSpeaker.stripeLink !== "#" ? 'auto' : 'none'
-                }}
-              >
-                {selectedSpeaker.stripeLink !== "#" ? "Pay with Stripe" : "Stripe Link Coming Soon"}
-              </a>
-            </div>
-          </div>
-        )}
-      </GatewayModal>
     </section>
   );
 };

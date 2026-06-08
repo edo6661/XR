@@ -1,26 +1,21 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
 import PastEventCard from './PastEventCard';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Data from cursorrules — exact content the client provided:
- * Past events: 2021 / 2022 / 2023 with real attendee numbers
- * Global stats: 1,430+ Total Attendees | 40+ Workshops | 75+ Partners
- */
+
 const UPCOMING_EVENTS = [
   {
-    title: '4th XR Asia Summit 2026',
-    subtitle: 'Flagship · XRAS26',
+    title: '4th XR Asia Summits 2026',
     date: '1 – 3 Dec 2026',
-    location: 'MITEC, Kuala Lumpur',
+    location: 'Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur',
     description:
-      "Asia's definitive immersive technology summit — conference, expo, workshops, masterclasses, hackathon grand finals, esports championship, and AI/XR Awards Gala Dinner.",
+      "One platform, six activations – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.",
     accentColor: '#fb923c',
     tag: 'Flagship',
     to: '/xras-kl-2026',
@@ -29,11 +24,10 @@ const UPCOMING_EVENTS = [
   },
   {
     title: "AI-XR Cultural Innovation Forum",
-    subtitle: 'Regional · Sarawak',
     date: '16 – 17 Oct 2026',
-    location: 'BCCK, Sarawak',
+    location: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak',
     description:
-      'Innovation • Culture • Technology • Future Talent — regional conference, expo, workshops, and semi-finals.',
+      'A prelude to XR Asia Summit – Innovation • Culture • Technology • Future Talent',
     accentColor: '#22d3ee',
     tag: 'Regional',
     to: '/aixr-2026-sarawak',
@@ -42,14 +36,11 @@ const UPCOMING_EVENTS = [
   },
   {
     title: 'AI Filmmaking Hackathon',
-    subtitle: 'Grand Finals at XRAS KL',
-    date: '1 – 3 Dec 2026',
-    location: 'MITEC, Kuala Lumpur',
     description:
-      'The culminating AI filmmaking showcase — teams compete with AI-generated films before industry judges and live audiences.',
+      '4 Universities from Malaysia, 1 University from Singapore, 1 University from Indonesia	72-hour run of show – Hands-on challenges, mentorship from industry leaders, pressure-tested workflows.',
     accentColor: '#a78bfa',
     tag: 'Hackathon',
-    to: '/xras-kl-2026',
+    to: '#',
     imageSrc: '/3-gateway-images/AI Filmmaking Hackathon.png',
     isFeatured: false,
   },
@@ -58,7 +49,7 @@ const UPCOMING_EVENTS = [
 const PAST_EVENTS = [
   {
     year: '2021',
-    title: 'XR Asia Summit',
+    title: 'XR Asia Summits',
     attendees: '100+',
     speakers: '25+',
     highlight:
@@ -68,7 +59,7 @@ const PAST_EVENTS = [
   },
   {
     year: '2022',
-    title: '2nd XR Asia Summit ',
+    title: '2nd XR Asia Summits',
     attendees: '200+',
     speakers: '30+',
     highlight:
@@ -78,7 +69,7 @@ const PAST_EVENTS = [
   },
   {
     year: '2023',
-    title: '3rd XR Asia Summit',
+    title: '3rd XR Asia Summits',
     attendees: '500+',
     speakers: '40+',
     highlight:
@@ -161,7 +152,7 @@ const EventsSection = () => {
               backgroundClip: 'text',
             }}
           >
-            Gateway
+            Entry Point
           </span>
         </h2>
 
@@ -178,6 +169,61 @@ const EventsSection = () => {
         </div>
 
         {/* Global stats banner */}
+
+
+        {/* ══ PAST EVENTS ════════════════════════════════════════════════ */}
+        <SectionEyebrow>Track Record</SectionEyebrow>
+
+        <div className="flex flex-col mb-16">
+          <h2
+            ref={pastHeadRef}
+            className="font-heading font-black text-foreground opacity-0"
+            style={{
+              fontSize: 'clamp(1.85rem, 4vw, 2.75rem)',
+              letterSpacing: '0.03em',
+            }}
+          >
+            Past{' '}
+            <span
+              style={{
+                background: 'linear-gradient(130deg, #22d3ee 0%, #f0f4ff 85%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Events
+            </span>
+          </h2>
+        </div>
+
+        {/* ── Timeline Container ── */}
+        <div className="relative w-full pb-10">
+          {/* Garis vertikal timeline tengah (Desktop) */}
+          <div
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 5%, rgba(255,255,255,0.08) 95%, transparent)',
+            }}
+          />
+
+          {/* Garis vertikal timeline kiri (Mobile) */}
+          <div
+            className="md:hidden absolute left-[19px] top-0 bottom-0 w-[2px]"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 5%, rgba(255,255,255,0.08) 95%, transparent)',
+            }}
+          />
+
+          {/* Render event secara vertikal */}
+          <div className="flex flex-col gap-16 md:gap-24 relative z-10">
+            {PAST_EVENTS.map((ev, i) => (
+              <PastEventCard key={`${ev.year}-${ev.title}`} index={i} {...ev} />
+            ))}
+          </div>
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -229,62 +275,8 @@ const EventsSection = () => {
             ))}
           </div>
         </motion.div>
-
-        {/* ══ PAST EVENTS ════════════════════════════════════════════════ */}
-        <SectionEyebrow>Track Record</SectionEyebrow>
-
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
-          <h2
-            ref={pastHeadRef}
-            className="font-heading font-black text-foreground opacity-0"
-            style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
-          >
-            Past{' '}
-            <span
-              style={{
-                background: 'linear-gradient(130deg, #22d3ee 0%, #f0f4ff 85%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Events
-            </span>
-          </h2>
-
-          {/* Timeline decoration */}
-          <div className="hidden sm:flex items-center gap-0 pb-1" aria-hidden="true">
-            {['2021', '2022', '2023', '2026'].map((yr, i, arr) => (
-              <div key={yr} className="flex items-center gap-0">
-                <span
-                  className="font-heading font-bold tracking-widest px-2"
-                  style={{
-                    fontSize: '0.6rem',
-                    color:
-                      i === arr.length - 1 ? '#fb923c' : 'rgba(107,127,163,0.4)',
-                  }}
-                >
-                  {yr}
-                </span>
-                {i < arr.length - 1 && (
-                  <div
-                    className="w-8 h-px"
-                    style={{ background: 'rgba(255,255,255,0.08)' }}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {PAST_EVENTS.map((ev, i) => (
-            <PastEventCard key={`${ev.year}-${ev.title}`} index={i} {...ev} />
-          ))}
-        </div>
-
-
       </div>
+
     </section>
   );
 };

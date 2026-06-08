@@ -27,7 +27,7 @@ const EVENT_GATEWAYS = [
   {
     title: "4th XR Asia Summits 2026",
     subtitle: '1 - 3 December 2026',
-    description: 'Malaysia International Trade and Exhibition Centre',
+    description: 'Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur. One platform, six activations – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.',
     to: '/xras-kl-2026',
     accentColor: '#fb923c',
     tag: 'XRAS26',
@@ -36,7 +36,7 @@ const EVENT_GATEWAYS = [
   {
     title: "AI-XR Cultural Innovation Forum",
     subtitle: '16 - 17 October 2026',
-    description: 'Borneo Convention Centre Kuching (BCCK)',
+    description: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak. A prelude to XR Asia Summit – Innovation • Culture • Technology • Future Talent',
     to: '/aixr-2026-sarawak',
     accentColor: '#22d3ee',
     tag: 'AIXR',
@@ -45,7 +45,7 @@ const EVENT_GATEWAYS = [
   {
     title: 'AI Filmmaking Hackathon',
     subtitle: '',
-    description: '',
+    description: '4 Universities from Malaysia, 1 University from Singapore, 1 University from Indonesia. 72-hour run of show – Hands-on challenges, mentorship from industry leaders, pressure-tested workflows.',
     accentColor: '#a78bfa',
     tag: 'Hackathon',
     icon: <HackathonIcon />,
@@ -85,15 +85,9 @@ const ChooseExperienceSection = () => (
           className="font-heading font-bold text-foreground leading-tight mb-4"
           style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.25rem)' }}
         >
-          Three gateways. One immersive future.
+          Choose Your Entry Point
         </h2>
-        <p
-          className="text-foreground-muted leading-relaxed"
-          style={{ fontSize: '0.88rem', lineHeight: 1.8 }}
-        >
-          Select the flagship Kuala Lumpur summit, the Sarawak regional experience, or the AI
-          Filmmaking Hackathon — each built for deployment-ready immersive innovation.
-        </p>
+
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
         {EVENT_GATEWAYS.map((gateway, index) => (

@@ -112,7 +112,7 @@ const Navbar = () => {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem]">
+        <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out ${isHeroPassed ? 'max-w-7xl' : 'max-w-5xl'}`}>
           {/* Implementasi transisi logo: hilang jika di Hero Section */}
           <Link
             to="/"

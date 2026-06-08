@@ -5,7 +5,6 @@ import HeroVideoBackdrop, { type HeroVideoConfig } from './HeroVideoBackdrop';
 import SplatField from './SplatField';
 import HeroLogo from './HeroLogo';
 import HeroIntroOverlay from './HeroIntroOverlay';
-import HeroGatewayTiles from './HeroGatewayTiles';
 
 
 type BackdropId = 'globe-3d' | 'spatial' | 'network' | 'globe';
@@ -272,31 +271,42 @@ const HeroSection = () => {
           )}
         </AnimatePresence>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 14 }}
-          transition={{ duration: 0.7, delay: showLogo ? 0.25 : 0, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading font-semibold text-center"
-          style={{
-            fontSize: 'clamp(0.9rem, 2.4vw, 1.5rem)',
-            color: 'rgba(240,244,255,0.94)',
-            letterSpacing: '0.01em',
-          }}
-        >
-          This is the Next Phase where Asia Builds Its {' '}
-          <span
-            style={{
-              background: 'linear-gradient(120deg, #fb923c 0%, #fdba74 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Spatial Future
-          </span>
-        </motion.h2>
 
-        <HeroGatewayTiles active={showTiles} />
+        <div className={`flex flex-col items-center transition-opacity duration-1000 ${showLogo ? 'opacity-100' : 'opacity-0'}`}>
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: showLogo ? 1 : 0, opacity: showLogo ? 1 : 0 }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            className="w-20 h-px origin-center mt-3 mb-6"
+            style={{
+              background: 'linear-gradient(90deg, transparent, rgba(56,189,248,0.75), transparent)',
+              boxShadow: '0 0 14px rgba(56,189,248,0.45)',
+            }}
+            aria-hidden="true"
+          />
+
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 12 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center font-heading font-semibold leading-snug max-w-4xl px-4"
+            style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.7rem)', color: '#f0f4ff', letterSpacing: '0.02em' }}
+          >
+            Asia’s Premier Platform for AI • XR • Spatial Media • Virtual Production • Immersive Technology
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 10 }}
+            transition={{ delay: showLogo ? 0.15 : 0, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center mt-5 px-4 max-w-3xl"
+            style={{ fontSize: 'clamp(0.85rem, 1.5vw, 1rem)', color: 'rgba(176,193,224,0.8)', lineHeight: 1.65 }}
+          >
+            Connecting industry leaders, creators, educators, broadcasters, governments and technology innovators through deployment-ready immersive experiences.
+          </motion.p>
+        </div>
+
+
       </motion.div>
 
       {/* Scroll hint — pulled out of the content flow so it can never push the
@@ -338,9 +348,11 @@ const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => 
   const booting = phase === 'boot';
 
   const corners = [
-    { c: 'top-6 left-6 border-t border-l', label: 'CALIBRATING', align: 'items-start' },
-    { c: 'top-6 right-6 border-t border-r', label: 'DEPTH · LOCK', align: 'items-end' },
-    { c: 'bottom-6 left-6 border-b border-l', label: '03°08′N 101°41′E', align: 'items-start' },
+    { c: 'top-6 left-6 border-t border-l', label: '1506516-A', align: 'items-start' },
+    { c: 'top-6 right-6 border-t border-r', label: '3.08695, 101.62442', align: 'items-end' },
+    {
+      c: 'bottom-6 left-6 border-b border-l', label: 'XR . 2021', align: 'items - start'
+    },
     { c: 'bottom-6 right-6 border-b border-r', label: 'XR · OS 4.0', align: 'items-end' },
   ];
 

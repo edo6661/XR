@@ -230,45 +230,7 @@ const SponsorsSection = () => (
         <InfiniteSlider partners={ALL_PARTNERS} />
       </motion.div>
 
-      {/* Global stats */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        className="grid grid-cols-3 gap-4 mb-10 rounded-xl overflow-hidden"
-        style={{ border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(13,27,46,0.5)' }}
-      >
-        {[
-          { value: '1,430+', label: 'Total Attendees' },
-          { value: '40+', label: 'Workshops Delivered' },
-          { value: '75+', label: 'Partners' },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            className="flex flex-col items-center justify-center py-6 px-4 text-center"
-          >
-            <span
-              className="font-heading font-black block mb-1"
-              style={{
-                fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-                background: 'linear-gradient(135deg, #fb923c 0%, #f0f4ff 80%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              {stat.value}
-            </span>
-            <span
-              className="font-bold tracking-[0.22em] uppercase"
-              style={{ fontSize: '0.52rem', color: 'rgba(107,127,163,0.65)' }}
-            >
-              {stat.label}
-            </span>
-          </div>
-        ))}
-      </motion.div>
+
 
       {/* Become a partner CTA */}
       <motion.div

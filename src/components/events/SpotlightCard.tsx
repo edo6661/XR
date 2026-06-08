@@ -6,9 +6,8 @@ import gsap from 'gsap';
 interface SpotlightCardProps {
   index: number;
   title: string;
-  subtitle: string;
-  date: string;
-  location: string;
+  date?: string;
+  location?: string;
   description: string;
   accentColor: string;
   tag: string;
@@ -20,7 +19,6 @@ interface SpotlightCardProps {
 const SpotlightCard = ({
   index,
   title,
-  subtitle,
   date,
   location,
   description,
@@ -34,6 +32,8 @@ const SpotlightCard = ({
   const shineRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const borderRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current || !shineRef.current) return;
@@ -69,6 +69,23 @@ const SpotlightCard = ({
       borderRef.current.style.borderColor = `${accentColor}42`;
       borderRef.current.style.boxShadow = `0 0 52px ${accentColor}14, inset 0 0 32px ${accentColor}04`;
     }
+
+    if (titleRef.current) {
+      gsap.to(titleRef.current, {
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+    }
+    if (descriptionRef.current) {
+      gsap.to(descriptionRef.current, {
+        color: 'rgba(255, 255, 255, 0.95)',
+        duration: 0.5,
+        ease: 'power3.out',
+        fontSize: '0.83rem',
+        fontWeight: 'bold',
+        delay: 0.02,
+      });
+    }
   }, [accentColor]);
 
   const handleMouseLeave = useCallback(() => {
@@ -82,6 +99,26 @@ const SpotlightCard = ({
       borderRef.current.style.borderColor = `${accentColor}20`;
       borderRef.current.style.boxShadow = 'none';
     }
+
+    if (titleRef.current) {
+      gsap.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+      });
+    }
+    if (descriptionRef.current) {
+      // PERBAIKAN: Mengembalikan ke fontSize dan fontWeight awal
+      gsap.to(descriptionRef.current, {
+        color: 'rgba(107,127,163,0.82)',
+        fontSize: '0.73rem',
+        fontWeight: 'normal',
+        duration: 0.7,
+        ease: 'power3.out',
+      });
+    }
+
   }, [accentColor]);
 
   const inner = (
@@ -104,7 +141,7 @@ const SpotlightCard = ({
               ref={imgRef}
               src={imageSrc}
               alt={title}
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover ${isFeatured ? 'object-right-bottom' : ''}`}
               loading="lazy"
             />
             <div
@@ -180,21 +217,17 @@ const SpotlightCard = ({
         </div>
 
         {/* Text */}
-        <div>
-          <p
-            className="font-semibold tracking-[0.26em] uppercase mb-1.5"
-            style={{ fontSize: '0.58rem', color: `${accentColor}80` }}
-          >
-            {subtitle}
-          </p>
+        <div className="flex flex-col">
           <h3
-            className="font-heading font-bold text-foreground leading-tight mb-2"
+            ref={titleRef}
+            className="font-heading font-bold text-foreground leading-tight mb-2 will-change-transform"
             style={{ fontSize: isFeatured ? '1.42rem' : '1.02rem' }}
           >
             {title}
           </h3>
           <p
-            className="leading-relaxed line-clamp-2"
+            ref={descriptionRef}
+            className="leading-relaxed line-clamp-4 will-change-transform"
             style={{ fontSize: '0.73rem', color: 'rgba(107,127,163,0.82)' }}
           >
             {description}
@@ -206,20 +239,24 @@ const SpotlightCard = ({
           className="flex items-center gap-5 pt-3 border-t"
           style={{ borderColor: 'rgba(255,255,255,0.06)' }}
         >
-          <span className="flex items-center gap-1.5" style={{ fontSize: '0.63rem', color: 'rgba(107,127,163,0.75)' }}>
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
-              <rect x="2" y="3" width="12" height="11" rx="1" />
-              <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
-            </svg>
-            {date}
-          </span>
-          <span className="flex items-center gap-1.5" style={{ fontSize: '0.63rem', color: 'rgba(107,127,163,0.75)' }}>
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
-              <circle cx="8" cy="6" r="1.5" />
-            </svg>
-            {location}
-          </span>
+          {date && (
+            <span className="flex items-center gap-1.5" style={{ fontSize: '0.63rem', color: 'rgba(107,127,163,0.75)' }}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
+                <rect x="2" y="3" width="12" height="11" rx="1" />
+                <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
+              </svg>
+              {date || ''}
+            </span>
+          )}
+          {location && (
+            <span className="flex items-center gap-1.5" style={{ fontSize: '0.63rem', color: 'rgba(107,127,163,0.75)' }}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
+                <circle cx="8" cy="6" r="1.5" />
+              </svg>
+              {location}
+            </span>
+          )}
           {to && (
             <span
               className="ml-auto text-sm transition-transform duration-300 group-hover:translate-x-1"

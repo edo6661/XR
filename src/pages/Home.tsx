@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/hero/HeroSection';
 import AboutSection from '../components/about/AboutSection';
-import ChooseExperienceSection from '../components/home/ChooseExperienceSection';
+// import ChooseExperienceSection from '../components/home/ChooseExperienceSection';
 import EventsSection from '../components/events/EventsSection';
 import SpeakersSection from '../components/speakers/SpeakersSection';
 import SponsorsSection from '../components/sponsors/SponsorsSection';
@@ -38,23 +38,24 @@ const Home = () => {
         <AboutSection />
       </StackedSection>
 
-      <StackedSection zIndex={30}>
+      {/* <StackedSection zIndex={30}>
         <ChooseExperienceSection />
-      </StackedSection>
+      </StackedSection> */}
 
-      <StackedSection zIndex={40}>
+      <StackedSection zIndex={30}>
         <EventsSection />
+      </StackedSection>
+      <StackedSection zIndex={40}>
+        <SponsorsSection />
       </StackedSection>
 
       <StackedSection zIndex={50}>
         <SpeakersSection />
       </StackedSection>
 
-      <StackedSection zIndex={60}>
-        <SponsorsSection />
-      </StackedSection>
 
-      <StackedSection zIndex={70}
+
+      <StackedSection zIndex={60}
         isLast
       >
         <ContactDetailsSection />

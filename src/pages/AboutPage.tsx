@@ -91,7 +91,7 @@ const AboutPage = () => (
 
     {/* 3. Why XR Summits */}
     <AboutSectionShell id="why-xr-summits" eyebrow="Why XR Summits" title="Why XR Summits">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 mb-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16">
         {WHY_XR_PILLARS.map((pillar, index) => (
           <PillarCard
             key={pillar.title}
