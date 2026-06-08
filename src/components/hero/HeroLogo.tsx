@@ -1,12 +1,7 @@
 import { motion } from 'framer-motion';
 import { COMPANY } from '../../core/navigation/routes';
 
-/**
- * HeroLogo — updated sesuai cursorrules:
- * - Headline: "The Internet was Flat. The Future is Spatial. Powered by AI."
- * - Subtext A: "The future will not be viewed. It will be experienced."
- * - Subtext B: "This is the Next Phase where Asia Builds Its Spatial Future."
- */
+
 const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center select-none w-full max-w-4xl mx-auto">
@@ -22,7 +17,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
           <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
         </div>
         <span
-          className="font-bold tracking-[0.6em] uppercase"
+          className="font-bold tracking-[0.6em] uppercase text-center"
           style={{ fontSize: '0.54rem', color: 'rgba(251,146,60,0.65)', letterSpacing: '0.58em' }}
         >
           The future will not be viewed. It will be experienced
@@ -65,13 +60,13 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             alt="XR Summits"
             className="relative w-auto object-contain"
             style={{
-              height: 'clamp(3rem, 7.5vh, 5.5rem)',
+              height: 'clamp(10rem, 15vw, 12rem)',
               filter: 'drop-shadow(0 0 22px rgba(251,146,60,0.5)) drop-shadow(0 0 60px rgba(251,146,60,0.15))',
             }}
           />
         </motion.div>
 
-        <div className="overflow-hidden -mb-2">
+        {/* <div className="overflow-hidden -mb-2">
           <motion.div
             initial={{ y: '105%' }}
             animate={{ y: '0%' }}
@@ -92,9 +87,9 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
               XR
             </h1>
           </motion.div>
-        </div>
+        </div> */}
 
-        <div className="overflow-hidden">
+        {/* <div className="overflow-hidden">
           <motion.div
             initial={{ y: '105%', opacity: 0 }}
             animate={{ y: '0%', opacity: 1 }}
@@ -122,7 +117,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
               style={{ width: 'clamp(28px, 4vw, 52px)', background: 'rgba(255,255,255,0.12)' }}
             />
           </motion.div>
-        </div>
+        </div> */}
       </div>
 
       {showText && (

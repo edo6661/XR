@@ -105,7 +105,8 @@ export const TRACK_RECORD = [
   {
     year: "2021",
     title: "XR Asia Summit",
-    detail: "The inaugural summit welcomed 100+ attendees and 25+ speakers to kick off Asia's immersive technology gathering.",
+    detail:
+      "The inaugural summit welcomed 100+ attendees and 25+ speakers to kick off Asia's immersive technology gathering.",
   },
   {
     year: "2022",

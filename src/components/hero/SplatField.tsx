@@ -1,22 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-/**
- * SplatField — a volumetric particle layer that evokes a 3D Gaussian-Splatting
- * viewer (the look Tamil referenced: a real space captured as millions of soft,
- * depth-aware "splats" you fly through).
- *
- * We don't have a trained .splat/.ply asset, so this is a stylised emulation:
- * a cloud of soft gaussian sprites distributed through a depth volume, with
- * perspective-correct sizing (near = big & bright, far = tiny & dim), depth fog,
- * gentle per-point drift, and mouse parallax. Layered IN FRONT of the spatial
- * video it adds genuine 3D depth — turning a flat clip into a volumetric,
- * "captured space" hero that reads as immersive + next-worldly without the
- * gamer/cyberpunk vibe.
- *
- * Built to be cheap and safe: GPU-driven motion (no per-frame CPU loops),
- * capped pixel ratio, pauses when offscreen / tab hidden, full WebGL teardown.
- */
 
 const SplatField = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -77,7 +61,7 @@ const SplatField = () => {
     const tmpColor = new THREE.Color();
     const colors = new Float32Array(COUNT * 3);
 
-    let cluster = new THREE.Vector3();
+    const cluster = new THREE.Vector3();
     let clusterLife = 0;
     for (let i = 0; i < COUNT; i++) {
       const i3 = i * 3;

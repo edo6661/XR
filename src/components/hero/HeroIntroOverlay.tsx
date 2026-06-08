@@ -1,11 +1,5 @@
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 
-/**
- * HeroIntroOverlay — cold open sesuai cursorrules brief:
- * Step 0: "The Internet was Flat."
- * Step 1: "The Future is Spatial. Powered by AI."
- * Step 2: ⚡ZAP⚡ — flash veil tears away, reveals spatial video
- */
 
 type HeroIntroOverlayProps = {
   step: number;

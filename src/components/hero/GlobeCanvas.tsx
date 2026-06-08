@@ -1,16 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-/**
- * GlobeCanvas — an elegant, "digital Earth" for a Corporate + Next-Worldly read.
- *
- * Continents are rendered as a fine dot-field sampled from a real world map
- * (so it unmistakably reads as Earth, not a generic data sphere), wrapped in a
- * glowing cyan atmosphere over a deep starfield. A handful of luminous
- * great-circle arcs connect the Asia-Pacific host cities — the visual language
- * of a global B2B network. No bitmap astronaut; all depth comes from real 3D
- * geometry + parallax.
- */
 
 const DEG = Math.PI / 180;
 const RADIUS = 2.05;

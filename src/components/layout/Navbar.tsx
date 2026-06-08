@@ -16,6 +16,9 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(() => location.pathname);
 
+  // State baru untuk mengontrol visibilitas logo di Navbar
+  const [isHeroPassed, setIsHeroPassed] = useState(true);
+
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   if (location.pathname !== menuPathname) {
@@ -23,17 +26,35 @@ const Navbar = () => {
     setMenuOpen(false);
   }
 
+  // Effect khusus untuk mendeteksi posisi Scroll dan URL
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
+      const currentScrollY = window.scrollY;
+      const isScrolled = currentScrollY > 50;
+
       setScrolled((prev) => {
         if (prev !== isScrolled) return isScrolled;
         return prev;
       });
+
+      // Jika di halaman Home, sembunyikan logo jika viewport masih di Hero Section
+      if (location.pathname === '/') {
+        // Tampilkan logo setelah user scroll melewati 75% dari tinggi layar
+        setIsHeroPassed(currentScrollY > window.innerHeight * 0.75);
+      } else {
+        // Di halaman lain, logo selalu tampil
+        setIsHeroPassed(true);
+      }
     };
 
+    handleScroll(); // Eksekusi saat inisialisasi
     window.addEventListener('scroll', handleScroll, { passive: true });
 
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [location.pathname]);
+
+  // Effect untuk progress bar (dipisah agar tidak re-render saat location berubah)
+  useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(progressBarRef.current, {
         scaleX: 1,
@@ -48,7 +69,6 @@ const Navbar = () => {
     });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       ctx.revert();
     };
   }, []);
@@ -93,7 +113,14 @@ const Navbar = () => {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem]">
-          <Link to="/" className="group flex items-center gap-3 select-none flex-shrink-0">
+          {/* Implementasi transisi logo: hilang jika di Hero Section */}
+          <Link
+            to="/"
+            className={`group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out ${isHeroPassed
+              ? 'opacity-100 pointer-events-auto translate-y-0'
+              : 'opacity-0 pointer-events-none -translate-y-2'
+              }`}
+          >
             <div className="relative w-12 h-12 flex-shrink-0">
               <motion.div
                 className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-md"
@@ -114,7 +141,6 @@ const Navbar = () => {
               >
                 XR SUMMITS
               </span>
-
             </div>
           </Link>
 
@@ -164,7 +190,7 @@ const Navbar = () => {
             <div className="hidden lg:block">
               <MagneticWrapper strength={0.2}>
                 <a
-                  href="#tickets"
+                  href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join Us')}`}
                   className="group relative inline-flex items-center gap-2 px-5 py-2 overflow-hidden rounded-sm cursor-none"
                   style={{ border: '1px solid rgba(251,146,60,0.4)' }}
                 >
@@ -173,11 +199,9 @@ const Navbar = () => {
                     style={{ background: '#fb923c', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
                     aria-hidden="true"
                   />
-                  <a className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200"
-                    href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement')}`}
-                  >
+                  <span className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200">
                     Join Us
-                  </a>
+                  </span>
                   <span
                     className="relative text-[0.62rem] transition-all duration-300 text-accent/55 group-hover:text-[#050b18] group-hover:translate-x-0.5"
                     aria-hidden="true"
@@ -209,6 +233,8 @@ const Navbar = () => {
           </div>
         </div>
       </motion.header>
+
+
 
       <AnimatePresence>
         {menuOpen && (
@@ -307,7 +333,7 @@ const Navbar = () => {
                 4th Edition · Kuala Lumpur · 2026
               </p>
               <a
-                href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement')}`}
+                href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join Us')}`}
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
                 style={{
@@ -315,7 +341,7 @@ const Navbar = () => {
                   boxShadow: '0 0 36px rgba(251,146,60,0.3)',
                 }}
               >
-                Join the Movement
+                Join Us
                 <span aria-hidden="true">→</span>
               </a>
             </motion.div>

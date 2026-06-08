@@ -1,21 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
-/**
- * HeroVideoBackdrop — a cinematic, "next-worldly" video layer for the hero.
- *
- * A raw stock clip on its own reads cheap and "gamer". To land the client's
- * "Corporate + Metaverse" brief we do three things on top of the footage:
- *   1. A slow ken-burns push-in + drift so the flat clip gains a sense of 3D
- *      depth (immersive, not 2D-flat) — disabled under reduced-motion.
- *   2. A per-clip colour filter that pulls the footage onto the brand palette.
- *   3. Layered grade passes (deep-navy floor, cyan/orange HUD tint, vignette)
- *      so the result feels like an elegant B2B keynote backdrop, not a loop.
- *
- * The component is intentionally "dumb": phase-driven blur / brightness / scale
- * and the parallax translate are applied by the parent wrapper in HeroSection,
- * so this layer inherits the HoloLens focus-pull for free.
- */
 
 export interface HeroVideoConfig {
   /** Public path to the mp4 (e.g. `/hero/videos/3d_digital_globe.mp4`). */

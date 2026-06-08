@@ -7,20 +7,7 @@ import HeroLogo from './HeroLogo';
 import HeroIntroOverlay from './HeroIntroOverlay';
 import HeroGatewayTiles from './HeroGatewayTiles';
 
-/**
- * ── Hero backdrop switch ─────────────────────────────────────────────────
- * The client asked us to trial three cinematic clips one by one. Each entry
- * below is pre-graded toward the brand palette; flip ACTIVE_BACKDROP to
- * preview a different one (or 'globe' to compare with the original 3D canvas).
- *
- *   'globe-3d'  → /hero/videos/3d_digital_globe.mp4  (recommended Stage-1 fit:
- *                 matches the brief's "Animatic 3D Globe" background)
- *   'spatial'   → spatial_computing_businessman…     (most overtly B2B / human;
- *                 great "Corporate + Metaverse" read, heaviest file)
- *   'network'   → digital_technology_network…        (abstract data-network;
- *                 cleanest, lightest, very "next-worldly")
- *   'globe'     → original three.js GlobeCanvas      (the current build)
- */
+
 type BackdropId = 'globe-3d' | 'spatial' | 'network' | 'globe';
 
 const VIDEO_BACKDROPS: Record<Exclude<BackdropId, 'globe'>, HeroVideoConfig> = {
@@ -46,28 +33,35 @@ const ACTIVE_BACKDROP = 'globe-3d' as BackdropId;
 
 type Phase = 'globe' | 'boot' | 'reveal';
 
-/**
- * ── "Zap zap" intro timeline ─────────────────────────────────────────────
- * step 0  "The Internet was flat."
- * step 1  "The future is spatial. Powered by AI"
- * step 2  ⚡ zap flash — veil tears away, video revealed
- * step 3  XR logo pop + "Join us to the Immersive Spatial Future"
- * step 4  BOOM — 3 glassmorphic tiles fly in
- * step 5  done (scroll hint live; scroll → hero closes → About Us)
- */
-/**
- * Tightened for the client's "zap zap FAST" note — each line snaps in under a
- * second, the double-zap fires, then the logo + tiles land in quick succession.
- * Total cold open ≈ 3.4s (was ~4s) so it reads energetic, not sluggish.
- */
+const HERO_INTRO_SEEN_KEY = 'xr-hero-intro-seen';
+const INTRO_LINE_ENTER_MS = 420;
+const INTRO_LINE_READ_MS = 1000;
+const INTRO_ZAP_MS = 700;
+
 const STEP_TIMELINE: { at: number; step: number }[] = [
-  { at: 820, step: 1 },
-  { at: 1640, step: 2 },
-  { at: 2320, step: 3 },
-  { at: 3020, step: 4 },
-  { at: 3700, step: 5 },
+  { at: INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS, step: 1 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2, step: 2 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2 + INTRO_ZAP_MS, step: 3 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2 + INTRO_ZAP_MS + 700, step: 4 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2 + INTRO_ZAP_MS + 1380, step: 5 },
 ];
 const LAST_STEP = 5;
+
+function hasSeenHeroIntro(): boolean {
+  try {
+    return sessionStorage.getItem(HERO_INTRO_SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function markHeroIntroSeen(): void {
+  try {
+    sessionStorage.setItem(HERO_INTRO_SEEN_KEY, '1');
+  } catch {
+    // sessionStorage unavailable (private mode, etc.)
+  }
+}
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -76,18 +70,24 @@ const HeroSection = () => {
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // step 0..5 — see STEP_TIMELINE. Reduced motion jumps straight to the finale.
-  const [step, setStep] = useState<number>(prefersReducedMotion ? LAST_STEP : 0);
+  const skipIntro = prefersReducedMotion || hasSeenHeroIntro();
+
+  const [step, setStep] = useState<number>(skipIntro ? LAST_STEP : 0);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (step === LAST_STEP) {
+      markHeroIntroSeen();
+    }
+  }, [step]);
+
+  useEffect(() => {
+    if (skipIntro) return;
 
     const timers: ReturnType<typeof setTimeout>[] = [];
     STEP_TIMELINE.forEach(({ at, step: s }) => {
       timers.push(setTimeout(() => setStep(s), at));
     });
 
-    // Let an impatient visitor skip the cold open → snap to the live finale.
     let skipped = false;
     const fastForward = () => {
       if (skipped) return;
@@ -105,7 +105,7 @@ const HeroSection = () => {
       timers.forEach(clearTimeout);
       removeListeners();
     };
-  }, [prefersReducedMotion]);
+  }, [skipIntro]);
 
   const handleScrollDown = () => {
     // The hero is a pinned StackedSection; scrolling one viewport closes it and
