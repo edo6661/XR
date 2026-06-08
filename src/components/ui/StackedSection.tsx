@@ -31,17 +31,17 @@ const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProp
       window.addEventListener('resize', handleResize);
 
       gsap.to(content, {
-        scale: 0.92,
-        opacity: 0,
-        ease: 'power2.inOut',
+        scale: 0.94,         // 1. Skala tidak mengecil terlalu jauh (hanya efek depth halus)
+        opacity: 0.3,        // 2. Jangan diturunkan sampai 0, biarkan tersisa sedikit agar seperti tertumpuk bayangan
+        ease: 'power3.in',   // 3. KUNCI UTAMA: Animasi ditahan di awal scroll, meredupnya perlahan nanti di akhir
         scrollTrigger: {
           trigger: section,
           start: () =>
             section.offsetHeight > window.innerHeight
               ? 'bottom bottom'
               : 'top top',
-          end: () => `+=${window.innerHeight}`,
-          scrub: 0.5,
+          end: () => `+=${window.innerHeight}`, // 4. Set persis 1 tinggi layar agar sinkron dengan section bawah yang naik
+          scrub: true,       // 5. Ganti ke true (tanpa delay angka) agar animasinya responsif dan solid menempel dengan posisi jari/mouse
           pin: true,
           pinSpacing: false,
           invalidateOnRefresh: true,
