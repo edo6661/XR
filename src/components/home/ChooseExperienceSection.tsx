@@ -59,7 +59,7 @@ const ChooseExperienceSection = () => (
     style={{
       paddingTop: 'var(--section-padding-y)',
       paddingBottom: 'var(--section-padding-y)',
-      borderTop: '1px solid rgba(255,255,255,0.05)',
+
     }}
     aria-labelledby="choose-experience-heading"
   >

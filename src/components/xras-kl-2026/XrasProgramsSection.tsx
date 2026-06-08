@@ -8,9 +8,8 @@ const ProgramCard = ({ program, index }: { program: XrasProgram; index: number }
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.2 }}
     transition={{ delay: (index % 4) * 0.05, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    className={`relative flex flex-col h-full rounded-xl overflow-hidden transition-all duration-400 ${
-      program.featured ? 'md:col-span-1' : ''
-    }`}
+    className={`relative flex flex-col h-full rounded-xl overflow-hidden transition-all duration-400 ${program.featured ? 'md:col-span-1' : ''
+      }`}
     style={{
       background: program.featured
         ? 'linear-gradient(155deg, rgba(22,38,62,0.85) 0%, rgba(13,27,46,0.92) 100%)'
@@ -76,7 +75,7 @@ const XrasProgramsSection = ({ onDownloadBrochure, onRegister }: XrasProgramsSec
     style={{
       paddingTop: 'var(--section-padding-y)',
       paddingBottom: 'var(--section-padding-y)',
-      borderTop: '1px solid rgba(255,255,255,0.05)',
+
     }}
     aria-labelledby="xras-programs-heading"
   >

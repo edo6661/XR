@@ -264,7 +264,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
 177:       style={{
 178:         paddingTop: 'var(--section-padding-y)',
 179:         paddingBottom: 'var(--section-padding-y)',
-180:         borderTop: '1px solid rgba(255,255,255,0.05)',
+180:         
 181:       }}
 182:     >
 183:       {/* Atmospheric background */}
@@ -671,7 +671,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
 125:       style={{
 126:         paddingTop: 'var(--section-padding-y)',
 127:         paddingBottom: 'var(--section-padding-y)',
-128:         borderTop: '1px solid rgba(255,255,255,0.05)',
+128:         
 129:       }}
 130:     >
 131:       {/* Atmospheric bg */}
@@ -1334,7 +1334,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
  67:     style={{
  68:       paddingTop: 'var(--section-padding-y)',
  69:       paddingBottom: 'var(--section-padding-y)',
- 70:       borderTop: '1px solid rgba(255,255,255,0.05)',
+ 70:       
  71:     }}
  72:     aria-labelledby="choose-experience-heading"
  73:   >
@@ -1437,7 +1437,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
  44:     style={{
  45:       paddingTop: 'var(--section-padding-y)',
  46:       paddingBottom: 'var(--section-padding-y)',
- 47:       borderTop: '1px solid rgba(255,255,255,0.05)',
+ 47:       
  48:     }}
  49:     aria-labelledby="contact-details-heading"
  50:   >
@@ -2055,7 +2055,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
 150:     style={{
 151:       paddingTop: 'var(--section-padding-y)',
 152:       paddingBottom: 'var(--section-padding-y)',
-153:       borderTop: '1px solid rgba(255,255,255,0.05)',
+153:       
 154:     }}
 155:     aria-labelledby="speakers-heading"
 156:   >
@@ -3577,7 +3577,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
  73:     style={{
  74:       paddingTop: 'var(--section-padding-y)',
  75:       paddingBottom: 'var(--section-padding-y)',
- 76:       borderTop: '1px solid rgba(255,255,255,0.05)',
+ 76:       
  77:     }}
  78:     aria-labelledby="aixr-programs-heading"
  79:   >
@@ -4699,7 +4699,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
  67:     style={{
  68:       paddingTop: 'var(--section-padding-y)',
  69:       paddingBottom: 'var(--section-padding-y)',
- 70:       borderTop: '1px solid rgba(255,255,255,0.05)',
+ 70:       
  71:     }}
  72:     aria-labelledby="choose-experience-heading"
  73:   >
@@ -4802,7 +4802,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
  44:     style={{
  45:       paddingTop: 'var(--section-padding-y)',
  46:       paddingBottom: 'var(--section-padding-y)',
- 47:       borderTop: '1px solid rgba(255,255,255,0.05)',
+ 47:       
  48:     }}
  49:     aria-labelledby="contact-details-heading"
  50:   >
@@ -6279,7 +6279,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
  76:     style={{
  77:       paddingTop: 'var(--section-padding-y)',
  78:       paddingBottom: 'var(--section-padding-y)',
- 79:       borderTop: '1px solid rgba(255,255,255,0.05)',
+ 79:       
  80:     }}
  81:     aria-labelledby="xras-programs-heading"
  82:   >
@@ -7742,7 +7742,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
 177:       style={{
 178:         paddingTop: 'var(--section-padding-y)',
 179:         paddingBottom: 'var(--section-padding-y)',
-180:         borderTop: '1px solid rgba(255,255,255,0.05)',
+180:         
 181:       }}
 182:     >
 183:       {/* Atmospheric background */}
@@ -8895,7 +8895,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
 127:       style={{
 128:         paddingTop: 'var(--section-padding-y)',
 129:         paddingBottom: 'var(--section-padding-y)',
-130:         borderTop: '1px solid rgba(255,255,255,0.05)',
+130:         
 131:       }}
 132:     >
 133:       {/* Atmospheric bg */}
@@ -9248,7 +9248,7 @@ klien baru saja mengirimkan apa isi web nya, sudah saya masukan ke cursor rules,
 150:     style={{
 151:       paddingTop: 'var(--section-padding-y)',
 152:       paddingBottom: 'var(--section-padding-y)',
-153:       borderTop: '1px solid rgba(255,255,255,0.05)',
+153:       
 154:     }}
 155:     aria-labelledby="speakers-heading"
 156:   >
