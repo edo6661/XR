@@ -26,12 +26,13 @@ const UPCOMING_EVENTS = [
     title: "AI-XR Cultural Innovation Forum",
     date: '16 – 17 Oct 2026',
     location: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak',
-    description:
-      'A prelude to XR Asia Summit – Innovation • Culture • Technology • Future Talent',
+    description: 'A prelude to XR Asia Summits – Innovation • Culture • Technology • Future Talent',
     accentColor: '#22d3ee',
     tag: 'Regional',
     to: '/aixr-2026-sarawak',
     imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image.jpeg',
+    imagePosition: 'center 30%',
+    imageDark: false,
     isFeatured: false,
   },
   {

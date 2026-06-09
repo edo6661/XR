@@ -14,6 +14,8 @@ interface SpotlightCardProps {
   to?: string;
   imageSrc?: string;
   isFeatured?: boolean;
+  imagePosition?: string;
+  imageDark?: boolean;
 }
 
 const SpotlightCard = ({
@@ -27,6 +29,10 @@ const SpotlightCard = ({
   to,
   imageSrc,
   isFeatured = false,
+  imagePosition = 'center',
+  imageDark = true,
+
+
 }: SpotlightCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
@@ -141,13 +147,16 @@ const SpotlightCard = ({
               ref={imgRef}
               src={imageSrc}
               alt={title}
-              className={`w-full h-full object-cover ${isFeatured ? 'object-right-bottom' : ''}`}
+              className="w-full h-full object-cover"
+              style={{ objectPosition: isFeatured ? 'right bottom' : imagePosition }}
               loading="lazy"
             />
             <div
               className="absolute inset-0"
               style={{
-                background: `linear-gradient(to top, rgba(5,11,24,0.97) 0%, rgba(5,11,24,0.65) 40%, rgba(5,11,24,0.22) 100%)`,
+                background: imageDark
+                  ? `linear-gradient(to top, rgba(5,11,24,0.97) 0%, rgba(5,11,24,0.65) 40%, rgba(5,11,24,0.22) 100%)`
+                  : `linear-gradient(to top, rgba(5,11,24,0.96) 0%, rgba(5,11,24,0.75) 35%, rgba(5,11,24,0.35) 65%, rgba(5,11,24,0.08) 100%)`,
               }}
             />
           </>

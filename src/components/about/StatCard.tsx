@@ -15,7 +15,6 @@ const StatCard = ({
   label,
   sublabel,
   accentColor = '#fb923c',
-  index = 0,
 }: StatCardProps) => {
   const countRef = useCountUp(value, suffix, 2.0);
 
@@ -61,18 +60,7 @@ const StatCard = ({
       />
 
       {/* Index watermark */}
-      <span
-        className="absolute top-4 right-5 font-heading font-black pointer-events-none select-none"
-        style={{
-          fontSize: '5rem',
-          lineHeight: 1,
-          color: `${accentColor}06`,
-          letterSpacing: '-0.02em',
-        }}
-        aria-hidden="true"
-      >
-        {String(index + 1).padStart(2, '0')}
-      </span>
+
 
       {/* Value display */}
       <div>
