@@ -13,7 +13,7 @@ const SplatField = () => {
       '(prefers-reduced-motion: reduce)',
     ).matches;
     const isMobile = window.innerWidth < 768;
-    const PIXEL = Math.min(window.devicePixelRatio, isMobile ? 1 : 1.25);
+    const PIXEL = Math.min(window.devicePixelRatio, 1.0);
 
     // ── Scene · Camera · Renderer ──────────────────────────────────────────
     const scene = new THREE.Scene();

@@ -53,7 +53,7 @@ const GlobeCanvas = () => {
       '(prefers-reduced-motion: reduce)',
     ).matches;
     const isMobile = window.innerWidth < 768;
-    const PIXEL = Math.min(window.devicePixelRatio, 1.5);
+    const PIXEL = Math.min(window.devicePixelRatio, 1.0);
 
     // ── 1. Scene · Camera · Renderer ───────────────────────────────────────
     const scene = new THREE.Scene();

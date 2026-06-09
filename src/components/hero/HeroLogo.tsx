@@ -5,23 +5,7 @@ import { COMPANY } from '../../core/navigation/routes';
 const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center select-none w-full max-w-4xl mx-auto">
-      {/* Edition badge */}
-      <motion.div
-        initial={{ opacity: 0, y: -12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="flex items-center gap-4 mb-4 sm:mb-6"
-      >
-        <div className="flex items-center gap-1.5">
-          <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
-          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
-        </div>
 
-        <div className="flex items-center gap-1.5">
-          <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
-          <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
-        </div>
-      </motion.div>
 
       {/* Logo mark + XR SUMMITS wordmark */}
       <div className="relative flex flex-col items-center gap-0 mb-3 w-full">
@@ -48,11 +32,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.55) 0%, transparent 70%)' }}
             aria-hidden="true"
           />
-          <div
-            className="absolute -inset-3 rounded-full pointer-events-none"
-            style={{ border: '1px solid rgba(251,146,60,0.12)', boxShadow: '0 0 32px rgba(251,146,60,0.1)' }}
-            aria-hidden="true"
-          />
+
           <motion.img
             src="/logo-278x262-removebg.png"
             alt="XR Summits"
@@ -66,6 +46,8 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
                 'drop-shadow(0 0 22px rgba(251, 146, 60, 0.45)) ' +
                 'drop-shadow(0 0 40px rgba(56, 189, 248, 0.30)) ' +
                 'drop-shadow(0 0 60px rgba(251, 146, 60, 0.18))',
+              transform: 'translateZ(0)',
+              willChange: 'transform'
             }}
           />
         </motion.div>

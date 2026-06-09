@@ -120,7 +120,7 @@ const HeroSection = () => {
 
   // Background focus-pull: blurred while veiled → punchy boot → settle.
   const hudPhase: Phase = step < 3 ? 'globe' : step === 3 ? 'boot' : 'reveal';
-  const bgBlur = step >= 4 ? 1.4 : step === 3 ? 7 : 5;
+  // const bgBlur = step >= 4 ? 1.4 : step === 3 ? 7 : 5;
   const bgBrightness = step >= 4 ? 0.82 : 0.76;
 
   return (
@@ -147,13 +147,20 @@ const HeroSection = () => {
         </motion.div>
         <motion.div
           className="absolute inset-0 pointer-events-none"
+          initial={{ opacity: 0 }}
           animate={{
-            backdropFilter: prefersReducedMotion ? 'none' : `blur(${bgBlur}px)`,
+            opacity: prefersReducedMotion ? 0 : 1,
             backgroundColor: prefersReducedMotion
               ? 'transparent'
               : `rgba(5, 11, 24, ${(1 - bgBrightness).toFixed(2)})`,
           }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            // Gunakan nilai blur fix, jangan di-animasikan
+            backdropFilter: prefersReducedMotion ? 'none' : `blur(5px)`,
+            WebkitBackdropFilter: prefersReducedMotion ? 'none' : `blur(5px)`,
+            willChange: 'opacity, background-color'
+          }}
         />
       </div>
 

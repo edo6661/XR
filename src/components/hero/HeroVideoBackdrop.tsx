@@ -53,19 +53,22 @@ const HeroVideoBackdrop = ({
           x: { duration: 40, repeat: Infinity, ease: 'easeInOut' },
           y: { duration: 52, repeat: Infinity, ease: 'easeInOut' },
         }}
-        style={{ willChange: 'transform' }}
+        // TAMBAHKAN transform: translateZ(0) di sini
+        style={{ willChange: 'transform', transform: 'translateZ(0)' }}
       >
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition, filter }}
+          // Kurangi manipulasi filter berat di sini jika memungkinkan
+          style={{ objectPosition, filter, transform: 'translateZ(0)' }}
           src={src}
           poster={poster}
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          // HAPUS preload="auto", ganti ke "metadata" agar memori tidak bengkak
+          preload="metadata"
           disablePictureInPicture
         />
       </motion.div>
