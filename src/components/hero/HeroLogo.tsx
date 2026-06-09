@@ -3,17 +3,11 @@ import { COMPANY } from '../../core/navigation/routes';
 
 const coinSpinVariants: Variants = {
   animate: {
-    // Putaran Y penuh, tapi kita akali timingnya
     rotateY: [0, 180, 360],
-    // Tilt X sedikit ke atas/bawah memberikan ilusi kedalaman (tidak perfectly flat)
     rotateX: [2, 12, 2],
-    // Sedikit mengecil saat posisi menyamping (edge-on) biar dramatis
     scale: [1, 0.88, 1],
     transition: {
-      duration: 5, // Durasi 1 putaran penuh
-      // Cubic-bezier ini rahasianya: 
-      // Sangat lambat di awal & akhir (nahan di depan agar terbaca), 
-      // tapi melesat sangat cepat di tengah (saat logo terbalik).
+      duration: 5,
       ease: [0.65, 0, 0.35, 1],
       repeat: Infinity,
     },
@@ -23,7 +17,6 @@ const coinSpinVariants: Variants = {
 const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center select-none w-full max-w-4xl mx-auto">
-      {/* Tambahkan perspective di parent agar kedalaman 3D-nya lebih terasa natural */}
       <div className="relative flex flex-col items-center gap-0 mb-3 w-full" style={{ perspective: '1200px' }}>
         <motion.div
           initial={{ scale: 0.6, opacity: 0, filter: 'blur(16px)' }}
@@ -31,9 +24,29 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
           transition={{ delay: 0.3, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="relative mb-2 sm:mb-5"
         >
+          {/* Efek Conic Glow di Background */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            className="absolute -inset-10 rounded-full pointer-events-none"
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 40%, rgba(56,189,248,0.06) 60%, rgba(251,146,60,0.12) 80%, rgba(251,146,60,0.06) 90%, transparent 100%)',
+              filter: 'blur(10px)',
+            }}
+            aria-hidden="true"
+          />
 
+          {/* Radial Pulse Glow (Oranye) */}
+          <motion.div
+            animate={{ scale: [1, 1.25, 1], opacity: [0.2, 0.08, 0.2] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute -inset-6 rounded-full pointer-events-none"
+            style={{ background: 'radial-gradient(circle, rgba(251,146,60,0.45) 0%, transparent 75%)' }}
+            aria-hidden="true"
+          />
 
-          {/* ── LOGO IMAGE UTAMA (Dynamic Premium Coin Spin) ── */}
+          {/* ── LOGO IMAGE UTAMA ── */}
           <motion.img
             src="/logo_dark_transparent.png"
             alt="XR Summits"
@@ -42,10 +55,13 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             animate="animate"
             style={{
               height: 'clamp(9rem, 14vw, 11rem)',
-              // Glow diset sedikit lebih menyebar agar saat muter, pendarannya mengikuti
-
+              // Glow ditipisin: Radius putih diturunkan ke 3px (opacity 0.45), 
+              // Radius oranye spasial diturunkan ke 12px (opacity 0.2)
+              filter:
+                'drop-shadow(0 0 3px rgba(255, 255, 255, 0.45)) ' +
+                'drop-shadow(0 0 12px rgba(251, 146, 60, 0.2))',
               transformStyle: 'preserve-3d',
-              backfaceVisibility: 'visible', // Biarkan terlihat saat di-flip cepat
+              backfaceVisibility: 'visible',
               willChange: 'transform'
             }}
           />

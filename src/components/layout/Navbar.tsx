@@ -116,7 +116,8 @@ const Navbar = () => {
                 alt="XR Summits"
                 className="relative w-[85%] h-[85%] object-contain transition-transform duration-500 group-hover:scale-110"
                 style={{
-                  filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))',
+                  // Glow sangat tipis, sekadar edge outline
+                  filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))',
                   willChange: 'transform'
                 }}
               />
@@ -250,7 +251,8 @@ const Navbar = () => {
                   src="/logo_dark_transparent.png"
                   alt="XR Summits"
                   className="w-7 h-7 object-contain"
-                  style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))' }}
+                  // Sama, tipis di menu HP
+                  style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
                 />
                 <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
                   XR SUMMITS
