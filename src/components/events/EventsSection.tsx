@@ -30,10 +30,11 @@ const UPCOMING_EVENTS = [
     accentColor: '#22d3ee',
     tag: 'Regional',
     to: '/aixr-2026-sarawak',
-    imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image.jpeg',
-    imagePosition: 'center 30%',
+    imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image-edited.jpeg',
+    imagePosition: 'center',
     imageDark: false,
     isFeatured: false,
+    imageTransform: 'scale(1.15) translateY(-10%)',
   },
   {
     title: 'AI Filmmaking Hackathon',

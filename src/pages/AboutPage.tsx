@@ -20,11 +20,16 @@ import {
   MEDIA_PRESS,
   STRATEGIC_PARTNER_SLOTS,
   OUR_MISSION,
+  REGIONAL_NETWORK,
+  epicenterTarget,
+  networkNodes,
+  epicenterNodes,
 } from '../core/content/aboutPage';
 import { COMPANY } from '../core/navigation/routes';
 
 // Icons mapping for Why XR
 const whyIcons = [<AIIcon key="ai" />, <SpatialIcon key="flex" />, <TalentIcon key="exp" />, <GlobeIcon key="prod" />];
+
 
 const AboutPage = () => (
   <>
@@ -106,29 +111,203 @@ const AboutPage = () => (
       </div>
     </AboutSectionShell>
 
-    {/* 4. Industry Focus */}
     <AboutSectionShell id="industry-focus" eyebrow="Industry Focus" title="Industry Focus">
-      <div className="max-w-4xl">
-        <p className="text-foreground-muted leading-relaxed mb-8" style={{ fontSize: '0.9rem', lineHeight: 1.8 }}>
+      <div className="max-w-5xl">
+        <p className="text-foreground-muted leading-relaxed mb-10" style={{ fontSize: '0.9rem', lineHeight: 1.8 }}>
           {INDUSTRY_FOCUS.description}
         </p>
-        <ul className="flex flex-col gap-4 mb-8">
-          {INDUSTRY_FOCUS.sectors.map((sector) => (
-            <li key={sector.title} className="flex items-start gap-3">
-              <span className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ABOUT_ACCENT }} />
-              <p style={{ fontSize: '0.9rem', color: 'rgba(240,244,255,0.85)', lineHeight: 1.7 }}>
-                <span className="font-bold text-foreground">{sector.title}: </span>
-                {sector.desc}
-              </p>
-            </li>
+
+        {/* Card grid — 2 col mobile, 3 col md, tapi 5 item jadi: 2-2-1 atau pakai auto-fit */}
+        <div
+          className="grid gap-4 mb-10"
+          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}
+        >
+          {INDUSTRY_FOCUS.sectors.map((sector, index) => (
+            <motion.div
+              key={sector.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.07, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative flex flex-col overflow-hidden rounded-xl"
+              style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(10,10,10,0.6)' }}
+            >
+              {/* Image */}
+              <div className="relative overflow-hidden aspect-[16/9]">
+                <img
+                  src={sector.image}
+                  alt={sector.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+                {/* Overlay gradient */}
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'linear-gradient(to bottom, transparent 40%, rgba(5,5,5,0.85) 100%)' }}
+                  aria-hidden="true"
+                />
+              </div>
+
+              {/* Text */}
+              <div className="flex flex-col gap-1.5 px-4 py-4">
+                {/* Accent bar + title */}
+                <div className="flex items-center gap-2">
+                  <span
+                    className="w-1 h-3.5 rounded-full flex-shrink-0"
+                    style={{ background: ABOUT_ACCENT }}
+                    aria-hidden="true"
+                  />
+                  <h4
+                    className="font-heading font-bold text-foreground leading-tight"
+                    style={{ fontSize: '0.8rem' }}
+                  >
+                    {sector.title}
+                  </h4>
+                </div>
+                <p
+                  className="leading-relaxed pl-3"
+                  style={{ fontSize: '0.72rem', color: 'rgba(139,155,180,0.85)', lineHeight: 1.65 }}
+                >
+                  {sector.desc}
+                </p>
+              </div>
+            </motion.div>
           ))}
-        </ul>
+        </div>
+
         <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.9rem', lineHeight: 1.8 }}>
           {INDUSTRY_FOCUS.footer}
         </p>
       </div>
     </AboutSectionShell>
+    {/* 4. Regional Network */}
+    <AboutSectionShell
+      id="regional-network"
+      eyebrow={REGIONAL_NETWORK.title}
+      title={REGIONAL_NETWORK.highlight}
+    >
+      <div className="flex flex-col gap-10 max-w-5xl">
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
+          className="text-foreground-muted leading-relaxed max-w-3xl"
+          style={{ fontSize: '0.9rem', lineHeight: 1.8 }}
+        >
+          {REGIONAL_NETWORK.body}
+        </motion.p>
 
+        {/* Code-Based Animated Network Map */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8 }}
+          className="relative w-full rounded-2xl overflow-hidden glass mt-4"
+          style={{
+            background: 'radial-gradient(circle at 75% 70%, rgba(239,120,61,0.06) 0%, rgba(5,5,5,0) 60%)',
+            border: '1px solid rgba(255,255,255,0.05)'
+          }}
+        >
+          <div className="w-full overflow-x-auto hide-scrollbar">
+            <div className="min-w-[700px] w-full p-6 lg:p-10">
+              <svg viewBox="0 0 850 400" className="w-full h-auto drop-shadow-md">
+
+                {/* 1. Animated Connecting Lines */}
+                {networkNodes.map((node, i) => (
+                  <motion.line
+                    key={`line-${node.id}`}
+                    x1={node.x}
+                    y1={node.y}
+                    x2={epicenterTarget.x}
+                    y2={epicenterTarget.y}
+                    stroke={ABOUT_ACCENT}
+                    strokeWidth="1.5"
+                    strokeDasharray="4 6"
+                    strokeOpacity="0.25"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1, duration: 1.8, ease: "easeOut" }}
+                  />
+                ))}
+
+                {/* 2. Dots & Labels */}
+                {[...networkNodes, ...epicenterNodes].map((node, i) => {
+                  const isEpicenter = node.id === 'my' || node.id === 'id';
+                  const delay = isEpicenter ? 0.2 : 0.8 + i * 0.05;
+
+                  return (
+                    <g key={`node-${node.id}`}>
+                      {/* Pulsing Aura */}
+                      <motion.circle
+                        cx={node.x}
+                        cy={node.y}
+                        r={isEpicenter ? 20 : 12}
+                        fill="transparent"
+                        stroke={ABOUT_ACCENT}
+                        strokeWidth="1"
+                        initial={{ scale: 0.2, opacity: 0 }}
+                        animate={{ scale: 1.8, opacity: [0, 0.4, 0] }}
+                        transition={{ repeat: Infinity, duration: isEpicenter ? 2.5 : 3, delay: i * 0.2 }}
+                      />
+
+                      {/* Solid Center Dot */}
+                      <motion.circle
+                        cx={node.x}
+                        cy={node.y}
+                        r={isEpicenter ? 7 : 4}
+                        fill={ABOUT_ACCENT}
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay, type: "spring", stiffness: 200, damping: 10 }}
+                        style={{ filter: `drop-shadow(0 0 8px ${ABOUT_ACCENT})` }}
+                      />
+
+                      {/* Legible Text Label */}
+                      <motion.text
+                        x={node.x}
+                        y={node.y - (isEpicenter ? 16 : 12)}
+                        fill="#f0f4ff"
+                        fontSize={isEpicenter ? "16px" : "13px"}
+                        fontWeight={isEpicenter ? "bold" : "normal"}
+                        textAnchor="middle"
+                        letterSpacing="0.05em"
+                        initial={{ opacity: 0, y: 5 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: delay + 0.2, duration: 0.4 }}
+                        style={{ fontFamily: 'var(--font-sans)', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
+                      >
+                        {node.label}
+                      </motion.text>
+                    </g>
+                  );
+                })}
+
+                {/* Epicenter Label Tag */}
+                <motion.text
+                  x={epicenterTarget.x + 40}
+                  y={epicenterTarget.y}
+                  fill={ABOUT_ACCENT}
+                  fontSize="10px"
+                  fontWeight="bold"
+                  letterSpacing="0.3em"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 0.7 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 2, duration: 1 }}
+                >
+                  EPICENTER
+                </motion.text>
+              </svg>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </AboutSectionShell>
     {/* 5. Awards & Recognition */}
     <AboutSectionShell id="awards" eyebrow="Awards & Recognition" title="Celebrating excellence in immersive innovation">
       <div className="max-w-4xl flex flex-col gap-6 mb-12">

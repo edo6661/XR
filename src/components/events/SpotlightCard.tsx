@@ -16,6 +16,7 @@ interface SpotlightCardProps {
   isFeatured?: boolean;
   imagePosition?: string;
   imageDark?: boolean;
+  imageTransform?: string;
 }
 
 const SpotlightCard = ({
@@ -31,7 +32,7 @@ const SpotlightCard = ({
   isFeatured = false,
   imagePosition = 'center',
   imageDark = true,
-
+  imageTransform = 'none',
 
 }: SpotlightCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -143,14 +144,18 @@ const SpotlightCard = ({
       <div className="absolute inset-0 overflow-hidden">
         {imageSrc ? (
           <>
-            <img
-              ref={imgRef}
-              src={imageSrc}
-              alt={title}
-              className="w-full h-full object-cover"
-              style={{ objectPosition: isFeatured ? 'right bottom' : imagePosition }}
-              loading="lazy"
-            />
+            {/* TAMBAHKAN DIV WRAPPER INI UNTUK CUSTOM TRANSFORM */}
+            <div className="w-full h-full origin-bottom" style={{ transform: imageTransform || 'none' }}>
+              <img
+                ref={imgRef}
+                src={imageSrc}
+                alt={title}
+                className="w-full h-full object-cover"
+                style={{ objectPosition: isFeatured ? 'right bottom' : imagePosition }}
+                loading="lazy"
+              />
+            </div>
+
             <div
               className="absolute inset-0"
               style={{

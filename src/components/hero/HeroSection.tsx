@@ -273,17 +273,7 @@ const HeroSection = () => {
 
 
         <div className={`flex flex-col items-center transition-opacity duration-1000 ${showLogo ? 'opacity-100' : 'opacity-0'}`}>
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: showLogo ? 1 : 0, opacity: showLogo ? 1 : 0 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-            className="w-20 h-px origin-center mt-3 mb-6"
-            style={{
-              background: 'linear-gradient(90deg, transparent, rgba(56,189,248,0.75), transparent)',
-              boxShadow: '0 0 14px rgba(56,189,248,0.45)',
-            }}
-            aria-hidden="true"
-          />
+
 
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
