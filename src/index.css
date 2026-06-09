@@ -331,3 +331,12 @@ svg {
 .will-change-transform {
   will-change: transform;
 }
+
+.glow-white-logo {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 25px rgba(255, 255, 255, 0.3));
+}
+
+.glow-white-logo-sm {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}

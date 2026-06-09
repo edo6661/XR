@@ -132,6 +132,10 @@ const Navbar = () => {
                 src="/logo-278x262-removebg.png"
                 alt="XR Summits"
                 className="relative w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                // Tambahkan baris style ini:
+                style={{
+                  filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.3))'
+                }}
               />
             </div>
             <div className="flex flex-col leading-none gap-[3px]">
@@ -268,7 +272,13 @@ const Navbar = () => {
 
             <div className="h-16 flex items-center px-6 flex-shrink-0">
               <Link to="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
-                <img src="/logo-278x262-removebg.png" alt="XR Summits" className="w-7 h-7 object-contain" />
+                <img
+                  src="/logo-278x262-removebg.png"
+                  alt="XR Summits"
+                  className="w-7 h-7 object-contain"
+                  // Tambahkan baris style ini untuk glow versi lebih kecil:
+                  style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))' }}
+                />
                 <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
                   XR SUMMITS
                 </span>

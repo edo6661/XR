@@ -164,7 +164,7 @@ const AboutSection = () => {
           <div ref={headingRef} style={{ perspective: '900px' }}>
             {[
               { text: 'The Definitive', accent: false },
-              { text: 'Platform', accent: false },
+              { text: 'Platform of', accent: false },
               { text: "Asia's XR", accent: true },
               { text: 'Future.', accent: false },
             ].map((line) => (

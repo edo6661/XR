@@ -16,12 +16,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
           <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
           <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
         </div>
-        <span
-          className="font-bold tracking-[0.6em] uppercase text-center"
-          style={{ fontSize: '0.54rem', color: 'rgba(251,146,60,0.65)', letterSpacing: '0.58em' }}
-        >
-          The future will not be viewed. It will be experienced
-        </span>
+
         <div className="flex items-center gap-1.5">
           <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(251,146,60,0.5)' }} />
           <span className="h-px w-10" style={{ background: 'rgba(251,146,60,0.3)' }} />
@@ -40,7 +35,10 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             className="absolute -inset-8 rounded-full pointer-events-none"
-            style={{ background: 'conic-gradient(from 0deg, transparent 70%, rgba(251,146,60,0.12) 100%)' }}
+            style={{
+              background:
+                'conic-gradient(from 0deg, transparent 50%, rgba(56,189,248,0.08) 70%, rgba(251,146,60,0.15) 85%, rgba(251,146,60,0.08) 95%, transparent 100%)',
+            }}
             aria-hidden="true"
           />
           <motion.div
@@ -55,13 +53,19 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             style={{ border: '1px solid rgba(251,146,60,0.12)', boxShadow: '0 0 32px rgba(251,146,60,0.1)' }}
             aria-hidden="true"
           />
-          <img
+          <motion.img
             src="/logo-278x262-removebg.png"
             alt="XR Summits"
             className="relative w-auto object-contain"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
             style={{
               height: 'clamp(10rem, 15vw, 12rem)',
-              filter: 'drop-shadow(0 0 22px rgba(251,146,60,0.5)) drop-shadow(0 0 60px rgba(251,146,60,0.15))',
+              filter:
+                'drop-shadow(0 0 10px rgba(251, 146, 60, 0.85)) ' +
+                'drop-shadow(0 0 22px rgba(251, 146, 60, 0.45)) ' +
+                'drop-shadow(0 0 40px rgba(56, 189, 248, 0.30)) ' +
+                'drop-shadow(0 0 60px rgba(251, 146, 60, 0.18))',
             }}
           />
         </motion.div>

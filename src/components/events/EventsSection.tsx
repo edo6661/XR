@@ -37,7 +37,7 @@ const UPCOMING_EVENTS = [
   {
     title: 'AI Filmmaking Hackathon',
     description:
-      '4 Universities from Malaysia, 1 University from Singapore, 1 University from Indonesia	72-hour run of show – Hands-on challenges, mentorship from industry leaders, pressure-tested workflows.',
+      '4 Universities from Malaysia, 1 University from Singapore, 1 University from Indonesia •	72-hour run of show – Hands-on challenges, mentorship from industry leaders, pressure-tested workflows.',
     accentColor: '#a78bfa',
     tag: 'Hackathon',
     to: '#',
