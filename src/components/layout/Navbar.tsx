@@ -132,9 +132,13 @@ const Navbar = () => {
                 src="/logo-278x262-removebg.png"
                 alt="XR Summits"
                 className="relative w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                // Tambahkan baris style ini:
+                // Ganti style filter ini dengan komposisi glow Hero yang sudah diskala
                 style={{
-                  filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 16px rgba(255, 255, 255, 0.3))'
+                  filter:
+                    'drop-shadow(0 0 4px rgba(251, 146, 60, 0.85)) ' +
+                    'drop-shadow(0 0 8px rgba(251, 146, 60, 0.45)) ' +
+                    'drop-shadow(0 0 14px rgba(56, 189, 248, 0.30)) ' +
+                    'drop-shadow(0 0 20px rgba(251, 146, 60, 0.18))',
                 }}
               />
             </div>

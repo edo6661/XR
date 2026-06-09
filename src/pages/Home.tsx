@@ -15,8 +15,10 @@ const Home = () => {
   const pageRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
+    const page = pageRef.current;
+
     return () => {
-      killScrollTriggersIn(pageRef.current);
+      killScrollTriggersIn(page);
     };
   }, []);
 
