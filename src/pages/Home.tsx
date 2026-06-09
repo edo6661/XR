@@ -3,13 +3,10 @@ import { useLayoutEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import HeroSection from '../components/hero/HeroSection';
 import AboutSection from '../components/about/AboutSection';
-// import ChooseExperienceSection from '../components/home/ChooseExperienceSection';
 import EventsSection from '../components/events/EventsSection';
 import SpeakersSection from '../components/speakers/SpeakersSection';
 import SponsorsSection from '../components/sponsors/SponsorsSection';
 import ContactDetailsSection from '../components/home/ContactDetailsSection';
-// import TicketsSection from '../components/tickets/TicketsSection';
-// import ScrollMarquee from '../components/ui/ScrollMarquee';
 import StackedSection from '../components/ui/StackedSection';
 import { COMPANY } from '../core/navigation/routes';
 import { killScrollTriggersIn } from '../lib/scrollTriggerCleanup';
@@ -38,13 +35,10 @@ const Home = () => {
         <AboutSection />
       </StackedSection>
 
-      {/* <StackedSection zIndex={30}>
-        <ChooseExperienceSection />
-      </StackedSection> */}
-
       <StackedSection zIndex={30}>
         <EventsSection />
       </StackedSection>
+
       <StackedSection zIndex={40}>
         <SponsorsSection />
       </StackedSection>
@@ -53,21 +47,11 @@ const Home = () => {
         <SpeakersSection />
       </StackedSection>
 
-
-
-      <StackedSection zIndex={60}
-        isLast
-      >
-        <ContactDetailsSection />
+      <StackedSection zIndex={60} isLast>
+        <div className="flex min-h-screen w-full flex-col justify-center">
+          <ContactDetailsSection />
+        </div>
       </StackedSection>
-
-      {/* <StackedSection zIndex={80}>
-        <ScrollMarquee />
-      </StackedSection>
-
-      <StackedSection zIndex={90} isLast>
-        <TicketsSection />
-      </StackedSection> */}
     </div>
   );
 };
