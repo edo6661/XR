@@ -15,22 +15,22 @@ type Speaker = {
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const SPEAKERS: Speaker[] = [
-  { name: "Dato' Kamil Othman", role: "CEO", company: "FINAS", accentColor: '#ef783d' },
-  { name: "Nick CG Tan", role: "Managing Director", company: "Oceanus Media Global", accentColor: '#3953a3' },
-  { name: "Thi Thu Hien Hoang", role: "Director", company: "Mirabo", accentColor: '#fedb21' },
-  { name: "Alex David", role: "Founder", company: "Tactician", accentColor: '#ef783d' },
-  { name: "Carl Loo", role: "Director", company: "Solid Water", accentColor: '#3953a3' },
-  { name: "Kei Choong", role: "Founder", company: "Aux Media", accentColor: '#fedb21' },
-  { name: "Fariz Hanapiah", role: "CEO", company: "EDT", accentColor: '#ef783d' },
-  { name: "Justin Wong", role: "Founder", company: "TrueXR", accentColor: '#3953a3' },
-  { name: "Havene Liew", role: "Director", company: "XRA", accentColor: '#fedb21' },
-  { name: "Ts. Dr. Mohd Zaliman", role: "Director", company: "TDC", accentColor: '#ef783d' },
-  { name: "Jason Yim", role: "CEO", company: "Trigger XR", accentColor: '#3953a3' },
-  { name: "Dr. Ike Tan", role: "Academic Lead", company: "APU/APIIT", accentColor: '#fedb21' },
-  { name: "Dr. Andrew Yew", role: "Director", company: "Ministry XR", accentColor: '#ef783d' },
-  { name: "Hussin Khan", role: "Founder", company: "EFXCO", accentColor: '#3953a3' },
-  { name: "Thomas Desmeules", role: "VP", company: "Solotech", accentColor: '#fedb21' },
-  { name: "Kian Chai Ng", role: "Director", company: "Microsoft", accentColor: '#ef783d' },
+  { name: "Dato' Kamil Othman", role: "CEO", company: "FINAS", accentColor: '#ef783d', photo: '/speaker-pics/Dato Kamil Othman.jpg' },
+  { name: "Nick CG Tan", role: "Managing Director", company: "Oceanus Media Global", accentColor: '#3953a3', photo: '/speaker-pics/Nick GC Tan.jpg' },
+  { name: "Thi Thu Hien Hoang", role: "Director", company: "Mirabo", accentColor: '#fedb21', photo: '/speaker-pics/Thi Thu Hien Hoang.jpg' },
+  { name: "Alex David", role: "Founder", company: "Tactician", accentColor: '#ef783d' }, // Foto belum tersedia di dalam direktori
+  { name: "Carl Loo", role: "Director", company: "Solid Water", accentColor: '#3953a3', photo: '/speaker-pics/Carl Loo.jpg' },
+  { name: "Kei Choong", role: "Founder", company: "Aux Media", accentColor: '#fedb21', photo: '/speaker-pics/Kei Choong.jpg' },
+  { name: "Fariz Hanapiah", role: "CEO", company: "EDT", accentColor: '#ef783d', photo: '/speaker-pics/Fariz Hanapiah.jpg' },
+  { name: "Justin Wong", role: "Founder", company: "TrueXR", accentColor: '#3953a3', photo: '/speaker-pics/Justin Wong.jpg' },
+  { name: "Havene Liew", role: "Director", company: "XRA", accentColor: '#fedb21', photo: '/speaker-pics/Havene Liew.jpg' },
+  { name: "Ts. Dr. Mohd Zaliman", role: "Director", company: "TDC", accentColor: '#ef783d', photo: '/speaker-pics/Ts Dr Mohd Zaliman Yusof.jpg' },
+  { name: "Jason Yim", role: "CEO", company: "Trigger XR", accentColor: '#3953a3', photo: '/speaker-pics/Jason Yim.jpg' },
+  { name: "Dr. Ike Tan", role: "Academic Lead", company: "APU/APIIT", accentColor: '#fedb21', photo: '/speaker-pics/Dr Ike Tan.jpg' },
+  { name: "Dr. Andrew Yew", role: "Director", company: "Ministry XR", accentColor: '#ef783d', photo: '/speaker-pics/Dr Andrew Yew.jpg' },
+  { name: "Hussin Khan", role: "Founder", company: "EFXCO", accentColor: '#3953a3', photo: '/speaker-pics/Hussin Khan.jpg' },
+  { name: "Thomas Desmeules", role: "VP", company: "Solotech", accentColor: '#fedb21', photo: '/speaker-pics/Thomas Desmeules.jpg' },
+  { name: "Kian Chai Ng", role: "Director", company: "Microsoft", accentColor: '#ef783d', photo: '/speaker-pics/Kian Chai Ng.jpg' },
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────

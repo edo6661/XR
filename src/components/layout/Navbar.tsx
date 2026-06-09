@@ -15,10 +15,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(() => location.pathname);
-
-  // State baru untuk mengontrol visibilitas logo di Navbar
   const [isHeroPassed, setIsHeroPassed] = useState(true);
-
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   if (location.pathname !== menuPathname) {
@@ -26,34 +23,25 @@ const Navbar = () => {
     setMenuOpen(false);
   }
 
-  // Effect khusus untuk mendeteksi posisi Scroll dan URL
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const isScrolled = currentScrollY > 50;
-
       setScrolled((prev) => {
         if (prev !== isScrolled) return isScrolled;
         return prev;
       });
-
-      // Jika di halaman Home, sembunyikan logo jika viewport masih di Hero Section
       if (location.pathname === '/') {
-        // Tampilkan logo setelah user scroll melewati 75% dari tinggi layar
         setIsHeroPassed(currentScrollY > window.innerHeight * 0.75);
       } else {
-        // Di halaman lain, logo selalu tampil
         setIsHeroPassed(true);
       }
     };
-
-    handleScroll(); // Eksekusi saat inisialisasi
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, [location.pathname]);
 
-  // Effect untuk progress bar (dipisah agar tidak re-render saat location berubah)
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(progressBarRef.current, {
@@ -67,7 +55,6 @@ const Navbar = () => {
         },
       });
     });
-
     return () => {
       ctx.revert();
     };
@@ -97,7 +84,6 @@ const Navbar = () => {
             borderBottom: scrolled ? '1px solid rgba(255,255,255,0.045)' : '1px solid transparent',
           }}
         />
-
         <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden z-10">
           <div
             ref={progressBarRef}
@@ -111,9 +97,7 @@ const Navbar = () => {
             }}
           />
         </div>
-
         <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out ${isHeroPassed ? 'max-w-7xl' : 'max-w-5xl'}`}>
-          {/* Implementasi transisi logo: hilang jika di Hero Section */}
           <Link
             to="/"
             className={`group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out ${isHeroPassed
@@ -121,24 +105,19 @@ const Navbar = () => {
               : 'opacity-0 pointer-events-none -translate-y-2'
               }`}
           >
-            <div className="relative w-12 h-12 flex-shrink-0">
+            <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
               <motion.div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-md"
-                style={{ background: 'rgba(251,146,60,0.4)' }}
-                transition={{ duration: 0.4 }}
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300"
+                style={{ background: 'rgba(251,146,60,0.3)' }}
                 aria-hidden="true"
               />
               <img
-                src="/logo-278x262-removebg.png"
+                src="/logo_dark_transparent.png"
                 alt="XR Summits"
-                className="relative w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                // Ganti style filter ini dengan komposisi glow Hero yang sudah diskala
+                className="relative w-[85%] h-[85%] object-contain transition-transform duration-500 group-hover:scale-110"
                 style={{
-                  filter:
-                    'drop-shadow(0 0 4px rgba(251, 146, 60, 0.85)) ' +
-                    'drop-shadow(0 0 8px rgba(251, 146, 60, 0.45)) ' +
-                    'drop-shadow(0 0 14px rgba(56, 189, 248, 0.30)) ' +
-                    'drop-shadow(0 0 20px rgba(251, 146, 60, 0.18))',
+                  filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))',
+                  willChange: 'transform'
                 }}
               />
             </div>
@@ -151,10 +130,8 @@ const Navbar = () => {
               </span>
             </div>
           </Link>
-
           <nav className="hidden lg:flex items-center" aria-label="Primary navigation">
             <div className="w-px h-4 mr-6" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
-
             {PRIMARY_NAV_LINKS.map((link) => (
               <MagneticWrapper key={link.to} strength={0.1}>
                 <NavLink
@@ -190,10 +167,8 @@ const Navbar = () => {
                 </NavLink>
               </MagneticWrapper>
             ))}
-
             <div className="w-px h-4 ml-6 mr-4" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
           </nav>
-
           <div className="flex items-center gap-3">
             <div className="hidden lg:block">
               <MagneticWrapper strength={0.2}>
@@ -219,7 +194,6 @@ const Navbar = () => {
                 </a>
               </MagneticWrapper>
             </div>
-
             <button
               onClick={() => setMenuOpen((v) => !v)}
               className="lg:hidden relative w-10 h-10 flex items-center justify-center text-foreground-muted hover:text-accent transition-colors duration-200"
@@ -241,9 +215,6 @@ const Navbar = () => {
           </div>
         </div>
       </motion.header>
-
-
-
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -273,14 +244,12 @@ const Navbar = () => {
               }}
               aria-hidden="true"
             />
-
             <div className="h-16 flex items-center px-6 flex-shrink-0">
               <Link to="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
                 <img
-                  src="/logo-278x262-removebg.png"
+                  src="/logo_dark_transparent.png"
                   alt="XR Summits"
                   className="w-7 h-7 object-contain"
-                  // Tambahkan baris style ini untuk glow versi lebih kecil:
                   style={{ filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))' }}
                 />
                 <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
@@ -288,9 +257,7 @@ const Navbar = () => {
                 </span>
               </Link>
             </div>
-
             <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
-
             <nav className="flex flex-col flex-1 justify-center px-6 gap-0.5" aria-label="Mobile navigation">
               {PRIMARY_NAV_LINKS.map((link, i) => (
                 <motion.div
@@ -334,8 +301,6 @@ const Navbar = () => {
                 </motion.div>
               ))}
             </nav>
-
-
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
