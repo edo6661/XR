@@ -86,7 +86,7 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
                   animate="enter"
                   exit="exit"
                   className="font-heading font-bold leading-tight"
-                  style={{ fontSize: 'clamp(1.8rem, 5.6vw, 3.9rem)', color: '#f0f4ff' }}
+                  style={{ fontSize: 'clamp(1.6rem, 5vw, 3.4rem)', color: '#f0f4ff' }}
                 >
                   The Future is{' '}
                   <span style={{

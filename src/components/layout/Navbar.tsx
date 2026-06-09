@@ -15,7 +15,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(() => location.pathname);
-  const [isHeroPassed, setIsHeroPassed] = useState(true);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   if (location.pathname !== menuPathname) {
@@ -31,11 +30,7 @@ const Navbar = () => {
         if (prev !== isScrolled) return isScrolled;
         return prev;
       });
-      if (location.pathname === '/') {
-        setIsHeroPassed(currentScrollY > window.innerHeight * 0.75);
-      } else {
-        setIsHeroPassed(true);
-      }
+
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -70,9 +65,11 @@ const Navbar = () => {
   return (
     <>
       <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+        // Hapus "initial" dan "animate" yang memaksa navbar bergerak ke bawah
+        // Cukup kontrol transparansi saja agar terlihat "muncul" dari kehampaan
+        initial={{ opacity: 0 }}
+        animate={{ opacity: scrolled ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: "linear" }}
         className="fixed top-0 left-0 right-0 z-[100]"
       >
         <div
@@ -97,40 +94,14 @@ const Navbar = () => {
             }}
           />
         </div>
-        <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out ${isHeroPassed ? 'max-w-7xl' : 'max-w-5xl'}`}>
-          <Link
-            to="/"
-            className={`group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out ${isHeroPassed
-              ? 'opacity-100 pointer-events-auto translate-y-0'
-              : 'opacity-0 pointer-events-none -translate-y-2'
-              }`}
-          >
-            <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center">
-              <motion.div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300"
-                style={{ background: 'rgba(251,146,60,0.3)' }}
-                aria-hidden="true"
-              />
-              <img
-                src="/logo_dark_transparent.png"
-                alt="XR Summits"
-                className="relative w-[85%] h-[85%] object-contain transition-transform duration-500 group-hover:scale-110"
-                style={{
-                  // Glow sangat tipis, sekadar edge outline
-                  filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))',
-                  willChange: 'transform'
-                }}
-              />
-            </div>
-            <div className="flex flex-col leading-none gap-[3px]">
-              <span
-                className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
-                style={{ fontSize: '0.76rem' }}
-              >
-                XR SUMMITS
-              </span>
-            </div>
-          </Link>
+        <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out 'max-w-7xl' : 'max-w-5xl'}`}>
+          {/* Anchor kosong — titik landing untuk logo portal dari HeroLogo */}
+          <div
+            id="nav-logo-anchor"
+            className="flex-shrink-0"
+            style={{ width: 48, height: 48 }}
+            aria-hidden="true"
+          />
           <nav className="hidden lg:flex items-center" aria-label="Primary navigation">
             <div className="w-px h-4 mr-6" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
             {PRIMARY_NAV_LINKS.map((link) => (
@@ -246,7 +217,11 @@ const Navbar = () => {
               aria-hidden="true"
             />
             <div className="h-16 flex items-center px-6 flex-shrink-0">
-              <Link to="/" className="flex items-center gap-3" onClick={() => setMenuOpen(false)}>
+              <Link
+                to="/"
+                // Ubah opacity default menjadi 0, kita biarkan GSAP yang mengontrolnya
+                className="group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out opacity-0"
+              >
                 <img
                   src="/logo_dark_transparent.png"
                   alt="XR Summits"
@@ -254,9 +229,11 @@ const Navbar = () => {
                   // Sama, tipis di menu HP
                   style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
                 />
-                <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
-                  XR SUMMITS
-                </span>
+                <div className="flex flex-col leading-none gap-[3px] opacity-0" >
+                  <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
+                    XR SUMMITS
+                  </span>
+                </div>
               </Link>
             </div>
             <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />

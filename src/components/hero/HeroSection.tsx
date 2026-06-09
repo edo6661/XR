@@ -289,7 +289,8 @@ const HeroSection = () => {
             className="text-center font-heading font-semibold leading-snug max-w-4xl px-4"
             style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.7rem)', color: '#f0f4ff', letterSpacing: '0.02em' }}
           >
-            Asia’s Premier Platform for AI • XR • Spatial Media • Virtual Production • Immersive Technology
+            Asia’s Premier Platform for <br className="hidden md:block" />
+            AI • XR • Spatial Media • Virtual Production • Immersive Technology
           </motion.h1>
 
           <motion.p

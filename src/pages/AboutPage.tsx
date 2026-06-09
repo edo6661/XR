@@ -38,31 +38,6 @@ const AboutPage = () => (
       <meta name="description" content="Learn about XR Summits — company overview, mission, awards, partners, and media." />
     </Helmet>
 
-    {/* Page hero */}
-    <section className="relative w-full overflow-hidden pt-32 pb-14 px-6">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(239,120,61,0.06) 0%, transparent 60%)' }}
-        aria-hidden="true"
-      />
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          className="font-bold tracking-[0.45em] uppercase mb-4"
-          style={{ fontSize: '0.52rem', color: 'rgba(239,120,61,0.7)' }}
-        >
-          About XR Summits
-        </motion.p>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08, duration: 0.75 }}
-          className="font-heading font-black text-foreground mb-4"
-          style={{ fontSize: 'clamp(2rem, 6vw, 3.25rem)', lineHeight: 1.05 }}
-        >
-          {COMPANY.tagline}
-        </motion.h1>
-      </div>
-    </section>
-
     {/* 1. Company Overview */}
     <AboutSectionShell id="company-overview" eyebrow="Company Overview" title={COMPANY_OVERVIEW.title} showTopBorder={false}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
