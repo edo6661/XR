@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import AutoScroll from 'embla-carousel-auto-scroll';
 
-// ── Types ────────────────────────────────────────────────────────────────────
 type Speaker = {
   name: string;
   role: string;
@@ -13,12 +13,12 @@ type Speaker = {
   accentColor?: string;
 };
 
-// ── Data ─────────────────────────────────────────────────────────────────────
+
 const SPEAKERS: Speaker[] = [
   { name: "Dato' Kamil Othman", role: "CEO", company: "FINAS", accentColor: '#ef783d', photo: '/speaker-pics/Dato Kamil Othman.jpg' },
   { name: "Nick CG Tan", role: "Managing Director", company: "Oceanus Media Global", accentColor: '#3953a3', photo: '/speaker-pics/Nick GC Tan.jpg' },
   { name: "Thi Thu Hien Hoang", role: "Director", company: "Mirabo", accentColor: '#fedb21', photo: '/speaker-pics/Thi Thu Hien Hoang.jpg' },
-  { name: "Alex David", role: "Founder", company: "Tactician", accentColor: '#ef783d' }, // Foto belum tersedia di dalam direktori
+  { name: "Alex David", role: "Founder", company: "Tactician", accentColor: '#ef783d' },
   { name: "Carl Loo", role: "Director", company: "Solid Water", accentColor: '#3953a3', photo: '/speaker-pics/Carl Loo.jpg' },
   { name: "Kei Choong", role: "Founder", company: "Aux Media", accentColor: '#fedb21', photo: '/speaker-pics/Kei Choong.jpg' },
   { name: "Fariz Hanapiah", role: "CEO", company: "EDT", accentColor: '#ef783d', photo: '/speaker-pics/Fariz Hanapiah.jpg' },
@@ -33,7 +33,7 @@ const SPEAKERS: Speaker[] = [
   { name: "Kian Chai Ng", role: "Director", company: "Microsoft", accentColor: '#ef783d', photo: '/speaker-pics/Kian Chai Ng.jpg' },
 ];
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
+
 const getInitials = (name: string) =>
   name
     .split(' ')
@@ -51,7 +51,7 @@ const getSlidesPerView = (): number => {
   return 2;
 };
 
-// ── SpeakerCard ──────────────────────────────────────────────────────────────
+
 const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) => {
   const accent = speaker.accentColor ?? '#ef783d';
   const initials = getInitials(speaker.name);
@@ -89,7 +89,8 @@ const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) =>
 
       {/* Photo / initials */}
       <div
-        className="relative flex items-center justify-center w-full"
+
+        className="relative flex shrink-0 items-center justify-center w-full overflow-hidden"
         style={{
           aspectRatio: '1/1',
           background: `linear-gradient(145deg, ${accent}10 0%, rgba(5,5,5,0.5) 100%)`,
@@ -100,7 +101,8 @@ const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) =>
           <img
             src={speaker.photo}
             alt={speaker.name}
-            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+
+            className="w-full h-full object-cover object-[50%_15%] transition-transform duration-500 group-hover:scale-105"
             style={{ filter: 'grayscale(20%) brightness(0.85)' }}
             loading="lazy"
           />
@@ -141,82 +143,39 @@ const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) =>
   );
 };
 
-// ── ArrowButton ──────────────────────────────────────────────────────────────
-const ArrowButton = ({
-  direction,
-  onClick,
-  disabled,
-}: {
-  direction: 'prev' | 'next';
-  onClick: () => void;
-  disabled: boolean;
-}) => (
-  <button
-    onClick={onClick}
-    disabled={disabled}
-    aria-label={direction === 'prev' ? 'Previous speakers' : 'Next speakers'}
-    className="relative flex items-center justify-center rounded-sm transition-all duration-300 focus-visible:outline-none"
-    style={{
-      width: '2.4rem',
-      height: '2.4rem',
-      border: `1px solid ${disabled ? 'rgba(255,255,255,0.07)' : 'rgba(239,120,61,0.35)'}`,
-      background: disabled ? 'rgba(255,255,255,0.02)' : 'rgba(239,120,61,0.05)',
-      color: disabled ? 'rgba(255,255,255,0.18)' : '#ef783d',
-      cursor: disabled ? 'not-allowed' : 'pointer',
-      transition: 'background 0.3s ease, border-color 0.3s ease',
-    }}
-    onMouseEnter={(e) => {
-      if (disabled) return;
-      const el = e.currentTarget as HTMLButtonElement;
-      el.style.background = 'rgba(239,120,61,0.12)';
-      el.style.borderColor = 'rgba(239,120,61,0.65)';
-    }}
-    onMouseLeave={(e) => {
-      if (disabled) return;
-      const el = e.currentTarget as HTMLButtonElement;
-      el.style.background = 'rgba(239,120,61,0.05)';
-      el.style.borderColor = 'rgba(239,120,61,0.35)';
-    }}
-  >
-    {direction === 'prev' ? (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-        <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ) : (
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-        <path d="M5 2L10 7L5 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    )}
-  </button>
-);
 
-// ── SpeakersSection ──────────────────────────────────────────────────────────
 const SpeakersSection = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
-    align: 'start',
-    dragFree: false,
-  });
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: 'start',
+      dragFree: true,
+    },
+    [
+      AutoScroll({
+        speed: 1.2,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      })
+    ]
+  );
 
   const [progress, setProgress] = useState(0);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(true);
-  const [slidesPerView, setSlidesPerView] = useState(getSlidesPerView);
+  const [, setSlidesPerView] = useState(getSlidesPerView);
 
-  // Responsive slides-per-view
+
   useEffect(() => {
     const onResize = () => setSlidesPerView(getSlidesPerView());
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
 
-  // Sync Embla state via event subscriptions (initial sync deferred to avoid setState in effect)
+
   useEffect(() => {
     if (!emblaApi) return;
 
     const syncSelect = () => {
-      setCanPrev(emblaApi.canScrollPrev());
-      setCanNext(emblaApi.canScrollNext());
     };
 
     const syncScroll = () => {
@@ -240,18 +199,6 @@ const SpeakersSection = () => {
     };
   }, [emblaApi]);
 
-  const scrollPrev = useCallback(() => {
-    if (!emblaApi) return;
-    const cur = emblaApi.selectedScrollSnap();
-    emblaApi.scrollTo(Math.max(0, cur - slidesPerView));
-  }, [emblaApi, slidesPerView]);
-
-  const scrollNext = useCallback(() => {
-    if (!emblaApi) return;
-    const cur = emblaApi.selectedScrollSnap();
-    const total = emblaApi.scrollSnapList().length;
-    emblaApi.scrollTo(Math.min(total - 1, cur + slidesPerView));
-  }, [emblaApi, slidesPerView]);
 
   return (
     <section
@@ -261,15 +208,15 @@ const SpeakersSection = () => {
     >
       {/* Responsive slide widths — one stylesheet, scoped to this section */}
       <style>{`
-        .spk-slide {
-          flex-shrink: 0;
-          width: calc(50% - 0.375rem);
-        }
-        @media (min-width: 640px)  { .spk-slide { width: calc(33.333% - 0.5rem);   } }
-        @media (min-width: 768px)  { .spk-slide { width: calc(25% - 0.5625rem);    } }
-        @media (min-width: 1024px) { .spk-slide { width: calc(20% - 0.6rem);       } }
-        @media (min-width: 1280px) { .spk-slide { width: calc(16.666% - 0.625rem); } }
-      `}</style>
+          .spk-slide {
+            flex-shrink: 0;
+            width: calc(50% - 0.375rem);
+          }
+          @media (min-width: 640px)  { .spk-slide { width: calc(33.333% - 0.5rem);   } }
+          @media (min-width: 768px)  { .spk-slide { width: calc(25% - 0.5625rem);    } }
+          @media (min-width: 1024px) { .spk-slide { width: calc(20% - 0.6rem);       } }
+          @media (min-width: 1280px) { .spk-slide { width: calc(16.666% - 0.625rem); } }
+        `}</style>
 
       {/* Background glow */}
       <div
@@ -325,14 +272,20 @@ const SpeakersSection = () => {
                 style={{ width: '1px', height: '1rem', background: 'rgba(255,255,255,0.08)' }}
                 aria-hidden="true"
               />
-              <ArrowButton direction="prev" onClick={scrollPrev} disabled={!canPrev} />
-              <ArrowButton direction="next" onClick={scrollNext} disabled={!canNext} />
             </motion.div>
           </div>
         </div>
 
         {/* ── Embla carousel ── */}
-        <div className="overflow-hidden" ref={emblaRef}>
+        <div
+          className="overflow-hidden"
+          ref={emblaRef}
+          style={{
+            // Tambahkan masking ini untuk memberikan efek blur/fade di ujung kiri & kanan
+            maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+          }}
+        >
           <div
             className="flex"
             style={{ gap: '0.75rem', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
@@ -350,9 +303,10 @@ const SpeakersSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center justify-center rounded-xl overflow-hidden text-center w-full"
+                className="flex flex-col items-center justify-center rounded-xl overflow-hidden text-center w-full h-full"
                 style={{
-                  aspectRatio: '3/4',
+                  minHeight: '100%',
+                  aspectRatio: '1/1.2',
                   background: 'rgba(255,255,255,0.015)',
                   border: '1px dashed rgba(255,255,255,0.08)',
                 }}

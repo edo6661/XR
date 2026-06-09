@@ -1,6 +1,8 @@
-// src/pages/Home.tsx
+
 import { useLayoutEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from '../components/hero/HeroSection';
 import AboutSection from '../components/about/AboutSection';
 import EventsSection from '../components/events/EventsSection';
@@ -11,13 +13,74 @@ import StackedSection from '../components/ui/StackedSection';
 import { COMPANY } from '../core/navigation/routes';
 import { killScrollTriggersIn } from '../lib/scrollTriggerCleanup';
 
+
+gsap.registerPlugin(ScrollTrigger);
+
 const Home = () => {
   const pageRef = useRef<HTMLDivElement>(null);
 
+
+  const eventsWrapRef = useRef<HTMLDivElement>(null);
+  const sponsorsWrapRef = useRef<HTMLDivElement>(null);
+  const speakersWrapRef = useRef<HTMLDivElement>(null);
+  const contactWrapRef = useRef<HTMLDivElement>(null);
+
   useLayoutEffect(() => {
     const page = pageRef.current;
+    const root = document.documentElement;
+
+    const ctx = gsap.context(() => {
+
+      gsap.to(root, {
+        "--theme-background": "#12112d",
+        scrollTrigger: {
+          trigger: eventsWrapRef.current,
+          start: "top 60%",
+          end: "top 10%",
+          scrub: true,
+        }
+      });
+
+      // 2. Morphing dari Events ke Sponsors
+      gsap.to(root, {
+        "--theme-background": "#0d1626", // Ganti ke Deep Oxford Blue
+        scrollTrigger: {
+          trigger: sponsorsWrapRef.current,
+          start: "top 60%",
+          end: "top 10%",
+          scrub: true,
+        }
+      });
+
+      // 3. Morphing dari Sponsors ke Speakers
+      gsap.to(root, {
+        "--theme-background": "#1a1325", // Ganti ke Deep Midnight Purple
+        scrollTrigger: {
+          trigger: speakersWrapRef.current,
+          start: "top 60%",
+          end: "top 10%",
+          scrub: true,
+        }
+      });
+
+      // 4. Morphing dari Speakers ke Contact Detail
+      gsap.to(root, {
+        "--theme-background": "#0b101a", // Ganti ke Very Dark Slate
+        scrollTrigger: {
+          trigger: contactWrapRef.current,
+          start: "top 60%",
+          end: "top 10%",
+          scrub: true,
+        }
+      });
+
+    }, pageRef);
 
     return () => {
+      ctx.revert();
+
+
+      root.style.removeProperty('--theme-background');
       killScrollTriggersIn(page);
     };
   }, []);
@@ -37,23 +100,32 @@ const Home = () => {
         <AboutSection />
       </StackedSection>
 
-      <StackedSection zIndex={30}>
-        <EventsSection />
-      </StackedSection>
+      {/* Gunakan div wrapper untuk referensi ScrollTrigger yang akurat, di luar logic "pinning" StackedSection */}
+      <div ref={eventsWrapRef} className="w-full relative">
+        <StackedSection zIndex={30}>
+          <EventsSection />
+        </StackedSection>
+      </div>
 
-      <StackedSection zIndex={40}>
-        <SponsorsSection />
-      </StackedSection>
+      <div ref={sponsorsWrapRef} className="w-full relative">
+        <StackedSection zIndex={40}>
+          <SponsorsSection />
+        </StackedSection>
+      </div>
 
-      <StackedSection zIndex={50}>
-        <SpeakersSection />
-      </StackedSection>
+      <div ref={speakersWrapRef} className="w-full relative">
+        <StackedSection zIndex={50}>
+          <SpeakersSection />
+        </StackedSection>
+      </div>
 
-      <StackedSection zIndex={60} isLast>
-        <div className="flex min-h-screen w-full flex-col justify-center">
-          <ContactDetailsSection />
-        </div>
-      </StackedSection>
+      <div ref={contactWrapRef} className="w-full relative">
+        <StackedSection zIndex={60} isLast>
+          <div className="flex min-h-screen w-full flex-col justify-center">
+            <ContactDetailsSection />
+          </div>
+        </StackedSection>
+      </div>
     </div>
   );
 };

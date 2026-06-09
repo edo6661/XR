@@ -1,14 +1,18 @@
 import { motion, type Variants } from 'framer-motion';
 import { COMPANY } from '../../core/navigation/routes';
 
+// Animasi baru: 3D Hover / Subtle Wobble
 const coinSpinVariants: Variants = {
   animate: {
-    rotateY: [0, 180, 360],
-    rotateX: [2, 12, 2],
-    scale: [1, 0.88, 1],
+    // "Nengok" kiri-kanan perlahan (max 25 derajat)
+    rotateY: [-25, 25, -25],
+    // Sedikit tilt (mendongak/menunduk) untuk dimensi ekstra
+    rotateX: [5, -5, 5],
+    // Efek floating (mengambang naik-turun sedikit)
+    y: [-6, 6, -6],
     transition: {
-      duration: 5,
-      ease: [0.65, 0, 0.35, 1],
+      duration: 7, // Dibuat lebih lambat (7 detik) agar pergerakannya sangat smooth dan elegan
+      ease: "easeInOut", // Gerakan melambat secara natural saat berganti arah
       repeat: Infinity,
     },
   },
@@ -17,6 +21,7 @@ const coinSpinVariants: Variants = {
 const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
   return (
     <div className="relative flex flex-col items-center select-none w-full max-w-4xl mx-auto">
+      {/* Perspective tetap ada agar rotasi 25 derajatnya terasa 3D */}
       <div className="relative flex flex-col items-center gap-0 mb-3 w-full" style={{ perspective: '1200px' }}>
         <motion.div
           initial={{ scale: 0.6, opacity: 0, filter: 'blur(16px)' }}
@@ -46,7 +51,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             aria-hidden="true"
           />
 
-          {/* ── LOGO IMAGE UTAMA ── */}
+          {/* ── LOGO IMAGE UTAMA (3D Subtle Hover) ── */}
           <motion.img
             src="/logo_dark_transparent.png"
             alt="XR Summits"
@@ -55,13 +60,11 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             animate="animate"
             style={{
               height: 'clamp(9rem, 14vw, 11rem)',
-              // Glow ditipisin: Radius putih diturunkan ke 3px (opacity 0.45), 
-              // Radius oranye spasial diturunkan ke 12px (opacity 0.2)
+              // Glow tipis dan elegan yang sudah di-ACC sebelumnya
               filter:
                 'drop-shadow(0 0 3px rgba(255, 255, 255, 0.45)) ' +
                 'drop-shadow(0 0 12px rgba(251, 146, 60, 0.2))',
               transformStyle: 'preserve-3d',
-              backfaceVisibility: 'visible',
               willChange: 'transform'
             }}
           />
