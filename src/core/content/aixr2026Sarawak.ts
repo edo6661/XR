@@ -1,4 +1,4 @@
-export const AIXR_SARAWAK_ACCENT = "#22d3ee";
+export const AIXR_SARAWAK_ACCENT = "#fb923c";
 
 export const AIXR_SARAWAK_POSITIONING =
   "Innovation • Culture • Technology • Future Talent";

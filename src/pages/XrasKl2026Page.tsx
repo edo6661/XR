@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import XrasKlHero from '../components/xras-kl-2026/XrasKlHero';
-import XrasProgramsSection from '../components/xras-kl-2026/XrasProgramsSection';
+
 import RegisterEnquiryModal from '../components/gateway/RegisterEnquiryModal';
 import BrochureModal from '../components/gateway/BrochureModal';
 import { XRAS_KL_ACCENT, XRAS_KL_META } from '../core/content/xrasKl2026';
+import XrasActivationsSection from '../components/xras-kl-2026/XrasActivationsSection';
 
 const XRAS_KL_EVENT_NAME = 'XRAS KL 2026';
 
@@ -24,7 +25,7 @@ const XrasKl2026Page = () => {
         onRegister={() => setRegisterOpen(true)}
       />
 
-      <XrasProgramsSection
+      <XrasActivationsSection
         onDownloadBrochure={() => setBrochureOpen(true)}
         onRegister={() => setRegisterOpen(true)}
       />

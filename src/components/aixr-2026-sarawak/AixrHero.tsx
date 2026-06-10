@@ -20,7 +20,7 @@ const AixrHero = ({ onDownloadBrochure, onRegister }: AixrHeroProps) => (
       className="absolute inset-0 pointer-events-none"
       style={{
         background:
-          'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34,211,238,0.09) 0%, transparent 55%), radial-gradient(ellipse 45% 40% at 20% 70%, rgba(251,146,60,0.03) 0%, transparent 50%)',
+          'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(251,146,60,0.08) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 80% 60%, rgba(56,189,248,0.04) 0%, transparent 50%)',
       }}
       aria-hidden="true"
     />
@@ -125,10 +125,10 @@ const AixrHero = ({ onDownloadBrochure, onRegister }: AixrHeroProps) => (
         <button
           type="button"
           onClick={onRegister}
-          className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(34,211,238,0.35)]"
+          className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
           style={{
-            background: `linear-gradient(135deg, ${AIXR_SARAWAK_ACCENT} 0%, #06b6d4 100%)`,
-            border: `1px solid ${AIXR_SARAWAK_ACCENT}80`,
+            background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+            border: '1px solid rgba(251,146,60,0.5)',
           }}
         >
           Register / Enquiry

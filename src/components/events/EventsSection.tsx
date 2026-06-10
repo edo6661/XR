@@ -51,31 +51,31 @@ const UPCOMING_EVENTS = [
 const PAST_EVENTS = [
   {
     year: '2021',
-    title: 'XR Asia Summits',
+    title: 'XR Asia Summits 2021',
     attendees: '100+',
     speakers: '25+',
     highlight:
-      '',
+      "XR Asia Summit 2021 marked the beginning of what would become Asia's definitive platform for the immersive technology ecosystem.Launched in 2021, the inaugural edition took the form of a focused webinar- led conference, bringing together a curated group of XR practitioners, technology enthusiasts, and industry voices to explore the then - emerging landscape of Extended Reality.modest in scale but deliberate in vision, the Summit established its core pillars — knowledge sharing, industry dialogue, and community building — laying the groundwork for a growing ecosystem that the XR industry in Asia sorely needed.",
     imageSrc: '/event-highlight-images/XRAS22 (a).png',
     accentColor: '#a78bfa',
   },
   {
     year: '2022',
-    title: '2nd XR Asia Summits',
+    title: 'XR Asia Summits 2022',
     attendees: '200+',
     speakers: '30+',
     highlight:
-      'The 2nd XR Asia Summits was a dynamic gathering that brought together leading minds and influencers in the Extended Reality industry, featuring an innovative XR solutions showcase, hands-on workshops, and engaging sessions that provided participants with the opportunity to explore cutting-edge technologies, exchange insights, and expand their professional network — leaving attendees inspired and eager to embrace the future of XR. ',
+      'Building on the momentum of its inaugural year, XR Asia Summit 2022 expanded beyond the virtual space into a full in-person experience — bringing together leading minds, practitioners, and influencers from across the Extended Reality industry under one roof. The three-day event featured an XR solutions showcase, hands-on workshops, and curated sessions designed to move beyond surface-level conversation into meaningful exchange. With over 200 attendees, the Summit demonstrated a clear appetite for a dedicated XR platform in Asia, and signaled that this was only the beginning.',
     imageSrc: '/event-highlight-images/XRAS22 (b).png',
     accentColor: '#22d3ee',
   },
   {
     year: '2023',
-    title: '3rd XR Asia Summits',
+    title: 'XR Asia Summits 2023',
     attendees: '500+',
     speakers: '40+',
     highlight:
-      "The 3rd XR Asia Summits brought together leading experts and visionaries across Virtual Production, XR technology, and immersive tech. Held as part of the Malaysia Digital Content Festival 2023, the Summit's Conference, Workshops, and Expo was a joint collaboration between Broadcast Elements Sdn Bhd and the Malaysia Digital Economy Corporation(MDEC), reinforcing its position as a premier platform for driving innovation and industry collaboration within the XR ecosystem.",
+      "XR Asia Summit 2023 arrived at a new scale entirely. Held as part of the Malaysia Digital Content Festival 2023 — in collaboration with Broadcast Elements Sdn Bhd and the Malaysia Digital Economy Corporation (MDEC) — the Summit grew to over 500 attendees, more than doubling its previous reach. The expanded programme brought together visionaries across Virtual Production, XR technology, and immersive tech, with a richer lineup of activations spanning a multi-track Conference, hands-on Workshops, and a full-scale Expo floor. What began as a webinar in 2021 had, by 2023, grown into a premier industry event — cementing the XR Asia Summit's position as the region's leading platform for innovation and cross-sector collaboration within the XR ecosystem.",
     imageSrc: '/event-highlight-images/XRAS23 (a).png',
     accentColor: '#fb923c',
   },

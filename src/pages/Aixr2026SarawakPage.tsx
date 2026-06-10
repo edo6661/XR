@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AixrHero from '../components/aixr-2026-sarawak/AixrHero';
-import AixrProgramsSection from '../components/aixr-2026-sarawak/AixrProgramsSection';
+import AixrActivationsSection from '../components/aixr-2026-sarawak/AiXrActivationsSection';
 import RegisterEnquiryModal from '../components/gateway/RegisterEnquiryModal';
 import BrochureModal from '../components/gateway/BrochureModal';
 import {
@@ -26,7 +26,7 @@ const Aixr2026SarawakPage = () => {
         onRegister={() => setRegisterOpen(true)}
       />
 
-      <AixrProgramsSection
+      <AixrActivationsSection
         onDownloadBrochure={() => setBrochureOpen(true)}
         onRegister={() => setRegisterOpen(true)}
       />
