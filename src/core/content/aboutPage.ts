@@ -4,7 +4,7 @@ export const COMPANY_OVERVIEW = {
   title:
     "The Definitive Platform Connecting Innovators Across Asia's Immersive Future",
   body: [
-    "XR Summits Sdn Bhd, founded by Louis Clovis, is a premier AI-XR platform focused on the latest advancements in AI, Virtual, Augmented, and Extended Reality (XR). We connect global XR creators and industry leaders, showcasing innovative production techniques and immersive, story-driven content. ",
+    "XR Asia Summits, founded by Louis Clovis, is a premier AI-XR platform focused on the latest advancements in AI, Virtual, Augmented, and Extended Reality (XR). We connect global XR creators and industry leaders, showcasing innovative production techniques and immersive, story-driven content.",
     "The platform features live sessions from top global speakers, covering industries such as film, broadcast, virtual travel, gaming /esports and education. XR Summits also offers virtual networking and presentations, fostering discussions on how XR technology is transforming XR storytelling and shaping the future of immersive experiences.",
   ],
 } as const;
@@ -76,27 +76,8 @@ export const INDUSTRY_FOCUS = {
 
 export const AWARDS_RECOGNITION = {
   intro:
-    "The XR Asia Summit is to honor XR content development in Malaysia & Asia regardless of it size or location, which shows excellence in all aspects of their creation. It is also known as the “OSCAR” award for the film, broadcast, gaming and education in AR/VR/XR development. The XR Asia Awards would lead up to be a prestigious award that many content creators desire as a benchmark for excellence in their amazing talent and work. It represents highest accolades and standards of professionalism.",
-  invitation:
-    "We cordially invite you to join this black-tie event, come to network with industry peers, meet old friends and make new ones while celebrating the achievements of our Winners and Awards Recipients.",
-  sections: [
-    {
-      title: "WHY ATTEND",
-      desc: "The XR Asia Awards ceremony promises to be a brilliant night of celebration, recognising the Asia’s best digital content and creators. Don’t miss out on your chance to celebrate with your peers, clients and the wider industry by joining us on the night. We look forward to seeing you on the night and, if you’re entering the awards, wish you the best of luck with your entry.",
-    },
-    {
-      title: "AWARDS NIGHT",
-      desc: "Winning a XR Asia Award is a huge accolade, and the awards night is a massive celebration of your success, showcasing your talents in front of more than 600 of your peers and clients.",
-    },
-    {
-      title: "WHY ENTER?",
-      desc: "The awards celebrate Asia’s very best digital content & creators with focus on emphasising the context of how shows and channels perform. The judges assess entries based on their understanding of the industry, as well as the resources available to broadcasters and producers.",
-    },
-    {
-      title: "JUDGING PROCESS",
-      desc: "The awards are judged by a panel of more than 10 industry experts, handpicked by the Broadcast team. The judges are split into groups, and each allocated a category.",
-    },
-  ],
+    "XR Summits Sdn Bhd received an accolade in the Initiative Award – Malaysia for AI-XR Production category at the Asia-Pacific Broadcasting+ Awards 2026 for its work in advancing Extended Reality (XR), virtual production, and AI-generated content across Southeast Asia.",
+  image: "/awards/awards.png",
 } as const;
 
 export const TRACK_RECORD = [

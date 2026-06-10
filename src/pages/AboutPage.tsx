@@ -25,7 +25,6 @@ import {
   networkNodes,
   epicenterNodes,
 } from '../core/content/aboutPage';
-import { COMPANY } from '../core/navigation/routes';
 
 // Icons mapping for Why XR
 const whyIcons = [<AIIcon key="ai" />, <SpatialIcon key="flex" />, <TalentIcon key="exp" />, <GlobeIcon key="prod" />];
@@ -284,31 +283,16 @@ const AboutPage = () => (
       </div>
     </AboutSectionShell>
     {/* 5. Awards & Recognition */}
-    <AboutSectionShell id="awards" eyebrow="Awards & Recognition" title="Celebrating excellence in immersive innovation">
-      <div className="max-w-4xl flex flex-col gap-6 mb-12">
+    <AboutSectionShell id="awards" eyebrow="Awards & Recognition" title="Awards & Recognition">
+      <div className="flex flex-col gap-6 mb-12">
         <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.9rem', lineHeight: 1.85 }}>
           {AWARDS_RECOGNITION.intro}
         </p>
-        <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.9rem', lineHeight: 1.85 }}>
-          {AWARDS_RECOGNITION.invitation}
-        </p>
+
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-        {AWARDS_RECOGNITION.sections.map((section, index) => (
-          <motion.div
-            key={section.title}
-            initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ delay: index * 0.05, duration: 0.55 }}
-            className="rounded-xl p-6"
-            style={{ background: 'rgba(10, 10, 10, 0.65)', border: '1px solid rgba(255,255,255,0.07)' }}
-          >
-            <h3 className="font-heading font-bold text-foreground mb-3" style={{ fontSize: '0.95rem', color: ABOUT_ACCENT }}>
-              {section.title}
-            </h3>
-            <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.82rem' }}>
-              {section.desc}
-            </p>
-          </motion.div>
-        ))}
+      <div className='bg-white rounded-md'>
+        <img src={AWARDS_RECOGNITION.image} alt="Awards & Recognition" className="w-full h-full object-cover rounded-md" />
+
       </div>
     </AboutSectionShell>
 

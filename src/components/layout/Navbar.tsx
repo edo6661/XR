@@ -12,6 +12,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const location = useLocation();
+  const isHome = location.pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(() => location.pathname);
@@ -68,17 +69,17 @@ const Navbar = () => {
         // Hapus "initial" dan "animate" yang memaksa navbar bergerak ke bawah
         // Cukup kontrol transparansi saja agar terlihat "muncul" dari kehampaan
         initial={{ opacity: 0 }}
-        animate={{ opacity: scrolled ? 1 : 0 }}
+        animate={{ opacity: isHome ? (scrolled ? 1 : 0) : 1 }}
         transition={{ duration: 0.6, ease: "linear" }}
         className="fixed top-0 left-0 right-0 z-[100]"
       >
         <div
           className="absolute inset-0 transition-all duration-600"
           style={{
-            background: scrolled ? 'rgba(5, 11, 24, 0.88)' : 'transparent',
-            backdropFilter: scrolled ? 'blur(28px) saturate(160%)' : 'none',
-            WebkitBackdropFilter: scrolled ? 'blur(28px) saturate(160%)' : 'none',
-            borderBottom: scrolled ? '1px solid rgba(255,255,255,0.045)' : '1px solid transparent',
+            background: isHome && !scrolled ? 'transparent' : 'rgba(5, 11, 24, 0.88)',
+            backdropFilter: isHome && !scrolled ? 'none' : 'blur(28px) saturate(160%)',
+            WebkitBackdropFilter: isHome && !scrolled ? 'none' : 'blur(28px) saturate(160%)',
+            borderBottom: isHome && !scrolled ? '1px solid transparent' : '1px solid rgba(255,255,255,0.045)',
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden z-10">
@@ -88,20 +89,36 @@ const Navbar = () => {
             style={{
               background: 'linear-gradient(90deg, #fb923c 0%, rgba(240,244,255,0.6) 100%)',
               transform: 'scaleX(0)',
-              opacity: scrolled ? 0.65 : 0,
+              opacity: isHome && !scrolled ? 0 : 0.65,
               transition: 'opacity 0.4s ease',
               boxShadow: '0 0 6px rgba(251,146,60,0.5)',
             }}
           />
         </div>
-        <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out 'max-w-7xl' : 'max-w-5xl'}`}>
-          {/* Anchor kosong — titik landing untuk logo portal dari HeroLogo */}
-          <div
-            id="nav-logo-anchor"
-            className="flex-shrink-0"
-            style={{ width: 48, height: 48 }}
-            aria-hidden="true"
-          />
+        <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out max-w-7xl`}>
+          {isHome ? (
+            /* Anchor kosong — titik landing untuk logo portal dari HeroLogo */
+            <div
+              id="nav-logo-anchor"
+              className="flex-shrink-0"
+              style={{ width: 48, height: 48 }}
+              aria-hidden="true"
+            />
+          ) : (
+            <Link
+              to="/"
+              className="flex-shrink-0 flex items-center justify-center select-none"
+              style={{ width: 48, height: 48 }}
+              aria-label="XR Summits — Home"
+            >
+              <img
+                src="/logo_dark_transparent.png"
+                alt="XR Summits"
+                className="w-full h-full object-contain"
+                style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
+              />
+            </Link>
+          )}
           <nav className="hidden lg:flex items-center" aria-label="Primary navigation">
             <div className="w-px h-4 mr-6" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
             {PRIMARY_NAV_LINKS.map((link) => (
@@ -219,8 +236,7 @@ const Navbar = () => {
             <div className="h-16 flex items-center px-6 flex-shrink-0">
               <Link
                 to="/"
-                // Ubah opacity default menjadi 0, kita biarkan GSAP yang mengontrolnya
-                className="group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out opacity-0"
+                className="group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out"
               >
                 <img
                   src="/logo_dark_transparent.png"
@@ -229,7 +245,7 @@ const Navbar = () => {
                   // Sama, tipis di menu HP
                   style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
                 />
-                <div className="flex flex-col leading-none gap-[3px] opacity-0" >
+                <div className="flex flex-col leading-none gap-[3px]">
                   <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
                     XR SUMMITS
                   </span>

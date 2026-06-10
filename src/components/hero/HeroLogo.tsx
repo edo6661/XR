@@ -62,12 +62,10 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
         if (navContainer) {
           const orig = navContainer.style.transition;
           navContainer.style.transition = 'none';
-          navContainer.classList.remove('max-w-5xl');
           navContainer.classList.add('max-w-7xl');
           void navContainer.offsetHeight;
           finalRect = anchor.getBoundingClientRect();
-          navContainer.classList.remove('max-w-7xl');
-          navContainer.classList.add('max-w-5xl');
+
           navContainer.style.transition = orig;
         } else {
           finalRect = anchor.getBoundingClientRect();

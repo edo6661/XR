@@ -98,7 +98,7 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
                     Spatial.
                   </span>
                   <br />
-                  <span style={{ fontSize: '0.62em', fontWeight: 500, color: 'rgba(240,244,255,0.82)' }}>
+                  <span style={{ fontSize: 'clamp(1.6rem, 5vw, 3.4rem)', fontWeight: 500, color: 'rgba(240,244,255,0.82)' }}>
                     Powered by{' '}
                     <span style={{
                       background: 'linear-gradient(120deg, #fb923c 0%, #f97316 100%)',
