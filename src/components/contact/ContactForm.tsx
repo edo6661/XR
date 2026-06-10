@@ -1,24 +1,40 @@
 import { useState, type FormEvent } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { COMPANY } from '../../core/navigation/routes';
 import { CONTACT_SUBJECTS } from '../../core/content/contactPage';
 
 const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-sm bg-[rgba(255,255,255,0.04)] border border-white/10 text-foreground text-sm outline-none focus:border-[rgba(251,146,60,0.45)] transition-colors';
+  'w-full px-4 py-3 rounded-sm bg-[rgba(255,255,255,0.04)] border border-white/10 text-foreground text-sm outline-none focus:border-[rgba(251,146,60,0.45)] transition-colors placeholder:text-foreground-muted/30';
 
-const ContactForm = () => {
+interface ContactFormProps {
+  initialSubject?: string;
+}
+
+const ContactForm = ({ initialSubject }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
+  const [subject, setSubject] = useState<string>(initialSubject ?? CONTACT_SUBJECTS[0]);
+
+  const isMedia = subject === 'Media Enquiries' || subject === 'Press Accreditation';
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    const subject = encodeURIComponent(
-      `XR Summits — ${String(form.get('subject') ?? 'Enquiry')}`,
-    );
-    const body = encodeURIComponent(
-      `Subject: ${form.get('subject')}\nName: ${form.get('name')}\nEmail: ${form.get('email')}\nOrganisation: ${form.get('organisation')}\nPhone: ${form.get('phone')}\n\nMessage:\n${form.get('message')}`,
-    );
-    window.location.href = `mailto:${COMPANY.email}?subject=${subject}&body=${body}`;
+    const subj = encodeURIComponent(`XR Summits — ${String(form.get('subject') ?? 'Enquiry')}`);
+    const lines = [
+      `Subject: ${form.get('subject')}`,
+      `Name: ${form.get('name')}`,
+      `Job Title: ${form.get('jobtitle') ?? '—'}`,
+      `Email: ${form.get('email')}`,
+      `Organisation: ${form.get('organisation')}`,
+      `Phone: ${form.get('phone') ?? '—'}`,
+    ];
+    if (isMedia) {
+      lines.push(`Outlet: ${form.get('outlet') ?? '—'}`);
+      lines.push(`Coverage Angle: ${form.get('coverage') ?? '—'}`);
+    }
+    lines.push('', `Message:`, String(form.get('message') ?? ''));
+    const body = encodeURIComponent(lines.join('\n'));
+    window.location.href = `mailto:${COMPANY.email}?subject=${subj}&body=${body}`;
     setSubmitted(true);
   };
 
@@ -33,20 +49,18 @@ const ContactForm = () => {
           background: 'rgba(251,146,60,0.04)',
         }}
       >
+        <p className="text-foreground text-sm font-heading font-bold mb-2">Message composed</p>
         <p className="text-foreground-muted text-sm leading-relaxed mb-4">
-          Your email client should open with your message. If not, contact us at{' '}
+          Your email client should open with your message pre-filled. If it didn't, write directly to{' '}
           <a href={`mailto:${COMPANY.email}`} className="text-accent hover:underline">
             {COMPANY.email}
           </a>
           .
         </p>
-        <p className="font-mono text-[0.48rem] tracking-[0.3em] uppercase text-foreground-muted/50">
-          Phase 1 · No server submission
-        </p>
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="mt-6 text-[0.68rem] font-bold tracking-[0.2em] uppercase text-accent hover:text-foreground transition-colors"
+          className="mt-4 text-[0.68rem] font-bold tracking-[0.2em] uppercase text-accent hover:text-foreground transition-colors"
         >
           Send another message
         </button>
@@ -62,65 +76,101 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4"
     >
+      {/* Subject */}
       <label className="flex flex-col gap-1.5">
-        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
-          Subject
-        </span>
-        <select name="subject" required className={INPUT_CLASS} defaultValue={CONTACT_SUBJECTS[0]}>
+        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Subject</span>
+        <select
+          name="subject"
+          required
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          className={INPUT_CLASS}
+        >
           {CONTACT_SUBJECTS.map((s) => (
-            <option key={s} value={s} className="bg-[#0d1b2e]">
-              {s}
-            </option>
+            <option key={s} value={s} className="bg-[#0a0a0a]">{s}</option>
           ))}
         </select>
       </label>
 
+      {/* Name + Job Title */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
-            Full name
-          </span>
+          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Full name</span>
           <input name="name" type="text" required autoComplete="name" className={INPUT_CLASS} />
         </label>
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
-            Email
-          </span>
-          <input name="email" type="email" required autoComplete="email" className={INPUT_CLASS} />
+          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Job title</span>
+          <input name="jobtitle" type="text" autoComplete="organization-title" className={INPUT_CLASS} />
         </label>
       </div>
 
+      {/* Email + Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
-            Organisation
-          </span>
-          <input name="organisation" type="text" className={INPUT_CLASS} />
+          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Email</span>
+          <input name="email" type="email" required autoComplete="email" className={INPUT_CLASS} />
         </label>
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
-            Phone (optional)
-          </span>
+          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Phone (optional)</span>
           <input name="phone" type="tel" autoComplete="tel" className={INPUT_CLASS} />
         </label>
       </div>
 
+      {/* Organisation */}
       <label className="flex flex-col gap-1.5">
-        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
-          Message
-        </span>
-        <textarea name="message" rows={5} required className={`${INPUT_CLASS} resize-y min-h-[120px]`} />
+        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Organisation</span>
+        <input name="organisation" type="text" className={INPUT_CLASS} />
+      </label>
+
+      {/* Media-specific fields */}
+      <AnimatePresence>
+        {isMedia && (
+          <motion.div
+            key="media-fields"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex flex-col gap-4 overflow-hidden"
+          >
+            <div
+              className="px-4 py-3 rounded-sm text-[0.72rem] text-foreground-muted/70 leading-relaxed"
+              style={{ border: '1px solid rgba(251,146,60,0.15)', background: 'rgba(251,146,60,0.04)' }}
+            >
+              Applying for press accreditation — please provide your outlet and coverage angle below.
+            </div>
+            <label className="flex flex-col gap-1.5">
+              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Outlet / Publication</span>
+              <input name="outlet" type="text" className={INPUT_CLASS} />
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Coverage angle</span>
+              <textarea name="coverage" rows={2} className={`${INPUT_CLASS} resize-none`} placeholder="What story are you covering?" />
+            </label>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Message */}
+      <label className="flex flex-col gap-1.5">
+        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Message</span>
+        <textarea
+          name="message"
+          rows={5}
+          required
+          className={`${INPUT_CLASS} resize-y min-h-[120px]`}
+        />
       </label>
 
       <button
         type="submit"
-        className="w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.7rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(251,146,60,0.35)]"
+        className="w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.7rem] text-[#050505] transition-shadow hover:shadow-[0_0_28px_rgba(251,146,60,0.35)] active:scale-[0.99]"
         style={{
           background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
           border: '1px solid rgba(251,146,60,0.5)',
         }}
       >
-        Send via email
+        {isMedia ? 'Apply for accreditation' : 'Send via email'}
       </button>
     </motion.form>
   );
