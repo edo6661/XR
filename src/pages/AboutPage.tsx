@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import StatCard from '../components/about/StatCard';
 import PillarCard from '../components/about/PillarCard';
@@ -17,8 +17,8 @@ import {
   COMPANY_OVERVIEW,
   WHY_XR_PILLARS,
   INDUSTRY_FOCUS,
-  MEDIA_PRESS,
-  STRATEGIC_PARTNER_SLOTS,
+  // MEDIA_PRESS,
+  // STRATEGIC_PARTNER_SLOTS,
   OUR_MISSION,
   REGIONAL_NETWORK,
   epicenterTarget,
@@ -297,7 +297,7 @@ const AboutPage = () => (
     </AboutSectionShell>
 
     {/* 6. Strategic Partners */}
-    <AboutSectionShell id="strategic-partners" eyebrow="Strategic Partners" title="Partners powering the ecosystem" description="Logo assets will be published as partnerships are confirmed. Phase 1 uses elegant placeholders.">
+    {/* <AboutSectionShell id="strategic-partners" eyebrow="Strategic Partners" title="Partners powering the ecosystem" description="Logo assets will be published as partnerships are confirmed. Phase 1 uses elegant placeholders.">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {Array.from({ length: STRATEGIC_PARTNER_SLOTS }, (_, i) => (
           <motion.div
@@ -309,10 +309,10 @@ const AboutPage = () => (
           </motion.div>
         ))}
       </div>
-    </AboutSectionShell>
+    </AboutSectionShell> */}
 
     {/* 7. Media & Press */}
-    <AboutSectionShell id="media-press" eyebrow="Media & Press" title="Press resources & accreditation" description="Media kits, releases, and press pass applications — placeholders for Phase 1.">
+    {/* <AboutSectionShell id="media-press" eyebrow="Media & Press" title="Press resources & accreditation" description="Media kits, releases, and press pass applications — placeholders for Phase 1.">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {MEDIA_PRESS.map((item, index) => (
           <motion.div
@@ -338,7 +338,7 @@ const AboutPage = () => (
           <span aria-hidden="true">→</span>
         </Link>
       </div>
-    </AboutSectionShell>
+    </AboutSectionShell> */}
   </>
 );
 
