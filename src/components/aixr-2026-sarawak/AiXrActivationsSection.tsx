@@ -328,7 +328,7 @@ const AixrActivationsSection = ({
             className="text-foreground-muted leading-relaxed"
             style={{ fontSize: '0.88rem', lineHeight: 1.8 }}
           >
-            16–17 October 2026 · Borneo Convention Centre (BCCK), Kuching, Sarawak. Select any experience to explore what's happening.
+            16–17 October 2026 · Borneo Convention Centre (BCCK), Kuching, Sarawak. <br /> <span className='font-bold'>Explore what's waiting for you</span>
           </p>
         </motion.div>
 

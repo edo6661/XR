@@ -15,7 +15,7 @@ const UPCOMING_EVENTS = [
     date: '1 – 3 Dec 2026',
     location: 'Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur',
     description:
-      "One platform, six activations – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.",
+      "One platform, 7 Experiences – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.",
     accentColor: '#fb923c',
     tag: 'Flagship',
     to: '/xras-kl-2026',

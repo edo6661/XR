@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -18,7 +18,6 @@ const SPEAKERS: Speaker[] = [
   { name: "Dato' Kamil Othman", role: "CEO", company: "FINAS", accentColor: '#ef783d', photo: '/speaker-pics/Dato Kamil Othman.jpg' },
   { name: "Nick CG Tan", role: "Managing Director", company: "Oceanus Media Global", accentColor: '#3953a3', photo: '/speaker-pics/Nick GC Tan.jpg' },
   { name: "Thi Thu Hien Hoang", role: "Director", company: "Mirabo", accentColor: '#fedb21', photo: '/speaker-pics/Thi Thu Hien Hoang.jpg' },
-  { name: "Alex David", role: "Founder", company: "Tactician", accentColor: '#ef783d' },
   { name: "Carl Loo", role: "Director", company: "Solid Water", accentColor: '#3953a3', photo: '/speaker-pics/Carl Loo.jpg' },
   { name: "Kei Choong", role: "Founder", company: "Aux Media", accentColor: '#fedb21', photo: '/speaker-pics/Kei Choong.jpg' },
   { name: "Fariz Hanapiah", role: "CEO", company: "EDT", accentColor: '#ef783d', photo: '/speaker-pics/Fariz Hanapiah.jpg' },
@@ -33,6 +32,10 @@ const SPEAKERS: Speaker[] = [
   { name: "Kian Chai Ng", role: "Director", company: "Microsoft", accentColor: '#ef783d', photo: '/speaker-pics/Kian Chai Ng.jpg' },
 ];
 
+const SPEAKERS_WITH_PHOTOS = SPEAKERS.filter((speaker) => speaker.photo);
+
+const AUTO_SCROLL_STOP_DELAY_MS = 220;
+const AUTO_SCROLL_RESUME_DELAY_MS = 320;
 
 const getInitials = (name: string) =>
   name
@@ -52,7 +55,17 @@ const getSlidesPerView = (): number => {
 };
 
 
-const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) => {
+const SpeakerCard = ({
+  speaker,
+  index,
+  onPhotoEnter,
+  onPhotoLeave,
+}: {
+  speaker: Speaker;
+  index: number;
+  onPhotoEnter: () => void;
+  onPhotoLeave: () => void;
+}) => {
   const accent = speaker.accentColor ?? '#ef783d';
   const initials = getInitials(speaker.name);
 
@@ -89,13 +102,14 @@ const SpeakerCard = ({ speaker, index }: { speaker: Speaker; index: number }) =>
 
       {/* Photo / initials */}
       <div
-
         className="relative flex shrink-0 items-center justify-center w-full overflow-hidden"
         style={{
           aspectRatio: '1/1',
           background: `linear-gradient(145deg, ${accent}10 0%, rgba(5,5,5,0.5) 100%)`,
           borderBottom: '1px solid rgba(255,255,255,0.05)',
         }}
+        onPointerEnter={onPhotoEnter}
+        onPointerLeave={onPhotoLeave}
       >
         {speaker.photo ? (
           <img
@@ -156,13 +170,58 @@ const SpeakersSection = () => {
       AutoScroll({
         speed: 1.2,
         stopOnInteraction: false,
-        stopOnMouseEnter: true,
+        stopOnMouseEnter: false,
       })
     ]
   );
 
   const [progress, setProgress] = useState(0);
   const [, setSlidesPerView] = useState(getSlidesPerView);
+  const hoveredPhotoCountRef = useRef(0);
+  const stopTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearAutoScrollStopTimeout = useCallback(() => {
+    if (stopTimeoutRef.current) {
+      clearTimeout(stopTimeoutRef.current);
+      stopTimeoutRef.current = null;
+    }
+  }, []);
+
+  const clearAutoScrollResumeTimeout = useCallback(() => {
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = null;
+    }
+  }, []);
+
+  const handleSpeakerPhotoEnter = useCallback(() => {
+    hoveredPhotoCountRef.current += 1;
+    clearAutoScrollResumeTimeout();
+
+    if (hoveredPhotoCountRef.current !== 1) return;
+
+    clearAutoScrollStopTimeout();
+    stopTimeoutRef.current = setTimeout(() => {
+      if (hoveredPhotoCountRef.current > 0) {
+        emblaApi?.plugins()?.autoScroll?.stop();
+      }
+    }, AUTO_SCROLL_STOP_DELAY_MS);
+  }, [clearAutoScrollResumeTimeout, clearAutoScrollStopTimeout, emblaApi]);
+
+  const handleSpeakerPhotoLeave = useCallback(() => {
+    hoveredPhotoCountRef.current = Math.max(0, hoveredPhotoCountRef.current - 1);
+    clearAutoScrollStopTimeout();
+
+    if (hoveredPhotoCountRef.current > 0) return;
+
+    clearAutoScrollResumeTimeout();
+    resumeTimeoutRef.current = setTimeout(() => {
+      if (hoveredPhotoCountRef.current === 0) {
+        emblaApi?.plugins()?.autoScroll?.play(AUTO_SCROLL_RESUME_DELAY_MS);
+      }
+    }, 0);
+  }, [clearAutoScrollResumeTimeout, clearAutoScrollStopTimeout, emblaApi]);
 
 
   useEffect(() => {
@@ -170,6 +229,13 @@ const SpeakersSection = () => {
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      clearAutoScrollStopTimeout();
+      clearAutoScrollResumeTimeout();
+    };
+  }, [clearAutoScrollResumeTimeout, clearAutoScrollStopTimeout]);
 
 
   useEffect(() => {
@@ -266,7 +332,7 @@ const SpeakersSection = () => {
                 className="font-mono"
                 style={{ fontSize: '0.58rem', letterSpacing: '0.2em', color: 'rgba(139,155,180,0.4)' }}
               >
-                {String(SPEAKERS.length).padStart(2, '0')} SPEAKERS
+                {String(SPEAKERS_WITH_PHOTOS.length).padStart(2, '0')} SPEAKERS
               </span>
               <div
                 style={{ width: '1px', height: '1rem', background: 'rgba(255,255,255,0.08)' }}
@@ -291,40 +357,18 @@ const SpeakersSection = () => {
             style={{ gap: '0.75rem', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
           >
             {/* Speaker cards */}
-            {SPEAKERS.map((speaker, i) => (
+            {SPEAKERS_WITH_PHOTOS.map((speaker, i) => (
               <div key={speaker.name} className="spk-slide">
-                <SpeakerCard speaker={speaker} index={i} />
+                <SpeakerCard
+                  speaker={speaker}
+                  index={i}
+                  onPhotoEnter={handleSpeakerPhotoEnter}
+                  onPhotoLeave={handleSpeakerPhotoLeave}
+                />
               </div>
             ))}
 
-            {/* TBA card */}
-            <div className="spk-slide">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center justify-center rounded-xl overflow-hidden text-center w-full h-full"
-                style={{
-                  minHeight: '100%',
-                  aspectRatio: '1/1.2',
-                  background: 'rgba(255,255,255,0.015)',
-                  border: '1px dashed rgba(255,255,255,0.08)',
-                }}
-              >
-                <span
-                  className="font-mono"
-                  style={{
-                    fontSize: '0.48rem',
-                    letterSpacing: '0.28em',
-                    lineHeight: 2,
-                    color: 'rgba(240,244,255,0.22)',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  More Speakers<br />To Be Announced
-                </span>
-              </motion.div>
-            </div>
+
           </div>
         </div>
 

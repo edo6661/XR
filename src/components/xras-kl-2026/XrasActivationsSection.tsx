@@ -338,7 +338,7 @@ const XrasActivationsSection = ({
       aria-labelledby="xras-activations-heading"
     >
       <div className="max-w-7xl mx-auto">
-        <SectionEyebrow>7 Activations</SectionEyebrow>
+        <SectionEyebrow>7 Experiences</SectionEyebrow>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -352,14 +352,14 @@ const XrasActivationsSection = ({
             className="font-heading font-bold text-foreground mb-3"
             style={{ fontSize: 'clamp(1.35rem, 3vw, 2rem)' }}
           >
-            3 Days. 7 Activations.{' '}
+            3 Days. 7 Experiences.{' '}
             <span style={{ color: XRAS_KL_ACCENT }}>One Ecosystem.</span>
           </h2>
           <p
             className="text-foreground-muted leading-relaxed"
             style={{ fontSize: '0.88rem', lineHeight: 1.8 }}
           >
-            1–3 December 2026 · Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur. Select any activation to explore what's happening.
+            1–3 December 2026 · Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur. <br /> <span className='font-bold'>Explore what's waiting for you</span>
           </p>
         </motion.div>
 
