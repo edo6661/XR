@@ -204,7 +204,7 @@ const AboutSection = () => {
           {/* RIGHT — body copy sesuai cursorrules */}
           <div ref={bodyRef} className="flex flex-col justify-center gap-7">
             <p data-para className="text-base text-foreground leading-[1.75]">
-              <span className="text-accent font-semibold">XR Summits </span>{' '}
+              <span className="text-accent font-semibold">XR Asia Summits </span>{' '}
               is connecting innovators across Extended Reality (XR), Spatial Media, AVXR, immersive technologies, and the evolving future of esports.
             </p>
             <p data-para style={{ fontSize: '0.85rem', color: 'rgba(107,127,163,0.9)', lineHeight: 1.8 }}>
