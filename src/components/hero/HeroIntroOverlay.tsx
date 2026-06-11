@@ -85,7 +85,7 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
                   initial="initial"
                   animate="enter"
                   exit="exit"
-                  className="font-heading font-bold leading-tight"
+                  className="font-heading font-semibold leading-tight"
                   style={{ fontSize: 'clamp(1.6rem, 5vw, 3.4rem)', color: '#f0f4ff' }}
                 >
                   The Future is{' '}
@@ -98,17 +98,17 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
                     Spatial.
                   </span>
                   <br />
-                  <span style={{ fontSize: 'clamp(1.6rem, 5vw, 3.4rem)', fontWeight: 500, color: 'rgba(240,244,255,0.82)' }}>
+                  <span style={{ color: 'rgba(240,244,255,0.82)' }}>
                     Powered by{' '}
                     <span style={{
                       background: 'linear-gradient(120deg, #fb923c 0%, #f97316 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
-                      fontWeight: 800,
                     }}>
                       AI
                     </span>
+                    .
                   </span>
                 </motion.h2>
               )}

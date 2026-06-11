@@ -8,13 +8,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 const coinSpinVariants: Variants = {
   animate: {
-    rotateY: [-25, 25, -25],
-    rotateX: [5, -5, 5],
-    y: [-6, 6, -6],
+    rotateY: [30, -30, 30, -30],
+    rotateX: [5, -5, 5, -5],
+    y: [-6, 6, -6, 6],
     transition: {
       duration: 7,
       ease: "easeInOut",
       repeat: Infinity,
+      repeatType: "loop",
     },
   },
   landed: {
@@ -169,9 +170,14 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             <motion.img
               src="/logo_dark_transparent.png"
               className="relative w-auto object-contain drop-shadow-xl"
-              style={{ height: 'clamp(9rem, 14vw, 11rem)' }}
+              style={{
+                height: 'clamp(9rem, 14vw, 11rem)',
+                transformStyle: 'preserve-3d',
+                willChange: 'transform',
+              }}
               alt="XR Summits"
               variants={coinSpinVariants}
+              initial="animate"
               animate="animate"
             />
           </div>
