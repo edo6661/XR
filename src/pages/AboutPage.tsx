@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import PillarCard from '../components/about/PillarCard';
 import AboutSectionShell from '../components/about/page/AboutSectionShell';
+import CompanyOverviewBlock from '../components/about/page/CompanyOverviewBlock';
+import OurMissionBlock from '../components/about/page/OurMissionBlock';
 import {
   AIIcon,
   SpatialIcon,
@@ -37,26 +39,12 @@ const AboutPage = () => (
 
     {/* 1. Company Overview */}
     <AboutSectionShell id="company-overview" eyebrow="Company Overview" title={COMPANY_OVERVIEW.title} showTopBorder={false}>
-      <div >
-        <div className="flex flex-col gap-5">
-          {COMPANY_OVERVIEW.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)} className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.88rem', lineHeight: 1.85 }}>
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
-      </div>
+      <CompanyOverviewBlock />
     </AboutSectionShell>
 
     {/* 2. Our Mission */}
     <AboutSectionShell id="our-mission" eyebrow="Our Mission" title={OUR_MISSION.title}>
-      <div className="flex flex-col gap-5 max-w-3xl">
-        <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.95rem', lineHeight: 1.9 }}>
-          {OUR_MISSION.body}
-        </p>
-
-      </div>
+      <OurMissionBlock />
     </AboutSectionShell>
 
     {/* 3. Why XR Asia Summit */}
@@ -78,7 +66,7 @@ const AboutPage = () => (
 
     <AboutSectionShell id="industry-focus" eyebrow="Industry Focus" title="Industry Focus">
       <div className="max-w-5xl">
-        <p className="text-foreground-muted leading-relaxed mb-10" style={{ fontSize: '0.9rem', lineHeight: 1.8 }}>
+        <p className="text-foreground-muted leading-relaxed mb-10" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
           {INDUSTRY_FOCUS.description}
         </p>
 
@@ -155,7 +143,7 @@ const AboutPage = () => (
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
           className="text-foreground-muted leading-relaxed max-w-3xl"
-          style={{ fontSize: '0.9rem', lineHeight: 1.8 }}
+          style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}
         >
           {REGIONAL_NETWORK.body}
         </motion.p>
@@ -166,105 +154,114 @@ const AboutPage = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8 }}
-          className="relative w-full rounded-2xl overflow-hidden glass mt-4"
+          className="relative w-full mt-4 rounded-[18px] p-1"
           style={{
-            background: 'radial-gradient(circle at 75% 70%, rgba(239,120,61,0.06) 0%, rgba(5,5,5,0) 60%)',
-            border: '1px solid rgba(255,255,255,0.05)'
+            border: '1px solid rgba(255,255,255,0.06)',
+            boxShadow: '0 0 32px rgba(239,120,61,0.06)',
           }}
         >
-          <div className="w-full overflow-x-auto hide-scrollbar">
-            <div className="min-w-[700px] w-full p-6 lg:p-10">
-              <svg viewBox="0 0 850 400" className="w-full h-auto drop-shadow-md">
+          <div
+            className="relative w-full rounded-2xl overflow-hidden glass"
+            style={{
+              background: 'radial-gradient(circle at 75% 70%, rgba(239,120,61,0.06) 0%, rgba(5,5,5,0) 60%)',
+              border: '1px solid rgba(239,120,61,0.25)',
+              boxShadow: 'inset 0 0 0 1px rgba(239,120,61,0.08)',
+            }}
+          >
+            <div className="w-full overflow-x-auto hide-scrollbar">
+              <div className="min-w-[700px] w-full p-6 lg:p-10">
+                <svg viewBox="0 0 850 400" className="w-full h-auto drop-shadow-md">
 
-                {/* 1. Animated Connecting Lines */}
-                {networkNodes.map((node, i) => (
-                  <motion.line
-                    key={`line-${node.id}`}
-                    x1={node.x}
-                    y1={node.y}
-                    x2={epicenterTarget.x}
-                    y2={epicenterTarget.y}
-                    stroke={ABOUT_ACCENT}
-                    strokeWidth="1.5"
-                    strokeDasharray="4 6"
-                    strokeOpacity="0.25"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    whileInView={{ pathLength: 1, opacity: 1 }}
+                  {/* 1. Animated Connecting Lines */}
+                  {networkNodes.map((node, i) => (
+                    <motion.line
+                      key={`line-${node.id}`}
+                      x1={node.x}
+                      y1={node.y}
+                      x2={epicenterTarget.x}
+                      y2={epicenterTarget.y}
+                      stroke={ABOUT_ACCENT}
+                      strokeWidth="1.5"
+                      strokeDasharray="4 6"
+                      strokeOpacity="0.25"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      whileInView={{ pathLength: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + i * 0.1, duration: 1.8, ease: "easeOut" }}
+                    />
+                  ))}
+
+                  {/* 2. Dots & Labels */}
+                  {[...networkNodes, ...epicenterNodes].map((node, i) => {
+                    const isEpicenter = node.id === 'my' || node.id === 'id';
+                    const delay = isEpicenter ? 0.2 : 0.8 + i * 0.05;
+
+                    return (
+                      <g key={`node-${node.id}`}>
+                        {/* Pulsing Aura */}
+                        <motion.circle
+                          cx={node.x}
+                          cy={node.y}
+                          r={isEpicenter ? 20 : 12}
+                          fill="transparent"
+                          stroke={ABOUT_ACCENT}
+                          strokeWidth="1"
+                          initial={{ scale: 0.2, opacity: 0 }}
+                          animate={{ scale: 1.8, opacity: [0, 0.4, 0] }}
+                          transition={{ repeat: Infinity, duration: isEpicenter ? 2.5 : 3, delay: i * 0.2 }}
+                        />
+
+                        {/* Solid Center Dot */}
+                        <motion.circle
+                          cx={node.x}
+                          cy={node.y}
+                          r={isEpicenter ? 7 : 4}
+                          fill={ABOUT_ACCENT}
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay, type: "spring", stiffness: 200, damping: 10 }}
+                          style={{ filter: `drop-shadow(0 0 8px ${ABOUT_ACCENT})` }}
+                        />
+
+                        {/* Legible Text Label */}
+                        <motion.text
+                          x={node.x}
+                          y={node.y - (isEpicenter ? 16 : 12)}
+                          fill="#f0f4ff"
+                          fontSize={isEpicenter ? "16px" : "13px"}
+                          fontWeight={isEpicenter ? "bold" : "normal"}
+                          textAnchor="middle"
+                          letterSpacing="0.05em"
+                          initial={{ opacity: 0, y: 5 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: delay + 0.2, duration: 0.4 }}
+                          style={{ fontFamily: 'var(--font-sans)', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
+                        >
+                          {node.label}
+                        </motion.text>
+                      </g>
+                    );
+                  })}
+
+                  {/* Epicenter Label Tag */}
+                  <motion.text
+                    x={epicenterTarget.x + 40}
+                    y={epicenterTarget.y}
+                    fill={ABOUT_ACCENT}
+                    fontSize="10px"
+                    fontWeight="bold"
+                    letterSpacing="0.3em"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.7 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.1, duration: 1.8, ease: "easeOut" }}
-                  />
-                ))}
-
-                {/* 2. Dots & Labels */}
-                {[...networkNodes, ...epicenterNodes].map((node, i) => {
-                  const isEpicenter = node.id === 'my' || node.id === 'id';
-                  const delay = isEpicenter ? 0.2 : 0.8 + i * 0.05;
-
-                  return (
-                    <g key={`node-${node.id}`}>
-                      {/* Pulsing Aura */}
-                      <motion.circle
-                        cx={node.x}
-                        cy={node.y}
-                        r={isEpicenter ? 20 : 12}
-                        fill="transparent"
-                        stroke={ABOUT_ACCENT}
-                        strokeWidth="1"
-                        initial={{ scale: 0.2, opacity: 0 }}
-                        animate={{ scale: 1.8, opacity: [0, 0.4, 0] }}
-                        transition={{ repeat: Infinity, duration: isEpicenter ? 2.5 : 3, delay: i * 0.2 }}
-                      />
-
-                      {/* Solid Center Dot */}
-                      <motion.circle
-                        cx={node.x}
-                        cy={node.y}
-                        r={isEpicenter ? 7 : 4}
-                        fill={ABOUT_ACCENT}
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay, type: "spring", stiffness: 200, damping: 10 }}
-                        style={{ filter: `drop-shadow(0 0 8px ${ABOUT_ACCENT})` }}
-                      />
-
-                      {/* Legible Text Label */}
-                      <motion.text
-                        x={node.x}
-                        y={node.y - (isEpicenter ? 16 : 12)}
-                        fill="#f0f4ff"
-                        fontSize={isEpicenter ? "16px" : "13px"}
-                        fontWeight={isEpicenter ? "bold" : "normal"}
-                        textAnchor="middle"
-                        letterSpacing="0.05em"
-                        initial={{ opacity: 0, y: 5 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: delay + 0.2, duration: 0.4 }}
-                        style={{ fontFamily: 'var(--font-sans)', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
-                      >
-                        {node.label}
-                      </motion.text>
-                    </g>
-                  );
-                })}
-
-                {/* Epicenter Label Tag */}
-                <motion.text
-                  x={epicenterTarget.x + 40}
-                  y={epicenterTarget.y}
-                  fill={ABOUT_ACCENT}
-                  fontSize="10px"
-                  fontWeight="bold"
-                  letterSpacing="0.3em"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 0.7 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 2, duration: 1 }}
-                >
-                  EPICENTER
-                </motion.text>
-              </svg>
+                    transition={{ delay: 2, duration: 1 }}
+                  >
+                    EPICENTER
+                  </motion.text>
+                </svg>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -273,8 +270,9 @@ const AboutPage = () => (
     {/* 5. Awards & Recognition */}
     <AboutSectionShell id="awards" eyebrow="Awards & Recognition" title="Awards & Recognition">
       <div className="flex flex-col gap-6 mb-12">
-        <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.9rem', lineHeight: 1.85 }}>
-          {AWARDS_RECOGNITION.intro}
+        <p className="text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85 }}>
+          <strong className="text-foreground font-bold">{AWARDS_RECOGNITION.companyName}</strong>
+          {AWARDS_RECOGNITION.introRest}
         </p>
 
       </div>

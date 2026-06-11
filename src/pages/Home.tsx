@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeroSection from '../components/hero/HeroSection';
 import AboutSection from '../components/about/AboutSection';
 import EventsSection from '../components/events/EventsSection';
-import SpeakersSection from '../components/speakers/SpeakersSection';
+import EcosystemInActionSection from '../components/home/EcosystemInActionSection';
 import SponsorsSection from '../components/sponsors/SponsorsSection';
 import ContactDetailsSection from '../components/home/ContactDetailsSection';
 import StackedSection from '../components/ui/StackedSection';
@@ -21,8 +21,8 @@ const Home = () => {
 
 
   const eventsWrapRef = useRef<HTMLDivElement>(null);
+  const ecosystemWrapRef = useRef<HTMLDivElement>(null);
   const sponsorsWrapRef = useRef<HTMLDivElement>(null);
-  const speakersWrapRef = useRef<HTMLDivElement>(null);
   const contactWrapRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -41,9 +41,20 @@ const Home = () => {
         }
       });
 
-      // 2. Morphing dari Events ke Sponsors
+      // 2. Morphing dari Events ke Ecosystem in Action
       gsap.to(root, {
-        "--theme-background": "#0d1626", // Ganti ke Deep Oxford Blue
+        "--theme-background": "#1a1325",
+        scrollTrigger: {
+          trigger: ecosystemWrapRef.current,
+          start: "top 60%",
+          end: "top 10%",
+          scrub: true,
+        }
+      });
+
+      // 3. Morphing dari Ecosystem ke Sponsors
+      gsap.to(root, {
+        "--theme-background": "#0d1626",
         scrollTrigger: {
           trigger: sponsorsWrapRef.current,
           start: "top 60%",
@@ -52,18 +63,7 @@ const Home = () => {
         }
       });
 
-      // 3. Morphing dari Sponsors ke Speakers
-      gsap.to(root, {
-        "--theme-background": "#1a1325", // Ganti ke Deep Midnight Purple
-        scrollTrigger: {
-          trigger: speakersWrapRef.current,
-          start: "top 60%",
-          end: "top 10%",
-          scrub: true,
-        }
-      });
-
-      // 4. Morphing dari Speakers ke Contact Detail
+      // 4. Morphing dari Sponsors ke Contact Detail
       gsap.to(root, {
         "--theme-background": "#0b101a", // Ganti ke Very Dark Slate
         scrollTrigger: {
@@ -107,15 +107,15 @@ const Home = () => {
         </StackedSection>
       </div>
 
-      <div ref={sponsorsWrapRef} className="w-full relative">
+      <div ref={ecosystemWrapRef} className="w-full relative">
         <StackedSection zIndex={40}>
-          <SponsorsSection />
+          <EcosystemInActionSection />
         </StackedSection>
       </div>
 
-      <div ref={speakersWrapRef} className="w-full relative">
+      <div ref={sponsorsWrapRef} className="w-full relative">
         <StackedSection zIndex={50}>
-          <SpeakersSection />
+          <SponsorsSection />
         </StackedSection>
       </div>
 

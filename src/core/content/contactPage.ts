@@ -36,7 +36,7 @@ export const PARTNERSHIP_CARDS = [
       {
         label: "Download Sponsorship Package",
         href: "#",
-        variant: "primary" as const,
+        variant: "orange" as const,
       },
       { label: "Talk to Our Team", href: "#", variant: "ghost" as const },
     ],
@@ -47,7 +47,7 @@ export const PARTNERSHIP_CARDS = [
     heading: "Showcase to Enterprise Buyers & Government Agencies",
     body: "Present your product or solution to a curated audience of enterprise buyers, government agencies, and industry practitioners actively looking to adopt immersive technology.",
     ctas: [
-      { label: "Apply to Exhibit", href: "#", variant: "primary" as const },
+      { label: "Apply to Exhibit", href: "#", variant: "orange" as const },
       { label: "View Booth Options", href: "#", variant: "ghost" as const },
     ],
   },
@@ -56,16 +56,14 @@ export const PARTNERSHIP_CARDS = [
     label: "Government",
     heading: "Align With National Digital Economy Agendas",
     body: "We work with government agencies and ministries to align our events with national digital economy and creative industry initiatives. Let's explore how XR Summits can support your work.",
-    ctas: [{ label: "Get in Touch", href: "#", variant: "primary" as const }],
+    ctas: [{ label: "Get in Touch", href: "#", variant: "orange" as const }],
   },
   {
     id: "universities",
     label: "Universities",
     heading: "Connect Students & Faculty With Industry",
     body: "XR Summits offers universities dedicated showcase space, recruitment exposure, and direct access to the region's XR talent pipeline.",
-    ctas: [
-      { label: "Partner With Us", href: "#", variant: "primary" as const },
-    ],
+    ctas: [{ label: "Partner With Us", href: "#", variant: "orange" as const }],
   },
 ] as const;
 

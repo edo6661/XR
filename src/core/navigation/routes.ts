@@ -14,6 +14,7 @@ export const PRIMARY_NAV_LINKS: readonly NavLink[] = [
 
 export const COMPANY = {
   name: "XR Summits",
+  navbarBrand: "XR SUMMITS SDN BHD",
   legalName: "XR Summits Sdn. Bhd.",
   registrationNo: "1506516-A",
   tagline:

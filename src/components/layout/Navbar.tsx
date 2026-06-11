@@ -97,26 +97,55 @@ const Navbar = () => {
         </div>
         <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out max-w-7xl`}>
           {isHome ? (
-            /* Anchor kosong — titik landing untuk logo portal dari HeroLogo */
-            <div
-              id="nav-logo-anchor"
-              className="flex-shrink-0"
-              style={{ width: 48, height: 48 }}
-              aria-hidden="true"
-            />
+            <div className="flex items-center gap-3 shrink-0">
+              {/* Anchor kosong — titik landing untuk logo portal dari HeroLogo */}
+              <div
+                id="nav-logo-anchor"
+                className="shrink-0"
+                style={{ width: 48, height: 48 }}
+                aria-hidden="true"
+              />
+              <Link
+                to="/"
+                className="group select-none transition-all duration-500 ease-in-out"
+                style={{
+                  opacity: scrolled ? 1 : 0,
+                  pointerEvents: scrolled ? 'auto' : 'none',
+                  transform: scrolled ? 'translateY(0)' : 'translateY(-4px)',
+                }}
+                aria-label="XR Summits — Home"
+              >
+                <span
+                  className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
+                  style={{ fontSize: '0.76rem' }}
+                >
+                  {COMPANY.navbarBrand}
+                </span>
+              </Link>
+            </div>
           ) : (
             <Link
               to="/"
-              className="flex-shrink-0 flex items-center justify-center select-none"
-              style={{ width: 48, height: 48 }}
+              className="group flex items-center gap-3 shrink-0 select-none"
               aria-label="XR Summits — Home"
             >
-              <img
-                src="/logo_dark_transparent.png"
-                alt="XR Summits"
-                className="w-full h-full object-contain"
-                style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
-              />
+              <div
+                className="relative w-12 h-12 shrink-0 flex items-center justify-center"
+              >
+                <img
+                  src="/logo_dark_transparent.png"
+                  alt=""
+                  aria-hidden="true"
+                  className="relative w-[85%] h-[85%] object-contain transition-transform duration-500 group-hover:scale-110"
+                  style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
+                />
+              </div>
+              <span
+                className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
+                style={{ fontSize: '0.76rem' }}
+              >
+                {COMPANY.navbarBrand}
+              </span>
             </Link>
           )}
           <nav className="hidden lg:flex items-center" aria-label="Primary navigation">
@@ -247,7 +276,7 @@ const Navbar = () => {
                 />
                 <div className="flex flex-col leading-none gap-[3px]">
                   <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
-                    XR SUMMITS
+                    {COMPANY.navbarBrand}
                   </span>
                 </div>
               </Link>

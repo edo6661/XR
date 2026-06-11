@@ -1,5 +1,130 @@
 export const XRAS_KL_ACCENT = "#fb923c";
 
+export type XrasSpeaker = {
+  name: string;
+  role: string;
+  company: string;
+  photo: string;
+  accentColor?: string;
+  focusAreas: string[];
+};
+
+export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
+  {
+    name: "Sam Majid",
+    role: "AI Policy Leader & CEO",
+    company: "National AI Office (Malaysia)",
+    photo: "/speaker-pics/Sam Majid.jpg",
+    accentColor: "#ef783d",
+    focusAreas: [
+      "Digital Transformation",
+      "AI & Public Sector",
+      "National AI Strategy",
+    ],
+  },
+  {
+    name: "Chaitanya Chinchlikar",
+    role: "VP, Business Head & CTO (Emerging Media)",
+    company: "Whistling Woods International",
+    photo: "/speaker-pics/Chaitanya.jpeg",
+    accentColor: "#3953a3",
+    focusAreas: ["Media", "Animation", "VFX & XR"],
+  },
+  {
+    name: "Rohit Kapoor",
+    role: "Studio Executive",
+    company: "Annapurna Studios",
+    photo: "/speaker-pics/ROHIT.jpg",
+    accentColor: "#fedb21",
+    focusAreas: ["Film Production", "Studio Operations", "Content Development"],
+  },
+  {
+    name: "Natalie Loi",
+    role: "Co-founder & Head of Technology",
+    company: "UnBound Malaysia",
+    photo: "/speaker-pics/Natalie Loi.jpg",
+    accentColor: "#ef783d",
+    focusAreas: [
+      "AR for Education",
+      "Financial Literacy",
+      "AI Metaverse Safety",
+    ],
+  },
+  {
+    name: "Lukasz Mirocha",
+    role: "International XR Industry Expert",
+    company: "International",
+    photo: "/speaker-pics/Lukasz Mirocha.jpeg",
+    accentColor: "#3953a3",
+    focusAreas: ["XR Innovation", "Digital Creativity", "Emerging Media"],
+  },
+  {
+    name: "Virgile Mangiavillano",
+    role: "Co-founder, VR Future",
+    company: "Müzeverse (Türkiye)",
+    photo: "/speaker-pics/Virgile Mangiavillano.jpg",
+    accentColor: "#fedb21",
+    focusAreas: ["XR Museums", "Immersive Storytelling", "Digital Heritage"],
+  },
+  {
+    name: "Amirsoleiman Esfandiari",
+    role: "Founder",
+    company: "Techcopter",
+    photo: "/speaker-pics/Amirsoleiman E.jpg",
+    accentColor: "#ef783d",
+    focusAreas: ["Industrial VR", "Digital Twins", "Simulation & Training"],
+  },
+  {
+    name: "Lakshmi Deshpande",
+    role: "Head of XR Innovation & Design",
+    company: "",
+    photo: "/speaker-pics/Lakshmi Deshpande.jpg",
+    accentColor: "#3953a3",
+    focusAreas: ["Spatial Design", "XR + AI", "Immersive Storytelling"],
+  },
+  {
+    name: "Raul John",
+    role: "AI Prodigy (India) & TedX Speaker",
+    company: "",
+    photo: "/speaker-pics/Raul John.png",
+    accentColor: "#fedb21",
+    focusAreas: ["Future of AI", "Youth Innovation", "Storytelling"],
+  },
+  {
+    name: "Datin Noorlindah Hassan",
+    role: "Deputy Director",
+    company: "Multimedia University",
+    photo: "/speaker-pics/Datin Noorlindah.jpg",
+    accentColor: "#ef783d",
+    focusAreas: ["Higher Education", "Digital Learning", "Innovation"],
+  },
+  {
+    name: "Dr. Yahaya Abdullah",
+    role: "Academic Lead",
+    company: "Management and Science University, Malaysia",
+    photo: "/speaker-pics/Dr Yahaya Abdullah.jpg",
+    accentColor: "#3953a3",
+    focusAreas: [
+      "Games Development",
+      "Industry Collaboration",
+      "Creative Tech",
+    ],
+  },
+  {
+    name: "Assoc. Prod. Ts. Dr. Safaa N. S. Al-Humairi",
+    role: "Robotics & Mechatronics Specialist",
+    company: "Management and Science University, Malaysia",
+    photo: "/speaker-pics/Safaa Al-Humairi.webp",
+    accentColor: "#fedb21",
+    focusAreas: [
+      "Robotics Innovation",
+      "Embedded Systems",
+      "Smart Mechatronics",
+      "Intelligent Automation",
+    ],
+  },
+] as const;
+
 export const XRAS_KL_META = {
   title: "XRAS KL 26' | XR Summits",
   description:

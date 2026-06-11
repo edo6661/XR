@@ -61,18 +61,19 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
         className="font-heading font-black text-foreground leading-[0.95] mb-5"
         style={{ fontSize: 'clamp(2.5rem, 8vw, 4.25rem)' }}
       >
-        XRAS KL{' '}
-        <span style={{ color: XRAS_KL_ACCENT }}>26&apos;</span>
+        XR Asia{' '}
+        <span style={{ color: XRAS_KL_ACCENT }}>Summits</span>
       </motion.h1>
 
       <motion.p
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.16, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="font-semibold tracking-[0.22em] uppercase mb-4"
-        style={{ fontSize: '0.72rem', color: 'rgba(107,127,163,0.75)' }}
+        className="font-semibold tracking-[0.12em] mb-4"
+        style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: 'rgba(240,244,255,0.85)', lineHeight: 1.6 }}
       >
-        {XRAS_KL_META.location}
+        3 Days. 7 Experiences.{' '}
+        <span style={{ color: XRAS_KL_ACCENT }}>One Ecosystem.</span>
       </motion.p>
 
       <motion.p
@@ -82,8 +83,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
         className="text-foreground-muted max-w-2xl mx-auto leading-relaxed mb-10"
         style={{ fontSize: '0.9rem', lineHeight: 1.85 }}
       >
-        Kuala Lumpur flagship — the definitive gateway for conference, expo, workshops, coaching, masterclasses,
-        grand finals, and the AI/XR Awards Gala Dinner.
+        1–3 December 2026 · Malaysia International Trade and Exhibition Centre (MITEC, Kuala Lumpur)
       </motion.p>
 
       <motion.div

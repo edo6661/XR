@@ -4,35 +4,9 @@ import { Link } from 'react-router-dom';
 import useEmblaCarousel from 'embla-carousel-react';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import AutoScroll from 'embla-carousel-auto-scroll';
+import { XRAS_KL_SPEAKERS, type XrasSpeaker } from '../../core/content/xrasKl2026';
 
-type Speaker = {
-  name: string;
-  role: string;
-  company: string;
-  photo?: string;
-  accentColor?: string;
-};
-
-
-const SPEAKERS: Speaker[] = [
-  { name: "Dato' Kamil Othman", role: "CEO", company: "FINAS", accentColor: '#ef783d', photo: '/speaker-pics/Dato Kamil Othman.jpg' },
-  { name: "Nick CG Tan", role: "Managing Director", company: "Oceanus Media Global", accentColor: '#3953a3', photo: '/speaker-pics/Nick GC Tan.jpg' },
-  { name: "Thi Thu Hien Hoang", role: "Director", company: "Mirabo", accentColor: '#fedb21', photo: '/speaker-pics/Thi Thu Hien Hoang.jpg' },
-  { name: "Carl Loo", role: "Director", company: "Solid Water", accentColor: '#3953a3', photo: '/speaker-pics/Carl Loo.jpg' },
-  { name: "Kei Choong", role: "Founder", company: "Aux Media", accentColor: '#fedb21', photo: '/speaker-pics/Kei Choong.jpg' },
-  { name: "Fariz Hanapiah", role: "CEO", company: "EDT", accentColor: '#ef783d', photo: '/speaker-pics/Fariz Hanapiah.jpg' },
-  { name: "Justin Wong", role: "Founder", company: "TrueXR", accentColor: '#3953a3', photo: '/speaker-pics/Justin Wong.jpg' },
-  { name: "Havene Liew", role: "Director", company: "XRA", accentColor: '#fedb21', photo: '/speaker-pics/Havene Liew.jpg' },
-  { name: "Ts. Dr. Mohd Zaliman", role: "Director", company: "TDC", accentColor: '#ef783d', photo: '/speaker-pics/Ts Dr Mohd Zaliman Yusof.jpg' },
-  { name: "Jason Yim", role: "CEO", company: "Trigger XR", accentColor: '#3953a3', photo: '/speaker-pics/Jason Yim.jpg' },
-  { name: "Dr. Ike Tan", role: "Academic Lead", company: "APU/APIIT", accentColor: '#fedb21', photo: '/speaker-pics/Dr Ike Tan.jpg' },
-  { name: "Dr. Andrew Yew", role: "Director", company: "Ministry XR", accentColor: '#ef783d', photo: '/speaker-pics/Dr Andrew Yew.jpg' },
-  { name: "Hussin Khan", role: "Founder", company: "EFXCO", accentColor: '#3953a3', photo: '/speaker-pics/Hussin Khan.jpg' },
-  { name: "Thomas Desmeules", role: "VP", company: "Solotech", accentColor: '#fedb21', photo: '/speaker-pics/Thomas Desmeules.jpg' },
-  { name: "Kian Chai Ng", role: "Director", company: "Microsoft", accentColor: '#ef783d', photo: '/speaker-pics/Kian Chai Ng.jpg' },
-];
-
-const SPEAKERS_WITH_PHOTOS = SPEAKERS.filter((speaker) => speaker.photo);
+const SPEAKERS: XrasSpeaker[] = [...XRAS_KL_SPEAKERS];
 
 const AUTO_SCROLL_STOP_DELAY_MS = 220;
 const AUTO_SCROLL_RESUME_DELAY_MS = 320;
@@ -61,7 +35,7 @@ const SpeakerCard = ({
   onPhotoEnter,
   onPhotoLeave,
 }: {
-  speaker: Speaker;
+  speaker: XrasSpeaker;
   index: number;
   onPhotoEnter: () => void;
   onPhotoLeave: () => void;
@@ -151,7 +125,22 @@ const SpeakerCard = ({
           {speaker.name}
         </h3>
         <p style={{ fontSize: '0.65rem', color: `${accent}99` }}>{speaker.role}</p>
-        <p style={{ fontSize: '0.62rem', color: 'rgba(240,244,255,0.5)' }}>{speaker.company}</p>
+        {speaker.company ? (
+          <p style={{ fontSize: '0.62rem', color: 'rgba(240,244,255,0.5)' }}>{speaker.company}</p>
+        ) : null}
+        {speaker.focusAreas.length > 0 ? (
+          <div className="mt-2 pt-2 border-t border-white/[0.06]">
+            <p
+              className="font-semibold tracking-[0.08em] uppercase mb-1"
+              style={{ fontSize: '0.5rem', color: 'rgba(139,155,180,0.55)' }}
+            >
+              Focus Areas
+            </p>
+            <p style={{ fontSize: '0.58rem', color: 'rgba(240,244,255,0.45)', lineHeight: 1.5 }}>
+              {speaker.focusAreas.join(' · ')}
+            </p>
+          </div>
+        ) : null}
       </div>
     </motion.div>
   );
@@ -295,7 +284,7 @@ const SpeakersSection = () => {
 
         {/* ── Header ── */}
         <div className="px-6">
-          <SectionEyebrow>Visionary Minds</SectionEyebrow>
+          <SectionEyebrow>Conference</SectionEyebrow>
 
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
             <motion.h2
@@ -307,7 +296,7 @@ const SpeakersSection = () => {
               className="font-heading font-black text-foreground"
               style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
             >
-              Keynote{' '}
+              Conference{' '}
               <span
                 style={{
                   background: 'linear-gradient(130deg, #ef783d 0%, #f0f4ff 85%)',
@@ -332,7 +321,7 @@ const SpeakersSection = () => {
                 className="font-mono"
                 style={{ fontSize: '0.58rem', letterSpacing: '0.2em', color: 'rgba(139,155,180,0.4)' }}
               >
-                {String(SPEAKERS_WITH_PHOTOS.length).padStart(2, '0')} SPEAKERS
+                {String(SPEAKERS.length).padStart(2, '0')} SPEAKERS
               </span>
               <div
                 style={{ width: '1px', height: '1rem', background: 'rgba(255,255,255,0.08)' }}
@@ -357,7 +346,7 @@ const SpeakersSection = () => {
             style={{ gap: '0.75rem', paddingLeft: '1.5rem', paddingRight: '1.5rem' }}
           >
             {/* Speaker cards */}
-            {SPEAKERS_WITH_PHOTOS.map((speaker, i) => (
+            {SPEAKERS.map((speaker, i) => (
               <div key={speaker.name} className="spk-slide">
                 <SpeakerCard
                   speaker={speaker}
@@ -411,22 +400,25 @@ const SpeakersSection = () => {
               Are you a practitioner, researcher, or industry leader in XR, AI, or spatial media?
             </p>
             <Link
-              to="/contact"
+              to="/contact#section-speakers"
               className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
               style={{
-                fontSize: '0.62rem',
-                border: '1px solid rgba(239,120,61,0.4)',
-                color: '#ef783d',
+                fontSize: '0.72rem',
+                border: '1px solid rgba(57,83,163,0.5)',
+                color: '#a8b8e8',
+                background: 'rgba(57,83,163,0.1)',
               }}
               onMouseEnter={(e) => {
                 const el = e.currentTarget as HTMLAnchorElement;
-                el.style.background = 'rgba(239,120,61,0.08)';
-                el.style.borderColor = 'rgba(239,120,61,0.65)';
+                el.style.background = 'rgba(57,83,163,0.2)';
+                el.style.borderColor = 'rgba(57,83,163,0.75)';
+                el.style.color = '#f0f4ff';
               }}
               onMouseLeave={(e) => {
                 const el = e.currentTarget as HTMLAnchorElement;
-                el.style.background = 'transparent';
-                el.style.borderColor = 'rgba(239,120,61,0.4)';
+                el.style.background = 'rgba(57,83,163,0.1)';
+                el.style.borderColor = 'rgba(57,83,163,0.5)';
+                el.style.color = '#a8b8e8';
               }}
             >
               Apply to Speak

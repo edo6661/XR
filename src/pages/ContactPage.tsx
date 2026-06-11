@@ -25,6 +25,9 @@ const CARD_ICONS: Record<string, React.ReactNode> = {
   universities: <GraduationCap size={18} />,
 };
 
+const BRAND_ORANGE = '#ef783d';
+const BRAND_PURPLE = '#3953a3';
+
 /* ── Shared CTA button ─── */
 const CtaBtn = ({
   href,
@@ -32,28 +35,46 @@ const CtaBtn = ({
   children,
 }: {
   href: string;
-  variant: 'primary' | 'ghost';
+  variant: 'orange' | 'purple' | 'ghost';
   children: React.ReactNode;
-}) =>
-  variant === 'primary' ? (
+}) => {
+  if (variant === 'orange') {
+    return (
+      <a
+        href={href}
+        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.72rem] text-[#050505] transition-shadow hover:shadow-[0_0_22px_rgba(239,120,61,0.35)] active:scale-[0.99]"
+        style={{ background: `linear-gradient(135deg, ${BRAND_ORANGE}, #d9652b)`, border: '1px solid rgba(239,120,61,0.5)' }}
+      >
+        {children}
+        <ChevronRight size={12} />
+      </a>
+    );
+  }
+
+  if (variant === 'purple') {
+    return (
+      <a
+        href={href}
+        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.72rem] text-[#f0f4ff] transition-shadow hover:shadow-[0_0_22px_rgba(57,83,163,0.4)] active:scale-[0.99]"
+        style={{ background: `linear-gradient(135deg, ${BRAND_PURPLE}, #2d4285)`, border: '1px solid rgba(57,83,163,0.55)' }}
+      >
+        {children}
+        <ChevronRight size={12} />
+      </a>
+    );
+  }
+
+  return (
     <a
       href={href}
-      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.65rem] text-[#050505] transition-shadow hover:shadow-[0_0_22px_rgba(251,146,60,0.35)] active:scale-[0.99]"
-      style={{ background: 'linear-gradient(135deg,#fb923c,#f97316)', border: '1px solid rgba(251,146,60,0.5)' }}
-    >
-      {children}
-      <ChevronRight size={12} />
-    </a>
-  ) : (
-    <a
-      href={href}
-      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.65rem] text-foreground-muted transition-colors hover:text-accent"
+      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.72rem] text-foreground-muted transition-colors hover:text-accent"
       style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)' }}
     >
       {children}
       <ExternalLink size={11} />
     </a>
   );
+};
 
 /* ═══════════════════════════════════════════════ */
 const ContactPage = () => {
@@ -286,7 +307,7 @@ const ContactPage = () => {
                       </p>
                     </div>
                   </div>
-                  <CtaBtn href={ev.href} variant="primary">{ev.label}</CtaBtn>
+                  <CtaBtn href={ev.href} variant="purple">{ev.label}</CtaBtn>
                 </motion.div>
               ))}
             </div>

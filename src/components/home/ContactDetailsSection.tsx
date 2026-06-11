@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SectionEyebrow from '../ui/SectionEyebrow';
-import { COMPANY } from '../../core/navigation/routes';
 
 
 const ContactDetailsSection = () => (
@@ -58,41 +57,34 @@ const ContactDetailsSection = () => (
 
           <p
             className="text-foreground-muted max-w-lg leading-relaxed"
-            style={{ fontSize: '0.85rem', lineHeight: 1.8 }}
+            style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}
           >
-            Whether you're attending, exhibiting, sponsoring, or speaking — XR Summits connects you
+            Whether you're attending, exhibiting, sponsoring, or speaking — XR Asia Summit connects you
             to the conversations and partnerships that matter.
           </p>
 
-
-
-
-
-          {/* CTA */}
-          <a
-            href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join the Movement — XR Summits')}`}
-            className="inline-flex items-center gap-2 px-7 py-3 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.68rem] text-[#050b18] transition-shadow duration-300 hover:shadow-[0_0_28px_rgba(251,146,60,0.35)]"
-            style={{
-              background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-              border: '1px solid rgba(251,146,60,0.5)',
-            }}
-          >
-            Join the Movement
-            <span aria-hidden="true">→</span>
-          </a>
-
           <Link
             to="/contact"
-            className="inline-flex items-center gap-1 transition-colors duration-250"
-            style={{ fontSize: '0.68rem', color: 'rgba(107,127,163,0.45)' }}
+            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase transition-all duration-300"
+            style={{
+              fontSize: 'clamp(0.72rem, 2vw, 0.8rem)',
+              border: '1px solid rgba(239,120,61,0.45)',
+              color: '#ef783d',
+              background: 'rgba(239,120,61,0.06)',
+            }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.65)';
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.background = 'rgba(239,120,61,0.12)';
+              el.style.borderColor = 'rgba(239,120,61,0.7)';
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(107,127,163,0.45)';
+              const el = e.currentTarget as HTMLAnchorElement;
+              el.style.background = 'rgba(239,120,61,0.06)';
+              el.style.borderColor = 'rgba(239,120,61,0.45)';
             }}
           >
-            Full contact form →
+            Start the Conversation
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </Link>
         </div>
       </motion.div>

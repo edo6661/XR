@@ -110,17 +110,7 @@ const PillarCard = ({
       </p>
     </div>
 
-    {/* Featured badge */}
-    {isFeatured && (
-      <div className="mt-auto pt-3.5 border-t" style={{ borderColor: `${accentColor}16` }}>
-        <span
-          className="text-[0.54rem] font-bold tracking-[0.38em] uppercase"
-          style={{ color: `${accentColor}65` }}
-        >
-          Core Focus
-        </span>
-      </div>
-    )}
+
   </motion.div>
 );
 

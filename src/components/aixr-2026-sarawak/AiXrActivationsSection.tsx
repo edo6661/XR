@@ -214,7 +214,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
 
           <p
             className="text-foreground-muted leading-relaxed"
-            style={{ fontSize: '0.9rem', lineHeight: 1.85, maxWidth: '58ch' }}
+            style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85, maxWidth: '58ch' }}
           >
             {activation.body}
           </p>
@@ -252,20 +252,21 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
 
         <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
           <div
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg flex-shrink-0"
+            className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
             style={{
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.07)',
+              background: `${AIXR_SARAWAK_ACCENT}10`,
+              border: `1px solid ${AIXR_SARAWAK_ACCENT}35`,
+              boxShadow: `0 0 16px ${AIXR_SARAWAK_ACCENT}08`,
             }}
           >
             <div
-              className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-              style={{ background: `${AIXR_SARAWAK_ACCENT}75` }}
+              className="w-2 h-2 rounded-full flex-shrink-0"
+              style={{ background: AIXR_SARAWAK_ACCENT, boxShadow: `0 0 8px ${AIXR_SARAWAK_ACCENT}60` }}
               aria-hidden="true"
             />
             <span
-              className="font-mono tracking-[0.18em] uppercase whitespace-nowrap text-foreground-muted"
-              style={{ fontSize: '0.52rem' }}
+              className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
+              style={{ fontSize: 'clamp(0.62rem, 1.8vw, 0.72rem)', color: `${AIXR_SARAWAK_ACCENT}dd` }}
             >
               {activation.meta}
             </span>
@@ -326,7 +327,7 @@ const AixrActivationsSection = ({
           </h2>
           <p
             className="text-foreground-muted leading-relaxed"
-            style={{ fontSize: '0.88rem', lineHeight: 1.8 }}
+            style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}
           >
             16–17 October 2026 · Borneo Convention Centre (BCCK), Kuching, Sarawak. <br /> <span className='font-bold'>Explore what's waiting for you</span>
           </p>
@@ -372,7 +373,7 @@ const AixrActivationsSection = ({
           <button
             type="button"
             onClick={onDownloadBrochure}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] transition-colors duration-300 hover:text-foreground cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.75rem] transition-colors duration-300 hover:text-foreground cursor-none"
             style={{
               color: AIXR_SARAWAK_ACCENT,
               background: 'rgba(255,255,255,0.03)',
@@ -384,10 +385,10 @@ const AixrActivationsSection = ({
           <button
             type="button"
             onClick={onRegister}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(251,146,60,0.35)] cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.75rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(239,120,61,0.35)] cursor-none"
             style={{
-              background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-              border: '1px solid rgba(251,146,60,0.5)',
+              background: 'linear-gradient(135deg, #ef783d 0%, #d9652b 100%)',
+              border: '1px solid rgba(239,120,61,0.5)',
             }}
           >
             Register / Enquiry

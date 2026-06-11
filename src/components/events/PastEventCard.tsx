@@ -4,8 +4,8 @@ interface PastEventCardProps {
   index: number;
   year: string;
   title: string;
+  date: string;
   attendees: string;
-  speakers: string;
   highlight: string;
   imageSrc?: string;
   accentColor?: string;
@@ -15,8 +15,8 @@ const PastEventCard = ({
   index,
   year,
   title,
+  date,
   attendees,
-  speakers,
   highlight,
   imageSrc,
   accentColor = '#fb923c',
@@ -112,22 +112,29 @@ const PastEventCard = ({
       {/* ── Sisi Konten / Deskripsi (50% Width) ── */}
       <div
         className={`w-full md:w-1/2 pl-14 md:pl-0 flex flex-col justify-center ${isEven
-            ? 'md:pl-12 lg:pl-20 md:items-start md:text-left'
-            : 'md:pr-12 lg:pr-20 md:items-end md:text-right'
+          ? 'md:pl-12 lg:pl-20 md:items-start md:text-left'
+          : 'md:pr-12 lg:pr-20 md:items-end md:text-right'
           }`}
       >
         <h3
-          className="font-heading font-black text-foreground mb-3 leading-tight"
+          className="font-heading font-black text-foreground mb-2 leading-tight"
           style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
         >
           {title}
         </h3>
 
+        <p
+          className="font-semibold mb-3"
+          style={{ fontSize: '0.78rem', color: accentColor, letterSpacing: '0.04em' }}
+        >
+          {date} · {attendees} Attendees
+        </p>
+
         {highlight && (
           <p
             className="leading-relaxed mb-6"
             style={{
-              fontSize: '0.85rem',
+              fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
               color: 'rgba(107,127,163,0.85)',
               maxWidth: '90%',
             }}
@@ -136,54 +143,6 @@ const PastEventCard = ({
           </p>
         )}
 
-        {/* Statistik */}
-        <div
-          className={`flex items-center gap-6 pt-5 border-t w-full ${!isEven ? 'md:flex-row-reverse md:justify-start' : 'md:justify-start'
-            }`}
-          style={{ borderColor: 'rgba(255,255,255,0.055)' }}
-        >
-          <div
-            className={`flex flex-col gap-0.5 ${!isEven ? 'md:items-end' : 'md:items-start'
-              }`}
-          >
-            <span
-              className="font-heading font-bold"
-              style={{ fontSize: '1.25rem', color: accentColor }}
-            >
-              {attendees}
-            </span>
-            <span
-              className="tracking-[0.12em] uppercase"
-              style={{ fontSize: '0.6rem', color: 'rgba(107,127,163,0.65)' }}
-            >
-              Attendees
-            </span>
-          </div>
-
-          <div
-            className="w-px h-8 self-center"
-            style={{ background: 'rgba(255,255,255,0.1)' }}
-            aria-hidden="true"
-          />
-
-          <div
-            className={`flex flex-col gap-0.5 ${!isEven ? 'md:items-end' : 'md:items-start'
-              }`}
-          >
-            <span
-              className="font-heading font-bold"
-              style={{ fontSize: '1.25rem', color: accentColor }}
-            >
-              {speakers}
-            </span>
-            <span
-              className="tracking-[0.12em] uppercase"
-              style={{ fontSize: '0.6rem', color: 'rgba(107,127,163,0.65)' }}
-            >
-              Speakers
-            </span>
-          </div>
-        </div>
       </div>
     </motion.div>
   );

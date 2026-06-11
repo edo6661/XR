@@ -50,7 +50,7 @@ const AboutSectionShell = ({
             </h2>
           )}
           {description && (
-            <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.88rem', lineHeight: 1.8 }}>
+            <p className="text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
               {description}
             </p>
           )}

@@ -6,6 +6,7 @@ import RegisterEnquiryModal from '../components/gateway/RegisterEnquiryModal';
 import BrochureModal from '../components/gateway/BrochureModal';
 import { XRAS_KL_ACCENT, XRAS_KL_META } from '../core/content/xrasKl2026';
 import XrasActivationsSection from '../components/xras-kl-2026/XrasActivationsSection';
+import SpeakersSection from '../components/speakers/SpeakersSection';
 
 const XRAS_KL_EVENT_NAME = 'XRAS KL 2026';
 
@@ -29,6 +30,8 @@ const XrasKl2026Page = () => {
         onDownloadBrochure={() => setBrochureOpen(true)}
         onRegister={() => setRegisterOpen(true)}
       />
+
+      <SpeakersSection />
 
       <RegisterEnquiryModal
         open={registerOpen}

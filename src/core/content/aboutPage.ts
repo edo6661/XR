@@ -69,29 +69,30 @@ export const INDUSTRY_FOCUS = {
 } as const;
 
 export const AWARDS_RECOGNITION = {
-  intro:
-    "XR Summits Sdn Bhd received an accolade in the Initiative Award – Malaysia for AI-XR Production category at the Asia-Pacific Broadcasting+ Awards 2026 for its work in advancing Extended Reality (XR), virtual production, and AI-generated content across Southeast Asia.",
+  companyName: "XR Summits Sdn Bhd",
+  introRest:
+    " received an accolade in the Initiative Award – Malaysia for AI-XR Production category at the Asia-Pacific Broadcasting+ Awards 2026 for its work in advancing Extended Reality (XR), virtual production, and AI-generated content across Southeast Asia.",
   image: "/awards/awards.png",
 } as const;
 
 export const TRACK_RECORD = [
   {
     year: "2021",
-    title: "XR Asia Summit",
+    title: "XR Asia Summit 2021",
     detail:
-      "The inaugural summit welcomed 100+ attendees and 25+ speakers to kick off Asia's immersive technology gathering.",
+      "25 – 27 November 2021 · 100+ attendees. The inaugural webinar-led conference established knowledge sharing, industry dialogue, and community building as the Summit's core pillars.",
   },
   {
     year: "2022",
-    title: "2nd XR Asia Summit",
+    title: "XR Asia Summit 2022",
     detail:
-      "A dynamic gathering with 200+ attendees, hands-on workshops, and an XR solutions showcase connecting industry leaders across the region.",
+      "11 – 13 November 2022 · 200+ attendees. A full in-person experience with an XR solutions showcase, hands-on workshops, and curated sessions across three days.",
   },
   {
     year: "2023",
-    title: "3rd XR Asia Summit",
+    title: "XR Asia Summit 2023",
     detail:
-      "500+ attendees at the Malaysia Digital Content Festival 2023, in collaboration with MDEC — cementing XRAS as a premier regional platform.",
+      "27 – 29 September 2023 · 500+ attendees at the Malaysia Digital Content Festival 2023, in collaboration with Broadcast Elements Sdn Bhd and MDEC.",
   },
 ] as const;
 

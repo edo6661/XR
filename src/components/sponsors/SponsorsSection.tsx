@@ -213,7 +213,7 @@ const SponsorsSection = () => (
         >
           Trusted by industry leaders
         </h2>
-        <p className="text-foreground-muted text-sm max-w-lg mx-auto leading-relaxed">
+        <p className="text-foreground-muted max-w-lg mx-auto leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)' }}>
           A growing ecosystem of government agencies, technology innovators, and industry partners
           driving immersive adoption across Asia.
         </p>
@@ -242,24 +242,25 @@ const SponsorsSection = () => (
       >
         <Link
           to="/contact"
-          className="group inline-flex items-center gap-2 transition-colors duration-300"
-          style={{ color: 'rgba(107,127,163,0.5)' }}
+          className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
+          style={{
+            fontSize: '0.72rem',
+            border: '1px solid rgba(239,120,61,0.4)',
+            color: '#ef783d',
+          }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.8)';
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = 'rgba(239,120,61,0.08)';
+            el.style.borderColor = 'rgba(239,120,61,0.65)';
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(107,127,163,0.5)';
+            const el = e.currentTarget as HTMLAnchorElement;
+            el.style.background = 'transparent';
+            el.style.borderColor = 'rgba(239,120,61,0.4)';
           }}
         >
-          <span className="font-bold tracking-[0.25em] uppercase" style={{ fontSize: '0.62rem' }}>
-            Become a partner
-          </span>
-          <span
-            className="text-xs transition-transform duration-300 group-hover:translate-x-0.5"
-            aria-hidden="true"
-          >
-            →
-          </span>
+          Become a partner
+          <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
         </Link>
       </motion.div>
     </div>
