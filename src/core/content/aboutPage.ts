@@ -1,19 +1,16 @@
 export const ABOUT_ACCENT = "#ef783d";
 
 export const COMPANY_OVERVIEW = {
-  title:
-    "The Definitive Platform Connecting Innovators Across Asia's Immersive Future",
+  title: "Connecting Innovators Across Asia's Immersive Future",
   body: [
-    "XR Asia Summits, founded by Louis Clovis, is a premier AI-XR platform focused on the latest advancements in AI, Virtual, Augmented, and Extended Reality (XR). We connect global XR creators and industry leaders, showcasing innovative production techniques and immersive, story-driven content.",
-    "The platform features live sessions from top global speakers, covering industries such as film, broadcast, virtual travel, gaming /esports and education. XR Summits also offers virtual networking and presentations, fostering discussions on how XR technology is transforming XR storytelling and shaping the future of immersive experiences.",
+    "XR Asia Summit, founded by Louis Clovis, is a premier AI-XR platform focused on the latest advancements in AI, Virtual, Augmented, and Extended Reality (XR). We connect global XR creators and industry leaders, showcasing innovative production techniques and immersive, story-driven content.",
+    "The platform features live sessions from top global speakers, covering industries such as film, broadcast, virtual travel, gaming /esports and education. XR Asia Summit also offers virtual networking and presentations, fostering discussions on how XR technology is transforming XR storytelling and shaping the future of immersive experiences.",
   ],
 } as const;
 
 export const OUR_MISSION = {
-  title: "Double business with half the impact.",
-  body: "Our mission is to advance XR production techniques, foster upskilling opportunities, and highlight case studies on immersive, story-driven content. By connecting top XR creators and industry leaders from around the globe, XR Summits serves as a catalyst for innovation in XR technology and storytelling via it’s signature event XR Asia Summits.",
-  highlight:
-    "Connecting industry leaders, creators, educators, broadcasters, governments and technology innovators through deployment-ready immersive experiences.",
+  title: "Maximum reach. Minimum friction.",
+  body: "XR Asia Summit exists to accelerate what the XR industry can achieve together. By connecting creators, industry leaders, educators, broadcasters, governments, and technology innovators through deployment-ready immersive experiences, we eliminate the silos that slow growth — so every stakeholder gets more value from every conversation, every session, and every collaboration.",
 } as const;
 
 export const WHY_XR_PILLARS = [
@@ -41,7 +38,7 @@ export const WHY_XR_PILLARS = [
 ] as const;
 export const INDUSTRY_FOCUS = {
   description:
-    "XR Summits focus on how immersive technologies like Virtual Reality (VR), Augmented Reality (AR), and Extended Reality (XR) are transforming various industries. Key sectors include:",
+    "XR Asia Summit focus on how immersive technologies like Virtual Reality (VR), Augmented Reality (AR), and Extended Reality (XR) are transforming various industries. XR Asia Summit explore the latest trends and innovations across these sectors, showcasing how XR is reshaping industries. Key sectors include:",
   sectors: [
     {
       title: "Film & Broadcast",
@@ -69,9 +66,6 @@ export const INDUSTRY_FOCUS = {
       image: "/industry-focus/XR-in-Gaming-Esports.png",
     },
   ],
-
-  footer:
-    "XR Summits explore the latest trends and innovations across these sectors, showcasing how XR is reshaping industries.",
 } as const;
 
 export const AWARDS_RECOGNITION = {
@@ -136,7 +130,7 @@ export const MEDIA_PRESS = [
 
 export const REGIONAL_NETWORK = {
   title: "Regional Network",
-  highlight: "XR Summits is Asia's stage — but the world shows up for it.",
+  highlight: "Asia sets the stage — the world shows up.",
   body: "Our speakers and participants have come from the UK, US, Canada, France, Germany, Spain, the Netherlands, Turkey, Japan, China, Vietnam, Indonesia, and beyond. Because when Asia's immersive tech industry moves, the world pays attention.",
 } as const;
 

@@ -51,7 +51,7 @@ const UPCOMING_EVENTS = [
 const PAST_EVENTS = [
   {
     year: '2021',
-    title: 'XR Asia Summits 2021',
+    title: 'XR Asia Summit 2021',
     attendees: '100+',
     speakers: '25+',
     highlight:
@@ -61,7 +61,7 @@ const PAST_EVENTS = [
   },
   {
     year: '2022',
-    title: 'XR Asia Summits 2022',
+    title: 'XR Asia Summit 2022',
     attendees: '200+',
     speakers: '30+',
     highlight:
@@ -71,7 +71,7 @@ const PAST_EVENTS = [
   },
   {
     year: '2023',
-    title: 'XR Asia Summits 2023',
+    title: 'XR Asia Summit 2023',
     attendees: '500+',
     speakers: '40+',
     highlight:

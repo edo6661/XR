@@ -1,7 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 // import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import StatCard from '../components/about/StatCard';
 import PillarCard from '../components/about/PillarCard';
 import AboutSectionShell from '../components/about/page/AboutSectionShell';
 import {
@@ -12,7 +11,6 @@ import {
 } from '../components/about/page/aboutIcons';
 import {
   ABOUT_ACCENT,
-  ABOUT_STATS,
   AWARDS_RECOGNITION,
   COMPANY_OVERVIEW,
   WHY_XR_PILLARS,
@@ -39,7 +37,7 @@ const AboutPage = () => (
 
     {/* 1. Company Overview */}
     <AboutSectionShell id="company-overview" eyebrow="Company Overview" title={COMPANY_OVERVIEW.title} showTopBorder={false}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+      <div >
         <div className="flex flex-col gap-5">
           {COMPANY_OVERVIEW.body.map((paragraph) => (
             <p key={paragraph.slice(0, 24)} className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.88rem', lineHeight: 1.85 }}>
@@ -47,11 +45,7 @@ const AboutPage = () => (
             </p>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-          {ABOUT_STATS.map((stat, index) => (
-            <StatCard key={stat.label} {...stat} index={index} />
-          ))}
-        </div>
+
       </div>
     </AboutSectionShell>
 
@@ -61,15 +55,12 @@ const AboutPage = () => (
         <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.95rem', lineHeight: 1.9 }}>
           {OUR_MISSION.body}
         </p>
-        {/* TAMBAHAN BARU DARI KLIEN */}
-        <p className="font-semibold text-foreground leading-relaxed" style={{ fontSize: '0.95rem', lineHeight: 1.9, color: 'rgba(240,244,255,0.95)' }}>
-          {OUR_MISSION.highlight}
-        </p>
+
       </div>
     </AboutSectionShell>
 
-    {/* 3. Why XR Summits */}
-    <AboutSectionShell id="why-xr-summits" eyebrow="Why XR Summits" title="Why XR Summits">
+    {/* 3. Why XR Asia Summit */}
+    <AboutSectionShell id="why-xr-summits" eyebrow="Why XR Asia Summit" title="Why XR Asia Summit">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16">
         {WHY_XR_PILLARS.map((pillar, index) => (
           <PillarCard
@@ -149,9 +140,6 @@ const AboutPage = () => (
           ))}
         </div>
 
-        <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.9rem', lineHeight: 1.8 }}>
-          {INDUSTRY_FOCUS.footer}
-        </p>
       </div>
     </AboutSectionShell>
     {/* 4. Regional Network */}
