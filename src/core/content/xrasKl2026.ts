@@ -38,18 +38,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     accentColor: "#fedb21",
     focusAreas: ["Film Production", "Studio Operations", "Content Development"],
   },
-  {
-    name: "Natalie Loi",
-    role: "Co-founder & Head of Technology",
-    company: "UnBound Malaysia",
-    photo: "/speaker-pics/Natalie Loi.jpg",
-    accentColor: "#ef783d",
-    focusAreas: [
-      "AR for Education",
-      "Financial Literacy",
-      "AI Metaverse Safety",
-    ],
-  },
+
   {
     name: "Lukasz Mirocha",
     role: "International XR Industry Expert",
