@@ -77,7 +77,7 @@ const ACTIVATIONS: Activation[] = [
     shortTitle: 'AI Filmmaking',
     category: 'Hackathon Semi Final',
     tagline: '72 hours. One mission. Real stakes.',
-    body: 'Teams of filmmakers, technologists, and storytellers race to produce AI-assisted short films aligned with UN Sustainable Development Goals. The sprint launches Day 1 and culminates in live pitches Day 2 — with top teams advancing to the Grand Final at XR Asia Summits 2026 in December.',
+    body: 'Teams of filmmakers, technologists, and storytellers race to produce AI-assisted short films aligned with UN Sustainable Development Goals. The sprint launches Day 1 and culminates in live pitches Day 2 — with top teams advancing to the Grand Final at XR Asia Summit 2026 in December.',
     meta: 'Day 1 Launch → Day 2 Pitches',
   },
   {
@@ -86,7 +86,7 @@ const ACTIVATIONS: Activation[] = [
     shortTitle: 'Esports',
     category: 'Esports Semi Final',
     tagline: 'The road to the Grand Final starts here.',
-    body: 'Regional teams compete in the MLBB Cup Semi Finals, with winners advancing to the Grand Final stage at XR Asia Summits 2026 in Kuala Lumpur.',
+    body: 'Regional teams compete in the MLBB Cup Semi Finals, with winners advancing to the Grand Final stage at XR Asia Summit 2026 in Kuala Lumpur.',
     meta: 'Day 2 · Competition Stage',
   },
 ];
@@ -323,7 +323,7 @@ const AixrActivationsSection = ({
             style={{ fontSize: 'clamp(1.35rem, 3vw, 2rem)' }}
           >
             2 Days. 6 Experiences.{' '}
-            <span style={{ color: AIXR_SARAWAK_ACCENT }}>A prelude to XR Asia Summits 2026.</span>
+            <span style={{ color: AIXR_SARAWAK_ACCENT }}>A prelude to XR Asia Summit 2026.</span>
           </h2>
           <p
             className="text-foreground-muted leading-relaxed"

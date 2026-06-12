@@ -155,7 +155,7 @@ const AboutSection = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
 
         {/* ══ INTRO BLOCK ════════════════════════════════════════════════ */}
-        <SectionEyebrow>About XR Asia Summits</SectionEyebrow>
+        <SectionEyebrow>About XR Asia Summit</SectionEyebrow>
 
         {/* Two-column: heading left, body right */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-24">
@@ -204,11 +204,11 @@ const AboutSection = () => {
           {/* RIGHT — body copy sesuai cursorrules */}
           <div ref={bodyRef} className="flex flex-col justify-center gap-7">
             <p data-para className="text-base text-foreground leading-[1.75]">
-              <span className="text-accent font-semibold">XR Asia Summits </span>{' '}
+              <span className="text-accent font-semibold">XR Asia Summit </span>{' '}
               is connecting innovators across Extended Reality (XR), Spatial Media, AVXR, immersive technologies, and the evolving future of esports.
             </p>
             <p data-para style={{ fontSize: '0.85rem', color: 'rgba(107,127,163,0.9)', lineHeight: 1.8 }}>
-              It serves as the region’s central hub for showcasing production-ready solutions and forging high-value commercial partnerships. XR Summits represents a decisive shift in the immersive industry.
+              It serves as the region’s central hub for showcasing production-ready solutions and forging high-value commercial partnerships. XR Summit represents a decisive shift in the immersive industry.
             </p>
             <p
               data-para
