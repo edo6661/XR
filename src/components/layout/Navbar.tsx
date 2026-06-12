@@ -13,23 +13,23 @@ gsap.registerPlugin(ScrollTrigger);
 const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
-  const [scrolled, setScrolled] = useState(false);
+  const [homeScrolled, setHomeScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuPathname, setMenuPathname] = useState(() => location.pathname);
   const progressBarRef = useRef<HTMLDivElement>(null);
 
+  const scrolled = !isHome || homeScrolled;
+
   if (location.pathname !== menuPathname) {
     setMenuPathname(location.pathname);
     setMenuOpen(false);
+    if (isHome) {
+      setHomeScrolled(false);
+    }
   }
 
   useEffect(() => {
-    if (!isHome) {
-      setScrolled(true);
-      return;
-    }
-
-    setScrolled(false);
+    if (!isHome) return;
 
     // Wait until the hero stack transition completes (1 viewport) so the flying
     // logo can land in the anchor before navbar chrome fades in.
@@ -38,8 +38,8 @@ const Navbar = () => {
       start: 'top top',
       end: () => `+=${window.innerHeight}`,
       invalidateOnRefresh: true,
-      onLeave: () => setScrolled(true),
-      onEnterBack: () => setScrolled(false),
+      onLeave: () => setHomeScrolled(true),
+      onEnterBack: () => setHomeScrolled(false),
     });
 
     return () => {

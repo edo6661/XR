@@ -107,14 +107,9 @@ const Footer = () => {
                   className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-300"
                   style={{ fontSize: '0.76rem' }}
                 >
-                  XR SUMMITS
+                  XR SUMMITS SDN BHD
                 </span>
-                <span
-                  className="font-mono tracking-[0.44em] text-foreground-muted/40 uppercase"
-                  style={{ fontSize: '0.42rem' }}
-                >
-                  Asia · Est. 2021
-                </span>
+
               </div>
             </Link>
 

@@ -65,6 +65,11 @@ export const INDUSTRY_FOCUS = {
       desc: "XR innovations drive immersive gameplay and competitions.",
       image: "/industry-focus/XR-in-Gaming-Esports.png",
     },
+    {
+      title: "Government",
+      desc: "Enabling Smarter Nations for better workforce development and public service delivery.",
+      image: "/industry-focus/XR-in-Gov.png",
+    },
   ],
 } as const;
 

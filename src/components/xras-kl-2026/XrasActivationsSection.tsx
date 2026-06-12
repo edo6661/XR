@@ -346,7 +346,7 @@ const XrasActivationsSection = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-10 max-w-2xl"
+          className="mb-10 max-w-5xl"
         >
           <h2
             id="xras-activations-heading"
