@@ -24,19 +24,28 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const isScrolled = currentScrollY > 50;
-      setScrolled((prev) => {
-        if (prev !== isScrolled) return isScrolled;
-        return prev;
-      });
+    if (!isHome) {
+      setScrolled(true);
+      return;
+    }
 
+    setScrolled(false);
+
+    // Wait until the hero stack transition completes (1 viewport) so the flying
+    // logo can land in the anchor before navbar chrome fades in.
+    const trigger = ScrollTrigger.create({
+      trigger: document.documentElement,
+      start: 'top top',
+      end: () => `+=${window.innerHeight}`,
+      invalidateOnRefresh: true,
+      onLeave: () => setScrolled(true),
+      onEnterBack: () => setScrolled(false),
+    });
+
+    return () => {
+      trigger.kill();
     };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [location.pathname]);
+  }, [isHome, location.pathname]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -70,7 +79,7 @@ const Navbar = () => {
         // Cukup kontrol transparansi saja agar terlihat "muncul" dari kehampaan
         initial={{ opacity: 0 }}
         animate={{ opacity: isHome ? (scrolled ? 1 : 0) : 1 }}
-        transition={{ duration: 0.6, ease: "linear" }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-[100]"
       >
         <div
