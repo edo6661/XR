@@ -25,7 +25,6 @@ const CARD_ICONS: Record<string, React.ReactNode> = {
   universities: <GraduationCap size={18} />,
 };
 
-const BRAND_ORANGE = '#ef783d';
 const BRAND_PURPLE = '#3953a3';
 
 /* ── Shared CTA button ─── */
@@ -42,8 +41,7 @@ const CtaBtn = ({
     return (
       <a
         href={href}
-        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.72rem] text-[#050505] transition-shadow hover:shadow-[0_0_22px_rgba(239,120,61,0.35)] active:scale-[0.99]"
-        style={{ background: `linear-gradient(135deg, ${BRAND_ORANGE}, #d9652b)`, border: '1px solid rgba(239,120,61,0.5)' }}
+        className="btn-orange inline-flex items-center gap-1.5 px-5 py-2.5"
       >
         {children}
         <ChevronRight size={12} />
@@ -128,8 +126,7 @@ const ContactPage = () => {
           </motion.h1>
           <motion.p
             {...fadeUp(0.15)}
-            className="text-foreground-muted mt-5 max-w-lg mx-auto"
-            style={{ fontSize: '1rem', lineHeight: 1.85, color: 'rgba(180,195,220,0.88)' }}
+            className="text-copy-lg mt-5 max-w-lg mx-auto"
           >
             Whether you're looking to partner, speak, exhibit, or simply find out more — you're in the right place.
           </motion.p>
@@ -149,8 +146,7 @@ const ContactPage = () => {
                     document.getElementById(`section-${label.toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }
                 }}
-                className="px-4 py-2 rounded-full font-mono tracking-[0.2em] uppercase transition-all duration-200 hover:text-accent hover:border-accent/40"
-                style={{ fontSize: '0.64rem', color: 'rgba(180,195,220,0.82)', border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(255,255,255,0.04)' }}
+                className="chip-nav"
               >
                 {label}
               </button>
@@ -171,10 +167,9 @@ const ContactPage = () => {
             {/* Introductory panel */}
             <motion.div
               {...fadeUp(0)}
-              className="lg:col-span-3 rounded-xl p-7"
-              style={{ border: '1px solid rgba(251,146,60,0.15)', background: 'rgba(251,146,60,0.03)' }}
+              className="lg:col-span-3 rounded-xl p-7 callout-accent"
             >
-              <p className="leading-relaxed" style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.88)' }}>
+              <p className="text-copy-lg">
                 XR Summits connects your brand with Asia's most engaged immersive tech community — across two flagship events, thousands of attendees, and a regional network of industry decision-makers.
               </p>
             </motion.div>
@@ -184,20 +179,13 @@ const ContactPage = () => {
               <motion.div
                 key={card.id}
                 {...fadeUp(i * 0.07)}
-                className="flex flex-col justify-between rounded-xl p-7 gap-6"
-                style={{
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  background: 'rgba(255,255,255,0.025)',
-                }}
+                className="flex flex-col justify-between surface-card p-7 gap-6"
               >
                 <div>
                   {/* label */}
                   <div className="flex items-center gap-2.5 mb-4">
                     <span className="text-accent/70">{CARD_ICONS[card.id]}</span>
-                    <span
-                      className="font-mono tracking-[0.3em] uppercase text-accent/80"
-                      style={{ fontSize: '0.62rem' }}
-                    >
+                    <span className="text-accent-label">
                       {card.label}
                     </span>
                   </div>
@@ -207,7 +195,7 @@ const ContactPage = () => {
                   >
                     {card.heading}
                   </h3>
-                  <p className="leading-relaxed" style={{ fontSize: '0.92rem', color: 'rgba(180,195,220,0.88)' }}>
+                  <p className="text-copy-sm">
                     {card.body}
                   </p>
                 </div>
@@ -256,8 +244,7 @@ const ContactPage = () => {
               </motion.h2>
               <motion.p
                 {...fadeUp(0.07)}
-                className="leading-relaxed mb-6"
-                style={{ fontSize: '0.96rem', color: 'rgba(180,195,220,0.88)' }}
+                className="text-copy mb-6"
               >
                 We welcome applications from industry practitioners, researchers, policymakers, and innovators with perspectives worth hearing. We're currently accepting applications for{' '}
                 <strong className="text-foreground/80">XR Asia Summits 2026</strong> and the{' '}
@@ -266,16 +253,12 @@ const ContactPage = () => {
               {/* What we look for */}
               <motion.div
                 {...fadeUp(0.12)}
-                className="rounded-xl p-6"
-                style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}
+                className="surface-card p-6"
               >
-                <p
-                  className="font-mono tracking-[0.28em] uppercase mb-4"
-                  style={{ fontSize: '0.62rem', color: 'rgba(180,195,220,0.75)' }}
-                >
+                <p className="text-micro-label mb-4">
                   What we look for
                 </p>
-                <p className="leading-relaxed" style={{ fontSize: '0.92rem', color: 'rgba(180,195,220,0.88)' }}>
+                <p className="text-copy-sm">
                   Talks that are grounded in real experience, challenge conventional thinking, or showcase applied work in XR, AI, spatial media, or immersive storytelling.
                 </p>
               </motion.div>
@@ -286,8 +269,7 @@ const ContactPage = () => {
                 <motion.div
                   key={ev.label}
                   {...fadeUp(i * 0.1)}
-                  className="flex items-center justify-between rounded-xl p-6 gap-4"
-                  style={{ border: '1px solid rgba(255,255,255,0.09)', background: 'rgba(255,255,255,0.025)' }}
+                  className="flex items-center justify-between surface-card p-6 gap-4"
                 >
                   <div className="flex items-start gap-4">
                     <div
@@ -297,10 +279,7 @@ const ContactPage = () => {
                       <Mic2 size={16} className="text-accent" />
                     </div>
                     <div>
-                      <p
-                        className="font-mono tracking-[0.25em] uppercase mb-1"
-                        style={{ fontSize: '0.58rem', color: 'rgba(180,195,220,0.75)' }}
-                      >
+                      <p className="text-micro-label mb-1">
                         Speaker Application
                       </p>
                       <p className="font-heading font-bold text-foreground" style={{ fontSize: '0.88rem' }}>
@@ -342,34 +321,23 @@ const ContactPage = () => {
               </motion.h2>
               <motion.p
                 {...fadeUp(0.07)}
-                className="leading-relaxed mb-6"
-                style={{ fontSize: '0.96rem', color: 'rgba(180,195,220,0.88)' }}
+                className="text-copy mb-6"
               >
                 XR Summits offers press accreditation, speaker access, and exclusive content opportunities for credentialled media covering immersive technology, the creative economy, or Asia's digital future.
               </motion.p>
               {/* Available perks */}
               <motion.div
                 {...fadeUp(0.12)}
-                className="rounded-xl p-6"
-                style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}
+                className="surface-card p-6"
               >
-                <p
-                  className="font-mono tracking-[0.28em] uppercase mb-4"
-                  style={{ fontSize: '0.62rem', color: 'rgba(180,195,220,0.75)' }}
-                >
+                <p className="text-micro-label mb-4">
                   What's available
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {MEDIA_PERKS.map((perk) => (
                     <span
                       key={perk}
-                      className="px-3 py-1.5 rounded-full"
-                      style={{
-                        fontSize: '0.84rem',
-                        color: 'rgba(180,195,220,0.88)',
-                        border: '1px solid rgba(255,255,255,0.14)',
-                        background: 'rgba(255,255,255,0.04)',
-                      }}
+                      className="chip-tag"
                     >
                       {perk}
                     </span>
@@ -380,8 +348,7 @@ const ContactPage = () => {
             {/* Right — CTA card */}
             <motion.div
               {...fadeUp(0.1)}
-              className="rounded-xl p-8 flex flex-col items-start gap-6"
-              style={{ border: '1px solid rgba(255,255,255,0.09)', background: 'rgba(255,255,255,0.025)' }}
+              className="surface-card p-8 flex flex-col items-start gap-6"
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center"
@@ -393,7 +360,7 @@ const ContactPage = () => {
                 <p className="font-heading font-bold text-foreground mb-2" style={{ fontSize: '1.05rem' }}>
                   Apply for Media Accreditation
                 </p>
-                <p className="leading-relaxed" style={{ fontSize: '0.92rem', color: 'rgba(180,195,220,0.88)' }}>
+                <p className="text-copy-sm">
                   Fill in your details — name, outlet, role, and coverage angle — and our team will be in touch with next steps.
                 </p>
               </div>
@@ -452,7 +419,7 @@ const ContactPage = () => {
                   Not Sure Where to Start?{' '}
                   <span className="gradient-text-accent">That&apos;s Fine.</span>
                 </h2>
-                <p className="leading-relaxed" style={{ fontSize: '0.96rem', color: 'rgba(180,195,220,0.88)' }}>
+                <p className="text-copy">
                   Drop us a message and we'll point you in the right direction. No question is too small, no idea too early.
                 </p>
               </div>

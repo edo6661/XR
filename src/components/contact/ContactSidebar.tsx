@@ -35,10 +35,6 @@ const SocialIcon = ({ id }: { id: string }) => {
   return null;
 };
 
-const SIDEBAR_LABEL = 'font-mono text-xs tracking-[0.22em] uppercase text-[rgba(180,195,220,0.82)] mb-1.5';
-const SIDEBAR_VALUE = 'font-heading font-bold text-accent text-[1.05rem]';
-const SIDEBAR_SUB = 'text-sm text-foreground-muted mt-1';
-
 const ContactSidebar = () => {
   const [aiModalOpen, setAiModalOpen] = useState(false);
 
@@ -52,13 +48,12 @@ const ContactSidebar = () => {
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.08, duration: 0.5 }}
-          className="flex items-start gap-4 p-5 rounded-xl transition-colors duration-300 hover:border-white/15"
-          style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(10, 14, 22, 0.55)' }}
+          className="flex items-start gap-4 p-5 surface-panel transition-colors duration-300"
         >
           <Phone size={17} className="text-accent mt-0.5 shrink-0" />
           <div>
-            <p className={SIDEBAR_LABEL}>Phone</p>
-            <p className={SIDEBAR_VALUE}>{COMPANY.phone}</p>
+            <p className="text-label-ui mb-1.5">Phone</p>
+            <p className="text-value-accent">{COMPANY.phone}</p>
           </div>
         </motion.a>
 
@@ -68,13 +63,12 @@ const ContactSidebar = () => {
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.13, duration: 0.5 }}
-          className="flex items-start gap-4 p-5 rounded-xl transition-colors duration-300 hover:border-white/15"
-          style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(10, 14, 22, 0.55)' }}
+          className="flex items-start gap-4 p-5 surface-panel transition-colors duration-300"
         >
           <Mail size={17} className="text-accent mt-0.5 shrink-0" />
           <div>
-            <p className={SIDEBAR_LABEL}>Email</p>
-            <p className={SIDEBAR_VALUE}>{COMPANY.email}</p>
+            <p className="text-label-ui mb-1.5">Email</p>
+            <p className="text-value-accent">{COMPANY.email}</p>
           </div>
         </motion.a>
 
@@ -108,8 +102,8 @@ const ContactSidebar = () => {
         >
           <Bot size={17} className="text-[#22d3ee] shrink-0" />
           <div>
-            <p className="font-heading font-bold text-foreground text-base">AI Agent</p>
-            <p className={SIDEBAR_SUB}>Coming soon</p>
+            <p className="font-heading font-bold text-base text-foreground">AI Agent</p>
+            <p className="text-meta mt-1">Coming soon</p>
           </div>
         </motion.button>
 
@@ -118,13 +112,12 @@ const ContactSidebar = () => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.28, duration: 0.5 }}
-          className="flex items-start gap-4 p-5 rounded-xl"
-          style={{ border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(10, 14, 22, 0.55)' }}
+          className="flex items-start gap-4 p-5 surface-panel"
         >
           <MapPin size={17} className="text-accent mt-0.5 shrink-0" />
           <div>
-            <p className={`${SIDEBAR_LABEL} mb-2`}>Address</p>
-            <address className="not-italic leading-relaxed text-sm text-foreground-muted">
+            <p className="text-label-ui mb-1.5">Address</p>
+            <address className="not-italic leading-relaxed text-copy-sm">
               No. 8, Block K, 8th Floor<br />
               Sunway PJ 51A, Jalan SS9A/19<br />
               47300 Petaling Jaya<br />
@@ -183,10 +176,10 @@ const ContactSidebar = () => {
           <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ border: '1px solid rgba(34,211,238,0.3)', background: 'rgba(34,211,238,0.08)' }}>
             <Bot size={28} className="text-[#22d3ee]" />
           </div>
-          <p className="text-foreground-muted text-sm leading-relaxed max-w-sm">
+          <p className="text-copy-sm max-w-sm">
             Our AI assistant will help answer registration and programme questions. This is a UI placeholder — no live agent connected in Phase 1.
           </p>
-          <p className="font-mono text-[0.48rem] tracking-[0.28em] uppercase text-foreground-muted/45">Coming soon</p>
+          <p className="text-micro-label opacity-45">Coming soon</p>
         </div>
       </GatewayModal>
     </>

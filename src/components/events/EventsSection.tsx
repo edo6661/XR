@@ -170,11 +170,10 @@ const EventsSection = () => {
             <div className="flex flex-col mb-16">
               <h2
                 ref={pastHeadRef}
-                className="font-heading font-black opacity-0"
+                className="font-heading font-black opacity-0 text-on-light-heading"
                 style={{
                   fontSize: 'clamp(1.85rem, 4vw, 2.75rem)',
                   letterSpacing: '0.03em',
-                  color: '#101e36',
                 }}
               >
                 Past{' '}
@@ -284,13 +283,10 @@ const EventsSection = () => {
                     >
                       {stat.value}
                     </span>
-                    <span
-                      className="font-heading font-bold text-sm uppercase tracking-[0.07em]"
-                      style={{ color: '#1a2e50' }}
-                    >
+                    <span className="text-stat-label">
                       {stat.label}
                     </span>
-                    <span className="text-sm leading-relaxed" style={{ color: 'rgba(26,46,80,0.82)' }}>
+                    <span className="text-stat-sub">
                       {stat.sub}
                     </span>
                   </motion.div>

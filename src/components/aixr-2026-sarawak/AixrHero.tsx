@@ -91,22 +91,14 @@ const AixrHero = ({ onDownloadBrochure, onRegister }: AixrHeroProps) => (
           transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-center gap-3 mb-8"
         >
-          <Link
-            to="/"
-            className="font-mono text-[0.5rem] tracking-[0.35em] uppercase transition-colors"
-            style={{ color: 'rgba(26,40,64,0.45)' }}
-          >
+          <Link to="/" className="hero-breadcrumb">
             XR Summits
           </Link>
           <span
-            className="w-1 h-1 rounded-full"
-            style={{ background: `${AIXR_SARAWAK_ACCENT}66` }}
+            className="w-1.5 h-1.5 rounded-full bg-accent/40"
             aria-hidden="true"
           />
-          <span
-            className="font-bold tracking-[0.4em] uppercase"
-            style={{ fontSize: '0.5rem', color: `${AIXR_SARAWAK_ACCENT}cc` }}
-          >
+          <span className="hero-edition">
             {AIXR_SARAWAK_META.edition}
           </span>
         </motion.div>
@@ -152,7 +144,7 @@ const AixrHero = ({ onDownloadBrochure, onRegister }: AixrHeroProps) => (
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.32, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl mx-auto leading-relaxed mb-10"
-          style={{ fontSize: '0.9rem', lineHeight: 1.85, color: 'rgba(22,36,62,0.72)' }}
+          style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85, color: 'rgba(15,27,48,0.88)' }}
         >
           Sarawak regional gateway — conference, expo, workshops, masterclasses, and championship semi-finals on the
           path to XRAS KL grand finals. No gala dinner at this stage.

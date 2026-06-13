@@ -58,34 +58,12 @@ const ContactDetailsSection = () => (
             </span>
           </h2>
 
-          <p
-            className="text-foreground-muted max-w-lg leading-relaxed"
-            style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}
-          >
+          <p className="text-lead max-w-lg mx-auto">
             Whether you're attending, exhibiting, sponsoring, or speaking — XR Asia Summit connects you
             to the conversations and partnerships that matter.
           </p>
 
-          <Link
-            to="/contact"
-            className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase transition-all duration-300"
-            style={{
-              fontSize: 'clamp(0.72rem, 2vw, 0.8rem)',
-              border: '1px solid rgba(239,120,61,0.45)',
-              color: '#ef783d',
-              background: 'rgba(239,120,61,0.06)',
-            }}
-            onMouseEnter={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = 'rgba(239,120,61,0.12)';
-              el.style.borderColor = 'rgba(239,120,61,0.7)';
-            }}
-            onMouseLeave={(e) => {
-              const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = 'rgba(239,120,61,0.06)';
-              el.style.borderColor = 'rgba(239,120,61,0.45)';
-            }}
-          >
+          <Link to="/contact" className="btn-ghost-orange group">
             Start the Conversation
             <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
           </Link>

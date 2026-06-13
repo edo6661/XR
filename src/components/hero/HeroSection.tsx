@@ -297,8 +297,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 10 }}
             transition={{ delay: showLogo ? 0.15 : 0, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mt-5 px-4 max-w-3xl"
-            style={{ fontSize: 'clamp(0.85rem, 1.5vw, 1rem)', color: 'rgba(176,193,224,0.8)', lineHeight: 1.65 }}
+            className="text-center mt-5 px-4 max-w-3xl text-hero-sub"
           >
             Connecting industry leaders, creators, educators, broadcasters, governments and technology innovators through deployment-ready immersive experiences.
           </motion.p>
@@ -318,7 +317,7 @@ const HeroSection = () => {
         aria-label="Scroll to Choose Your Experience"
         style={{ pointerEvents: showHint ? 'auto' : 'none' }}
       >
-        <span className="font-mono text-sm font-bold tracking-[0.38em] uppercase text-foreground-muted transition-colors duration-300 group-hover:text-accent">
+        <span className="text-kicker group-hover:text-accent">
           Experience More
         </span>
         <div className="relative w-px h-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>

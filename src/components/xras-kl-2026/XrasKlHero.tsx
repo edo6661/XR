@@ -87,22 +87,14 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-center gap-3 mb-8"
         >
-          <Link
-            to="/"
-            className="font-mono text-[0.5rem] tracking-[0.35em] uppercase transition-colors"
-            style={{ color: 'rgba(26,40,64,0.45)' }}
-          >
+          <Link to="/" className="hero-breadcrumb">
             XR Summits
           </Link>
           <span
-            className="w-1 h-1 rounded-full"
-            style={{ background: `${XRAS_KL_ACCENT}66` }}
+            className="w-1.5 h-1.5 rounded-full bg-accent/40"
             aria-hidden="true"
           />
-          <span
-            className="font-bold tracking-[0.4em] uppercase"
-            style={{ fontSize: '0.5rem', color: `${XRAS_KL_ACCENT}cc` }}
-          >
+          <span className="hero-edition">
             {XRAS_KL_META.edition}
           </span>
         </motion.div>
@@ -127,7 +119,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#1a2840', lineHeight: 1.6 }}
         >
           3 Days. 7 Experiences.{' '}
-          <span className="gradient-text-accent">One Ecosystem.</span>
+          <span className="text-accent">One Ecosystem.</span>
         </motion.p>
 
         <motion.p

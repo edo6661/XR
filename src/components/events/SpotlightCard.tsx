@@ -254,8 +254,8 @@ const SpotlightCard = ({
           style={{ borderColor: 'rgba(255,255,255,0.06)' }}
         >
           {date && (
-            <span className="flex items-center gap-1.5 text-sm text-foreground-muted">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
+            <span className="text-meta flex items-center gap-1.5">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0" aria-hidden="true">
                 <rect x="2" y="3" width="12" height="11" rx="1" />
                 <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
               </svg>
@@ -263,8 +263,8 @@ const SpotlightCard = ({
             </span>
           )}
           {location && (
-            <span className="flex items-center gap-1.5 text-sm text-foreground-muted">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3.5 h-3.5 shrink-0" aria-hidden="true">
+            <span className="text-meta flex items-center gap-1.5">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
                 <circle cx="8" cy="6" r="1.5" />
               </svg>

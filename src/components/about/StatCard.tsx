@@ -94,7 +94,7 @@ const StatCard = ({
         >
           {label}
         </span>
-        <span className="text-sm text-foreground-muted tracking-wide leading-relaxed">
+        <span className="text-copy-sm">
           {sublabel}
         </span>
       </div>

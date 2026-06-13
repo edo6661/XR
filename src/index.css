@@ -137,6 +137,19 @@ html.lenis body {
   --theme-foreground-muted: #a8b8d0; /* Lifted from 8b9bb4 → more readable */
   --theme-foreground-subtle: #6b7fa0; /* For truly secondary info */
 
+  /* Semantic copy — consolidate repeated rgba values */
+  --theme-copy: rgba(180, 195, 220, 0.88);
+  --theme-copy-bright: rgba(200, 215, 240, 0.92);
+  --theme-copy-label: rgba(180, 195, 220, 0.82);
+  --theme-copy-faint: rgba(180, 195, 220, 0.75);
+  --theme-hero-sub: rgba(176, 193, 224, 0.8);
+
+  /* Text on light / silver surfaces */
+  --theme-on-light: #1a2e50;
+  --theme-on-light-muted: rgba(26, 46, 80, 0.82);
+  --theme-on-light-heading: #101e36;
+  --theme-on-glass-muted: rgba(26, 40, 64, 0.62);
+
   /* Borders */
   --theme-border: rgba(255, 255, 255, 0.1);
   --theme-border-accent: rgba(239, 120, 61, 0.35);
@@ -379,6 +392,215 @@ svg {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: none;
+}
+
+/* ── Typography utilities (reusable copy, labels, meta) ───────────────── */
+.text-copy {
+  font-size: var(--text-body);
+  line-height: 1.85;
+  color: var(--theme-copy);
+}
+
+.text-copy-sm {
+  font-size: var(--text-body);
+  line-height: 1.75;
+  color: var(--theme-copy);
+}
+
+.text-copy-lg {
+  font-size: var(--text-body-lg);
+  line-height: 1.85;
+  color: var(--theme-copy);
+}
+
+.text-copy-bright {
+  font-size: var(--text-body);
+  line-height: 1.8;
+  color: var(--theme-copy-bright);
+}
+
+.text-lead {
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  line-height: 1.8;
+  color: var(--theme-foreground-muted);
+}
+
+.text-hero-sub {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  line-height: 1.65;
+  color: var(--theme-hero-sub);
+}
+
+.text-label-ui {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--theme-copy-label);
+}
+
+.text-kicker {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--theme-foreground-muted);
+  transition: color 0.3s ease;
+}
+
+.text-kicker:hover,
+.group:hover .text-kicker {
+  color: var(--theme-accent);
+}
+
+.text-meta {
+  font-size: var(--text-2xs);
+  color: var(--theme-foreground-muted);
+}
+
+.text-micro-label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--theme-copy-faint);
+}
+
+.text-value-accent {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-body-lg);
+  color: var(--theme-accent);
+}
+
+.text-stat-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--theme-on-light);
+}
+
+.text-stat-sub {
+  font-size: var(--text-sm);
+  line-height: 1.625;
+  color: var(--theme-on-light-muted);
+}
+
+.text-on-light-heading {
+  color: var(--theme-on-light-heading);
+}
+
+/* ── Form & surface utilities ──────────────────────────────────────────── */
+.input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--theme-foreground);
+  font-size: var(--text-body-lg);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.input-field::placeholder {
+  color: color-mix(in srgb, var(--theme-foreground-muted) 45%, transparent);
+}
+
+.input-field:focus {
+  border-color: rgba(251, 146, 60, 0.45);
+}
+
+.surface-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 14, 22, 0.55);
+  border-radius: 0.75rem;
+  transition: border-color 0.3s ease;
+}
+
+.surface-panel:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.surface-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: 0.75rem;
+}
+
+.callout-accent {
+  padding: 0.75rem 1rem;
+  border-radius: 3px;
+  font-size: var(--text-body);
+  line-height: 1.625;
+  color: var(--theme-copy);
+  border: 1px solid rgba(251, 146, 60, 0.15);
+  background: rgba(251, 146, 60, 0.04);
+}
+
+.chip-nav {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--theme-copy-label);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.chip-nav:hover {
+  color: var(--theme-accent);
+  border-color: rgba(239, 120, 61, 0.4);
+}
+
+.chip-tag {
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: var(--text-body);
+  color: var(--theme-copy);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.text-accent-label {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--theme-accent) 80%, transparent);
+}
+
+/* Light glass hero — breadcrumb & edition meta */
+.hero-breadcrumb {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-xs);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--theme-on-glass-muted);
+  transition: color 0.3s ease;
+}
+
+.hero-breadcrumb:hover {
+  color: var(--theme-on-light);
+}
+
+.hero-edition {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--theme-accent);
 }
 
 /* ── Orange CTA button global style ─────────────────────────────────────── */
