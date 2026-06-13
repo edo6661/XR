@@ -41,11 +41,11 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => (
   <li>
     <Link
       to={to}
-      className="group inline-flex items-center gap-1.5 transition-colors duration-250 hover:text-foreground"
-      style={{ color: 'rgba(160,178,210,0.72)', fontSize: '0.82rem' }}
+      className="group inline-flex items-center gap-1.5 transition-colors duration-250 hover:text-on-light-heading"
+      style={{ color: 'var(--theme-on-light-muted)', fontSize: '0.82rem' }}
     >
       <span
-        className="w-0 h-px transition-all duration-300 group-hover:w-3"
+        className="w-0 h-px transition-all duration-300 group-hover:w-3 shrink-0"
         style={{ background: 'rgba(251,146,60,0.5)', flexShrink: 0 }}
         aria-hidden="true"
       />
@@ -56,11 +56,10 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => (
 
 const FooterColumnTitle = ({ children }: { children: ReactNode }) => (
   <h4
-    className="font-heading font-bold tracking-[0.22em] uppercase pb-3 mb-1"
+    className="font-heading font-bold tracking-[0.22em] uppercase pb-3 mb-1 text-on-light-heading"
     style={{
       fontSize: '0.92rem',
-      color: 'rgba(240,244,255,0.95)',
-      borderBottom: '1px solid rgba(255,255,255,0.1)',
+      borderBottom: '1px solid rgba(26, 46, 80, 0.1)',
     }}
   >
     {children}
@@ -76,24 +75,44 @@ const Footer = () => {
   );
 
   return (
-    <footer className="relative w-full overflow-hidden" style={{ background: 'rgba(3,6,13,0.99)' }}>
-      {/* Top line */}
+    <footer
+      className="relative w-full overflow-hidden"
+      style={{
+        background: 'linear-gradient(168deg, #fafbfd 0%, #ffffff 42%, #f6f8fc 100%)',
+      }}
+    >
+      {/* Ambient brand mesh — decorative only, no extra height */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute -top-16 -right-12 w-[320px] h-[320px] rounded-full opacity-[0.18]"
+          style={{
+            background: 'radial-gradient(circle, rgba(239,120,61,0.16) 0%, transparent 68%)',
+            filter: 'blur(36px)',
+          }}
+        />
+        <div
+          className="absolute bottom-0 -left-16 w-[280px] h-[280px] rounded-full opacity-[0.14]"
+          style={{
+            background: 'radial-gradient(circle, rgba(30,58,138,0.14) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.028]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(26,46,80,0.55) 1px, transparent 1px), linear-gradient(90deg, rgba(26,46,80,0.55) 1px, transparent 1px)',
+            backgroundSize: '48px 48px',
+          }}
+        />
+      </div>
+
+      {/* Top accent */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent 0%, rgba(251,146,60,0.28) 25%, rgba(251,146,60,0.28) 75%, transparent 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Bottom glow */}
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
-        style={{
-          width: '700px',
-          height: '280px',
-          background: 'radial-gradient(ellipse, rgba(251,146,60,0.025) 0%, transparent 68%)',
+            'linear-gradient(90deg, transparent 0%, var(--theme-accent-yellow) 15%, var(--theme-accent) 35%, var(--theme-accent-blue) 65%, transparent 100%)',
         }}
         aria-hidden="true"
       />
@@ -105,31 +124,35 @@ const Footer = () => {
             <Link to="/" className="group flex items-center gap-3 w-fit select-none">
               <div className="relative w-8 h-8">
                 <div
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-md"
-                  style={{ background: 'rgba(251,146,60,0.3)' }}
+                  className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 blur-md"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, rgba(239,120,61,0.28), rgba(57,83,163,0.22))',
+                  }}
                   aria-hidden="true"
                 />
-                <img
-                  src="/logo-278x262-removebg.png"
-                  alt="XR Summits"
-                  className="relative w-full h-full object-contain"
-                />
+                <div className="relative glass-light rounded-lg p-0.5">
+                  <img
+                    src="/logo-278x262-removebg.png"
+                    alt="XR Summits"
+                    className="relative w-full h-full object-contain"
+                  />
+                </div>
               </div>
               <div className="flex flex-col leading-none gap-[3px]">
                 <span
-                  className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-300"
+                  className="font-heading font-bold tracking-[0.3em] text-on-light-heading group-hover:text-accent transition-colors duration-300"
                   style={{ fontSize: '0.76rem' }}
                 >
                   XR SUMMITS SDN BHD
                 </span>
-
               </div>
             </Link>
 
             <p
               style={{
                 fontSize: '0.86rem',
-                color: 'rgba(180,195,220,0.82)',
+                color: 'var(--theme-on-light)',
                 lineHeight: 1.8,
                 maxWidth: '320px',
               }}
@@ -140,7 +163,7 @@ const Footer = () => {
             <p
               style={{
                 fontSize: '0.82rem',
-                color: 'rgba(160,178,210,0.78)',
+                color: 'var(--theme-on-light-muted)',
                 lineHeight: 1.75,
                 maxWidth: '320px',
               }}
@@ -157,24 +180,21 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300"
-                  style={{
-                    background: 'rgba(255,255,255,0.035)',
-                    border: '1px solid rgba(255,255,255,0.055)',
-                    color: 'rgba(180,195,220,0.72)',
-                  }}
+                  className="glass-light flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-300"
+                  style={{ color: 'var(--theme-on-light-muted)' }}
                   whileHover={{ scale: 1.08 }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.borderColor = 'rgba(251,146,60,0.3)';
-                    el.style.color = 'rgba(251,146,60,0.75)';
-                    el.style.background = 'rgba(251,146,60,0.06)';
+                    el.style.borderColor = 'rgba(239,120,61,0.28)';
+                    el.style.color = 'var(--theme-accent)';
+                    el.style.background =
+                      'linear-gradient(135deg, rgba(255,255,255,0.92), rgba(239,120,61,0.08))';
                   }}
                   onMouseLeave={(e) => {
                     const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.borderColor = 'rgba(255,255,255,0.055)';
-                    el.style.color = 'rgba(180,195,220,0.72)';
-                    el.style.background = 'rgba(255,255,255,0.035)';
+                    el.style.borderColor = '';
+                    el.style.color = 'var(--theme-on-light-muted)';
+                    el.style.background = '';
                   }}
                 >
                   {SOCIAL_ICONS[label]}
@@ -185,7 +205,11 @@ const Footer = () => {
             {/* Contact info */}
             <div
               className="flex flex-col gap-1.5"
-              style={{ fontSize: '0.8rem', color: 'rgba(180,195,220,0.78)', lineHeight: 1.8 }}
+              style={{
+                fontSize: '0.8rem',
+                color: 'var(--theme-on-light-muted)',
+                lineHeight: 1.8,
+              }}
             >
               <a
                 href={`tel:${COMPANY.phone}`}
@@ -239,38 +263,30 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px" style={{ background: 'rgba(255,255,255,0.04)' }} aria-hidden="true" />
+        <div
+          className="w-full h-px"
+          style={{ background: 'rgba(26, 46, 80, 0.08)' }}
+          aria-hidden="true"
+        />
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
-          <p style={{ fontSize: '0.76rem', color: 'rgba(160,178,210,0.72)' }}>
+          <p style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}>
             XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) ©2026. All Rights Reserved.
           </p>
 
           <a
             href={`mailto:${COMPANY.email}`}
-            className="transition-colors duration-250"
-            style={{ fontSize: '0.76rem', color: 'rgba(160,178,210,0.72)' }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.85)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(160,178,210,0.72)';
-            }}
+            className="transition-colors duration-250 hover:text-accent"
+            style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}
           >
             {COMPANY.email}
           </a>
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-2 transition-colors duration-250"
-            style={{ color: 'rgba(160,178,210,0.72)', fontSize: '0.76rem' }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = 'rgba(251,146,60,0.85)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = 'rgba(160,178,210,0.72)';
-            }}
+            className="group flex items-center gap-2 transition-colors duration-250 hover:text-accent"
+            style={{ color: 'var(--theme-on-light-muted)', fontSize: '0.76rem' }}
             aria-label="Back to top"
           >
             <span className="font-bold tracking-[0.24em] uppercase">Back to top</span>

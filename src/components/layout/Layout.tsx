@@ -72,7 +72,7 @@ const Layout = () => {
       <ScrollProgress />
       <Navbar />
 
-      <div className="relative z-10 bg-background shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
+      <div className="relative z-10 bg-background">
         <main className="flex-1 flex flex-col">
           <Outlet />
         </main>

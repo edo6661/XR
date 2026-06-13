@@ -303,7 +303,7 @@ const RegionalNetworkMap = () => {
               <g aria-hidden="true">
                 {backgroundCountries.map((country, i) => (
                   <motion.path
-                    key={`bg-${countryIsoId(country)}`}
+                    key={`bg-${i}-${countryIsoId(country)}`}
                     d={countryPath(projection, country)}
                     fill="rgba(255,255,255,0.035)"
                     stroke="rgba(255,255,255,0.12)"
@@ -326,7 +326,7 @@ const RegionalNetworkMap = () => {
                 const d = countryPath(projection, country);
 
                 return (
-                  <g key={`speaker-${iso}`}>
+                  <g key={`speaker-${i}-${iso}`}>
                     <motion.path
                       d={d}
                       fill={isHub ? 'rgba(239,120,61,0.12)' : 'rgba(255,255,255,0.07)'}
