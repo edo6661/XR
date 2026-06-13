@@ -178,7 +178,7 @@ const EventsSection = () => {
                 }}
               >
                 Past{' '}
-                <span className="gradient-text-accent">
+                <span className="text-accent">
                   Events Highlights
                 </span>
               </h2>

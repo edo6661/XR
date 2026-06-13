@@ -94,10 +94,7 @@ const StatCard = ({
         >
           {label}
         </span>
-        <span
-          className="tracking-wide leading-relaxed"
-          style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.75)' }}
-        >
+        <span className="text-sm text-foreground-muted tracking-wide leading-relaxed">
           {sublabel}
         </span>
       </div>

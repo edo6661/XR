@@ -318,6 +318,69 @@ svg {
   background-clip: text;
 }
 
+/* ── Section eyebrow ───────────────────────────────────────────────────── */
+.eyebrow-line {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    var(--theme-accent) 0%,
+    var(--theme-accent-bright) 72%,
+    rgba(239, 120, 61, 0.15) 100%
+  );
+  box-shadow: 0 0 12px var(--theme-accent-glow);
+}
+
+.eyebrow-line--light {
+  background: linear-gradient(
+    90deg,
+    var(--theme-accent) 0%,
+    var(--theme-accent-bright) 100%
+  );
+  box-shadow: 0 0 8px rgba(239, 120, 61, 0.38);
+}
+
+.eyebrow-line--center-right {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 120, 61, 0.15) 0%,
+    var(--theme-accent-bright) 38%,
+    var(--theme-accent) 100%
+  );
+}
+
+.section-eyebrow-text {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: linear-gradient(
+    90deg,
+    var(--theme-accent) 0%,
+    var(--theme-accent-bright) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 10px var(--theme-accent-glow));
+}
+
+.section-eyebrow-text--light {
+  background: linear-gradient(
+    90deg,
+    var(--theme-accent) 0%,
+    var(--theme-accent-bright) 85%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: none;
+}
+
 /* ── Orange CTA button global style ─────────────────────────────────────── */
 .btn-orange {
   display: inline-flex;

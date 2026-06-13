@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import StatCard from './StatCard';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -29,25 +30,6 @@ const STATS = [
     accentColor: '#a78bfa',
   },
 ];
-
-// ── Eyebrow label ──────────────────────────────────────────────────────────
-const SectionEyebrow = ({ children }: { children: React.ReactNode }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -16 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    viewport={{ once: true, amount: 0.6 }}
-    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    className="flex items-center gap-3 mb-10"
-  >
-    <span className="w-5 h-px" style={{ background: 'rgba(251,146,60,0.55)' }} aria-hidden="true" />
-    <span
-      className="font-bold tracking-[0.52em] uppercase"
-      style={{ fontSize: '0.57rem', color: 'rgba(251,146,60,0.72)' }}
-    >
-      {children}
-    </span>
-  </motion.div>
-);
 
 // ── Main component ─────────────────────────────────────────────────────────
 const AboutSection = () => {
