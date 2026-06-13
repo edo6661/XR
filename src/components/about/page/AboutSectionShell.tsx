@@ -5,7 +5,7 @@ import SectionEyebrow from '../../ui/SectionEyebrow';
 type AboutSectionShellProps = {
   id?: string;
   eyebrow: string;
-  title?: string;
+  title?: ReactNode;
   description?: string;
   children: ReactNode;
   className?: string;

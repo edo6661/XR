@@ -174,7 +174,7 @@ const ContactPage = () => {
               className="lg:col-span-3 rounded-xl p-7"
               style={{ border: '1px solid rgba(251,146,60,0.15)', background: 'rgba(251,146,60,0.03)' }}
             >
-              <p className="leading-relaxed" style={{ fontSize: '1rem', maxWidth: '64ch', color: 'rgba(180,195,220,0.88)' }}>
+              <p className="leading-relaxed" style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.88)' }}>
                 XR Summits connects your brand with Asia's most engaged immersive tech community — across two flagship events, thousands of attendees, and a regional network of industry decision-makers.
               </p>
             </motion.div>
@@ -251,7 +251,8 @@ const ContactPage = () => {
                 className="font-heading font-black text-foreground leading-tight mb-5"
                 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)' }}
               >
-                Share Your Expertise With Asia's Immersive Tech Community
+                Share Your Expertise With Asia&apos;s{' '}
+                <span className="gradient-text-accent">Immersive Tech Community</span>
               </motion.h2>
               <motion.p
                 {...fadeUp(0.07)}
@@ -335,7 +336,9 @@ const ContactPage = () => {
                 className="font-heading font-black text-foreground leading-tight mb-5"
                 style={{ fontSize: 'clamp(1.6rem, 3vw, 2.2rem)' }}
               >
-                Covering Immersive Technology or Asia's Digital Future?
+                Covering{' '}
+                <span className="gradient-text-accent">Immersive Technology</span>{' '}
+                or Asia&apos;s Digital Future?
               </motion.h2>
               <motion.p
                 {...fadeUp(0.07)}
@@ -446,7 +449,8 @@ const ContactPage = () => {
                   className="font-heading font-black text-foreground mb-2 leading-tight"
                   style={{ fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)' }}
                 >
-                  Not Sure Where to Start? That's Fine.
+                  Not Sure Where to Start?{' '}
+                  <span className="gradient-text-accent">That&apos;s Fine.</span>
                 </h2>
                 <p className="leading-relaxed" style={{ fontSize: '0.96rem', color: 'rgba(180,195,220,0.88)' }}>
                   Drop us a message and we'll point you in the right direction. No question is too small, no idea too early.

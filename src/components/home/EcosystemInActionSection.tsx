@@ -136,14 +136,7 @@ const EcosystemInActionSection = () => (
           style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
         >
           The{' '}
-          <span
-            style={{
-              background: 'linear-gradient(130deg, #22d3ee 0%, #f0f4ff 85%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
+          <span className="gradient-text-accent">
             Ecosystem
           </span>
           , in Action.

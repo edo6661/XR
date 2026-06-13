@@ -127,7 +127,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#1a2840', lineHeight: 1.6 }}
         >
           3 Days. 7 Experiences.{' '}
-          <span style={{ color: XRAS_KL_ACCENT }}>One Ecosystem.</span>
+          <span className="gradient-text-accent">One Ecosystem.</span>
         </motion.p>
 
         <motion.p

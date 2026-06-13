@@ -171,18 +171,11 @@ const AboutSection = () => {
               <div key={line.text} className="overflow-hidden">
                 <h2
                   data-line
-                  className="font-heading font-black leading-[0.93]"
+                  className={`font-heading font-black leading-[0.93]${line.accent ? ' gradient-text-accent' : ''}`}
                   style={{
                     fontSize: 'clamp(2.4rem, 5.2vw, 4rem)',
                     letterSpacing: '0.03em',
-                    ...(line.accent
-                      ? {
-                        background: 'linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                      }
-                      : { color: '#f0f4ff' }),
+                    ...(!line.accent ? { color: '#f0f4ff' } : {}),
                   }}
                 >
                   {line.text}

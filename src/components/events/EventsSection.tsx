@@ -135,14 +135,7 @@ const EventsSection = () => {
           style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
         >
           Choose Your{' '}
-          <span
-            style={{
-              background: 'linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
+          <span className="gradient-text-accent">
             Entry Point
           </span>
         </h2>
@@ -185,14 +178,7 @@ const EventsSection = () => {
                 }}
               >
                 Past{' '}
-                <span
-                  style={{
-                    background: 'linear-gradient(130deg, #0891b2 0%, #16304f 85%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
+                <span className="gradient-text-accent">
                   Events Highlights
                 </span>
               </h2>
@@ -290,13 +276,9 @@ const EventsSection = () => {
                       />
                     )}
                     <span
-                      className="font-heading font-black leading-none"
+                      className="font-heading font-black leading-none gradient-text-accent"
                       style={{
                         fontSize: 'clamp(2rem, 4vw, 2.8rem)',
-                        background: 'linear-gradient(135deg, #ea580c 0%, #1e3a6e 80%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
                         filter: 'drop-shadow(0 1.5px 0 rgba(255,255,255,0.9))',
                       }}
                     >

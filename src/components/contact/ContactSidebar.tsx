@@ -35,9 +35,9 @@ const SocialIcon = ({ id }: { id: string }) => {
   return null;
 };
 
-const SIDEBAR_LABEL = 'font-mono text-[0.62rem] tracking-[0.28em] uppercase text-[rgba(180,195,220,0.75)] mb-1';
-const SIDEBAR_VALUE = 'font-heading font-bold text-accent';
-const SIDEBAR_SUB = 'font-mono text-[0.58rem] tracking-[0.22em] uppercase mt-1 text-[rgba(180,195,220,0.72)]';
+const SIDEBAR_LABEL = 'font-mono text-xs tracking-[0.22em] uppercase text-[rgba(180,195,220,0.82)] mb-1.5';
+const SIDEBAR_VALUE = 'font-heading font-bold text-accent text-[1.05rem]';
+const SIDEBAR_SUB = 'text-sm text-foreground-muted mt-1';
 
 const ContactSidebar = () => {
   const [aiModalOpen, setAiModalOpen] = useState(false);
@@ -58,7 +58,7 @@ const ContactSidebar = () => {
           <Phone size={17} className="text-accent mt-0.5 shrink-0" />
           <div>
             <p className={SIDEBAR_LABEL}>Phone</p>
-            <p className={SIDEBAR_VALUE} style={{ fontSize: '0.98rem' }}>{COMPANY.phone}</p>
+            <p className={SIDEBAR_VALUE}>{COMPANY.phone}</p>
           </div>
         </motion.a>
 
@@ -74,7 +74,7 @@ const ContactSidebar = () => {
           <Mail size={17} className="text-accent mt-0.5 shrink-0" />
           <div>
             <p className={SIDEBAR_LABEL}>Email</p>
-            <p className={SIDEBAR_VALUE} style={{ fontSize: '0.94rem' }}>{COMPANY.email}</p>
+            <p className={SIDEBAR_VALUE}>{COMPANY.email}</p>
           </div>
         </motion.a>
 
@@ -91,8 +91,8 @@ const ContactSidebar = () => {
         >
           <MessageCircle size={17} className="text-[#4ade80] shrink-0" />
           <div>
-            <p className="font-heading font-bold text-foreground" style={{ fontSize: '0.94rem' }}>{WHATSAPP_PLACEHOLDER.label}</p>
-            <p className={SIDEBAR_SUB}>{WHATSAPP_PLACEHOLDER.display}</p>
+            <p className="font-heading font-bold text-foreground text-base">{WHATSAPP_PLACEHOLDER.label}</p>
+            <p className="text-base font-heading font-semibold text-[#4ade80] mt-1">{WHATSAPP_PLACEHOLDER.display}</p>
           </div>
         </motion.a>
 
@@ -108,7 +108,7 @@ const ContactSidebar = () => {
         >
           <Bot size={17} className="text-[#22d3ee] shrink-0" />
           <div>
-            <p className="font-heading font-bold text-foreground" style={{ fontSize: '0.94rem' }}>AI Agent</p>
+            <p className="font-heading font-bold text-foreground text-base">AI Agent</p>
             <p className={SIDEBAR_SUB}>Coming soon</p>
           </div>
         </motion.button>
@@ -124,7 +124,7 @@ const ContactSidebar = () => {
           <MapPin size={17} className="text-accent mt-0.5 shrink-0" />
           <div>
             <p className={`${SIDEBAR_LABEL} mb-2`}>Address</p>
-            <address className="not-italic leading-relaxed" style={{ fontSize: '0.88rem', color: 'rgba(180,195,220,0.88)' }}>
+            <address className="not-italic leading-relaxed text-sm text-foreground-muted">
               No. 8, Block K, 8th Floor<br />
               Sunway PJ 51A, Jalan SS9A/19<br />
               47300 Petaling Jaya<br />

@@ -393,14 +393,7 @@ const XrasActivationsSection = ({
             style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', color: '#f8faff' }}
           >
             3 Days. 7 Experiences.{' '}
-            <span
-              style={{
-                background: 'linear-gradient(130deg, #ef783d 0%, #fb923c 60%, #f8faff 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
+            <span className="gradient-text-accent">
               One Ecosystem.
             </span>
           </h2>

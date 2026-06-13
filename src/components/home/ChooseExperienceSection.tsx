@@ -85,7 +85,8 @@ const ChooseExperienceSection = () => (
           className="font-heading font-bold text-foreground leading-tight mb-4"
           style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.25rem)' }}
         >
-          Choose Your Entry Point
+          Choose Your{' '}
+          <span className="gradient-text-accent">Entry Point</span>
         </h2>
 
       </motion.div>

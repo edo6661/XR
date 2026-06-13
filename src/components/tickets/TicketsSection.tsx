@@ -83,14 +83,7 @@ const TicketsSection = () => {
               >
                 <span style={{ color: '#f0f4ff' }}>Join the</span>
                 <br />
-                <span
-                  style={{
-                    background: 'linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
+                <span className="gradient-text-accent">
                   Next Phase
                 </span>
               </h2>

@@ -211,7 +211,10 @@ const SponsorsSection = () => (
           className="font-heading font-bold text-foreground mb-3"
           style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)' }}
         >
-          Trusted by industry leaders
+          Trusted by{' '}
+          <span className='gradient-text-accent'>
+            Industry Leaders
+          </span>
         </h2>
         <p className="text-foreground-muted max-w-lg mx-auto leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)' }}>
           A growing ecosystem of government agencies, technology innovators, and industry partners

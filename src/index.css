@@ -119,6 +119,14 @@ html.lenis body {
   --theme-accent-glow: rgba(239, 120, 61, 0.45);
   --theme-accent-glow-lg: rgba(239, 120, 61, 0.25);
 
+  /* Single brand gradient for accent headings & highlight text */
+  --gradient-text-accent: linear-gradient(
+    130deg,
+    var(--theme-accent) 0%,
+    var(--theme-accent-bright) 55%,
+    var(--theme-foreground) 85%
+  );
+
   /* Surfaces */
   --theme-background: #050505;
   --theme-surface: #0a0a0a;
@@ -304,14 +312,7 @@ svg {
 
 /* ── Gradient text utility ─────────────────────────────────────────────── */
 .gradient-text-accent {
-  background: linear-gradient(130deg, #fb923c 0%, #f8faff 85%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-text-orange-white {
-  background: linear-gradient(135deg, #ef783d 0%, #fb923c 40%, #f8faff 100%);
+  background: var(--gradient-text-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -14,12 +14,10 @@ import {
 import {
   ABOUT_ACCENT,
   AWARDS_RECOGNITION,
-  COMPANY_OVERVIEW,
   WHY_XR_PILLARS,
   INDUSTRY_FOCUS,
   // MEDIA_PRESS,
   // STRATEGIC_PARTNER_SLOTS,
-  OUR_MISSION,
   REGIONAL_NETWORK,
   MALAYSIA_HUB,
   networkNodes,
@@ -38,17 +36,43 @@ const AboutPage = () => (
     </Helmet>
 
     {/* 1. Company Overview */}
-    <AboutSectionShell id="company-overview" eyebrow="Company Overview" title={COMPANY_OVERVIEW.title} showTopBorder={false}>
+    <AboutSectionShell
+      id="company-overview"
+      eyebrow="Company Overview"
+      title={
+        <>
+          Connecting Innovators Across Asia&apos;s{' '}
+          <span className="gradient-text-accent">Immersive Future</span>
+        </>
+      }
+      showTopBorder={false}
+    >
       <CompanyOverviewBlock />
     </AboutSectionShell>
 
     {/* 2. Our Mission */}
-    <AboutSectionShell id="our-mission" eyebrow="Our Mission" title={OUR_MISSION.title}>
+    <AboutSectionShell
+      id="our-mission"
+      eyebrow="Our Mission"
+      title={
+        <>
+          <span className="gradient-text-accent">Maximum reach.</span> Minimum friction.
+        </>
+      }
+    >
       <OurMissionBlock />
     </AboutSectionShell>
 
     {/* 3. Why XR Asia Summit */}
-    <AboutSectionShell id="why-xr-summits" eyebrow="Why XR Asia Summit" title="Why XR Asia Summit">
+    <AboutSectionShell
+      id="why-xr-summits"
+      eyebrow="Why XR Asia Summit"
+      title={
+        <>
+          Why XR Asia <span className="gradient-text-accent">Summit</span>
+        </>
+      }
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16">
         {WHY_XR_PILLARS.map((pillar, index) => (
           <PillarCard
@@ -64,7 +88,15 @@ const AboutPage = () => (
       </div>
     </AboutSectionShell>
 
-    <AboutSectionShell id="industry-focus" eyebrow="Industry Focus" title="Industry Focus">
+    <AboutSectionShell
+      id="industry-focus"
+      eyebrow="Industry Focus"
+      title={
+        <>
+          Industry <span className="gradient-text-accent">Focus</span>
+        </>
+      }
+    >
       <div className="max-w-5xl">
         <p className="text-foreground-muted leading-relaxed mb-10" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
           {INDUSTRY_FOCUS.description}
@@ -134,7 +166,11 @@ const AboutPage = () => (
     <AboutSectionShell
       id="regional-network"
       eyebrow={REGIONAL_NETWORK.title}
-      title={REGIONAL_NETWORK.highlight}
+      title={
+        <>
+          <span className="gradient-text-accent">Asia sets the stage</span> — the world shows up.
+        </>
+      }
     >
       <div className="flex flex-col gap-10 max-w-5xl">
         <motion.p
@@ -323,7 +359,15 @@ const AboutPage = () => (
       </div>
     </AboutSectionShell>
     {/* 5. Awards & Recognition */}
-    <AboutSectionShell id="awards" eyebrow="Awards & Recognition" title="Awards & Recognition">
+    <AboutSectionShell
+      id="awards"
+      eyebrow="Awards & Recognition"
+      title={
+        <>
+          Awards & <span className="gradient-text-accent">Recognition</span>
+        </>
+      }
+    >
       <div className="flex flex-col gap-6 mb-12">
         <p className="text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85 }}>
           <strong className="text-foreground font-bold">{AWARDS_RECOGNITION.companyName}</strong>

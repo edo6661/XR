@@ -4,10 +4,10 @@ import { COMPANY } from '../../core/navigation/routes';
 import { CONTACT_SUBJECTS } from '../../core/content/contactPage';
 
 const LABEL_CLASS =
-  'font-mono text-[0.62rem] tracking-[0.28em] uppercase text-[rgba(180,195,220,0.78)]';
+  'font-mono text-sm tracking-[0.18em] uppercase text-[rgba(180,195,220,0.85)]';
 
 const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-sm bg-[rgba(255,255,255,0.04)] border border-white/10 text-foreground text-base outline-none focus:border-[rgba(251,146,60,0.45)] transition-colors placeholder:text-foreground-muted/45';
+  'w-full px-4 py-3.5 rounded-sm bg-[rgba(255,255,255,0.04)] border border-white/10 text-foreground text-[1.0625rem] outline-none focus:border-[rgba(251,146,60,0.45)] transition-colors placeholder:text-foreground-muted/45';
 
 interface ContactFormProps {
   initialSubject?: string;
