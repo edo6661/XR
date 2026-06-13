@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Mic,
@@ -9,7 +9,6 @@ import {
   Gamepad2,
 } from 'lucide-react';
 import SectionEyebrow from '../ui/SectionEyebrow';
-import { AIXR_SARAWAK_ACCENT } from '../../core/content/aixr2026Sarawak';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Data — verbatim from client brief
@@ -92,7 +91,7 @@ const ACTIVATIONS: Activation[] = [
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Tab Button
+// Tab Button — strong active / inactive states
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TabButton = ({
@@ -112,42 +111,52 @@ const TabButton = ({
     initial={{ opacity: 0, y: 12 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.04, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex flex-col items-center gap-2.5 px-4 py-4 rounded-xl transition-all duration-300 cursor-none flex-shrink-0 min-w-[80px] sm:min-w-[90px]"
+    className="group relative flex flex-col items-center gap-2 px-4 py-3.5 rounded-xl transition-all duration-250 cursor-none flex-shrink-0 min-w-[80px] sm:min-w-[92px]"
     style={{
       background: isActive
-        ? `${AIXR_SARAWAK_ACCENT}10`
-        : 'rgba(255,255,255,0.02)',
-      border: `1px solid ${isActive ? `${AIXR_SARAWAK_ACCENT}40` : 'rgba(255,255,255,0.06)'}`,
-      boxShadow: isActive ? `0 0 20px ${AIXR_SARAWAK_ACCENT}08` : 'none',
+        ? `linear-gradient(135deg, rgba(239,120,61,0.22), rgba(251,146,60,0.14))`
+        : 'rgba(255,255,255,0.025)',
+      border: `1px solid ${isActive ? 'rgba(239,120,61,0.65)' : 'rgba(255,255,255,0.07)'}`,
+      boxShadow: isActive
+        ? `0 0 28px rgba(239,120,61,0.22), inset 0 1px 0 rgba(239,120,61,0.18), 0 4px 16px rgba(0,0,0,0.3)`
+        : 'none',
+      transform: isActive ? 'translateY(-1px)' : 'none',
     }}
-    aria-expanded={isActive}
+    aria-pressed={isActive}
     aria-controls={`activation-panel-${activation.id}`}
   >
+    {/* Active top bar — bold orange */}
     <div
-      className="absolute top-0 inset-x-0 h-[2px] rounded-t-xl transition-opacity duration-300"
+      className="absolute top-0 inset-x-0 h-[2.5px] rounded-t-xl transition-opacity duration-250"
       style={{
-        background: `linear-gradient(90deg, transparent, ${AIXR_SARAWAK_ACCENT}, transparent)`,
+        background: `linear-gradient(90deg, transparent, #ef783d, #fb923c, transparent)`,
         opacity: isActive ? 1 : 0,
+        boxShadow: isActive ? '0 0 12px rgba(239,120,61,0.8)' : 'none',
       }}
       aria-hidden="true"
     />
 
+    {/* Icon box */}
     <div
-      className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-300"
+      className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-250"
       style={{
-        background: isActive ? `${AIXR_SARAWAK_ACCENT}15` : 'rgba(255,255,255,0.04)',
-        border: `1px solid ${isActive ? `${AIXR_SARAWAK_ACCENT}35` : 'rgba(255,255,255,0.06)'}`,
-        color: isActive ? AIXR_SARAWAK_ACCENT : 'rgba(139,155,180,0.7)',
+        background: isActive ? 'rgba(239,120,61,0.2)' : 'rgba(255,255,255,0.05)',
+        border: `1px solid ${isActive ? 'rgba(239,120,61,0.5)' : 'rgba(255,255,255,0.08)'}`,
+        color: isActive ? '#ef783d' : 'rgba(168,184,208,0.65)',
+        boxShadow: isActive ? '0 0 14px rgba(239,120,61,0.3)' : 'none',
       }}
     >
       {activation.icon}
     </div>
 
+    {/* Label */}
     <span
-      className="font-bold tracking-[0.08em] uppercase text-center leading-tight transition-colors duration-300 whitespace-nowrap"
+      className="font-bold tracking-[0.08em] uppercase text-center leading-tight transition-all duration-250 whitespace-nowrap"
       style={{
-        fontSize: '0.55rem',
-        color: isActive ? AIXR_SARAWAK_ACCENT : 'rgba(139,155,180,0.6)',
+        fontSize: '0.58rem',
+        color: isActive ? '#ef783d' : 'rgba(168,184,208,0.55)',
+        textShadow: isActive ? '0 0 16px rgba(239,120,61,0.5)' : 'none',
+        fontWeight: isActive ? 800 : 600,
       }}
     >
       {activation.shortTitle}
@@ -156,36 +165,39 @@ const TabButton = ({
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Expanded Panel
+// Expanded Panel — improved text readability & glowing elements
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ExpandedPanel = ({ activation }: { activation: Activation }) => (
   <motion.div
     id={`activation-panel-${activation.id}`}
     key={activation.id}
-    initial={{ opacity: 0, y: 8 }}
+    initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -4 }}
-    transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+    exit={{ opacity: 0, y: -6 }}
+    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
     className="relative rounded-2xl overflow-hidden"
     style={{
-      background:
-        'linear-gradient(155deg, rgba(18,30,50,0.7) 0%, rgba(8,16,30,0.9) 100%)',
-      border: `1px solid ${AIXR_SARAWAK_ACCENT}18`,
+      background: 'linear-gradient(155deg, rgba(22,36,60,0.75) 0%, rgba(10,18,34,0.92) 100%)',
+      border: '1px solid rgba(239,120,61,0.22)',
+      boxShadow: '0 0 40px rgba(239,120,61,0.06), 0 24px 48px rgba(0,0,0,0.3)',
     }}
   >
+    {/* Top accent line */}
     <div
-      className="absolute top-0 inset-x-0 h-[1px]"
+      className="absolute top-0 inset-x-0 h-[2px]"
       style={{
-        background: `linear-gradient(90deg, transparent 5%, ${AIXR_SARAWAK_ACCENT}55 40%, ${AIXR_SARAWAK_ACCENT}55 60%, transparent 95%)`,
+        background: `linear-gradient(90deg, transparent 5%, #ef783d 40%, #fb923c 60%, transparent 95%)`,
+        boxShadow: '0 0 16px rgba(239,120,61,0.4)',
       }}
       aria-hidden="true"
     />
 
+    {/* Ambient glow */}
     <div
-      className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+      className="absolute top-0 left-0 right-0 h-40 pointer-events-none"
       style={{
-        background: `radial-gradient(ellipse 60% 100% at 20% 0%, ${AIXR_SARAWAK_ACCENT}05 0%, transparent 100%)`,
+        background: `radial-gradient(ellipse 60% 100% at 20% 0%, rgba(239,120,61,0.07) 0%, transparent 100%)`,
       }}
       aria-hidden="true"
     />
@@ -193,53 +205,72 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
     <div className="relative z-10 p-7 md:p-10 lg:p-12">
       <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12">
         <div>
+          {/* Category label */}
           <span
-            className="inline-block font-bold tracking-[0.32em] uppercase mb-4"
-            style={{ fontSize: '0.57rem', color: `${AIXR_SARAWAK_ACCENT}90` }}
+            className="inline-block font-bold tracking-[0.32em] uppercase mb-4 px-3 py-1.5 rounded-sm"
+            style={{
+              fontSize: '0.6rem',
+              color: '#ef783d',
+              background: 'rgba(239,120,61,0.12)',
+              border: '1px solid rgba(239,120,61,0.3)',
+            }}
           >
             {activation.category}
           </span>
 
+          {/* Tagline — bright white */}
           <h3
-            className="font-heading font-bold text-foreground leading-tight mb-4"
-            style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)' }}
+            className="font-heading font-bold leading-tight mb-4"
+            style={{
+              fontSize: 'clamp(1.25rem, 2.5vw, 1.7rem)',
+              color: '#f8faff',
+              letterSpacing: '0.01em',
+            }}
           >
             {activation.tagline}
           </h3>
 
+          {/* Divider */}
           <div
-            className="w-8 h-px mb-5"
-            style={{ background: `${AIXR_SARAWAK_ACCENT}38` }}
+            className="w-10 h-[2px] mb-5 rounded-full"
+            style={{
+              background: 'linear-gradient(90deg, #ef783d, transparent)',
+              boxShadow: '0 0 10px rgba(239,120,61,0.4)',
+            }}
           />
 
+          {/* Body — clearly readable muted white */}
           <p
-            className="text-foreground-muted leading-relaxed"
-            style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85, maxWidth: '58ch' }}
+            className="leading-relaxed"
+            style={{
+              fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
+              lineHeight: 1.9,
+              color: '#a8b8d0',
+              maxWidth: '58ch',
+            }}
           >
             {activation.body}
           </p>
 
+          {/* Sub-items */}
           {activation.subItems && activation.subItems.length > 0 && (
-            <div className="mt-6 flex flex-col gap-2.5">
+            <div className="mt-6 flex flex-col gap-3">
               {activation.subItems.map((item) => (
                 <div key={item.label} className="flex items-start gap-3">
                   <span
-                    className="mt-[0.35em] w-1 h-1 rounded-full flex-shrink-0"
-                    style={{ background: `${AIXR_SARAWAK_ACCENT}65` }}
+                    className="mt-[0.45em] w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{
+                      background: '#ef783d',
+                      boxShadow: '0 0 8px rgba(239,120,61,0.6)',
+                    }}
                     aria-hidden="true"
                   />
                   <div>
-                    <span
-                      className="font-semibold text-foreground/80"
-                      style={{ fontSize: '0.82rem' }}
-                    >
+                    <span className="font-semibold" style={{ fontSize: '0.9rem', color: '#dce8f8' }}>
                       {item.label}
                     </span>
                     {item.detail && (
-                      <span
-                        className="text-foreground-muted ml-2"
-                        style={{ fontSize: '0.78rem' }}
-                      >
+                      <span className="ml-2" style={{ fontSize: '0.82rem', color: '#a8b8d0' }}>
                         — {item.detail}
                       </span>
                     )}
@@ -250,23 +281,30 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
           )}
         </div>
 
+        {/* Meta pill */}
         <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
           <div
             className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
             style={{
-              background: `${AIXR_SARAWAK_ACCENT}10`,
-              border: `1px solid ${AIXR_SARAWAK_ACCENT}35`,
-              boxShadow: `0 0 16px ${AIXR_SARAWAK_ACCENT}08`,
+              background: 'rgba(239,120,61,0.12)',
+              border: '1px solid rgba(239,120,61,0.4)',
+              boxShadow: '0 0 20px rgba(239,120,61,0.1)',
             }}
           >
             <div
-              className="w-2 h-2 rounded-full flex-shrink-0"
-              style={{ background: AIXR_SARAWAK_ACCENT, boxShadow: `0 0 8px ${AIXR_SARAWAK_ACCENT}60` }}
+              className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
+              style={{
+                background: '#ef783d',
+                boxShadow: '0 0 10px rgba(239,120,61,0.8)',
+              }}
               aria-hidden="true"
             />
             <span
               className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
-              style={{ fontSize: 'clamp(0.62rem, 1.8vw, 0.72rem)', color: `${AIXR_SARAWAK_ACCENT}dd` }}
+              style={{
+                fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+                color: '#ef783d',
+              }}
             >
               {activation.meta}
             </span>
@@ -278,7 +316,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Main Section
+// Main Section with sticky tabs
 // ─────────────────────────────────────────────────────────────────────────────
 
 type AixrActivationsSectionProps = {
@@ -291,16 +329,35 @@ const AixrActivationsSection = ({
   onRegister,
 }: AixrActivationsSectionProps) => {
   const [activeId, setActiveId] = useState<string>(ACTIVATIONS[0].id);
+  const sectionRef = useRef<HTMLElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [isTabsSticky, setIsTabsSticky] = useState(false);
 
   const activeActivation = ACTIVATIONS.find((a) => a.id === activeId)!;
 
-  const handleTabClick = (id: string) => {
-    setActiveId((prev) => (prev === id ? '' : id));
-  };
+  const handleTabClick = useCallback((id: string) => {
+    setActiveId(id);
+  }, []);
+
+  /* Observe when the tabs bar becomes sticky */
+  useEffect(() => {
+    const sentinel = tabsRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsTabsSticky(!entry.isIntersecting);
+      },
+      { threshold: 1, rootMargin: '-65px 0px 0px 0px' }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
-      className="relative w-full overflow-hidden px-6"
+      ref={sectionRef}
+      className="relative w-full overflow-visible px-6"
       style={{
         paddingTop: 'var(--section-padding-y)',
         paddingBottom: 'var(--section-padding-y)',
@@ -315,43 +372,73 @@ const AixrActivationsSection = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-10 max-w-2xl"
+          className="mb-10 max-w-5xl"
         >
           <h2
             id="aixr-activations-heading"
-            className="font-heading font-bold text-foreground mb-3"
-            style={{ fontSize: 'clamp(1.35rem, 3vw, 2rem)' }}
+            className="font-heading font-bold mb-3"
+            style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', color: '#f8faff' }}
           >
             2 Days. 6 Experiences.{' '}
-            <span style={{ color: AIXR_SARAWAK_ACCENT }}>A prelude to XR Asia Summit 2026.</span>
+            <span
+              style={{
+                background: 'linear-gradient(130deg, #ef783d 0%, #fb923c 60%, #f8faff 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              A prelude to XR Asia Summit 2026.
+            </span>
           </h2>
           <p
-            className="text-foreground-muted leading-relaxed"
-            style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}
+            className="leading-relaxed"
+            style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', lineHeight: 1.85, color: '#a8b8d0' }}
           >
-            16–17 October 2026 · Borneo Convention Centre (BCCK), Kuching, Sarawak. <br /> <span className='font-bold'>Explore what's waiting for you</span>
+            16–17 October 2026 · Borneo Convention Centre (BCCK), Kuching, Sarawak.
+            <br />
+            <span className="font-semibold" style={{ color: '#f8faff' }}>Explore what's waiting for you</span>
           </p>
         </motion.div>
 
-        {/* ── Tab Row ──────────────────────────────────────────────────── */}
+        {/* ── Sticky sentinel + Tab Row ──────────────────────────────── */}
         <div
-          className="overflow-x-auto pb-1 mb-5 -mx-1 px-1"
-          style={{ scrollbarWidth: 'none' }}
+          ref={tabsRef}
+          className="sticky z-40 -mx-6 px-6 py-3 mb-5 transition-all duration-300"
+          style={{
+            top: '64px',
+            background: isTabsSticky
+              ? 'rgba(5,5,5,0.94)'
+              : 'transparent',
+            backdropFilter: isTabsSticky ? 'blur(20px)' : 'none',
+            WebkitBackdropFilter: isTabsSticky ? 'blur(20px)' : 'none',
+            borderBottom: isTabsSticky
+              ? '1px solid rgba(239,120,61,0.15)'
+              : '1px solid transparent',
+            boxShadow: isTabsSticky
+              ? '0 4px 24px rgba(0,0,0,0.4)'
+              : 'none',
+          }}
         >
-          <div className="flex gap-2.5 w-max sm:w-auto sm:flex-wrap">
-            {ACTIVATIONS.map((activation, index) => (
-              <TabButton
-                key={activation.id}
-                activation={activation}
-                isActive={activeId === activation.id}
-                index={index}
-                onClick={() => handleTabClick(activation.id)}
-              />
-            ))}
+          <div
+            className="overflow-x-auto pb-1 -mx-1 px-1"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            <div className="flex gap-2.5 w-max sm:w-auto sm:flex-wrap max-w-7xl">
+              {ACTIVATIONS.map((activation, index) => (
+                <TabButton
+                  key={activation.id}
+                  activation={activation}
+                  isActive={activeId === activation.id}
+                  index={index}
+                  onClick={() => handleTabClick(activation.id)}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* ── Expanded Panel ───────────────────────────────────────────── */}
+        {/* ── Expanded Panel ──────────────────────────────────────────── */}
         <AnimatePresence mode="wait">
           {activeId && (
             <ExpandedPanel
@@ -361,23 +448,23 @@ const AixrActivationsSection = ({
           )}
         </AnimatePresence>
 
-        {/* ── CTA Row ──────────────────────────────────────────────────── */}
+        {/* ── CTA Row ─────────────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-14 pt-10"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
         >
           <button
             type="button"
             onClick={onDownloadBrochure}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.75rem] transition-colors duration-300 hover:text-foreground cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] transition-all duration-300 hover:shadow-[0_0_28px_rgba(239,120,61,0.25)] cursor-none"
             style={{
-              color: AIXR_SARAWAK_ACCENT,
-              background: 'rgba(255,255,255,0.03)',
-              border: `1px solid ${AIXR_SARAWAK_ACCENT}45`,
+              color: '#ef783d',
+              background: 'rgba(239,120,61,0.08)',
+              border: '1px solid rgba(239,120,61,0.45)',
             }}
           >
             Download Brochure
@@ -385,10 +472,11 @@ const AixrActivationsSection = ({
           <button
             type="button"
             onClick={onRegister}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.75rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(239,120,61,0.35)] cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] hover:-translate-y-px cursor-none"
             style={{
-              background: 'linear-gradient(135deg, #ef783d 0%, #d9652b 100%)',
+              background: 'linear-gradient(135deg, #ef783d 0%, #fb923c 100%)',
               border: '1px solid rgba(239,120,61,0.5)',
+              boxShadow: '0 0 24px rgba(239,120,61,0.25)',
             }}
           >
             Register / Enquiry

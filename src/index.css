@@ -86,7 +86,6 @@ html.lenis body {
 
 /* ── Theme tokens ───────────────────────────────────────────────────────── */
 @theme {
-  /* Typography — 80% Satoshi body, 20% Space Grotesk heading (per cursorrules) */
   --font-sans: "Satoshi", system-ui, sans-serif;
   --font-heading: "Space Grotesk", var(--font-sans);
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
@@ -110,26 +109,29 @@ html.lenis body {
 
 /* ── Design tokens ─────────────────────────────────────────────────────── */
 :root {
-  /* Brand palette — disesuaikan dengan cursorrules */
+  /* Brand palette — orange-forward per logo */
   --theme-primary: #1e3a8a;
   --theme-secondary: #7e22ce;
-  --theme-accent: #ef783d; /* Berubah: Official Client Orange */
-  --theme-accent-yellow: #fedb21; /* Official Client Yellow */
-  --theme-accent-blue: #3953a3; /* Official Client Blue */
-  --theme-accent-glow: rgba(239, 120, 61, 0.38);
+  --theme-accent: #ef783d; /* Primary brand orange */
+  --theme-accent-bright: #fb923c; /* Brighter orange variant */
+  --theme-accent-yellow: #fedb21;
+  --theme-accent-blue: #3953a3;
+  --theme-accent-glow: rgba(239, 120, 61, 0.45);
+  --theme-accent-glow-lg: rgba(239, 120, 61, 0.25);
 
-  /* Surfaces - Disesuaikan menjadi Deep Black / Charcoal */
-  --theme-background: #050505; /* Berubah dari #050b18 */
-  --theme-surface: #0a0a0a; /* Berubah ke charcoal gelap */
+  /* Surfaces */
+  --theme-background: #050505;
+  --theme-surface: #0a0a0a;
   --theme-surface-2: #121212;
 
-  /* Text */
-  --theme-foreground: #f0f4ff;
-  --theme-foreground-muted: #8b9bb4; /* Sedikit diterangkan agar kontras di bg hitam */
+  /* Text — improved readability: brighter white, clearer muted */
+  --theme-foreground: #f8faff; /* Near-white, high legibility */
+  --theme-foreground-muted: #a8b8d0; /* Lifted from 8b9bb4 → more readable */
+  --theme-foreground-subtle: #6b7fa0; /* For truly secondary info */
 
   /* Borders */
-  --theme-border: rgba(255, 255, 255, 0.08);
-  --theme-border-accent: rgba(239, 120, 61, 0.25);
+  --theme-border: rgba(255, 255, 255, 0.1);
+  --theme-border-accent: rgba(239, 120, 61, 0.35);
 
   /* Layout */
   --section-padding-y: clamp(5rem, 8vw, 8rem);
@@ -141,18 +143,18 @@ html.lenis body {
   --transition-base: all 0.35s ease;
   --transition-slow: all 0.6s ease;
 
-  /* Typography scale (fluid) */
+  /* Typography scale (fluid) — increased base sizes for readability */
   --text-display: clamp(3.5rem, 10vw, 8rem);
   --text-h1: clamp(2.4rem, 5.5vw, 4rem);
   --text-h2: clamp(2rem, 4vw, 3rem);
   --text-h3: clamp(1.2rem, 2vw, 1.5rem);
-  --text-body-lg: 1rem;
-  --text-body: 0.875rem;
-  --text-sm: 0.8rem;
-  --text-xs: 0.72rem;
-  --text-2xs: 0.62rem;
-  --text-label: 0.57rem;
-  --text-micro: 0.5rem;
+  --text-body-lg: 1.0625rem; /* 17px — up from 16px */
+  --text-body: 0.9375rem; /* 15px — up from 14px */
+  --text-sm: 0.875rem; /* 14px — up from 12.8px */
+  --text-xs: 0.8125rem; /* 13px — up from 11.5px */
+  --text-2xs: 0.75rem; /* 12px — up from 9.9px */
+  --text-label: 0.6875rem; /* 11px — up from 9.1px */
+  --text-micro: 0.625rem; /* 10px — up from 8px */
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────── */
@@ -173,10 +175,17 @@ body {
   background-color: var(--theme-background);
   color: var(--theme-foreground);
   font-family: var(--font-sans);
+  font-size: var(--text-body);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scrollbar-gutter: stable;
+  /* Subtle orange warmth to global bg */
+  background-image: radial-gradient(
+    ellipse 80% 40% at 50% 0%,
+    rgba(239, 120, 61, 0.04) 0%,
+    transparent 60%
+  );
 }
 
 h1,
@@ -189,10 +198,18 @@ h6 {
   letter-spacing: 0.04em;
   font-weight: 700;
   line-height: 1.1;
+  color: var(--theme-foreground); /* Ensure headings are always bright white */
 }
 
 p {
-  line-height: 1.75;
+  line-height: 1.8;
+  color: var(--theme-foreground-muted);
+}
+
+/* Standalone paragraphs in dark backgrounds should be clearly readable */
+.dark-section p,
+section p {
+  color: var(--theme-foreground-muted);
 }
 
 img,
@@ -200,16 +217,17 @@ svg {
   display: block;
   max-width: 100%;
 }
+
 :focus-visible {
-  outline: 2px solid rgba(239, 120, 61, 0.7);
+  outline: 2px solid rgba(239, 120, 61, 0.8);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 /* ── Selection ─────────────────────────────────────────────────────────── */
 ::selection {
-  background: rgba(239, 120, 61, 0.28);
-  color: #f0f4ff;
+  background: rgba(239, 120, 61, 0.35);
+  color: #f8faff;
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────────────────── */
@@ -220,11 +238,40 @@ svg {
   background: var(--theme-background);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(239, 120, 61, 0.35);
+  background: rgba(239, 120, 61, 0.5);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(239, 120, 61, 0.6);
+  background: rgba(239, 120, 61, 0.75);
+}
+
+/* ── Orange accent utilities ────────────────────────────────────────────── */
+.text-accent {
+  color: var(--theme-accent) !important;
+}
+
+.bg-accent {
+  background-color: var(--theme-accent);
+}
+
+/* Strong orange badge / pill */
+.badge-orange {
+  background: linear-gradient(135deg, #ef783d 0%, #fb923c 100%);
+  color: #050505;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  font-size: var(--text-micro);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Orange glowing border */
+.border-accent-glow {
+  border-color: rgba(239, 120, 61, 0.6);
+  box-shadow:
+    0 0 0 1px rgba(239, 120, 61, 0.3),
+    0 0 20px rgba(239, 120, 61, 0.15);
 }
 
 /* ── Glass utilities ───────────────────────────────────────────────────── */
@@ -240,34 +287,81 @@ svg {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--theme-border-accent);
-  box-shadow: 0 0 30px rgba(251, 146, 60, 0.05);
+  box-shadow: 0 0 30px rgba(239, 120, 61, 0.08);
 }
+
 .glow-accent {
   box-shadow:
-    0 0 20px rgba(239, 120, 61, 0.28),
-    0 0 60px rgba(239, 120, 61, 0.08);
+    0 0 20px rgba(239, 120, 61, 0.35),
+    0 0 60px rgba(239, 120, 61, 0.12);
 }
 
 .glow-text-accent {
   text-shadow:
-    0 0 20px rgba(239, 120, 61, 0.55),
-    0 0 40px rgba(239, 120, 61, 0.25);
+    0 0 20px rgba(239, 120, 61, 0.65),
+    0 0 40px rgba(239, 120, 61, 0.3);
 }
 
 /* ── Gradient text utility ─────────────────────────────────────────────── */
 .gradient-text-accent {
-  background: linear-gradient(130deg, #ef783d 0%, #f0f4ff 85%);
+  background: linear-gradient(130deg, #fb923c 0%, #f8faff 85%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ── Gradient text utility ─────────────────────────────────────────────── */
-.gradient-text-accent {
-  background: linear-gradient(130deg, #fb923c 0%, #f0f4ff 85%);
+.gradient-text-orange-white {
+  background: linear-gradient(135deg, #ef783d 0%, #fb923c 40%, #f8faff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ── Orange CTA button global style ─────────────────────────────────────── */
+.btn-orange {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: linear-gradient(135deg, #ef783d 0%, #fb923c 100%);
+  color: #050505;
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(239, 120, 61, 0.6);
+  border-radius: 3px;
+  box-shadow: 0 0 32px rgba(239, 120, 61, 0.3);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+  cursor: pointer;
+}
+.btn-orange:hover {
+  box-shadow: 0 0 48px rgba(239, 120, 61, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-ghost-orange {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: rgba(239, 120, 61, 0.08);
+  color: #ef783d;
+  font-weight: 700;
+  font-size: var(--text-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: 1px solid rgba(239, 120, 61, 0.45);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.btn-ghost-orange:hover {
+  background: rgba(239, 120, 61, 0.15);
+  border-color: rgba(239, 120, 61, 0.7);
+  box-shadow: 0 0 24px rgba(239, 120, 61, 0.2);
 }
 
 /* ── Scanlines overlay ─────────────────────────────────────────────────── */
@@ -339,4 +433,78 @@ svg {
 
 .glow-white-logo-sm {
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}
+
+/* ── Eyebrow / label readability ────────────────────────────────────────── */
+/* Lift all tiny uppercase tracking labels to be clearly readable */
+.font-mono {
+  letter-spacing: 0.08em;
+}
+
+/* Section eyebrow lines should be bright orange */
+.section-eyebrow-line {
+  background: rgba(239, 120, 61, 0.7);
+}
+
+/* ── Sticky tabs for activation sections ────────────────────────────────── */
+.activation-tabs-sticky {
+  position: sticky;
+  top: 64px; /* below navbar */
+  z-index: 40;
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.75rem 0;
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  .activation-tabs-sticky {
+    top: calc(64px + env(safe-area-inset-top));
+  }
+}
+
+/* ── Form input base style — improved readability ───────────────────────── */
+.form-input-base {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+  color: #f8faff;
+  font-size: var(--text-sm);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.form-input-base::placeholder {
+  color: rgba(168, 184, 208, 0.4);
+}
+.form-input-base:focus {
+  border-color: rgba(239, 120, 61, 0.55);
+  box-shadow: 0 0 0 3px rgba(239, 120, 61, 0.1);
+}
+
+/* ── Active tab pill — strong visual state ──────────────────────────────── */
+.tab-active {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 120, 61, 0.2),
+    rgba(251, 146, 60, 0.12)
+  ) !important;
+  border-color: rgba(239, 120, 61, 0.65) !important;
+  box-shadow:
+    0 0 28px rgba(239, 120, 61, 0.2),
+    inset 0 1px 0 rgba(239, 120, 61, 0.2) !important;
+}
+
+.tab-inactive {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+.tab-inactive:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
 }

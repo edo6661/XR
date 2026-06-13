@@ -40,7 +40,7 @@ const TECH_PARTNERS: Partner[] = [
   { name: 'Smode', src: '/all-partner-logos/logo_smode.png', needsInvert: true },
   { name: 'STYPE', src: '/all-partner-logos/STYPE-logo-black.png', needsInvert: true },
   { name: 'Unreal Engine', src: '/all-partner-logos/unreal logo.png', needsInvert: true },
-  { name: 'Ventuz', src: '/all-partner-logos/Ventuz_5_logo_grey_orange.svg.png' },
+
   { name: 'Vivemars', src: '/all-partner-logos/vivemars_logo.jpg' },
 ];
 

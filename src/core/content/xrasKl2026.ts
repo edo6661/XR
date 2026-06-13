@@ -71,14 +71,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     accentColor: "#3953a3",
     focusAreas: ["Spatial Design", "XR + AI", "Immersive Storytelling"],
   },
-  {
-    name: "Raul John",
-    role: "AI Prodigy (India) & TedX Speaker",
-    company: "",
-    photo: "/speaker-pics/Raul John.png",
-    accentColor: "#fedb21",
-    focusAreas: ["Future of AI", "Youth Innovation", "Storytelling"],
-  },
+
   {
     name: "Datin Noorlindah Hassan",
     role: "Deputy Director",

@@ -10,7 +10,7 @@ interface SectionEyebrowProps {
 
 /**
  * Shared eyebrow label used across all sections.
- * Eliminates the copy-paste pattern in About, Events, Speakers, etc.
+ * Stronger orange prominence per design direction.
  */
 const SectionEyebrow = ({
   children,
@@ -18,8 +18,8 @@ const SectionEyebrow = ({
   className = '',
   tone = 'dark',
 }: SectionEyebrowProps) => {
-  const lineColor = tone === 'light' ? 'rgba(194,87,14,0.6)' : 'rgba(251,146,60,0.55)';
-  const textColor = tone === 'light' ? 'rgba(194,87,14,0.95)' : 'rgba(251,146,60,0.72)';
+  const lineColor = tone === 'light' ? 'rgba(194,87,14,0.8)' : 'rgba(239,120,61,0.75)';
+  const textColor = tone === 'light' ? 'rgba(194,87,14,1)' : '#ef783d';
 
   return (
     <motion.div
@@ -30,20 +30,32 @@ const SectionEyebrow = ({
       className={`flex items-center gap-3 mb-10 ${align === 'center' ? 'justify-center' : ''} ${className}`}
     >
       <span
-        className="h-px flex-shrink-0"
-        style={{ width: '20px', background: lineColor }}
+        className="h-[2px] flex-shrink-0 rounded-full"
+        style={{
+          width: '24px',
+          background: lineColor,
+          boxShadow: `0 0 8px ${lineColor}`,
+        }}
         aria-hidden="true"
       />
       <span
-        className="font-bold tracking-[0.52em] uppercase whitespace-nowrap"
-        style={{ fontSize: '0.57rem', color: textColor }}
+        className="font-bold tracking-[0.48em] uppercase whitespace-nowrap"
+        style={{
+          fontSize: '0.65rem',
+          color: textColor,
+          textShadow: `0 0 20px ${textColor}60`,
+        }}
       >
         {children}
       </span>
       {align === 'center' && (
         <span
-          className="h-px flex-shrink-0"
-          style={{ width: '20px', background: lineColor }}
+          className="h-[2px] flex-shrink-0 rounded-full"
+          style={{
+            width: '24px',
+            background: lineColor,
+            boxShadow: `0 0 8px ${lineColor}`,
+          }}
           aria-hidden="true"
         />
       )}
