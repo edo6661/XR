@@ -141,8 +141,8 @@ const Footer = () => {
               </div>
               <div className="flex flex-col leading-none gap-[3px]">
                 <span
-                  className="font-heading font-bold tracking-[0.3em] text-on-light-heading group-hover:text-accent transition-colors duration-300"
-                  style={{ fontSize: '0.76rem' }}
+                  className="font-heading font-bold tracking-[0.22em] uppercase text-on-light-heading group-hover:text-accent transition-colors duration-300"
+                  style={{ fontSize: '1.125rem' }}
                 >
                   XR SUMMITS SDN BHD
                 </span>

@@ -48,6 +48,9 @@ const RegisterEnquiryModal = ({
     setSubmitted(true);
   };
 
+  const labelClass =
+    'font-mono text-xs tracking-[0.2em] uppercase text-foreground-muted/80';
+
   const inputClass =
     'w-full px-4 py-3 rounded-sm bg-[rgba(255,255,255,0.04)] border border-white/10 text-foreground text-sm outline-none transition-colors';
 
@@ -76,14 +79,9 @@ const RegisterEnquiryModal = ({
         </div>
       ) : (
         <>
-          <p className="text-foreground-muted text-sm leading-relaxed mb-6">
-            Complete the form below — we will open your email app with your enquiry details. No account or payment is
-            processed on this site in Phase 1.
-          </p>
-
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
+              <span className={labelClass}>
                 Enquiry type
               </span>
               <select name="enquiryType" required className={inputClass} defaultValue={ENQUIRY_TYPES[0]}>
@@ -96,28 +94,28 @@ const RegisterEnquiryModal = ({
             </label>
 
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
+              <span className={labelClass}>
                 Full name
               </span>
               <input name="name" type="text" required autoComplete="name" className={inputClass} />
             </label>
 
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
+              <span className={labelClass}>
                 Email
               </span>
               <input name="email" type="email" required autoComplete="email" className={inputClass} />
             </label>
 
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
+              <span className={labelClass}>
                 Organisation
               </span>
               <input name="organisation" type="text" className={inputClass} />
             </label>
 
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">
+              <span className={labelClass}>
                 Message
               </span>
               <textarea name="message" rows={4} className={`${inputClass} resize-y min-h-[100px]`} />
