@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 // import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PillarCard from '../components/about/PillarCard';
+import RegionalNetworkMap from '../components/about/RegionalNetworkMap';
 import AboutSectionShell from '../components/about/page/AboutSectionShell';
 import CompanyOverviewBlock from '../components/about/page/CompanyOverviewBlock';
 import OurMissionBlock from '../components/about/page/OurMissionBlock';
@@ -19,9 +20,6 @@ import {
   // MEDIA_PRESS,
   // STRATEGIC_PARTNER_SLOTS,
   REGIONAL_NETWORK,
-  MALAYSIA_HUB,
-  networkNodes,
-  regionalNodes,
 } from '../core/content/aboutPage';
 
 // Icons mapping for Why XR
@@ -184,178 +182,7 @@ const AboutPage = () => (
           {REGIONAL_NETWORK.body}
         </motion.p>
 
-        {/* Code-Based Animated Network Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-          className="relative w-full mt-4 rounded-[18px] p-1"
-          style={{
-            border: '1px solid rgba(255,255,255,0.06)',
-            boxShadow: '0 0 32px rgba(239,120,61,0.06)',
-          }}
-        >
-          <div
-            className="relative w-full rounded-2xl overflow-hidden glass"
-            style={{
-              background: 'radial-gradient(circle at 75% 70%, rgba(239,120,61,0.06) 0%, rgba(5,5,5,0) 60%)',
-              border: '1px solid rgba(239,120,61,0.25)',
-              boxShadow: 'inset 0 0 0 1px rgba(239,120,61,0.08)',
-            }}
-          >
-            <div className="w-full overflow-x-auto hide-scrollbar">
-              <div className="min-w-[700px] w-full p-6 lg:p-10">
-                <svg viewBox="0 0 850 400" className="w-full h-auto drop-shadow-md">
-
-                  {/* 1. International lines → Malaysia hub */}
-                  {networkNodes.map((node, i) => (
-                    <motion.line
-                      key={`line-${node.id}`}
-                      x1={node.x}
-                      y1={node.y}
-                      x2={MALAYSIA_HUB.x}
-                      y2={MALAYSIA_HUB.y}
-                      stroke={ABOUT_ACCENT}
-                      strokeWidth="1.5"
-                      strokeDasharray="4 6"
-                      strokeOpacity="0.3"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      whileInView={{ pathLength: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + i * 0.1, duration: 1.8, ease: "easeOut" }}
-                    />
-                  ))}
-
-                  {/* Regional lines → Malaysia hub */}
-                  {regionalNodes.map((node, i) => (
-                    <motion.line
-                      key={`regional-line-${node.id}`}
-                      x1={node.x}
-                      y1={node.y}
-                      x2={MALAYSIA_HUB.x}
-                      y2={MALAYSIA_HUB.y}
-                      stroke={ABOUT_ACCENT}
-                      strokeWidth="1"
-                      strokeDasharray="3 5"
-                      strokeOpacity="0.18"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      whileInView={{ pathLength: 1, opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 1.2 + i * 0.15, duration: 1.4, ease: "easeOut" }}
-                    />
-                  ))}
-
-                  {/* 2. International & regional dots */}
-                  {[...networkNodes, ...regionalNodes].map((node, i) => {
-                    const isRegional = regionalNodes.some((r) => r.id === node.id);
-                    const delay = 0.8 + i * 0.05;
-
-                    return (
-                      <g key={`node-${node.id}`}>
-                        <motion.circle
-                          cx={node.x}
-                          cy={node.y}
-                          r={12}
-                          fill="transparent"
-                          stroke={ABOUT_ACCENT}
-                          strokeWidth="1"
-                          initial={{ scale: 0.2, opacity: 0 }}
-                          animate={{ scale: 1.8, opacity: [0, 0.35, 0] }}
-                          transition={{ repeat: Infinity, duration: 3, delay: i * 0.2 }}
-                        />
-                        <motion.circle
-                          cx={node.x}
-                          cy={node.y}
-                          r={isRegional ? 5 : 4}
-                          fill={ABOUT_ACCENT}
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ delay, type: "spring", stiffness: 200, damping: 10 }}
-                          style={{ filter: `drop-shadow(0 0 6px ${ABOUT_ACCENT})` }}
-                        />
-                        <motion.text
-                          x={node.x}
-                          y={node.y - 12}
-                          fill="#f0f4ff"
-                          fontSize={isRegional ? "14px" : "13px"}
-                          fontWeight={isRegional ? "600" : "normal"}
-                          textAnchor="middle"
-                          letterSpacing="0.05em"
-                          initial={{ opacity: 0, y: 5 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: delay + 0.2, duration: 0.4 }}
-                          style={{ fontFamily: 'var(--font-sans)', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}
-                        >
-                          {node.label}
-                        </motion.text>
-                      </g>
-                    );
-                  })}
-
-                  {/* 3. Malaysia hub — primary epicenter */}
-                  <g key="node-malaysia-hub">
-                    <motion.circle
-                      cx={MALAYSIA_HUB.x}
-                      cy={MALAYSIA_HUB.y}
-                      r={28}
-                      fill="transparent"
-                      stroke={ABOUT_ACCENT}
-                      strokeWidth="1.5"
-                      initial={{ scale: 0.2, opacity: 0 }}
-                      animate={{ scale: 1.6, opacity: [0, 0.5, 0] }}
-                      transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-                    />
-                    <motion.circle
-                      cx={MALAYSIA_HUB.x}
-                      cy={MALAYSIA_HUB.y}
-                      r={10}
-                      fill={ABOUT_ACCENT}
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 10 }}
-                      style={{ filter: `drop-shadow(0 0 14px ${ABOUT_ACCENT})` }}
-                    />
-                    <motion.text
-                      x={MALAYSIA_HUB.x}
-                      y={MALAYSIA_HUB.y - 20}
-                      fill="#f0f4ff"
-                      fontSize="18px"
-                      fontWeight="bold"
-                      textAnchor="middle"
-                      letterSpacing="0.06em"
-                      initial={{ opacity: 0, y: 5 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.4, duration: 0.4 }}
-                      style={{ fontFamily: 'var(--font-sans)', textShadow: '0 2px 6px rgba(0,0,0,0.9)' }}
-                    >
-                      {MALAYSIA_HUB.label}
-                    </motion.text>
-                    <motion.text
-                      x={MALAYSIA_HUB.x}
-                      y={MALAYSIA_HUB.y + 28}
-                      fill={ABOUT_ACCENT}
-                      fontSize="9px"
-                      fontWeight="bold"
-                      textAnchor="middle"
-                      letterSpacing="0.28em"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 0.85 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 1.6, duration: 0.8 }}
-                    >
-                      EPICENTER
-                    </motion.text>
-                  </g>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        <RegionalNetworkMap />
       </div>
     </AboutSectionShell>
     {/* 5. Awards & Recognition */}

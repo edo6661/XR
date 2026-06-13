@@ -140,25 +140,26 @@ export const REGIONAL_NETWORK = {
   body: "Our speakers and participants have come from the UK, US, Canada, France, Germany, Spain, the Netherlands, Turkey, Japan, China, Vietnam, Indonesia, and beyond. Malaysia is the most preeminent hub in this network — when Asia's immersive tech industry moves, the world pays attention.",
 } as const;
 
+/** Coordinates aligned to stylized map viewBox (1000 × 520) */
 export const networkNodes = [
-  { id: "ca", label: "Canada", x: 120, y: 120 },
-  { id: "us", label: "US", x: 130, y: 180 },
-  { id: "uk", label: "UK", x: 360, y: 110 },
-  { id: "nl", label: "Netherlands", x: 390, y: 80 },
-  { id: "de", label: "Germany", x: 440, y: 100 },
-  { id: "fr", label: "France", x: 380, y: 150 },
-  { id: "es", label: "Spain", x: 340, y: 190 },
-  { id: "tr", label: "Turkey", x: 480, y: 170 },
-  { id: "cn", label: "China", x: 630, y: 130 },
-  { id: "jp", label: "Japan", x: 740, y: 110 },
-  { id: "vn", label: "Vietnam", x: 570, y: 190 },
+  { id: "ca", label: "Canada", x: 115, y: 165 },
+  { id: "us", label: "US", x: 140, y: 215 },
+  { id: "uk", label: "UK", x: 364, y: 166 },
+  { id: "nl", label: "Netherlands", x: 404, y: 170 },
+  { id: "de", label: "Germany", x: 418, y: 178 },
+  { id: "fr", label: "France", x: 392, y: 184 },
+  { id: "es", label: "Spain", x: 348, y: 204 },
+  { id: "tr", label: "Turkey", x: 482, y: 184 },
+  { id: "cn", label: "China", x: 648, y: 184 },
+  { id: "jp", label: "Japan", x: 720, y: 158 },
+  { id: "vn", label: "Vietnam", x: 616, y: 248 },
 ];
 
 /** Primary hub — all international lines converge here */
-export const MALAYSIA_HUB = { id: "my", label: "Malaysia", x: 610, y: 248 };
+export const MALAYSIA_HUB = { id: "my", label: "Malaysia", x: 588, y: 298 };
 
 /** Secondary regional nodes — connect to Malaysia, not treated as epicenter */
-export const regionalNodes = [{ id: "id", label: "Indonesia", x: 690, y: 305 }];
+export const regionalNodes = [{ id: "id", label: "Indonesia", x: 634, y: 356 }];
 
 /** @deprecated use MALAYSIA_HUB — kept for any legacy imports */
 export const epicenterTarget = { x: MALAYSIA_HUB.x, y: MALAYSIA_HUB.y };
