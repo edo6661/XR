@@ -270,7 +270,7 @@ const PastEventCard = ({
                 className="leading-relaxed"
                 style={{
                   fontSize: 'clamp(0.8rem, 1.4vw, 0.92rem)',
-                  color: 'rgba(22,36,62,0.72)',
+                  color: 'rgba(15,27,48,0.92)',
                   lineHeight: 1.85,
                 }}
               >

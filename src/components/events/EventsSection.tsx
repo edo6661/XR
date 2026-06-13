@@ -313,7 +313,7 @@ const EventsSection = () => {
                     >
                       {stat.label}
                     </span>
-                    <span style={{ fontSize: '0.61rem', color: 'rgba(42,58,88,0.5)' }}>
+                    <span style={{ fontSize: '0.72rem', color: 'rgba(26,46,80,0.78)' }}>
                       {stat.sub}
                     </span>
                   </motion.div>

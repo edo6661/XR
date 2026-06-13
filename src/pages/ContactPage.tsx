@@ -129,7 +129,7 @@ const ContactPage = () => {
           <motion.p
             {...fadeUp(0.15)}
             className="text-foreground-muted mt-5 max-w-lg mx-auto"
-            style={{ fontSize: '0.9rem', lineHeight: 1.85 }}
+            style={{ fontSize: '1rem', lineHeight: 1.85, color: 'rgba(180,195,220,0.88)' }}
           >
             Whether you're looking to partner, speak, exhibit, or simply find out more — you're in the right place.
           </motion.p>
@@ -149,8 +149,8 @@ const ContactPage = () => {
                     document.getElementById(`section-${label.toLowerCase()}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   }
                 }}
-                className="px-4 py-1.5 rounded-full font-mono tracking-[0.2em] uppercase text-foreground-muted/70 transition-all duration-200 hover:text-accent hover:border-accent/40"
-                style={{ fontSize: '0.5rem', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)' }}
+                className="px-4 py-2 rounded-full font-mono tracking-[0.2em] uppercase transition-all duration-200 hover:text-accent hover:border-accent/40"
+                style={{ fontSize: '0.64rem', color: 'rgba(180,195,220,0.82)', border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(255,255,255,0.04)' }}
               >
                 {label}
               </button>
@@ -174,7 +174,7 @@ const ContactPage = () => {
               className="lg:col-span-3 rounded-xl p-7"
               style={{ border: '1px solid rgba(251,146,60,0.15)', background: 'rgba(251,146,60,0.03)' }}
             >
-              <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.9rem', maxWidth: '64ch' }}>
+              <p className="leading-relaxed" style={{ fontSize: '1rem', maxWidth: '64ch', color: 'rgba(180,195,220,0.88)' }}>
                 XR Summits connects your brand with Asia's most engaged immersive tech community — across two flagship events, thousands of attendees, and a regional network of industry decision-makers.
               </p>
             </motion.div>
@@ -195,8 +195,8 @@ const ContactPage = () => {
                   <div className="flex items-center gap-2.5 mb-4">
                     <span className="text-accent/70">{CARD_ICONS[card.id]}</span>
                     <span
-                      className="font-mono tracking-[0.3em] uppercase text-accent/70"
-                      style={{ fontSize: '0.5rem' }}
+                      className="font-mono tracking-[0.3em] uppercase text-accent/80"
+                      style={{ fontSize: '0.62rem' }}
                     >
                       {card.label}
                     </span>
@@ -207,7 +207,7 @@ const ContactPage = () => {
                   >
                     {card.heading}
                   </h3>
-                  <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.82rem' }}>
+                  <p className="leading-relaxed" style={{ fontSize: '0.92rem', color: 'rgba(180,195,220,0.88)' }}>
                     {card.body}
                   </p>
                 </div>
@@ -255,8 +255,8 @@ const ContactPage = () => {
               </motion.h2>
               <motion.p
                 {...fadeUp(0.07)}
-                className="text-foreground-muted leading-relaxed mb-6"
-                style={{ fontSize: '0.88rem' }}
+                className="leading-relaxed mb-6"
+                style={{ fontSize: '0.96rem', color: 'rgba(180,195,220,0.88)' }}
               >
                 We welcome applications from industry practitioners, researchers, policymakers, and innovators with perspectives worth hearing. We're currently accepting applications for{' '}
                 <strong className="text-foreground/80">XR Asia Summits 2026</strong> and the{' '}
@@ -269,12 +269,12 @@ const ContactPage = () => {
                 style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}
               >
                 <p
-                  className="font-mono tracking-[0.28em] uppercase mb-4 text-foreground-muted/55"
-                  style={{ fontSize: '0.5rem' }}
+                  className="font-mono tracking-[0.28em] uppercase mb-4"
+                  style={{ fontSize: '0.62rem', color: 'rgba(180,195,220,0.75)' }}
                 >
                   What we look for
                 </p>
-                <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.83rem' }}>
+                <p className="leading-relaxed" style={{ fontSize: '0.92rem', color: 'rgba(180,195,220,0.88)' }}>
                   Talks that are grounded in real experience, challenge conventional thinking, or showcase applied work in XR, AI, spatial media, or immersive storytelling.
                 </p>
               </motion.div>
@@ -297,8 +297,8 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <p
-                        className="font-mono tracking-[0.25em] uppercase text-foreground-muted/55 mb-1"
-                        style={{ fontSize: '0.48rem' }}
+                        className="font-mono tracking-[0.25em] uppercase mb-1"
+                        style={{ fontSize: '0.58rem', color: 'rgba(180,195,220,0.75)' }}
                       >
                         Speaker Application
                       </p>
@@ -339,8 +339,8 @@ const ContactPage = () => {
               </motion.h2>
               <motion.p
                 {...fadeUp(0.07)}
-                className="text-foreground-muted leading-relaxed mb-6"
-                style={{ fontSize: '0.88rem' }}
+                className="leading-relaxed mb-6"
+                style={{ fontSize: '0.96rem', color: 'rgba(180,195,220,0.88)' }}
               >
                 XR Summits offers press accreditation, speaker access, and exclusive content opportunities for credentialled media covering immersive technology, the creative economy, or Asia's digital future.
               </motion.p>
@@ -351,8 +351,8 @@ const ContactPage = () => {
                 style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)' }}
               >
                 <p
-                  className="font-mono tracking-[0.28em] uppercase mb-4 text-foreground-muted/55"
-                  style={{ fontSize: '0.5rem' }}
+                  className="font-mono tracking-[0.28em] uppercase mb-4"
+                  style={{ fontSize: '0.62rem', color: 'rgba(180,195,220,0.75)' }}
                 >
                   What's available
                 </p>
@@ -360,11 +360,12 @@ const ContactPage = () => {
                   {MEDIA_PERKS.map((perk) => (
                     <span
                       key={perk}
-                      className="px-3 py-1.5 rounded-full text-foreground-muted"
+                      className="px-3 py-1.5 rounded-full"
                       style={{
-                        fontSize: '0.72rem',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        background: 'rgba(255,255,255,0.03)',
+                        fontSize: '0.84rem',
+                        color: 'rgba(180,195,220,0.88)',
+                        border: '1px solid rgba(255,255,255,0.14)',
+                        background: 'rgba(255,255,255,0.04)',
                       }}
                     >
                       {perk}
@@ -389,7 +390,7 @@ const ContactPage = () => {
                 <p className="font-heading font-bold text-foreground mb-2" style={{ fontSize: '1.05rem' }}>
                   Apply for Media Accreditation
                 </p>
-                <p className="text-foreground-muted text-sm leading-relaxed">
+                <p className="leading-relaxed" style={{ fontSize: '0.92rem', color: 'rgba(180,195,220,0.88)' }}>
                   Fill in your details — name, outlet, role, and coverage angle — and our team will be in touch with next steps.
                 </p>
               </div>
@@ -447,7 +448,7 @@ const ContactPage = () => {
                 >
                   Not Sure Where to Start? That's Fine.
                 </h2>
-                <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.88rem' }}>
+                <p className="leading-relaxed" style={{ fontSize: '0.96rem', color: 'rgba(180,195,220,0.88)' }}>
                   Drop us a message and we'll point you in the right direction. No question is too small, no idea too early.
                 </p>
               </div>

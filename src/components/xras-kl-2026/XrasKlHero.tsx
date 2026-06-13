@@ -135,7 +135,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.26, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl mx-auto leading-relaxed mb-10"
-          style={{ fontSize: '0.9rem', lineHeight: 1.85, color: 'rgba(22,36,62,0.72)' }}
+          style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85, color: 'rgba(15,27,48,0.88)' }}
         >
           1–3 December 2026 · Malaysia International Trade and Exhibition Centre (MITEC, Kuala Lumpur)
         </motion.p>

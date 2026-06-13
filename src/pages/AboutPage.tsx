@@ -21,9 +21,9 @@ import {
   // STRATEGIC_PARTNER_SLOTS,
   OUR_MISSION,
   REGIONAL_NETWORK,
-  epicenterTarget,
+  MALAYSIA_HUB,
   networkNodes,
-  epicenterNodes,
+  regionalNodes,
 } from '../core/content/aboutPage';
 
 // Icons mapping for Why XR
@@ -119,7 +119,7 @@ const AboutPage = () => (
                 </div>
                 <p
                   className="leading-relaxed pl-3"
-                  style={{ fontSize: '0.72rem', color: 'rgba(139,155,180,0.85)', lineHeight: 1.65 }}
+                  style={{ fontSize: '0.84rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}
                 >
                   {sector.desc}
                 </p>
@@ -172,18 +172,18 @@ const AboutPage = () => (
               <div className="min-w-[700px] w-full p-6 lg:p-10">
                 <svg viewBox="0 0 850 400" className="w-full h-auto drop-shadow-md">
 
-                  {/* 1. Animated Connecting Lines */}
+                  {/* 1. International lines → Malaysia hub */}
                   {networkNodes.map((node, i) => (
                     <motion.line
                       key={`line-${node.id}`}
                       x1={node.x}
                       y1={node.y}
-                      x2={epicenterTarget.x}
-                      y2={epicenterTarget.y}
+                      x2={MALAYSIA_HUB.x}
+                      y2={MALAYSIA_HUB.y}
                       stroke={ABOUT_ACCENT}
                       strokeWidth="1.5"
                       strokeDasharray="4 6"
-                      strokeOpacity="0.25"
+                      strokeOpacity="0.3"
                       initial={{ pathLength: 0, opacity: 0 }}
                       whileInView={{ pathLength: 1, opacity: 1 }}
                       viewport={{ once: true }}
@@ -191,46 +191,60 @@ const AboutPage = () => (
                     />
                   ))}
 
-                  {/* 2. Dots & Labels */}
-                  {[...networkNodes, ...epicenterNodes].map((node, i) => {
-                    const isEpicenter = node.id === 'my' || node.id === 'id';
-                    const delay = isEpicenter ? 0.2 : 0.8 + i * 0.05;
+                  {/* Regional lines → Malaysia hub */}
+                  {regionalNodes.map((node, i) => (
+                    <motion.line
+                      key={`regional-line-${node.id}`}
+                      x1={node.x}
+                      y1={node.y}
+                      x2={MALAYSIA_HUB.x}
+                      y2={MALAYSIA_HUB.y}
+                      stroke={ABOUT_ACCENT}
+                      strokeWidth="1"
+                      strokeDasharray="3 5"
+                      strokeOpacity="0.18"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      whileInView={{ pathLength: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.2 + i * 0.15, duration: 1.4, ease: "easeOut" }}
+                    />
+                  ))}
+
+                  {/* 2. International & regional dots */}
+                  {[...networkNodes, ...regionalNodes].map((node, i) => {
+                    const isRegional = regionalNodes.some((r) => r.id === node.id);
+                    const delay = 0.8 + i * 0.05;
 
                     return (
                       <g key={`node-${node.id}`}>
-                        {/* Pulsing Aura */}
                         <motion.circle
                           cx={node.x}
                           cy={node.y}
-                          r={isEpicenter ? 20 : 12}
+                          r={12}
                           fill="transparent"
                           stroke={ABOUT_ACCENT}
                           strokeWidth="1"
                           initial={{ scale: 0.2, opacity: 0 }}
-                          animate={{ scale: 1.8, opacity: [0, 0.4, 0] }}
-                          transition={{ repeat: Infinity, duration: isEpicenter ? 2.5 : 3, delay: i * 0.2 }}
+                          animate={{ scale: 1.8, opacity: [0, 0.35, 0] }}
+                          transition={{ repeat: Infinity, duration: 3, delay: i * 0.2 }}
                         />
-
-                        {/* Solid Center Dot */}
                         <motion.circle
                           cx={node.x}
                           cy={node.y}
-                          r={isEpicenter ? 7 : 4}
+                          r={isRegional ? 5 : 4}
                           fill={ABOUT_ACCENT}
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
                           viewport={{ once: true }}
                           transition={{ delay, type: "spring", stiffness: 200, damping: 10 }}
-                          style={{ filter: `drop-shadow(0 0 8px ${ABOUT_ACCENT})` }}
+                          style={{ filter: `drop-shadow(0 0 6px ${ABOUT_ACCENT})` }}
                         />
-
-                        {/* Legible Text Label */}
                         <motion.text
                           x={node.x}
-                          y={node.y - (isEpicenter ? 16 : 12)}
+                          y={node.y - 12}
                           fill="#f0f4ff"
-                          fontSize={isEpicenter ? "16px" : "13px"}
-                          fontWeight={isEpicenter ? "bold" : "normal"}
+                          fontSize={isRegional ? "14px" : "13px"}
+                          fontWeight={isRegional ? "600" : "normal"}
                           textAnchor="middle"
                           letterSpacing="0.05em"
                           initial={{ opacity: 0, y: 5 }}
@@ -245,21 +259,62 @@ const AboutPage = () => (
                     );
                   })}
 
-                  {/* Epicenter Label Tag */}
-                  <motion.text
-                    x={epicenterTarget.x + 40}
-                    y={epicenterTarget.y}
-                    fill={ABOUT_ACCENT}
-                    fontSize="10px"
-                    fontWeight="bold"
-                    letterSpacing="0.3em"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 0.7 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 2, duration: 1 }}
-                  >
-                    EPICENTER
-                  </motion.text>
+                  {/* 3. Malaysia hub — primary epicenter */}
+                  <g key="node-malaysia-hub">
+                    <motion.circle
+                      cx={MALAYSIA_HUB.x}
+                      cy={MALAYSIA_HUB.y}
+                      r={28}
+                      fill="transparent"
+                      stroke={ABOUT_ACCENT}
+                      strokeWidth="1.5"
+                      initial={{ scale: 0.2, opacity: 0 }}
+                      animate={{ scale: 1.6, opacity: [0, 0.5, 0] }}
+                      transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+                    />
+                    <motion.circle
+                      cx={MALAYSIA_HUB.x}
+                      cy={MALAYSIA_HUB.y}
+                      r={10}
+                      fill={ABOUT_ACCENT}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 10 }}
+                      style={{ filter: `drop-shadow(0 0 14px ${ABOUT_ACCENT})` }}
+                    />
+                    <motion.text
+                      x={MALAYSIA_HUB.x}
+                      y={MALAYSIA_HUB.y - 20}
+                      fill="#f0f4ff"
+                      fontSize="18px"
+                      fontWeight="bold"
+                      textAnchor="middle"
+                      letterSpacing="0.06em"
+                      initial={{ opacity: 0, y: 5 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4, duration: 0.4 }}
+                      style={{ fontFamily: 'var(--font-sans)', textShadow: '0 2px 6px rgba(0,0,0,0.9)' }}
+                    >
+                      {MALAYSIA_HUB.label}
+                    </motion.text>
+                    <motion.text
+                      x={MALAYSIA_HUB.x}
+                      y={MALAYSIA_HUB.y + 28}
+                      fill={ABOUT_ACCENT}
+                      fontSize="9px"
+                      fontWeight="bold"
+                      textAnchor="middle"
+                      letterSpacing="0.28em"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 0.85 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1.6, duration: 0.8 }}
+                    >
+                      EPICENTER
+                    </motion.text>
+                  </g>
                 </svg>
               </div>
             </div>

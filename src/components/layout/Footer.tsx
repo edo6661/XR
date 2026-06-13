@@ -42,7 +42,7 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => (
     <Link
       to={to}
       className="group inline-flex items-center gap-1.5 transition-colors duration-250 hover:text-foreground"
-      style={{ color: 'rgba(107,127,163,0.58)', fontSize: '0.76rem' }}
+      style={{ color: 'rgba(160,178,210,0.72)', fontSize: '0.82rem' }}
     >
       <span
         className="w-0 h-px transition-all duration-300 group-hover:w-3"
@@ -52,6 +52,19 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => (
       {label}
     </Link>
   </li>
+);
+
+const FooterColumnTitle = ({ children }: { children: ReactNode }) => (
+  <h4
+    className="font-heading font-bold tracking-[0.22em] uppercase pb-3 mb-1"
+    style={{
+      fontSize: '0.92rem',
+      color: 'rgba(240,244,255,0.95)',
+      borderBottom: '1px solid rgba(255,255,255,0.1)',
+    }}
+  >
+    {children}
+  </h4>
 );
 
 const Footer = () => {
@@ -115,8 +128,8 @@ const Footer = () => {
 
             <p
               style={{
-                fontSize: '0.78rem',
-                color: 'rgba(107,127,163,0.65)',
+                fontSize: '0.86rem',
+                color: 'rgba(180,195,220,0.82)',
                 lineHeight: 1.8,
                 maxWidth: '320px',
               }}
@@ -126,8 +139,8 @@ const Footer = () => {
 
             <p
               style={{
-                fontSize: '0.72rem',
-                color: 'rgba(107,127,163,0.5)',
+                fontSize: '0.82rem',
+                color: 'rgba(160,178,210,0.78)',
                 lineHeight: 1.75,
                 maxWidth: '320px',
               }}
@@ -148,7 +161,7 @@ const Footer = () => {
                   style={{
                     background: 'rgba(255,255,255,0.035)',
                     border: '1px solid rgba(255,255,255,0.055)',
-                    color: 'rgba(107,127,163,0.5)',
+                    color: 'rgba(180,195,220,0.72)',
                   }}
                   whileHover={{ scale: 1.08 }}
                   onMouseEnter={(e) => {
@@ -160,7 +173,7 @@ const Footer = () => {
                   onMouseLeave={(e) => {
                     const el = e.currentTarget as HTMLAnchorElement;
                     el.style.borderColor = 'rgba(255,255,255,0.055)';
-                    el.style.color = 'rgba(107,127,163,0.5)';
+                    el.style.color = 'rgba(180,195,220,0.72)';
                     el.style.background = 'rgba(255,255,255,0.035)';
                   }}
                 >
@@ -172,7 +185,7 @@ const Footer = () => {
             {/* Contact info */}
             <div
               className="flex flex-col gap-1.5"
-              style={{ fontSize: '0.7rem', color: 'rgba(107,127,163,0.42)', lineHeight: 1.8 }}
+              style={{ fontSize: '0.8rem', color: 'rgba(180,195,220,0.78)', lineHeight: 1.8 }}
             >
               <a
                 href={`tel:${COMPANY.phone}`}
@@ -196,13 +209,8 @@ const Footer = () => {
 
           {/* Links columns */}
           <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="flex flex-col gap-4">
-              <h4
-                className="font-heading font-bold tracking-[0.32em] uppercase"
-                style={{ fontSize: '0.58rem', color: 'rgba(240,244,255,0.35)' }}
-              >
-                Events 2026
-              </h4>
+            <div className="flex flex-col gap-3">
+              <FooterColumnTitle>Events 2026</FooterColumnTitle>
               <ul className="flex flex-col gap-2.5">
                 {eventLinks.map((link) => (
                   <FooterLink key={link.to} {...link} />
@@ -210,13 +218,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="flex flex-col gap-4">
-              <h4
-                className="font-heading font-bold tracking-[0.32em] uppercase"
-                style={{ fontSize: '0.58rem', color: 'rgba(240,244,255,0.35)' }}
-              >
-                Explore
-              </h4>
+            <div className="flex flex-col gap-3">
+              <FooterColumnTitle>Explore</FooterColumnTitle>
               <ul className="flex flex-col gap-2.5">
                 {companyLinks.map((link) => (
                   <FooterLink key={link.to} {...link} />
@@ -224,13 +227,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
-              <h4
-                className="font-heading font-bold tracking-[0.32em] uppercase"
-                style={{ fontSize: '0.58rem', color: 'rgba(240,244,255,0.35)' }}
-              >
-                Legal
-              </h4>
+            <div className="flex flex-col gap-3 sm:col-span-2 lg:col-span-1">
+              <FooterColumnTitle>Legal</FooterColumnTitle>
               <ul className="flex flex-col gap-2.5">
                 {LEGAL_PAGES.map((page) => (
                   <FooterLink key={page.slug} label={page.title} to={page.path} />
@@ -245,19 +243,19 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
-          <p style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.35)' }}>
+          <p style={{ fontSize: '0.76rem', color: 'rgba(160,178,210,0.72)' }}>
             XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) ©2026. All Rights Reserved.
           </p>
 
           <a
             href={`mailto:${COMPANY.email}`}
             className="transition-colors duration-250"
-            style={{ fontSize: '0.66rem', color: 'rgba(107,127,163,0.35)' }}
+            style={{ fontSize: '0.76rem', color: 'rgba(160,178,210,0.72)' }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.65)';
+              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(251,146,60,0.85)';
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(107,127,163,0.35)';
+              (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(160,178,210,0.72)';
             }}
           >
             {COMPANY.email}
@@ -266,12 +264,12 @@ const Footer = () => {
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="group flex items-center gap-2 transition-colors duration-250"
-            style={{ color: 'rgba(107,127,163,0.35)', fontSize: '0.66rem' }}
+            style={{ color: 'rgba(160,178,210,0.72)', fontSize: '0.76rem' }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = 'rgba(251,146,60,0.65)';
+              (e.currentTarget as HTMLButtonElement).style.color = 'rgba(251,146,60,0.85)';
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.color = 'rgba(107,127,163,0.35)';
+              (e.currentTarget as HTMLButtonElement).style.color = 'rgba(160,178,210,0.72)';
             }}
             aria-label="Back to top"
           >

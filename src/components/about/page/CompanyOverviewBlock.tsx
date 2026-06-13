@@ -102,10 +102,10 @@ const CompanyOverviewBlock = () => {
                   transition={{ delay: 0.1 + i * 0.06, duration: 0.45 }}
                   className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono uppercase tracking-[0.14em]"
                   style={{
-                    fontSize: '0.52rem',
+                    fontSize: '0.64rem',
                     border: '1px solid rgba(255,255,255,0.12)',
                     background: 'rgba(255,255,255,0.05)',
-                    color: 'rgba(240,244,255,0.75)',
+                    color: 'rgba(240,244,255,0.9)',
                   }}
                 >
                   <span
@@ -153,7 +153,7 @@ const CompanyOverviewBlock = () => {
               />
               <p
                 className="font-mono uppercase tracking-[0.2em]"
-                style={{ fontSize: '0.55rem', color: 'rgba(139,155,180,0.75)' }}
+                style={{ fontSize: '0.68rem', color: 'rgba(180,195,220,0.88)' }}
               >
                 Founded by Louis Clovis
               </p>

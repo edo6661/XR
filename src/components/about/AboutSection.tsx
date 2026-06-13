@@ -207,7 +207,7 @@ const AboutSection = () => {
               <span className="text-accent font-semibold">XR Asia Summit </span>{' '}
               is connecting innovators across Extended Reality (XR), Spatial Media, AVXR, immersive technologies, and the evolving future of esports.
             </p>
-            <p data-para style={{ fontSize: '0.85rem', color: 'rgba(107,127,163,0.9)', lineHeight: 1.8 }}>
+            <p data-para style={{ fontSize: '0.92rem', color: 'rgba(200,215,240,0.92)', lineHeight: 1.8 }}>
               It serves as the region’s central hub for showcasing production-ready solutions and forging high-value commercial partnerships. XR Summit represents a decisive shift in the immersive industry.
             </p>
             <p

@@ -118,8 +118,8 @@ const SpotlightCard = ({
     if (descriptionRef.current) {
       // PERBAIKAN: Mengembalikan ke fontSize dan fontWeight awal
       gsap.to(descriptionRef.current, {
-        color: 'rgba(107,127,163,0.82)',
-        fontSize: '0.73rem',
+        color: 'rgba(200,215,240,0.9)',
+        fontSize: '0.8rem',
         fontWeight: 'normal',
         duration: 0.7,
         ease: 'power3.out',
@@ -242,7 +242,7 @@ const SpotlightCard = ({
           <p
             ref={descriptionRef}
             className="leading-relaxed line-clamp-4 will-change-transform"
-            style={{ fontSize: '0.73rem', color: 'rgba(107,127,163,0.82)' }}
+            style={{ fontSize: '0.8rem', color: 'rgba(200,215,240,0.9)' }}
           >
             {description}
           </p>

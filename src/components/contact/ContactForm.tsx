@@ -3,8 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { COMPANY } from '../../core/navigation/routes';
 import { CONTACT_SUBJECTS } from '../../core/content/contactPage';
 
+const LABEL_CLASS =
+  'font-mono text-[0.62rem] tracking-[0.28em] uppercase text-[rgba(180,195,220,0.78)]';
+
 const INPUT_CLASS =
-  'w-full px-4 py-3 rounded-sm bg-[rgba(255,255,255,0.04)] border border-white/10 text-foreground text-sm outline-none focus:border-[rgba(251,146,60,0.45)] transition-colors placeholder:text-foreground-muted/30';
+  'w-full px-4 py-3 rounded-sm bg-[rgba(255,255,255,0.04)] border border-white/10 text-foreground text-base outline-none focus:border-[rgba(251,146,60,0.45)] transition-colors placeholder:text-foreground-muted/45';
 
 interface ContactFormProps {
   initialSubject?: string;
@@ -78,7 +81,7 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
     >
       {/* Subject */}
       <label className="flex flex-col gap-1.5">
-        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Subject</span>
+        <span className={LABEL_CLASS}>Subject</span>
         <select
           name="subject"
           required
@@ -95,11 +98,11 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
       {/* Name + Job Title */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Full name</span>
+          <span className={LABEL_CLASS}>Full name</span>
           <input name="name" type="text" required autoComplete="name" className={INPUT_CLASS} />
         </label>
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Job title</span>
+          <span className={LABEL_CLASS}>Job title</span>
           <input name="jobtitle" type="text" autoComplete="organization-title" className={INPUT_CLASS} />
         </label>
       </div>
@@ -107,18 +110,18 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
       {/* Email + Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Email</span>
+          <span className={LABEL_CLASS}>Email</span>
           <input name="email" type="email" required autoComplete="email" className={INPUT_CLASS} />
         </label>
         <label className="flex flex-col gap-1.5">
-          <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Phone (optional)</span>
+          <span className={LABEL_CLASS}>Phone (optional)</span>
           <input name="phone" type="tel" autoComplete="tel" className={INPUT_CLASS} />
         </label>
       </div>
 
       {/* Organisation */}
       <label className="flex flex-col gap-1.5">
-        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Organisation</span>
+        <span className={LABEL_CLASS}>Organisation</span>
         <input name="organisation" type="text" className={INPUT_CLASS} />
       </label>
 
@@ -134,17 +137,17 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
             className="flex flex-col gap-4 overflow-hidden"
           >
             <div
-              className="px-4 py-3 rounded-sm text-[0.72rem] text-foreground-muted/70 leading-relaxed"
-              style={{ border: '1px solid rgba(251,146,60,0.15)', background: 'rgba(251,146,60,0.04)' }}
+              className="px-4 py-3 rounded-sm text-[0.88rem] leading-relaxed"
+              style={{ border: '1px solid rgba(251,146,60,0.15)', background: 'rgba(251,146,60,0.04)', color: 'rgba(180,195,220,0.88)' }}
             >
               Applying for press accreditation — please provide your outlet and coverage angle below.
             </div>
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Outlet / Publication</span>
+              <span className={LABEL_CLASS}>Outlet / Publication</span>
               <input name="outlet" type="text" className={INPUT_CLASS} />
             </label>
             <label className="flex flex-col gap-1.5">
-              <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Coverage angle</span>
+              <span className={LABEL_CLASS}>Coverage angle</span>
               <textarea name="coverage" rows={2} className={`${INPUT_CLASS} resize-none`} placeholder="What story are you covering?" />
             </label>
           </motion.div>
@@ -153,7 +156,7 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
 
       {/* Message */}
       <label className="flex flex-col gap-1.5">
-        <span className="font-mono text-[0.5rem] tracking-[0.32em] uppercase text-foreground-muted/60">Message</span>
+        <span className={LABEL_CLASS}>Message</span>
         <textarea
           name="message"
           rows={5}
@@ -164,7 +167,7 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
 
       <button
         type="submit"
-        className="w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.7rem] text-[#050505] transition-shadow hover:shadow-[0_0_28px_rgba(251,146,60,0.35)] active:scale-[0.99]"
+        className="w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.78rem] text-[#050505] transition-shadow hover:shadow-[0_0_28px_rgba(251,146,60,0.35)] active:scale-[0.99]"
         style={{
           background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
           border: '1px solid rgba(251,146,60,0.5)',

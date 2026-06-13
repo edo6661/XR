@@ -137,7 +137,7 @@ export const MEDIA_PRESS = [
 export const REGIONAL_NETWORK = {
   title: "Regional Network",
   highlight: "Asia sets the stage — the world shows up.",
-  body: "Our speakers and participants have come from the UK, US, Canada, France, Germany, Spain, the Netherlands, Turkey, Japan, China, Vietnam, Indonesia, and beyond. Because when Asia's immersive tech industry moves, the world pays attention.",
+  body: "Our speakers and participants have come from the UK, US, Canada, France, Germany, Spain, the Netherlands, Turkey, Japan, China, Vietnam, Indonesia, and beyond. Malaysia is the most preeminent hub in this network — when Asia's immersive tech industry moves, the world pays attention.",
 } as const;
 
 export const networkNodes = [
@@ -154,9 +154,14 @@ export const networkNodes = [
   { id: "vn", label: "Vietnam", x: 570, y: 190 },
 ];
 
-export const epicenterNodes = [
-  { id: "my", label: "Malaysia", x: 620, y: 260 },
-  { id: "id", label: "Indonesia", x: 660, y: 310 },
-];
+/** Primary hub — all international lines converge here */
+export const MALAYSIA_HUB = { id: "my", label: "Malaysia", x: 610, y: 248 };
 
-export const epicenterTarget = { x: 640, y: 285 };
+/** Secondary regional nodes — connect to Malaysia, not treated as epicenter */
+export const regionalNodes = [{ id: "id", label: "Indonesia", x: 690, y: 305 }];
+
+/** @deprecated use MALAYSIA_HUB — kept for any legacy imports */
+export const epicenterTarget = { x: MALAYSIA_HUB.x, y: MALAYSIA_HUB.y };
+
+/** @deprecated use MALAYSIA_HUB + regionalNodes */
+export const epicenterNodes = [MALAYSIA_HUB, ...regionalNodes];

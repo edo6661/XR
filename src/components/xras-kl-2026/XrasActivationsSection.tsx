@@ -283,7 +283,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
                       {item.label}
                     </span>
                     {item.detail && (
-                      <span className="ml-2" style={{ fontSize: '0.82rem', color: '#a8b8d0' }}>
+                      <span className="ml-2" style={{ fontSize: '0.9rem', color: 'rgba(200,215,240,0.88)' }}>
                         — {item.detail}
                       </span>
                     )}

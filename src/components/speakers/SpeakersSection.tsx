@@ -124,19 +124,19 @@ const SpeakerCard = ({
         >
           {speaker.name}
         </h3>
-        <p style={{ fontSize: '0.65rem', color: `${accent}99` }}>{speaker.role}</p>
+        <p style={{ fontSize: '0.76rem', color: accent, fontWeight: 500 }}>{speaker.role}</p>
         {speaker.company ? (
-          <p style={{ fontSize: '0.62rem', color: 'rgba(240,244,255,0.5)' }}>{speaker.company}</p>
+          <p style={{ fontSize: '0.72rem', color: 'rgba(220,230,248,0.82)' }}>{speaker.company}</p>
         ) : null}
         {speaker.focusAreas.length > 0 ? (
           <div className="mt-2 pt-2 border-t border-white/[0.06]">
             <p
               className="font-semibold tracking-[0.08em] uppercase mb-1"
-              style={{ fontSize: '0.5rem', color: 'rgba(139,155,180,0.55)' }}
+              style={{ fontSize: '0.62rem', color: 'rgba(180,195,220,0.85)' }}
             >
               Focus Areas
             </p>
-            <p style={{ fontSize: '0.58rem', color: 'rgba(240,244,255,0.45)', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.68rem', color: 'rgba(220,230,248,0.78)', lineHeight: 1.55 }}>
               {speaker.focusAreas.join(' · ')}
             </p>
           </div>
@@ -396,7 +396,7 @@ const SpeakersSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 pt-10"
             style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
           >
-            <p style={{ fontSize: '0.78rem', color: 'rgba(139,155,180,0.6)' }}>
+            <p style={{ fontSize: '0.9rem', color: 'rgba(180,195,220,0.88)', lineHeight: 1.65 }}>
               Are you a practitioner, researcher, or industry leader in XR, AI, or spatial media?
             </p>
             <Link

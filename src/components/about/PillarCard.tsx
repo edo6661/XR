@@ -101,8 +101,8 @@ const PillarCard = ({
       <p
         className="leading-relaxed"
         style={{
-          fontSize: '0.7rem',
-          color: 'rgba(107,127,163,0.82)',
+          fontSize: '0.82rem',
+          color: 'rgba(180,195,220,0.88)',
           lineHeight: 1.68,
         }}
       >
