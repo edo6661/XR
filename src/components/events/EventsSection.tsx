@@ -276,7 +276,7 @@ const EventsSection = () => {
                       />
                     )}
                     <span
-                      className="font-heading font-black leading-none gradient-text-accent"
+                      className="font-heading font-black leading-none text-accent"
                       style={{
                         fontSize: 'clamp(2rem, 4vw, 2.8rem)',
                         filter: 'drop-shadow(0 1.5px 0 rgba(255,255,255,0.9))',
@@ -285,17 +285,12 @@ const EventsSection = () => {
                       {stat.value}
                     </span>
                     <span
-                      className="font-heading font-bold"
-                      style={{
-                        fontSize: '0.7rem',
-                        color: '#1a2e50',
-                        letterSpacing: '0.07em',
-                        textTransform: 'uppercase',
-                      }}
+                      className="font-heading font-bold text-sm uppercase tracking-[0.07em]"
+                      style={{ color: '#1a2e50' }}
                     >
                       {stat.label}
                     </span>
-                    <span style={{ fontSize: '0.72rem', color: 'rgba(26,46,80,0.78)' }}>
+                    <span className="text-sm leading-relaxed" style={{ color: 'rgba(26,46,80,0.82)' }}>
                       {stat.sub}
                     </span>
                   </motion.div>

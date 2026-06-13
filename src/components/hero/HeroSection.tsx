@@ -318,10 +318,7 @@ const HeroSection = () => {
         aria-label="Scroll to Choose Your Experience"
         style={{ pointerEvents: showHint ? 'auto' : 'none' }}
       >
-        <span
-          className="font-bold tracking-[0.55em] uppercase transition-colors duration-300 group-hover:text-accent"
-          style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.4)' }}
-        >
+        <span className="font-mono text-sm font-bold tracking-[0.38em] uppercase text-foreground-muted transition-colors duration-300 group-hover:text-accent">
           Experience More
         </span>
         <div className="relative w-px h-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>

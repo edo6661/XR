@@ -23,7 +23,7 @@ const ContactDetailsSection = () => (
       aria-hidden="true"
     />
 
-    <div className="relative z-10 max-w-4xl mx-auto px-6">
+    <div className="relative z-10 max-w-5xl mx-auto px-6">
       <SectionEyebrow align="center">Contact</SectionEyebrow>
 
       <motion.div
@@ -52,7 +52,10 @@ const ContactDetailsSection = () => (
             className="font-heading font-bold text-foreground"
             style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)' }}
           >
-            Join the Next Phase Where Asia Builds Its Spatial Future
+            Join the Next Phase Where Asia Builds Its {' '}
+            <span className='gradient-text-accent'>
+              Spatial Future
+            </span>
           </h2>
 
           <p
