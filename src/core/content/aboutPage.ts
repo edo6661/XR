@@ -17,7 +17,7 @@ export const WHY_XR_PILLARS = [
   {
     title: "Premier Event Organiser",
     description:
-      "XR Summit is the leading platform for immersive XR technology, bringing together visionaries in Virtual Production, XR technology, and Immersive tech.",
+      "Leading platform for immersive XR technology, bringing together visionaries in Virtual Production, XR technology, and Immersive tech.",
     accentColor: "#ef783d",
     featured: true,
   },
