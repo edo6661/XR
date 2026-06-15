@@ -93,7 +93,9 @@ const AboutPage = () => (
       eyebrow="Industry Focus"
       title={
         <>
-          Industry <span className="gradient-text-accent">Focus</span>
+          Where{" "}
+          <span className="gradient-text-accent">immersive technology</span>
+          {" "}meets real-world impact.
         </>
       }
     >

@@ -16,9 +16,7 @@ type Partner = {
 };
 
 const GOVERNMENT_PARTNERS: Partner[] = [
-  { name: 'Broadcast Elements (BE)', src: '/all-partner-logos/Logo_BE_Malaysia.png' },
   { name: 'Centre of Excellence (COE)', src: '/all-partner-logos/COE LOGO_PNG_Med res.png' },
-  { name: 'Digital Content Creation (DCC)', src: '/all-partner-logos/DCC-Logo_OP.png' },
   { name: 'FINAS', src: '/all-partner-logos/FINAS.png' },
   { name: 'MDEC', src: '/all-partner-logos/MDEC_logo.png' },
   { name: 'POSTAM', src: '/all-partner-logos/postamsmall.png' },
