@@ -52,9 +52,7 @@ const Home = () => {
 
       <div className="w-full relative">
         <StackedSection zIndex={60} isLast>
-          <div className="flex min-h-screen w-full flex-col justify-center">
-            <ContactDetailsSection />
-          </div>
+          <ContactDetailsSection />
         </StackedSection>
       </div>
     </div>

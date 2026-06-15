@@ -66,9 +66,14 @@ const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProp
     <div ref={outerRef} className="relative w-full" style={{ zIndex }}>
       <div
         ref={sectionRef}
-        className="relative w-full bg-background will-change-transform"
+        className={`relative w-full will-change-transform ${
+          isLast ? 'min-h-dvh bg-transparent' : 'bg-background'
+        }`}
       >
-        <div ref={contentRef} className="w-full h-full relative">
+        <div
+          ref={contentRef}
+          className={`w-full relative ${isLast ? 'min-h-dvh' : 'h-full'}`}
+        >
           {children}
         </div>
       </div>
