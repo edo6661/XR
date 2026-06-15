@@ -17,7 +17,7 @@ const FLAGSHIP_EVENTS = [
     accentColor: '#fb923c',
     tag: 'XRAS',
     to: '/xras-kl-2026',
-    imageSrc: '/3-gateway-images/XR AI Summit 2026_Main Image.jpeg',
+    imageSrc: '/3-gateway-images/XRAS_2026.png',
     isFeatured: true,
   },
   {
@@ -32,7 +32,6 @@ const FLAGSHIP_EVENTS = [
     imagePosition: 'center',
     imageDark: false,
     isFeatured: true,
-    imageTransform: 'scale(1.15) translateY(-10%)',
   },
 ] as const;
 
