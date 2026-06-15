@@ -1,3 +1,16 @@
+import { COMPANY } from "../navigation/routes";
+
+export const ENQUIRY_EMAIL_BODY = `Dear XR SUMMITS Team,
+I am reaching out to express my interest would like to learn more about the available opportunities.
+I look forward to hearing from you.`;
+
+/** Uniform mailto link — only subject differs per CTA */
+export function buildContactMailto(subjectLabel: string): string {
+  const subject = encodeURIComponent(`Enquiry - ${subjectLabel}`);
+  const body = encodeURIComponent(ENQUIRY_EMAIL_BODY);
+  return `mailto:${COMPANY.email}?subject=${subject}&body=${body}`;
+}
+
 export const CONTACT_SUBJECTS = [
   "General Enquiries",
   "Partnerships",
@@ -30,55 +43,58 @@ export const PARTNERSHIP_CARDS = [
   {
     id: "sponsors",
     label: "Sponsors",
-    heading: "Put Your Brand at the Centre of Asia's XR Ecosystem",
-    body: "From naming rights to floor presence, our sponsorship packages are built around visibility, lead generation, and genuine industry credibility.",
-    ctas: [
-      {
-        label: "Download Sponsorship Package",
-        href: "#",
-        variant: "orange" as const,
-      },
-      { label: "Talk to Our Team", href: "#", variant: "ghost" as const },
-    ],
+    body: "Put your brand at the centre of Asia's XR ecosystem. From naming rights to floor presence, our sponsorship packages are built around visibility, lead generation, and genuine industry credibility.",
+    cta: {
+      label: "Sponsorship Package Details",
+      subject: "Sponsorship Package Details",
+    },
   },
   {
     id: "exhibitors",
     label: "Exhibitors",
-    heading: "Showcase to Enterprise Buyers & Government Agencies",
-    body: "Present your product or solution to a curated audience of enterprise buyers, government agencies, and industry practitioners actively looking to adopt immersive technology.",
-    ctas: [
-      { label: "Apply to Exhibit", href: "#", variant: "orange" as const },
-      { label: "View Booth Options", href: "#", variant: "ghost" as const },
-    ],
+    body: "Showcase your product or solution to a curated audience of enterprise buyers, government agencies, and industry practitioners actively looking to adopt immersive technology.",
+    cta: {
+      label: "Exhibitor Package Details",
+      subject: "Exhibitor Package Details",
+    },
   },
   {
     id: "government",
     label: "Government",
-    heading: "Align With National Digital Economy Agendas",
-    body: "We work with government agencies and ministries to align our events with national digital economy and creative industry initiatives. Let's explore how XR Summits can support your work.",
-    ctas: [{ label: "Get in Touch", href: "#", variant: "orange" as const }],
+    body: "We work with government agencies and ministries to align our events with national digital economy and creative industry agendas. Let's explore how XR SUMMITS can support your initiatives.",
+    cta: {
+      label: "Government Partnership Details",
+      subject: "Government Partnership Details",
+    },
   },
   {
     id: "universities",
     label: "Universities",
-    heading: "Connect Students & Faculty With Industry",
-    body: "XR Summits offers universities dedicated showcase space, recruitment exposure, and direct access to the region's XR talent pipeline.",
-    ctas: [{ label: "Partner With Us", href: "#", variant: "orange" as const }],
+    body: "Connect your students and faculty with industry. XR SUMMITS offers universities dedicated showcase space, recruitment exposure, and direct access to the region's XR talent pipeline.",
+    cta: {
+      label: "University Partnership Details",
+      subject: "University Partnership Details",
+    },
   },
 ] as const;
 
 export const SPEAKER_EVENTS = [
   {
     label: "Apply for XRAS KL '26",
-    href: "#",
+    subject: "Speaker Application — XRAS KL '26",
     event: "XR Asia Summits 2026",
   },
   {
     label: "Apply for AIXR Sarawak '26",
-    href: "#",
+    subject: "Speaker Application — AIXR Sarawak '26",
     event: "AI-XR Cultural Innovation Forum",
   },
 ] as const;
+
+export const MEDIA_ACCREDITATION_CTA = {
+  label: "Apply for Media Accreditation",
+  subject: "Media Accreditation",
+} as const;
 
 export const SOCIAL_LINKS = [
   {

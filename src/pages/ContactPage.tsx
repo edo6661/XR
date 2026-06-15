@@ -2,12 +2,18 @@ import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ExternalLink, ChevronRight, Mic2, Newspaper, Send, Building2, GraduationCap, Landmark, LayoutGrid } from 'lucide-react';
+import { ChevronRight, Mic2, Newspaper, Send, Building2, GraduationCap, Landmark, LayoutGrid } from 'lucide-react';
 import SectionEyebrow from '../components/ui/SectionEyebrow';
 import ContactForm from '../components/contact/ContactForm';
 import ContactSidebar from '../components/contact/ContactSidebar';
 import { LEGAL_PAGES } from '../core/content/legalPages';
-import { PARTNERSHIP_CARDS, SPEAKER_EVENTS, MEDIA_PERKS } from '../core/content/contactPage';
+import {
+  PARTNERSHIP_CARDS,
+  SPEAKER_EVENTS,
+  MEDIA_PERKS,
+  MEDIA_ACCREDITATION_CTA,
+  buildContactMailto,
+} from '../core/content/contactPage';
 
 /* ── Fade-up variant shared across sections ─── */
 const fadeUp = (delay = 0) => ({
@@ -25,54 +31,13 @@ const CARD_ICONS: Record<string, React.ReactNode> = {
   universities: <GraduationCap size={18} />,
 };
 
-const BRAND_PURPLE = '#3953a3';
-
-/* ── Shared CTA button ─── */
-const CtaBtn = ({
-  href,
-  variant,
-  children,
-}: {
-  href: string;
-  variant: 'orange' | 'purple' | 'ghost';
-  children: React.ReactNode;
-}) => {
-  if (variant === 'orange') {
-    return (
-      <a
-        href={href}
-        className="btn-orange inline-flex items-center gap-1.5 px-5 py-2.5"
-      >
-        {children}
-        <ChevronRight size={12} />
-      </a>
-    );
-  }
-
-  if (variant === 'purple') {
-    return (
-      <a
-        href={href}
-        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.72rem] text-[#f0f4ff] transition-shadow hover:shadow-[0_0_22px_rgba(57,83,163,0.4)] active:scale-[0.99]"
-        style={{ background: `linear-gradient(135deg, ${BRAND_PURPLE}, #2d4285)`, border: '1px solid rgba(57,83,163,0.55)' }}
-      >
-        {children}
-        <ChevronRight size={12} />
-      </a>
-    );
-  }
-
-  return (
-    <a
-      href={href}
-      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.72rem] text-foreground-muted transition-colors hover:text-accent"
-      style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.03)' }}
-    >
-      {children}
-      <ExternalLink size={11} />
-    </a>
-  );
-};
+/* ── Uniform mailto CTA button ─── */
+const MailtoBtn = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a href={href} className="btn-orange inline-flex items-center gap-1.5 px-5 py-2.5">
+    {children}
+    <ChevronRight size={12} />
+  </a>
+);
 
 /* ═══════════════════════════════════════════════ */
 const ContactPage = () => {
@@ -189,23 +154,13 @@ const ContactPage = () => {
                       {card.label}
                     </span>
                   </div>
-                  <h3
-                    className="font-heading font-bold text-foreground mb-3 leading-snug"
-                    style={{ fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)' }}
-                  >
-                    {card.heading}
-                  </h3>
                   <p className="text-copy-sm">
                     {card.body}
                   </p>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {card.ctas.map((cta) => (
-                    <CtaBtn key={cta.label} href={cta.href} variant={cta.variant}>
-                      {cta.label}
-                    </CtaBtn>
-                  ))}
-                </div>
+                <MailtoBtn href={buildContactMailto(card.cta.subject)}>
+                  {card.cta.label}
+                </MailtoBtn>
               </motion.div>
             ))}
           </div>
@@ -269,7 +224,7 @@ const ContactPage = () => {
                 <motion.div
                   key={ev.label}
                   {...fadeUp(i * 0.1)}
-                  className="flex items-center justify-between surface-card p-6 gap-4"
+                  className="flex flex-col surface-card p-6 gap-5"
                 >
                   <div className="flex items-start gap-4">
                     <div
@@ -287,7 +242,7 @@ const ContactPage = () => {
                       </p>
                     </div>
                   </div>
-                  <CtaBtn href={ev.href} variant="purple">{ev.label}</CtaBtn>
+                  <MailtoBtn href={buildContactMailto(ev.subject)}>{ev.label}</MailtoBtn>
                 </motion.div>
               ))}
             </div>
@@ -308,7 +263,7 @@ const ContactPage = () => {
         <div className="max-w-6xl mx-auto">
           <SectionEyebrow>Media Enquiries</SectionEyebrow>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left */}
+            {/* Left — intro + accreditation CTA */}
             <div>
               <motion.h2
                 {...fadeUp(0)}
@@ -325,58 +280,47 @@ const ContactPage = () => {
               >
                 XR Summits offers press accreditation, speaker access, and exclusive content opportunities for credentialled media covering immersive technology, the creative economy, or Asia's digital future.
               </motion.p>
-              {/* Available perks */}
               <motion.div
                 {...fadeUp(0.12)}
-                className="surface-card p-6"
+                className="surface-card p-8 flex flex-col items-start gap-6"
               >
-                <p className="text-micro-label mb-4">
-                  What's available
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {MEDIA_PERKS.map((perk) => (
-                    <span
-                      key={perk}
-                      className="chip-tag"
-                    >
-                      {perk}
-                    </span>
-                  ))}
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{ border: '1px solid rgba(251,146,60,0.25)', background: 'rgba(251,146,60,0.07)' }}
+                >
+                  <Newspaper size={20} className="text-accent" />
                 </div>
+                <div>
+                  <p className="font-heading font-bold text-foreground mb-2" style={{ fontSize: '1.05rem' }}>
+                    {MEDIA_ACCREDITATION_CTA.label}
+                  </p>
+                  <p className="text-copy-sm">
+                    Fill in your details — name, outlet, role, and coverage angle — and our team will be in touch with next steps.
+                  </p>
+                </div>
+                <MailtoBtn href={buildContactMailto(MEDIA_ACCREDITATION_CTA.subject)}>
+                  {MEDIA_ACCREDITATION_CTA.label}
+                </MailtoBtn>
               </motion.div>
             </div>
-            {/* Right — CTA card */}
+            {/* Right — perks */}
             <motion.div
               {...fadeUp(0.1)}
-              className="surface-card p-8 flex flex-col items-start gap-6"
+              className="surface-card p-6"
             >
-              <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center"
-                style={{ border: '1px solid rgba(251,146,60,0.25)', background: 'rgba(251,146,60,0.07)' }}
-              >
-                <Newspaper size={20} className="text-accent" />
+              <p className="text-micro-label mb-4">
+                What's available
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {MEDIA_PERKS.map((perk) => (
+                  <span
+                    key={perk}
+                    className="chip-tag"
+                  >
+                    {perk}
+                  </span>
+                ))}
               </div>
-              <div>
-                <p className="font-heading font-bold text-foreground mb-2" style={{ fontSize: '1.05rem' }}>
-                  Apply for Media Accreditation
-                </p>
-                <p className="text-copy-sm">
-                  Fill in your details — name, outlet, role, and coverage angle — and our team will be in touch with next steps.
-                </p>
-              </div>
-              {/* Inline mini-form link — scrolls to main form with subject pre-set */}
-              <a
-                href="#section-general"
-                onClick={(e) => {
-                  e.preventDefault();
-                  generalRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  // subject change handled via URL hash — ContactForm reads it
-                }}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.65rem] text-[#050505] transition-shadow hover:shadow-[0_0_22px_rgba(251,146,60,0.35)]"
-                style={{ background: 'linear-gradient(135deg,#fb923c,#f97316)', border: '1px solid rgba(251,146,60,0.5)' }}
-              >
-                Apply for Media Accreditation <ChevronRight size={13} />
-              </a>
             </motion.div>
           </div>
         </div>

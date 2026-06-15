@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { COMPANY } from '../../core/navigation/routes';
-import { CONTACT_SUBJECTS } from '../../core/content/contactPage';
+import { CONTACT_SUBJECTS, ENQUIRY_EMAIL_BODY } from '../../core/content/contactPage';
 
 interface ContactFormProps {
   initialSubject?: string;
@@ -21,9 +21,9 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
       `Subject: ${form.get('subject')}`,
       `Name: ${form.get('name')}`,
       `Job Title: ${form.get('jobtitle') ?? '—'}`,
-      `Email: ${form.get('email')}`,
       `Organisation: ${form.get('organisation')}`,
-      `Phone: ${form.get('phone') ?? '—'}`,
+      `Email: ${form.get('email')}`,
+      `Mobile: ${form.get('mobile') ?? '—'}`,
     ];
     if (isMedia) {
       lines.push(`Outlet: ${form.get('outlet') ?? '—'}`);
@@ -95,21 +95,21 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
         </label>
       </div>
 
+      <label className="flex flex-col gap-1.5">
+        <span className="text-label-ui">Organisation</span>
+        <input name="organisation" type="text" className="input-field" />
+      </label>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
           <span className="text-label-ui">Email</span>
           <input name="email" type="email" required autoComplete="email" className="input-field" />
         </label>
         <label className="flex flex-col gap-1.5">
-          <span className="text-label-ui">Phone (optional)</span>
-          <input name="phone" type="tel" autoComplete="tel" className="input-field" />
+          <span className="text-label-ui">Mobile phone</span>
+          <input name="mobile" type="tel" autoComplete="tel" className="input-field" />
         </label>
       </div>
-
-      <label className="flex flex-col gap-1.5">
-        <span className="text-label-ui">Organisation</span>
-        <input name="organisation" type="text" className="input-field" />
-      </label>
 
       <AnimatePresence>
         {isMedia && (
@@ -140,9 +140,10 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
         <span className="text-label-ui">Message</span>
         <textarea
           name="message"
-          rows={5}
+          rows={12}
           required
-          className="input-field resize-y min-h-[120px]"
+          placeholder={ENQUIRY_EMAIL_BODY}
+          className="input-field resize-y min-h-[200px]"
         />
       </label>
 
