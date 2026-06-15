@@ -75,9 +75,15 @@ export const INDUSTRY_FOCUS = {
 
 export const AWARDS_RECOGNITION = {
   companyName: "XR Summits Sdn Bhd",
-  introRest:
-    " received an accolade in the Initiative Award – Malaysia for AI-XR Production category at the Asia-Pacific Broadcasting+ Awards 2026 for its work in advancing Extended Reality (XR), virtual production, and AI-generated content across Southeast Asia.",
-  image: "/awards/awards.png",
+  body: "received an accolade in the Initiative Award – Malaysia for AI-XR Production category at the Asia-Pacific Broadcasting+ Awards 2026 for its work in advancing Extended Reality (XR), virtual production, and AI-generated content across Southeast Asia.",
+  event: "Asia-Pacific Broadcasting+ Awards 2026",
+  date: "21 May 2026",
+  category: "Initiative Award – Malaysia",
+  subcategory: "AI-XR Production",
+  logo: "/awards/awards.png",
+  ceremonyPhoto: "/awards/XR_Summits_Sdn_Bhd_APB_Awards.jpg",
+  ceremonyPhotoAlt:
+    "XR Summits Sdn Bhd receiving the Initiative Award at the Asia-Pacific Broadcasting+ Awards 2026",
 } as const;
 
 export const TRACK_RECORD = [

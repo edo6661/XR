@@ -7,6 +7,7 @@ import PastEventsSection from '../components/about/PastEventsSection';
 import AboutSectionShell from '../components/about/page/AboutSectionShell';
 import CompanyOverviewBlock from '../components/about/page/CompanyOverviewBlock';
 import OurMissionBlock from '../components/about/page/OurMissionBlock';
+import AwardsRecognitionBlock from '../components/about/page/AwardsRecognitionBlock';
 import {
   AIIcon,
   SpatialIcon,
@@ -15,7 +16,6 @@ import {
 } from '../components/about/page/aboutIcons';
 import {
   ABOUT_ACCENT,
-  AWARDS_RECOGNITION,
   WHY_XR_PILLARS,
   INDUSTRY_FOCUS,
   // MEDIA_PRESS,
@@ -203,17 +203,7 @@ const AboutPage = () => (
         </>
       }
     >
-      <div className="flex flex-col gap-6 mb-12">
-        <p className="text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85 }}>
-          <strong className="text-foreground font-bold">{AWARDS_RECOGNITION.companyName}</strong>
-          {AWARDS_RECOGNITION.introRest}
-        </p>
-
-      </div>
-      <div className='bg-white rounded-md'>
-        <img src={AWARDS_RECOGNITION.image} alt="Awards & Recognition" className="w-full h-full object-cover rounded-md" />
-
-      </div>
+      <AwardsRecognitionBlock />
     </AboutSectionShell>
 
     {/* 6. Strategic Partners */}
