@@ -61,21 +61,21 @@ const AwardsRecognitionBlock = () => (
         aria-hidden="true"
       />
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-0">
-        {/* Ceremony photo */}
-        <div className="relative overflow-hidden">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-0">
+        {/* Ceremony photo — 1/3 */}
+        <div className="relative overflow-hidden lg:col-span-1">
           <div
             className="absolute inset-0 z-10 pointer-events-none"
             style={{
               background:
-                'linear-gradient(to right, transparent 55%, rgba(12,12,18,0.85) 100%), linear-gradient(to top, rgba(12,12,18,0.5) 0%, transparent 35%)',
+                'linear-gradient(to right, transparent 70%, rgba(12,12,18,0.75) 100%), linear-gradient(to top, rgba(12,12,18,0.45) 0%, transparent 35%)',
             }}
             aria-hidden="true"
           />
           <img
             src={AWARDS_RECOGNITION.ceremonyPhoto}
             alt={AWARDS_RECOGNITION.ceremonyPhotoAlt}
-            className="w-full h-full min-h-[260px] lg:min-h-[380px] object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+            className="w-full h-full min-h-[240px] lg:min-h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
             loading="lazy"
           />
 
@@ -103,9 +103,9 @@ const AwardsRecognitionBlock = () => (
           </div>
         </div>
 
-        {/* Award details */}
-        <div className="flex flex-col justify-center gap-5 p-6 md:p-8 lg:p-9">
-          {/* APB+ logo — light plate + crop: skip empty black left of wide banner asset */}
+        {/* Award details — 2/3 */}
+        <div className="flex flex-col justify-center gap-5 p-6 md:p-8 lg:p-9 lg:col-span-2">
+          {/* APB+ banner — full asset on light plate */}
           <div
             className="rounded-lg overflow-hidden"
             style={{
@@ -114,14 +114,12 @@ const AwardsRecognitionBlock = () => (
               boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 16px rgba(0,0,0,0.18)',
             }}
           >
-            <div className="relative h-[4.25rem] md:h-[4.75rem] overflow-hidden px-3 md:px-4">
-              <img
-                src={AWARDS_RECOGNITION.logo}
-                alt="Asia-Pacific Broadcasting+ Awards 2026"
-                className="absolute inset-y-0 right-3 md:right-4 h-full w-[115%] max-w-none object-cover object-right"
-                loading="lazy"
-              />
-            </div>
+            <img
+              src={AWARDS_RECOGNITION.logo}
+              alt="Asia-Pacific Broadcasting+ Awards 2026"
+              className="block w-full h-auto object-contain px-3 py-3 md:px-4 md:py-3.5"
+              loading="lazy"
+            />
           </div>
 
           {/* Category tags */}
