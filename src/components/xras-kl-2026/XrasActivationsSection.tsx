@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Mic,
   LayoutGrid,
@@ -10,6 +10,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import ActivationPanelStack from '../ui/ActivationPanelStack';
 
 type SubItem = { label: string; detail?: string };
 
@@ -120,73 +121,71 @@ const TabButton = ({
   <motion.button
     type="button"
     onClick={onClick}
+    role="tab"
     initial={{ opacity: 0, y: 12 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.04, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex flex-col items-center gap-2 px-4 py-3.5 rounded-xl transition-all duration-300 cursor-pointer flex-shrink-0 min-w-[84px] sm:min-w-[100px]"
+    className="group relative flex flex-col items-center gap-2 px-4 py-4 rounded-xl transition-all duration-300 cursor-pointer shrink-0 min-w-[92px] sm:min-w-[108px]"
     style={{
       background: isActive
-        ? `linear-gradient(135deg, rgba(239,120,61,0.25), rgba(251,146,60,0.15))`
-        : 'rgba(255,255,255,0.08)', // Background lebih solid saat inactive
-      border: `1px solid ${isActive ? 'rgba(239,120,61,0.8)' : 'rgba(255,255,255,0.15)'}`, // Border lebih tegas
+        ? 'linear-gradient(135deg, rgba(239,120,61,0.34), rgba(251,146,60,0.2))'
+        : 'rgba(255,255,255,0.1)',
+      border: `1.5px solid ${isActive ? 'rgba(239,120,61,0.9)' : 'rgba(255,255,255,0.2)'}`,
       boxShadow: isActive
-        ? `0 0 28px rgba(239,120,61,0.3), inset 0 1px 0 rgba(239,120,61,0.2), 0 4px 16px rgba(0,0,0,0.4)`
-        : '0 2px 8px rgba(0,0,0,0.15)', // Shadow statis supaya terlihat seperti tombol fisik
+        ? '0 0 32px rgba(239,120,61,0.32), inset 0 1px 0 rgba(239,120,61,0.22), 0 6px 20px rgba(0,0,0,0.4)'
+        : '0 3px 12px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)',
       transform: isActive ? 'translateY(-2px)' : 'none',
     }}
     aria-pressed={isActive}
+    aria-selected={isActive}
     aria-controls={`activation-panel-${activation.id}`}
     whileHover={{
-      y: isActive ? -2 : -2,
-      background: isActive ? undefined : 'rgba(255,255,255,0.12)',
-      borderColor: isActive ? undefined : 'rgba(255,255,255,0.3)',
+      y: -2,
+      background: isActive ? undefined : 'rgba(255,255,255,0.14)',
+      borderColor: isActive ? undefined : 'rgba(255,255,255,0.35)',
     }}
   >
-    {/* Active top bar — bold orange */}
     <div
       className="absolute top-0 inset-x-0 h-[3px] rounded-t-xl transition-opacity duration-300"
       style={{
-        background: `linear-gradient(90deg, transparent, #ef783d, #fb923c, transparent)`,
+        background: 'linear-gradient(90deg, transparent, #ef783d, #fb923c, transparent)',
         opacity: isActive ? 1 : 0,
-        boxShadow: isActive ? '0 0 12px rgba(239,120,61,0.8)' : 'none',
+        boxShadow: isActive ? '0 0 14px rgba(239,120,61,0.9)' : 'none',
       }}
       aria-hidden="true"
     />
 
-    {/* Icon box */}
     <div
-      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
+      className="w-11 h-11 rounded-lg flex items-center justify-center transition-all duration-300 shrink-0"
       style={{
-        background: isActive ? 'rgba(239,120,61,0.25)' : 'rgba(255,255,255,0.08)',
-        border: `1px solid ${isActive ? 'rgba(239,120,61,0.6)' : 'rgba(255,255,255,0.15)'}`,
-        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.9)', // Warna icon cerah meski inactive
-        boxShadow: isActive ? '0 0 16px rgba(239,120,61,0.4)' : 'none',
+        background: isActive ? 'rgba(239,120,61,0.3)' : 'rgba(255,255,255,0.1)',
+        border: `1px solid ${isActive ? 'rgba(239,120,61,0.65)' : 'rgba(255,255,255,0.18)'}`,
+        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.95)',
+        boxShadow: isActive ? '0 0 18px rgba(239,120,61,0.45)' : 'none',
       }}
     >
       {activation.icon}
     </div>
 
-    {/* Label */}
     <span
-      className="font-bold tracking-[0.08em] uppercase text-center leading-tight transition-all duration-300 whitespace-nowrap"
+      className="font-bold tracking-[0.1em] uppercase text-center leading-tight transition-all duration-300 whitespace-nowrap"
       style={{
-        fontSize: '0.62rem', // Font dinaikkan sedikit ukurannya
-        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.85)', // Teks putih tegas saat inactive
+        fontSize: '0.65rem',
+        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.92)',
         textShadow: isActive ? '0 0 16px rgba(239,120,61,0.5)' : 'none',
-        fontWeight: isActive ? 800 : 600,
+        fontWeight: isActive ? 800 : 700,
       }}
     >
       {activation.shortTitle}
     </span>
 
-    {/* Downward indicator connecting active tab to the panel */}
     {isActive && (
       <div
         className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 rotate-45"
         style={{
           background: 'rgba(239,120,61,0.9)',
           boxShadow: '0 0 10px rgba(239,120,61,0.5)',
-          zIndex: -1
+          zIndex: -1,
         }}
         aria-hidden="true"
       />
@@ -199,13 +198,7 @@ const TabButton = ({
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ExpandedPanel = ({ activation }: { activation: Activation }) => (
-  <motion.div
-    id={`activation-panel-${activation.id}`}
-    key={activation.id}
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -6 }}
-    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+  <div
     className="relative rounded-2xl overflow-hidden"
     style={{
       background: 'linear-gradient(155deg, rgba(22,36,60,0.75) 0%, rgba(10,18,34,0.92) 100%)',
@@ -342,7 +335,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
         </div>
       </div>
     </div>
-  </motion.div>
+  </div>
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -362,8 +355,6 @@ const XrasActivationsSection = ({
   const sectionRef = useRef<HTMLElement>(null);
   const tabsRef = useRef<HTMLDivElement>(null);
   const [isTabsSticky, setIsTabsSticky] = useState(false);
-
-  const activeActivation = ACTIVATIONS.find((a) => a.id === activeId)!;
 
   const handleTabClick = useCallback((id: string) => {
     setActiveId(id);
@@ -424,30 +415,21 @@ const XrasActivationsSection = ({
           </p>
         </motion.div>
 
-        {/* ── Sticky sentinel + Tab Row ──────────────────────────────── */}
+        {/* ── Sticky horizontal tab dock + content panel ───────────────── */}
         <div
           ref={tabsRef}
-          className="sticky z-40 -mx-6 px-6 py-4 mb-5 transition-all duration-300" // py-3 jadi py-4
-          style={{
-            top: '64px',
-            background: isTabsSticky
-              ? 'rgba(5,5,5,0.94)'
-              : 'transparent',
-            backdropFilter: isTabsSticky ? 'blur(20px)' : 'none',
-            WebkitBackdropFilter: isTabsSticky ? 'blur(20px)' : 'none',
-            borderBottom: isTabsSticky
-              ? '1px solid rgba(239,120,61,0.15)'
-              : '1px solid transparent',
-            boxShadow: isTabsSticky
-              ? '0 4px 24px rgba(0,0,0,0.4)'
-              : 'none',
-          }}
+          className={`activation-tabs-sticky activation-tabs-dock -mx-6 px-6 mb-5 transition-shadow duration-300 ${isTabsSticky ? 'is-floating' : ''
+            }`}
+          role="tablist"
+          aria-label="Event experiences"
         >
+          <p className="activation-tabs-hint">Tap to switch experience</p>
+
           <div
-            className="overflow-x-auto pb-3 pt-1 -mx-1 px-1" // Ditambah padding agar hover/shadow button gak terpotong container
+            className="overflow-x-auto pb-2 pt-1 -mx-1 px-1"
             style={{ scrollbarWidth: 'none' }}
           >
-            <div className="flex gap-3 w-max sm:w-auto sm:flex-wrap max-w-7xl"> {/* Gap diperbesar ke gap-3 */}
+            <div className="flex gap-3 w-max sm:w-full sm:flex-wrap sm:justify-center">
               {ACTIVATIONS.map((activation, index) => (
                 <TabButton
                   key={activation.id}
@@ -461,15 +443,11 @@ const XrasActivationsSection = ({
           </div>
         </div>
 
-        {/* ── Expanded Panel ──────────────────────────────────────────── */}
-        <AnimatePresence mode="wait">
-          {activeId && (
-            <ExpandedPanel
-              key={activeActivation.id}
-              activation={activeActivation}
-            />
-          )}
-        </AnimatePresence>
+        <ActivationPanelStack
+          items={ACTIVATIONS}
+          activeId={activeId}
+          renderPanel={(activation) => <ExpandedPanel activation={activation} />}
+        />
 
         {/* ── CTA Row ─────────────────────────────────────────────────── */}
         <motion.div

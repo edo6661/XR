@@ -760,13 +760,50 @@ svg {
 /* ── Sticky tabs for activation sections ────────────────────────────────── */
 .activation-tabs-sticky {
   position: sticky;
-  top: 64px; /* below navbar */
-  z-index: 40;
-  background: rgba(5, 5, 5, 0.92);
+  top: 64px;
+  z-index: 50;
+}
+
+.activation-tabs-dock {
+  background: rgba(5, 5, 5, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 0.75rem 0;
+  border: 1px solid rgba(239, 120, 61, 0.32);
+  border-radius: 1rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(239, 120, 61, 0.08);
+  padding: 1rem 1.125rem;
+}
+
+.activation-tabs-dock.is-floating {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(239, 120, 61, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.activation-tabs-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.875rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ef783d;
+}
+
+.activation-tabs-hint::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: #ef783d;
+  box-shadow: 0 0 10px rgba(239, 120, 61, 0.8);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @supports (padding: env(safe-area-inset-top)) {
