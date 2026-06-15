@@ -6,9 +6,9 @@ export const ECOSYSTEM_IN_ACTION_DESCRIPTION =
 export const ECOSYSTEM_IN_ACTION_PHOTOS = [
   {
     src: "/past-event-pics/Conference2.jpg",
-    alt: "XR Asia Summit conference session",
+    alt: "XR ASIA SUMMIT conference session",
   },
-  { src: "/past-event-pics/Conference3.jpg", alt: "XR Asia Summit main stage" },
+  { src: "/past-event-pics/Conference3.jpg", alt: "XR ASIA SUMMIT main stage" },
   { src: "/past-event-pics/groups2.jpg", alt: "Summit attendees networking" },
   { src: "/past-event-pics/panelist.jpg", alt: "Industry panel discussion" },
   { src: "/past-event-pics/panelist nick 2.jpg", alt: "Panelist on stage" },

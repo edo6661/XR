@@ -110,7 +110,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
 export const XRAS_KL_META = {
   title: "XRAS KL 26' | XR Summits",
   description:
-    "XR Asia Summit Kuala Lumpur 2026 — flagship conference, expo, workshops, coaching, masterclasses, grand finals, and AI/XR Awards Gala.",
+    "XR ASIA SUMMIT Kuala Lumpur 2026 — flagship conference, expo, workshops, coaching, masterclasses, grand finals, and AI/XR Awards Gala.",
   location: "Kuala Lumpur, Malaysia",
   edition: "4th Edition · 2026",
 } as const;

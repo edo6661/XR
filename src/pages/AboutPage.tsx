@@ -61,10 +61,10 @@ const AboutPage = () => (
       <OurMissionBlock />
     </AboutSectionShell>
 
-    {/* 3. Why XR Asia Summit */}
+    {/* 3. Why XR ASIA SUMMIT */}
     <AboutSectionShell
       id="why-xr-summits"
-      eyebrow="Why XR Asia Summit"
+      eyebrow="Why XR ASIA SUMMIT"
       title={
         <>
           Why XR Asia <span className="gradient-text-accent">Summit</span>

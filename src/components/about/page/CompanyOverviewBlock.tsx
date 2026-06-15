@@ -9,7 +9,7 @@ const HIGHLIGHTS = [
 ] as const;
 
 const MOSAIC_IMAGES = [
-  { src: '/past-event-pics/Conference3.jpg', alt: 'XR Asia Summit conference', className: 'col-span-2 row-span-2' },
+  { src: '/past-event-pics/Conference3.jpg', alt: 'XR ASIA SUMMIT conference', className: 'col-span-2 row-span-2' },
   { src: '/past-event-pics/masterclass students.jpg', alt: 'Masterclass session', className: 'col-span-1 row-span-1' },
   { src: '/past-event-pics/panelist.jpg', alt: 'Industry panel discussion', className: 'col-span-1 row-span-1' },
 ] as const;

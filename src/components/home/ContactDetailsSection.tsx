@@ -117,7 +117,7 @@ const ContactDetailsSection = () => (
           </h2>
 
           <p className="text-lead max-w-lg mx-auto">
-            Whether you're attending, exhibiting, sponsoring, or speaking — XR Asia Summit connects you
+            Whether you're attending, exhibiting, sponsoring, or speaking — XR ASIA SUMMIT connects you
             to the conversations and partnerships that matter.
           </p>
 
