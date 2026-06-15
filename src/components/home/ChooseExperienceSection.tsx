@@ -36,7 +36,7 @@ const EVENT_GATEWAYS = [
   {
     title: "AI-XR Cultural Innovation Forum",
     subtitle: '16 - 17 October 2026',
-    description: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak. A prelude to XR ASIA SUMMIT – Innovation • Culture • Technology • Future Talent',
+    description: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak. A prelude to XR Asia Summit – Innovation • Culture • Technology • Future Talent',
     to: '/aixr-2026-sarawak',
     accentColor: '#22d3ee',
     tag: 'AIXR',

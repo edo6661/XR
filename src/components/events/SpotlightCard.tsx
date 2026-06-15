@@ -250,30 +250,32 @@ const SpotlightCard = ({
 
         {/* Meta row */}
         <div
-          className="flex items-center gap-5 pt-3 border-t"
+          className="flex items-start justify-between gap-3 pt-3 border-t"
           style={{ borderColor: 'rgba(255,255,255,0.06)' }}
         >
-          {date && (
-            <span className="text-meta flex items-center gap-1.5">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0" aria-hidden="true">
-                <rect x="2" y="3" width="12" height="11" rx="1" />
-                <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
-              </svg>
-              {date || ''}
-            </span>
-          )}
-          {location && (
-            <span className="text-meta flex items-center gap-1.5">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
-                <circle cx="8" cy="6" r="1.5" />
-              </svg>
-              {location}
-            </span>
-          )}
+          <div className="flex flex-col gap-2 min-w-0">
+            {date && (
+              <span className="text-meta flex items-start gap-1.5 leading-snug">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0 mt-0.5" aria-hidden="true">
+                  <rect x="2" y="3" width="12" height="11" rx="1" />
+                  <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
+                </svg>
+                {date}
+              </span>
+            )}
+            {location && (
+              <span className="text-meta flex items-start gap-1.5 leading-snug">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0 mt-0.5" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
+                  <circle cx="8" cy="6" r="1.5" />
+                </svg>
+                {location}
+              </span>
+            )}
+          </div>
           {to && (
             <span
-              className="ml-auto text-sm transition-transform duration-300 group-hover:translate-x-1"
+              className="shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-1"
               style={{ color: `${accentColor}65` }}
               aria-hidden="true"
             >

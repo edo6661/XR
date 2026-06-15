@@ -7,14 +7,14 @@ export type NavLink = {
 export const PRIMARY_NAV_LINKS: readonly NavLink[] = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "XRAS 26 KL'", to: "/xras-kl-2026" },
-  { label: "AIXR 26' Sarawak", to: "/aixr-2026-sarawak" },
+  { label: "XRAS 26 KL", to: "/xras-kl-2026" },
+  { label: "AIXR 26 Sarawak", to: "/aixr-2026-sarawak" },
   { label: "Contact", to: "/contact" },
 ] as const;
 
 export const COMPANY = {
   name: "XR Summits",
-  navbarBrand: "XR ASIA SUMMIT 2026",
+  navbarBrand: "XR ASIA SUMMIT",
   legalName: "XR Summits Sdn. Bhd.",
   registrationNo: "1506516-A",
   tagline:
