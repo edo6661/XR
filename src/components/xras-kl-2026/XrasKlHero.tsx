@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+
 import { motion } from 'framer-motion';
 import { XRAS_KL_ACCENT, XRAS_KL_META } from '../../core/content/xrasKl2026';
 
@@ -87,13 +87,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-center gap-3 mb-8"
         >
-          <Link to="/" className="hero-breadcrumb">
-            XR Summits
-          </Link>
-          <span
-            className="w-1.5 h-1.5 rounded-full bg-accent/40"
-            aria-hidden="true"
-          />
+
           <span className="hero-edition">
             {XRAS_KL_META.edition}
           </span>
@@ -107,8 +101,8 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           className="font-heading font-black leading-[0.95] mb-5"
           style={{ fontSize: 'clamp(2.5rem, 8vw, 4.25rem)', color: '#0f1b30' }}
         >
-          XR Asia{' '}
-          <span style={{ color: XRAS_KL_ACCENT }}>Summits</span>
+          IMMERSIVE AI-XR {' '}
+          <span style={{ color: XRAS_KL_ACCENT }}>EXPERIENCE</span>
         </motion.h1>
 
         <motion.p
@@ -126,10 +120,10 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.26, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mx-auto leading-relaxed mb-10"
-          style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85, color: 'rgba(15,27,48,0.88)' }}
+          className="font-semibold tracking-[0.22em] uppercase mb-8"
+          style={{ fontSize: '0.68rem', color: 'rgba(22,36,62,0.55)' }}
         >
-          1–3 December 2026 · Malaysia International Trade and Exhibition Centre (MITEC, Kuala Lumpur)
+          {XRAS_KL_META.location}
         </motion.p>
 
         <motion.div
