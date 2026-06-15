@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import PillarCard from '../components/about/PillarCard';
 import RegionalNetworkMap from '../components/about/RegionalNetworkMap';
+import PastEventsSection from '../components/about/PastEventsSection';
 import AboutSectionShell from '../components/about/page/AboutSectionShell';
 import CompanyOverviewBlock from '../components/about/page/CompanyOverviewBlock';
 import OurMissionBlock from '../components/about/page/OurMissionBlock';
@@ -189,6 +190,9 @@ const AboutPage = () => (
         <RegionalNetworkMap />
       </div>
     </AboutSectionShell>
+
+    <PastEventsSection />
+
     {/* 5. Awards & Recognition */}
     <AboutSectionShell
       id="awards"

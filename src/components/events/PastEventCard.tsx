@@ -5,10 +5,12 @@ interface PastEventCardProps {
   year: string;
   title: string;
   date: string;
+  location?: string;
   attendees: string;
   highlight: string;
   imageSrc?: string;
   accentColor?: string;
+  compact?: boolean;
 }
 
 const PastEventCard = ({
@@ -16,10 +18,12 @@ const PastEventCard = ({
   year,
   title,
   date,
+  location,
   attendees,
   highlight,
   imageSrc,
   accentColor = '#fb923c',
+  compact = false,
 }: PastEventCardProps) => {
   const isEven = index % 2 === 0;
 
@@ -48,12 +52,12 @@ const PastEventCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative flex flex-col md:flex-row items-center w-full gap-8 md:gap-0 ${!isEven ? 'md:flex-row-reverse' : ''
+      className={`relative flex flex-col md:flex-row items-center w-full ${compact ? 'gap-6 md:gap-0' : 'gap-8 md:gap-0'} ${!isEven ? 'md:flex-row-reverse' : ''
         }`}
     >
       {/* ── Timeline Node — Desktop ── */}
       <div
-        className="hidden md:flex absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 w-[70px] h-[70px] rounded-full items-center justify-center flex-col gap-0.5"
+        className={`hidden md:flex absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 rounded-full items-center justify-center flex-col gap-0.5 ${compact ? 'w-[52px] h-[52px]' : 'w-[70px] h-[70px]'}`}
         style={{
           background: 'linear-gradient(145deg, #f5f7fa, #e2e8f0)',
           boxShadow: `
@@ -67,19 +71,19 @@ const PastEventCard = ({
       >
         <span
           className="font-heading font-black leading-none"
-          style={{ fontSize: '0.95rem', color: accentColor }}
+          style={{ fontSize: compact ? '0.78rem' : '0.95rem', color: accentColor }}
         >
           {year}
         </span>
         <div
-          className="w-[18px] h-px mt-0.5"
+          className={`h-px mt-0.5 ${compact ? 'w-[14px]' : 'w-[18px]'}`}
           style={{ background: `${accentColor}55` }}
         />
       </div>
 
       {/* ── Timeline Node — Mobile ── */}
       <div
-        className="md:hidden absolute left-0 top-0 z-20 w-11 h-11 rounded-full flex items-center justify-center mt-3"
+        className={`md:hidden absolute left-0 top-0 z-20 rounded-full flex items-center justify-center mt-2 ${compact ? 'w-9 h-9' : 'w-11 h-11'}`}
         style={{
           background: 'linear-gradient(145deg, #f5f7fa, #e2e8f0)',
           boxShadow: `
@@ -92,7 +96,7 @@ const PastEventCard = ({
       >
         <span
           className="font-heading font-bold"
-          style={{ fontSize: '0.62rem', color: accentColor }}
+          style={{ fontSize: compact ? '0.54rem' : '0.62rem', color: accentColor }}
         >
           &apos;{year.slice(-2)}
         </span>
@@ -100,12 +104,11 @@ const PastEventCard = ({
 
       {/* ── Image Side — Inset glass tray ── */}
       <div
-        className={`w-full md:w-1/2 pl-14 md:pl-0 flex ${isEven ? 'md:pr-12 lg:pr-20' : 'md:pl-12 lg:pl-20'
-          }`}
+        className={`w-full md:w-1/2 flex ${compact ? 'pl-11 md:pl-0' : 'pl-14 md:pl-0'} ${isEven ? (compact ? 'md:pr-8 lg:pr-12' : 'md:pr-12 lg:pr-20') : (compact ? 'md:pl-8 lg:pl-12' : 'md:pl-12 lg:pl-20')}`}
       >
         {/* Inset neomorphic tray */}
         <div
-          className="relative w-full rounded-2xl p-[7px]"
+          className={`relative w-full rounded-2xl ${compact ? 'p-[5px]' : 'p-[7px]'}`}
           style={{
             background: 'linear-gradient(145deg, #dce3ee, #eef2f8)',
             boxShadow: neoInset,
@@ -113,7 +116,7 @@ const PastEventCard = ({
         >
           {/* Inner glass frame */}
           <div
-            className="relative w-full aspect-video md:aspect-[4/3] rounded-[14px] overflow-hidden group"
+            className={`relative w-full rounded-[14px] overflow-hidden group ${compact ? 'aspect-[16/10] md:aspect-[5/3] max-h-[200px] md:max-h-[220px]' : 'aspect-video md:aspect-[4/3]'}`}
             style={{
               background: 'rgba(255,255,255,0.45)',
               backdropFilter: 'blur(10px)',
@@ -160,7 +163,7 @@ const PastEventCard = ({
 
             {/* Glass pill badge — bottom left */}
             <div
-              className="absolute bottom-3 left-3 flex items-center gap-1.5 px-3 py-[5px] rounded-full"
+              className={`absolute bottom-2.5 left-2.5 flex items-center gap-1.5 rounded-full ${compact ? 'px-2.5 py-1' : 'px-3 py-[5px]'}`}
               style={{
                 background: 'rgba(255,255,255,0.72)',
                 backdropFilter: 'blur(14px)',
@@ -171,14 +174,14 @@ const PastEventCard = ({
             >
               <span
                 className="font-heading font-bold"
-                style={{ fontSize: '0.68rem', color: '#1a2840', letterSpacing: '0.06em' }}
+                style={{ fontSize: compact ? '0.58rem' : '0.68rem', color: '#1a2840', letterSpacing: '0.06em' }}
               >
                 {year}
               </span>
               <span style={{ fontSize: '0.5rem', color: 'rgba(26,40,64,0.3)' }}>·</span>
               <span
                 className="font-semibold"
-                style={{ fontSize: '0.63rem', color: accentColor }}
+                style={{ fontSize: compact ? '0.55rem' : '0.63rem', color: accentColor }}
               >
                 {attendees} Attendees
               </span>
@@ -189,13 +192,12 @@ const PastEventCard = ({
 
       {/* ── Content Card — Raised neomorphic glass ── */}
       <div
-        className={`w-full md:w-1/2 pl-14 md:pl-0 ${isEven ? 'md:pl-12 lg:pl-20' : 'md:pr-12 lg:pr-20'
-          }`}
+        className={`w-full md:w-1/2 ${compact ? 'pl-11 md:pl-0' : 'pl-14 md:pl-0'} ${isEven ? (compact ? 'md:pl-8 lg:pl-12' : 'md:pl-12 lg:pl-20') : (compact ? 'md:pr-8 lg:pr-12' : 'md:pr-12 lg:pr-20')}`}
       >
         <motion.div
-          whileHover={{ y: -3 }}
+          whileHover={{ y: compact ? -2 : -3 }}
           transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-          className="relative rounded-2xl p-6 lg:p-8"
+          className={`relative rounded-2xl ${compact ? 'p-4 lg:p-5' : 'p-6 lg:p-8'}`}
           style={{
             background: 'linear-gradient(145deg, rgba(252,253,255,0.94), rgba(236,242,252,0.9))',
             backdropFilter: 'blur(24px)',
@@ -234,11 +236,10 @@ const PastEventCard = ({
           />
 
           <div className={isEven ? 'text-left pl-2' : 'md:text-right pr-2'}>
-            {/* Date */}
             <p
-              className="font-semibold mb-2"
+              className={`font-semibold ${compact ? 'mb-1' : 'mb-2'}`}
               style={{
-                fontSize: '0.67rem',
+                fontSize: compact ? '0.6rem' : '0.67rem',
                 color: accentColor,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
@@ -247,16 +248,30 @@ const PastEventCard = ({
               {date}
             </p>
 
+            {location && (
+              <p
+                className={`font-semibold tracking-[0.14em] uppercase ${compact ? 'mb-2' : 'mb-2.5'}`}
+                style={{
+                  fontSize: compact ? '0.58rem' : '0.63rem',
+                  color: 'rgba(22,36,62,0.55)',
+                }}
+              >
+                {location}
+              </p>
+            )}
+
             <h3
-              className="font-heading font-black mb-4 leading-tight"
-              style={{ fontSize: 'clamp(1.2rem, 2vw, 1.65rem)', color: '#0f1b30' }}
+              className={`font-heading font-black leading-tight ${compact ? 'mb-3' : 'mb-4'}`}
+              style={{
+                fontSize: compact ? 'clamp(0.95rem, 1.6vw, 1.2rem)' : 'clamp(1.2rem, 2vw, 1.65rem)',
+                color: '#0f1b30',
+              }}
             >
               {title}
             </h3>
 
-            {/* Etched divider */}
             <div
-              className="mb-5 h-px w-full"
+              className={`h-px w-full ${compact ? 'mb-3' : 'mb-5'}`}
               style={{
                 background: 'transparent',
                 boxShadow:
@@ -269,9 +284,9 @@ const PastEventCard = ({
               <p
                 className="leading-relaxed"
                 style={{
-                  fontSize: 'clamp(0.8rem, 1.4vw, 0.92rem)',
+                  fontSize: compact ? 'clamp(0.72rem, 1.2vw, 0.82rem)' : 'clamp(0.8rem, 1.4vw, 0.92rem)',
                   color: 'rgba(15,27,48,0.92)',
-                  lineHeight: 1.85,
+                  lineHeight: compact ? 1.7 : 1.85,
                 }}
               >
                 {highlight}
