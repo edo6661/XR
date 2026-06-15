@@ -187,7 +187,7 @@ const ProgramDetailModal = ({
                 {program.category}
               </span>
               <span className="font-mono text-[0.6rem] text-foreground-muted">
-                XRAS KL 26'
+                XRAS 26 KL'
               </span>
             </div>
           </div>

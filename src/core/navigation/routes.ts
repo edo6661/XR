@@ -7,7 +7,7 @@ export type NavLink = {
 export const PRIMARY_NAV_LINKS: readonly NavLink[] = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "XRAS KL 26'", to: "/xras-kl-2026" },
+  { label: "XRAS 26 KL'", to: "/xras-kl-2026" },
   { label: "AIXR 26' Sarawak", to: "/aixr-2026-sarawak" },
   { label: "Contact", to: "/contact" },
 ] as const;
