@@ -67,7 +67,9 @@ const AboutPage = () => (
       eyebrow="Why XR ASIA SUMMIT"
       title={
         <>
-          Why XR Asia <span className="gradient-text-accent">Summit</span>
+          Where the
+          <span className="gradient-text-accent"> XR ecosystem </span>
+          comes to life
         </>
       }
     >
