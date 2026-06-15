@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   AIXR_SARAWAK_ACCENT,
@@ -91,13 +90,7 @@ const AixrHero = ({ onDownloadBrochure, onRegister }: AixrHeroProps) => (
           transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-center gap-3 mb-8"
         >
-          <Link to="/" className="hero-breadcrumb">
-            XR Summits
-          </Link>
-          <span
-            className="w-1.5 h-1.5 rounded-full bg-accent/40"
-            aria-hidden="true"
-          />
+
           <span className="hero-edition">
             {AIXR_SARAWAK_META.edition}
           </span>
@@ -111,8 +104,9 @@ const AixrHero = ({ onDownloadBrochure, onRegister }: AixrHeroProps) => (
           className="font-heading font-black leading-[0.95] mb-5"
           style={{ fontSize: 'clamp(2.25rem, 7vw, 3.75rem)', color: '#0f1b30' }}
         >
-          AIXR{' '}
-          <span style={{ color: AIXR_SARAWAK_ACCENT }}>26&apos; Sarawak</span>
+          <span style={{ color: AIXR_SARAWAK_ACCENT }}>AI-XR</span>
+          {" "}
+          Cultural Innovation Forum
         </motion.h1>
 
         <motion.p
