@@ -7,7 +7,7 @@ import SilverBlobBackground from './SilverBlobBackground';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import { motion } from 'framer-motion';
 gsap.registerPlugin(ScrollTrigger);
-const UPCOMING_EVENTS = [
+const FLAGSHIP_EVENTS = [
   {
     title: '4th XR Asia Summits 2026',
     date: '1 – 3 Dec 2026',
@@ -15,7 +15,7 @@ const UPCOMING_EVENTS = [
     description:
       "One platform, 7 Experiences – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.",
     accentColor: '#fb923c',
-    tag: 'Flagship',
+    tag: 'XRAS',
     to: '/xras-kl-2026',
     imageSrc: '/3-gateway-images/XR AI Summit 2026_Main Image.jpeg',
     isFeatured: true,
@@ -26,25 +26,48 @@ const UPCOMING_EVENTS = [
     location: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak',
     description: 'A prelude to XR Asia Summit – Innovation • Culture • Technology • Future Talent',
     accentColor: '#22d3ee',
-    tag: 'Regional',
+    tag: 'AIXR',
     to: '/aixr-2026-sarawak',
     imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image-edited.jpeg',
     imagePosition: 'center',
     imageDark: false,
-    isFeatured: false,
+    isFeatured: true,
     imageTransform: 'scale(1.15) translateY(-10%)',
   },
+] as const;
+
+const PROGRAMME_HIGHLIGHTS = [
   {
     title: 'AI Filmmaking Hackathon',
     description:
-      '4 Universities from Malaysia, 1 University from Singapore, 1 University from Indonesia • 72-hour run of show – Hands-on challenges, mentorship from industry leaders, pressure-tested workflows.',
+      '',
     accentColor: '#a78bfa',
     tag: 'Hackathon',
-    to: '#',
-    imageSrc: '/3-gateway-images/AI Filmmaking Hackathon.png',
+    to: '/xras-kl-2026',
+    imageSrc: '/programme-highlights/AI Filmmaking Hackathon.png',
     isFeatured: false,
   },
-];
+  {
+    title: 'Esports Tournament',
+    description:
+      '',
+    accentColor: '#34d399',
+    tag: 'Esports',
+    to: '/xras-kl-2026',
+    imageSrc: '/programme-highlights/Esports.jpeg',
+    isFeatured: false,
+  },
+  {
+    title: 'Gala & Awards',
+    description:
+      '',
+    accentColor: '#f472b6',
+    tag: 'Gala',
+    to: '/xras-kl-2026',
+    imageSrc: '/programme-highlights/Awards & Gala.png',
+    isFeatured: false,
+  },
+] as const;
 const PAST_EVENTS = [
   {
     year: '2021',
@@ -129,6 +152,7 @@ const EventsSection = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* ══ UPCOMING ═══════════════════════════════════════════════════ */}
         <SectionEyebrow>Upcoming Events</SectionEyebrow>
+        {/* ── Entry points: XRAS + AIXR ── */}
         <h2
           ref={headingRef}
           className="font-heading font-black text-foreground mb-12 opacity-0"
@@ -139,14 +163,18 @@ const EventsSection = () => {
             Entry Point
           </span>
         </h2>
-        {/* Featured + secondary grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-4">
-          <div className="lg:col-span-2">
-            <SpotlightCard index={0} {...UPCOMING_EVENTS[0]} />
-          </div>
-          <div className="flex flex-col gap-3">
-            {UPCOMING_EVENTS.slice(1).map((ev, i) => (
-              <SpotlightCard key={ev.title} index={i + 1} {...ev} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {FLAGSHIP_EVENTS.map((ev, i) => (
+            <SpotlightCard key={ev.title} index={i} {...ev} />
+          ))}
+        </div>
+
+        {/* ── Programme highlights (sub-events under XRAS) ── */}
+        <div className="mt-14 md:mt-16 pt-10 border-t border-white/[0.06]">
+          <SectionEyebrow className="mb-8">Programme Highlights</SectionEyebrow>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {PROGRAMME_HIGHLIGHTS.map((ev, i) => (
+              <SpotlightCard key={ev.title} index={i + FLAGSHIP_EVENTS.length} {...ev} />
             ))}
           </div>
         </div>
