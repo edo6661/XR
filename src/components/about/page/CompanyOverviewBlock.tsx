@@ -55,7 +55,7 @@ const CompanyOverviewBlock = () => {
           className="absolute inset-0 w-full h-full object-cover opacity-[0.18] pointer-events-none mix-blend-screen"
         />
         <img
-          src="/hero/background-3.jpg"
+          src="/about/Company_Overview.png"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover opacity-[0.12] pointer-events-none"

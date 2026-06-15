@@ -40,7 +40,7 @@ const OurMissionBlock = () => {
           className="absolute inset-0 w-full h-full object-cover opacity-[0.22] pointer-events-none"
         />
         <img
-          src="/hero/background-7.jpg"
+          src="/about/Our_Mission.png"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover opacity-[0.1] pointer-events-none mix-blend-soft-light"
