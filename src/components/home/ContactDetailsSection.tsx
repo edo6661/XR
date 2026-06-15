@@ -178,7 +178,7 @@ const ContactDetailsSection = () => (
             }}
           >
             Join the Next Phase Where Asia Builds Its{' '}
-            <span className="gradient-text-accent">Spatial Future</span>
+            <span className="text-accent">Spatial Future</span>
           </h2>
 
           <p

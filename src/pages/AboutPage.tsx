@@ -8,6 +8,7 @@ import AboutSectionShell from '../components/about/page/AboutSectionShell';
 import CompanyOverviewBlock from '../components/about/page/CompanyOverviewBlock';
 import OurMissionBlock from '../components/about/page/OurMissionBlock';
 import AwardsRecognitionBlock from '../components/about/page/AwardsRecognitionBlock';
+import SustainabilityCommitmentSection from '../components/about/page/SustainabilityCommitmentSection';
 import {
   AIIcon,
   SpatialIcon,
@@ -205,6 +206,8 @@ const AboutPage = () => (
     >
       <AwardsRecognitionBlock />
     </AboutSectionShell>
+
+    <SustainabilityCommitmentSection />
 
     {/* 6. Strategic Partners */}
     {/* <AboutSectionShell id="strategic-partners" eyebrow="Strategic Partners" title="Partners powering the ecosystem" description="Logo assets will be published as partnerships are confirmed. Phase 1 uses elegant placeholders.">
