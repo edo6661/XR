@@ -106,7 +106,6 @@ const ACTIVATIONS: Activation[] = [
 // ─────────────────────────────────────────────────────────────────────────────
 // Tab Button — strong active / inactive states
 // ─────────────────────────────────────────────────────────────────────────────
-
 const TabButton = ({
   activation,
   isActive,
@@ -124,23 +123,28 @@ const TabButton = ({
     initial={{ opacity: 0, y: 12 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.04, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex flex-col items-center gap-2 px-4 py-3.5 rounded-xl transition-all duration-250 cursor-none flex-shrink-0 min-w-[80px] sm:min-w-[92px]"
+    className="group relative flex flex-col items-center gap-2 px-4 py-3.5 rounded-xl transition-all duration-300 cursor-pointer flex-shrink-0 min-w-[84px] sm:min-w-[100px]"
     style={{
       background: isActive
-        ? `linear-gradient(135deg, rgba(239,120,61,0.22), rgba(251,146,60,0.14))`
-        : 'rgba(255,255,255,0.025)',
-      border: `1px solid ${isActive ? 'rgba(239,120,61,0.65)' : 'rgba(255,255,255,0.07)'}`,
+        ? `linear-gradient(135deg, rgba(239,120,61,0.25), rgba(251,146,60,0.15))`
+        : 'rgba(255,255,255,0.08)', // Background lebih solid saat inactive
+      border: `1px solid ${isActive ? 'rgba(239,120,61,0.8)' : 'rgba(255,255,255,0.15)'}`, // Border lebih tegas
       boxShadow: isActive
-        ? `0 0 28px rgba(239,120,61,0.22), inset 0 1px 0 rgba(239,120,61,0.18), 0 4px 16px rgba(0,0,0,0.3)`
-        : 'none',
-      transform: isActive ? 'translateY(-1px)' : 'none',
+        ? `0 0 28px rgba(239,120,61,0.3), inset 0 1px 0 rgba(239,120,61,0.2), 0 4px 16px rgba(0,0,0,0.4)`
+        : '0 2px 8px rgba(0,0,0,0.15)', // Shadow statis supaya terlihat seperti tombol fisik
+      transform: isActive ? 'translateY(-2px)' : 'none',
     }}
     aria-pressed={isActive}
     aria-controls={`activation-panel-${activation.id}`}
+    whileHover={{
+      y: isActive ? -2 : -2,
+      background: isActive ? undefined : 'rgba(255,255,255,0.12)',
+      borderColor: isActive ? undefined : 'rgba(255,255,255,0.3)',
+    }}
   >
     {/* Active top bar — bold orange */}
     <div
-      className="absolute top-0 inset-x-0 h-[2.5px] rounded-t-xl transition-opacity duration-250"
+      className="absolute top-0 inset-x-0 h-[3px] rounded-t-xl transition-opacity duration-300"
       style={{
         background: `linear-gradient(90deg, transparent, #ef783d, #fb923c, transparent)`,
         opacity: isActive ? 1 : 0,
@@ -151,12 +155,12 @@ const TabButton = ({
 
     {/* Icon box */}
     <div
-      className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-250"
+      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
       style={{
-        background: isActive ? 'rgba(239,120,61,0.2)' : 'rgba(255,255,255,0.05)',
-        border: `1px solid ${isActive ? 'rgba(239,120,61,0.5)' : 'rgba(255,255,255,0.08)'}`,
-        color: isActive ? '#ef783d' : 'rgba(168,184,208,0.65)',
-        boxShadow: isActive ? '0 0 14px rgba(239,120,61,0.3)' : 'none',
+        background: isActive ? 'rgba(239,120,61,0.25)' : 'rgba(255,255,255,0.08)',
+        border: `1px solid ${isActive ? 'rgba(239,120,61,0.6)' : 'rgba(255,255,255,0.15)'}`,
+        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.9)', // Warna icon cerah meski inactive
+        boxShadow: isActive ? '0 0 16px rgba(239,120,61,0.4)' : 'none',
       }}
     >
       {activation.icon}
@@ -164,16 +168,29 @@ const TabButton = ({
 
     {/* Label */}
     <span
-      className="font-bold tracking-[0.08em] uppercase text-center leading-tight transition-all duration-250 whitespace-nowrap"
+      className="font-bold tracking-[0.08em] uppercase text-center leading-tight transition-all duration-300 whitespace-nowrap"
       style={{
-        fontSize: '0.58rem',
-        color: isActive ? '#ef783d' : 'rgba(168,184,208,0.55)',
+        fontSize: '0.62rem', // Font dinaikkan sedikit ukurannya
+        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.85)', // Teks putih tegas saat inactive
         textShadow: isActive ? '0 0 16px rgba(239,120,61,0.5)' : 'none',
         fontWeight: isActive ? 800 : 600,
       }}
     >
       {activation.shortTitle}
     </span>
+
+    {/* Downward indicator connecting active tab to the panel */}
+    {isActive && (
+      <div
+        className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 rotate-45"
+        style={{
+          background: 'rgba(239,120,61,0.9)',
+          boxShadow: '0 0 10px rgba(239,120,61,0.5)',
+          zIndex: -1
+        }}
+        aria-hidden="true"
+      />
+    )}
   </motion.button>
 );
 
@@ -410,7 +427,7 @@ const XrasActivationsSection = ({
         {/* ── Sticky sentinel + Tab Row ──────────────────────────────── */}
         <div
           ref={tabsRef}
-          className="sticky z-40 -mx-6 px-6 py-3 mb-5 transition-all duration-300"
+          className="sticky z-40 -mx-6 px-6 py-4 mb-5 transition-all duration-300" // py-3 jadi py-4
           style={{
             top: '64px',
             background: isTabsSticky
@@ -427,10 +444,10 @@ const XrasActivationsSection = ({
           }}
         >
           <div
-            className="overflow-x-auto pb-1 -mx-1 px-1"
+            className="overflow-x-auto pb-3 pt-1 -mx-1 px-1" // Ditambah padding agar hover/shadow button gak terpotong container
             style={{ scrollbarWidth: 'none' }}
           >
-            <div className="flex gap-2.5 w-max sm:w-auto sm:flex-wrap max-w-7xl">
+            <div className="flex gap-3 w-max sm:w-auto sm:flex-wrap max-w-7xl"> {/* Gap diperbesar ke gap-3 */}
               {ACTIVATIONS.map((activation, index) => (
                 <TabButton
                   key={activation.id}
