@@ -244,7 +244,7 @@ const SpeakersSection = () => {
                 </div>
               ) : null}
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-5">
+              <div className="grid grid-cols-2 min-[640px]:max-[767px]:grid-cols-3 min-[768px]:max-[1079px]:grid-cols-4 min-[1080px]:grid-cols-5 gap-4 lg:gap-5">
                 {row.map((speaker, colIndex) => {
                   const index = rowIndex * ROW_SIZE + colIndex;
                   return (
