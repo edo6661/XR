@@ -28,7 +28,7 @@ export const WHATSAPP_PLACEHOLDER = {
   phone: "60122020624",
   href: "https://wa.me/60122020624?text=Hello%20XR%20Summits",
   label: "Chat on WhatsApp",
-  display: "+6012-2020624",
+  display: "+603 2740 4317",
 } as const;
 
 export const BNI_BANK_DETAILS = {

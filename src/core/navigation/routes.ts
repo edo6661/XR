@@ -22,7 +22,7 @@ export const COMPANY = {
   supportingText:
     "Connecting industry leaders, creators, educators, broadcasters, governments and technology innovators through deployment-ready immersive experiences.",
   email: "register@xr-summits.com",
-  phone: "+6012-2020624",
+  phone: "+603 2740 4317",
   address: {
     line1: "No. 8, Block K, 8th Floor,",
     line2: "Sunway PJ 51A, Jalan SS9A/19,",

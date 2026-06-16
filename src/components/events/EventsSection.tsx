@@ -5,18 +5,7 @@ import SpotlightCard from './SpotlightCard';
 import SectionEyebrow from '../ui/SectionEyebrow';
 gsap.registerPlugin(ScrollTrigger);
 const FLAGSHIP_EVENTS = [
-  {
-    title: 'XR Asia Summits 2026',
-    date: '1 – 3 Dec 2026',
-    location: 'Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur',
-    description:
-      "One platform, 7 Experiences – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.",
-    accentColor: '#fb923c',
-    tag: 'XRAS',
-    to: '/xras-kl-2026',
-    imageSrc: '/3-gateway-images/XRAS_2026.png',
-    isFeatured: true,
-  },
+
   {
     title: "AI-XR Cultural Innovation Forum",
     date: '16 – 17 Oct 2026',
@@ -28,6 +17,18 @@ const FLAGSHIP_EVENTS = [
     imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image-edited.jpeg',
     imagePosition: 'center',
     imageDark: false,
+    isFeatured: true,
+  },
+  {
+    title: 'XR Asia Summit 2026',
+    date: '1 – 3 Dec 2026',
+    location: 'Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur',
+    description:
+      "One platform, 7 Experiences – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.",
+    accentColor: '#fb923c',
+    tag: 'XRAS',
+    to: '/xras-kl-2026',
+    imageSrc: '/3-gateway-images/XRAS_2026.png',
     isFeatured: true,
   },
 ] as const;
