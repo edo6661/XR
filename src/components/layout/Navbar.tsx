@@ -116,20 +116,18 @@ const Navbar = () => {
                 aria-hidden="true"
                 className="relative object-contain transition-transform duration-500 group-hover:scale-105"
                 style={{
-                  height: isHome ? '40px' : '36px',
+                  height: '36px',
                   width: 'auto',
                   filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5)) brightness(1.06)',
                 }}
               />
             </div>
-            {!isHome && (
-              <span
-                className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
-                style={{ fontSize: '0.76rem' }}
-              >
-                {COMPANY.navbarBrand}
-              </span>
-            )}
+            <span
+              className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
+              style={{ fontSize: '0.76rem' }}
+            >
+              {COMPANY.navbarBrand}
+            </span>
           </Link>
 
           <nav

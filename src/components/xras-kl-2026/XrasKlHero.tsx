@@ -101,8 +101,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           className="font-heading font-black leading-[0.95] mb-5"
           style={{ fontSize: 'clamp(2.5rem, 8vw, 4.25rem)', color: '#0f1b30' }}
         >
-          IMMERSIVE AI-XR {' '}
-          <span style={{ color: XRAS_KL_ACCENT }}>EXPERIENCE</span>
+          XR ASIA SUMMIT
         </motion.h1>
 
         <motion.p

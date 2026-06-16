@@ -398,8 +398,7 @@ const AixrActivationsSection = ({
             style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', lineHeight: 1.85, color: '#a8b8d0' }}
           >
             16–17 October 2026 · Borneo Convention Centre (BCCK), Kuching, Sarawak.
-            <br />
-            <span className="font-semibold" style={{ color: '#f8faff' }}>Explore what's waiting for you</span>
+
           </p>
         </motion.div>
 
@@ -411,7 +410,7 @@ const AixrActivationsSection = ({
           role="tablist"
           aria-label="Event experiences"
         >
-          <p className="activation-tabs-hint">Tap to switch experience</p>
+          <p className="activation-tabs-hint">Explore what's waiting for you</p>
 
           <div
             className="overflow-x-auto pb-2 pt-1 -mx-1 px-1"
