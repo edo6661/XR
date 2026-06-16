@@ -31,8 +31,6 @@ const Navbar = () => {
   useEffect(() => {
     if (!isHome) return;
 
-    // Wait until the hero stack transition completes (1 viewport) so the flying
-    // logo can land in the anchor before navbar chrome fades in.
     const trigger = ScrollTrigger.create({
       trigger: document.documentElement,
       start: 'top top',
@@ -75,8 +73,6 @@ const Navbar = () => {
   return (
     <>
       <motion.header
-        // Hapus "initial" dan "animate" yang memaksa navbar bergerak ke bawah
-        // Cukup kontrol transparansi saja agar terlihat "muncul" dari kehampaan
         initial={{ opacity: 0 }}
         animate={{ opacity: isHome ? (scrolled ? 1 : 0) : 1 }}
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
@@ -88,7 +84,8 @@ const Navbar = () => {
             background: isHome && !scrolled ? 'transparent' : 'rgba(5, 11, 24, 0.88)',
             backdropFilter: isHome && !scrolled ? 'none' : 'blur(28px) saturate(160%)',
             WebkitBackdropFilter: isHome && !scrolled ? 'none' : 'blur(28px) saturate(160%)',
-            borderBottom: isHome && !scrolled ? '1px solid transparent' : '1px solid rgba(255,255,255,0.045)',
+            borderBottom:
+              isHome && !scrolled ? '1px solid transparent' : '1px solid rgba(255,255,255,0.045)',
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden z-10">
@@ -104,61 +101,46 @@ const Navbar = () => {
             }}
           />
         </div>
-        <div className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out max-w-7xl`}>
-          {isHome ? (
-            <div className="flex items-center gap-3 shrink-0">
-              {/* Anchor kosong — titik landing untuk logo portal dari HeroLogo */}
-              <div
-                id="nav-logo-anchor"
-                className="shrink-0"
-                style={{ width: 48, height: 48 }}
+        <div
+          className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out max-w-7xl`}
+        >
+          <Link
+            to="/"
+            className="group flex items-center gap-3 shrink-0 select-none"
+            aria-label="XR Asia Summit — Home"
+          >
+            <div className="relative shrink-0 flex items-center justify-center">
+              <img
+                src="/logo_dark_transparent.png"
+                alt=""
                 aria-hidden="true"
-              />
-              <Link
-                to="/"
-                className="group select-none transition-all duration-500 ease-in-out"
+                className="relative object-contain transition-transform duration-500 group-hover:scale-105"
                 style={{
-                  opacity: scrolled ? 1 : 0,
-                  pointerEvents: scrolled ? 'auto' : 'none',
-                  transform: scrolled ? 'translateY(0)' : 'translateY(-4px)',
+                  height: isHome ? '40px' : '36px',
+                  width: 'auto',
+                  filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5)) brightness(1.06)',
                 }}
-                aria-label="XR Summits — Home"
-              >
-                <span
-                  className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
-                  style={{ fontSize: '0.76rem' }}
-                >
-                  {COMPANY.navbarBrand}
-                </span>
-              </Link>
+              />
             </div>
-          ) : (
-            <Link
-              to="/"
-              className="group flex items-center gap-3 shrink-0 select-none"
-              aria-label="XR Summits — Home"
-            >
-              <div
-                className="relative w-12 h-12 shrink-0 flex items-center justify-center"
-              >
-                <img
-                  src="/logo_dark_transparent.png"
-                  alt=""
-                  aria-hidden="true"
-                  className="relative w-[85%] h-[85%] object-contain transition-transform duration-500 group-hover:scale-110"
-                  style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
-                />
-              </div>
+            {!isHome && (
               <span
                 className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
                 style={{ fontSize: '0.76rem' }}
               >
                 {COMPANY.navbarBrand}
               </span>
-            </Link>
-          )}
-          <nav className="hidden lg:flex items-center" aria-label="Primary navigation">
-            <div className="w-px h-4 mr-6" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
+            )}
+          </Link>
+
+          <nav
+            className="hidden lg:flex items-center"
+            aria-label="Primary navigation"
+          >
+            <div
+              className="w-px h-4 mr-6"
+              style={{ background: 'rgba(255,255,255,0.08)' }}
+              aria-hidden="true"
+            />
             {PRIMARY_NAV_LINKS.map((link) => (
               <MagneticWrapper key={link.to} strength={0.1}>
                 <NavLink
@@ -183,7 +165,8 @@ const Navbar = () => {
                           layoutId="nav-active"
                           className="absolute bottom-0.5 left-3 right-3 h-px"
                           style={{
-                            background: 'linear-gradient(90deg, transparent, #fb923c, transparent)',
+                            background:
+                              'linear-gradient(90deg, transparent, #fb923c, transparent)',
                             boxShadow: '0 0 8px rgba(251,146,60,0.8)',
                           }}
                           transition={{ type: 'spring', stiffness: 400, damping: 30 }}
@@ -194,8 +177,13 @@ const Navbar = () => {
                 </NavLink>
               </MagneticWrapper>
             ))}
-            <div className="w-px h-4 ml-6 mr-4" style={{ background: 'rgba(255,255,255,0.08)' }} aria-hidden="true" />
+            <div
+              className="w-px h-4 ml-6 mr-4"
+              style={{ background: 'rgba(255,255,255,0.08)' }}
+              aria-hidden="true"
+            />
           </nav>
+
           <div className="flex items-center gap-3">
             <div className="hidden lg:block">
               <MagneticWrapper strength={0.2}>
@@ -206,7 +194,10 @@ const Navbar = () => {
                 >
                   <span
                     className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-450"
-                    style={{ background: '#fb923c', transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)' }}
+                    style={{
+                      background: '#fb923c',
+                      transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}
                     aria-hidden="true"
                   />
                   <span className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200">
@@ -229,11 +220,25 @@ const Navbar = () => {
             >
               <AnimatePresence mode="wait" initial={false}>
                 {menuOpen ? (
-                  <motion.span key="close" initial={{ rotate: -45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 45, opacity: 0 }} transition={{ duration: 0.2 }} className="absolute">
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -45, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 45, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute"
+                  >
                     <X size={18} />
                   </motion.span>
                 ) : (
-                  <motion.span key="open" initial={{ rotate: 45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -45, opacity: 0 }} transition={{ duration: 0.2 }} className="absolute">
+                  <motion.span
+                    key="open"
+                    initial={{ rotate: 45, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -45, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute"
+                  >
                     <Menu size={18} />
                   </motion.span>
                 )}
@@ -242,6 +247,8 @@ const Navbar = () => {
           </div>
         </div>
       </motion.header>
+
+      {/* ── MOBILE MENU ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -258,7 +265,8 @@ const Navbar = () => {
               style={{
                 width: '500px',
                 height: '260px',
-                background: 'radial-gradient(ellipse, rgba(251,146,60,0.07) 0%, transparent 68%)',
+                background:
+                  'radial-gradient(ellipse, rgba(251,146,60,0.07) 0%, transparent 68%)',
               }}
               aria-hidden="true"
             />
@@ -271,41 +279,65 @@ const Navbar = () => {
               }}
               aria-hidden="true"
             />
+
+            {/* Mobile menu header */}
             <div className="h-16 flex items-center px-6 flex-shrink-0">
               <Link
                 to="/"
                 className="group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out"
               >
+                {/*
+                  Logo landscape di mobile menu — height kecil, width auto
+                */}
                 <img
                   src="/logo_dark_transparent.png"
-                  alt="XR Summits"
-                  className="w-7 h-7 object-contain"
-                  // Sama, tipis di menu HP
-                  style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.4))' }}
+                  alt="XR Asia Summit"
+                  className="object-contain"
+                  style={{
+                    height: '32px',
+                    width: 'auto',
+                    filter:
+                      'drop-shadow(0 0 3px rgba(255,255,255,0.5)) brightness(1.06)',
+                  }}
                 />
                 <div className="flex flex-col leading-none gap-[3px]">
-                  <span className="font-heading font-bold tracking-[0.3em] text-foreground" style={{ fontSize: '0.76rem' }}>
+                  <span
+                    className="font-heading font-bold tracking-[0.3em] text-foreground"
+                    style={{ fontSize: '0.76rem' }}
+                  >
                     {COMPANY.navbarBrand}
                   </span>
                 </div>
               </Link>
             </div>
+
             <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
-            <nav className="flex flex-col flex-1 justify-center px-6 gap-0.5" aria-label="Mobile navigation">
+
+            <nav
+              className="flex flex-col flex-1 justify-center px-6 gap-0.5"
+              aria-label="Mobile navigation"
+            >
               {PRIMARY_NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.to}
                   initial={{ x: 28, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   exit={{ x: 28, opacity: 0 }}
-                  transition={{ delay: i * 0.05 + 0.08, duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{
+                    delay: i * 0.05 + 0.08,
+                    duration: 0.42,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                 >
                   <NavLink
                     to={link.to}
                     end={link.to === '/'}
                     className={({ isActive }) =>
                       `group flex items-center gap-4 py-4 border-b transition-all duration-200
-                      ${isActive ? 'text-accent border-white/10' : 'text-foreground-muted hover:text-foreground border-white/[0.04]'}`
+                      ${isActive
+                        ? 'text-accent border-white/10'
+                        : 'text-foreground-muted hover:text-foreground border-white/[0.04]'
+                      }`
                     }
                     onClick={() => setMenuOpen(false)}
                   >
@@ -313,10 +345,15 @@ const Navbar = () => {
                       <>
                         <span
                           className="w-1 h-1 rounded-full flex-shrink-0 transition-colors duration-200"
-                          style={{ background: isActive ? '#fb923c' : 'rgba(255,255,255,0.12)' }}
+                          style={{
+                            background: isActive ? '#fb923c' : 'rgba(255,255,255,0.12)',
+                          }}
                           aria-hidden="true"
                         />
-                        <span className="font-heading font-bold tracking-[0.22em] uppercase" style={{ fontSize: '1.05rem' }}>
+                        <span
+                          className="font-heading font-bold tracking-[0.22em] uppercase"
+                          style={{ fontSize: '1.05rem' }}
+                        >
                           {link.label}
                         </span>
                         {isActive && (
@@ -334,6 +371,7 @@ const Navbar = () => {
                 </motion.div>
               ))}
             </nav>
+
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

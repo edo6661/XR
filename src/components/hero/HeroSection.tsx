@@ -58,7 +58,7 @@ function markHeroIntroSeen(): void {
   try {
     sessionStorage.setItem(HERO_INTRO_SEEN_KEY, '1');
   } catch {
-    // sessionStorage unavailable (private mode, etc.)
+    // sessionStorage unavailable
   }
 }
 
@@ -107,20 +107,15 @@ const HeroSection = () => {
   }, [skipIntro]);
 
   const handleScrollDown = () => {
-    // The hero is a pinned StackedSection; scrolling one viewport closes it and
-    // brings the About Us section up underneath (the client's desired beat).
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
-  // Derived stage flags
-  const videoRevealed = step >= 3; // veil has torn away
+  const videoRevealed = step >= 3;
   const showLogo = step >= 3;
   const showTiles = step >= 4;
   const showHint = step >= LAST_STEP;
 
-  // Background focus-pull: blurred while veiled → punchy boot → settle.
   const hudPhase: Phase = step < 3 ? 'globe' : step === 3 ? 'boot' : 'reveal';
-  // const bgBlur = step >= 4 ? 1.4 : step === 3 ? 7 : 5;
   const bgBrightness = step >= 4 ? 0.82 : 0.76;
 
   return (
@@ -129,8 +124,7 @@ const HeroSection = () => {
       className="relative w-full min-h-screen flex flex-col overflow-hidden"
       aria-label="Hero"
     >
-      {/* Backdrop: video scale only. Blur/dim live on a static overlay so mouse
-          movement never repaints a filtered full-screen layer (major perf win). */}
+      {/* ── BACKDROP ── */}
       <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
         <motion.div
           className="absolute inset-0"
@@ -156,14 +150,14 @@ const HeroSection = () => {
           }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            // Gunakan nilai blur fix, jangan di-animasikan
-            backdropFilter: prefersReducedMotion ? 'none' : `blur(5px)`,
-            WebkitBackdropFilter: prefersReducedMotion ? 'none' : `blur(5px)`,
-            willChange: 'opacity, background-color'
+            backdropFilter: prefersReducedMotion ? 'none' : 'blur(5px)',
+            WebkitBackdropFilter: prefersReducedMotion ? 'none' : 'blur(5px)',
+            willChange: 'opacity, background-color',
           }}
         />
       </div>
 
+      {/* Radial vignette */}
       <motion.div
         className="absolute inset-0 z-1 pointer-events-none"
         animate={{ opacity: showTiles ? 1 : 0.7 }}
@@ -175,10 +169,12 @@ const HeroSection = () => {
         aria-hidden="true"
       />
 
+      {/* Bottom fade */}
       <div
         className="absolute bottom-0 left-0 right-0 h-64 z-2 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.7) 50%, #050b18 100%)',
+          background:
+            'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.7) 50%, #050b18 100%)',
         }}
         aria-hidden="true"
       />
@@ -196,13 +192,11 @@ const HeroSection = () => {
       )}
 
       <BootOverlay phase={hudPhase} reduced={prefersReducedMotion} />
-
-      {/* ── The "zap zap" cold open (sits above everything, then unmounts) ── */}
       {!prefersReducedMotion && <HeroIntroOverlay step={step} />}
 
+      {/* ── KONTEN UTAMA ── */}
       <motion.div
-        className="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 pt-20 sm:pt-24 pb-12 gap-2 sm:gap-4"
-        // Camera-shake the whole stage the instant the tiles BOOM in.
+        className="relative z-10 flex flex-col items-center justify-center flex-1 w-full px-6 pt-20 sm:pt-24 pb-12"
         animate={
           showTiles && !prefersReducedMotion
             ? { x: [0, -7, 6, -4, 3, -1.5, 0], y: [0, 5, -4, 3, -2, 1, 0] }
@@ -213,45 +207,50 @@ const HeroSection = () => {
         <AnimatePresence>
           {showLogo && (
             <motion.div
-              key="logo"
-              initial={{ opacity: 0, scale: 0.7, filter: 'blur(14px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-              transition={{ duration: 0.7, ease: [0.22, 1.3, 0.4, 1] }}
-              className="relative flex flex-col items-center"
+              key="logo-block"
+              initial={{ opacity: 0, y: 24, filter: 'blur(14px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 0.75, ease: [0.22, 1.3, 0.4, 1] }}
+              className="relative flex flex-col items-center w-full max-w-4xl"
             >
-              {/* WOW — shockwave ring + light burst when the logo lands */}
+              {/* Shockwave */}
               {!prefersReducedMotion && (
                 <>
                   <motion.div
-                    className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
-                    style={{ zIndex: -1, border: '2px solid rgba(125,211,252,0.55)' }}
-                    initial={{ width: 60, height: 60, opacity: 0 }}
-                    animate={{ width: [60, 560], height: [60, 560], opacity: [0.7, 0] }}
-                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                    style={{
+                      zIndex: -1,
+                      border: '1.5px solid rgba(125,211,252,0.4)',
+                      borderRadius: '50%',
+                    }}
+                    initial={{ width: 80, height: 40, opacity: 0 }}
+                    animate={{ width: [80, 800], height: [40, 200], opacity: [0.6, 0] }}
+                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
                     aria-hidden="true"
                   />
                   <motion.div
-                    className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+                    className="absolute left-1/2 top-[35%] -translate-x-1/2 -translate-y-1/2 pointer-events-none"
                     style={{
                       zIndex: -1,
-                      width: 360,
-                      height: 360,
+                      width: 600,
+                      height: 240,
                       background:
-                        'radial-gradient(circle, rgba(251,146,60,0.28) 0%, rgba(56,189,248,0.12) 35%, transparent 65%)',
+                        'radial-gradient(ellipse, rgba(125,211,252,0.16) 0%, rgba(251,146,60,0.08) 45%, transparent 70%)',
                     }}
-                    initial={{ scale: 0.2, opacity: 0 }}
-                    animate={{ scale: [0.2, 2.3], opacity: [0.55, 0] }}
-                    transition={{ duration: 1.05, ease: 'easeOut' }}
+                    initial={{ scale: 0.25, opacity: 0 }}
+                    animate={{ scale: [0.25, 2.2], opacity: [0.5, 0] }}
+                    transition={{ duration: 1.3, ease: 'easeOut' }}
                     aria-hidden="true"
                   />
-                  {/* Spark burst — shards of light fly outward as the logo lands */}
-                  {Array.from({ length: 14 }).map((_, i) => {
-                    const angle = (i / 14) * Math.PI * 2;
-                    const dist = 150 + (i % 3) * 46;
+                  {/* Spark burst — disesuaikan untuk logo horizontal */}
+                  {Array.from({ length: 10 }).map((_, i) => {
+                    const angle = (i / 10) * Math.PI * 2;
+                    const distX = (160 + (i % 3) * 50) * Math.cos(angle);
+                    const distY = (60 + (i % 3) * 20) * Math.sin(angle);
                     return (
                       <motion.span
                         key={i}
-                        className="absolute left-1/2 top-[40%] rounded-full pointer-events-none"
+                        className="absolute left-1/2 top-[35%] rounded-full pointer-events-none"
                         style={{
                           zIndex: -1,
                           width: i % 2 === 0 ? 3 : 2,
@@ -261,8 +260,8 @@ const HeroSection = () => {
                         }}
                         initial={{ x: 0, y: 0, opacity: 0, scale: 1 }}
                         animate={{
-                          x: Math.cos(angle) * dist,
-                          y: Math.sin(angle) * dist,
+                          x: distX,
+                          y: distY,
                           opacity: [0, 1, 0],
                           scale: [1, 0.3],
                         }}
@@ -273,41 +272,87 @@ const HeroSection = () => {
                   })}
                 </>
               )}
+
+
+
+              {/* ── LOGO ── */}
               <HeroLogo showText={false} />
+
+              {/* ── DIVIDER ── */}
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-4 mt-7 mb-6 w-full max-w-md justify-center"
+                aria-hidden="true"
+              >
+                <div
+                  className="h-px flex-1"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent, rgba(125,211,252,0.28))',
+                  }}
+                />
+                <div
+                  className="w-1.5 h-1.5 rounded-full"
+                  style={{
+                    background: 'rgba(125,211,252,0.7)',
+                    boxShadow: '0 0 8px rgba(125,211,252,0.9)',
+                  }}
+                />
+                <div
+                  className="h-px flex-1"
+                  style={{
+                    background: 'linear-gradient(90deg, rgba(125,211,252,0.28), transparent)',
+                  }}
+                />
+              </motion.div>
+
+              {/* ── HEADLINE ── */}
+              <motion.h1
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center font-heading font-semibold leading-snug max-w-3xl px-4"
+                style={{
+                  fontSize: 'clamp(1rem, 2.3vw, 1.55rem)',
+                  color: '#f0f4ff',
+                  letterSpacing: '0.015em',
+                }}
+              >
+                Asia&apos;s Premier Platform for{' '}
+                <span
+                  style={{
+                    background: 'linear-gradient(120deg, #7dd3fc 0%, #38bdf8 55%, #fb923c 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                  }}
+                >
+                  AI · XR · Spatial Media
+                </span>{' '}
+                &amp; Immersive Technology
+              </motion.h1>
+
+              {/* ── SUBTEXT ── */}
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center mt-4 px-4 max-w-2xl text-hero-sub"
+                style={{ fontSize: 'clamp(0.78rem, 1.3vw, 0.92rem)' }}
+              >
+                Connecting industry leaders, creators, educators, broadcasters,
+                governments and technology innovators through deployment-ready
+                immersive experiences.
+              </motion.p>
+
+
             </motion.div>
           )}
         </AnimatePresence>
-
-
-        <div className={`flex flex-col items-center transition-opacity duration-1000 ${showLogo ? 'opacity-100' : 'opacity-0'}`}>
-
-
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 12 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center font-heading font-semibold leading-snug max-w-4xl px-4"
-            style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.7rem)', color: '#f0f4ff', letterSpacing: '0.02em' }}
-          >
-            Asia’s Premier Platform for <br className="hidden md:block" />
-            AI • XR • Spatial Media • Virtual Production • Immersive Technology
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: showLogo ? 1 : 0, y: showLogo ? 0 : 10 }}
-            transition={{ delay: showLogo ? 0.15 : 0, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center mt-5 px-4 max-w-3xl text-hero-sub"
-          >
-            Connecting industry leaders, creators, educators, broadcasters, governments and technology innovators through deployment-ready immersive experiences.
-          </motion.p>
-        </div>
-
-
       </motion.div>
 
-      {/* Scroll hint — pulled out of the content flow so it can never push the
-          tiles off-screen on short / windowed viewports. */}
+      {/* ── SCROLL HINT ── */}
       <motion.button
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: showHint ? 1 : 0, y: showHint ? 0 : 10 }}
@@ -317,15 +362,17 @@ const HeroSection = () => {
         aria-label="Scroll to Choose Your Experience"
         style={{ pointerEvents: showHint ? 'auto' : 'none' }}
       >
-        <span className="text-kicker group-hover:text-accent">
-          Experience More
-        </span>
-        <div className="relative w-px h-8 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+        <span className="text-kicker group-hover:text-accent">Experience More</span>
+        <div
+          className="relative w-px h-8 overflow-hidden"
+          style={{ background: 'rgba(255,255,255,0.07)' }}
+        >
           <motion.div
             className="absolute top-0 w-full"
             style={{
               height: '45%',
-              background: 'linear-gradient(to bottom, transparent, rgba(251,146,60,0.8), transparent)',
+              background:
+                'linear-gradient(to bottom, transparent, rgba(251,146,60,0.8), transparent)',
             }}
             animate={{ y: ['-100%', '320%'] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
@@ -337,6 +384,7 @@ const HeroSection = () => {
   );
 };
 
+// ── BootOverlay — tidak berubah dari original ──────────────────────────────
 const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => {
   const active = phase !== 'globe';
   const booting = phase === 'boot';
@@ -344,9 +392,7 @@ const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => 
   const corners = [
     { c: 'top-6 left-6 border-t border-l', label: '1506516-A', align: 'items-start' },
     { c: 'top-6 right-6 border-t border-r', label: '3.08695, 101.62442', align: 'items-end' },
-    {
-      c: 'bottom-6 left-6 border-b border-l', label: 'XR . 2021', align: 'items - start'
-    },
+    { c: 'bottom-6 left-6 border-b border-l', label: 'XR . 2021', align: 'items-start' },
     { c: 'bottom-6 right-6 border-b border-r', label: 'XR · OS 4.0', align: 'items-end' },
   ];
 
@@ -388,7 +434,11 @@ const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => 
           <motion.div
             initial={{ top: '-10%', opacity: 0 }}
             animate={{ top: ['-10%', '110%'], opacity: [0, 0.9, 0.9, 0] }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], times: [0, 0.12, 0.85, 1] }}
+            transition={{
+              duration: 0.9,
+              ease: [0.22, 1, 0.36, 1],
+              times: [0, 0.12, 0.85, 1],
+            }}
             className="absolute inset-x-0 h-[40%]"
             style={{
               background:
@@ -411,9 +461,15 @@ const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => 
           />
           <motion.span
             animate={{ opacity: booting ? [0.3, 0.8, 0.3] : 0.32 }}
-            transition={booting ? { duration: 1.4, repeat: Infinity } : { duration: 0.4 }}
+            transition={
+              booting ? { duration: 1.4, repeat: Infinity } : { duration: 0.4 }
+            }
             className="font-mono uppercase"
-            style={{ fontSize: '0.42rem', letterSpacing: '0.28em', color: 'rgba(125,211,252,0.55)' }}
+            style={{
+              fontSize: '0.42rem',
+              letterSpacing: '0.28em',
+              color: 'rgba(125,211,252,0.55)',
+            }}
           >
             {label}
           </motion.span>
@@ -428,9 +484,20 @@ const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => 
             className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2"
           >
             <svg width="150" height="150" viewBox="0 0 150 150" fill="none">
-              <circle cx="75" cy="75" r="58" stroke="rgba(125,211,252,0.25)" strokeWidth="0.75" strokeDasharray="2 9" />
+              <circle
+                cx="75"
+                cy="75"
+                r="58"
+                stroke="rgba(125,211,252,0.25)"
+                strokeWidth="0.75"
+                strokeDasharray="2 9"
+              />
               <circle cx="75" cy="75" r="44" stroke="rgba(125,211,252,0.18)" strokeWidth="0.5" />
-              <path d="M75 8 v14 M75 128 v14 M8 75 h14 M128 75 h14" stroke="rgba(125,211,252,0.35)" strokeWidth="0.75" />
+              <path
+                d="M75 8 v14 M75 128 v14 M8 75 h14 M128 75 h14"
+                stroke="rgba(125,211,252,0.35)"
+                strokeWidth="0.75"
+              />
             </svg>
           </motion.div>
         )}
