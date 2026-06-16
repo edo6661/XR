@@ -174,11 +174,11 @@ const SustainabilityCommitmentSection = () => (
               </div>
 
               <p
-                className="pt-3"
+                className="font-heading font-semibold pt-3"
                 style={{
-                  ...bodyStyle,
                   fontSize: '0.8rem',
-                  color: 'rgba(200,225,210,0.75)',
+                  color: 'rgba(248,250,255,0.95)',
+                  letterSpacing: '0.02em',
                   borderTop: '1px solid rgba(255,255,255,0.1)',
                 }}
               >

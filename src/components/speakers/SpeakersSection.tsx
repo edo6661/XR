@@ -272,21 +272,18 @@ const SpeakersSection = () => {
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
             style={{
               fontSize: '0.72rem',
-              border: '1px solid rgba(57,83,163,0.5)',
-              color: '#a8b8e8',
-              background: 'rgba(57,83,163,0.1)',
+              border: '1px solid rgba(239,120,61,0.4)',
+              color: '#ef783d',
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = 'rgba(57,83,163,0.2)';
-              el.style.borderColor = 'rgba(57,83,163,0.75)';
-              el.style.color = '#f0f4ff';
+              el.style.background = 'rgba(239,120,61,0.08)';
+              el.style.borderColor = 'rgba(239,120,61,0.65)';
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLAnchorElement;
-              el.style.background = 'rgba(57,83,163,0.1)';
-              el.style.borderColor = 'rgba(57,83,163,0.5)';
-              el.style.color = '#a8b8e8';
+              el.style.background = 'transparent';
+              el.style.borderColor = 'rgba(239,120,61,0.4)';
             }}
           >
             Apply to Speak
