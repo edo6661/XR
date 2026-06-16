@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import SectionEyebrow from '../../ui/SectionEyebrow';
 import { SUSTAINABILITY_COMMITMENT } from '../../../core/content/aboutPage';
 
-const ACCENT = '#fb923c';
 const GREEN = '#3d9b6e';
 
 const { images } = SUSTAINABILITY_COMMITMENT;
@@ -124,8 +123,7 @@ const SustainabilityCommitmentSection = () => (
                   color: '#f8faff',
                 }}
               >
-                {SUSTAINABILITY_COMMITMENT.titleLead}{' '}
-                <span style={{ color: ACCENT }}>{SUSTAINABILITY_COMMITMENT.titleAccent}</span>
+                {SUSTAINABILITY_COMMITMENT.title}
               </h2>
 
               <div

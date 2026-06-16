@@ -148,15 +148,16 @@ export const REGIONAL_NETWORK = {
 
 export const SUSTAINABILITY_COMMITMENT = {
   eyebrow: "Sustainability Commitment",
-  titleLead: "Our Green",
-  titleAccent: "Agenda",
+  title: "Advancing Technology Responsibly.",
   intro:
-    "We recognise the impact of our business operations and the threat of climate change to prosperity, social justice and quality of life.",
-  practiceLead: "We will do this by",
+    "We recognise that the immersive technology industry — and the activities that support it — carry an environmental responsibility. We are committed to conducting our activities with awareness, accountability, and continuous improvement.",
+  practiceLead: "In practice, this means:",
   practices: [
-    "Reviewing and understanding the environmental impacts arising from our activities",
-    "Ensuring that we understand and comply with all relevant environmental legislation, and with any other environmental requirements or commitments",
-    "Setting environmental objectives and targets for activities having the most significant impact",
+    "Complying with all applicable environmental regulations and legislation governing our event operations",
+    "Prioritising recyclable and sustainably sourced materials across our event production and collateral",
+    "Reviewing the environmental impact of our activities on an ongoing basis and identifying areas for improvement",
+    "Aligning our programmes and initiatives with the United Nations Sustainable Development Goals (SDGs), recognising the role of AI and XR technology in shaping a more equitable and sustainable future",
+    "Engaging our partners, sponsors, and vendors in shared responsibility toward greener event practices",
   ],
   closing:
     "We are committed to raising the bar — not just for our industry, but for how industry events in Asia are run.",
