@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { XRAS_KL_ACCENT, XRAS_KL_META } from '../../core/content/xrasKl2026';
 
-const XRAS_HERO_IMAGE = '/3-gateway-images/XR AI Summit 2026_Main Image.jpeg';
+const XRAS_HERO_IMAGE = '/3-gateway-images/XRAS_2026.png';
 
 const neoShadow = `
   10px 10px 28px rgba(180,190,208,0.58),
