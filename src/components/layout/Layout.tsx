@@ -9,7 +9,7 @@ import CustomCursor from '../ui/CustomCursor';
 import ScrollProgress from '../ui/ScrollProgress';
 import FilmGrain from '../ui/FilmGrain';
 import BackgroundElements from '../ui/BackgroundElements';
-import { lenisInstance } from '../../lib/lenisInstance';
+import { lenisInstance, registerLenis, unregisterLenis } from '../../lib/lenisInstance';
 import { killPinnedScrollTriggers } from '../../lib/scrollTriggerCleanup';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +28,7 @@ const Layout = () => {
     });
 
     lenisRef.current = lenis;
-    lenisInstance.current = lenis;
+    registerLenis(lenis);
 
     lenis.on('scroll', ScrollTrigger.update);
 
@@ -41,8 +41,8 @@ const Layout = () => {
 
     return () => {
       gsap.ticker.remove(onTick);
+      unregisterLenis(lenis);
       lenis.destroy();
-      lenisInstance.current = null;
     };
   }, []);
 

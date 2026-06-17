@@ -776,10 +776,27 @@ svg {
 }
 
 .activation-tabs-dock.is-floating {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
   box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.55),
     0 0 24px rgba(239, 120, 61, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.activation-tabs-dock.is-floating.is-dismissing,
+.activation-tabs-dock.is-floating.is-entering {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.activation-tabs-dock.is-floating.is-entering {
+  transition: none;
 }
 
 .activation-tabs-hint {

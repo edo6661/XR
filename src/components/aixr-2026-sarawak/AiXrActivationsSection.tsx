@@ -348,10 +348,13 @@ const AixrActivationsSection = ({
     dockSlotRef,
     dockRef,
     isPinned,
+    isDismissing,
+    isEntering,
     isPinnedRef,
     placeholderHeight,
     dockStyle,
     scrollToContent,
+    handleDismissTransitionEnd,
   } = useActivationTabsDock({ contentAnchorRef: headingRef });
 
   const handleTabClick = useCallback(
@@ -414,8 +417,9 @@ const AixrActivationsSection = ({
           <div
             ref={dockRef}
             style={dockStyle}
+            onTransitionEnd={handleDismissTransitionEnd}
             className={`activation-tabs-sticky activation-tabs-dock transition-shadow duration-300 ${isPinned ? 'is-floating' : ''
-              }`}
+              } ${isDismissing ? 'is-dismissing' : ''} ${isEntering ? 'is-entering' : ''}`}
             role="tablist"
             aria-label="Event experiences"
           >
