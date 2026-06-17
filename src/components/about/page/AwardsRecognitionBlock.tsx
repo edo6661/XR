@@ -170,8 +170,8 @@ const AwardsRecognitionBlock = () => (
               aria-hidden="true"
             />
             <p
-              className="font-mono uppercase tracking-[0.16em]"
-              style={{ fontSize: '0.55rem', color: 'rgba(140,150,175,0.7)' }}
+              className="font-mono uppercase tracking-[0.14em]"
+              style={{ fontSize: '0.7rem', color: 'rgba(175,185,210,0.88)' }}
             >
               {AWARDS_RECOGNITION.event}
             </p>
