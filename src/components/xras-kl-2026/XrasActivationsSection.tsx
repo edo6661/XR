@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
   Mic,
@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import ActivationPanelStack from '../ui/ActivationPanelStack';
+import { useActivationTabsDock } from '../../hooks/useActivationTabsDock';
 
 type SubItem = { label: string; detail?: string };
 
@@ -352,28 +353,29 @@ const XrasActivationsSection = ({
   onRegister,
 }: XrasActivationsSectionProps) => {
   const [activeId, setActiveId] = useState<string>(ACTIVATIONS[0].id);
-  const sectionRef = useRef<HTMLElement>(null);
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const [isTabsSticky, setIsTabsSticky] = useState(false);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const {
+    sectionRef,
+    sentinelRef,
+    dockSlotRef,
+    dockRef,
+    isPinned,
+    isPinnedRef,
+    placeholderHeight,
+    dockStyle,
+    scrollToContent,
+  } = useActivationTabsDock({ contentAnchorRef: headingRef });
 
-  const handleTabClick = useCallback((id: string) => {
-    setActiveId(id);
-  }, []);
-
-  /* Observe when the tabs bar becomes sticky */
-  useEffect(() => {
-    const sentinel = tabsRef.current;
-    if (!sentinel) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsTabsSticky(!entry.isIntersecting);
-      },
-      { threshold: 1, rootMargin: '-65px 0px 0px 0px' }
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, []);
+  const handleTabClick = useCallback(
+    (id: string) => {
+      const wasPinned = isPinnedRef.current;
+      setActiveId(id);
+      if (wasPinned) {
+        requestAnimationFrame(() => scrollToContent());
+      }
+    },
+    [isPinnedRef, scrollToContent],
+  );
 
   return (
     <section
@@ -389,6 +391,7 @@ const XrasActivationsSection = ({
         <SectionEyebrow>7 Experiences</SectionEyebrow>
 
         <motion.div
+          ref={headingRef}
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -414,30 +417,37 @@ const XrasActivationsSection = ({
           </p>
         </motion.div>
 
-        {/* ── Sticky horizontal tab dock + content panel ───────────────── */}
-        <div
-          ref={tabsRef}
-          className={`activation-tabs-sticky activation-tabs-dock -mx-6 px-6 mb-5 transition-shadow duration-300 ${isTabsSticky ? 'is-floating' : ''
-            }`}
-          role="tablist"
-          aria-label="Event experiences"
-        >
-          <p className="activation-tabs-hint">Explore what's waiting for you</p>
-
+        {/* ── Pinned horizontal tab dock + content panel ───────────────── */}
+        <div ref={sentinelRef} className="h-0 w-full" aria-hidden="true" />
+        <div ref={dockSlotRef} className="mb-5 -mx-6 px-6">
+          {isPinned && (
+            <div style={{ height: placeholderHeight }} aria-hidden="true" />
+          )}
           <div
-            className="overflow-x-auto pb-2 pt-1 -mx-1 px-1"
-            style={{ scrollbarWidth: 'none' }}
+            ref={dockRef}
+            style={dockStyle}
+            className={`activation-tabs-sticky activation-tabs-dock transition-shadow duration-300 ${isPinned ? 'is-floating' : ''
+              }`}
+            role="tablist"
+            aria-label="Event experiences"
           >
-            <div className="flex gap-3 w-max sm:w-full sm:flex-wrap sm:justify-center">
-              {ACTIVATIONS.map((activation, index) => (
-                <TabButton
-                  key={activation.id}
-                  activation={activation}
-                  isActive={activeId === activation.id}
-                  index={index}
-                  onClick={() => handleTabClick(activation.id)}
-                />
-              ))}
+            <p className="activation-tabs-hint">Explore what's waiting for you</p>
+
+            <div
+              className="overflow-x-auto pb-2 pt-1 -mx-1 px-1"
+              style={{ scrollbarWidth: 'none' }}
+            >
+              <div className="flex gap-3 w-max sm:w-full sm:flex-wrap sm:justify-center">
+                {ACTIVATIONS.map((activation, index) => (
+                  <TabButton
+                    key={activation.id}
+                    activation={activation}
+                    isActive={activeId === activation.id}
+                    index={index}
+                    onClick={() => handleTabClick(activation.id)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

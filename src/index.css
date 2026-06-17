@@ -759,8 +759,6 @@ svg {
 
 /* ── Sticky tabs for activation sections ────────────────────────────────── */
 .activation-tabs-sticky {
-  position: sticky;
-  top: 64px;
   z-index: 50;
 }
 
@@ -804,12 +802,6 @@ svg {
   background: #ef783d;
   box-shadow: 0 0 10px rgba(239, 120, 61, 0.8);
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@supports (padding: env(safe-area-inset-top)) {
-  .activation-tabs-sticky {
-    top: calc(64px + env(safe-area-inset-top));
-  }
 }
 
 /* ── Form input base style — improved readability ───────────────────────── */
