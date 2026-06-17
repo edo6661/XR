@@ -22,6 +22,16 @@ type UseActivationTabsDockOptions = {
 };
 
 const DOCK_ANIM_MS = 320;
+const METRICS_EPSILON = 0.5;
+
+function metricsEqual(a: PinnedMetrics | null, b: PinnedMetrics): boolean {
+  if (!a) return false;
+  return (
+    Math.abs(a.top - b.top) < METRICS_EPSILON &&
+    Math.abs(a.left - b.left) < METRICS_EPSILON &&
+    Math.abs(a.width - b.width) < METRICS_EPSILON
+  );
+}
 
 /**
  * Pins the activation tab dock below the navbar while the user scrolls
@@ -38,6 +48,10 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
   const dismissingRef = useRef(false);
   const dismissTimerRef = useRef<number | null>(null);
   const enterFrameRef = useRef<number | null>(null);
+  const scrollRafRef = useRef<number | null>(null);
+  const navHeightRef = useRef(64);
+  const pinnedMetricsRef = useRef<PinnedMetrics | null>(null);
+  const placeholderHeightRef = useRef(0);
   const [isPinned, setIsPinned] = useState(false);
   const [isDismissing, setIsDismissing] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
@@ -46,9 +60,9 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     null,
   );
 
-  const getNavHeight = useCallback(() => {
+  const refreshNavHeight = useCallback(() => {
     const header = document.querySelector("header");
-    return header?.getBoundingClientRect().height ?? 64;
+    navHeightRef.current = header?.getBoundingClientRect().height ?? 64;
   }, []);
 
   const clearDismissTimer = useCallback(() => {
@@ -65,6 +79,36 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     }
   }, []);
 
+  const clearScrollRaf = useCallback(() => {
+    if (scrollRafRef.current !== null) {
+      cancelAnimationFrame(scrollRafRef.current);
+      scrollRafRef.current = null;
+    }
+  }, []);
+
+  const applyPinnedMetrics = useCallback(
+    (slot: HTMLDivElement, navHeight: number) => {
+      const slotRect = slot.getBoundingClientRect();
+      const next: PinnedMetrics = {
+        top: navHeight,
+        left: slotRect.left,
+        width: slotRect.width,
+      };
+
+      if (metricsEqual(pinnedMetricsRef.current, next)) return;
+
+      pinnedMetricsRef.current = next;
+      setPinnedMetrics(next);
+    },
+    [],
+  );
+
+  const applyPlaceholderHeight = useCallback((height: number) => {
+    if (placeholderHeightRef.current === height) return;
+    placeholderHeightRef.current = height;
+    setPlaceholderHeight(height);
+  }, []);
+
   const finishUnpin = useCallback(() => {
     clearDismissTimer();
     clearEnterFrame();
@@ -72,6 +116,8 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     setIsDismissing(false);
     setIsEntering(false);
     isPinnedRef.current = false;
+    pinnedMetricsRef.current = null;
+    placeholderHeightRef.current = 0;
     setIsPinned(false);
     setPlaceholderHeight(0);
     setPinnedMetrics(null);
@@ -93,18 +139,6 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     setIsDismissing(false);
   }, [clearDismissTimer]);
 
-  const updatePinnedMetrics = useCallback(
-    (slot: HTMLDivElement, navHeight: number) => {
-      const slotRect = slot.getBoundingClientRect();
-      setPinnedMetrics({
-        top: navHeight,
-        left: slotRect.left,
-        width: slotRect.width,
-      });
-    },
-    [],
-  );
-
   const update = useCallback(() => {
     const section = sectionRef.current;
     const sentinel = sentinelRef.current;
@@ -112,39 +146,37 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     const slot = dockSlotRef.current;
     if (!section || !sentinel || !dock || !slot) return;
 
-    const navHeight = getNavHeight();
+    const navHeight = navHeightRef.current;
     const sentinelTop = sentinel.getBoundingClientRect().top;
-    const sectionRect = section.getBoundingClientRect();
+    const sectionBottom = section.getBoundingClientRect().bottom;
     const dockHeight = dock.offsetHeight;
     const pinThreshold = navHeight + dockHeight + 12;
 
-    const inPinZone =
-      sentinelTop <= navHeight && sectionRect.bottom > pinThreshold;
-    const exitedDownward = sectionRect.bottom <= pinThreshold;
+    const inPinZone = sentinelTop <= navHeight && sectionBottom > pinThreshold;
+    const exitedDownward = sectionBottom <= pinThreshold;
     const scrolledAbove = sentinelTop > navHeight;
 
     if (inPinZone) {
-      const wasPinned = isPinnedRef.current;
-      cancelDismiss();
+      if (dismissingRef.current) {
+        cancelDismiss();
+        return;
+      }
+
+      if (isPinnedRef.current) return;
 
       isPinnedRef.current = true;
       setIsPinned(true);
-      setPlaceholderHeight(dockHeight);
-      updatePinnedMetrics(slot, navHeight);
-
-      if (!wasPinned) {
-        setIsEntering(true);
-      }
-
+      applyPlaceholderHeight(dockHeight);
+      applyPinnedMetrics(slot, navHeight);
+      setIsEntering(true);
       return;
     }
 
     if (!isPinnedRef.current) return;
-
     if (dismissingRef.current) return;
 
     if (exitedDownward) {
-      updatePinnedMetrics(slot, navHeight);
+      applyPinnedMetrics(slot, navHeight);
       startDismiss();
       return;
     }
@@ -153,18 +185,31 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
       finishUnpin();
     }
   }, [
+    applyPinnedMetrics,
+    applyPlaceholderHeight,
     cancelDismiss,
     finishUnpin,
-    getNavHeight,
     startDismiss,
-    updatePinnedMetrics,
   ]);
+
+  const scheduleUpdate = useCallback(() => {
+    if (scrollRafRef.current !== null) return;
+    scrollRafRef.current = requestAnimationFrame(() => {
+      scrollRafRef.current = null;
+      update();
+    });
+  }, [update]);
+
+  const handleResize = useCallback(() => {
+    refreshNavHeight();
+    scheduleUpdate();
+  }, [refreshNavHeight, scheduleUpdate]);
 
   const scrollToContent = useCallback(() => {
     const anchor = contentAnchorRef?.current;
     if (!anchor) return;
 
-    const navHeight = getNavHeight();
+    const navHeight = navHeightRef.current;
     const lenis = lenisInstance.current;
     const offset = -(navHeight + 16);
 
@@ -174,7 +219,7 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
       const top = anchor.getBoundingClientRect().top + window.scrollY + offset;
       window.scrollTo({ top, behavior: "smooth" });
     }
-  }, [contentAnchorRef, getNavHeight]);
+  }, [contentAnchorRef]);
 
   const handleDismissTransitionEnd = useCallback(
     (event: TransitionEvent<HTMLDivElement>) => {
@@ -184,7 +229,6 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     [finishUnpin],
   );
 
-  /* Commit hidden enter state to the DOM, then animate to visible */
   useLayoutEffect(() => {
     if (!isPinned || !isEntering) return;
 
@@ -205,30 +249,35 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
   }, [isPinned, isEntering, clearEnterFrame]);
 
   useEffect(() => {
-    const unsubLenis = subscribeLenisScroll(update);
-    window.addEventListener("resize", update);
+    refreshNavHeight();
 
-    const ro = new ResizeObserver(update);
-    const section = sectionRef.current;
-    const dock = dockRef.current;
+    const unsubLenis = subscribeLenisScroll(scheduleUpdate);
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    const ro = new ResizeObserver(scheduleUpdate);
     const slot = dockSlotRef.current;
-    if (section) ro.observe(section);
-    if (dock) ro.observe(dock);
     if (slot) ro.observe(slot);
 
     const initialFrame = requestAnimationFrame(update);
-    const layoutRefresh = window.setTimeout(update, 150);
 
     return () => {
       cancelAnimationFrame(initialFrame);
       unsubLenis();
-      window.removeEventListener("resize", update);
+      window.removeEventListener("resize", handleResize);
       ro.disconnect();
       clearDismissTimer();
       clearEnterFrame();
-      window.clearTimeout(layoutRefresh);
+      clearScrollRaf();
     };
-  }, [clearDismissTimer, clearEnterFrame, update]);
+  }, [
+    clearDismissTimer,
+    clearEnterFrame,
+    clearScrollRaf,
+    handleResize,
+    refreshNavHeight,
+    scheduleUpdate,
+    update,
+  ]);
 
   const dockStyle: CSSProperties | undefined = pinnedMetrics
     ? {
