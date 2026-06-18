@@ -106,7 +106,7 @@ const AboutPage = () => (
           {INDUSTRY_FOCUS.description}
         </p>
 
-        {/* Card grid — 2 col mobile, 3 col md, tapi 5 item jadi: 2-2-1 atau pakai auto-fit */}
+        {/* Card grid — 2×2 on wide screens via auto-fill */}
         <div
           className="grid gap-4 mb-10"
           style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}
@@ -159,6 +159,23 @@ const AboutPage = () => (
                 >
                   {sector.desc}
                 </p>
+                {'bullets' in sector && sector.bullets.length > 0 && (
+                  <ul
+                    className="mt-1 space-y-1 pl-3"
+                    style={{ fontSize: '0.8rem', color: 'rgba(150,165,195,0.85)', lineHeight: 1.55 }}
+                  >
+                    {sector.bullets.map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <span
+                          className="mt-[0.45em] h-1 w-1 flex-shrink-0 rounded-full"
+                          style={{ background: ABOUT_ACCENT }}
+                          aria-hidden="true"
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </motion.div>
           ))}

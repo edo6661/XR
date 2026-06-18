@@ -25,7 +25,7 @@ const HackathonIcon = () => (
 
 const EVENT_GATEWAYS = [
   {
-    title: "4th XR Asia Summits 2026",
+    title: "4th XR ASIA SUMMITs 2026",
     subtitle: '1 - 3 December 2026',
     description: 'Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur. One platform, six activations – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.',
     to: '/xras-kl-2026',
@@ -36,7 +36,7 @@ const EVENT_GATEWAYS = [
   {
     title: "AI-XR Cultural Innovation Forum",
     subtitle: '16 - 17 October 2026',
-    description: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak. A prelude to XR Asia Summit – Innovation • Culture • Technology • Future Talent',
+    description: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak. A prelude to XR ASIA SUMMIT – Innovation • Culture • Technology • Future Talent',
     to: '/aixr-2026-sarawak',
     accentColor: '#22d3ee',
     tag: 'AIXR',

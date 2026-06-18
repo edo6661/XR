@@ -20,7 +20,7 @@ const FLAGSHIP_EVENTS = [
     isFeatured: true,
   },
   {
-    title: 'XR Asia Summit 2026',
+    title: 'XR ASIA SUMMIT 2026',
     date: '1 – 3 Dec 2026',
     location: 'Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur',
     description:
@@ -51,7 +51,7 @@ const PROGRAMME_HIGHLIGHTS = [
     accentColor: '#34d399',
     tag: 'Esports',
     to: '/xras-kl-2026',
-    imageSrc: '/programme-highlights/Esports.jpeg',
+    imageSrc: '/programme-highlights/Esports.png',
     isFeatured: false,
   },
   {

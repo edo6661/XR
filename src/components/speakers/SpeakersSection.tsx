@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SectionEyebrow from '../ui/SectionEyebrow';
@@ -232,27 +233,19 @@ const SpeakersSection = () => {
           </motion.div>
         </div>
 
-        <div className="flex flex-col gap-8 lg:gap-10">
-          {speakerRows.map((row, rowIndex) => (
-            <div key={rowIndex}>
-              {rowIndex > 0 ? (
+        <div className="grid grid-cols-2 min-[640px]:max-[767px]:grid-cols-3 min-[768px]:max-[1079px]:grid-cols-4 min-[1080px]:grid-cols-5 gap-4 lg:gap-5">
+          {SPEAKERS.map((speaker, index) => (
+            <Fragment key={speaker.name}>
+              {index > 0 && index % ROW_SIZE === 0 ? (
                 <div
-                  className="flex items-center gap-4 mb-8 lg:mb-10"
+                  className="hidden min-[1080px]:flex col-span-full items-center gap-4 -mt-2 mb-2 lg:-mt-3 lg:mb-3"
                   aria-hidden="true"
                 >
                   <div className="h-px flex-1 bg-linear-to-r from-transparent via-white/8 to-transparent" />
                 </div>
               ) : null}
-
-              <div className="grid grid-cols-2 min-[640px]:max-[767px]:grid-cols-3 min-[768px]:max-[1079px]:grid-cols-4 min-[1080px]:grid-cols-5 gap-4 lg:gap-5">
-                {row.map((speaker, colIndex) => {
-                  const index = rowIndex * ROW_SIZE + colIndex;
-                  return (
-                    <SpeakerCard key={speaker.name} speaker={speaker} index={index} />
-                  );
-                })}
-              </div>
-            </div>
+              <SpeakerCard speaker={speaker} index={index} />
+            </Fragment>
           ))}
         </div>
 

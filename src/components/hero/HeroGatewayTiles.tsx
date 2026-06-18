@@ -25,7 +25,7 @@ type Tile = {
 const TILES: Tile[] = [
   {
     tag: '',
-    title: "XR Asia Summits",
+    title: "XR ASIA SUMMITs",
     subtitle: '',
     to: '/xras-kl-2026',
     accent: '#fb923c',

@@ -133,16 +133,6 @@ const AixrHero = ({ onDownloadBrochure, onRegister }: AixrHeroProps) => (
           {AIXR_SARAWAK_META.location}
         </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.32, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl mx-auto leading-relaxed mb-10"
-          style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.85, color: 'rgba(15,27,48,0.88)' }}
-        >
-          Sarawak regional gateway — conference, expo, workshops, masterclasses, and championship semi-finals on the
-          path to XRAS KL grand finals. No gala dinner at this stage.
-        </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}

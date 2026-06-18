@@ -107,7 +107,7 @@ const Navbar = () => {
           <Link
             to="/"
             className="group flex items-center gap-3 shrink-0 select-none"
-            aria-label="XR Asia Summit — Home"
+            aria-label="XR ASIA SUMMIT — Home"
           >
             <div className="relative shrink-0 flex items-center justify-center">
               <img
@@ -289,7 +289,7 @@ const Navbar = () => {
                 */}
                 <img
                   src="/logo_dark_transparent.png"
-                  alt="XR Asia Summit"
+                  alt="XR ASIA SUMMIT"
                   className="object-contain"
                   style={{
                     height: '32px',

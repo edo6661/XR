@@ -82,7 +82,7 @@ export const SPEAKER_EVENTS = [
   {
     label: "Apply for XRAS KL '26",
     subject: "Speaker Application — XRAS KL '26",
-    event: "XR Asia Summits 2026",
+    event: "XR ASIA SUMMITs 2026",
   },
   {
     label: "Apply for AIXR Sarawak '26",

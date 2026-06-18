@@ -1,18 +1,19 @@
-import { useRef } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import SectionEyebrow from '../ui/SectionEyebrow';
 
 /**
- * Partner logos — derived from the actual assets in /public/all-partner-logos/
- * Group 1: Government / Ecosystem Partners
- * Group 2: Technology Partners
- * All merged into one infinite slider.
+ * Partner logos — assets in /public/all-partner-logos/
+ *
+ * All logos render on a white tile so dark / mixed-contrast brand marks stay
+ * legible on the dark section. A few monochrome assets need a CSS filter boost.
  */
 type Partner = {
   name: string;
   src: string;
-  needsInvert?: boolean;
+  /** CSS filter for assets that are near-invisible even on white */
+  filter?: string;
 };
 
 const GOVERNMENT_PARTNERS: Partner[] = [
@@ -24,89 +25,84 @@ const GOVERNMENT_PARTNERS: Partner[] = [
 
 const TECH_PARTNERS: Partner[] = [
   { name: 'AOTO', src: '/all-partner-logos/AOTO LOGO2.png' },
-  { name: 'Artixium', src: '/all-partner-logos/artixium.jpg' },
-  { name: 'Aximmetry', src: '/all-partner-logos/aximmetry.png', needsInvert: true },
-  { name: 'Blackcam Robotics', src: '/all-partner-logos/blackcam robotics.jpg' },
-  { name: 'Brompton Technology', src: '/all-partner-logos/brompton_technology_logo.jpg' },
-  { name: 'Eztrack', src: '/all-partner-logos/logo_eztrack-noir.png', needsInvert: true },
-  { name: 'Huawei', src: '/all-partner-logos/Huawei new Logo.png', needsInvert: true },
-  { name: 'Infiled', src: '/all-partner-logos/infiled.webp' },
-  { name: 'Korad', src: '/all-partner-logos/korad.png', needsInvert: true },
-  { name: 'OARO', src: '/all-partner-logos/OARO.jpeg' },
-  { name: 'Object Matrix', src: '/all-partner-logos/Object-Matrix-Logo-e1610495539370.webp', needsInvert: true },
-  { name: 'Ortana', src: '/all-partner-logos/ortana-omg-wide-logo-with-new-tagline-sml.png', needsInvert: true },
-  { name: 'Smode', src: '/all-partner-logos/logo_smode.png', needsInvert: true },
-  { name: 'STYPE', src: '/all-partner-logos/STYPE-logo-black.png', needsInvert: true },
-  { name: 'Unreal Engine', src: '/all-partner-logos/unreal logo.png', needsInvert: true },
-
-  { name: 'Vivemars', src: '/all-partner-logos/vivemars_logo.jpg' },
+  { name: 'Artixium', src: '/all-partner-logos/artixium.png' },
+  { name: 'Aximmetry', src: '/all-partner-logos/aximmetry.png' },
+  { name: 'Blackcam Robotics', src: '/all-partner-logos/blackcam robotics.png', filter: 'contrast(2.8) brightness(1.35)' },
+  { name: 'Brompton Technology', src: '/all-partner-logos/brompton_technology_logo.png' },
+  { name: 'Eztrack', src: '/all-partner-logos/logo_eztrack-noir.png' },
+  { name: 'Huawei', src: '/all-partner-logos/Huawei new Logo.png' },
+  { name: 'Infiled', src: '/all-partner-logos/infiled.png' },
+  { name: 'Korad', src: '/all-partner-logos/korad.png' },
+  { name: 'OARO', src: '/all-partner-logos/OARO.png' },
+  { name: 'Object Matrix', src: '/all-partner-logos/Object-Matrix-Logo-e1610495539370.png' },
+  { name: 'Ortana', src: '/all-partner-logos/ortana-omg-wide-logo-with-new-tagline-sml.png' },
+  { name: 'Smode', src: '/all-partner-logos/logo_smode.png', filter: 'contrast(2.5) brightness(1.4)' },
+  { name: 'STYPE', src: '/all-partner-logos/STYPE-logo-black.png' },
+  { name: 'Unreal Engine', src: '/all-partner-logos/unreal logo.png', filter: 'contrast(2.8) brightness(1.35)' },
+  { name: 'Vivemars', src: '/all-partner-logos/vivemars_logo.png' },
 ];
 
 // Merge all partners into one flat list for the slider
 const ALL_PARTNERS: Partner[] = [...GOVERNMENT_PARTNERS, ...TECH_PARTNERS];
 
 // ─── Single Logo Card (for slider) ──────────────────────────────────────────
+const LOGO_CARD = {
+  background: '#ffffff',
+  borderColor: 'rgba(0,0,0,0.08)',
+  hoverBorder: 'rgba(251,146,60,0.5)',
+  hoverShadow: '0 6px 28px rgba(0,0,0,0.14)',
+} as const;
+
+const logoImageStyle = (partner: Partner, hovered: boolean): CSSProperties => {
+  const base = partner.filter ?? 'none';
+  const filter =
+    hovered && base !== 'none'
+      ? `${base} contrast(1.08)`
+      : hovered
+        ? 'brightness(1.02)'
+        : base;
+  return { opacity: 1, mixBlendMode: 'normal', filter };
+};
+
 const SliderLogoCard = ({ partner }: { partner: Partner }) => {
   const reduce = useReducedMotion();
-  const imgRef = useRef<HTMLImageElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+
+  const applyCardHover = (active: boolean) => {
+    if (reduce || !cardRef.current) return;
+    const el = cardRef.current;
+    el.style.borderColor = active ? LOGO_CARD.hoverBorder : LOGO_CARD.borderColor;
+    el.style.boxShadow = active ? LOGO_CARD.hoverShadow : 'none';
+  };
 
   return (
     <div
       ref={cardRef}
-      className="relative flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden transition-all duration-400"
+      className="relative shrink-0 flex items-center justify-center rounded-xl overflow-hidden transition-all duration-400"
       style={{
-        width: '140px',
-        minHeight: '72px',
-        background: 'rgba(255,255,255,0.025)',
-        border: '1px solid rgba(255,255,255,0.07)',
+        width: '152px',
+        minHeight: '80px',
+        background: LOGO_CARD.background,
+        border: '1px solid',
+        borderColor: LOGO_CARD.borderColor,
         padding: '16px 20px',
       }}
-      onMouseEnter={(e) => {
-        if (reduce) return;
-        const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = 'rgba(251,146,60,0.35)';
-        el.style.background = 'rgba(251,146,60,0.05)';
-        el.style.boxShadow = '0 0 28px rgba(251,146,60,0.10)';
-        if (imgRef.current) {
-          imgRef.current.style.filter = partner.needsInvert
-            ? 'invert(1) brightness(1.1) grayscale(0)'
-            : 'grayscale(0) brightness(1.05)';
-          imgRef.current.style.opacity = '1';
-        }
+      onMouseEnter={() => {
+        setHovered(true);
+        applyCardHover(true);
       }}
-      onMouseLeave={(e) => {
-        if (reduce) return;
-        const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = 'rgba(255,255,255,0.07)';
-        el.style.background = 'rgba(255,255,255,0.025)';
-        el.style.boxShadow = 'none';
-        if (imgRef.current) {
-          imgRef.current.style.filter = partner.needsInvert
-            ? 'invert(1) brightness(0.85) grayscale(0.2)'
-            : 'grayscale(0.35) brightness(0.85)';
-          imgRef.current.style.opacity = '0.7';
-        }
+      onMouseLeave={() => {
+        setHovered(false);
+        applyCardHover(false);
       }}
     >
-      {/* Top shimmer line on hover */}
-      <div
-        className="absolute top-0 inset-x-0 h-px opacity-0 hover:opacity-100 transition-opacity duration-400"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(251,146,60,0.55), transparent)' }}
-        aria-hidden="true"
-      />
       <img
-        ref={imgRef}
         src={partner.src}
         alt={partner.name}
         title={partner.name}
-        className="max-h-9 w-full object-contain transition-all duration-400"
-        style={{
-          filter: partner.needsInvert
-            ? 'invert(1) brightness(0.85) grayscale(0.2)'
-            : 'grayscale(0.35) brightness(0.85)',
-          opacity: 0.7,
-        }}
+        className="relative z-1 max-h-11 w-full object-contain transition-all duration-400"
+        style={logoImageStyle(partner, hovered)}
         loading="lazy"
         onError={(e) => {
           const img = e.currentTarget;
@@ -133,8 +129,8 @@ const InfiniteSlider = ({ partners }: { partners: Partner[] }) => {
   // Duplicate for seamless loop
   const doubled = [...partners, ...partners];
 
-  // Each card is 140px wide + 12px gap = 152px per item
-  const itemWidth = 152;
+  // Each card is 152px wide + 12px gap = 164px per item
+  const itemWidth = 164;
   const totalWidth = partners.length * itemWidth;
 
   return (

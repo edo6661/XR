@@ -7,15 +7,15 @@ type ActivationPanelStackProps<T extends { id: string }> = {
 };
 
 /**
- * Stacks all panels in one grid cell so container height stays at the
- * tallest panel — no layout jump when switching tabs with uneven content.
+ * Tab panels with cross-fade. Only the active panel contributes to layout
+ * height so mobile does not reserve space for every inactive experience.
  */
 const ActivationPanelStack = <T extends { id: string }>({
   items,
   activeId,
   renderPanel,
 }: ActivationPanelStackProps<T>) => (
-  <div className="grid [&>*]:col-start-1 [&>*]:row-start-1">
+  <div className="relative">
     {items.map((item) => {
       const isActive = activeId === item.id;
 
@@ -32,7 +32,11 @@ const ActivationPanelStack = <T extends { id: string }>({
             y: isActive ? 0 : 8,
           }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className={isActive ? 'relative z-10' : 'pointer-events-none invisible'}
+          className={
+            isActive
+              ? 'relative z-10'
+              : 'pointer-events-none absolute inset-x-0 top-0 h-0 overflow-hidden opacity-0 invisible'
+          }
         >
           {renderPanel(item)}
         </motion.div>

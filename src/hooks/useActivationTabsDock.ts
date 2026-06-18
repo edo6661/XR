@@ -19,10 +19,40 @@ type PinnedMetrics = {
 type UseActivationTabsDockOptions = {
   /** Section heading block — scrolled into view when switching tabs while pinned */
   contentAnchorRef?: RefObject<HTMLElement | null>;
+  /** max-w-7xl content wrapper — stable width for pinned dock on mobile */
+  containerRef?: RefObject<HTMLElement | null>;
 };
 
 const DOCK_ANIM_MS = 320;
 const METRICS_EPSILON = 0.5;
+
+function isMobileViewport() {
+  return window.matchMedia("(max-width: 767px)").matches;
+}
+
+function computePinnedMetrics(
+  section: HTMLElement,
+  slot: HTMLDivElement,
+  navHeight: number,
+  container?: HTMLElement | null,
+): PinnedMetrics {
+  if (isMobileViewport()) {
+    const anchor = container ?? section;
+    const anchorRect = anchor.getBoundingClientRect();
+    return {
+      top: navHeight,
+      left: anchorRect.left,
+      width: anchorRect.width,
+    };
+  }
+
+  const slotRect = slot.getBoundingClientRect();
+  return {
+    top: navHeight,
+    left: slotRect.left,
+    width: slotRect.width,
+  };
+}
 
 function metricsEqual(a: PinnedMetrics | null, b: PinnedMetrics): boolean {
   if (!a) return false;
@@ -39,7 +69,7 @@ function metricsEqual(a: PinnedMetrics | null, b: PinnedMetrics): boolean {
  * ancestors that have overflow-x: hidden (which break CSS sticky).
  */
 export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
-  const { contentAnchorRef } = options ?? {};
+  const { contentAnchorRef, containerRef } = options ?? {};
   const sectionRef = useRef<HTMLElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const dockSlotRef = useRef<HTMLDivElement>(null);
@@ -87,20 +117,20 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
   }, []);
 
   const applyPinnedMetrics = useCallback(
-    (slot: HTMLDivElement, navHeight: number) => {
-      const slotRect = slot.getBoundingClientRect();
-      const next: PinnedMetrics = {
-        top: navHeight,
-        left: slotRect.left,
-        width: slotRect.width,
-      };
+    (section: HTMLElement, slot: HTMLDivElement, navHeight: number) => {
+      const next = computePinnedMetrics(
+        section,
+        slot,
+        navHeight,
+        containerRef?.current,
+      );
 
       if (metricsEqual(pinnedMetricsRef.current, next)) return;
 
       pinnedMetricsRef.current = next;
       setPinnedMetrics(next);
     },
-    [],
+    [containerRef],
   );
 
   const applyPlaceholderHeight = useCallback((height: number) => {
@@ -159,15 +189,15 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     if (inPinZone) {
       if (dismissingRef.current) {
         cancelDismiss();
-        return;
       }
+
+      applyPinnedMetrics(section, slot, navHeight);
 
       if (isPinnedRef.current) return;
 
       isPinnedRef.current = true;
       setIsPinned(true);
       applyPlaceholderHeight(dockHeight);
-      applyPinnedMetrics(slot, navHeight);
       setIsEntering(true);
       return;
     }
@@ -176,7 +206,7 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     if (dismissingRef.current) return;
 
     if (exitedDownward) {
-      applyPinnedMetrics(slot, navHeight);
+      applyPinnedMetrics(section, slot, navHeight);
       startDismiss();
       return;
     }
@@ -209,16 +239,36 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     const anchor = contentAnchorRef?.current;
     if (!anchor) return;
 
+    refreshNavHeight();
     const navHeight = navHeightRef.current;
     const lenis = lenisInstance.current;
     const offset = -(navHeight + 16);
+    const rect = anchor.getBoundingClientRect();
 
     if (lenis) {
-      lenis.scrollTo(anchor, { offset, duration: 0.9 });
+      const top = lenis.scroll + rect.top + offset;
+      lenis.scrollTo(top, { duration: 0.9, force: true });
     } else {
-      const top = anchor.getBoundingClientRect().top + window.scrollY + offset;
+      const top = rect.top + window.scrollY + offset;
       window.scrollTo({ top, behavior: "smooth" });
     }
+  }, [contentAnchorRef, refreshNavHeight]);
+
+  /** True when the user has scrolled away from the section content (pinned dock, etc.) */
+  const shouldScrollToContent = useCallback(() => {
+    const sentinel = sentinelRef.current;
+    const anchor = contentAnchorRef?.current;
+    if (!sentinel || !anchor) return isPinnedRef.current;
+
+    const navHeight = navHeightRef.current;
+    const sentinelTop = sentinel.getBoundingClientRect().top;
+    const anchorTop = anchor.getBoundingClientRect().top;
+
+    return (
+      isPinnedRef.current ||
+      sentinelTop <= navHeight ||
+      anchorTop < navHeight + 20
+    );
   }, [contentAnchorRef]);
 
   const handleDismissTransitionEnd = useCallback(
@@ -256,7 +306,9 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
 
     const ro = new ResizeObserver(scheduleUpdate);
     const slot = dockSlotRef.current;
+    const container = containerRef?.current;
     if (slot) ro.observe(slot);
+    if (container) ro.observe(container);
 
     const initialFrame = requestAnimationFrame(update);
 
@@ -302,6 +354,7 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     placeholderHeight,
     dockStyle,
     scrollToContent,
+    shouldScrollToContent,
     handleDismissTransitionEnd,
   };
 }

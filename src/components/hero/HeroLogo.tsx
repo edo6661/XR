@@ -37,7 +37,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
                 filter:
                   'drop-shadow(0 0 16px rgba(125,211,252,0.22)) drop-shadow(0 2px 32px rgba(251,146,60,0.14)) brightness(1.08)',
               }}
-              alt="XR Asia Summit"
+              alt="XR ASIA SUMMIT"
               variants={logoFloatVariants}
               initial="animate"
               animate="animate"

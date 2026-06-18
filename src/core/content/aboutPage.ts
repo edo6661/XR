@@ -41,34 +41,44 @@ export const INDUSTRY_FOCUS = {
     "XR ASIA SUMMIT focus on how immersive technologies like Virtual Reality (VR), Augmented Reality (AR), and Extended Reality (XR) are transforming various industries. XR ASIA SUMMIT explore the latest trends and innovations across these sectors, showcasing how XR is reshaping industries. Key sectors include:",
   sectors: [
     {
-      title: "Film & Broadcast",
-      desc: "Virtual sets and real-time effects are revolutionising production.",
-      image: "/industry-focus/XR-in-Film-Broadcast.png",
+      title: "Medical XR",
+      desc: "Transforming healthcare through immersive training, patient care, and advanced visualisation.",
+      bullets: [
+        "Surgical training & simulation",
+        "Anatomy & medical education",
+        "Remote consultation & collaboration",
+      ],
+      image: "/industry-focus/doctor.jpeg",
     },
     {
-      title: "Education",
-      desc: "XR creates engaging, experiential learning environments.",
-      image: "/industry-focus/XR-in-Edu.png",
+      title: "Military XR",
+      desc: "Enhancing readiness, mission success, and decision-making across the defense ecosystem.",
+      bullets: [
+        "Simulation & mission rehearsal",
+        "Tactical training & wargaming",
+        "Situational awareness & battlefield visualisation",
+      ],
+      image: "/industry-focus/military-vr.jpeg",
     },
     {
-      title: "Virtual Travel & Tourism",
-      desc: "Immersive tools allow virtual exploration of destinations.",
-      image: "/industry-focus/XR-in-Travel-Tourism.png",
+      title: "Aviation XR",
+      desc: "Elevating flight operations, training, maintenance, and passenger experiences.",
+      bullets: [
+        "Pilot training & flight simulation",
+        "Maintenance, repair & overhaul (MRO) guidance",
+        "Safety & emergency response drills",
+      ],
+      image: "/industry-focus/people-with-gun.jpeg",
     },
     {
-      title: "Events & Entertainment",
-      desc: "XR enhances live performances and audience interaction.",
-      image: "/industry-focus/XR-in-Entertainments.png",
-    },
-    {
-      title: "Gaming & Esports",
-      desc: "XR innovations drive immersive gameplay and competitions.",
-      image: "/industry-focus/XR-in-Gaming-Esports.png",
-    },
-    {
-      title: "Government",
-      desc: "Enabling Smarter Nations for better workforce development and public service delivery.",
-      image: "/industry-focus/XR-in-Gov.png",
+      title: "Museum XR",
+      desc: "Reinventing cultural engagement, education, and storytelling for future generations.",
+      bullets: [
+        "Immersive storytelling & interactive exhibits",
+        "Artifact restoration & visualisation",
+        "Heritage preservation through digital archiving",
+      ],
+      image: "/industry-focus/filmmaking-immersive-studies.jpeg",
     },
   ],
 } as const;

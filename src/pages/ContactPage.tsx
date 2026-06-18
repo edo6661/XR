@@ -202,7 +202,7 @@ const ContactPage = () => {
                 className="text-copy mb-6"
               >
                 We welcome applications from industry practitioners, researchers, policymakers, and innovators with perspectives worth hearing. We're currently accepting applications for{' '}
-                <strong className="text-foreground/80">XR Asia Summits 2026</strong> and the{' '}
+                <strong className="text-foreground/80">XR ASIA SUMMITs 2026</strong> and the{' '}
                 <strong className="text-foreground/80">AI-XR Cultural Innovation Forum</strong>.
               </motion.p>
               {/* What we look for */}

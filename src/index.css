@@ -773,6 +773,12 @@ svg {
   padding: 1rem 1.125rem;
 }
 
+.activation-tabs-dock--sidebar {
+  @media (min-width: 768px) {
+    padding: 1.125rem 1rem;
+  }
+}
+
 .activation-tabs-dock.is-floating {
   opacity: 1;
   transform: translateY(0);
@@ -798,6 +804,14 @@ svg {
 
 .activation-tabs-dock.is-floating.is-entering {
   transition: none;
+}
+
+@media (max-width: 767px) {
+  .activation-tabs-dock.is-floating {
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .activation-tabs-hint {

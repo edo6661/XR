@@ -11,20 +11,20 @@ gsap.registerPlugin(ScrollTrigger);
 const PAST_EVENTS = [
   {
     year: '2021',
-    title: 'XR Asia Summit 2021',
+    title: 'XR ASIA SUMMIT 2021',
     date: '25 – 27 November 2021',
     location: 'Virtual Experience',
     attendees: '100+',
     highlight:
-      'XR Asia Summit launched in 2021 as a focused webinar-led conference — modest in scale but deliberate in vision. It brought together XR practitioners, technology enthusiasts, and industry voices to explore the emerging XR landscape, establishing community building that would define every edition to come.',
+      'XR ASIA SUMMIT launched in 2021 as a focused webinar-led conference — modest in scale but deliberate in vision. It brought together XR practitioners, technology enthusiasts, and industry voices to explore the emerging XR landscape, establishing community building that would define every edition to come.',
     imageSrc: '/event-highlight-images/XRAS22 (a).png',
     accentColor: '#7c3aed',
   },
   {
     year: '2022',
-    title: 'XR Asia Summit 2022',
+    title: 'XR ASIA SUMMIT 2022',
     date: '11 – 13 November 2022',
-    location: 'Ulu Kelang (UK), Malaysia',
+    location: 'FINAS Studio Sound Stage UK (Ulu Klang), Malaysia',
     attendees: '200+',
     highlight:
       'The 2022 edition moved beyond the virtual space into a full in-person experience. Over three days, more than 200 attendees gathered for an XR solutions showcase, hands-on workshops, and curated industry sessions — signaling a clear and growing appetite for a dedicated XR platform in Asia.',
@@ -33,12 +33,12 @@ const PAST_EVENTS = [
   },
   {
     year: '2023',
-    title: 'XR Asia Summit 2023',
+    title: 'XR ASIA SUMMIT 2023',
     date: '27 – 29 September 2023',
-    location: 'Kuala Lumpur (KL), Malaysia',
+    location: 'Kuala Lumpur City Centre (KLCC), Malaysia',
     attendees: '500+',
     highlight:
-      "By 2023, the Summit had reached a new scale entirely. Held in collaboration with MDEC and Broadcast Elements as part of the Malaysia Digital Content Festival, the edition welcomed over 500 attendees across a multi-track Conference, Expo, and hands-on Workshops — cementing XR Asia Summit's position as the region's leading platform for immersive technology and cross-sector collaboration.",
+      "By 2023, the Summit had reached a new scale entirely. Held in collaboration with MDEC and Broadcast Elements as part of the Malaysia Digital Content Festival, the edition welcomed over 500 attendees across a multi-track Conference, Expo, and hands-on Workshops — cementing XR ASIA SUMMIT's position as the region's leading platform for immersive technology and cross-sector collaboration.",
     imageSrc: '/past-event-pics/Conference3_revision.png',
     accentColor: '#ea580c',
   },
