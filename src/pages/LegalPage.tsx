@@ -326,13 +326,6 @@ const RefundPolicyContent = () => (
       We aim to be sensitive in understanding your particular issue, including personal emergencies and deaths in the family. Our Executive Director will review these cases individually.</p>
   </div>
 );
-// --- KOMPONEN FALLBACK UNTUK HALAMAN LAINNYA ---
-const DefaultContent = () => (
-  <div className="flex flex-col gap-6 text-foreground-muted leading-relaxed" style={{ fontSize: '0.88rem', lineHeight: 1.9 }}>
-    <p>This document is currently being updated by our legal team. Please check back later.</p>
-  </div>
-);
-
 const LegalPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const page = LEGAL_PAGES.find((p) => p.slug === slug);
@@ -350,8 +343,6 @@ const LegalPage = () => {
         return <TermsContent />;
       case 'refund-policy':
         return <RefundPolicyContent />;
-      default:
-        return <DefaultContent />;
     }
   };
 

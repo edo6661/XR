@@ -392,10 +392,7 @@ const ContactPage = () => {
       >
         <div className="max-w-6xl mx-auto">
           <SectionEyebrow align="center">Legal & Policies</SectionEyebrow>
-          <p className="text-center text-foreground-muted text-sm mb-8 max-w-lg mx-auto leading-relaxed">
-            Phase 1 placeholder documents — final legal text will be supplied by the client.
-          </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mt-8">
             {LEGAL_PAGES.map((page) => (
               <li key={page.slug}>
                 <Link
