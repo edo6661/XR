@@ -69,10 +69,7 @@ const ACTIVATIONS: Activation[] = [
     body: 'One-on-one and small group coaching sessions pairing AI and XR startups with industry mentors. Get direct feedback, sharpen your pitch, and find your next move.',
     meta: 'Day 1–2 · Limited Seats',
     sessionSlots: [
-      {
-        topic: 'Women Empowerment',
-        speaker: { name: 'Natalie Loi' },
-      },
+      { topic: 'Women Empowerment' },
       {
         topic: 'Student Empowerment',
         speaker: { name: 'Ajun John', jobTitle: 'TedX Speaker — "AI Kid of India"' },
