@@ -7,19 +7,20 @@ const ACCENT = '#fb923c';
 const ContactDetailsSection = () => (
   <section
     id="contact-details"
-    className="relative w-full min-h-dvh overflow-hidden flex flex-col justify-center"
+    className="relative w-full min-h-dvh overflow-hidden flex flex-col justify-center isolate"
     style={{
       paddingTop: 'var(--section-padding-y)',
       paddingBottom: 'var(--section-padding-y)',
-      backgroundColor: '#fafbfd', /* fallback terang agar blend ke footer */
+      /* Solid stops only — semi-transparent gradient let pinned SponsorsSection logos show through */
+      backgroundColor: '#fafbfd',
       background: `
       linear-gradient(
         to bottom,
         #050505 0%,
-        rgba(10,14,22,0.98) 15%,
-        rgba(18,26,48,0.92) 35%,
-        rgba(100,125,170,0.5) 62%,
-        rgba(195,210,232,0.85) 80%,
+        #0a0e16 15%,
+        #121a30 35%,
+        #7d94b5 62%,
+        #c3d2e8 80%,
         #fafbfd 100%
       )
     `,
