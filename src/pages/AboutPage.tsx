@@ -106,11 +106,8 @@ const AboutPage = () => (
           {INDUSTRY_FOCUS.description}
         </p>
 
-        {/* Card grid — 2×2 on wide screens via auto-fill */}
-        <div
-          className="grid gap-4 mb-10"
-          style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}
-        >
+        {/* Card grid — 2×2 (4 items), never 3+1 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
           {INDUSTRY_FOCUS.sectors.map((sector, index) => (
             <motion.div
               key={sector.title}

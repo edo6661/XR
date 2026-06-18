@@ -11,9 +11,9 @@ const OurMissionBlock = () => {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative max-w-5xl">
+    <div className="relative">
       {/* Ambient background */}
-      <div className="absolute -inset-x-6 -top-10 -bottom-10 pointer-events-none" aria-hidden="true">
+      <div className="absolute -inset-x-8 -top-12 -bottom-8 pointer-events-none" aria-hidden="true">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
           style={{ background: 'radial-gradient(ellipse, rgba(57,83,163,0.14) 0%, transparent 70%)' }}
@@ -89,85 +89,87 @@ const OurMissionBlock = () => {
           aria-hidden="true"
         />
 
-        <div className="relative z-10 p-8 md:p-12 lg:p-14">
-          {/* Mission pillars row */}
-          <div className="flex flex-wrap gap-6 mb-8 md:mb-10">
-            {MISSION_PILLARS.map((pillar, i) => (
-              <motion.div
-                key={pillar.label}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
-                className="flex items-center gap-2.5"
-              >
-                <div
-                  className="flex items-center justify-center w-8 h-8 rounded-lg"
-                  style={{
-                    background: `${pillar.color}14`,
-                    border: `1px solid ${pillar.color}30`,
-                  }}
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-0">
+          <div className="p-8 md:p-10 lg:p-12 flex flex-col">
+            {/* Mission pillars row */}
+            <div className="flex flex-wrap gap-6 mb-8 md:mb-10">
+              {MISSION_PILLARS.map((pillar, i) => (
+                <motion.div
+                  key={pillar.label}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
+                  className="flex items-center gap-2.5"
                 >
+                  <div
+                    className="flex items-center justify-center w-8 h-8 rounded-lg"
+                    style={{
+                      background: `${pillar.color}14`,
+                      border: `1px solid ${pillar.color}30`,
+                    }}
+                  >
+                    <span
+                      className="w-2 h-2 rounded-full"
+                      style={{ background: pillar.color, boxShadow: `0 0 10px ${pillar.color}80` }}
+                      aria-hidden="true"
+                    />
+                  </div>
                   <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ background: pillar.color, boxShadow: `0 0 10px ${pillar.color}80` }}
-                    aria-hidden="true"
-                  />
-                </div>
-                <span
-                  className="font-heading font-bold tracking-wide"
-                  style={{ fontSize: '0.78rem', color: 'rgba(240,244,255,0.85)' }}
-                >
-                  {pillar.label}
-                </span>
-              </motion.div>
-            ))}
+                    className="font-heading font-bold tracking-wide"
+                    style={{ fontSize: '0.78rem', color: 'rgba(240,244,255,0.85)' }}
+                  >
+                    {pillar.label}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Large quote mark */}
+            <div
+              className="font-heading font-black leading-none select-none mb-4"
+              style={{
+                fontSize: 'clamp(3rem, 8vw, 5rem)',
+                background: 'linear-gradient(135deg, rgba(239,120,61,0.35) 0%, rgba(34,211,238,0.2) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+              aria-hidden="true"
+            >
+              "
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.65 }}
+              className="font-medium leading-relaxed max-w-3xl"
+              style={{
+                fontSize: 'clamp(1.05rem, 2.8vw, 1.22rem)',
+                lineHeight: 1.95,
+                color: 'rgba(235,242,255,0.92)',
+              }}
+            >
+              <span className="gradient-text-accent font-bold">
+                {OUR_MISSION.body.split('. By ')[0]}.
+              </span>
+              {' '}
+              By {OUR_MISSION.body.split('. By ')[1]}
+            </motion.p>
+
+            {/* Bottom accent bar */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-8 md:mt-10 h-px origin-left max-w-xs"
+              style={{ background: `linear-gradient(90deg, ${ABOUT_ACCENT}, rgba(34,211,238,0.6), transparent)` }}
+              aria-hidden="true"
+            />
           </div>
-
-          {/* Large quote mark */}
-          <div
-            className="font-heading font-black leading-none select-none mb-4"
-            style={{
-              fontSize: 'clamp(3rem, 8vw, 5rem)',
-              background: 'linear-gradient(135deg, rgba(239,120,61,0.35) 0%, rgba(34,211,238,0.2) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-            aria-hidden="true"
-          >
-            "
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.65 }}
-            className="font-medium leading-relaxed max-w-3xl"
-            style={{
-              fontSize: 'clamp(1.05rem, 2.8vw, 1.22rem)',
-              lineHeight: 1.95,
-              color: 'rgba(235,242,255,0.92)',
-            }}
-          >
-            <span className="gradient-text-accent font-bold">
-              {OUR_MISSION.body.split('. By ')[0]}.
-            </span>
-            {' '}
-            By {OUR_MISSION.body.split('. By ')[1]}
-          </motion.p>
-
-          {/* Bottom accent bar */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.35, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 md:mt-10 h-px origin-left max-w-xs"
-            style={{ background: `linear-gradient(90deg, ${ABOUT_ACCENT}, rgba(34,211,238,0.6), transparent)` }}
-            aria-hidden="true"
-          />
         </div>
       </motion.div>
     </div>
