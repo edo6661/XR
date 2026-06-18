@@ -72,7 +72,7 @@ const ACTIVATIONS: Activation[] = [
       { topic: 'Women Empowerment' },
       {
         topic: 'Student Empowerment',
-        speaker: { name: 'Ajun John', jobTitle: 'TedX Speaker — "AI Kid of India"' },
+        speaker: { name: 'Speaker Name', jobTitle: 'Speaker Job Title' },
       },
     ],
   },
