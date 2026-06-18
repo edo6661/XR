@@ -438,10 +438,7 @@ const XrasActivationsSection = ({
             >
               <p className="activation-tabs-hint">Explore what's waiting for you</p>
 
-              <div
-                className="overflow-x-auto pb-2 pt-1 -mx-1 px-1 md:overflow-visible md:pb-0 md:pt-0 md:mx-0 md:px-0"
-                style={{ scrollbarWidth: 'none' }}
-              >
+              <div className="activation-tabs-scroll pb-2 pt-1 -mx-1 px-1 md:pb-0 md:pt-0 md:mx-0 md:px-0">
                 <div className="flex gap-3 w-max justify-start md:w-full md:flex-col md:gap-2">
                   {ACTIVATIONS.map((activation, index) => (
                     <TabButton

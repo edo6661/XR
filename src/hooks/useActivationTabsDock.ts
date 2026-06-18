@@ -82,6 +82,7 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
   const navHeightRef = useRef(64);
   const pinnedMetricsRef = useRef<PinnedMetrics | null>(null);
   const placeholderHeightRef = useRef(0);
+  const [navHeight, setNavHeight] = useState(64);
   const [isPinned, setIsPinned] = useState(false);
   const [isDismissing, setIsDismissing] = useState(false);
   const [isEntering, setIsEntering] = useState(false);
@@ -92,7 +93,9 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
 
   const refreshNavHeight = useCallback(() => {
     const header = document.querySelector("header");
-    navHeightRef.current = header?.getBoundingClientRect().height ?? 64;
+    const next = header?.getBoundingClientRect().height ?? 64;
+    navHeightRef.current = next;
+    setNavHeight((prev) => (prev === next ? prev : next));
   }, []);
 
   const clearDismissTimer = useCallback(() => {
@@ -181,6 +184,10 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     const sectionBottom = section.getBoundingClientRect().bottom;
     const dockHeight = dock.offsetHeight;
     const pinThreshold = navHeight + dockHeight + 12;
+
+    if (isPinnedRef.current) {
+      applyPlaceholderHeight(dockHeight);
+    }
 
     const inPinZone = sentinelTop <= navHeight && sectionBottom > pinThreshold;
     const exitedDownward = sectionBottom <= pinThreshold;
@@ -306,8 +313,10 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
 
     const ro = new ResizeObserver(scheduleUpdate);
     const slot = dockSlotRef.current;
+    const dock = dockRef.current;
     const container = containerRef?.current;
     if (slot) ro.observe(slot);
+    if (dock) ro.observe(dock);
     if (container) ro.observe(container);
 
     const initialFrame = requestAnimationFrame(update);
@@ -331,16 +340,21 @@ export function useActivationTabsDock(options?: UseActivationTabsDockOptions) {
     update,
   ]);
 
-  const dockStyle: CSSProperties | undefined = pinnedMetrics
-    ? {
-        position: "fixed",
-        top: pinnedMetrics.top,
-        left: pinnedMetrics.left,
-        width: pinnedMetrics.width,
-        boxSizing: "border-box",
-        zIndex: 50,
-      }
-    : undefined;
+  const dockViewportOffset = navHeight + 16;
+
+  const dockStyle: CSSProperties = {
+    ["--activation-tabs-offset" as string]: `${dockViewportOffset}px`,
+    ...(pinnedMetrics
+      ? {
+          position: "fixed",
+          top: pinnedMetrics.top,
+          left: pinnedMetrics.left,
+          width: pinnedMetrics.width,
+          boxSizing: "border-box",
+          zIndex: 50,
+        }
+      : {}),
+  };
 
   return {
     sectionRef,

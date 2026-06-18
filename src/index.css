@@ -775,15 +775,69 @@ svg {
 
 .activation-tabs-dock--sidebar {
   @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - var(--activation-tabs-offset, 80px));
+    max-height: calc(100dvh - var(--activation-tabs-offset, 80px));
     padding: 1.125rem 1rem;
   }
+}
+
+.activation-tabs-dock--sidebar .activation-tabs-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.activation-tabs-dock--sidebar .activation-tabs-scroll::-webkit-scrollbar {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.activation-tabs-dock--sidebar .activation-tabs-scroll {
+  @media (min-width: 768px) {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(239, 120, 61, 0.45) transparent;
+    /* Keep scrollbar off the tabs; sit it in the dock's right gutter */
+    padding-right: 0.75rem;
+    margin-right: -0.5rem;
+    width: calc(100% + 0.5rem);
+  }
+}
+
+.activation-tabs-dock--sidebar .activation-tabs-scroll::-webkit-scrollbar {
+  @media (min-width: 768px) {
+    display: block;
+    width: 4px;
+    height: auto;
+  }
+}
+
+.activation-tabs-dock--sidebar
+  .activation-tabs-scroll::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+.activation-tabs-dock--sidebar
+  .activation-tabs-scroll::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgba(239, 120, 61, 0.45);
 }
 
 .activation-tabs-dock.is-floating {
   opacity: 1;
   transform: translateY(0);
   background: rgba(5, 5, 5, 0.98);
-  contain: layout style paint;
+  contain: layout style;
   transition:
     opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
