@@ -42,8 +42,8 @@ const TILES: Tile[] = [
     tag: '',
     title: 'AI Filmmaking Hackathon',
     subtitle: '',
-    to: '/aixr-2026-sarawak',
-    accent: '#22d3ee',
+    to: '/ai-filmmaking-hackathon',
+    accent: '#fb923c',
   },
 ];
 

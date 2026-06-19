@@ -38,9 +38,9 @@ const PROGRAMME_HIGHLIGHTS = [
     title: 'AI Filmmaking Hackathon',
     description:
       '',
-    accentColor: '#a78bfa',
+    accentColor: '#fb923c',
     tag: 'Hackathon',
-    to: '/xras-kl-2026',
+    to: '/ai-filmmaking-hackathon',
     imageSrc: '/programme-highlights/AI Filmmaking Hackathon.png',
     isFeatured: false,
   },
@@ -51,7 +51,7 @@ const PROGRAMME_HIGHLIGHTS = [
     accentColor: '#34d399',
     tag: 'Esports',
     to: '/xras-kl-2026',
-    imageSrc: '/programme-highlights/Esports.jpeg',
+    imageSrc: '/programme-highlights/Esports.png',
     isFeatured: false,
   },
   {

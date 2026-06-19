@@ -10,6 +10,7 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 const XrasKl2026Page = lazy(() => import('./pages/XrasKl2026Page'));
 const Aixr2026SarawakPage = lazy(() => import('./pages/Aixr2026SarawakPage'));
+const AiFilmmakingHackathonPage = lazy(() => import('./pages/AiFilmmakingHackathonPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
 
 const PageLoader = () => (
@@ -45,6 +46,7 @@ const App = () => {
                 <Route path="about" element={<AboutPage />} />
                 <Route path="xras-kl-2026" element={<XrasKl2026Page />} />
                 <Route path="aixr-2026-sarawak" element={<Aixr2026SarawakPage />} />
+                <Route path="ai-filmmaking-hackathon" element={<AiFilmmakingHackathonPage />} />
                 <Route path="contact" element={<ContactPage />} />
                 <Route path="legal/:slug" element={<LegalPage />} />
                 <Route path="mothership" element={<Navigate to="/xras-kl-2026" replace />} />

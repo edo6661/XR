@@ -1,34 +1,21 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import GlobeCanvas from './GlobeCanvas';
 import HeroVideoBackdrop, { type HeroVideoConfig } from './HeroVideoBackdrop';
 import SplatField from './SplatField';
 import HeroLogo from './HeroLogo';
 import HeroIntroOverlay from './HeroIntroOverlay';
 
+/** Master keyart — backmost layer at ~55% opacity (client: 50–60%). */
+const MASTER_KEYART = '/hero/new_hero_from_louis.jpeg';
+const KEYART_OPACITY = 0.58;
 
-type BackdropId = 'globe-3d' | 'spatial' | 'network' | 'globe';
-
-const VIDEO_BACKDROPS: Record<Exclude<BackdropId, 'globe'>, HeroVideoConfig> = {
-  'globe-3d': {
-    src: '/hero/videos/3d_digital_globe.mp4',
-    poster: '/hero/earth-dark.jpg',
-    objectPosition: '50% 50%',
-    filter: 'brightness(0.92) contrast(1.05) saturate(1.06)',
-  },
-  spatial: {
-    src: '/hero/videos/spatial_computing_businessman_working_with_virtual.mp4',
-    objectPosition: '50% 38%',
-    filter: 'brightness(0.8) contrast(1.08) saturate(0.92)',
-  },
-  network: {
-    src: '/hero/videos/digital_technology_network_word_work_cloud_backgrounds.mp4',
-    objectPosition: '50% 50%',
-    filter: 'brightness(0.88) contrast(1.06) saturate(1.02)',
-  },
+const GLOBE_VIDEO: HeroVideoConfig = {
+  src: '/hero/videos/3d_digital_globe.mp4',
+  poster: '/hero/earth-dark.jpg',
+  objectPosition: '50% 50%',
+  filter: 'brightness(0.92) contrast(1.05) saturate(1.06)',
+  overKeyart: true,
 };
-
-const ACTIVE_BACKDROP = 'globe-3d' as BackdropId;
 
 type Phase = 'globe' | 'boot' | 'reveal';
 
@@ -116,7 +103,7 @@ const HeroSection = () => {
   const showHint = step >= LAST_STEP;
 
   const hudPhase: Phase = step < 3 ? 'globe' : step === 3 ? 'boot' : 'reveal';
-  const bgBrightness = step >= 4 ? 0.82 : 0.76;
+  const bgBrightness = step >= 4 ? 0.94 : 0.92;
 
   return (
     <section
@@ -124,23 +111,57 @@ const HeroSection = () => {
       className="relative w-full min-h-screen flex flex-col overflow-hidden"
       aria-label="Hero"
     >
-      {/* ── BACKDROP ── */}
-      <div className="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+      {/* ── BACKDROP: keyart → globe + particles → text ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#050b18]" aria-hidden="true">
+        {/* 1. Master keyart Louis — backmost, 50–60% visible */}
         <motion.div
-          className="absolute inset-0"
+          className="absolute inset-0 z-0"
           animate={{
-            scale: videoRevealed && !prefersReducedMotion ? 1.06 : 1.12,
+            scale: videoRevealed && !prefersReducedMotion ? 1.04 : 1.08,
           }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          {ACTIVE_BACKDROP === 'globe' ? (
-            <GlobeCanvas />
-          ) : (
-            <HeroVideoBackdrop {...VIDEO_BACKDROPS[ACTIVE_BACKDROP]} />
-          )}
+          <img
+            src={MASTER_KEYART}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{
+              opacity: KEYART_OPACITY,
+              objectPosition: '50% center',
+            }}
+            loading="eager"
+            fetchPriority="high"
+          />
         </motion.div>
+
+        {/* 2. Current animated globe video — composited over keyart */}
         <motion.div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 z-1"
+          animate={{
+            scale: videoRevealed && !prefersReducedMotion ? 1.06 : 1.12,
+            opacity: videoRevealed ? 0.82 : 0.68,
+          }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          style={{ mixBlendMode: 'lighten' }}
+        >
+          <HeroVideoBackdrop {...GLOBE_VIDEO} />
+        </motion.div>
+
+        {/* 3. Blue static particles — mixed with the animated globe */}
+        <motion.div
+          className="absolute inset-0 z-2 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: step === 3 ? 0.95 : step >= 4 ? 0.7 : 0.4 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          style={{ mixBlendMode: 'screen' }}
+          aria-hidden="true"
+        >
+          <SplatField />
+        </motion.div>
+
+        {/* Very light depth tint — must not bury the keyart */}
+        <motion.div
+          className="absolute inset-0 z-3 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{
             opacity: prefersReducedMotion ? 0 : 1,
@@ -149,22 +170,18 @@ const HeroSection = () => {
               : `rgba(5, 11, 24, ${(1 - bgBrightness).toFixed(2)})`,
           }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            backdropFilter: prefersReducedMotion ? 'none' : 'blur(5px)',
-            WebkitBackdropFilter: prefersReducedMotion ? 'none' : 'blur(5px)',
-            willChange: 'opacity, background-color',
-          }}
+          style={{ willChange: 'opacity, background-color' }}
         />
       </div>
 
-      {/* Radial vignette */}
+      {/* Radial vignette — lighter so Louis keyart stays readable at edges */}
       <motion.div
         className="absolute inset-0 z-1 pointer-events-none"
-        animate={{ opacity: showTiles ? 1 : 0.7 }}
+        animate={{ opacity: showTiles ? 0.85 : 0.55 }}
         transition={{ duration: 1.2 }}
         style={{
           background:
-            'radial-gradient(ellipse 78% 62% at 50% 42%, transparent 0%, rgba(5,11,24,0.5) 48%, rgba(5,11,24,0.94) 80%, #050b18 100%)',
+            'radial-gradient(ellipse 82% 68% at 50% 42%, transparent 0%, rgba(5,11,24,0.22) 52%, rgba(5,11,24,0.62) 82%, rgba(5,11,24,0.88) 100%)',
         }}
         aria-hidden="true"
       />
@@ -178,18 +195,6 @@ const HeroSection = () => {
         }}
         aria-hidden="true"
       />
-
-      {ACTIVE_BACKDROP !== 'globe' && (
-        <motion.div
-          className="absolute inset-0 z-3 pointer-events-none"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: step === 3 ? 0.95 : step >= 4 ? 0.7 : 0.4 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          aria-hidden="true"
-        >
-          <SplatField />
-        </motion.div>
-      )}
 
       <BootOverlay phase={hudPhase} reduced={prefersReducedMotion} />
       {!prefersReducedMotion && <HeroIntroOverlay step={step} />}

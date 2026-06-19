@@ -11,6 +11,8 @@ export interface HeroVideoConfig {
   objectPosition?: string;
   /** CSS filter that grades the raw clip toward the brand palette. */
   filter?: string;
+  /** Lighten grading overlays so a keyart layer beneath stays visible. */
+  overKeyart?: boolean;
 }
 
 const HeroVideoBackdrop = ({
@@ -18,6 +20,7 @@ const HeroVideoBackdrop = ({
   poster,
   objectPosition = '50% 50%',
   filter = 'brightness(0.9) contrast(1.05) saturate(1.04)',
+  overKeyart = false,
 }: HeroVideoConfig) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduce = useReducedMotion();
@@ -79,7 +82,7 @@ const HeroVideoBackdrop = ({
         className="absolute inset-0 mix-blend-multiply"
         style={{
           background: 'linear-gradient(180deg, #0b1730 0%, #050b18 100%)',
-          opacity: 0.42,
+          opacity: overKeyart ? 0.14 : 0.42,
         }}
       />
 
@@ -87,15 +90,20 @@ const HeroVideoBackdrop = ({
       <div
         className="absolute inset-0 mix-blend-screen"
         style={{
-          background:
-            'radial-gradient(120% 85% at 50% 14%, rgba(56,189,248,0.14) 0%, transparent 55%), radial-gradient(100% 80% at 50% 102%, rgba(251,146,60,0.12) 0%, transparent 58%)',
+          background: overKeyart
+            ? 'radial-gradient(120% 85% at 50% 14%, rgba(56,189,248,0.08) 0%, transparent 55%), radial-gradient(100% 80% at 50% 102%, rgba(251,146,60,0.06) 0%, transparent 58%)'
+            : 'radial-gradient(120% 85% at 50% 14%, rgba(56,189,248,0.14) 0%, transparent 55%), radial-gradient(100% 80% at 50% 102%, rgba(251,146,60,0.12) 0%, transparent 58%)',
         }}
       />
 
       {/* Cinematic vignette — focuses the eye centre-stage for the reveal. */}
       <div
         className="absolute inset-0"
-        style={{ boxShadow: 'inset 0 0 240px 48px rgba(5,11,24,0.82)' }}
+        style={{
+          boxShadow: overKeyart
+            ? 'inset 0 0 160px 24px rgba(5,11,24,0.35)'
+            : 'inset 0 0 240px 48px rgba(5,11,24,0.82)',
+        }}
       />
     </div>
   );

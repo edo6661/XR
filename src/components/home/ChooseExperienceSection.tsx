@@ -44,9 +44,10 @@ const EVENT_GATEWAYS = [
   },
   {
     title: 'AI Filmmaking Hackathon',
-    subtitle: '',
+    subtitle: '1 – 3 May 2026',
     description: '4 Universities from Malaysia, 1 University from Singapore, 1 University from Indonesia. 72-hour run of show – Hands-on challenges, mentorship from industry leaders, pressure-tested workflows.',
-    accentColor: '#a78bfa',
+    to: '/ai-filmmaking-hackathon',
+    accentColor: '#fb923c',
     tag: 'Hackathon',
     icon: <HackathonIcon />,
   },
