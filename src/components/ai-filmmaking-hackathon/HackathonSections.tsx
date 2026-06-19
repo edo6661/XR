@@ -531,20 +531,48 @@ const HackathonSections = ({ onRegister }: HackathonSectionsProps) => (
       }
       description={HACKATHON_CHECKIN.intro}
     >
-      <div className="max-w-3xl rounded-xl px-6 py-5" style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(9,18,34,0.45)' }}>
-        <div className="flex items-center gap-3 mb-4">
-          <div
-            className="flex items-center justify-center rounded-lg"
-            style={{ width: 38, height: 38, background: `${HACKATHON_ACCENT}12`, border: `1px solid ${HACKATHON_ACCENT}22`, color: HACKATHON_ACCENT }}
-          >
-            <Smartphone {...iconSize} />
+      <div
+        className="max-w-4xl rounded-xl px-6 py-6 sm:px-8"
+        style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(9,18,34,0.45)' }}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,200px)_1fr] gap-8 items-start">
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <div
+              className="rounded-xl overflow-hidden p-3"
+              style={{
+                border: '1px solid rgba(255,255,255,0.1)',
+                background: 'rgba(255,255,255,0.97)',
+              }}
+            >
+              <img
+                src={HACKATHON_CHECKIN.qrImage}
+                alt={HACKATHON_CHECKIN.qrAlt}
+                className="w-full max-w-[176px] aspect-square object-contain"
+                loading="lazy"
+              />
+            </div>
+            <p className="text-center md:text-left text-foreground-muted" style={{ fontSize: '0.78rem', lineHeight: 1.5 }}>
+              Scan to register
+            </p>
           </div>
-          <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.62rem', color: HACKATHON_ACCENT }}>
-            Scan QR and Register
-          </p>
+
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                className="flex items-center justify-center rounded-lg shrink-0"
+                style={{ width: 38, height: 38, background: `${HACKATHON_ACCENT}12`, border: `1px solid ${HACKATHON_ACCENT}22`, color: HACKATHON_ACCENT }}
+              >
+                <Smartphone {...iconSize} />
+              </div>
+              <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.62rem', color: HACKATHON_ACCENT }}>
+                {HACKATHON_CHECKIN.scanLabel}
+              </p>
+            </div>
+            {bulletList(HACKATHON_CHECKIN.requirements)}
+          </div>
         </div>
-        {bulletList(HACKATHON_CHECKIN.requirements)}
-        <p className="mt-6 text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
+
+        <p className="mt-8 text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
           {HACKATHON_CHECKIN.closing}
         </p>
       </div>

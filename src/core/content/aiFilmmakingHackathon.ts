@@ -308,7 +308,10 @@ export const HACKATHON_PRIZE_STRUCTURE = {
 } as const;
 
 export const HACKATHON_CHECKIN = {
-  title: "Event Check-in & Access — Scan QR and Register",
+  title: "Event Check-in & Access",
+  scanLabel: "Scan QR and Register",
+  qrImage: "/qr/old_qr.png",
+  qrAlt: "Registration QR code for XR SUMMIT Mothership Hackathon",
   intro:
     "Upon your arrival at the XR SUMMIT's Mothership Hackathon, please proceed directly to the designated registration area. Our team will be on hand to assist you with a swift and seamless check-in process.",
   requirements: [
