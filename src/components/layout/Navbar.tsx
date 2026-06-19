@@ -125,7 +125,7 @@ const Navbar = () => {
             </div>
             <span
               className={`${BRAND_FONT_CLASS} font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350`}
-              style={{ fontSize: '0.76rem' }}
+              style={{ fontSize: '1rem' }}
             >
               {COMPANY.navbarBrand}
             </span>

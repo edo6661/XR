@@ -71,14 +71,14 @@ export const INDUSTRY_FOCUS = {
       image: "/industry-focus/people-with-gun.png",
     },
     {
-      title: "Museum XR",
-      desc: "Reinventing cultural engagement, education, and storytelling for future generations.",
+      title: "Broadcast & Sports XR",
+      desc: "Redefining how sports are produced, experienced, and consumed through immersive technologies.",
       bullets: [
-        "Immersive storytelling & interactive exhibits",
-        "Artifact restoration & visualisation",
-        "Heritage preservation through digital archiving",
+        "Real-time XR broadcasting & virtual production",
+        "Interactive fan engagement & immersive storytelling",
+        "Performance training, simulation & sports analytics",
       ],
-      image: "/industry-focus/filmmaking-immersive-studies.jpeg",
+      image: "/industry-focus/Broadcast_&_Sports_XR.png",
     },
   ],
 } as const;

@@ -42,6 +42,7 @@ const PROGRAMME_HIGHLIGHTS = [
     tag: 'Hackathon',
     to: '/ai-filmmaking-hackathon',
     imageSrc: '/programme-highlights/AI Filmmaking Hackathon.png',
+    imageFit: 'contain' as const,
     isFeatured: false,
   },
   {
@@ -52,6 +53,7 @@ const PROGRAMME_HIGHLIGHTS = [
     tag: 'Esports',
     to: '/xras-kl-2026',
     imageSrc: '/programme-highlights/Esports.png',
+    imageFit: 'contain' as const,
     isFeatured: false,
   },
   {
@@ -62,6 +64,7 @@ const PROGRAMME_HIGHLIGHTS = [
     tag: 'Gala',
     to: '/xras-kl-2026',
     imageSrc: '/programme-highlights/Awards & Gala.png',
+    imageFit: 'contain' as const,
     isFeatured: false,
   },
 ] as const;

@@ -18,6 +18,8 @@ interface SpotlightCardProps {
   imagePosition?: string;
   imageDark?: boolean;
   imageTransform?: string;
+  /** 'cover' crops to fill; 'contain' shows the full image with a blurred backdrop */
+  imageFit?: 'cover' | 'contain';
 }
 
 const SpotlightCard = ({
@@ -34,6 +36,7 @@ const SpotlightCard = ({
   imagePosition = 'center',
   imageDark = true,
   imageTransform = 'none',
+  imageFit = 'cover',
 
 }: SpotlightCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -145,13 +148,22 @@ const SpotlightCard = ({
       <div className="absolute inset-0 overflow-hidden">
         {imageSrc ? (
           <>
-            {/* TAMBAHKAN DIV WRAPPER INI UNTUK CUSTOM TRANSFORM */}
+            {imageFit === 'contain' && (
+              <img
+                src={imageSrc}
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-50"
+                style={{ objectPosition: imagePosition }}
+                loading="lazy"
+              />
+            )}
             <div className="w-full h-full origin-bottom" style={{ transform: imageTransform || 'none' }}>
               <img
                 ref={imgRef}
                 src={imageSrc}
                 alt={title}
-                className="w-full h-full object-cover"
+                className={`w-full h-full ${imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
                 style={{ objectPosition: isFeatured ? 'right bottom' : imagePosition }}
                 loading="lazy"
               />
