@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { XRAS_KL_ACCENT, XRAS_KL_META } from '../../core/content/xrasKl2026';
 
+const HERO_KEYART = '/hero/new_hero_from_louis.jpeg';
+
 const neoShadow = `
   10px 10px 28px rgba(180,190,208,0.58),
   -7px -7px 20px rgba(255,255,255,1),
@@ -17,20 +19,27 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
     className="relative w-full overflow-hidden pt-28 pb-16 md:pb-24 px-6 min-h-[min(88vh,920px)] flex items-center"
     aria-labelledby="xras-hero-heading"
   >
-    {/* Ambient background — no repeated keyart/poster on event landing */}
-    <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div className="absolute inset-0 pointer-events-none bg-[#050b18]" aria-hidden="true">
+      <img
+        src={HERO_KEYART}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: '50% center' }}
+        loading="eager"
+        fetchPriority="high"
+      />
       <div
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(175deg, #050b18 0%, #0a1730 45%, #0d1f3c 100%)',
+            'radial-gradient(ellipse 82% 68% at 50% 42%, transparent 0%, rgba(5,11,24,0.28) 52%, rgba(5,11,24,0.72) 82%, rgba(5,11,24,0.92) 100%)',
         }}
       />
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(251,146,60,0.1) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 80% 60%, rgba(56,189,248,0.08) 0%, transparent 50%)',
+            'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.55) 70%, #050b18 100%)',
         }}
       />
     </div>
