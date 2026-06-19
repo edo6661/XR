@@ -68,7 +68,7 @@ export const INDUSTRY_FOCUS = {
         "Maintenance, repair & overhaul (MRO) guidance",
         "Safety & emergency response drills",
       ],
-      image: "/industry-focus/people-with-gun.jpeg",
+      image: "/industry-focus/people-with-gun.png",
     },
     {
       title: "Museum XR",

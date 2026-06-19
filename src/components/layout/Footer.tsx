@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { COMPANY, PRIMARY_NAV_LINKS, SOCIAL_LINKS } from '../../core/navigation/routes';
 import { LEGAL_PAGES } from '../../core/content/legalPages';
+import { COPYRIGHT_NOTICE } from '../../core/content/legal';
 
 const SOCIAL_ICONS: Record<string, ReactNode> = {
   LinkedIn: (
@@ -270,34 +271,49 @@ const Footer = () => {
         />
 
         {/* Bottom bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6">
-          <p style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}>
-            XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) ©2026. All Rights Reserved.
-          </p>
+        <div className="flex flex-col gap-4 py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}>
+              XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) · {COPYRIGHT_NOTICE.line1}
+            </p>
 
-          <a
-            href={`mailto:${COMPANY.email}`}
-            className="transition-colors duration-250 hover:text-accent"
-            style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}
-          >
-            {COMPANY.email}
-          </a>
-
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-2 transition-colors duration-250 hover:text-accent"
-            style={{ color: 'var(--theme-on-light-muted)', fontSize: '0.76rem' }}
-            aria-label="Back to top"
-          >
-            <span className="font-bold tracking-[0.24em] uppercase">Back to top</span>
-            <motion.span
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-              aria-hidden="true"
+            <a
+              href={`mailto:${COMPANY.email}`}
+              className="transition-colors duration-250 hover:text-accent"
+              style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}
             >
-              ↑
-            </motion.span>
-          </button>
+              {COMPANY.email}
+            </a>
+
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="group flex items-center gap-2 transition-colors duration-250 hover:text-accent"
+              style={{ color: 'var(--theme-on-light-muted)', fontSize: '0.76rem' }}
+              aria-label="Back to top"
+            >
+              <span className="font-bold tracking-[0.24em] uppercase">Back to top</span>
+              <motion.span
+                animate={{ y: [0, -3, 0] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                aria-hidden="true"
+              >
+                ↑
+              </motion.span>
+            </button>
+          </div>
+
+          <p
+            className="max-w-4xl mx-auto text-center font-semibold mb-1"
+            style={{ fontSize: '0.72rem', color: 'var(--theme-on-light-muted)' }}
+          >
+            {COPYRIGHT_NOTICE.heading}
+          </p>
+          <p
+            className="max-w-4xl mx-auto text-center leading-relaxed"
+            style={{ fontSize: '0.68rem', color: 'var(--theme-on-light-muted)', opacity: 0.75 }}
+          >
+            {COPYRIGHT_NOTICE.line2} {COPYRIGHT_NOTICE.line3}
+          </p>
         </div>
       </div>
     </footer>
