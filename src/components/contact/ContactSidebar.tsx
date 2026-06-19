@@ -118,10 +118,9 @@ const ContactSidebar = () => {
           <div>
             <p className="text-label-ui mb-1.5">Address</p>
             <address className="not-italic leading-relaxed text-copy-sm">
-              No. 8, Block K, 8th Floor<br />
-              Sunway PJ 51A, Jalan SS9A/19<br />
-              47300 Petaling Jaya<br />
-              Selangor, Malaysia
+              {COMPANY.address.line1}<br />
+              {COMPANY.address.line2}<br />
+              {COMPANY.address.line3}
             </address>
           </div>
         </motion.div>

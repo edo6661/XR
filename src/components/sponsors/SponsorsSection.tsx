@@ -19,7 +19,6 @@ type Partner = {
 const GOVERNMENT_PARTNERS: Partner[] = [
   { name: 'Centre of Excellence (COE)', src: '/all-partner-logos/COE LOGO_PNG_Med res.png' },
   { name: 'FINAS', src: '/all-partner-logos/FINAS.png' },
-  { name: 'MDEC', src: '/all-partner-logos/MDEC_logo.png' },
   { name: 'POSTAM', src: '/all-partner-logos/postamsmall.png' },
 ];
 
@@ -30,8 +29,6 @@ const TECH_PARTNERS: Partner[] = [
   { name: 'Blackcam Robotics', src: '/all-partner-logos/blackcam robotics.png', filter: 'contrast(2.8) brightness(1.35)' },
   { name: 'Brompton Technology', src: '/all-partner-logos/brompton_technology_logo.png' },
   { name: 'Eztrack', src: '/all-partner-logos/logo_eztrack-noir.png' },
-  { name: 'Huawei', src: '/all-partner-logos/Huawei new Logo.png' },
-  { name: 'Infiled', src: '/all-partner-logos/infiled.png' },
   { name: 'Korad', src: '/all-partner-logos/korad.png' },
   { name: 'OARO', src: '/all-partner-logos/OARO.png' },
   { name: 'Object Matrix', src: '/all-partner-logos/Object-Matrix-Logo-e1610495539370.png' },

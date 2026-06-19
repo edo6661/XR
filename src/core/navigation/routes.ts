@@ -24,9 +24,9 @@ export const COMPANY = {
   email: "register@xr-summits.com",
   phone: "+603 2740 4317",
   address: {
-    line1: "No. 8, Block K, 8th Floor,",
-    line2: "Sunway PJ 51A, Jalan SS9A/19,",
-    line3: "47300 Petaling Jaya, Selangor, Malaysia.",
+    line1: "Sunway PJS 51A,",
+    line2: "47300 Petaling Jaya,",
+    line3: "Selangor, Malaysia.",
   },
 } as const;
 

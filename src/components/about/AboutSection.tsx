@@ -145,10 +145,8 @@ const AboutSection = () => {
           {/* LEFT — large heading */}
           <div ref={headingRef} style={{ perspective: '900px' }}>
             {[
-              { text: 'The Definitive', accent: false },
-              { text: 'Platform of', accent: false },
-              { text: "Asia's XR", accent: true },
-              { text: 'Future.', accent: false },
+              { text: 'Innovation Meets', accent: false },
+              { text: 'Implementation.', accent: true },
             ].map((line) => (
               <div key={line.text} className="overflow-hidden">
                 <h2
@@ -179,21 +177,29 @@ const AboutSection = () => {
           {/* RIGHT — body copy sesuai cursorrules */}
           <div ref={bodyRef} className="flex flex-col justify-center gap-7">
             <p data-para className="text-base text-foreground leading-[1.75]">
-              <span className="text-accent font-semibold">XR ASIA SUMMIT </span>{' '}
-              is connecting innovators across Extended Reality (XR), Spatial Media, AVXR, immersive technologies, and the evolving future of esports.
+              <span className="text-accent font-semibold">XR Asia Summit 2026 (XRAS26)</span>{' '}
+              is the definitive platform connecting innovators across Extended Reality (XR), Spatial Media, AVXR, immersive technologies, and the evolving future of esports. It serves as the region’s central hub for showcasing production-ready solutions and forging high-value commercial partnerships. XR Asia Summit 2026 represents a decisive shift in the immersive industry — from experimentation to execution.
             </p>
-            <p data-para className="text-copy-bright text-base">
-              It serves as the region’s central hub for showcasing production-ready solutions and forging high-value commercial partnerships. XR Summit represents a decisive shift in the immersive industry.
-            </p>
+            <ul data-para className="flex flex-col gap-4 text-copy-bright text-base leading-[1.75] list-none pl-0">
+              {[
+                'AI × XR has moved beyond proof of concept into scalable, production-grade pipelines.',
+                'Spatial Media and AVXR are now broadcast-ready and deployment-ready across enterprise and creative sectors.',
+                'Traditional sports and esports are evolving into fully integrated spatial production and competitive media ecosystems.',
+                'Enterprises and governments are actively investing in secure, deployable AI-XR infrastructure and real-world applications.',
+              ].map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-[0.55em] shrink-0 w-1.5 h-1.5 rounded-full bg-accent/80" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
             <p
               data-para
               className="font-semibold"
               style={{ fontSize: '0.9rem', color: 'rgba(251,146,60,0.85)', lineHeight: 1.65, letterSpacing: '0.01em' }}
             >
-              Deployment Ready. Innovation in Action. Reality Redefined.
+              XRAS26 is where innovation meets implementation — where emerging technologies are validated, commercialised, and scaled.
             </p>
-
-
           </div>
         </div>
 

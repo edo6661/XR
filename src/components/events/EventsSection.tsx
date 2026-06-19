@@ -51,7 +51,7 @@ const PROGRAMME_HIGHLIGHTS = [
     accentColor: '#34d399',
     tag: 'Esports',
     to: '/xras-kl-2026',
-    imageSrc: '/programme-highlights/Esports.png',
+    imageSrc: '/programme-highlights/Esports.jpeg',
     isFeatured: false,
   },
   {

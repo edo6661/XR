@@ -74,8 +74,8 @@ const Navbar = () => {
   return (
     <>
       <motion.header
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHome ? (scrolled ? 1 : 0) : 1 }}
+        initial={{ opacity: isHome ? 1 : 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-[100]"
       >
