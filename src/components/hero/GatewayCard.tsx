@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import TracerBorder from '../ui/TracerBorder';
+import { brandFontClass } from '../../core/brand/brandTypography';
 
 const REGISTER_MAILTO = 'mailto:register@xr-summits.com';
 
@@ -291,7 +292,7 @@ const GatewayCard = ({
                   {subtitle}
                 </p>
                 <h3
-                  className="font-heading font-bold text-foreground leading-tight"
+                  className={brandFontClass(title, 'font-heading font-bold text-foreground leading-tight')}
                   style={{ fontSize: isCenter ? '1.22rem' : '1.04rem' }}
                 >
                   {title}

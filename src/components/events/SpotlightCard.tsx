@@ -2,6 +2,7 @@ import { useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
+import { brandFontClass } from '../../core/brand/brandTypography';
 
 interface SpotlightCardProps {
   index: number;
@@ -234,7 +235,7 @@ const SpotlightCard = ({
         <div className="flex flex-col">
           <h3
             ref={titleRef}
-            className="font-heading font-bold text-foreground leading-tight mb-2 will-change-transform"
+            className={brandFontClass(title, 'font-heading font-bold text-foreground leading-tight mb-2 will-change-transform')}
             style={{ fontSize: isFeatured ? '1.42rem' : '1.02rem' }}
           >
             {title}

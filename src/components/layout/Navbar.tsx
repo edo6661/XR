@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import MagneticWrapper from '../ui/MagneticWrapper';
 import ScrambleText from '../ui/ScrambleText';
+import { BRAND_FONT_CLASS } from '../../core/brand/brandTypography';
 import { COMPANY, PRIMARY_NAV_LINKS } from '../../core/navigation/routes';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -123,7 +124,7 @@ const Navbar = () => {
               />
             </div>
             <span
-              className="font-heading font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350"
+              className={`${BRAND_FONT_CLASS} font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350`}
               style={{ fontSize: '0.76rem' }}
             >
               {COMPANY.navbarBrand}
@@ -300,7 +301,7 @@ const Navbar = () => {
                 />
                 <div className="flex flex-col leading-none gap-[3px]">
                   <span
-                    className="font-heading font-bold tracking-[0.3em] text-foreground"
+                    className={`${BRAND_FONT_CLASS} font-bold tracking-[0.3em] text-foreground`}
                     style={{ fontSize: '0.76rem' }}
                   >
                     {COMPANY.navbarBrand}

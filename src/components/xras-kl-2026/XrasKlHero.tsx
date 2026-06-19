@@ -98,7 +98,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.14, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="font-heading font-black leading-[0.95] mb-5"
+          className="font-brand font-black leading-[0.95] mb-5"
           style={{ fontSize: 'clamp(2.5rem, 8vw, 4.25rem)', color: '#0f1b30' }}
         >
           XR ASIA SUMMIT

@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion, useMotionValue, useSpring } from 'framer-motion';
+import { brandFontClass } from '../../core/brand/brandTypography';
 
 /**
  * HeroGatewayTiles — the finale: three glassmorphic "shaky" tiles that BOOM in
@@ -211,7 +212,7 @@ const TileCard = ({
 
               <div className="mt-auto flex flex-col gap-1">
                 <h3
-                  className="font-heading font-bold text-foreground leading-tight"
+                  className={brandFontClass(tile.title, 'font-heading font-bold text-foreground leading-tight')}
                   style={{ fontSize: isCenter ? '1.18rem' : '1.06rem' }}
                 >
                   {tile.title}
