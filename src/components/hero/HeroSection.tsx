@@ -6,7 +6,7 @@ import HeroLogo from './HeroLogo';
 import HeroIntroOverlay from './HeroIntroOverlay';
 
 /** Master keyart — backmost layer at ~55% opacity (client: 50–60%). */
-const MASTER_KEYART = '/hero/new_hero_from_louis.jpeg';
+const MASTER_KEYART = '/hero/new_hero_from_louis.png';
 const KEYART_OPACITY = 0.58;
 
 const GLOBE_VIDEO: HeroVideoConfig = {
@@ -27,11 +27,12 @@ const INTRO_ZAP_MS = 700;
 const STEP_TIMELINE: { at: number; step: number }[] = [
   { at: INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS, step: 1 },
   { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2, step: 2 },
-  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2 + INTRO_ZAP_MS, step: 3 },
-  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2 + INTRO_ZAP_MS + 700, step: 4 },
-  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 2 + INTRO_ZAP_MS + 1380, step: 5 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 3, step: 3 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 3 + INTRO_ZAP_MS, step: 4 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 3 + INTRO_ZAP_MS + 700, step: 5 },
+  { at: (INTRO_LINE_ENTER_MS + INTRO_LINE_READ_MS) * 3 + INTRO_ZAP_MS + 1380, step: 6 },
 ];
-const LAST_STEP = 5;
+const LAST_STEP = 6;
 
 function hasSeenHeroIntro(): boolean {
   try {
@@ -97,12 +98,12 @@ const HeroSection = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
   };
 
-  const videoRevealed = step >= 3;
-  const showLogo = step >= 3;
-  const showTiles = step >= 4;
+  const videoRevealed = step >= 4;
+  const showLogo = step >= 4;
+  const showTiles = step >= 5;
   const showHint = step >= LAST_STEP;
 
-  const hudPhase: Phase = step < 3 ? 'globe' : step === 3 ? 'boot' : 'reveal';
+  const hudPhase: Phase = step < 4 ? 'globe' : step === 4 ? 'boot' : 'reveal';
   const bgBrightness = step >= 4 ? 0.94 : 0.92;
 
   return (
@@ -151,7 +152,7 @@ const HeroSection = () => {
         <motion.div
           className="absolute inset-0 z-2 pointer-events-none"
           initial={{ opacity: 0 }}
-          animate={{ opacity: step === 3 ? 0.95 : step >= 4 ? 0.7 : 0.4 }}
+          animate={{ opacity: step === 4 ? 0.95 : step >= 5 ? 0.7 : 0.4 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           style={{ mixBlendMode: 'screen' }}
           aria-hidden="true"
@@ -313,7 +314,7 @@ const HeroSection = () => {
               </motion.div>
 
               {/* ── HEADLINE ── */}
-              <motion.h1
+              <motion.h2
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -336,15 +337,19 @@ const HeroSection = () => {
                   AI · XR · Spatial Media
                 </span>{' '}
                 &amp; Immersive Technology
-              </motion.h1>
+              </motion.h2>
 
               {/* ── SUBTEXT ── */}
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                className="text-center mt-4 px-4 max-w-2xl text-hero-sub"
-                style={{ fontSize: 'clamp(0.78rem, 1.3vw, 0.92rem)' }}
+                className="text-center mt-5 px-4 max-w-2xl font-medium"
+                style={{
+                  fontSize: 'clamp(0.95rem, 1.85vw, 1.2rem)',
+                  lineHeight: 1.65,
+                  color: 'rgba(240, 244, 255, 0.92)',
+                }}
               >
                 Connecting industry leaders, creators, educators, broadcasters,
                 governments and technology innovators through deployment-ready

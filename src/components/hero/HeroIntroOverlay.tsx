@@ -1,4 +1,5 @@
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import type { CSSProperties } from 'react';
 
 
 type HeroIntroOverlayProps = {
@@ -22,12 +23,29 @@ const lineVariants: Variants = {
   },
 };
 
+const INTRO_WORDS = ['IMAGINE', 'GENERATE', 'IMMERSE'] as const;
+
+const wordStyle = (index: number): CSSProperties => {
+  if (index === 1) {
+    return {
+      background: 'linear-gradient(120deg, #7dd3fc 0%, #38bdf8 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+    };
+  }
+  if (index === 2) {
+    return { color: '#fb923c' };
+  }
+  return { color: '#f0f4ff' };
+};
+
 const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
   const veilVisible = step < 2;
 
   return (
     <AnimatePresence>
-      {step < 3 && (
+      {step < 4 && (
         <motion.div
           key="intro"
           className="absolute inset-0 z-40 flex items-center justify-center overflow-hidden"
@@ -63,60 +81,27 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
           {/* Lines */}
           <div className="relative z-10 px-6 text-center">
             <AnimatePresence mode="wait">
-              {step === 0 && (
+              {step < 3 && (
                 <motion.h2
-                  key="line1"
+                  key={INTRO_WORDS[step]}
                   variants={lineVariants}
                   initial="initial"
                   animate="enter"
                   exit="exit"
-                  className="font-heading font-semibold leading-tight"
-                  style={{ fontSize: 'clamp(1.6rem, 5vw, 3.4rem)', color: 'rgba(176,193,224,0.92)', letterSpacing: '0.01em' }}
+                  className="font-heading font-black leading-tight tracking-[0.18em] uppercase"
+                  style={{
+                    fontSize: 'clamp(1.8rem, 5.5vw, 3.6rem)',
+                    ...wordStyle(step),
+                  }}
                 >
-                  The Internet was{' '}
-                  <span style={{ color: 'rgba(107,127,163,0.7)' }}>Flat.</span>
-                </motion.h2>
-              )}
-
-              {step === 1 && (
-                <motion.h2
-                  key="line2"
-                  variants={lineVariants}
-                  initial="initial"
-                  animate="enter"
-                  exit="exit"
-                  className="font-heading font-semibold leading-tight"
-                  style={{ fontSize: 'clamp(1.6rem, 5vw, 3.4rem)', color: '#f0f4ff' }}
-                >
-                  The Future is{' '}
-                  <span style={{
-                    background: 'linear-gradient(120deg, #7dd3fc 0%, #38bdf8 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}>
-                    Spatial.
-                  </span>
-                  <br />
-                  <span style={{ color: 'rgba(240,244,255,0.82)' }}>
-                    Powered by{' '}
-                    <span style={{
-                      background: 'linear-gradient(120deg, #fb923c 0%, #f97316 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}>
-                      AI
-                    </span>
-                    .
-                  </span>
+                  {INTRO_WORDS[step]}
                 </motion.h2>
               )}
             </AnimatePresence>
           </div>
 
           {/* ZAP flash */}
-          {step === 2 && (
+          {step === 3 && (
             <>
               <motion.div
                 className="absolute inset-0 z-20 bg-white"

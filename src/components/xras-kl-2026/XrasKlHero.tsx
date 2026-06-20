@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { XRAS_KL_ACCENT, XRAS_KL_META } from '../../core/content/xrasKl2026';
 
-const HERO_KEYART = '/hero/new_hero_from_louis.jpeg';
+const HERO_KEYART = '/hero/new_hero_from_louis.png';
 
 const neoShadow = `
   10px 10px 28px rgba(180,190,208,0.58),

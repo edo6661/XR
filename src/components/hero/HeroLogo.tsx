@@ -26,22 +26,22 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             className="relative flex justify-center items-center w-full"
             style={{ padding: '0 clamp(1rem, 8vw, 5rem)' }}
           >
-            <motion.img
-              src="/logo/XR_ASIA_SUMMIT.png"
-              className="relative object-contain"
+            <motion.h1
+              className="font-brand font-black text-center leading-[0.92] uppercase"
               style={{
-                width: '100%',
-                maxWidth: 'clamp(260px, 65vw, 600px)',
-                height: 'auto',
-                willChange: 'transform',
-                filter:
-                  'drop-shadow(0 0 16px rgba(125,211,252,0.22)) drop-shadow(0 2px 32px rgba(251,146,60,0.14)) brightness(1.08)',
+                fontSize: 'clamp(2rem, 8.5vw, 4.75rem)',
+                letterSpacing: '0.04em',
+                color: '#fb923c',
+                WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.28)',
+                paintOrder: 'stroke fill',
+                filter: 'drop-shadow(0 0 24px rgba(251,146,60,0.35)) drop-shadow(0 2px 32px rgba(251,146,60,0.18))',
               }}
-              alt="XR ASIA SUMMIT"
               variants={logoFloatVariants}
               initial="animate"
               animate="animate"
-            />
+            >
+              XR ASIA SUMMIT 26&apos;
+            </motion.h1>
           </div>
         </motion.div>
       </div>

@@ -11,7 +11,7 @@ const CustomCursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfigOuter = { stiffness: 600, damping: 30, mass: 0.5 };
+  const springConfigOuter = { stiffness: 120, damping: 28, mass: 1.4 };
   const outerX = useSpring(cursorX, springConfigOuter);
   const outerY = useSpring(cursorY, springConfigOuter);
 
