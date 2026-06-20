@@ -3,13 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
 import StatCard from './StatCard';
-import {
-  AIIcon,
-  BuildingIcon,
-  GlobeIcon,
-  SpatialIcon,
-  TalentIcon,
-} from './page/aboutIcons';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,28 +42,28 @@ const DELIVERABLES = [
 
 const PILLARS = [
   {
-    icon: <SpatialIcon />,
-    label: 'Immersive Tech Mastery',
+    image: '/about-icons/Mastery.png',
+    label: 'Building Immersive Tech Mastery',
     accentColor: '#fb923c',
   },
   {
-    icon: <TalentIcon />,
-    label: 'Fueling Industry, Driving Growth. Building Talent',
+    image: '/about-icons/Growth.png',
+    label: 'Scaling Industry Growth and Talent',
     accentColor: '#22d3ee',
   },
   {
-    icon: <AIIcon />,
-    label: 'Driving Industry Evolution, Cultivating New Capabilities',
+    image: '/about-icons/Capabilities.png',
+    label: 'Cultivating New Capability',
     accentColor: '#a78bfa',
   },
   {
-    icon: <GlobeIcon />,
-    label: 'Empowering Industry Through Shared Innovation',
+    image: '/about-icons/Collaboration.png',
+    label: 'Enabling Collaboration',
     accentColor: '#38bdf8',
   },
   {
-    icon: <BuildingIcon />,
-    label: 'A Launchpad for XR Partnerships in Malaysia',
+    image: '/about-icons/Launchpad.png',
+    label: "Powering Malaysia's XR Launchpad",
     accentColor: '#fbbf24',
   },
 ];
@@ -327,7 +321,7 @@ const AboutSection = () => {
             <IntroBar>XR ASIA SUMMIT &apos;26 — PILLARS</IntroBar>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-3">
             {PILLARS.map((pillar, i) => (
               <motion.div
                 key={pillar.label}
@@ -335,30 +329,45 @@ const AboutSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ delay: i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col items-center text-center gap-4"
+                className="flex flex-col items-center text-center gap-3"
               >
+                {/* Card persegi dark purple */}
                 <div
-                  className="flex items-center justify-center rounded-full"
+                  className="relative flex flex-col items-center justify-end w-full aspect-square rounded-lg overflow-hidden"
                   style={{
-                    width: '72px',
-                    height: '72px',
-                    background: `radial-gradient(circle at 35% 30%, ${pillar.accentColor}18 0%, rgba(8,14,28,0.85) 70%)`,
-                    border: `1.5px solid ${pillar.accentColor}55`,
-                    boxShadow: `0 0 28px ${pillar.accentColor}22, inset 0 0 20px ${pillar.accentColor}0a`,
-                    color: pillar.accentColor,
+                    background: 'linear-gradient(160deg, #1a0a2e 0%, #0d0618 60%, #120820 100%)',
+                    border: `1px solid ${pillar.accentColor}30`,
+                    boxShadow: `0 0 32px ${pillar.accentColor}18, inset 0 0 40px rgba(80,0,120,0.25)`,
                   }}
                 >
-                  {pillar.icon}
+                  {/* Image — besar, center atas */}
+                  <img
+                    src={pillar.image}
+                    alt={pillar.label}
+                    className="absolute inset-0 w-full h-full object-contain p-4"
+                    style={{
+                      filter: `drop-shadow(0 0 16px ${pillar.accentColor}66) drop-shadow(0 0 40px rgba(160,60,255,0.4))`,
+                    }}
+                  />
+                  {/* Gradient overlay bawah untuk label */}
+                  <div
+                    className="relative z-10 w-full px-3 pb-3 pt-8"
+                    style={{
+                      background: 'linear-gradient(0deg, rgba(10,4,20,0.92) 0%, rgba(10,4,20,0.6) 60%, transparent 100%)',
+                    }}
+                  >
+                    <p
+                      className="font-heading font-bold leading-snug text-white"
+                      style={{ fontSize: '0.75rem', letterSpacing: '0.01em' }}
+                    >
+                      {pillar.label}
+                    </p>
+                  </div>
                 </div>
-                <p
-                  className="font-heading font-semibold leading-snug"
-                  style={{ fontSize: '0.72rem', color: 'rgba(240,244,255,0.88)', letterSpacing: '0.02em' }}
-                >
-                  {pillar.label}
-                </p>
               </motion.div>
             ))}
           </div>
+
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
