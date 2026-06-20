@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { AWARDS_RECOGNITION } from '../../../core/content/aboutPage';
+import AboutHighlightPhotos from './AboutHighlightPhotos';
 
 const GOLD = '#d4af37';
 const BURGUNDY = '#6b0f1a';
@@ -40,7 +41,7 @@ const AwardsRecognitionBlock = () => (
     >
       {/* Gold top sheen */}
       <div
-        className="absolute top-0 inset-x-0 h-px pointer-events-none"
+        className="absolute top-0 inset-x-0 h-px pointer-events-none z-20"
         style={{
           background: `linear-gradient(90deg, transparent 5%, ${GOLD}88 35%, ${GOLD}cc 50%, ${GOLD}88 65%, transparent 95%)`,
         }}
@@ -61,68 +62,13 @@ const AwardsRecognitionBlock = () => (
         aria-hidden="true"
       />
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-0">
-        {/* Ceremony photo — 1/3 */}
-        <div className="relative overflow-hidden lg:col-span-1">
-          <div
-            className="absolute inset-0 z-10 pointer-events-none"
-            style={{
-              background:
-                'linear-gradient(to right, transparent 70%, rgba(12,12,18,0.75) 100%), linear-gradient(to top, rgba(12,12,18,0.45) 0%, transparent 35%)',
-            }}
-            aria-hidden="true"
-          />
-          <img
-            src={AWARDS_RECOGNITION.ceremonyPhoto}
-            alt={AWARDS_RECOGNITION.ceremonyPhotoAlt}
-            className="w-full h-full min-h-[240px] lg:min-h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
-            loading="lazy"
-          />
-
-          {/* Floating award badge on photo */}
-          <div
-            className="absolute bottom-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full"
-            style={{
-              background: 'rgba(8,8,12,0.72)',
-              backdropFilter: 'blur(12px)',
-              border: `1px solid ${GOLD}44`,
-              boxShadow: `0 4px 20px rgba(0,0,0,0.4), 0 0 16px ${GOLD}15`,
-            }}
-          >
-            <span
-              className="w-1.5 h-1.5 rounded-full shrink-0"
-              style={{ background: GOLD, boxShadow: `0 0 8px ${GOLD}` }}
-              aria-hidden="true"
-            />
-            <span
-              className="font-mono uppercase tracking-[0.14em]"
-              style={{ fontSize: '0.58rem', color: GOLD }}
-            >
-              Award Recipient
-            </span>
-          </div>
+      <div className="relative z-10 flex flex-col">
+        <div className="p-5 md:p-7 pb-0">
+          <AboutHighlightPhotos className="max-w-none w-full" />
         </div>
 
-        {/* Award details — 2/3 */}
-        <div className="flex flex-col justify-center gap-5 p-6 md:p-8 lg:p-9 lg:col-span-2">
-          {/* APB+ banner — full asset on light plate */}
-          <div
-            className="rounded-lg overflow-hidden"
-            style={{
-              background: 'linear-gradient(145deg, #f6f7fa 0%, #eceff5 100%)',
-              border: '1px solid rgba(255,255,255,0.22)',
-              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9), 0 4px 16px rgba(0,0,0,0.18)',
-            }}
-          >
-            <img
-              src={AWARDS_RECOGNITION.logo}
-              alt="Initiative Award – Malaysia for AI-XR Production, Asia-Pacific Broadcasting+ Awards 2026"
-              className="block w-full h-auto object-contain px-3 py-3 md:px-4 md:py-3.5"
-              loading="lazy"
-            />
-          </div>
-
-          {/* Category tags */}
+        {/* Copy + tags */}
+        <div className="flex flex-col gap-5 p-6 md:p-8 lg:px-9 lg:pt-6 lg:pb-7">
           <div className="flex flex-wrap gap-2">
             {AWARD_TAGS.map((tag, i) => (
               <motion.span
@@ -144,22 +90,20 @@ const AwardsRecognitionBlock = () => (
             ))}
           </div>
 
-          {/* Client copy — compact, integrated */}
           <p
-            className="leading-relaxed"
+            className="leading-relaxed max-w-3xl"
             style={{
-              fontSize: 'clamp(0.8rem, 1.8vw, 0.88rem)',
-              lineHeight: 1.75,
-              color: 'rgba(175,185,210,0.88)',
+              fontSize: 'clamp(0.82rem, 1.8vw, 0.92rem)',
+              lineHeight: 1.8,
+              color: 'rgba(175,185,210,0.9)',
             }}
           >
-            <strong className="text-foreground font-semibold" style={{ fontSize: '0.9em' }}>
+            <strong className="text-foreground font-semibold" style={{ fontSize: '0.95em' }}>
               {AWARDS_RECOGNITION.companyName}
             </strong>{' '}
             {AWARDS_RECOGNITION.body}
           </p>
 
-          {/* Event footer line */}
           <div
             className="flex items-center gap-3 pt-1"
             style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
@@ -181,12 +125,12 @@ const AwardsRecognitionBlock = () => (
 
       {/* Corner accents */}
       <div
-        className="absolute top-4 left-4 w-5 h-5 border-t border-l pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity"
+        className="absolute top-4 left-4 w-5 h-5 border-t border-l pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity z-20"
         style={{ borderColor: `${GOLD}55` }}
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-4 right-4 w-5 h-5 border-b border-r pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity"
+        className="absolute bottom-4 right-4 w-5 h-5 border-b border-r pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity z-20"
         style={{ borderColor: `${GOLD}55` }}
         aria-hidden="true"
       />

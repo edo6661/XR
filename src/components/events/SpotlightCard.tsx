@@ -139,6 +139,91 @@ const SpotlightCard = ({
 
   }, [accentColor, baseImgScale, isHero]);
 
+  const contentBlock = (
+    <div
+      className={[
+        'relative z-10 flex flex-col gap-3',
+        isHero ? 'shrink-0 p-5 bg-[#050b18]' : 'justify-end h-full p-5',
+      ].join(' ')}
+      style={isHero ? undefined : { textShadow: '0 2px 12px rgba(0,0,0,1), 0 4px 32px rgba(0,0,0,0.85)' }}
+    >
+      {/* Tag + index */}
+      <div className="flex items-center justify-between mb-0.5">
+        <span
+          className="text-[0.56rem] font-bold tracking-[0.32em] uppercase px-2.5 py-1 rounded-sm"
+          style={{
+            color: accentColor,
+            background: `${accentColor}16`,
+            border: `1px solid ${accentColor}28`,
+          }}
+        >
+          {tag}
+        </span>
+        <span
+          className="font-mono text-[0.5rem] tracking-[0.3em]"
+          style={{ color: `${accentColor}48` }}
+          aria-hidden="true"
+        >
+          {String(index + 1).padStart(2, '0')}
+        </span>
+      </div>
+
+      {/* Text */}
+      <div className="flex flex-col">
+        <h3
+          ref={titleRef}
+          className={brandFontClass(title, 'font-heading font-extrabold text-white leading-tight mb-2 will-change-transform')}
+          style={{ fontSize: isFeatured ? '1.42rem' : isHero ? '1.2rem' : '1.02rem' }}
+        >
+          {title}
+        </h3>
+        <p
+          ref={descriptionRef}
+          className="leading-relaxed line-clamp-4 will-change-transform"
+          style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.95)' }}
+        >
+          {description}
+        </p>
+      </div>
+
+      {/* Meta row */}
+      <div
+        className="flex items-start justify-between gap-3 pt-3 border-t"
+        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+      >
+        <div className="flex flex-col gap-2 min-w-0">
+          {date && (
+            <span className="text-meta flex items-start gap-1.5 leading-snug">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0 mt-0.5" aria-hidden="true">
+                <rect x="2" y="3" width="12" height="11" rx="1" />
+                <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
+              </svg>
+              {date}
+            </span>
+          )}
+          {location && (
+            <span className="text-meta flex items-start gap-1.5 leading-snug">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0 mt-0.5" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
+                <circle cx="8" cy="6" r="1.5" />
+              </svg>
+              {location}
+            </span>
+          )}
+        </div>
+        {to && (
+          <span
+            className="shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-1"
+            style={{ color: `${accentColor}65` }}
+            aria-hidden="true"
+          >
+            →
+          </span>
+        )}
+      </div>
+    </div>
+  );
+
   const inner = (
     <div
       ref={cardRef}
@@ -149,48 +234,70 @@ const SpotlightCard = ({
       className={[
         'relative overflow-hidden rounded-xl group cursor-pointer h-full will-change-transform',
         isFeatured ? 'min-h-[460px]' : isHero ? 'min-h-[340px] md:min-h-0' : 'min-h-[280px] md:min-h-0',
+        isHero ? 'flex flex-col bg-[#050b18]' : '',
       ].join(' ')}
     >
-      {/* ── Background ── */}
-      <div className="absolute inset-0 overflow-hidden">
-        {imageSrc ? (
-          <>
-            {imageFit === 'contain' && (
-              <div className="absolute inset-0 bg-[#050b18]" aria-hidden="true" />
-            )}
-            <div
-              className={`absolute inset-0 ${imageFit === 'contain' ? 'origin-center' : 'origin-bottom'}`}
-              style={{ transform: imageTransform || 'none' }}
-            >
-              <img
-                ref={imgRef}
-                src={imageSrc}
-                alt={title}
-                className={`absolute inset-0 w-full h-full opacity-100 ${imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
-                style={{
-                  objectPosition: isHero ? 'center top' : isFeatured ? 'right bottom' : imagePosition,
-                  transform: baseImgScale !== 1 ? `scale(${baseImgScale})` : undefined,
-                  transformOrigin: isHero ? 'center top' : 'center center',
-                }}
-                loading="lazy"
-              />
-            </div>
-            <div
-              className="absolute inset-x-0 bottom-0 z-[2] pointer-events-none"
-              style={{
-                height: isFeatured ? '68%' : isHero ? '30%' : '58%',
-                background: 'linear-gradient(to top, rgba(5,11,24,0.98) 0%, rgba(5,11,24,0.88) 30%, rgba(5,11,24,0.45) 65%, transparent 100%)',
-              }}
-              aria-hidden="true"
+      {/* ── Hero: stacked image + content (full-width image, text below) ── */}
+      {isHero && imageSrc ? (
+        <>
+          <div className="relative flex-1 min-h-0 w-full overflow-hidden">
+            <img
+              ref={imgRef}
+              src={imageSrc}
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: imagePosition }}
+              loading="lazy"
             />
-          </>
-        ) : (
-          <div
-            className="w-full h-full"
-            style={{ background: `linear-gradient(148deg, rgba(13,27,46,0.96) 0%, ${accentColor}10 100%)` }}
-          />
-        )}
-      </div>
+          </div>
+          {contentBlock}
+        </>
+      ) : (
+        <>
+          {/* ── Background ── */}
+          <div className="absolute inset-0 overflow-hidden">
+            {imageSrc ? (
+              <>
+                {imageFit === 'contain' && (
+                  <div className="absolute inset-0 bg-[#050b18]" aria-hidden="true" />
+                )}
+                <div
+                  className={`absolute inset-0 ${imageFit === 'contain' ? 'origin-center' : 'origin-bottom'}`}
+                  style={{ transform: imageTransform || 'none' }}
+                >
+                  <img
+                    ref={imgRef}
+                    src={imageSrc}
+                    alt={title}
+                    className={`absolute inset-0 w-full h-full opacity-100 ${imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
+                    style={{
+                      objectPosition: isFeatured ? 'right bottom' : imagePosition,
+                      transform: baseImgScale !== 1 ? `scale(${baseImgScale})` : undefined,
+                      transformOrigin: 'center center',
+                    }}
+                    loading="lazy"
+                  />
+                </div>
+                <div
+                  className="absolute inset-x-0 bottom-0 z-[2] pointer-events-none"
+                  style={{
+                    height: isFeatured ? '68%' : '58%',
+                    background: 'linear-gradient(to top, rgba(5,11,24,0.98) 0%, rgba(5,11,24,0.88) 30%, rgba(5,11,24,0.45) 65%, transparent 100%)',
+                  }}
+                  aria-hidden="true"
+                />
+              </>
+            ) : (
+              <div
+                className="w-full h-full"
+                style={{ background: `linear-gradient(148deg, rgba(13,27,46,0.96) 0%, ${accentColor}10 100%)` }}
+              />
+            )}
+          </div>
+
+          {contentBlock}
+        </>
+      )}
 
       {/* ── Border ── */}
       <div
@@ -225,87 +332,6 @@ const SpotlightCard = ({
         aria-hidden="true"
       />
 
-      {/* ── Content ── */}
-      <div
-        className="relative z-10 flex flex-col justify-end h-full p-5 gap-3"
-        style={{ textShadow: '0 2px 12px rgba(0,0,0,1), 0 4px 32px rgba(0,0,0,0.85)' }}
-      >
-
-        {/* Tag + index */}
-        <div className="flex items-center justify-between mb-0.5">
-          <span
-            className="text-[0.56rem] font-bold tracking-[0.32em] uppercase px-2.5 py-1 rounded-sm"
-            style={{
-              color: accentColor,
-              background: `${accentColor}16`,
-              border: `1px solid ${accentColor}28`,
-            }}
-          >
-            {tag}
-          </span>
-          <span
-            className="font-mono text-[0.5rem] tracking-[0.3em]"
-            style={{ color: `${accentColor}48` }}
-            aria-hidden="true"
-          >
-            {String(index + 1).padStart(2, '0')}
-          </span>
-        </div>
-
-        {/* Text */}
-        <div className="flex flex-col">
-          <h3
-            ref={titleRef}
-            className={brandFontClass(title, 'font-heading font-extrabold text-white leading-tight mb-2 will-change-transform')}
-            style={{ fontSize: isFeatured ? '1.42rem' : isHero ? '1.2rem' : '1.02rem' }}
-          >
-            {title}
-          </h3>
-          <p
-            ref={descriptionRef}
-            className="leading-relaxed line-clamp-4 will-change-transform"
-            style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.95)' }}
-          >
-            {description}
-          </p>
-        </div>
-
-        {/* Meta row */}
-        <div
-          className="flex items-start justify-between gap-3 pt-3 border-t"
-          style={{ borderColor: 'rgba(255,255,255,0.06)' }}
-        >
-          <div className="flex flex-col gap-2 min-w-0">
-            {date && (
-              <span className="text-meta flex items-start gap-1.5 leading-snug">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0 mt-0.5" aria-hidden="true">
-                  <rect x="2" y="3" width="12" height="11" rx="1" />
-                  <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
-                </svg>
-                {date}
-              </span>
-            )}
-            {location && (
-              <span className="text-meta flex items-start gap-1.5 leading-snug">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 shrink-0 mt-0.5" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
-                  <circle cx="8" cy="6" r="1.5" />
-                </svg>
-                {location}
-              </span>
-            )}
-          </div>
-          {to && (
-            <span
-              className="shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-1"
-              style={{ color: `${accentColor}65` }}
-              aria-hidden="true"
-            >
-              →
-            </span>
-          )}
-        </div>
-      </div>
     </div>
   );
 

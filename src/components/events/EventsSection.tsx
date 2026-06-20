@@ -41,7 +41,6 @@ const PROGRAMME_HIGHLIGHTS = [
     to: '/ai-filmmaking-hackathon',
     imageSrc: '/programme-highlights/AI Filmmaking Hackathon.png',
     imagePosition: 'center top',
-    imageFit: 'contain' as const,
     isHero: true,
   },
   {

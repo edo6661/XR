@@ -1,5 +1,20 @@
 export const ABOUT_ACCENT = "#ef783d";
 
+export const ABOUT_HIGHLIGHT_PHOTOS = [
+  {
+    src: "/awards/awards_new.jpeg",
+    alt: "Initiative Award – Malaysia for AI-XR Production, Asia-Pacific Broadcasting+ Awards 2026",
+    caption: "Initiative Award · APB+ 2026",
+    fit: "contain" as const,
+  },
+  {
+    src: "/random/events.jpeg",
+    alt: "XR Asia Summit community on stage at IMMERSE KL",
+    caption: "Community in action · IMMERSE KL",
+    fit: "cover" as const,
+  },
+] as const;
+
 export const COMPANY_OVERVIEW = {
   title: "Connecting Innovators Across Asia's Immersive Future",
   body: [

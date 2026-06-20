@@ -126,40 +126,6 @@ const PastEventsSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-            className="relative rounded-xl overflow-hidden mt-10 md:mt-12"
-            style={{
-              border: '1px solid rgba(255,255,255,0.88)',
-              boxShadow: '0 16px 48px rgba(60,80,120,0.18), inset 0 1px 0 rgba(255,255,255,1)',
-            }}
-          >
-            <img
-              src="/random/events.jpeg"
-              alt="XR Asia Summit community on stage at IMMERSE KL"
-              className="w-full aspect-21/9 object-cover object-center"
-              loading="lazy"
-              decoding="async"
-            />
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  'linear-gradient(to top, rgba(18,28,48,0.72) 0%, rgba(18,28,48,0.12) 45%, transparent 100%)',
-              }}
-              aria-hidden="true"
-            />
-            <p
-              className="absolute bottom-4 left-4 right-4 md:bottom-5 md:left-6 font-mono uppercase tracking-[0.14em]"
-              style={{ fontSize: '0.62rem', color: 'rgba(240,244,255,0.92)' }}
-            >
-              Community in action · IMMERSE KL
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="relative rounded-xl overflow-hidden mt-10"
