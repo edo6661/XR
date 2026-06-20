@@ -40,7 +40,7 @@ const PROGRAMME_HIGHLIGHTS = [
     tag: 'Hackathon',
     to: '/ai-filmmaking-hackathon',
     imageSrc: '/programme-highlights/AI Filmmaking Hackathon.png',
-    imagePosition: 'center top',
+    imagePosition: '18% center',
     isHero: true,
   },
   {

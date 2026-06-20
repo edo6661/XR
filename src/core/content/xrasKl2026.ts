@@ -11,14 +11,6 @@ export type XrasSpeaker = {
 
 export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
   {
-    name: "Ali Yaghoubi",
-    role: "Founder & CEO",
-    company: "Techsign Ltd",
-    photo: "/speaker-pics/Ali Yaghoubi.jpg.jpeg",
-    accentColor: "#3953a3",
-    focusAreas: ["XR Solutions", "Enterprise Technology", "Innovation"],
-  },
-  {
     name: "Amirsoleiman Esfandiari",
     role: "Founder",
     company: "Techcopter & Techwedia+",
