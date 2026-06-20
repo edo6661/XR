@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ── Local fonts (Satoshi primary, Corptic brand headers only) ───────── */
+/* ── Local fonts (Satoshi primary, Backsteal brand headers only) ─────── */
 @font-face {
   font-family: "Satoshi";
   src: url("/font/satoshi/Satoshi-Regular.otf") format("opentype");
@@ -59,10 +59,10 @@
   font-display: swap;
 }
 
-/* Corptic — brand headers only: "XR ASIA SUMMIT" & "AI-XR Cultural Innovation Forum" */
+/* Backsteal — brand headers only: "XR ASIA SUMMIT" & "AI-XR Cultural Innovation Forum" */
 @font-face {
-  font-family: "Corptic";
-  src: url("/font/corptic/Corptic-DEMO.otf") format("opentype");
+  font-family: "Backsteal";
+  src: url("/font/backsteal/Backsteal-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -87,7 +87,7 @@ html.lenis body {
 @theme {
   --font-sans: "Satoshi", system-ui, sans-serif;
   --font-heading: var(--font-sans);
-  --font-brand: "Corptic", var(--font-sans);
+  --font-brand: "Backsteal", var(--font-sans);
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
   --color-primary: var(--theme-primary);
   --color-secondary: var(--theme-secondary);

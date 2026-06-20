@@ -1,4 +1,4 @@
-/** Corptic is reserved for the two primary event brand headers only. */
+/** Backsteal is reserved for the two primary event brand headers only. */
 export const BRAND_FONT_CLASS = "font-brand";
 
 export const BRAND_HEADERS = {
@@ -6,7 +6,7 @@ export const BRAND_HEADERS = {
   aixr: "AI-XR Cultural Innovation Forum",
 } as const;
 
-/** Primary section/card titles that should render in Corptic. */
+/** Primary section/card titles that should render in Backsteal. */
 export function usesBrandFont(title: string): boolean {
   const normalized = title.trim();
 

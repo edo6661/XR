@@ -265,7 +265,7 @@ const AboutSection = () => {
               className="font-heading font-bold text-foreground"
               style={{ fontSize: 'clamp(1.15rem, 2.4vw, 1.55rem)', lineHeight: 1.25 }}
             >
-              XR Asia Summit 2026: From Disruption to Deployment
+              XR Asia Summit 2026: FROM VISION TO DEPLOYMENT
             </h3>
 
             <p data-para className="text-base text-foreground leading-[1.75]">
