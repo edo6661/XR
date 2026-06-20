@@ -116,7 +116,7 @@ const AwardsRecognitionBlock = () => (
           >
             <img
               src={AWARDS_RECOGNITION.logo}
-              alt="Asia-Pacific Broadcasting+ Awards 2026"
+              alt="Initiative Award – Malaysia for AI-XR Production, Asia-Pacific Broadcasting+ Awards 2026"
               className="block w-full h-auto object-contain px-3 py-3 md:px-4 md:py-3.5"
               loading="lazy"
             />

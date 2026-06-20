@@ -91,7 +91,7 @@ export const AWARDS_RECOGNITION = {
   date: "21 May 2026",
   category: "Initiative Award – Malaysia",
   subcategory: "AI-XR Production",
-  logo: "/awards/awards.png",
+  logo: "/awards/awards_new.jpeg",
   ceremonyPhoto: "/awards/XR_Summits_Sdn_Bhd_APB_Awards.jpg",
   ceremonyPhotoAlt:
     "XR Summits Sdn Bhd receiving the Initiative Award at the Asia-Pacific Broadcasting+ Awards 2026",

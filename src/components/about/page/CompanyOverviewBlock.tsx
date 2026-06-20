@@ -11,7 +11,7 @@ const HIGHLIGHTS = [
 const MOSAIC_IMAGES = [
   { src: '/past-event-pics/Conference3.jpg', alt: 'XR ASIA SUMMIT conference', className: 'col-span-2 row-span-2' },
   { src: '/past-event-pics/masterclass students.jpg', alt: 'Masterclass session', className: 'col-span-1 row-span-1' },
-
+  { src: '/louis/louis-1.jpeg', alt: 'Louis Clovis, Founder of XR Asia Summit', className: 'col-span-1 row-span-1', objectPosition: 'center top' },
 ] as const;
 
 const CompanyOverviewBlock = () => {
@@ -199,6 +199,7 @@ const CompanyOverviewBlock = () => {
                     src={img.src}
                     alt={img.alt}
                     className="w-full h-full object-cover"
+                    style={'objectPosition' in img ? { objectPosition: img.objectPosition } : undefined}
                     loading="lazy"
                     decoding="async"
                   />
