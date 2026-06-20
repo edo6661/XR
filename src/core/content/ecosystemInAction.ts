@@ -20,11 +20,7 @@ export const ECOSYSTEM_IN_ACTION_PHOTOS = [
     src: "/past-event-pics/masterclass students.jpg",
     alt: "Masterclass participants",
   },
-  {
-    src: "/past-event-pics/future of filmmaking 4.jpg",
-    alt: "Future of filmmaking session",
-  },
-  { src: "/past-event-pics/walkway7.jpg", alt: "Summit expo walkway" },
+
   { src: "/past-event-pics/led2.jpg", alt: "LED volume demonstration" },
   { src: "/past-event-pics/infled.jpg", alt: "Infiled technology showcase" },
   { src: "/past-event-pics/artixum.jpg", alt: "Artixium partner showcase" },

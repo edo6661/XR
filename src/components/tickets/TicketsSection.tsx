@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import MagneticWrapper from '../ui/MagneticWrapper';
 import PaymentPlaceholders from './PaymentPlaceholders';
-import { COMPANY } from '../../core/navigation/routes';
+import { useLeadCapture } from '../../context/LeadCaptureContext';
 
 const CheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true">
@@ -20,7 +20,8 @@ const PERKS = [
 ];
 
 const TicketsSection = () => {
-  const btnRef = useRef<HTMLAnchorElement>(null);
+  const { openLeadCapture } = useLeadCapture();
+  const btnRef = useRef<HTMLButtonElement>(null);
   const fillRef = useRef<HTMLSpanElement>(null);
 
   const handleBtnEnter = () => {
@@ -178,9 +179,17 @@ const TicketsSection = () => {
               <div className="h-px" style={{ background: 'rgba(255,255,255,0.06)' }} aria-hidden="true" />
 
               <MagneticWrapper strength={0.2}>
-                <a
+                <button
+                  type="button"
                   ref={btnRef}
-                  href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('XR Summits Interest')}`}
+                  onClick={() =>
+                    openLeadCapture({
+                      title: 'Register Interest',
+                      description: 'Share your details to discuss ticketing, exhibition spaces, or speaking opportunities.',
+                      defaultInterest: 'General registration interest',
+                      intent: 'register',
+                    })
+                  }
                   className="relative flex items-center justify-center gap-3 w-full py-4 rounded-sm overflow-hidden cursor-none group"
                   style={{
                     border: '1px solid rgba(251,146,60,0.55)',
@@ -189,13 +198,13 @@ const TicketsSection = () => {
                   }}
                   onMouseEnter={(e: React.MouseEvent) => {
                     handleBtnEnter();
-                    (e.currentTarget as HTMLAnchorElement).style.color = '#050b18';
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 0 40px rgba(251,146,60,0.4)';
+                    (e.currentTarget as HTMLButtonElement).style.color = '#050b18';
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 40px rgba(251,146,60,0.4)';
                   }}
                   onMouseLeave={(e: React.MouseEvent) => {
                     handleBtnLeave();
-                    (e.currentTarget as HTMLAnchorElement).style.color = '#fb923c';
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
+                    (e.currentTarget as HTMLButtonElement).style.color = '#fb923c';
+                    (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none';
                   }}
                 >
                   <span
@@ -213,7 +222,7 @@ const TicketsSection = () => {
                   <span className="relative text-sm transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">
                     →
                   </span>
-                </a>
+                </button>
               </MagneticWrapper>
 
               <p

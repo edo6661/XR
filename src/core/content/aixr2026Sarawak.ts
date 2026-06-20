@@ -1,14 +1,14 @@
 export const AIXR_SARAWAK_ACCENT = "#fb923c";
 
 export const AIXR_SARAWAK_POSITIONING =
-  "Innovation • Culture • Technology • Future Talent";
+  "Reimagining Heritage Through Artificial Intelligence & Immersive Technology";
 
 export const AIXR_SARAWAK_META = {
-  title: "AIXR 26' Sarawak | XR Summits",
+  title: "AI·XR Cultural Innovation Forum 2026 | XR Summits",
   description:
-    "AIXR 2026 Sarawak — Innovation • Culture • Technology • Future Talent. Regional conference, expo, workshops, masterclasses, and semi-finals.",
-  location: "Sarawak, Malaysia",
-  edition: "Regional · 2026",
+    "AI·XR Cultural Innovation Forum 2026 — a prelude to XR Asia Summits 2026. Where heritage meets future technology at BCCK, Kuching, Sarawak, 16–17 October 2026.",
+  location: "16–17 October 2026 · BCCK, Kuching, Sarawak",
+  edition: "A Prelude to XR Asia Summits 2026",
 } as const;
 
 export type AixrProgram = {
@@ -23,54 +23,54 @@ export type AixrProgram = {
 export const AIXR_SARAWAK_PROGRAMS: readonly AixrProgram[] = [
   {
     id: "conference",
-    category: "Conference",
-    title: "AIXR Conference",
+    category: "Day 1",
+    title: "Cultural Innovation Forum & Industry Dialogue",
     description:
-      "Regional keynotes exploring AI Adoption, the Digital Economy, and collaborative partnerships across Universities and Government sectors.",
+      "Opening keynote on Kuching as ASEAN's AI & immersive cultural innovation hub, hackathon mothership launch, and industry panels on digital heritage and tourism.",
     featured: true,
   },
   {
     id: "expo",
-    category: "Expo",
-    title: "Technology & Culture Expo",
+    category: "Day 2",
+    title: "Cultural XR Innovation Showcase",
     description:
-      "Showcase floor for creators, Startups, and industry partners building deployment-ready experiences in Creative Technology and Tourism XR.",
+      "Interactive experience zones featuring XR exhibitions, AI innovation demos, and creative pitches from hackathon finalists.",
     featured: true,
   },
   {
     id: "workshop-1",
-    category: "Workshop",
-    title: "Workshop I",
+    category: "Training",
+    title: "Youth Immersion Lab",
     description:
-      "Hands-on session exploring AI, XR, and spatial storytelling to empower Indigenous Creative Communities and drive Heritage Preservation.",
-  },
-  {
-    id: "workshop-2",
-    category: "Workshop",
-    title: "Workshop II",
-    description:
-      "Follow-on workshop focused on production pipelines, talent development, and immersive deployment.",
+      "Hands-on training in AI tools, XR storytelling technologies, and spatial media production workflows for the next generation of creative technologists.",
   },
   {
     id: "masterclass-1",
     category: "Masterclass",
-    title: "Masterclass I",
+    title: "Cultural Documentation Masterclass",
     description:
-      "Expert-led intensive on Education Transformation, virtual production, cultural narrative, and enterprise immersive adoption.",
+      "3D scanning, Gaussian Splatting reconstruction, volumetric video capture, and real-time rendering engines for heritage preservation.",
   },
   {
     id: "masterclass-2",
     category: "Masterclass",
-    title: "Masterclass II",
+    title: "Digital Archiving for Heritage Organisations",
     description:
-      "Second masterclass track for broadcasters, universities, and technology innovators in Borneo.",
+      "Specialist intensive for museums, tourism agencies, cultural institutions, and heritage bodies digitising Borneo's living heritage.",
+  },
+  {
+    id: "heritage-xr",
+    category: "Heritage XR",
+    title: "Preserving Heritage Through Immersive Technologies",
+    description:
+      "VR, AR, mixed reality, spatial computing, and AI-powered reconstruction — from museum digitisation to digital twins of heritage sites.",
   },
   {
     id: "hackathon-semi",
-    category: "Semi Finals",
-    title: "AI Filmmaking Hackathon Semi Finals",
+    category: "Hackathon",
+    title: "AI Filmmaking Hackathon · Mothership Challenge",
     description:
-      "Semi-final showcase where AI filmmaking teams present projects before advancing to the Kuala Lumpur grand finals.",
+      "72-hour ASEAN creative sprint producing AI-assisted short films aligned with UN Sustainable Development Goals. Launched at CENTEXS, culminating at BCCK.",
     featured: true,
   },
   {
@@ -78,9 +78,9 @@ export const AIXR_SARAWAK_PROGRAMS: readonly AixrProgram[] = [
     category: "Semi Finals",
     title: "Esports Semi Finals",
     description:
-      "Regional immersive esports semi-finals — competitive spatial entertainment on the road to the championship finals.",
+      "Regional MLBB Cup semi-finals on the road to the Grand Final at XR ASIA SUMMIT 2026 in Kuala Lumpur.",
     featured: true,
   },
 ] as const;
 
-export const AIXR_SARAWAK_EVENT_NAME = "AIXR 2026 Sarawak";
+export const AIXR_SARAWAK_EVENT_NAME = "AI·XR Cultural Innovation Forum 2026";

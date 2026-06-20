@@ -16,7 +16,6 @@ const FLAGSHIP_EVENTS = [
     to: '/aixr-2026-sarawak',
     imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image-edited.jpeg',
     imagePosition: 'center',
-    imageDark: false,
     isFeatured: true,
   },
   {
@@ -36,14 +35,14 @@ const FLAGSHIP_EVENTS = [
 const PROGRAMME_HIGHLIGHTS = [
   {
     title: 'AI Filmmaking Hackathon',
-    description:
-      '',
+    description: '',
     accentColor: '#fb923c',
     tag: 'Hackathon',
     to: '/ai-filmmaking-hackathon',
     imageSrc: '/programme-highlights/AI Filmmaking Hackathon.png',
+    imagePosition: 'center top',
     imageFit: 'contain' as const,
-    isFeatured: false,
+    isHero: true,
   },
   {
     title: 'Esports Tournament',
@@ -53,7 +52,7 @@ const PROGRAMME_HIGHLIGHTS = [
     tag: 'Esports',
     to: '/xras-kl-2026',
     imageSrc: '/programme-highlights/Esports.png',
-    imageFit: 'contain' as const,
+    imagePosition: 'center',
     isFeatured: false,
   },
   {
@@ -64,10 +63,12 @@ const PROGRAMME_HIGHLIGHTS = [
     tag: 'Gala',
     to: '/xras-kl-2026',
     imageSrc: '/programme-highlights/Awards & Gala.png',
-    imageFit: 'contain' as const,
+    imagePosition: 'center',
     isFeatured: false,
   },
 ] as const;
+
+const [HACKATHON_HIGHLIGHT, ...OTHER_HIGHLIGHTS] = PROGRAMME_HIGHLIGHTS;
 // ── Main component ─────────────────────────────────────────────────────────
 const EventsSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -137,9 +138,20 @@ const EventsSection = () => {
         {/* ── Programme highlights (sub-events under XRAS) ── */}
         <div className="mt-14 md:mt-16 pt-10 border-t border-white/[0.06]">
           <SectionEyebrow className="mb-8">Programme Highlights</SectionEyebrow>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {PROGRAMME_HIGHLIGHTS.map((ev, i) => (
-              <SpotlightCard key={ev.title} index={i + FLAGSHIP_EVENTS.length} {...ev} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:grid-rows-[repeat(2,minmax(280px,1fr))]">
+            <SpotlightCard
+              key={HACKATHON_HIGHLIGHT.title}
+              index={FLAGSHIP_EVENTS.length}
+              {...HACKATHON_HIGHLIGHT}
+              className="md:col-span-2 md:row-span-2"
+            />
+            {OTHER_HIGHLIGHTS.map((ev, i) => (
+              <SpotlightCard
+                key={ev.title}
+                index={i + FLAGSHIP_EVENTS.length + 1}
+                {...ev}
+                className="md:col-span-1"
+              />
             ))}
           </div>
         </div>

@@ -3,8 +3,9 @@ export const ABOUT_ACCENT = "#ef783d";
 export const COMPANY_OVERVIEW = {
   title: "Connecting Innovators Across Asia's Immersive Future",
   body: [
-    "XR ASIA SUMMIT, founded by Louis Clovis, is a premier AI-XR platform focused on the latest advancements in AI, Virtual, Augmented, and Extended Reality (XR). We connect global XR creators and industry leaders, showcasing innovative production techniques and immersive, story-driven content.",
-    "The platform features live sessions from top global speakers, covering industries such as film, broadcast, virtual travel, gaming /esports and education. XR ASIA SUMMIT also offers virtual networking and presentations, fostering discussions on how XR technology is transforming XR storytelling and shaping the future of immersive experiences.",
+    "XR Asia Summit, founded by Louis Clovis, is a premier AI-XR platform dedicated to advancing the future of Artificial Intelligence, Virtual Reality, Augmented Reality, Extended Reality and Spatial Computing.",
+    "The summit brings together global XR creators, technology innovators, industry leaders, researchers, policymakers and decision-makers to explore the latest advancements in AI, XR and immersive technologies. Through cutting-edge production techniques, immersive experiences and transformative applications, the platform showcases innovation across a wide range of sectors, including film, broadcast, virtual production, gaming, esports, healthcare, defence, aviation, automotive, manufacturing, education, tourism and enterprise transformation.",
+    "Through world-class speaker sessions, industry showcases, networking opportunities, masterclasses and strategic presentations, XR Asia Summit drives meaningful conversations on how AI and XR are transforming storytelling, business, learning, industry and the future of human experience.",
   ],
 } as const;
 

@@ -1,18 +1,34 @@
-import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import XrasKlHero from '../components/xras-kl-2026/XrasKlHero';
-
-import RegisterEnquiryModal from '../components/gateway/RegisterEnquiryModal';
-import BrochureModal from '../components/gateway/BrochureModal';
 import { XRAS_KL_ACCENT, XRAS_KL_META } from '../core/content/xrasKl2026';
 import XrasActivationsSection from '../components/xras-kl-2026/XrasActivationsSection';
 import SpeakersSection from '../components/speakers/SpeakersSection';
+import { useLeadCapture } from '../context/LeadCaptureContext';
 
 const XRAS_KL_EVENT_NAME = 'XRAS KL 2026';
 
 const XrasKl2026Page = () => {
-  const [registerOpen, setRegisterOpen] = useState(false);
-  const [brochureOpen, setBrochureOpen] = useState(false);
+  const { openLeadCapture } = useLeadCapture();
+
+  const openBrochure = () =>
+    openLeadCapture({
+      title: 'Download Brochure',
+      description: 'Share your details to access the XRAS KL 2026 brochure and start a conversation with our team.',
+      eventName: XRAS_KL_EVENT_NAME,
+      defaultInterest: 'Brochure download',
+      intent: 'brochure',
+      accentColor: XRAS_KL_ACCENT,
+    });
+
+  const openRegister = () =>
+    openLeadCapture({
+      title: 'Register / Enquiry',
+      description: 'Tell us about your interest in XRAS KL 2026 and we will follow up with next steps.',
+      eventName: XRAS_KL_EVENT_NAME,
+      defaultInterest: 'General registration interest',
+      intent: 'register',
+      accentColor: XRAS_KL_ACCENT,
+    });
 
   return (
     <>
@@ -21,30 +37,11 @@ const XrasKl2026Page = () => {
         <meta name="description" content={XRAS_KL_META.description} />
       </Helmet>
 
-      <XrasKlHero
-        onDownloadBrochure={() => setBrochureOpen(true)}
-        onRegister={() => setRegisterOpen(true)}
-      />
+      <XrasKlHero onDownloadBrochure={openBrochure} onRegister={openRegister} />
 
-      <XrasActivationsSection
-        onDownloadBrochure={() => setBrochureOpen(true)}
-        onRegister={() => setRegisterOpen(true)}
-      />
+      <XrasActivationsSection onDownloadBrochure={openBrochure} onRegister={openRegister} />
 
       <SpeakersSection />
-
-      <RegisterEnquiryModal
-        open={registerOpen}
-        onClose={() => setRegisterOpen(false)}
-        eventName={XRAS_KL_EVENT_NAME}
-        accentColor={XRAS_KL_ACCENT}
-      />
-      <BrochureModal
-        open={brochureOpen}
-        onClose={() => setBrochureOpen(false)}
-        eventName={XRAS_KL_EVENT_NAME}
-        accentColor={XRAS_KL_ACCENT}
-      />
     </>
   );
 };

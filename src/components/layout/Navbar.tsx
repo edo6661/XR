@@ -8,10 +8,12 @@ import MagneticWrapper from '../ui/MagneticWrapper';
 import ScrambleText from '../ui/ScrambleText';
 import { BRAND_FONT_CLASS } from '../../core/brand/brandTypography';
 import { COMPANY, PRIMARY_NAV_LINKS } from '../../core/navigation/routes';
+import { useLeadCapture } from '../../context/LeadCaptureContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
+  const { openLeadCapture } = useLeadCapture();
   const location = useLocation();
   const isHome = location.pathname === '/';
   const [homeScrolled, setHomeScrolled] = useState(false);
@@ -186,8 +188,16 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <div className="hidden lg:block">
               <MagneticWrapper strength={0.2}>
-                <a
-                  href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join Us')}`}
+                <button
+                  type="button"
+                  onClick={() =>
+                    openLeadCapture({
+                      title: 'Join Us',
+                      description: 'Share your details and start a conversation with the XR Summits team.',
+                      defaultInterest: 'General registration interest',
+                      intent: 'register',
+                    })
+                  }
                   className="group relative inline-flex items-center gap-2 px-5 py-2 overflow-hidden rounded-sm cursor-none"
                   style={{ border: '1px solid rgba(251,146,60,0.4)' }}
                 >
@@ -208,7 +218,7 @@ const Navbar = () => {
                   >
                     →
                   </span>
-                </a>
+                </button>
               </MagneticWrapper>
             </div>
             <button
@@ -381,9 +391,17 @@ const Navbar = () => {
               <p className="font-mono text-[0.5rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
                 4th Edition · Kuala Lumpur · 2026
               </p>
-              <a
-                href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('Join Us')}`}
-                onClick={() => setMenuOpen(false)}
+              <button
+                type="button"
+                onClick={() => {
+                  setMenuOpen(false);
+                  openLeadCapture({
+                    title: 'Join Us',
+                    description: 'Share your details and start a conversation with the XR Summits team.',
+                    defaultInterest: 'General registration interest',
+                    intent: 'register',
+                  });
+                }}
                 className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
                 style={{
                   background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
@@ -392,7 +410,7 @@ const Navbar = () => {
               >
                 Join Us
                 <span aria-hidden="true">→</span>
-              </a>
+              </button>
             </motion.div>
           </motion.div>
         )}

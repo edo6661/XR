@@ -16,10 +16,14 @@ interface SpotlightCardProps {
   imageSrc?: string;
   isFeatured?: boolean;
   imagePosition?: string;
-  imageDark?: boolean;
   imageTransform?: string;
-  /** 'cover' crops to fill; 'contain' shows the full image with a blurred backdrop */
+  /** 'cover' fills the card; 'contain' shows the full image (use imageScale to enlarge) */
   imageFit?: 'cover' | 'contain';
+  /** CSS scale multiplier when imageFit is 'contain' */
+  imageScale?: number;
+  /** Large hero tile in programme highlights grid */
+  isHero?: boolean;
+  className?: string;
 }
 
 const SpotlightCard = ({
@@ -34,11 +38,14 @@ const SpotlightCard = ({
   imageSrc,
   isFeatured = false,
   imagePosition = 'center',
-  imageDark = true,
   imageTransform = 'none',
   imageFit = 'cover',
+  imageScale = 1,
+  isHero = false,
+  className = '',
 
 }: SpotlightCardProps) => {
+  const baseImgScale = imageFit === 'contain' ? imageScale : 1;
   const cardRef = useRef<HTMLDivElement>(null);
   const shineRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -73,8 +80,8 @@ const SpotlightCard = ({
   }, [isFeatured]);
 
   const handleMouseEnter = useCallback(() => {
-    if (imgRef.current) {
-      gsap.to(imgRef.current, { scale: 1.04, duration: 0.7, ease: 'power3.out' });
+    if (imgRef.current && !isHero) {
+      gsap.to(imgRef.current, { scale: baseImgScale * 1.04, duration: 0.7, ease: 'power3.out' });
     }
     if (borderRef.current) {
       borderRef.current.style.borderColor = `${accentColor}42`;
@@ -97,14 +104,14 @@ const SpotlightCard = ({
         delay: 0.02,
       });
     }
-  }, [accentColor]);
+  }, [accentColor, baseImgScale, isHero]);
 
   const handleMouseLeave = useCallback(() => {
     if (!cardRef.current || !shineRef.current) return;
     gsap.to(cardRef.current, { rotateX: 0, rotateY: 0, duration: 0.8, ease: 'power3.out' });
     gsap.to(shineRef.current, { opacity: 0, duration: 0.4 });
-    if (imgRef.current) {
-      gsap.to(imgRef.current, { scale: 1, duration: 0.7, ease: 'power3.out' });
+    if (imgRef.current && !isHero) {
+      gsap.to(imgRef.current, { scale: baseImgScale, duration: 0.7, ease: 'power3.out' });
     }
     if (borderRef.current) {
       borderRef.current.style.borderColor = `${accentColor}20`;
@@ -130,7 +137,7 @@ const SpotlightCard = ({
       });
     }
 
-  }, [accentColor]);
+  }, [accentColor, baseImgScale, isHero]);
 
   const inner = (
     <div
@@ -141,7 +148,7 @@ const SpotlightCard = ({
       style={{ transformStyle: 'preserve-3d' }}
       className={[
         'relative overflow-hidden rounded-xl group cursor-pointer h-full will-change-transform',
-        isFeatured ? 'min-h-[460px]' : 'min-h-[300px]',
+        isFeatured ? 'min-h-[460px]' : isHero ? 'min-h-[340px] md:min-h-0' : 'min-h-[280px] md:min-h-0',
       ].join(' ')}
     >
       {/* ── Background ── */}
@@ -149,33 +156,32 @@ const SpotlightCard = ({
         {imageSrc ? (
           <>
             {imageFit === 'contain' && (
-              <img
-                src={imageSrc}
-                alt=""
-                aria-hidden="true"
-                className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-50"
-                style={{ objectPosition: imagePosition }}
-                loading="lazy"
-              />
+              <div className="absolute inset-0 bg-[#050b18]" aria-hidden="true" />
             )}
-            <div className="w-full h-full origin-bottom" style={{ transform: imageTransform || 'none' }}>
+            <div
+              className={`absolute inset-0 ${imageFit === 'contain' ? 'origin-center' : 'origin-bottom'}`}
+              style={{ transform: imageTransform || 'none' }}
+            >
               <img
                 ref={imgRef}
                 src={imageSrc}
                 alt={title}
-                className={`w-full h-full ${imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
-                style={{ objectPosition: isFeatured ? 'right bottom' : imagePosition }}
+                className={`absolute inset-0 w-full h-full opacity-100 ${imageFit === 'contain' ? 'object-contain' : 'object-cover'}`}
+                style={{
+                  objectPosition: isHero ? 'center top' : isFeatured ? 'right bottom' : imagePosition,
+                  transform: baseImgScale !== 1 ? `scale(${baseImgScale})` : undefined,
+                  transformOrigin: isHero ? 'center top' : 'center center',
+                }}
                 loading="lazy"
               />
             </div>
-
             <div
-              className="absolute inset-0"
+              className="absolute inset-x-0 bottom-0 z-[2] pointer-events-none"
               style={{
-                background: imageDark
-                  ? `linear-gradient(to top, rgba(5,11,24,0.97) 0%, rgba(5,11,24,0.65) 40%, rgba(5,11,24,0.22) 100%)`
-                  : `linear-gradient(to top, rgba(5,11,24,0.96) 0%, rgba(5,11,24,0.75) 35%, rgba(5,11,24,0.35) 65%, rgba(5,11,24,0.08) 100%)`,
+                height: isFeatured ? '68%' : isHero ? '30%' : '58%',
+                background: 'linear-gradient(to top, rgba(5,11,24,0.98) 0%, rgba(5,11,24,0.88) 30%, rgba(5,11,24,0.45) 65%, transparent 100%)',
               }}
+              aria-hidden="true"
             />
           </>
         ) : (
@@ -220,7 +226,10 @@ const SpotlightCard = ({
       />
 
       {/* ── Content ── */}
-      <div className="relative z-10 flex flex-col justify-end h-full p-5 gap-3">
+      <div
+        className="relative z-10 flex flex-col justify-end h-full p-5 gap-3"
+        style={{ textShadow: '0 2px 12px rgba(0,0,0,1), 0 4px 32px rgba(0,0,0,0.85)' }}
+      >
 
         {/* Tag + index */}
         <div className="flex items-center justify-between mb-0.5">
@@ -247,15 +256,15 @@ const SpotlightCard = ({
         <div className="flex flex-col">
           <h3
             ref={titleRef}
-            className={brandFontClass(title, 'font-heading font-bold text-foreground leading-tight mb-2 will-change-transform')}
-            style={{ fontSize: isFeatured ? '1.42rem' : '1.02rem' }}
+            className={brandFontClass(title, 'font-heading font-extrabold text-white leading-tight mb-2 will-change-transform')}
+            style={{ fontSize: isFeatured ? '1.42rem' : isHero ? '1.2rem' : '1.02rem' }}
           >
             {title}
           </h3>
           <p
             ref={descriptionRef}
             className="leading-relaxed line-clamp-4 will-change-transform"
-            style={{ fontSize: '0.8rem', color: 'rgba(200,215,240,0.9)' }}
+            style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.95)' }}
           >
             {description}
           </p>
@@ -306,7 +315,7 @@ const SpotlightCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ delay: index * 0.07, duration: 0.88, ease: [0.16, 1, 0.3, 1] }}
-      className="h-full"
+      className={`h-full ${className}`}
       style={{ perspective: '1000px' }}
     >
       {to ? <Link to={to} className="block h-full">{inner}</Link> : inner}

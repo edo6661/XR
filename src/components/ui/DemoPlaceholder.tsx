@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { COMPANY } from '../../core/navigation/routes';
+import { useLeadCapture } from '../../context/LeadCaptureContext';
 
 interface DemoPlaceholderProps {
   title: string;
@@ -15,6 +15,7 @@ const DemoPlaceholder = ({
   eta,
   accentColor = '#fb923c',
 }: DemoPlaceholderProps) => {
+  const { openLeadCapture } = useLeadCapture();
   return (
     <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-32 pb-20">
 
@@ -123,8 +124,17 @@ const DemoPlaceholder = ({
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 w-full">
-            <a
-              href={`mailto:${COMPANY.email}?subject=${encodeURIComponent('XR Summits Interest')}`}
+            <button
+              type="button"
+              onClick={() =>
+                openLeadCapture({
+                  title: 'Register Interest',
+                  description: 'Share your details and we will follow up when this section launches.',
+                  defaultInterest: 'General registration interest',
+                  intent: 'register',
+                  accentColor,
+                })
+              }
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-sm font-bold tracking-[0.18em] uppercase transition-all duration-300 group"
               style={{
                 fontSize: '0.7rem',
@@ -135,7 +145,7 @@ const DemoPlaceholder = ({
             >
               Register Interest
               <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
-            </a>
+            </button>
 
             <Link
               to="/"

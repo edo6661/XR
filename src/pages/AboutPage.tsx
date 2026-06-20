@@ -1,32 +1,21 @@
 import { Helmet } from 'react-helmet-async';
 // import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import PillarCard from '../components/about/PillarCard';
 import RegionalNetworkMap from '../components/about/RegionalNetworkMap';
 import PastEventsSection from '../components/about/PastEventsSection';
 import AboutSectionShell from '../components/about/page/AboutSectionShell';
 import CompanyOverviewBlock from '../components/about/page/CompanyOverviewBlock';
 import OurMissionBlock from '../components/about/page/OurMissionBlock';
+import WhyXrSummitsBlock from '../components/about/page/WhyXrSummitsBlock';
 import AwardsRecognitionBlock from '../components/about/page/AwardsRecognitionBlock';
 import SustainabilityCommitmentSection from '../components/about/page/SustainabilityCommitmentSection';
 import {
-  AIIcon,
-  SpatialIcon,
-  GlobeIcon,
-  TalentIcon,
-} from '../components/about/page/aboutIcons';
-import {
   ABOUT_ACCENT,
-  WHY_XR_PILLARS,
   INDUSTRY_FOCUS,
   // MEDIA_PRESS,
   // STRATEGIC_PARTNER_SLOTS,
   REGIONAL_NETWORK,
 } from '../core/content/aboutPage';
-
-// Icons mapping for Why XR
-const whyIcons = [<AIIcon key="ai" />, <SpatialIcon key="flex" />, <TalentIcon key="exp" />, <GlobeIcon key="prod" />];
-
 
 const AboutPage = () => (
   <>
@@ -75,19 +64,7 @@ const AboutPage = () => (
         </>
       }
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16">
-        {WHY_XR_PILLARS.map((pillar, index) => (
-          <PillarCard
-            key={pillar.title}
-            index={index}
-            icon={whyIcons[index]}
-            title={pillar.title}
-            description={pillar.description}
-            accentColor={pillar.accentColor}
-            isFeatured={pillar.featured}
-          />
-        ))}
-      </div>
+      <WhyXrSummitsBlock />
     </AboutSectionShell>
 
     <AboutSectionShell

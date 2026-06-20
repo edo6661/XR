@@ -11,6 +11,7 @@ import FilmGrain from '../ui/FilmGrain';
 import BackgroundElements from '../ui/BackgroundElements';
 import { lenisInstance, registerLenis, unregisterLenis } from '../../lib/lenisInstance';
 import { killPinnedScrollTriggers } from '../../lib/scrollTriggerCleanup';
+import { LeadCaptureProvider } from '../../context/LeadCaptureContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,6 +65,7 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
+    <LeadCaptureProvider>
     <div className="relative min-h-screen w-full overflow-x-hidden text-foreground flex flex-col selection:bg-accent/30 selection:text-white">
       <BackgroundElements />
       <FilmGrain />
@@ -82,6 +84,7 @@ const Layout = () => {
         <Footer />
       </div>
     </div>
+    </LeadCaptureProvider>
   );
 };
 

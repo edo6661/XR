@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import TracerBorder from '../ui/TracerBorder';
 import { brandFontClass } from '../../core/brand/brandTypography';
-
-const REGISTER_MAILTO = 'mailto:register@xr-summits.com';
+import { useLeadCapture } from '../../context/LeadCaptureContext';
 
 interface GatewayCardProps {
   index: number;
@@ -16,7 +15,6 @@ interface GatewayCardProps {
   accentColor: string;
   glowColor?: string;
   cta?: string;
-  ctaHref?: string;
   tag: string;
   icon: React.ReactNode;
   isCenter?: boolean;
@@ -30,16 +28,16 @@ const GatewayCard = ({
   to,
   accentColor,
   cta = "Explore",
-  ctaHref = REGISTER_MAILTO,
   tag,
   icon,
   isCenter = false,
 }: GatewayCardProps) => {
   const navigate = useNavigate();
+  const { openLeadCapture } = useLeadCapture();
   const cardRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLAnchorElement>(null);
+  const ctaRef = useRef<HTMLButtonElement>(null);
   const ctaTextRef = useRef<HTMLSpanElement>(null);
   const arrowRef = useRef<HTMLSpanElement>(null);
   const borderRef = useRef<HTMLDivElement>(null);
@@ -141,14 +139,25 @@ const GatewayCard = ({
     }
   }, [accentColor]);
 
+  const openCapture = useCallback(() => {
+    openLeadCapture({
+      title: cta,
+      description: `Share your details to join ${title} and start a conversation with our team.`,
+      eventName: title,
+      defaultInterest: 'General registration interest',
+      intent: 'register',
+      accentColor,
+    });
+  }, [accentColor, cta, openLeadCapture, title]);
+
   const handleCardClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).closest('[data-gateway-cta]')) return;
     if (to) {
       navigate(to);
       return;
     }
-    window.location.href = REGISTER_MAILTO;
-  }, [navigate, to]);
+    openCapture();
+  }, [navigate, openCapture, to]);
 
   const handleCardKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).closest('[data-gateway-cta]')) return;
@@ -158,8 +167,8 @@ const GatewayCard = ({
       navigate(to);
       return;
     }
-    window.location.href = REGISTER_MAILTO;
-  }, [navigate, to]);
+    openCapture();
+  }, [navigate, openCapture, to]);
 
   const cardInner = (
     <div
@@ -305,14 +314,17 @@ const GatewayCard = ({
                 </p>
               </div>
               {/* CTA row */}
-              <a
+              <button
+                type="button"
                 ref={ctaRef}
-                href={ctaHref}
                 data-gateway-cta
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openCapture();
+                }}
                 onMouseEnter={handleCtaMouseEnter}
                 onMouseLeave={handleCtaMouseLeave}
-                className="relative z-30 -mx-2 px-2 flex items-center justify-between pt-4 mt-auto border-t cursor-none rounded-b-lg transition-shadow duration-300"
+                className="relative z-30 -mx-2 px-2 flex items-center justify-between pt-4 mt-auto border-t cursor-none rounded-b-lg transition-shadow duration-300 w-[calc(100%+1rem)]"
                 style={{ borderColor: `${accentColor}12` }}
               >
                 <span
@@ -330,7 +342,7 @@ const GatewayCard = ({
                 >
                   →
                 </span>
-              </a>
+              </button>
             </div>
           </div>
         </TracerBorder>

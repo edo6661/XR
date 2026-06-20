@@ -69,10 +69,17 @@ const ACTIVATIONS: Activation[] = [
     body: 'One-on-one and small group coaching sessions pairing AI and XR startups with industry mentors. Get direct feedback, sharpen your pitch, and find your next move.',
     meta: 'Day 1–2 · Limited Seats',
     sessionSlots: [
-      { topic: 'Women Empowerment' },
+      {
+        topic: 'Women Empowerment',
+        speaker: {
+          name: 'Dimitri Josephine',
+          jobTitle: 'Virtual Production & Unreal Engine Authorised Instructor',
+          photo: '/speaker-pics/Dimitri Josephine.jpg.jpeg',
+        },
+      },
       {
         topic: 'Student Empowerment',
-        speaker: { name: 'Speaker Name', jobTitle: 'Speaker Job Title' },
+        comingSoon: true,
       },
     ],
   },

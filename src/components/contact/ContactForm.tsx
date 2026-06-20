@@ -1,39 +1,48 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Download, MessageCircle } from 'lucide-react';
 import { COMPANY } from '../../core/navigation/routes';
-import { CONTACT_SUBJECTS, ENQUIRY_EMAIL_BODY } from '../../core/content/contactPage';
+import { WHATSAPP_PLACEHOLDER } from '../../core/content/contactPage';
+import {
+  LEAD_INTEREST_OPTIONS,
+  buildLeadCaptureMailto,
+  buildLeadCaptureWhatsAppHref,
+  getDocumentsForLead,
+  type LeadCaptureFields,
+  type LeadInterest,
+} from '../../core/content/leadCapture';
 
 interface ContactFormProps {
-  initialSubject?: string;
+  initialInterest?: LeadInterest;
 }
 
-const ContactForm = ({ initialSubject }: ContactFormProps) => {
+const ContactForm = ({ initialInterest }: ContactFormProps) => {
   const [submitted, setSubmitted] = useState(false);
-  const [subject, setSubject] = useState<string>(initialSubject ?? CONTACT_SUBJECTS[0]);
+  const [form, setForm] = useState<LeadCaptureFields>({
+    name: '',
+    email: '',
+    phone: '',
+    title: '',
+    interest: initialInterest ?? LEAD_INTEREST_OPTIONS[0],
+  });
+  const [message, setMessage] = useState('');
 
-  const isMedia = subject === 'Media Enquiries' || subject === 'Press Accreditation';
+  const isMedia = form.interest === 'Media / press';
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    const subj = encodeURIComponent(`XR Summits — ${String(form.get('subject') ?? 'Enquiry')}`);
-    const lines = [
-      `Subject: ${form.get('subject')}`,
-      `Name: ${form.get('name')}`,
-      `Job Title: ${form.get('jobtitle') ?? '—'}`,
-      `Organisation: ${form.get('organisation')}`,
-      `Email: ${form.get('email')}`,
-      `Mobile: ${form.get('mobile') ?? '—'}`,
-    ];
-    if (isMedia) {
-      lines.push(`Outlet: ${form.get('outlet') ?? '—'}`);
-      lines.push(`Coverage Angle: ${form.get('coverage') ?? '—'}`);
-    }
-    lines.push('', `Message:`, String(form.get('message') ?? ''));
-    const body = encodeURIComponent(lines.join('\n'));
-    window.location.href = `mailto:${COMPANY.email}?subject=${subj}&body=${body}`;
+    const mailto = buildLeadCaptureMailto(form, { title: 'General Enquiry' });
+    const withMessage = mailto.replace(
+      encodeURIComponent('Please follow up and share any requested documents.'),
+      encodeURIComponent(`Message:\n${message}\n\nPlease follow up and share any requested documents.`),
+    );
+    window.location.href = withMessage;
     setSubmitted(true);
   };
+
+  const documents = getDocumentsForLead('enquiry', form.interest);
+  const availableDocs = documents.filter((doc) => doc.available);
+  const whatsappHref = buildLeadCaptureWhatsAppHref(form, { title: 'General Enquiry' });
 
   if (submitted) {
     return (
@@ -42,18 +51,55 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
         animate={{ opacity: 1, y: 0 }}
         className="rounded-xl p-8 text-center callout-accent"
       >
-        <p className="text-foreground text-sm font-heading font-bold mb-2">Message composed</p>
+        <p className="text-foreground text-sm font-heading font-bold mb-2">
+          Thank you — let&apos;s start the conversation
+        </p>
         <p className="text-copy-sm mb-4">
-          Your email client should open with your message pre-filled. If it didn't, write directly to{' '}
+          Your details have been captured. If your email app opened, please hit send. We&apos;ll follow up shortly.
+        </p>
+
+        {availableDocs.length > 0 && (
+          <div className="flex flex-col gap-2 mb-4">
+            {availableDocs.map((doc) => (
+              <a
+                key={doc.href}
+                href={doc.href}
+                download
+                className="btn-orange inline-flex items-center justify-center gap-2 py-3"
+              >
+                <Download size={14} />
+                {doc.label}
+              </a>
+            ))}
+          </div>
+        )}
+
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[0.68rem] mb-4"
+          style={{
+            border: '1px solid rgba(74,222,128,0.35)',
+            background: 'rgba(74,222,128,0.08)',
+            color: '#4ade80',
+          }}
+        >
+          <MessageCircle size={15} />
+          Continue on WhatsApp
+        </a>
+
+        <p className="text-copy-sm mb-4">
+          Or email{' '}
           <a href={`mailto:${COMPANY.email}`} className="text-accent hover:underline">
             {COMPANY.email}
           </a>
-          .
         </p>
+
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="mt-4 text-micro-label font-bold text-accent hover:text-foreground transition-colors"
+          className="mt-2 text-micro-label font-bold text-accent hover:text-foreground transition-colors"
         >
           Send another message
         </button>
@@ -69,17 +115,36 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4"
     >
+      <div
+        className="flex items-start gap-3 p-4 rounded-lg callout-accent"
+      >
+        <MessageCircle size={16} className="flex-shrink-0 mt-0.5 text-[#4ade80]" />
+        <p className="text-copy-sm">
+          Prefer WhatsApp?{' '}
+          <a
+            href={WHATSAPP_PLACEHOLDER.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#4ade80] underline underline-offset-2"
+          >
+            Chat with us directly
+          </a>
+        </p>
+      </div>
+
       <label className="flex flex-col gap-1.5">
-        <span className="text-label-ui">Subject</span>
+        <span className="text-label-ui">Interest</span>
         <select
-          name="subject"
+          name="interest"
           required
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
+          value={form.interest}
+          onChange={(e) => setForm((f) => ({ ...f, interest: e.target.value as LeadInterest }))}
           className="input-field"
         >
-          {CONTACT_SUBJECTS.map((s) => (
-            <option key={s} value={s} className="bg-[#0a0a0a]">{s}</option>
+          {LEAD_INTEREST_OPTIONS.map((option) => (
+            <option key={option} value={option} className="bg-[#0a0a0a]">
+              {option}
+            </option>
           ))}
         </select>
       </label>
@@ -87,27 +152,54 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
           <span className="text-label-ui">Full name</span>
-          <input name="name" type="text" required autoComplete="name" className="input-field" />
+          <input
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            value={form.name}
+            onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+            className="input-field"
+          />
         </label>
         <label className="flex flex-col gap-1.5">
           <span className="text-label-ui">Job title</span>
-          <input name="jobtitle" type="text" autoComplete="organization-title" className="input-field" />
+          <input
+            name="title"
+            type="text"
+            required
+            autoComplete="organization-title"
+            value={form.title}
+            onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
+            className="input-field"
+          />
         </label>
       </div>
-
-      <label className="flex flex-col gap-1.5">
-        <span className="text-label-ui">Organisation</span>
-        <input name="organisation" type="text" className="input-field" />
-      </label>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
           <span className="text-label-ui">Email</span>
-          <input name="email" type="email" required autoComplete="email" className="input-field" />
+          <input
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            value={form.email}
+            onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+            className="input-field"
+          />
         </label>
         <label className="flex flex-col gap-1.5">
-          <span className="text-label-ui">Mobile phone</span>
-          <input name="mobile" type="tel" autoComplete="tel" className="input-field" />
+          <span className="text-label-ui">Phone number</span>
+          <input
+            name="phone"
+            type="tel"
+            required
+            autoComplete="tel"
+            value={form.phone}
+            onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+            className="input-field"
+          />
         </label>
       </div>
 
@@ -122,16 +214,8 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
             className="flex flex-col gap-4 overflow-hidden"
           >
             <div className="callout-accent">
-              Applying for press accreditation — please provide your outlet and coverage angle below.
+              Applying for press accreditation — include your outlet and coverage angle in your message below.
             </div>
-            <label className="flex flex-col gap-1.5">
-              <span className="text-label-ui">Outlet / Publication</span>
-              <input name="outlet" type="text" className="input-field" />
-            </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="text-label-ui">Coverage angle</span>
-              <textarea name="coverage" rows={2} className="input-field resize-none" placeholder="What story are you covering?" />
-            </label>
           </motion.div>
         )}
       </AnimatePresence>
@@ -140,15 +224,16 @@ const ContactForm = ({ initialSubject }: ContactFormProps) => {
         <span className="text-label-ui">Message</span>
         <textarea
           name="message"
-          rows={12}
-          required
-          placeholder={ENQUIRY_EMAIL_BODY}
-          className="input-field resize-y min-h-[200px]"
+          rows={8}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Tell us more about what you're looking for..."
+          className="input-field resize-y min-h-[160px]"
         />
       </label>
 
       <button type="submit" className="btn-orange w-full py-3.5">
-        {isMedia ? 'Apply for accreditation' : 'Send via email'}
+        Submit &amp; start conversation
       </button>
     </motion.form>
   );

@@ -12,8 +12,9 @@ import {
   SPEAKER_EVENTS,
   MEDIA_PERKS,
   MEDIA_ACCREDITATION_CTA,
-  buildContactMailto,
 } from '../core/content/contactPage';
+import { useLeadCapture } from '../context/LeadCaptureContext';
+import type { LeadCaptureConfig, LeadInterest } from '../core/content/leadCapture';
 
 /* ── Fade-up variant shared across sections ─── */
 const fadeUp = (delay = 0) => ({
@@ -31,13 +32,43 @@ const CARD_ICONS: Record<string, React.ReactNode> = {
   universities: <GraduationCap size={18} />,
 };
 
-/* ── Uniform mailto CTA button ─── */
-const MailtoBtn = ({ href, children }: { href: string; children: React.ReactNode }) => (
-  <a href={href} className="btn-orange inline-flex items-center gap-1.5 px-5 py-2.5">
-    {children}
-    <ChevronRight size={12} />
-  </a>
-);
+/* ── Lead capture CTA button ─── */
+const CaptureBtn = ({ config, children }: { config: LeadCaptureConfig; children: React.ReactNode }) => {
+  const { openLeadCapture } = useLeadCapture();
+  return (
+    <button type="button" onClick={() => openLeadCapture(config)} className="btn-orange inline-flex items-center gap-1.5 px-5 py-2.5">
+      {children}
+      <ChevronRight size={12} />
+    </button>
+  );
+};
+
+const PARTNERSHIP_CAPTURE: Record<string, LeadCaptureConfig> = {
+  sponsors: {
+    title: 'Sponsorship Package Details',
+    description: 'Share your details to receive sponsorship package information and start a conversation with our partnerships team.',
+    defaultInterest: 'Sponsorship package',
+    intent: 'sponsor-docs',
+  },
+  exhibitors: {
+    title: 'Exhibitor Package Details',
+    description: 'Share your details to receive exhibitor package information and start a conversation with our team.',
+    defaultInterest: 'Exhibitor package',
+    intent: 'exhibitor-docs',
+  },
+  government: {
+    title: 'Government Partnership Details',
+    description: 'Tell us about your agency and how we can collaborate on immersive technology initiatives.',
+    defaultInterest: 'Government partnership',
+    intent: 'enquiry',
+  },
+  universities: {
+    title: 'University Partnership Details',
+    description: 'Connect your institution with Asia\'s XR ecosystem — share your details and we\'ll be in touch.',
+    defaultInterest: 'University partnership',
+    intent: 'enquiry',
+  },
+};
 
 /* ═══════════════════════════════════════════════ */
 const ContactPage = () => {
@@ -158,9 +189,9 @@ const ContactPage = () => {
                     {card.body}
                   </p>
                 </div>
-                <MailtoBtn href={buildContactMailto(card.cta.subject)}>
+                <CaptureBtn config={PARTNERSHIP_CAPTURE[card.id]}>
                   {card.cta.label}
-                </MailtoBtn>
+                </CaptureBtn>
               </motion.div>
             ))}
           </div>
@@ -242,7 +273,17 @@ const ContactPage = () => {
                       </p>
                     </div>
                   </div>
-                  <MailtoBtn href={buildContactMailto(ev.subject)}>{ev.label}</MailtoBtn>
+                  <CaptureBtn
+                    config={{
+                      title: ev.label,
+                      description: `Apply to speak at ${ev.event}. Share your details and our programming team will follow up.`,
+                      eventName: ev.event,
+                      defaultInterest: 'Speaker application',
+                      intent: 'enquiry',
+                    }}
+                  >
+                    {ev.label}
+                  </CaptureBtn>
                 </motion.div>
               ))}
             </div>
@@ -298,9 +339,16 @@ const ContactPage = () => {
                     Fill in your details — name, outlet, role, and coverage angle — and our team will be in touch with next steps.
                   </p>
                 </div>
-                <MailtoBtn href={buildContactMailto(MEDIA_ACCREDITATION_CTA.subject)}>
+                <CaptureBtn
+                  config={{
+                    title: MEDIA_ACCREDITATION_CTA.label,
+                    description: 'Apply for press accreditation — share your details and our media team will be in touch.',
+                    defaultInterest: 'Media / press' as LeadInterest,
+                    intent: 'enquiry',
+                  }}
+                >
                   {MEDIA_ACCREDITATION_CTA.label}
-                </MailtoBtn>
+                </CaptureBtn>
               </motion.div>
             </div>
             {/* Right — perks */}

@@ -1,8 +1,7 @@
 import { useRef, useState, type CSSProperties } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import SectionEyebrow from '../ui/SectionEyebrow';
-
+import { useLeadCapture } from '../../context/LeadCaptureContext';
 /**
  * Partner logos — assets in /public/all-partner-logos/
  *
@@ -17,7 +16,7 @@ type Partner = {
 };
 
 const GOVERNMENT_PARTNERS: Partner[] = [
-  { name: 'Centre of Excellence (COE)', src: '/all-partner-logos/COE LOGO_PNG_Med res.png' },
+
   { name: 'FINAS', src: '/all-partner-logos/FINAS.png' },
   { name: 'POSTAM', src: '/all-partner-logos/postamsmall.png' },
 ];
@@ -170,95 +169,107 @@ const InfiniteSlider = ({ partners }: { partners: Partner[] }) => {
 };
 
 // ─── Section ─────────────────────────────────────────────────────────────────
-const SponsorsSection = () => (
-  <section
-    className="relative w-full overflow-hidden"
-    style={{
-      borderTop: '1px solid rgba(255,255,255,0.055)',
-      paddingTop: 'var(--section-padding-y)',
-      paddingBottom: 'var(--section-padding-y)',
-    }}
-    aria-labelledby="partners-heading"
-  >
-    {/* Subtle background tint */}
-    <div
-      className="absolute inset-0 pointer-events-none"
-      style={{ background: 'rgba(13,27,46,0.35)' }}
-      aria-hidden="true"
-    />
+const SponsorsSection = () => {
+  const { openLeadCapture } = useLeadCapture();
 
-    <div className="relative z-10 max-w-6xl mx-auto px-6">
-      <SectionEyebrow align="center">Partners</SectionEyebrow>
+  return (
+    <section
+      className="relative w-full overflow-hidden"
+      style={{
+        borderTop: '1px solid rgba(255,255,255,0.055)',
+        paddingTop: 'var(--section-padding-y)',
+        paddingBottom: 'var(--section-padding-y)',
+      }}
+      aria-labelledby="partners-heading"
+    >
+      {/* Subtle background tint */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'rgba(13,27,46,0.35)' }}
+        aria-hidden="true"
+      />
 
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        className="text-center mb-14"
-      >
-        <h2
-          id="partners-heading"
-          className="font-heading font-bold text-foreground mb-3"
-          style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)' }}
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <SectionEyebrow align="center">Partners</SectionEyebrow>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-14"
         >
-          Trusted by{' '}
-          <span className='gradient-text-accent'>
-            Industry Leaders
-          </span>
-        </h2>
-        <p className="text-foreground-muted max-w-lg mx-auto leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)' }}>
-          A growing ecosystem of government agencies, technology innovators, and industry partners
-          driving immersive adoption across Asia.
-        </p>
-      </motion.div>
+          <h2
+            id="partners-heading"
+            className="font-heading font-bold text-foreground mb-3"
+            style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)' }}
+          >
+            Trusted by{' '}
+            <span className='gradient-text-accent'>
+              Industry Leaders
+            </span>
+          </h2>
+          <p className="text-foreground-muted max-w-lg mx-auto leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)' }}>
+            A growing ecosystem of government agencies, technology innovators, and industry partners
+            driving immersive adoption across Asia.
+          </p>
+        </motion.div>
 
-      {/* ── Single Infinite Slider ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-14"
-      >
-        <InfiniteSlider partners={ALL_PARTNERS} />
-      </motion.div>
-
-
-
-      {/* Become a partner CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ delay: 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="flex justify-center"
-      >
-        <Link
-          to="/contact"
-          className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
-          style={{
-            fontSize: '0.72rem',
-            border: '1px solid rgba(239,120,61,0.4)',
-            color: '#ef783d',
-          }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = 'rgba(239,120,61,0.08)';
-            el.style.borderColor = 'rgba(239,120,61,0.65)';
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget as HTMLAnchorElement;
-            el.style.background = 'transparent';
-            el.style.borderColor = 'rgba(239,120,61,0.4)';
-          }}
+        {/* ── Single Infinite Slider ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-14"
         >
-          Become a partner
-          <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
-        </Link>
-      </motion.div>
-    </div>
-  </section>
-);
+          <InfiniteSlider partners={ALL_PARTNERS} />
+        </motion.div>
+
+
+
+        {/* Become a partner CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ delay: 0.15, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex justify-center"
+        >
+          <button
+            type="button"
+            onClick={() =>
+              openLeadCapture({
+                title: 'Become a Partner',
+                description: 'Share your details to receive sponsorship information and start a conversation with our partnerships team.',
+                defaultInterest: 'Sponsorship package',
+                intent: 'sponsor-docs',
+              })
+            }
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
+            style={{
+              fontSize: '0.72rem',
+              border: '1px solid rgba(239,120,61,0.4)',
+              color: '#ef783d',
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLButtonElement;
+              el.style.background = 'rgba(239,120,61,0.08)';
+              el.style.borderColor = 'rgba(239,120,61,0.65)';
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLButtonElement;
+              el.style.background = 'transparent';
+              el.style.borderColor = 'rgba(239,120,61,0.4)';
+            }}
+          >
+            Become a partner
+            <span className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
+          </button>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 export default SponsorsSection;

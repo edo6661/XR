@@ -10,6 +10,7 @@ export type SessionSpeaker = {
 export type SessionSlot = {
   topic?: string;
   speaker?: SessionSpeaker;
+  comingSoon?: boolean;
 };
 
 type ActivationSessionSlotsProps = {
@@ -32,17 +33,37 @@ const ActivationSessionSlots = ({
       const hasJobTitle = Boolean(speaker.jobTitle);
       const hasOrganization = Boolean(speaker.organization);
       const hasTopic = Boolean(slot.topic);
+      const isComingSoon = Boolean(slot.comingSoon);
 
       return (
         <article
           key={`session-slot-${index}`}
-          className="flex h-full flex-col gap-5 rounded-xl p-5"
+          className="relative flex h-full flex-col gap-5 rounded-xl p-5"
           style={{
             background: 'rgba(255,255,255,0.04)',
             border: `1px solid ${accentColor}33`,
             boxShadow: `0 0 24px ${accentColor}0a, inset 0 1px 0 rgba(255,255,255,0.05)`,
           }}
         >
+          {isComingSoon && (
+            <div
+              className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-xl"
+              style={{ background: 'rgba(5,10,20,0.72)' }}
+              aria-hidden="true"
+            >
+              <span
+                className="font-bold tracking-[0.22em] uppercase"
+                style={{
+                  fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
+                  color: accentColor,
+                  textShadow: `0 0 24px ${accentColor}88`,
+                }}
+              >
+                Coming Soon
+              </span>
+            </div>
+          )}
+
           <div className="shrink-0">
             <p
               className="mb-2 font-bold tracking-[0.28em] uppercase"
