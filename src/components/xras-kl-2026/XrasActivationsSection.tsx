@@ -12,7 +12,20 @@ import {
 import SectionEyebrow from '../ui/SectionEyebrow';
 import ActivationPanelStack from '../ui/ActivationPanelStack';
 import ActivationSessionSlots, { type SessionSlot } from '../ui/ActivationSessionSlots';
+import ConferenceAgenda from './ConferenceAgenda';
 import { useActivationTabsDock } from '../../hooks/useActivationTabsDock';
+
+type ActivationImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+type ActivationMediaSection = {
+  title: string;
+  images: ActivationImage[];
+  layout?: 'single' | 'grid';
+};
 
 type Activation = {
   id: string;
@@ -23,6 +36,7 @@ type Activation = {
   body: string;
   meta: string;
   sessionSlots?: SessionSlot[];
+  mediaSections?: ActivationMediaSection[];
 };
 
 const iconClass = 'w-5 h-5 flex-shrink-0';
@@ -45,6 +59,27 @@ const ACTIVATIONS: Activation[] = [
     tagline: 'Where technology meets its buyers.',
     body: 'A curated B2B exhibition floor connecting XR solution providers with enterprise and government decision-makers. Demo live. Match on the spot. Close faster.',
     meta: 'Dec 1–3 · Expo Floor',
+    mediaSections: [
+      {
+        title: 'Expo Hall Layout',
+        layout: 'single',
+        images: [
+          {
+            src: '/booth/120-3x3-booth-20-kiosks-walkway-between-rows-immersive-story-tell-performance-creative-tech-ai-xr-virtual-prod.jpeg',
+            alt: 'MITEC expo hall floor plan — 120 booths, kiosks, and masterclass zones',
+          },
+        ],
+      },
+      {
+        title: 'Booth Options',
+        layout: 'grid',
+        images: [
+          { src: '/booth/3x3.png', alt: '3m × 3m exhibition booth', caption: '3m × 3m' },
+          { src: '/booth/6x3.png', alt: '6m × 3m exhibition booth', caption: '6m × 3m' },
+          { src: '/booth/6x6.png', alt: '6m × 6m exhibition booth', caption: '6m × 6m' },
+        ],
+      },
+    ],
   },
   {
     id: 'masterclasses',
@@ -224,6 +259,60 @@ const TabButton = ({
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Media gallery — hall layouts, booth renders, agenda
+// ─────────────────────────────────────────────────────────────────────────────
+
+const ActivationMediaGallery = ({ sections }: { sections: ActivationMediaSection[] }) => (
+  <div className="mt-8 space-y-8">
+    {sections.map((section) => (
+      <div key={section.title}>
+        <p
+          className="mb-4 font-bold tracking-[0.28em] uppercase"
+          style={{ fontSize: '0.58rem', color: '#ef783d' }}
+        >
+          {section.title}
+        </p>
+
+        <div
+          className={
+            section.layout === 'grid'
+              ? 'grid grid-cols-1 gap-4 sm:grid-cols-3'
+              : 'grid grid-cols-1'
+          }
+        >
+          {section.images.map((image) => (
+            <figure
+              key={image.src}
+              className="overflow-hidden rounded-xl"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(239,120,61,0.22)',
+                boxShadow: '0 0 24px rgba(239,120,61,0.06), inset 0 1px 0 rgba(255,255,255,0.05)',
+              }}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                loading="lazy"
+                className={`w-full object-contain ${section.layout === 'grid' ? 'aspect-[4/3] bg-white p-3' : 'bg-white'}`}
+              />
+              {image.caption && (
+                <figcaption
+                  className="px-4 py-2.5 text-center font-mono font-semibold tracking-[0.16em] uppercase"
+                  style={{ fontSize: '0.65rem', color: '#a8b8d0', borderTop: '1px solid rgba(255,255,255,0.08)' }}
+                >
+                  {image.caption}
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Expanded Panel — improved text readability
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -339,6 +428,12 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
 
       {activation.sessionSlots && activation.sessionSlots.length > 0 && (
         <ActivationSessionSlots slots={activation.sessionSlots} />
+      )}
+
+      {activation.id === 'conference' && <ConferenceAgenda />}
+
+      {activation.mediaSections && activation.mediaSections.length > 0 && (
+        <ActivationMediaGallery sections={activation.mediaSections} />
       )}
     </div>
   </div>
