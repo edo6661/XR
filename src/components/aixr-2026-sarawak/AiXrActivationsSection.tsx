@@ -19,13 +19,6 @@ import { useActivationTabsDock } from '../../hooks/useActivationTabsDock';
 // Data — from AI·XR Cultural Innovation Forum 2026 catalog
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Cultural palette — distinct from XRAS KL orange
-const AIXR_GOLD = '#c8962e';
-const AIXR_TEAL = '#14b8a6';
-const AIXR_GOLD_SOFT = 'rgba(200,150,46,0.34)';
-const AIXR_GOLD_BORDER = 'rgba(200,150,46,0.9)';
-const AIXR_GOLD_GLOW = 'rgba(200,150,46,0.32)';
-
 type Activation = {
   id: string;
   icon: React.ReactNode;
@@ -170,11 +163,11 @@ const TabButton = ({
     className={`group relative flex flex-col items-center gap-2 px-4 py-4 rounded-xl transition-all duration-300 cursor-pointer shrink-0 min-w-[92px] sm:min-w-[108px] md:flex-row md:items-center md:gap-3 md:w-full md:min-w-0 md:px-3 md:py-3 md:justify-start ${isActive ? 'md:translate-x-0.5' : ''}`}
     style={{
       background: isActive
-        ? `linear-gradient(135deg, ${AIXR_GOLD_SOFT}, rgba(20,184,166,0.18))`
+        ? 'linear-gradient(135deg, rgba(239,120,61,0.34), rgba(251,146,60,0.2))'
         : 'rgba(255,255,255,0.1)',
-      border: `1.5px solid ${isActive ? AIXR_GOLD_BORDER : 'rgba(255,255,255,0.2)'}`,
+      border: `1.5px solid ${isActive ? 'rgba(239,120,61,0.9)' : 'rgba(255,255,255,0.2)'}`,
       boxShadow: isActive
-        ? `0 0 32px ${AIXR_GOLD_GLOW}, inset 0 1px 0 rgba(200,150,46,0.22), 0 6px 20px rgba(0,0,0,0.4)`
+        ? '0 0 32px rgba(239,120,61,0.32), inset 0 1px 0 rgba(239,120,61,0.22), 0 6px 20px rgba(0,0,0,0.4)'
         : '0 3px 12px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.06)',
       transform: isActive ? undefined : 'none',
     }}
@@ -190,9 +183,9 @@ const TabButton = ({
     <div
       className="absolute top-0 inset-x-0 h-[3px] rounded-t-xl transition-opacity duration-300 md:hidden"
       style={{
-        background: `linear-gradient(90deg, transparent, ${AIXR_GOLD}, ${AIXR_TEAL}, transparent)`,
+        background: 'linear-gradient(90deg, transparent, #ef783d, #fb923c, transparent)',
         opacity: isActive ? 1 : 0,
-        boxShadow: isActive ? `0 0 14px ${AIXR_GOLD_GLOW}` : 'none',
+        boxShadow: isActive ? '0 0 14px rgba(239,120,61,0.9)' : 'none',
       }}
       aria-hidden="true"
     />
@@ -200,9 +193,9 @@ const TabButton = ({
     <div
       className="absolute left-0 inset-y-3 w-[3px] rounded-full transition-opacity duration-300 hidden md:block"
       style={{
-        background: `linear-gradient(180deg, transparent, ${AIXR_GOLD}, ${AIXR_TEAL}, transparent)`,
+        background: 'linear-gradient(180deg, transparent, #ef783d, #fb923c, transparent)',
         opacity: isActive ? 1 : 0,
-        boxShadow: isActive ? `0 0 14px ${AIXR_GOLD_GLOW}` : 'none',
+        boxShadow: isActive ? '0 0 14px rgba(239,120,61,0.9)' : 'none',
       }}
       aria-hidden="true"
     />
@@ -210,10 +203,10 @@ const TabButton = ({
     <div
       className="w-11 h-11 rounded-lg flex items-center justify-center transition-all duration-300 shrink-0 md:w-10 md:h-10"
       style={{
-        background: isActive ? 'rgba(200,150,46,0.3)' : 'rgba(255,255,255,0.1)',
-        border: `1px solid ${isActive ? 'rgba(200,150,46,0.65)' : 'rgba(255,255,255,0.18)'}`,
-        color: isActive ? AIXR_GOLD : 'rgba(248, 250, 255, 0.95)',
-        boxShadow: isActive ? `0 0 18px ${AIXR_GOLD_GLOW}` : 'none',
+        background: isActive ? 'rgba(239,120,61,0.3)' : 'rgba(255,255,255,0.1)',
+        border: `1px solid ${isActive ? 'rgba(239,120,61,0.65)' : 'rgba(255,255,255,0.18)'}`,
+        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.95)',
+        boxShadow: isActive ? '0 0 18px rgba(239,120,61,0.45)' : 'none',
       }}
     >
       {activation.icon}
@@ -223,8 +216,8 @@ const TabButton = ({
       className="font-bold tracking-[0.1em] uppercase text-center leading-tight transition-all duration-300 whitespace-nowrap md:text-left md:whitespace-normal md:leading-snug md:flex-1"
       style={{
         fontSize: '0.65rem',
-        color: isActive ? AIXR_GOLD : 'rgba(248, 250, 255, 0.92)',
-        textShadow: isActive ? `0 0 16px ${AIXR_GOLD_GLOW}` : 'none',
+        color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.92)',
+        textShadow: isActive ? '0 0 16px rgba(239,120,61,0.5)' : 'none',
         fontWeight: isActive ? 800 : 700,
       }}
     >
@@ -235,8 +228,8 @@ const TabButton = ({
       <div
         className="absolute -bottom-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 rotate-45 md:hidden"
         style={{
-          background: `${AIXR_GOLD}ee`,
-          boxShadow: `0 0 10px ${AIXR_GOLD_GLOW}`,
+          background: 'rgba(239,120,61,0.9)',
+          boxShadow: '0 0 10px rgba(239,120,61,0.5)',
           zIndex: -1,
         }}
         aria-hidden="true"
@@ -247,8 +240,8 @@ const TabButton = ({
       <div
         className="absolute -right-[5px] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rotate-45 hidden md:block"
         style={{
-          background: `${AIXR_GOLD}ee`,
-          boxShadow: `0 0 10px ${AIXR_GOLD_GLOW}`,
+          background: 'rgba(239,120,61,0.9)',
+          boxShadow: '0 0 10px rgba(239,120,61,0.5)',
           zIndex: -1,
         }}
         aria-hidden="true"
@@ -265,17 +258,17 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
   <div
     className="relative rounded-2xl overflow-hidden"
     style={{
-      background: 'linear-gradient(155deg, rgba(28,32,24,0.82) 0%, rgba(12,18,16,0.94) 100%)',
-      border: `1px solid rgba(200,150,46,0.28)`,
-      boxShadow: `0 0 40px rgba(200,150,46,0.08), 0 24px 48px rgba(0,0,0,0.3)`,
+      background: 'linear-gradient(155deg, rgba(22,36,60,0.75) 0%, rgba(10,18,34,0.92) 100%)',
+      border: '1px solid rgba(239,120,61,0.22)',
+      boxShadow: '0 0 40px rgba(239,120,61,0.06), 0 24px 48px rgba(0,0,0,0.3)',
     }}
   >
     {/* Top accent line */}
     <div
       className="absolute top-0 inset-x-0 h-[2px]"
       style={{
-        background: `linear-gradient(90deg, transparent 5%, ${AIXR_GOLD} 40%, ${AIXR_TEAL} 60%, transparent 95%)`,
-        boxShadow: `0 0 16px ${AIXR_GOLD_GLOW}`,
+        background: `linear-gradient(90deg, transparent 5%, #ef783d 40%, #fb923c 60%, transparent 95%)`,
+        boxShadow: '0 0 16px rgba(239,120,61,0.4)',
       }}
       aria-hidden="true"
     />
@@ -284,7 +277,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
     <div
       className="absolute top-0 left-0 right-0 h-40 pointer-events-none"
       style={{
-        background: `radial-gradient(ellipse 60% 100% at 20% 0%, rgba(200,150,46,0.09) 0%, transparent 100%)`,
+        background: `radial-gradient(ellipse 60% 100% at 20% 0%, rgba(239,120,61,0.07) 0%, transparent 100%)`,
       }}
       aria-hidden="true"
     />
@@ -297,9 +290,9 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
             className="inline-block font-bold tracking-[0.32em] uppercase mb-4 px-3 py-1.5 rounded-sm"
             style={{
               fontSize: '0.6rem',
-              color: AIXR_GOLD,
-              background: 'rgba(200,150,46,0.12)',
-              border: '1px solid rgba(200,150,46,0.35)',
+              color: '#ef783d',
+              background: 'rgba(239,120,61,0.12)',
+              border: '1px solid rgba(239,120,61,0.3)',
             }}
           >
             {activation.category}
@@ -321,8 +314,8 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
           <div
             className="w-10 h-[2px] mb-5 rounded-full"
             style={{
-              background: `linear-gradient(90deg, ${AIXR_GOLD}, transparent)`,
-              boxShadow: `0 0 10px ${AIXR_GOLD_GLOW}`,
+              background: 'linear-gradient(90deg, #ef783d, transparent)',
+              boxShadow: '0 0 10px rgba(239,120,61,0.4)',
             }}
           />
 
@@ -345,16 +338,16 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
           <div
             className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
             style={{
-              background: 'rgba(200,150,46,0.12)',
-              border: '1px solid rgba(200,150,46,0.45)',
-              boxShadow: `0 0 20px rgba(200,150,46,0.12)`,
+              background: 'rgba(239,120,61,0.12)',
+              border: '1px solid rgba(239,120,61,0.4)',
+              boxShadow: '0 0 20px rgba(239,120,61,0.1)',
             }}
           >
             <div
               className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
               style={{
-                background: AIXR_GOLD,
-                boxShadow: `0 0 10px ${AIXR_GOLD_GLOW}`,
+                background: '#ef783d',
+                boxShadow: '0 0 10px rgba(239,120,61,0.8)',
               }}
               aria-hidden="true"
             />
@@ -362,7 +355,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
               className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
               style={{
                 fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-                color: AIXR_GOLD,
+                color: '#ef783d',
               }}
             >
               {activation.meta}
@@ -372,7 +365,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
       </div>
 
       {activation.sessionSlots && activation.sessionSlots.length > 0 && (
-        <ActivationSessionSlots slots={activation.sessionSlots} accentColor={AIXR_GOLD} />
+        <ActivationSessionSlots slots={activation.sessionSlots} />
       )}
     </div>
   </div>
@@ -443,14 +436,14 @@ const AixrActivationsSection = ({
           className="mb-10 max-w-5xl"
         >
           <div className="flex items-start gap-3 mb-4">
-            <Landmark className="w-6 h-6 shrink-0 mt-1" style={{ color: AIXR_GOLD }} aria-hidden="true" />
+            <Landmark className="w-6 h-6 shrink-0 mt-1" style={{ color: '#ef783d' }} aria-hidden="true" />
             <h2
               id="aixr-activations-heading"
               className="font-heading font-bold"
               style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', color: '#f8faff' }}
             >
               2 Days. 7 Experiences.{' '}
-              <span style={{ color: AIXR_GOLD }}>
+              <span className="gradient-text-accent">
                 Where Heritage Meets Future Technology.
               </span>
             </h2>
@@ -520,11 +513,11 @@ const AixrActivationsSection = ({
           <button
             type="button"
             onClick={onDownloadBrochure}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] transition-all duration-300 hover:shadow-[0_0_28px_rgba(200,150,46,0.25)] cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] transition-all duration-300 hover:shadow-[0_0_28px_rgba(239,120,61,0.25)] cursor-none"
             style={{
-              color: AIXR_GOLD,
-              background: 'rgba(200,150,46,0.08)',
-              border: '1px solid rgba(200,150,46,0.45)',
+              color: '#ef783d',
+              background: 'rgba(239,120,61,0.08)',
+              border: '1px solid rgba(239,120,61,0.45)',
             }}
           >
             Download Brochure
@@ -532,11 +525,11 @@ const AixrActivationsSection = ({
           <button
             type="button"
             onClick={onRegister}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(200,150,46,0.45)] hover:-translate-y-px cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] hover:-translate-y-px cursor-none"
             style={{
-              background: `linear-gradient(135deg, ${AIXR_GOLD} 0%, ${AIXR_TEAL} 100%)`,
-              border: '1px solid rgba(200,150,46,0.5)',
-              boxShadow: `0 0 24px ${AIXR_GOLD_GLOW}`,
+              background: 'linear-gradient(135deg, #ef783d 0%, #fb923c 100%)',
+              border: '1px solid rgba(239,120,61,0.5)',
+              boxShadow: '0 0 24px rgba(239,120,61,0.25)',
             }}
           >
             Register / Enquiry
