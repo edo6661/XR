@@ -30,3 +30,4 @@ dist-ssr
 
 # Large local assets — do not commit
 public/AI•XR CULTURAL FORUM v2.pdf
+.env*
