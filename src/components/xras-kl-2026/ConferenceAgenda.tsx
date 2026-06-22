@@ -35,7 +35,7 @@ const AGENDA_DAYS: AgendaDay[] = [
     theme: 'Esports, Governance & Future Interfaces',
     items: [
       { time: '09:10 AM', label: 'Conference, Masterclasses & Coaching' },
-      { time: '09:00 AM – 03:00 PM', label: 'MLBB Esports Arena open' },
+      { time: '09:00 AM – 03:00 PM', label: 'Esports Arena open' },
       { label: 'Full day exhibitor floor access' },
       { time: '07:30 PM', label: 'AI-XR Awards & Gala Dinner' },
     ],

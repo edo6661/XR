@@ -109,7 +109,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           className="font-semibold tracking-[0.12em] mb-4"
           style={{ fontSize: 'clamp(0.85rem, 2.5vw, 1rem)', color: '#1a2840', lineHeight: 1.6 }}
         >
-          3 Days. 7 Experiences.{' '}
+          3 Days. 6 Experiences.{' '}
           <span className="text-accent">One Ecosystem.</span>
         </motion.p>
 

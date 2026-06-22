@@ -493,7 +493,7 @@ const XrasActivationsSection = ({
       aria-labelledby="xras-activations-heading"
     >
       <div ref={containerRef} className="max-w-7xl mx-auto">
-        <SectionEyebrow>7 Experiences</SectionEyebrow>
+        <SectionEyebrow>6 Experiences</SectionEyebrow>
 
         <motion.div
           ref={headingRef}
@@ -508,7 +508,7 @@ const XrasActivationsSection = ({
             className="font-heading font-bold mb-3"
             style={{ fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', color: '#f8faff' }}
           >
-            3 Days. 7 Experiences.{' '}
+            3 Days. 6 Experiences.{' '}
             <span className="gradient-text-accent">
               One Ecosystem.
             </span>
