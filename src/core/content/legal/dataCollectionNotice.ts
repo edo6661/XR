@@ -4,7 +4,7 @@ export const dataCollectionNotice: LegalDocument = {
   slug: "data-collection-notice",
   title: "Data Collection Notice",
   preamble: [
-    "Issued under Section 7 of the Personal Data Protection Act 2010 (Malaysia). This Notice must be made available in both English and Bahasa Malaysia; an accredited Bahasa Malaysia version should accompany this English text.",
+    "Issued under Section 7 of the Personal Data Protection Act 2010 (Malaysia).",
     'XR Summits Sdn Bhd (Company Registration No. 1506516-A) ("we", "us", "our") is processing your personal data. This Notice tells you what we collect and why, and your rights in relation to it. It supplements, and should be read with, our Privacy Policy at Section 2.',
   ],
   sections: [

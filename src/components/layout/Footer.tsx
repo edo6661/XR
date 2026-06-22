@@ -302,18 +302,20 @@ const Footer = () => {
             </button>
           </div>
 
-          <p
-            className="max-w-4xl mx-auto text-center font-semibold mb-1"
-            style={{ fontSize: '0.72rem', color: 'var(--theme-on-light-muted)' }}
-          >
-            {COPYRIGHT_NOTICE.heading}
-          </p>
-          <p
-            className="max-w-4xl mx-auto text-center leading-relaxed"
-            style={{ fontSize: '0.68rem', color: 'var(--theme-on-light-muted)', opacity: 0.75 }}
-          >
-            {COPYRIGHT_NOTICE.line2} {COPYRIGHT_NOTICE.line3}
-          </p>
+          <div className="flex flex-col">
+            <p
+              className="max-w-4xl mx-auto text-center font-semibold mb-1"
+              style={{ fontSize: '0.72rem', color: 'var(--theme-on-light-muted)' }}
+            >
+              {COPYRIGHT_NOTICE.heading}
+            </p>
+            <p
+              className="max-w-4xl mx-auto text-center leading-relaxed"
+              style={{ fontSize: '0.68rem', color: 'var(--theme-on-light-muted)', opacity: 0.75 }}
+            >
+              {COPYRIGHT_NOTICE.line2} {COPYRIGHT_NOTICE.line3}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

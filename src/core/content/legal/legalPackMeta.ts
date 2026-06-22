@@ -63,12 +63,5 @@ export const LEGAL_PACK_META = {
         '"As is" basis, no professional advice, links, limitation of liability',
       slug: "website-disclaimer",
     },
-    {
-      number: 8,
-      title: "Copyright & Trademark Notice",
-      description:
-        "Footer copyright line and trademark attribution for the Website and materials",
-      slug: null,
-    },
   ],
 } as const;
