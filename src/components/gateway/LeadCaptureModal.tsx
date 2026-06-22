@@ -1,15 +1,18 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Download, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import GatewayModal from './GatewayModal';
 import { COMPANY } from '../../core/navigation/routes';
 import { WHATSAPP_PLACEHOLDER } from '../../core/content/contactPage';
 import {
+  LEAD_EVENT_OPTIONS,
   LEAD_INTEREST_OPTIONS,
   buildLeadCaptureMailto,
   buildLeadCaptureWhatsAppHref,
   getDocumentsForLead,
+  resolveDefaultEvent,
   type LeadCaptureConfig,
   type LeadCaptureFields,
+  type LeadEvent,
   type LeadInterest,
 } from '../../core/content/leadCapture';
 
@@ -24,7 +27,18 @@ const EMPTY_FORM: LeadCaptureFields = {
   phone: '',
   title: '',
   interest: LEAD_INTEREST_OPTIONS[0],
+  event: '',
 };
+
+const buildInitialForm = (
+  defaultInterest?: LeadInterest,
+  defaultEvent?: LeadEvent,
+  eventName?: string,
+): LeadCaptureFields => ({
+  ...EMPTY_FORM,
+  interest: defaultInterest ?? EMPTY_FORM.interest,
+  event: defaultEvent ?? resolveDefaultEvent(eventName) ?? '',
+});
 
 const INPUT_CLASS =
   'w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-200 placeholder:opacity-40' +
@@ -40,18 +54,24 @@ const LeadCaptureModal = ({
   description,
   eventName,
   defaultInterest,
+  defaultEvent,
   intent = 'enquiry',
   accentColor = '#fb923c',
 }: LeadCaptureModalProps) => {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState<LeadCaptureFields>({
-    ...EMPTY_FORM,
-    interest: defaultInterest ?? EMPTY_FORM.interest,
-  });
+  const [form, setForm] = useState<LeadCaptureFields>(() =>
+    buildInitialForm(defaultInterest, defaultEvent, eventName),
+  );
+
+  useEffect(() => {
+    if (!open) return;
+    setSubmitted(false);
+    setForm(buildInitialForm(defaultInterest, defaultEvent, eventName));
+  }, [open, defaultInterest, defaultEvent, eventName]);
 
   const handleClose = () => {
     setSubmitted(false);
-    setForm({ ...EMPTY_FORM, interest: defaultInterest ?? EMPTY_FORM.interest });
+    setForm(buildInitialForm(defaultInterest, defaultEvent, eventName));
     onClose();
   };
 
@@ -96,6 +116,8 @@ const LeadCaptureModal = ({
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
+
             <label className="flex flex-col gap-1.5">
               <span className={LABEL_CLASS}>
                 Interest <span className="text-accent">*</span>
@@ -110,6 +132,29 @@ const LeadCaptureModal = ({
                 className={INPUT_CLASS}
               >
                 {LEAD_INTEREST_OPTIONS.map((option) => (
+                  <option key={option} value={option} className="bg-[#0d1b2e]">
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="flex flex-col gap-1.5">
+              <span className={LABEL_CLASS}>
+                Event <span className="text-accent">*</span>
+              </span>
+              <select
+                name="event"
+                required
+                value={form.event}
+                onChange={(e) =>
+                  setForm((f) => ({ ...f, event: e.target.value as LeadEvent }))
+                }
+                className={INPUT_CLASS}
+              >
+                <option value="" disabled className="bg-[#0d1b2e]">
+                  Select an event
+                </option>
+                {LEAD_EVENT_OPTIONS.map((option) => (
                   <option key={option} value={option} className="bg-[#0d1b2e]">
                     {option}
                   </option>

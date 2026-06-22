@@ -15,6 +15,27 @@ export const LEAD_INTEREST_OPTIONS = [
 
 export type LeadInterest = (typeof LEAD_INTEREST_OPTIONS)[number];
 
+export const LEAD_EVENT_OPTIONS = [
+  "XR ASIA SUMMIT 2026",
+  "AI-XR Cultural Innovation Forum",
+  "Both",
+  "Not sure yet, need more details",
+] as const;
+
+export type LeadEvent = (typeof LEAD_EVENT_OPTIONS)[number];
+
+/** Maps internal brochure event keys to the user-facing Event dropdown label */
+export function resolveDefaultEvent(eventName?: string): LeadEvent | undefined {
+  if (!eventName) return undefined;
+  if (eventName.includes("XRAS") || eventName.includes("XR ASIA")) {
+    return "XR ASIA SUMMIT 2026";
+  }
+  if (eventName.includes("AI") && eventName.includes("XR")) {
+    return "AI-XR Cultural Innovation Forum";
+  }
+  return undefined;
+}
+
 export type LeadCaptureIntent =
   | "brochure"
   | "sponsor-docs"
@@ -34,6 +55,7 @@ export type LeadCaptureConfig = {
   description?: string;
   eventName?: string;
   defaultInterest?: LeadInterest;
+  defaultEvent?: LeadEvent;
   intent?: LeadCaptureIntent;
   accentColor?: string;
 };
@@ -44,6 +66,7 @@ export type LeadCaptureFields = {
   phone: string;
   title: string;
   interest: LeadInterest;
+  event: LeadEvent | "";
 };
 
 /** Brochure & package PDFs — flip `available` to true when assets are in /public/docs */
@@ -121,7 +144,8 @@ export function buildLeadCaptureMailto(
 
   const lines = [
     `Lead capture: ${context.title}`,
-    context.eventName ? `Event: ${context.eventName}` : "",
+    `Event: ${fields.event}`,
+    context.eventName ? `Page context: ${context.eventName}` : "",
     `Name: ${fields.name}`,
     `Email: ${fields.email}`,
     `Phone: ${fields.phone}`,
@@ -146,10 +170,11 @@ export function buildLeadCaptureWhatsAppHref(
     `Email: ${fields.email}`,
     `Phone: ${fields.phone}`,
     `Title: ${fields.title}`,
+    `Event: ${fields.event}`,
     `Interest: ${fields.interest}`,
   ];
 
-  if (context.eventName) lines.push(`Event: ${context.eventName}`);
+  if (context.eventName) lines.push(`Page context: ${context.eventName}`);
   lines.push("", `Enquiry: ${context.title}`);
 
   const text = encodeURIComponent(lines.join("\n"));

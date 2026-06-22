@@ -18,6 +18,7 @@ const Aixr2026SarawakPage = () => {
       description: 'Share your details to access the AIXR Sarawak 2026 brochure and start a conversation with our team.',
       eventName: AIXR_SARAWAK_EVENT_NAME,
       defaultInterest: 'Brochure download',
+      defaultEvent: 'AI-XR Cultural Innovation Forum',
       intent: 'brochure',
       accentColor: AIXR_SARAWAK_ACCENT,
     });
@@ -28,6 +29,7 @@ const Aixr2026SarawakPage = () => {
       description: 'Tell us about your interest in AIXR Sarawak 2026 and we will follow up with next steps.',
       eventName: AIXR_SARAWAK_EVENT_NAME,
       defaultInterest: 'General registration interest',
+      defaultEvent: 'AI-XR Cultural Innovation Forum',
       intent: 'register',
       accentColor: AIXR_SARAWAK_ACCENT,
     });

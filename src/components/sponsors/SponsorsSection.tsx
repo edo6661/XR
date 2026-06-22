@@ -242,8 +242,8 @@ const SponsorsSection = () => {
               openLeadCapture({
                 title: 'Become a Partner',
                 description: 'Share your details to receive sponsorship information and start a conversation with our partnerships team.',
-                defaultInterest: 'Sponsorship package',
-                intent: 'sponsor-docs',
+                defaultInterest: 'Partnership',
+                intent: 'enquiry',
               })
             }
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"

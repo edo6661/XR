@@ -4,11 +4,13 @@ import { Download, MessageCircle } from 'lucide-react';
 import { COMPANY } from '../../core/navigation/routes';
 import { WHATSAPP_PLACEHOLDER } from '../../core/content/contactPage';
 import {
+  LEAD_EVENT_OPTIONS,
   LEAD_INTEREST_OPTIONS,
   buildLeadCaptureMailto,
   buildLeadCaptureWhatsAppHref,
   getDocumentsForLead,
   type LeadCaptureFields,
+  type LeadEvent,
   type LeadInterest,
 } from '../../core/content/leadCapture';
 
@@ -24,6 +26,7 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
     phone: '',
     title: '',
     interest: initialInterest ?? LEAD_INTEREST_OPTIONS[0],
+    event: '',
   });
   const [message, setMessage] = useState('');
 
@@ -132,6 +135,8 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
         </p>
       </div>
 
+
+
       <label className="flex flex-col gap-1.5">
         <span className="text-label-ui">Interest</span>
         <select
@@ -142,6 +147,25 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
           className="input-field"
         >
           {LEAD_INTEREST_OPTIONS.map((option) => (
+            <option key={option} value={option} className="bg-[#0a0a0a]">
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="flex flex-col gap-1.5">
+        <span className="text-label-ui">Event</span>
+        <select
+          name="event"
+          required
+          value={form.event}
+          onChange={(e) => setForm((f) => ({ ...f, event: e.target.value as LeadEvent }))}
+          className="input-field"
+        >
+          <option value="" disabled className="bg-[#0a0a0a]">
+            Select an event
+          </option>
+          {LEAD_EVENT_OPTIONS.map((option) => (
             <option key={option} value={option} className="bg-[#0a0a0a]">
               {option}
             </option>

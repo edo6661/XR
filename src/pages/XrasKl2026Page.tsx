@@ -18,6 +18,7 @@ const XrasKl2026Page = () => {
       description: 'Share your details to access the XRAS KL 2026 brochure and start a conversation with our team.',
       eventName: XRAS_KL_EVENT_NAME,
       defaultInterest: 'Brochure download',
+      defaultEvent: 'XR ASIA SUMMIT 2026',
       intent: 'brochure',
       accentColor: XRAS_KL_ACCENT,
     });
@@ -28,6 +29,7 @@ const XrasKl2026Page = () => {
       description: 'Tell us about your interest in XRAS KL 2026 and we will follow up with next steps.',
       eventName: XRAS_KL_EVENT_NAME,
       defaultInterest: 'General registration interest',
+      defaultEvent: 'XR ASIA SUMMIT 2026',
       intent: 'register',
       accentColor: XRAS_KL_ACCENT,
     });

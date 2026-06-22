@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
@@ -13,6 +13,8 @@ type GatewayModalProps = {
 };
 
 const GatewayModal = ({ open, onClose, title, children, accentColor = '#fb923c' }: GatewayModalProps) => {
+  const panelRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!open) return;
 
@@ -42,6 +44,32 @@ const GatewayModal = ({ open, onClose, title, children, accentColor = '#fb923c' 
     };
   }, [open, onClose]);
 
+  useLayoutEffect(() => {
+    if (!open) return;
+
+    const panel = panelRef.current;
+    if (!panel) return;
+
+    const onPanelWheel = (e: WheelEvent) => {
+      e.stopPropagation();
+
+      const { scrollTop, scrollHeight, clientHeight } = panel;
+      const atTop = scrollTop <= 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+      if ((e.deltaY < 0 && atTop) || (e.deltaY > 0 && atBottom)) return;
+
+      e.preventDefault();
+      panel.scrollTop += e.deltaY;
+    };
+
+    panel.addEventListener('wheel', onPanelWheel, { passive: false });
+
+    return () => {
+      panel.removeEventListener('wheel', onPanelWheel);
+    };
+  }, [open]);
+
   return createPortal(
     <AnimatePresence>
       {open && (
@@ -63,11 +91,14 @@ const GatewayModal = ({ open, onClose, title, children, accentColor = '#fb923c' 
           />
 
           <motion.div
+            ref={panelRef}
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-xl overscroll-contain"
+            data-lenis-prevent
+            data-lenis-prevent-wheel
             style={{
               background: 'linear-gradient(155deg, rgba(22,38,62,0.96) 0%, rgba(10,20,36,0.98) 100%)',
               border: `1px solid ${accentColor}30`,
