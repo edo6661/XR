@@ -223,7 +223,7 @@ const AboutSection = () => {
           {/* LEFT — client: tagline top left */}
           <div ref={taglineRef} style={{ perspective: '900px' }}>
             {[
-              { text: 'INNOVATION IN ACTION .', accent: false },
+              { text: 'INNOVATION IN ACTION.', accent: false },
               { text: 'REALITY REDEFINED.', accent: true },
             ].map((line) => (
               <div key={line.text} className="overflow-hidden">
