@@ -5,6 +5,7 @@ import XrasActivationsSection from '../components/xras-kl-2026/XrasActivationsSe
 import SpeakersSection from '../components/speakers/SpeakersSection';
 import { useLeadCapture } from '../context/LeadCaptureContext';
 import EventPartnersSection from '../components/xras-kl-2026/EventPartnersSection';
+import XrasKlCtaRow from '../components/xras-kl-2026/XrasKlCtaRow';
 
 const XRAS_KL_EVENT_NAME = 'XRAS KL 2026';
 
@@ -40,10 +41,18 @@ const XrasKl2026Page = () => {
 
       <XrasKlHero onDownloadBrochure={openBrochure} onRegister={openRegister} />
 
-      <XrasActivationsSection onDownloadBrochure={openBrochure} onRegister={openRegister} />
-
-      <SpeakersSection />
-      <EventPartnersSection />
+      <div
+        style={
+          {
+            '--section-padding-y': 'clamp(2.75rem, 5vw, 4.5rem)',
+          } as React.CSSProperties
+        }
+      >
+        <XrasActivationsSection />
+        <SpeakersSection />
+        <EventPartnersSection />
+        <XrasKlCtaRow onDownloadBrochure={openBrochure} onRegister={openRegister} />
+      </div>
 
     </>
   );

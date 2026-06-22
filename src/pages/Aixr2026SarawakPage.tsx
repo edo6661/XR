@@ -7,6 +7,7 @@ import {
   AIXR_SARAWAK_META,
 } from '../core/content/aixr2026Sarawak';
 import { useLeadCapture } from '../context/LeadCaptureContext';
+import AixrCtaRow from '../components/aixr-2026-sarawak/AixrCtaRow';
 
 const Aixr2026SarawakPage = () => {
   const { openLeadCapture } = useLeadCapture();
@@ -40,7 +41,16 @@ const Aixr2026SarawakPage = () => {
 
       <AixrHero onDownloadBrochure={openBrochure} onRegister={openRegister} />
 
-      <AixrActivationsSection onDownloadBrochure={openBrochure} onRegister={openRegister} />
+      <div
+        style={
+          {
+            '--section-padding-y': 'clamp(2.75rem, 5vw, 4.5rem)',
+          } as React.CSSProperties
+        }
+      >
+        <AixrActivationsSection />
+        <AixrCtaRow onDownloadBrochure={openBrochure} onRegister={openRegister} />
+      </div>
     </>
   );
 };

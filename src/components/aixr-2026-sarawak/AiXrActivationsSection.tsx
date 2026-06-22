@@ -375,15 +375,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
 // Main Section with sticky tabs
 // ─────────────────────────────────────────────────────────────────────────────
 
-type AixrActivationsSectionProps = {
-  onDownloadBrochure: () => void;
-  onRegister: () => void;
-};
-
-const AixrActivationsSection = ({
-  onDownloadBrochure,
-  onRegister,
-}: AixrActivationsSectionProps) => {
+const AixrActivationsSection = () => {
   const [activeId, setActiveId] = useState<string>(ACTIVATIONS[0].id);
   const headingRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -500,41 +492,6 @@ const AixrActivationsSection = ({
             />
           </div>
         </div>
-
-        {/* ── CTA Row ─────────────────────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-14 pt-10"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
-        >
-          <button
-            type="button"
-            onClick={onDownloadBrochure}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] transition-all duration-300 hover:shadow-[0_0_28px_rgba(239,120,61,0.25)] cursor-none"
-            style={{
-              color: '#ef783d',
-              background: 'rgba(239,120,61,0.08)',
-              border: '1px solid rgba(239,120,61,0.45)',
-            }}
-          >
-            Download Brochure
-          </button>
-          <button
-            type="button"
-            onClick={onRegister}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] hover:-translate-y-px cursor-none"
-            style={{
-              background: 'linear-gradient(135deg, #ef783d 0%, #fb923c 100%)',
-              border: '1px solid rgba(239,120,61,0.5)',
-              boxShadow: '0 0 24px rgba(239,120,61,0.25)',
-            }}
-          >
-            Register / Enquiry
-          </button>
-        </motion.div>
       </div>
     </section>
   );
