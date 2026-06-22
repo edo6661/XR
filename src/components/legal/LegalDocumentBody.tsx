@@ -177,22 +177,16 @@ export function LegalDocumentBody({ document }: LegalDocumentBodyProps) {
               <span className="text-foreground-muted/50 mr-2">
                 {item.number}.
               </span>
-              {item.slug ? (
-                <Link
-                  to={`/legal/${item.slug}`}
-                  className={
-                    item.slug === document.slug
-                      ? "text-foreground font-semibold"
-                      : "text-accent hover:underline"
-                  }
-                >
-                  {item.title}
-                </Link>
-              ) : (
-                <span className="text-foreground font-semibold">
-                  {item.title}
-                </span>
-              )}
+              <Link
+                to={`/legal/${item.slug}`}
+                className={
+                  item.slug === document.slug
+                    ? "text-foreground font-semibold"
+                    : "text-accent hover:underline"
+                }
+              >
+                {item.title}
+              </Link>
               <span className="block mt-0.5 text-foreground-muted/70 pl-5">
                 {item.description}
               </span>
