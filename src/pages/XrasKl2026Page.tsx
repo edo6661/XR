@@ -4,6 +4,7 @@ import { XRAS_KL_ACCENT, XRAS_KL_META } from '../core/content/xrasKl2026';
 import XrasActivationsSection from '../components/xras-kl-2026/XrasActivationsSection';
 import SpeakersSection from '../components/speakers/SpeakersSection';
 import { useLeadCapture } from '../context/LeadCaptureContext';
+import EventPartnersSection from '../components/xras-kl-2026/EventPartnersSection';
 
 const XRAS_KL_EVENT_NAME = 'XRAS KL 2026';
 
@@ -42,6 +43,8 @@ const XrasKl2026Page = () => {
       <XrasActivationsSection onDownloadBrochure={openBrochure} onRegister={openRegister} />
 
       <SpeakersSection />
+      <EventPartnersSection />
+
     </>
   );
 };
