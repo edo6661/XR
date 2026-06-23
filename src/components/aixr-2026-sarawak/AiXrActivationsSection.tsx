@@ -52,20 +52,20 @@ const ACTIVATIONS: Activation[] = [
     id: 'conference',
     icon: <Mic className={iconClass} />,
     shortTitle: 'Conference',
-    category: 'Day 1 · Cultural Innovation Forum',
-    tagline: 'Strategic dialogue, policy insights, and industry collaboration.',
-    body: 'Day one opens with keynotes and panels exploring how Sarawak can lead ASEAN\'s future of AI-driven cultural preservation and immersive tourism. Cultural leaders, technologists, and policymakers converge to shape the region\'s creative and digital renaissance.',
-    meta: 'Day 1 · BCCK Main Stage',
+    category: 'Conference',
+    tagline: 'Where culture, policy, and immersive technology meet.',
+    body: 'Keynotes, fireside chats, and industry panels exploring how AI and XR are reshaping heritage preservation, immersive tourism, and the creative economy. Featuring global voices from policy, technology, and cultural institutions.',
+    meta: 'Day 1 · Main Stage',
     comingSoon: true,
   },
   {
     id: 'expo',
     icon: <LayoutGrid className={iconClass} />,
     shortTitle: 'Expo',
-    category: 'Day 2 · Cultural XR Innovation Showcase',
-    tagline: 'Experience the future of heritage and tourism.',
-    body: 'Interactive experience zones where XR exhibitions, AI innovation demos, and creative pitches bring cultural heritage to life. See how immersive technologies transform tradition into globally accessible digital experiences.',
-    meta: 'Day 2 · Experience Zones',
+    category: 'Expo',
+    tagline: 'See the future of cultural technology, live.',
+    body: 'An immersive showcase floor featuring XR exhibitions, AI innovation demos, and interactive heritage experiences. Where technology providers meet cultural institutions, tourism bodies, and creative industry decision-makers.',
+    meta: 'Day 1–2 · Exhibition Floor',
     comingSoon: true,
     mediaSections: [
       {
@@ -330,7 +330,7 @@ const ActivationMediaGallery = ({ sections }: { sections: ActivationMediaSection
 
 const ActivationComingSoon = () => (
   <div
-    className="flex min-h-[220px] items-center justify-center rounded-xl"
+    className="mt-8 flex min-h-[220px] items-center justify-center rounded-xl"
     style={{
       background: 'rgba(255,255,255,0.03)',
       border: '1px solid rgba(239,120,61,0.22)',
@@ -379,10 +379,10 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
     />
 
     <div className="relative z-10 p-7 md:p-10 lg:p-12">
-      {activation.comingSoon ? (
-        <>
+      <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12">
+        <div>
           <span
-            className="inline-block font-bold tracking-[0.32em] uppercase mb-6 px-3 py-1.5 rounded-sm"
+            className="inline-block font-bold tracking-[0.32em] uppercase mb-4 px-3 py-1.5 rounded-sm"
             style={{
               fontSize: '0.6rem',
               color: '#ef783d',
@@ -392,91 +392,73 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
           >
             {activation.category}
           </span>
-          <ActivationComingSoon />
-        </>
+
+          <h3
+            className="font-heading font-bold leading-tight mb-4"
+            style={{
+              fontSize: 'clamp(1.25rem, 2.5vw, 1.7rem)',
+              color: '#f8faff',
+              letterSpacing: '0.01em',
+            }}
+          >
+            {activation.tagline}
+          </h3>
+
+          <div
+            className="w-10 h-[2px] mb-5 rounded-full"
+            style={{
+              background: 'linear-gradient(90deg, #ef783d, transparent)',
+              boxShadow: '0 0 10px rgba(239,120,61,0.4)',
+            }}
+          />
+
+          <p
+            className="leading-relaxed"
+            style={{
+              fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
+              lineHeight: 1.9,
+              color: '#a8b8d0',
+              maxWidth: '58ch',
+            }}
+          >
+            {activation.body}
+          </p>
+        </div>
+
+        <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
+          <div
+            className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
+            style={{
+              background: 'rgba(239,120,61,0.12)',
+              border: '1px solid rgba(239,120,61,0.4)',
+              boxShadow: '0 0 20px rgba(239,120,61,0.1)',
+            }}
+          >
+            <div
+              className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
+              style={{
+                background: '#ef783d',
+                boxShadow: '0 0 10px rgba(239,120,61,0.8)',
+              }}
+              aria-hidden="true"
+            />
+            <span
+              className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
+              style={{
+                fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+                color: '#ef783d',
+              }}
+            >
+              {activation.meta}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {activation.comingSoon ? (
+        <ActivationComingSoon />
       ) : (
         <>
-          <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12">
-            <div>
-              {/* Category label */}
-              <span
-                className="inline-block font-bold tracking-[0.32em] uppercase mb-4 px-3 py-1.5 rounded-sm"
-                style={{
-                  fontSize: '0.6rem',
-                  color: '#ef783d',
-                  background: 'rgba(239,120,61,0.12)',
-                  border: '1px solid rgba(239,120,61,0.3)',
-                }}
-              >
-                {activation.category}
-              </span>
-
-              {/* Tagline — bright white */}
-              <h3
-                className="font-heading font-bold leading-tight mb-4"
-                style={{
-                  fontSize: 'clamp(1.25rem, 2.5vw, 1.7rem)',
-                  color: '#f8faff',
-                  letterSpacing: '0.01em',
-                }}
-              >
-                {activation.tagline}
-              </h3>
-
-              {/* Divider */}
-              <div
-                className="w-10 h-[2px] mb-5 rounded-full"
-                style={{
-                  background: 'linear-gradient(90deg, #ef783d, transparent)',
-                  boxShadow: '0 0 10px rgba(239,120,61,0.4)',
-                }}
-              />
-
-              {/* Body — clearly readable muted white */}
-              <p
-                className="leading-relaxed"
-                style={{
-                  fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
-                  lineHeight: 1.9,
-                  color: '#a8b8d0',
-                  maxWidth: '58ch',
-                }}
-              >
-                {activation.body}
-              </p>
-            </div>
-
-            {/* Meta pill */}
-            <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
-              <div
-                className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
-                style={{
-                  background: 'rgba(239,120,61,0.12)',
-                  border: '1px solid rgba(239,120,61,0.4)',
-                  boxShadow: '0 0 20px rgba(239,120,61,0.1)',
-                }}
-              >
-                <div
-                  className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
-                  style={{
-                    background: '#ef783d',
-                    boxShadow: '0 0 10px rgba(239,120,61,0.8)',
-                  }}
-                  aria-hidden="true"
-                />
-                <span
-                  className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
-                  style={{
-                    fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-                    color: '#ef783d',
-                  }}
-                >
-                  {activation.meta}
-                </span>
-              </div>
-            </div>
-          </div>
-
           {activation.sessionSlots && activation.sessionSlots.length > 0 && (
             <ActivationSessionSlots slots={activation.sessionSlots} />
           )}

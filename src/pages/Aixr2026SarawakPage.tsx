@@ -8,7 +8,6 @@ import {
 } from '../core/content/aixr2026Sarawak';
 import { useLeadCapture } from '../context/LeadCaptureContext';
 import AixrCtaRow from '../components/aixr-2026-sarawak/AixrCtaRow';
-import EventPartnersSection from '../components/xras-kl-2026/EventPartnersSection';
 
 const Aixr2026SarawakPage = () => {
   const { openLeadCapture } = useLeadCapture();
@@ -52,7 +51,6 @@ const Aixr2026SarawakPage = () => {
         }
       >
         <AixrActivationsSection />
-        <EventPartnersSection />
         <AixrCtaRow onDownloadBrochure={openBrochure} onRegister={openRegister} />
       </div>
     </>
