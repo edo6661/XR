@@ -65,7 +65,7 @@ const ACTIVATIONS: Activation[] = [
         layout: 'single',
         images: [
           {
-            src: '/booth/120-3x3-booth-20-kiosks-walkway-between-rows-immersive-story-tell-performance-creative-tech-ai-xr-virtual-prod.jpeg',
+            src: '/booth/Expo-Layout-(XRAS26).png',
             alt: 'MITEC expo hall floor plan — 120 booths, kiosks, and masterclass zones',
           },
         ],

@@ -1,5 +1,14 @@
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import BecomePartnerCta from '../ui/BecomePartnerCta';
+
+const LOGO_CARD = {
+  background: '#ffffff',
+  borderColor: 'rgba(0,0,0,0.08)',
+  hoverBorder: 'rgba(251,146,60,0.5)',
+  hoverShadow: '0 6px 28px rgba(0,0,0,0.14)',
+} as const;
 
 type Partner = {
   name: string;
@@ -36,58 +45,58 @@ const PartnerLogo = ({
 }: {
   partner: Partner;
   index: number;
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 16 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{
-      delay: index * 0.07,
-      duration: 0.55,
-      ease: [0.16, 1, 0.3, 1],
-    }}
-    className="group relative flex items-center justify-center rounded-xl px-8 py-6 transition-all duration-300"
-    style={{
-      background: 'rgba(255,255,255,0.03)',
-      border: '1px solid rgba(255,255,255,0.08)',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.18)',
-      minHeight: '96px',
-    }}
-    onMouseEnter={(e) => {
-      const el = e.currentTarget as HTMLDivElement;
-      el.style.background = 'rgba(255,255,255,0.06)';
-      el.style.borderColor = 'rgba(239,120,61,0.25)';
-      el.style.boxShadow =
-        '0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(239,120,61,0.12)';
-    }}
-    onMouseLeave={(e) => {
-      const el = e.currentTarget as HTMLDivElement;
-      el.style.background = 'rgba(255,255,255,0.03)';
-      el.style.borderColor = 'rgba(255,255,255,0.08)';
-      el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.18)';
-    }}
-  >
-    <img
-      src={partner.logo}
-      alt={partner.name}
-      loading="lazy"
-      className="max-h-12 w-auto object-contain transition-all duration-300 group-hover:scale-[1.04]"
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+
+  const applyCardHover = (active: boolean) => {
+    if (!cardRef.current) return;
+    const el = cardRef.current;
+    el.style.borderColor = active ? LOGO_CARD.hoverBorder : LOGO_CARD.borderColor;
+    el.style.boxShadow = active ? LOGO_CARD.hoverShadow : 'none';
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{
+        delay: index * 0.07,
+        duration: 0.55,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className="group relative flex items-center justify-center rounded-xl px-8 py-6 transition-all duration-300"
       style={{
-        filter: 'brightness(0.92) saturate(0.85)',
-        maxWidth: '160px',
+        background: LOGO_CARD.background,
+        border: '1px solid',
+        borderColor: LOGO_CARD.borderColor,
+        minHeight: '96px',
       }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLImageElement).style.filter =
-          'brightness(1) saturate(1)';
+      onMouseEnter={() => {
+        setHovered(true);
+        applyCardHover(true);
       }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLImageElement).style.filter =
-          'brightness(0.92) saturate(0.85)';
+      onMouseLeave={() => {
+        setHovered(false);
+        applyCardHover(false);
       }}
-    />
-    <span className="sr-only">{partner.name}</span>
-  </motion.div>
-);
+    >
+      <img
+        src={partner.logo}
+        alt={partner.name}
+        loading="lazy"
+        className="max-h-12 w-auto object-contain transition-all duration-300 group-hover:scale-[1.04]"
+        style={{
+          maxWidth: '160px',
+          filter: hovered ? 'brightness(1.02)' : 'none',
+        }}
+      />
+      <span className="sr-only">{partner.name}</span>
+    </motion.div>
+  );
+};
 
 const EventPartnersSection = () => {
   return (
@@ -177,6 +186,8 @@ const EventPartnersSection = () => {
             </div>
           ))}
         </div>
+
+        <BecomePartnerCta />
       </div>
     </section>
   );

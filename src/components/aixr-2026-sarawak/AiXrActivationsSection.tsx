@@ -40,6 +40,7 @@ type Activation = {
   tagline: string;
   body: string;
   meta: string;
+  comingSoon?: boolean;
   sessionSlots?: SessionSlot[];
   mediaSections?: ActivationMediaSection[];
 };
@@ -55,6 +56,7 @@ const ACTIVATIONS: Activation[] = [
     tagline: 'Strategic dialogue, policy insights, and industry collaboration.',
     body: 'Day one opens with keynotes and panels exploring how Sarawak can lead ASEAN\'s future of AI-driven cultural preservation and immersive tourism. Cultural leaders, technologists, and policymakers converge to shape the region\'s creative and digital renaissance.',
     meta: 'Day 1 · BCCK Main Stage',
+    comingSoon: true,
   },
   {
     id: 'expo',
@@ -64,6 +66,7 @@ const ACTIVATIONS: Activation[] = [
     tagline: 'Experience the future of heritage and tourism.',
     body: 'Interactive experience zones where XR exhibitions, AI innovation demos, and creative pitches bring cultural heritage to life. See how immersive technologies transform tradition into globally accessible digital experiences.',
     meta: 'Day 2 · Experience Zones',
+    comingSoon: true,
     mediaSections: [
       {
         title: 'Expo Hall Layout',
@@ -325,6 +328,28 @@ const ActivationMediaGallery = ({ sections }: { sections: ActivationMediaSection
 // Expanded Panel — improved text readability & glowing elements
 // ─────────────────────────────────────────────────────────────────────────────
 
+const ActivationComingSoon = () => (
+  <div
+    className="flex min-h-[220px] items-center justify-center rounded-xl"
+    style={{
+      background: 'rgba(255,255,255,0.03)',
+      border: '1px solid rgba(239,120,61,0.22)',
+      boxShadow: '0 0 32px rgba(239,120,61,0.08), inset 0 1px 0 rgba(255,255,255,0.05)',
+    }}
+  >
+    <span
+      className="font-bold tracking-[0.28em] uppercase"
+      style={{
+        fontSize: 'clamp(1.35rem, 3vw, 1.85rem)',
+        color: '#ef783d',
+        textShadow: '0 0 24px rgba(239,120,61,0.55)',
+      }}
+    >
+      Coming Soon
+    </span>
+  </div>
+);
+
 const ExpandedPanel = ({ activation }: { activation: Activation }) => (
   <div
     className="relative rounded-2xl overflow-hidden"
@@ -354,11 +379,10 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
     />
 
     <div className="relative z-10 p-7 md:p-10 lg:p-12">
-      <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12">
-        <div>
-          {/* Category label */}
+      {activation.comingSoon ? (
+        <>
           <span
-            className="inline-block font-bold tracking-[0.32em] uppercase mb-4 px-3 py-1.5 rounded-sm"
+            className="inline-block font-bold tracking-[0.32em] uppercase mb-6 px-3 py-1.5 rounded-sm"
             style={{
               fontSize: '0.6rem',
               color: '#ef783d',
@@ -368,81 +392,101 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
           >
             {activation.category}
           </span>
+          <ActivationComingSoon />
+        </>
+      ) : (
+        <>
+          <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12">
+            <div>
+              {/* Category label */}
+              <span
+                className="inline-block font-bold tracking-[0.32em] uppercase mb-4 px-3 py-1.5 rounded-sm"
+                style={{
+                  fontSize: '0.6rem',
+                  color: '#ef783d',
+                  background: 'rgba(239,120,61,0.12)',
+                  border: '1px solid rgba(239,120,61,0.3)',
+                }}
+              >
+                {activation.category}
+              </span>
 
-          {/* Tagline — bright white */}
-          <h3
-            className="font-heading font-bold leading-tight mb-4"
-            style={{
-              fontSize: 'clamp(1.25rem, 2.5vw, 1.7rem)',
-              color: '#f8faff',
-              letterSpacing: '0.01em',
-            }}
-          >
-            {activation.tagline}
-          </h3>
+              {/* Tagline — bright white */}
+              <h3
+                className="font-heading font-bold leading-tight mb-4"
+                style={{
+                  fontSize: 'clamp(1.25rem, 2.5vw, 1.7rem)',
+                  color: '#f8faff',
+                  letterSpacing: '0.01em',
+                }}
+              >
+                {activation.tagline}
+              </h3>
 
-          {/* Divider */}
-          <div
-            className="w-10 h-[2px] mb-5 rounded-full"
-            style={{
-              background: 'linear-gradient(90deg, #ef783d, transparent)',
-              boxShadow: '0 0 10px rgba(239,120,61,0.4)',
-            }}
-          />
+              {/* Divider */}
+              <div
+                className="w-10 h-[2px] mb-5 rounded-full"
+                style={{
+                  background: 'linear-gradient(90deg, #ef783d, transparent)',
+                  boxShadow: '0 0 10px rgba(239,120,61,0.4)',
+                }}
+              />
 
-          {/* Body — clearly readable muted white */}
-          <p
-            className="leading-relaxed"
-            style={{
-              fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
-              lineHeight: 1.9,
-              color: '#a8b8d0',
-              maxWidth: '58ch',
-            }}
-          >
-            {activation.body}
-          </p>
-        </div>
+              {/* Body — clearly readable muted white */}
+              <p
+                className="leading-relaxed"
+                style={{
+                  fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
+                  lineHeight: 1.9,
+                  color: '#a8b8d0',
+                  maxWidth: '58ch',
+                }}
+              >
+                {activation.body}
+              </p>
+            </div>
 
-        {/* Meta pill */}
-        <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
-          <div
-            className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
-            style={{
-              background: 'rgba(239,120,61,0.12)',
-              border: '1px solid rgba(239,120,61,0.4)',
-              boxShadow: '0 0 20px rgba(239,120,61,0.1)',
-            }}
-          >
-            <div
-              className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
-              style={{
-                background: '#ef783d',
-                boxShadow: '0 0 10px rgba(239,120,61,0.8)',
-              }}
-              aria-hidden="true"
-            />
-            <span
-              className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
-              style={{
-                fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-                color: '#ef783d',
-              }}
-            >
-              {activation.meta}
-            </span>
+            {/* Meta pill */}
+            <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
+              <div
+                className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
+                style={{
+                  background: 'rgba(239,120,61,0.12)',
+                  border: '1px solid rgba(239,120,61,0.4)',
+                  boxShadow: '0 0 20px rgba(239,120,61,0.1)',
+                }}
+              >
+                <div
+                  className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
+                  style={{
+                    background: '#ef783d',
+                    boxShadow: '0 0 10px rgba(239,120,61,0.8)',
+                  }}
+                  aria-hidden="true"
+                />
+                <span
+                  className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
+                  style={{
+                    fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+                    color: '#ef783d',
+                  }}
+                >
+                  {activation.meta}
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {activation.sessionSlots && activation.sessionSlots.length > 0 && (
-        <ActivationSessionSlots slots={activation.sessionSlots} />
-      )}
+          {activation.sessionSlots && activation.sessionSlots.length > 0 && (
+            <ActivationSessionSlots slots={activation.sessionSlots} />
+          )}
 
-      {activation.id === 'conference' && <ConferenceAgenda />}
+          {activation.id === 'conference' && <ConferenceAgenda />}
 
-      {activation.mediaSections && activation.mediaSections.length > 0 && (
-        <ActivationMediaGallery sections={activation.mediaSections} />
+          {activation.mediaSections && activation.mediaSections.length > 0 && (
+            <ActivationMediaGallery sections={activation.mediaSections} />
+          )}
+        </>
       )}
     </div>
   </div>
