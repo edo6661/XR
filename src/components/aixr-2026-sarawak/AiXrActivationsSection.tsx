@@ -153,7 +153,7 @@ const ACTIVATIONS: Activation[] = [
     shortTitle: 'Esports',
     category: 'Esports Semi Final',
     tagline: 'Regional competition on the road to Kuala Lumpur.',
-    body: 'Teams battle in the MLBB Cup Semi Finals — competitive spatial entertainment on the regional stage. Winners advance to the Grand Final at XR ASIA SUMMIT 2026 in December.',
+    body: 'Teams battle in the Esports Tournament Semi Final — competitive spatial entertainment on the regional stage. Winners advance to the Grand Final at XR ASIA SUMMIT 2026 in December.',
     meta: 'Day 2 · Competition Stage',
   },
 ];

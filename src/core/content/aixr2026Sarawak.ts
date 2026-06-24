@@ -78,7 +78,7 @@ export const AIXR_SARAWAK_PROGRAMS: readonly AixrProgram[] = [
     category: "Semi Finals",
     title: "Esports Semi Finals",
     description:
-      "Regional MLBB Cup semi-finals on the road to the Grand Final at XR ASIA SUMMIT 2026 in Kuala Lumpur.",
+      "Regional Esports Tournament Semi Final on the road to the Grand Final at XR ASIA SUMMIT 2026 in Kuala Lumpur.",
     featured: true,
   },
 ] as const;

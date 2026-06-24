@@ -133,7 +133,7 @@ const ACTIVATIONS: Activation[] = [
     shortTitle: 'Esports',
     category: 'Esports Grand Final',
     tagline: 'Competitive gaming, produced like a broadcast.',
-    body: 'The MLBB Cup Grand Final — produced using XR stage technology, volumetric graphics, and AI-driven broadcast systems. Where esports meets next-generation live production.',
+    body: 'The Esports Tournament Grand Final — produced using XR stage technology, volumetric graphics, and AI-driven broadcast systems. Where esports meets next-generation live production.',
     meta: 'Day 2 · Esports Arena',
   },
   {
