@@ -118,7 +118,7 @@ const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }
           {speaker.name}
         </h3>
         {speaker.role ? (
-          <p className="font-medium leading-snug" style={{ fontSize: '0.7rem', color: accent }}>
+          <p className="font-medium leading-snug" style={{ fontSize: '0.8rem', color: accent }}>
             {speaker.role}
           </p>
         ) : null}

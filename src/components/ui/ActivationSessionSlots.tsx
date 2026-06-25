@@ -8,6 +8,7 @@ export type SessionSpeaker = {
 };
 
 export type SessionSlot = {
+  title?: string;
   topic?: string;
   speaker?: SessionSpeaker;
   comingSoon?: boolean;
@@ -51,12 +52,14 @@ const ActivationSessionSlots = ({
           }}
         >
           <div className="shrink-0">
-            <p
-              className="mb-2 font-bold tracking-[0.28em] uppercase"
-              style={{ fontSize: '0.58rem', color: accentColor }}
-            >
-              Topic
-            </p>
+            {slot.title && (
+              <p
+                className="mb-2 font-bold tracking-[0.28em] uppercase"
+                style={{ fontSize: '0.58rem', color: accentColor }}
+              >
+                {slot.title}
+              </p>
+            )}
             <div
               className="flex h-20 items-center rounded-lg px-3 py-2 overflow-hidden"
               style={{

@@ -35,14 +35,14 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     role: "VP, Business Head & CTO (Emerging Media)",
     company: "Whistling Woods International",
     photo: "/speaker-pics/Chaitanya.jpeg",
-    accentColor: "#3953a3",
+    accentColor: "#0ea5e9",
   },
   {
     name: "Dr. Lukasz Mirocha",
     role: "Director, Opus Lab | Omni Lucenti Limited",
     company: "Dell Pro Precision Ambassador",
     photo: "/speaker-pics/Lukasz Mirocha.jpeg",
-    accentColor: "#3953a3",
+    accentColor: "#0ea5e9",
   },
   {
     name: "Virgile Mangiavillano",
@@ -98,14 +98,14 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     role: "",
     company: "Management & Science University",
     photo: "/speaker-pics/Dr Yahaya Abdullah.jpg",
-    accentColor: "#3953a3",
+    accentColor: "#0ea5e9",
   },
   {
     name: "Assoc. Prof. Ts. Dr. Safaa N.S. Al-Humairi",
     role: "Robotics & Mechatronics Specialist",
     company: "Management & Science University",
     photo: "/speaker-pics/Safaa Al-Humairi.webp",
-    accentColor: "#3953a3",
+    accentColor: "#0ea5e9",
   },
 ] as const;
 

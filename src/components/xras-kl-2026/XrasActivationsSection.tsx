@@ -85,12 +85,13 @@ const ACTIVATIONS: Activation[] = [
     id: 'masterclasses',
     icon: <GraduationCap className={iconClass} />,
     shortTitle: 'Masterclasses',
-    category: '3× Masterclass',
+    category: '4× Masterclass',
     tagline: 'Hands-on, production-ready skills.',
     body: 'Deep-dive technical sessions covering real-world XR workflows — from production pipelines to immersive deployment. Built for practitioners who want to leave with something they can use.',
     meta: 'Day 1–3 · Limited Seats',
     sessionSlots: [
       {
+        title: 'Masterclass 1',
         topic: '3D Gaussian Splatting (3DGS)',
         speaker: {
           name: 'Dr. Lukasz Mirocha',
@@ -99,20 +100,21 @@ const ACTIVATIONS: Activation[] = [
           photo: '/speaker-pics/Lukasz Mirocha.jpeg',
         },
       },
-      { topic: 'Virtual Production, Digital Humans, AI & Future Storytelling' },
-      { topic: 'AR Wall ICVFX Masterclass' },
+      { title: 'Masterclass 2', topic: 'Virtual Production, Digital Humans, AI & Future Storytelling' },
+      { title: 'Masterclass 3', topic: 'AR Wall ICVFX Masterclass' },
     ],
   },
   {
     id: 'coaching',
     icon: <Lightbulb className={iconClass} />,
     shortTitle: 'Coaching',
-    category: '2× Coaching',
+    category: 'Coaching',
     tagline: 'For the builders who need a sounding board.',
     body: 'One-on-one and small group coaching sessions pairing AI and XR startups with industry mentors. Get direct feedback, sharpen your pitch, and find your next move.',
     meta: 'Day 2–3 · Limited Seats',
     sessionSlots: [
       {
+
         topic: 'Women Empowerment',
         speaker: {
           name: 'Dimitri Josephine',
@@ -121,10 +123,7 @@ const ACTIVATIONS: Activation[] = [
           organization: 'Unreal Engine Authorised Instructor',
         },
       },
-      {
-        topic: 'Student Empowerment',
-        comingSoon: true,
-      },
+
     ],
   },
   {
