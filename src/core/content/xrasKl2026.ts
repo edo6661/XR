@@ -39,8 +39,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
   },
   {
     name: "Dr. Lukasz Mirocha",
-    role: "Director, Opus Lab | Omni Lucenti Limited",
-    company: "Dell Pro Precision Ambassador",
+    role: "Director",
+    company: "Opus Lab",
     photo: "/speaker-pics/Lukasz Mirocha.jpeg",
     accentColor: "#0ea5e9",
   },
