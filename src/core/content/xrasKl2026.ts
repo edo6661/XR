@@ -52,13 +52,6 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     accentColor: "#ef783d",
   },
   {
-    name: "Lakshmi Deshpande",
-    role: "Head of Spatial AI & Immersive Experience Design",
-    company: "",
-    photo: "/speaker-pics/Lakshmi Deshpande.jpg",
-    accentColor: "#ef783d",
-  },
-  {
     name: "Ryoichi Wada",
     role: "CEO",
     company: "TOKYO EPIC INC.",
@@ -94,7 +87,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     accentColor: "#fedb21",
   },
   {
-    name: "Prof Yoki Chin",
+    name: "Prof. Yoki Chin",
     role: "President",
     company: "POINT College/Future Studios",
     photo: "/speaker-pics/Prof Yoki.jpg.jpeg",
@@ -108,7 +101,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     accentColor: "#3953a3",
   },
   {
-    name: "Prof Ts Dr Safaa N.S. Al-Humari",
+    name: "Assoc. Prof. Ts. Dr. Safaa N.S. Al-Humairi",
     role: "Robotics & Mechatronics Specialist",
     company: "Management & Science University",
     photo: "/speaker-pics/Safaa Al-Humairi.webp",
