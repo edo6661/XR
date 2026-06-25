@@ -18,6 +18,8 @@ type ActivationSessionSlotsProps = {
   accentColor?: string;
 };
 
+const COMING_SOON_LABEL = 'COMING SOON';
+
 const ActivationSessionSlots = ({
   slots,
   accentColor = '#ef783d',
@@ -34,6 +36,9 @@ const ActivationSessionSlots = ({
       const hasOrganization = Boolean(speaker.organization);
       const hasTopic = Boolean(slot.topic);
       const isComingSoon = Boolean(slot.comingSoon);
+      const speakerName = hasName ? speaker.name : COMING_SOON_LABEL;
+      const speakerJobTitle = hasJobTitle ? speaker.jobTitle : COMING_SOON_LABEL;
+      const speakerOrganization = hasOrganization ? speaker.organization : COMING_SOON_LABEL;
 
       return (
         <article
@@ -142,31 +147,31 @@ const ActivationSessionSlots = ({
                   className="font-bold leading-tight"
                   style={{
                     fontSize: '1rem',
-                    color: hasName ? '#f8faff' : 'rgba(200,215,240,0.5)',
-                    fontStyle: hasName ? 'normal' : 'italic',
+                    color: hasName ? '#f8faff' : accentColor,
+                    letterSpacing: hasName ? undefined : '0.08em',
                   }}
                 >
-                  {hasName ? speaker.name : 'Speaker name'}
+                  {speakerName}
                 </p>
                 <p
                   className="leading-snug"
                   style={{
                     fontSize: '0.82rem',
-                    color: hasJobTitle ? '#c8d8f0' : 'rgba(200,215,240,0.42)',
-                    fontStyle: hasJobTitle ? 'normal' : 'italic',
+                    color: hasJobTitle ? '#c8d8f0' : accentColor,
+                    letterSpacing: hasJobTitle ? undefined : '0.06em',
                   }}
                 >
-                  {hasJobTitle ? speaker.jobTitle : 'Job title'}
+                  {speakerJobTitle}
                 </p>
                 <p
                   className="leading-snug"
                   style={{
                     fontSize: '0.78rem',
-                    color: hasOrganization ? '#a8b8d0' : 'rgba(200,215,240,0.38)',
-                    fontStyle: hasOrganization ? 'normal' : 'italic',
+                    color: hasOrganization ? '#a8b8d0' : accentColor,
+                    letterSpacing: hasOrganization ? undefined : '0.06em',
                   }}
                 >
-                  {hasOrganization ? speaker.organization : 'Organisation'}
+                  {speakerOrganization}
                 </p>
               </div>
             </div>

@@ -90,9 +90,17 @@ const ACTIVATIONS: Activation[] = [
     body: 'Deep-dive technical sessions covering real-world XR workflows — from production pipelines to immersive deployment. Built for practitioners who want to leave with something they can use.',
     meta: 'Day 1–3 · Limited Seats',
     sessionSlots: [
-      { topic: 'AI-XR / Virtual Production' },
-      { topic: '3D Gaussian Splatting (3DGS)' },
-      {},
+      {
+        topic: '3D Gaussian Splatting (3DGS)',
+        speaker: {
+          name: 'Dr. Lukasz Mirocha',
+          jobTitle: 'Director, Opus Lab | Omni Lucenti Limited',
+          organization: 'Dell Pro Precision Ambassador',
+          photo: '/speaker-pics/Lukasz Mirocha.jpeg',
+        },
+      },
+      { topic: 'Virtual Production, Digital Humans, AI & Future Storytelling' },
+      { topic: 'AR Wall ICVFX Masterclass' },
     ],
   },
   {
@@ -108,7 +116,7 @@ const ACTIVATIONS: Activation[] = [
         topic: 'Women Empowerment',
         speaker: {
           name: 'Dimitri Josephine',
-          jobTitle: 'Virtual Production & Unreal Engine Authorised Instructor',
+          jobTitle: 'Virtual Art Director & Head of Virtual Production, Unreal Engine Authorised Instructor',
           photo: '/speaker-pics/Dimitri Josephine.jpg.jpeg',
         },
       },

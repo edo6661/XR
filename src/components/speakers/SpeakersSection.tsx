@@ -117,9 +117,11 @@ const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }
         >
           {speaker.name}
         </h3>
-        <p className="font-medium leading-snug" style={{ fontSize: '0.7rem', color: accent }}>
-          {speaker.role}
-        </p>
+        {speaker.role ? (
+          <p className="font-medium leading-snug" style={{ fontSize: '0.7rem', color: accent }}>
+            {speaker.role}
+          </p>
+        ) : null}
         {speaker.company ? (
           <p
             className="line-clamp-2"
@@ -127,26 +129,6 @@ const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }
           >
             {speaker.company}
           </p>
-        ) : null}
-
-        {speaker.focusAreas.length > 0 ? (
-          <div className="mt-auto pt-3 flex flex-wrap gap-1">
-            {speaker.focusAreas.slice(0, 3).map((area) => (
-              <span
-                key={area}
-                className="inline-flex px-1.5 py-0.5 rounded-sm"
-                style={{
-                  fontSize: '0.58rem',
-                  letterSpacing: '0.04em',
-                  color: 'rgba(200,212,235,0.78)',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.06)',
-                }}
-              >
-                {area}
-              </span>
-            ))}
-          </div>
         ) : null}
       </div>
 
