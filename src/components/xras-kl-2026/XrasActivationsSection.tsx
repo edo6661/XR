@@ -65,6 +65,10 @@ const ACTIVATIONS: Activation[] = [
         layout: 'single',
         images: [
           {
+            src: '/others/MITEC.jpeg',
+            alt: 'Malaysia International Trade and Exhibition Centre (MITEC) at dusk',
+          },
+          {
             src: '/booth/Expo-Layout-(XRAS26).png',
             alt: 'MITEC expo hall floor plan — 120 booths, kiosks, and masterclass zones',
           },
@@ -285,7 +289,7 @@ const ActivationMediaGallery = ({ sections }: { sections: ActivationMediaSection
           className={
             section.layout === 'grid'
               ? 'grid grid-cols-1 gap-4 sm:grid-cols-3'
-              : 'grid grid-cols-1'
+              : 'grid grid-cols-1 gap-4'
           }
         >
           {section.images.map((image) => (
