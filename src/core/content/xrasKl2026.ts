@@ -13,7 +13,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     name: "Shamsul Izhan Abdul Majid",
     role: "Chief Executive Officer",
     company: "Malaysia National AI Office (NAIO)",
-    photo: "",
+    photo: "/speaker-pics/Sam Majid.jpg",
     accentColor: "#ef783d",
   },
   {

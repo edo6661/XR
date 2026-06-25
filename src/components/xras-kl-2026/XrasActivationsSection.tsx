@@ -116,8 +116,9 @@ const ACTIVATIONS: Activation[] = [
         topic: 'Women Empowerment',
         speaker: {
           name: 'Dimitri Josephine',
-          jobTitle: 'Virtual Art Director & Head of Virtual Production, Unreal Engine Authorised Instructor',
+          jobTitle: 'Virtual Art Director & Head of Virtual Production',
           photo: '/speaker-pics/Dimitri Josephine.jpg.jpeg',
+          organization: 'Unreal Engine Authorised Instructor',
         },
       },
       {
