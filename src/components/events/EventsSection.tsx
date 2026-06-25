@@ -27,7 +27,7 @@ const FLAGSHIP_EVENTS = [
     accentColor: '#fb923c',
     tag: 'XRAS',
     to: '/xras-kl-2026',
-    imageSrc: '/hero/new_hero_from_louis.png',
+    imageSrc: '/hero/new_hero_from_louis_2.png',
     isFeatured: true,
   },
 ] as const;

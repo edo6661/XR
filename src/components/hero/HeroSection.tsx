@@ -6,7 +6,7 @@ import HeroLogo from './HeroLogo';
 import HeroIntroOverlay from './HeroIntroOverlay';
 
 /** Master keyart — backmost layer at ~55% opacity (client: 50–60%). */
-const MASTER_KEYART = '/hero/new_hero_from_louis.png';
+const MASTER_KEYART = '/hero/new_hero_from_louis_2.png';
 const KEYART_OPACITY = 0.58;
 
 const GLOBE_VIDEO: HeroVideoConfig = {
