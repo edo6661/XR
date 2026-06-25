@@ -4,4 +4,4 @@ Allow: /
 Disallow: /assets/
 Disallow: /*.json$
 
-Sitemap: 
+Sitemap: https://xr-summits.com/sitemap.xml
