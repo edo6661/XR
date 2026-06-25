@@ -19,12 +19,7 @@ type ActivationSessionSlotsProps = {
 };
 
 const COMING_SOON_LABEL = 'COMING SOON';
-
-const getTopicFontSize = (topic: string) => {
-  if (topic.length > 52) return '0.68rem';
-  if (topic.length > 36) return '0.78rem';
-  return '0.9rem';
-};
+const TOPIC_FONT_SIZE = '0.78rem';
 
 const ActivationSessionSlots = ({
   slots,
@@ -42,9 +37,8 @@ const ActivationSessionSlots = ({
       const hasOrganization = Boolean(speaker.organization);
       const hasSpeakerDetails = hasName || hasJobTitle || hasOrganization;
       const hasTopic = Boolean(slot.topic);
-      const isComingSoon = Boolean(slot.comingSoon);
+      const showSpeakerComingSoon = Boolean(slot.comingSoon) || !hasSpeakerDetails;
       const topicText = hasTopic ? slot.topic! : 'Topic to be announced';
-      const topicFontSize = hasTopic ? getTopicFontSize(topicText) : '0.9rem';
 
       return (
         <article
@@ -56,25 +50,6 @@ const ActivationSessionSlots = ({
             boxShadow: `0 0 24px ${accentColor}0a, inset 0 1px 0 rgba(255,255,255,0.05)`,
           }}
         >
-          {isComingSoon && (
-            <div
-              className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-xl"
-              style={{ background: 'rgba(5,10,20,0.72)' }}
-              aria-hidden="true"
-            >
-              <span
-                className="font-bold tracking-[0.22em] uppercase"
-                style={{
-                  fontSize: 'clamp(1.1rem, 2.5vw, 1.45rem)',
-                  color: accentColor,
-                  textShadow: `0 0 24px ${accentColor}88`,
-                }}
-              >
-                Coming Soon
-              </span>
-            </div>
-          )}
-
           <div className="shrink-0">
             <p
               className="mb-2 font-bold tracking-[0.28em] uppercase"
@@ -94,7 +69,7 @@ const ActivationSessionSlots = ({
               <p
                 className="w-full font-semibold leading-[1.35]"
                 style={{
-                  fontSize: topicFontSize,
+                  fontSize: TOPIC_FONT_SIZE,
                   color: hasTopic ? '#f0f6ff' : 'rgba(200,215,240,0.55)',
                   fontStyle: hasTopic ? 'normal' : 'italic',
                 }}
@@ -104,7 +79,7 @@ const ActivationSessionSlots = ({
             </div>
           </div>
 
-          <div className="flex min-h-[5.5rem] flex-1 flex-col">
+          <div className="flex min-h-22 flex-1 flex-col">
             <p
               className="mb-3 font-bold tracking-[0.28em] uppercase"
               style={{ fontSize: '0.58rem', color: accentColor }}
@@ -112,7 +87,20 @@ const ActivationSessionSlots = ({
               Speaker
             </p>
 
-            {hasSpeakerDetails ? (
+            {showSpeakerComingSoon ? (
+              <div className="flex flex-1 items-center justify-center rounded-xl">
+                <span
+                  className="text-center font-bold tracking-[0.18em] uppercase"
+                  style={{
+                    fontSize: '0.95rem',
+                    color: accentColor,
+                    textShadow: `0 0 16px ${accentColor}66`,
+                  }}
+                >
+                  {COMING_SOON_LABEL}
+                </span>
+              </div>
+            ) : (
               <div className="flex items-start gap-4">
                 <div
                   className="relative shrink-0 overflow-hidden rounded-xl"
@@ -167,19 +155,6 @@ const ActivationSessionSlots = ({
                     </p>
                   ) : null}
                 </div>
-              </div>
-            ) : (
-              <div className="flex flex-1 items-center justify-center rounded-xl">
-                <span
-                  className="font-bold tracking-[0.18em] uppercase text-center"
-                  style={{
-                    fontSize: 'clamp(0.85rem, 2vw, 1rem)',
-                    color: accentColor,
-                    textShadow: `0 0 16px ${accentColor}66`,
-                  }}
-                >
-                  {COMING_SOON_LABEL}
-                </span>
               </div>
             )}
           </div>
