@@ -99,8 +99,8 @@ const ACTIVATIONS: Activation[] = [
         topic: '3D Gaussian Splatting (3DGS)',
         speaker: {
           name: 'Dr. Lukasz Mirocha',
-          jobTitle: 'Director, Opus Lab | Omni Lucenti Limited',
-          organization: 'Dell Pro Precision Ambassador',
+          jobTitle: 'Director',
+          organization: 'Opus Lab',
           photo: '/speaker-pics/Lukasz Mirocha.jpeg',
         },
       },
