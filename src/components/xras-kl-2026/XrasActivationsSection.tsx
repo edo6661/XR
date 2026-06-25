@@ -14,6 +14,12 @@ import ActivationPanelStack from '../ui/ActivationPanelStack';
 import ActivationSessionSlots, { type SessionSlot } from '../ui/ActivationSessionSlots';
 import ConferenceAgenda from './ConferenceAgenda';
 import { useActivationTabsDock } from '../../hooks/useActivationTabsDock';
+import {
+  XRAS_KL_MASTERCLASS_SLOTS,
+  XRAS_KL_COACHING_SLOTS,
+  XRAS_KL_AI_FILMMAKING,
+  XRAS_KL_AWARDS_GALA,
+} from '../../core/content/xrasKl2026';
 
 type ActivationImage = {
   src: string;
@@ -89,55 +95,30 @@ const ACTIVATIONS: Activation[] = [
     id: 'masterclasses',
     icon: <GraduationCap className={iconClass} />,
     shortTitle: 'Masterclasses',
-    category: '4× Masterclass',
-    tagline: 'Hands-on, production-ready skills.',
-    body: 'Deep-dive technical sessions covering real-world XR workflows — from production pipelines to immersive deployment. Built for practitioners who want to leave with something they can use.',
-    meta: 'Day 1–3 · Limited Seats',
-    sessionSlots: [
-      {
-        title: 'Masterclass 1',
-        topic: '3D Gaussian Splatting (3DGS)',
-        speaker: {
-          name: 'Dr. Lukasz Mirocha',
-          jobTitle: 'Director',
-          organization: 'Opus Lab',
-          photo: '/speaker-pics/Lukasz Mirocha.jpeg',
-        },
-      },
-      { title: 'Masterclass 2', topic: 'Virtual Production, Digital Humans, AI & Future Storytelling' },
-      { title: 'Masterclass 3', topic: 'AR Wall ICVFX Masterclass' },
-    ],
+    category: '4x Masterclass',
+    tagline: '',
+    body: '',
+    meta: '',
+    sessionSlots: XRAS_KL_MASTERCLASS_SLOTS as SessionSlot[],
   },
   {
     id: 'coaching',
     icon: <Lightbulb className={iconClass} />,
     shortTitle: 'Coaching',
     category: 'Coaching',
-    tagline: 'For the builders who need a sounding board.',
-    body: 'One-on-one and small group coaching sessions pairing AI and XR startups with industry mentors. Get direct feedback, sharpen your pitch, and find your next move.',
-    meta: 'Day 2–3 · Limited Seats',
-    sessionSlots: [
-      {
-
-        topic: 'Women Empowerment',
-        speaker: {
-          name: 'Dimitri Josephine',
-          jobTitle: 'Virtual Art Director & Head of Virtual Production',
-          photo: '/speaker-pics/Dimitri Josephine.jpg.jpeg',
-          organization: 'Unreal Engine Authorised Instructor',
-        },
-      },
-
-    ],
+    tagline: '',
+    body: '',
+    meta: '',
+    sessionSlots: XRAS_KL_COACHING_SLOTS as SessionSlot[],
   },
   {
     id: 'hackathon',
     icon: <Clapperboard className={iconClass} />,
     shortTitle: 'AI Filmmaking',
-    category: 'Hackathon Grand Final',
-    tagline: "The proving ground for Asia's next XR filmmakers.",
-    body: 'Teams compete live with AI-assisted filmmaking tools, judged by industry leaders. The Grand Final is where months of regional competition converge into one stage.',
-    meta: 'Day 2 · Competition Stage',
+    category: 'AI Filmmaking',
+    tagline: XRAS_KL_AI_FILMMAKING.highlights[0],
+    body: XRAS_KL_AI_FILMMAKING.highlights[1],
+    meta: '',
   },
   {
     id: 'esports',
@@ -152,10 +133,10 @@ const ACTIVATIONS: Activation[] = [
     id: 'gala',
     icon: <Sparkles className={iconClass} />,
     shortTitle: 'Gala',
-    category: 'Awards Gala',
-    tagline: 'The night the industry celebrates itself.',
-    body: 'An awards ceremony and gala dinner recognising excellence across XR education, film production, broadcast, and esports. 600+ peers, clients, and industry leaders in one room.',
-    meta: 'Day 2 · Night',
+    category: 'Awards & Gala',
+    tagline: XRAS_KL_AWARDS_GALA.tagline,
+    body: XRAS_KL_AWARDS_GALA.body,
+    meta: '',
   },
 ];
 
@@ -325,6 +306,184 @@ const ActivationMediaGallery = ({ sections }: { sections: ActivationMediaSection
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
+// AI Filmmaking & Awards detail panels
+// ─────────────────────────────────────────────────────────────────────────────
+
+const sectionLabelStyle = {
+  fontSize: '0.58rem',
+  color: '#ef783d',
+} as const;
+
+const bodyTextStyle = {
+  fontSize: 'clamp(0.92rem, 2.3vw, 1rem)',
+  lineHeight: 1.75,
+  color: '#a8b8d0',
+} as const;
+
+const cardStyle = {
+  background: 'rgba(255,255,255,0.04)',
+  border: '1px solid rgba(239,120,61,0.22)',
+  boxShadow: '0 0 24px rgba(239,120,61,0.06), inset 0 1px 0 rgba(255,255,255,0.05)',
+} as const;
+
+const AiFilmmakingDetails = () => {
+  const { highlights, framework, benefits, interactiveMedia } = XRAS_KL_AI_FILMMAKING;
+
+  return (
+    <div className="mt-8 space-y-8">
+      <ul className="space-y-2">
+        {highlights.slice(2).map((item) => (
+          <li key={item} className="leading-relaxed" style={bodyTextStyle}>
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <div>
+        <p className="mb-4 font-bold tracking-[0.28em] uppercase" style={sectionLabelStyle}>
+          {framework.title}
+        </p>
+        <p className="mb-5 leading-relaxed" style={bodyTextStyle}>
+          {framework.intro}
+        </p>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {framework.pillars.map((pillar) => (
+            <div key={pillar.title} className="rounded-xl p-5" style={cardStyle}>
+              <p className="mb-2 font-bold" style={{ fontSize: '0.9rem', color: '#f8faff' }}>
+                {pillar.title}
+              </p>
+              <p className="leading-relaxed" style={bodyTextStyle}>
+                {pillar.description}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-5 leading-relaxed" style={bodyTextStyle}>
+          {framework.challengeBrief}
+        </p>
+      </div>
+
+      <div>
+        <p className="mb-4 font-bold tracking-[0.28em] uppercase" style={sectionLabelStyle}>
+          {benefits.title}
+        </p>
+        <div className="space-y-4">
+          {benefits.items.map((benefit) => (
+            <div key={benefit.title} className="rounded-xl p-5" style={cardStyle}>
+              <p className="mb-2 font-bold" style={{ fontSize: '0.9rem', color: '#f8faff' }}>
+                {benefit.title}
+              </p>
+              <p className="leading-relaxed" style={bodyTextStyle}>
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 leading-relaxed" style={bodyTextStyle}>
+          {benefits.closing}{' '}
+          {benefits.countries.map((country, index) => (
+            <span key={country.code}>
+              <span role="img" aria-label={country.label}>
+                {country.flag}
+              </span>{' '}
+              {country.code}
+              {index < benefits.countries.length - 1 ? ' / ' : ''}
+            </span>
+          ))}
+        </p>
+      </div>
+
+      <div>
+        <p className="mb-4 font-bold tracking-[0.28em] uppercase" style={sectionLabelStyle}>
+          {interactiveMedia.title}
+        </p>
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {interactiveMedia.items.map((item) => (
+            <figure key={item.title} className="overflow-hidden rounded-xl" style={cardStyle}>
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                className="w-full bg-white object-contain"
+              />
+              <figcaption className="px-5 py-4">
+                <p className="mb-2 font-bold" style={{ fontSize: '0.9rem', color: '#f8faff' }}>
+                  {item.title}
+                </p>
+                <p className="leading-relaxed" style={bodyTextStyle}>
+                  {item.description}
+                </p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AwardsGalaDetails = () => {
+  const { headline, categories, howToParticipate } = XRAS_KL_AWARDS_GALA;
+
+  return (
+    <div className="mt-8 space-y-8">
+      <p
+        className="font-bold tracking-[0.12em] uppercase leading-relaxed"
+        style={{ fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#f8faff' }}
+      >
+        {headline}
+      </p>
+
+      <div>
+        <p className="mb-4 font-bold tracking-[0.28em] uppercase" style={sectionLabelStyle}>
+          AWARD CATEGORIES:
+        </p>
+        <div className="overflow-hidden rounded-xl" style={cardStyle}>
+          {categories.map((category, index) => (
+            <div
+              key={category.name}
+              className="flex flex-col gap-2 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
+              style={{
+                borderTop: index > 0 ? '1px solid rgba(255,255,255,0.08)' : undefined,
+              }}
+            >
+              <p className="font-semibold leading-snug" style={{ fontSize: '0.88rem', color: '#f0f6ff' }}>
+                {category.name}
+              </p>
+              <p
+                className="shrink-0 font-mono font-semibold tracking-[0.14em] uppercase"
+                style={{ fontSize: '0.72rem', color: '#ef783d' }}
+              >
+                {category.count}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p className="mb-4 font-bold tracking-[0.28em] uppercase" style={sectionLabelStyle}>
+          {howToParticipate.title}
+        </p>
+        <div className="space-y-3">
+          {howToParticipate.steps.map((step) => (
+            <div
+              key={step}
+              className="rounded-xl px-5 py-4"
+              style={cardStyle}
+            >
+              <span className="font-semibold tracking-[0.08em] uppercase" style={{ fontSize: '0.88rem', color: '#f8faff' }}>
+                {step}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Expanded Panel — improved text readability
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -373,69 +532,77 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
           </span>
 
           {/* Tagline — bright white */}
-          <h3
-            className="font-heading font-bold leading-tight mb-4"
-            style={{
-              fontSize: 'clamp(1.25rem, 2.5vw, 1.7rem)',
-              color: '#f8faff',
-              letterSpacing: '0.01em',
-            }}
-          >
-            {activation.tagline}
-          </h3>
+          {activation.tagline ? (
+            <>
+              <h3
+                className="font-heading font-bold leading-tight mb-4"
+                style={{
+                  fontSize: 'clamp(1.25rem, 2.5vw, 1.7rem)',
+                  color: '#f8faff',
+                  letterSpacing: '0.01em',
+                }}
+              >
+                {activation.tagline}
+              </h3>
 
-          {/* Divider */}
-          <div
-            className="w-10 h-[2px] mb-5 rounded-full"
-            style={{
-              background: 'linear-gradient(90deg, #ef783d, transparent)',
-              boxShadow: '0 0 10px rgba(239,120,61,0.4)',
-            }}
-          />
+              {/* Divider */}
+              <div
+                className="w-10 h-[2px] mb-5 rounded-full"
+                style={{
+                  background: 'linear-gradient(90deg, #ef783d, transparent)',
+                  boxShadow: '0 0 10px rgba(239,120,61,0.4)',
+                }}
+              />
+            </>
+          ) : null}
 
           {/* Body — clearly readable muted white */}
-          <p
-            className="leading-relaxed"
-            style={{
-              fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
-              lineHeight: 1.9,
-              color: '#a8b8d0',
-              maxWidth: '58ch',
-            }}
-          >
-            {activation.body}
-          </p>
+          {activation.body ? (
+            <p
+              className="leading-relaxed"
+              style={{
+                fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
+                lineHeight: 1.9,
+                color: '#a8b8d0',
+                maxWidth: '58ch',
+              }}
+            >
+              {activation.body}
+            </p>
+          ) : null}
         </div>
 
         {/* Meta pill */}
-        <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
-          <div
-            className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
-            style={{
-              background: 'rgba(239,120,61,0.12)',
-              border: '1px solid rgba(239,120,61,0.4)',
-              boxShadow: '0 0 20px rgba(239,120,61,0.1)',
-            }}
-          >
+        {activation.meta ? (
+          <div className="flex md:flex-col md:items-end items-center gap-3 md:gap-0">
             <div
-              className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
+              className="flex items-center gap-2.5 px-4 py-3 rounded-lg flex-shrink-0"
               style={{
-                background: '#ef783d',
-                boxShadow: '0 0 10px rgba(239,120,61,0.8)',
-              }}
-              aria-hidden="true"
-            />
-            <span
-              className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
-              style={{
-                fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
-                color: '#ef783d',
+                background: 'rgba(239,120,61,0.12)',
+                border: '1px solid rgba(239,120,61,0.4)',
+                boxShadow: '0 0 20px rgba(239,120,61,0.1)',
               }}
             >
-              {activation.meta}
-            </span>
+              <div
+                className="w-2 h-2 rounded-full flex-shrink-0 animate-pulse"
+                style={{
+                  background: '#ef783d',
+                  boxShadow: '0 0 10px rgba(239,120,61,0.8)',
+                }}
+                aria-hidden="true"
+              />
+              <span
+                className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
+                style={{
+                  fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+                  color: '#ef783d',
+                }}
+              >
+                {activation.meta}
+              </span>
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
 
       {activation.sessionSlots && activation.sessionSlots.length > 0 && (
@@ -443,6 +610,10 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
       )}
 
       {activation.id === 'conference' && <ConferenceAgenda />}
+
+      {activation.id === 'hackathon' && <AiFilmmakingDetails />}
+
+      {activation.id === 'gala' && <AwardsGalaDetails />}
 
       {activation.mediaSections && activation.mediaSections.length > 0 && (
         <ActivationMediaGallery sections={activation.mediaSections} />

@@ -11,6 +11,7 @@ export type SessionSlot = {
   title?: string;
   topic?: string;
   speaker?: SessionSpeaker;
+  speakers?: SessionSpeaker[];
   comingSoon?: boolean;
 };
 
@@ -22,24 +23,105 @@ type ActivationSessionSlotsProps = {
 const COMING_SOON_LABEL = 'COMING SOON';
 const TOPIC_FONT_SIZE = '0.78rem';
 
+const getGridClass = (count: number) => {
+  if (count === 1) return 'grid-cols-1';
+  if (count === 3) return 'md:grid-cols-2 lg:grid-cols-3';
+  return 'lg:grid-cols-2';
+};
+
 const ActivationSessionSlots = ({
   slots,
   accentColor = '#ef783d',
 }: ActivationSessionSlotsProps) => (
-  <div
-    className={`mt-8 grid items-stretch gap-4 ${slots.length === 3 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2'
-      }`}
-  >
+  <div className={`mt-8 grid items-stretch gap-4 ${getGridClass(slots.length)}`}>
     {slots.map((slot, index) => {
-      const speaker = slot.speaker ?? {};
-      const hasPhoto = Boolean(speaker.photo);
-      const hasName = Boolean(speaker.name);
-      const hasJobTitle = Boolean(speaker.jobTitle);
-      const hasOrganization = Boolean(speaker.organization);
-      const hasSpeakerDetails = hasName || hasJobTitle || hasOrganization;
+      const speakerList = slot.speakers?.length
+        ? slot.speakers
+        : slot.speaker
+          ? [slot.speaker]
+          : [];
+      const hasSpeakerDetails = speakerList.some(
+        (speaker) => speaker.name || speaker.jobTitle || speaker.organization,
+      );
       const hasTopic = Boolean(slot.topic);
       const showSpeakerComingSoon = Boolean(slot.comingSoon) || !hasSpeakerDetails;
       const topicText = hasTopic ? slot.topic! : 'Topic to be announced';
+
+      const renderSpeaker = (speaker: SessionSpeaker, speakerIndex: number) => {
+        const hasPhoto = Boolean(speaker.photo);
+        const hasName = Boolean(speaker.name);
+        const hasJobTitle = Boolean(speaker.jobTitle);
+        const hasOrganization = Boolean(speaker.organization);
+
+        return (
+          <div
+            key={`speaker-${speakerIndex}`}
+            className={`flex items-start gap-4 ${speakerIndex > 0 ? 'pt-4' : ''}`}
+          >
+            <div
+              className="relative shrink-0 overflow-hidden rounded-xl"
+              style={{
+                width: '5.5rem',
+                height: '5.5rem',
+                background: hasPhoto ? 'transparent' : 'rgba(255,255,255,0.03)',
+                border: hasPhoto
+                  ? `1.5px solid ${accentColor}55`
+                  : `1.5px dashed ${accentColor}55`,
+                boxShadow: hasPhoto ? `0 0 18px ${accentColor}22` : 'none',
+              }}
+            >
+              {hasPhoto ? (
+                <img
+                  src={speaker.photo}
+                  alt={speaker.name ?? 'Speaker'}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full flex-col items-center justify-center gap-1">
+                  <User
+                    className="h-7 w-7"
+                    style={{ color: `${accentColor}88` }}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="font-bold tracking-[0.18em] uppercase"
+                    style={{ fontSize: '0.45rem', color: 'rgba(200,215,240,0.45)' }}
+                  >
+                    Photo
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <div className="min-w-0 flex-1 space-y-2">
+              {hasName ? (
+                <p className="font-bold leading-tight" style={{ fontSize: '1rem', color: '#f8faff' }}>
+                  {speaker.name}
+                </p>
+              ) : null}
+              <div>
+                {hasJobTitle ? (
+                  <p
+                    className="leading-snug whitespace-pre-line"
+                    style={{ fontSize: '0.82rem', color: '#c8d8f0' }}
+                  >
+                    {speaker.jobTitle}
+                  </p>
+                ) : null}
+                {hasOrganization ? (
+                  <p
+                    className="leading-snug whitespace-pre-line"
+                    style={{ fontSize: '0.78rem', color: '#a8b8d0' }}
+                  >
+                    {speaker.organization}
+                  </p>
+                ) : null}
+              </div>
+            </div>
+          </div>
+        );
+      };
 
       return (
         <article
@@ -104,60 +186,14 @@ const ActivationSessionSlots = ({
                 </span>
               </div>
             ) : (
-              <div className="flex items-start gap-4">
-                <div
-                  className="relative shrink-0 overflow-hidden rounded-xl"
-                  style={{
-                    width: '5.5rem',
-                    height: '5.5rem',
-                    background: hasPhoto ? 'transparent' : 'rgba(255,255,255,0.03)',
-                    border: hasPhoto
-                      ? `1.5px solid ${accentColor}55`
-                      : `1.5px dashed ${accentColor}55`,
-                    boxShadow: hasPhoto ? `0 0 18px ${accentColor}22` : 'none',
-                  }}
-                >
-                  {hasPhoto ? (
-                    <img
-                      src={speaker.photo}
-                      alt={speaker.name ?? 'Speaker'}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full flex-col items-center justify-center gap-1">
-                      <User
-                        className="h-7 w-7"
-                        style={{ color: `${accentColor}88` }}
-                        strokeWidth={1.5}
-                        aria-hidden="true"
-                      />
-                      <span
-                        className="font-bold tracking-[0.18em] uppercase"
-                        style={{ fontSize: '0.45rem', color: 'rgba(200,215,240,0.45)' }}
-                      >
-                        Photo
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="min-w-0 flex-1 space-y-2">
-                  {hasName ? (
-                    <p className="font-bold leading-tight" style={{ fontSize: '1rem', color: '#f8faff' }}>
-                      {speaker.name}
-                    </p>
-                  ) : null}
-                  {hasJobTitle ? (
-                    <p className="leading-snug" style={{ fontSize: '0.82rem', color: '#c8d8f0' }}>
-                      {speaker.jobTitle}
-                    </p>
-                  ) : null}
-                  {hasOrganization ? (
-                    <p className="leading-snug" style={{ fontSize: '0.78rem', color: '#a8b8d0' }}>
-                      {speaker.organization}
-                    </p>
-                  ) : null}
-                </div>
+              <div
+                className={
+                  slots.length === 1 && speakerList.length > 1
+                    ? 'grid grid-cols-1 gap-4 md:grid-cols-2'
+                    : 'space-y-0'
+                }
+              >
+                {speakerList.map((speaker, speakerIndex) => renderSpeaker(speaker, speakerIndex))}
               </div>
             )}
           </div>
