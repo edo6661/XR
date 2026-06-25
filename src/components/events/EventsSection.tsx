@@ -6,18 +6,18 @@ import SectionEyebrow from '../ui/SectionEyebrow';
 gsap.registerPlugin(ScrollTrigger);
 const FLAGSHIP_EVENTS = [
 
-  {
-    title: "AI-XR Cultural Innovation Forum",
-    date: '16 – 17 Oct 2026',
-    location: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak',
-    description: 'A prelude to XR ASIA SUMMIT – Innovation • Culture • Technology • Future Talent',
-    accentColor: '#22d3ee',
-    tag: 'AIXR',
-    to: '/aixr-2026-sarawak',
-    imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image-edited.jpeg',
-    imagePosition: 'center',
-    isFeatured: true,
-  },
+  // {
+  //   title: "AI-XR Cultural Innovation Forum",
+  //   date: '16 – 17 Oct 2026',
+  //   location: 'Borneo Convention Centre Kuching (BCCK), Kuching, Sarawak',
+  //   description: 'A prelude to XR ASIA SUMMIT – Innovation • Culture • Technology • Future Talent',
+  //   accentColor: '#22d3ee',
+  //   tag: 'AIXR',
+  //   to: '/aixr-2026-sarawak',
+  //   imageSrc: '/3-gateway-images/AI-XR Cultural Forum_Main Image-edited.jpeg',
+  //   imagePosition: 'center',
+  //   isFeatured: true,
+  // },
   {
     title: 'XR ASIA SUMMIT 2026',
     date: '1 – 3 Dec 2026',
@@ -128,7 +128,7 @@ const EventsSection = () => {
             Entry Point
           </span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 gap-3">
           {FLAGSHIP_EVENTS.map((ev, i) => (
             <SpotlightCard key={ev.title} index={i} {...ev} />
           ))}
