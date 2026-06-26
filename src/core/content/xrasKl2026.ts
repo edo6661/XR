@@ -110,7 +110,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
   {
     name: "Rene Amador",
     role: "Co-Founder, Chief Executive Officer",
-    company: "",
+    company: "ARwall",
     photo: "/speaker-pics/Rene Amador.png",
     accentColor: "#ef783d",
   },
