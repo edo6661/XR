@@ -392,7 +392,14 @@ const AiFilmmakingDetails = () => {
             </span>
           ))}
         </p>
-
+        <figure className="mt-6 overflow-hidden rounded-xl  p-3 sm:p-4">
+          <img
+            src={benefits.sdgBanner.src}
+            alt={benefits.sdgBanner.alt}
+            loading="lazy"
+            className="w-full object-contain rounded-xl"
+          />
+        </figure>
       </div>
     </div>
   );
