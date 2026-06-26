@@ -18,6 +18,7 @@ import {
   XRAS_KL_MASTERCLASS_SLOTS,
   XRAS_KL_COACHING_SLOTS,
   XRAS_KL_AI_FILMMAKING,
+  XRAS_KL_ESPORTS,
   XRAS_KL_AWARDS_GALA,
 } from '../../core/content/xrasKl2026';
 
@@ -125,9 +126,9 @@ const ACTIVATIONS: Activation[] = [
     icon: <Gamepad2 className={iconClass} />,
     shortTitle: 'Esports',
     category: 'Esports Grand Final',
-    tagline: 'Competitive gaming, produced like a broadcast.',
-    body: 'The Esports Tournament Grand Final — produced using XR stage technology, volumetric graphics, and AI-driven broadcast systems. Where esports meets next-generation live production.',
-    meta: 'Day 2 · Esports Arena',
+    tagline: XRAS_KL_ESPORTS.tagline,
+    body: '',
+    meta: '',
   },
   {
     id: 'gala',
@@ -327,7 +328,7 @@ const cardStyle = {
 } as const;
 
 const AiFilmmakingDetails = () => {
-  const { highlights, framework, benefits, interactiveMedia } = XRAS_KL_AI_FILMMAKING;
+  const { highlights, framework, benefits } = XRAS_KL_AI_FILMMAKING;
 
   return (
     <div className="mt-8 space-y-8">
@@ -391,36 +392,36 @@ const AiFilmmakingDetails = () => {
             </span>
           ))}
         </p>
-      </div>
 
-      <div>
-        <p className="mb-4 font-bold tracking-[0.28em] uppercase" style={sectionLabelStyle}>
-          {interactiveMedia.title}
-        </p>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {interactiveMedia.items.map((item) => (
-            <figure key={item.title} className="overflow-hidden rounded-xl" style={cardStyle}>
-              <img
-                src={item.image}
-                alt={item.title}
-                loading="lazy"
-                className="w-full bg-white object-contain"
-              />
-              <figcaption className="px-5 py-4">
-                <p className="mb-2 font-bold" style={{ fontSize: '0.9rem', color: '#f8faff' }}>
-                  {item.title}
-                </p>
-                <p className="leading-relaxed" style={bodyTextStyle}>
-                  {item.description}
-                </p>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
       </div>
     </div>
   );
 };
+
+const EsportsDetails = () => (
+  <div className="mt-8">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      {XRAS_KL_ESPORTS.items.map((item) => (
+        <figure key={item.title} className="overflow-hidden rounded-xl" style={cardStyle}>
+          <img
+            src={item.image}
+            alt=""
+            loading="lazy"
+            className="w-full bg-white object-contain"
+          />
+          <figcaption className="px-5 py-4">
+            <p className="mb-2 font-bold" style={{ fontSize: '0.9rem', color: '#f8faff' }}>
+              {item.title}
+            </p>
+            <p className="leading-relaxed" style={bodyTextStyle}>
+              {item.description}
+            </p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+);
 
 const AwardsGalaDetails = () => {
   const { headline, categories, howToParticipate } = XRAS_KL_AWARDS_GALA;
@@ -612,6 +613,8 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
       {activation.id === 'conference' && <ConferenceAgenda />}
 
       {activation.id === 'hackathon' && <AiFilmmakingDetails />}
+
+      {activation.id === 'esports' && <EsportsDetails />}
 
       {activation.id === 'gala' && <AwardsGalaDetails />}
 

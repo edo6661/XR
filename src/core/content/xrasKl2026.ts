@@ -284,24 +284,31 @@ export const XRAS_KL_AI_FILMMAKING = {
       { code: "PH", flag: "🇵🇭", label: "Philippines" },
       { code: "VN", flag: "🇻🇳", label: "Vietnam" },
     ],
+    sdgBanner: {
+      src: "/booth/17@2x.png",
+      alt: "United Nations Sustainable Development Goals 1–17",
+      width: 3840,
+      height: 226,
+    },
   },
-  interactiveMedia: {
-    title: "The Future of Interactive Media Live on Stage.",
-    items: [
-      {
-        title: "AI-XR Production",
-        image: "/others/a.png",
-        description:
-          "Real-time rendering, virtual environments and intelligent broadcast systems powering the live experience.",
-      },
-      {
-        title: "Interactive Media Showcase",
-        image: "/others/b.jpeg",
-        description:
-          "Demonstrating how gaming, entertainment and immersive technologies converge in front of a live audience.",
-      },
-    ],
-  },
+} as const;
+
+export const XRAS_KL_ESPORTS = {
+  tagline: "The Future of Interactive Media Live on Stage.",
+  items: [
+    {
+      title: "AI-XR Production",
+      image: "/others/a.png",
+      description:
+        "Real-time rendering, virtual environments and intelligent broadcast systems powering the live experience.",
+    },
+    {
+      title: "Interactive Media Showcase",
+      image: "/others/b.jpeg",
+      description:
+        "Demonstrating how gaming, entertainment and immersive technologies converge in front of a live audience.",
+    },
+  ],
 } as const;
 
 export const XRAS_KL_AWARDS_GALA = {
