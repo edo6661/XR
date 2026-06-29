@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Mic,
@@ -655,6 +655,7 @@ const XrasActivationsSection = () => {
   const [activeId, setActiveId] = useState<string>(ACTIVATIONS[0].id);
   const headingRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const tabsScrollRef = useRef<HTMLDivElement>(null);
   const {
     sectionRef,
     sentinelRef,
@@ -681,6 +682,38 @@ const XrasActivationsSection = () => {
     },
     [scrollToContent, shouldScrollToContent],
   );
+
+  useLayoutEffect(() => {
+    const el = tabsScrollRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      e.stopPropagation();
+
+      const { scrollTop, scrollHeight, clientHeight, scrollLeft, scrollWidth, clientWidth } = el;
+      const { deltaY, deltaX } = e;
+
+      if (Math.abs(deltaY) >= Math.abs(deltaX)) {
+        if (scrollHeight <= clientHeight) return;
+        const atTop = scrollTop <= 0;
+        const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+        if ((deltaY < 0 && atTop) || (deltaY > 0 && atBottom)) return;
+        e.preventDefault();
+        el.scrollTop += deltaY;
+        return;
+      }
+
+      if (scrollWidth <= clientWidth) return;
+      const atLeft = scrollLeft <= 0;
+      const atRight = scrollLeft + clientWidth >= scrollWidth - 1;
+      if ((deltaX < 0 && atLeft) || (deltaX > 0 && atRight)) return;
+      e.preventDefault();
+      el.scrollLeft += deltaX;
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
 
   return (
     <section
@@ -740,7 +773,12 @@ const XrasActivationsSection = () => {
             >
               <p className="activation-tabs-hint">Explore what's waiting for you</p>
 
-              <div className="activation-tabs-scroll pb-2 pt-1 -mx-1 px-1 md:pt-0 md:mx-0 md:px-0">
+              <div
+                ref={tabsScrollRef}
+                className="activation-tabs-scroll pb-2 pt-1 -mx-1 px-1 md:pt-0 md:mx-0 md:px-0"
+                data-lenis-prevent
+                data-lenis-prevent-wheel
+              >
                 <div className="flex gap-3 w-max justify-start md:w-full md:flex-col md:gap-2">
                   {ACTIVATIONS.map((activation, index) => (
                     <TabButton
