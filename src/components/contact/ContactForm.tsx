@@ -34,12 +34,11 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const mailto = buildLeadCaptureMailto(form, { title: 'General Enquiry' });
-    const withMessage = mailto.replace(
-      encodeURIComponent('Please follow up and share any requested documents.'),
-      encodeURIComponent(`Message:\n${message}\n\nPlease follow up and share any requested documents.`),
-    );
-    window.location.href = withMessage;
+    const mailto = buildLeadCaptureMailto(form, {
+      title: 'General Enquiry',
+      message: message.trim() || undefined,
+    });
+    window.location.href = mailto;
     setSubmitted(true);
   };
 

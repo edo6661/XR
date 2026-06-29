@@ -1,5 +1,6 @@
 import { COMPANY } from "../navigation/routes";
 import { WHATSAPP_PLACEHOLDER } from "./contactPage";
+import { buildLeadEnquiryEmailBody } from "./enquiryEmail";
 
 export const LEAD_INTEREST_OPTIONS = [
   "General registration interest",
@@ -65,6 +66,8 @@ export type LeadCaptureFields = {
   email: string;
   phone: string;
   title: string;
+  organisation?: string;
+  country?: string;
   interest: LeadInterest;
   event: LeadEvent | "";
 };
@@ -134,7 +137,7 @@ export function getDocumentsForLead(
 
 export function buildLeadCaptureMailto(
   fields: LeadCaptureFields,
-  context: { title: string; eventName?: string },
+  context: { title: string; eventName?: string; message?: string },
 ): string {
   const subject = encodeURIComponent(
     context.eventName
@@ -142,20 +145,12 @@ export function buildLeadCaptureMailto(
       : `XR Summits — ${fields.interest}`,
   );
 
-  const lines = [
-    `Lead capture: ${context.title}`,
-    `Event: ${fields.event}`,
-    context.eventName ? `Page context: ${context.eventName}` : "",
-    `Name: ${fields.name}`,
-    `Email: ${fields.email}`,
-    `Phone: ${fields.phone}`,
-    `Title: ${fields.title}`,
-    `Interest: ${fields.interest}`,
-    "",
-    "Please follow up and share any requested documents.",
-  ].filter(Boolean);
-
-  const body = encodeURIComponent(lines.join("\n"));
+  const body = encodeURIComponent(
+    buildLeadEnquiryEmailBody({
+      ...fields,
+      message: context.message,
+    }),
+  );
   return `mailto:${COMPANY.email}?subject=${subject}&body=${body}`;
 }
 

@@ -11,7 +11,7 @@ export type XrasSpeaker = {
 export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
   {
     name: "Shamsul Izhan Abdul Majid",
-    role: "Chief Executive Officer",
+    role: "Former CEO",
     company: "Malaysia National AI Office (NAIO)",
     photo: "/speaker-pics/Sam Majid.jpg",
     accentColor: "#ef783d",
@@ -32,16 +32,23 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
   },
   {
     name: "Chaitanya Chinchlikar",
-    role: "VP, Business Head & CTO (Emerging Media)",
+    role: "Vice President, Business Head & CTO (Emerging Media)",
     company: "Whistling Woods International",
     photo: "/speaker-pics/Chaitanya.jpeg",
     accentColor: "#0ea5e9",
   },
   {
     name: "Dr. Lukasz Mirocha",
-    role: "Director",
+    role: "Founder",
     company: "Opus Lab",
     photo: "/speaker-pics/Lukasz Mirocha.jpeg",
+    accentColor: "#0ea5e9",
+  },
+  {
+    name: "Florin Ursu",
+    role: "Vice President of Platform Quality and Stability",
+    company: "Xsolla",
+    photo: "/speaker-pics/Florin Ursu.jpg.jpeg",
     accentColor: "#0ea5e9",
   },
   {
@@ -52,9 +59,16 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     accentColor: "#ef783d",
   },
   {
+    name: "Lakshmi Deshpande",
+    role: "Head of Spatial AI & Immersive Experience Design",
+    company: "",
+    photo: "/speaker-pics/Lakshmi Deshpande.jpg",
+    accentColor: "#ef783d",
+  },
+  {
     name: "Ryoichi Wada",
     role: "CEO",
-    company: "TOKYO EPIC INC.",
+    company: "Tokyo Epic Inc",
     photo: "/speaker-pics/Ryoichi Wada.jpeg",
     accentColor: "#fedb21",
   },
@@ -89,37 +103,23 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
   {
     name: "Prof. Yoki Chin",
     role: "President",
-    company: "POINT College/Future Studios",
+    company: "POINT College",
     photo: "/speaker-pics/Prof Yoki.jpg.jpeg",
     accentColor: "#fedb21",
   },
   {
-    name: "Dr Yahaya Abdullah",
-    role: "",
-    company: "Management & Science University",
+    name: "Dr. Yahaya Abdullah",
+    role: "Senior Lecturer/Industry Strategy Architect",
+    company: "Management and Science University (MSU)",
     photo: "/speaker-pics/Dr Yahaya Abdullah.jpg",
     accentColor: "#0ea5e9",
   },
   {
     name: "Assoc. Prof. Ts. Dr. Safaa N.S. Al-Humairi",
-    role: "Robotics & Mechatronics Specialist",
-    company: "Management & Science University",
+    role: "Deputy Dean of Research, Internationalisation, and Industry / Robotics & Mechatronics Specialist",
+    company: "Management and Science University (MSU)",
     photo: "/speaker-pics/Safaa Al-Humairi.webp",
     accentColor: "#0ea5e9",
-  },
-  {
-    name: "Rene Amador",
-    role: "Co-Founder, Chief Executive Officer",
-    company: "ARwall",
-    photo: "/speaker-pics/Rene Amador.png",
-    accentColor: "#ef783d",
-  },
-  {
-    name: "Lakshmi Deshpande",
-    role: "Head of Spatial AI & Immersive Experience Design",
-    company: "",
-    photo: "/speaker-pics/Lakshmi Deshpande.jpg",
-    accentColor: "#ef783d",
   },
 ] as const;
 

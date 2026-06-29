@@ -1,8 +1,7 @@
 import { COMPANY } from "../navigation/routes";
+import { buildLeadEnquiryEmailBody } from "./enquiryEmail";
 
-export const ENQUIRY_EMAIL_BODY = `Dear XR SUMMITS Team,
-I am reaching out to express my interest would like to learn more about the available opportunities.
-I look forward to hearing from you.`;
+export const ENQUIRY_EMAIL_BODY = buildLeadEnquiryEmailBody({});
 
 /** Uniform mailto link — only subject differs per CTA */
 export function buildContactMailto(subjectLabel: string): string {
