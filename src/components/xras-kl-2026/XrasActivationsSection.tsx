@@ -48,6 +48,13 @@ type Activation = {
 
 const iconClass = 'w-5 h-5 flex-shrink-0';
 
+const ACTIVATION_PANEL_BACKGROUNDS = [
+  '/xras-activation/1.jpg',
+  '/xras-activation/2.jpg',
+  '/xras-activation/3.jpg',
+  '/xras-activation/4.jpg',
+] as const;
+
 const ACTIVATIONS: Activation[] = [
   {
     id: 'conference',
@@ -495,11 +502,19 @@ const AwardsGalaDetails = () => {
 // Expanded Panel — improved text readability
 // ─────────────────────────────────────────────────────────────────────────────
 
-const ExpandedPanel = ({ activation }: { activation: Activation }) => (
+const ExpandedPanel = ({
+  activation,
+  backgroundSrc,
+}: {
+  activation: Activation;
+  backgroundSrc: string;
+}) => (
   <div
     className="relative rounded-2xl overflow-hidden"
     style={{
-      background: 'linear-gradient(155deg, rgba(22,36,60,0.75) 0%, rgba(10,18,34,0.92) 100%)',
+      backgroundImage: `linear-gradient(155deg, rgba(22,36,60,0.75) 0%, rgba(10,18,34,0.92) 100%), url(${backgroundSrc})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
       border: '1px solid rgba(239,120,61,0.22)',
       boxShadow: '0 0 40px rgba(239,120,61,0.06), 0 24px 48px rgba(0,0,0,0.3)',
     }}
@@ -745,7 +760,15 @@ const XrasActivationsSection = () => {
             <ActivationPanelStack
               items={ACTIVATIONS}
               activeId={activeId}
-              renderPanel={(activation) => <ExpandedPanel activation={activation} />}
+              renderPanel={(activation) => {
+                const index = ACTIVATIONS.findIndex((item) => item.id === activation.id);
+                const backgroundSrc =
+                  ACTIVATION_PANEL_BACKGROUNDS[index % ACTIVATION_PANEL_BACKGROUNDS.length];
+
+                return (
+                  <ExpandedPanel activation={activation} backgroundSrc={backgroundSrc} />
+                );
+              }}
             />
           </div>
         </div>
