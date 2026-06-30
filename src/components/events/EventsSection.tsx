@@ -123,9 +123,9 @@ const EventsSection = () => {
           className="font-heading font-black text-foreground mb-12 opacity-0"
           style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
         >
-          Choose Your{' '}
+
           <span className="gradient-text-accent">
-            Entry Point
+            Welcome
           </span>
         </h2>
         <div className="grid grid-cols-1 gap-3">
