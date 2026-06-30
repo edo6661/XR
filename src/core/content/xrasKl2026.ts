@@ -294,7 +294,9 @@ export const XRAS_KL_AI_FILMMAKING = {
 } as const;
 
 export const XRAS_KL_ESPORTS = {
-  tagline: "The Future of Interactive Media Live on Stage.",
+  tagline: "Competitive gaming, produced like a broadcast.",
+  body: "The Cup Grand Final — produced using XR stage technology, volumetric graphics, and AI-driven broadcast systems. Where esports meets next-generation live production.",
+  headline: "The Future of Interactive Media Live on Stage.",
   items: [
     {
       title: "AI-XR Production",
@@ -317,7 +319,7 @@ export const XRAS_KL_AWARDS_GALA = {
   headline:
     "RECOGNITION CREATES MOMENTUM. THE INDUSTRY'S BEST DESERVE A STAGE.",
   categories: [
-    { name: "AI-XR ESPORTS MLBB CUP AWARDS (X 5 MEMBERS)", count: "5 AWARDS" },
+    { name: "AI-XR ESPORTS CUP AWARDS (X 5 MEMBERS)", count: "5 AWARDS" },
     { name: "AI FILMMAKING AWARDS (TOP 5)", count: "5 AWARDS" },
     { name: "BEST IMMERSIVE EXPERIENCE BOOTH AWARDS", count: "1 AWARD" },
     { name: "BEST USE OF XR IN EDUCATION AND TRAINING", count: "1 AWARD" },

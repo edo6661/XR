@@ -26,6 +26,8 @@ const EMPTY_FORM: LeadCaptureFields = {
   email: '',
   phone: '',
   title: '',
+  organisation: '',
+  country: '',
   interest: LEAD_INTEREST_OPTIONS[0],
   event: '',
 };
@@ -192,6 +194,40 @@ const LeadCaptureModal = ({
                   onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
                   className={INPUT_CLASS}
                   placeholder="Your role"
+                />
+              </label>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label className="flex flex-col gap-1.5">
+                <span className={LABEL_CLASS}>
+                  Organisation / Institution <span className="text-accent">*</span>
+                </span>
+                <input
+                  name="organisation"
+                  type="text"
+                  required
+                  autoComplete="organization"
+                  value={form.organisation ?? ''}
+                  onChange={(e) => setForm((f) => ({ ...f, organisation: e.target.value }))}
+                  className={INPUT_CLASS}
+                  placeholder="Your company or institution"
+                />
+              </label>
+
+              <label className="flex flex-col gap-1.5">
+                <span className={LABEL_CLASS}>
+                  Country <span className="text-accent">*</span>
+                </span>
+                <input
+                  name="country"
+                  type="text"
+                  required
+                  autoComplete="country-name"
+                  value={form.country ?? ''}
+                  onChange={(e) => setForm((f) => ({ ...f, country: e.target.value }))}
+                  className={INPUT_CLASS}
+                  placeholder="e.g. Malaysia"
                 />
               </label>
             </div>

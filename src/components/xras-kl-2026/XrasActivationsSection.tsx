@@ -104,8 +104,8 @@ const ACTIVATIONS: Activation[] = [
     icon: <GraduationCap className={iconClass} />,
     shortTitle: 'Masterclasses',
     category: '4x Masterclass',
-    tagline: '',
-    body: '',
+    tagline: 'Hands-on, production-ready skills.',
+    body: 'Deep-dive technical sessions covering real-world XR workflows — from production pipelines to immersive deployment. Built for practitioners who want to leave with something they can use.',
     meta: '',
     sessionSlots: XRAS_KL_MASTERCLASS_SLOTS as SessionSlot[],
   },
@@ -114,8 +114,8 @@ const ACTIVATIONS: Activation[] = [
     icon: <Lightbulb className={iconClass} />,
     shortTitle: 'Coaching',
     category: 'Coaching',
-    tagline: '',
-    body: '',
+    tagline: 'For the builders who need a sounding board.',
+    body: 'One-on-one and small group coaching sessions pairing AI and XR startups with industry mentors. Get direct feedback, sharpen your pitch, and find your next move.',
     meta: '',
     sessionSlots: XRAS_KL_COACHING_SLOTS as SessionSlot[],
   },
@@ -134,7 +134,7 @@ const ACTIVATIONS: Activation[] = [
     shortTitle: 'Esports',
     category: 'Esports Grand Final',
     tagline: XRAS_KL_ESPORTS.tagline,
-    body: '',
+    body: XRAS_KL_ESPORTS.body,
     meta: '',
   },
   {
@@ -413,7 +413,14 @@ const AiFilmmakingDetails = () => {
 };
 
 const EsportsDetails = () => (
-  <div className="mt-8">
+  <div className="mt-8 space-y-8">
+    <p
+      className="font-bold tracking-[0.12em] uppercase leading-relaxed"
+      style={{ fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', color: '#f8faff' }}
+    >
+      {XRAS_KL_ESPORTS.headline}
+    </p>
+
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {XRAS_KL_ESPORTS.items.map((item) => (
         <figure key={item.title} className="overflow-hidden rounded-xl" style={cardStyle}>

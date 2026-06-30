@@ -165,6 +165,8 @@ export function buildLeadCaptureWhatsAppHref(
     `Email: ${fields.email}`,
     `Phone: ${fields.phone}`,
     `Title: ${fields.title}`,
+    `Organisation: ${fields.organisation ?? ""}`,
+    `Country: ${fields.country ?? ""}`,
     `Event: ${fields.event}`,
     `Interest: ${fields.interest}`,
   ];
