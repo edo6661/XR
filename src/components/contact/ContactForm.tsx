@@ -1,11 +1,10 @@
 import { useState, type FormEvent } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Download, MessageCircle } from 'lucide-react';
 import { COMPANY } from '../../core/navigation/routes';
 import { WHATSAPP_PLACEHOLDER } from '../../core/content/contactPage';
 import {
   LEAD_EVENT_OPTIONS,
-  LEAD_INTEREST_OPTIONS,
   buildLeadCaptureMailto,
   buildLeadCaptureWhatsAppHref,
   getDocumentsForLead,
@@ -14,28 +13,28 @@ import {
   type LeadInterest,
 } from '../../core/content/leadCapture';
 
-interface ContactFormProps {
-  initialInterest?: LeadInterest;
-}
+const CONTACT_INTEREST: LeadInterest = 'General Enquiries';
 
-const ContactForm = ({ initialInterest }: ContactFormProps) => {
+const EMPTY_FORM: LeadCaptureFields = {
+  name: '',
+  email: '',
+  phone: '',
+  title: '',
+  organisation: '',
+  country: '',
+  interest: CONTACT_INTEREST,
+  event: '',
+};
+
+const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState<LeadCaptureFields>({
-    name: '',
-    email: '',
-    phone: '',
-    title: '',
-    interest: initialInterest ?? LEAD_INTEREST_OPTIONS[0],
-    event: '',
-  });
+  const [form, setForm] = useState<LeadCaptureFields>(EMPTY_FORM);
   const [message, setMessage] = useState('');
-
-  const isMedia = form.interest === 'Media / press';
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const mailto = buildLeadCaptureMailto(form, {
-      title: 'General Enquiry',
+      title: CONTACT_INTEREST,
       message: message.trim() || undefined,
     });
     window.location.href = mailto;
@@ -44,7 +43,7 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
 
   const documents = getDocumentsForLead('enquiry', form.interest);
   const availableDocs = documents.filter((doc) => doc.available);
-  const whatsappHref = buildLeadCaptureWhatsAppHref(form, { title: 'General Enquiry' });
+  const whatsappHref = buildLeadCaptureWhatsAppHref(form, { title: CONTACT_INTEREST });
 
   if (submitted) {
     return (
@@ -100,7 +99,11 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
 
         <button
           type="button"
-          onClick={() => setSubmitted(false)}
+          onClick={() => {
+            setSubmitted(false);
+            setForm(EMPTY_FORM);
+            setMessage('');
+          }}
           className="mt-2 text-micro-label font-bold text-accent hover:text-foreground transition-colors"
         >
           Send another message
@@ -133,25 +136,6 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
           </a>
         </p>
       </div>
-
-
-
-      <label className="flex flex-col gap-1.5">
-        <span className="text-label-ui">Interest</span>
-        <select
-          name="interest"
-          required
-          value={form.interest}
-          onChange={(e) => setForm((f) => ({ ...f, interest: e.target.value as LeadInterest }))}
-          className="input-field"
-        >
-          {LEAD_INTEREST_OPTIONS.map((option) => (
-            <option key={option} value={option} className="bg-[#0a0a0a]">
-              {option}
-            </option>
-          ))}
-        </select>
-      </label>
       <label className="flex flex-col gap-1.5">
         <span className="text-label-ui">Event</span>
         <select
@@ -201,6 +185,35 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <label className="flex flex-col gap-1.5">
+          <span className="text-label-ui">Organisation / Institution</span>
+          <input
+            name="organisation"
+            type="text"
+            required
+            autoComplete="organization"
+            value={form.organisation ?? ''}
+            onChange={(e) => setForm((f) => ({ ...f, organisation: e.target.value }))}
+            className="input-field"
+            placeholder="Your company or institution"
+          />
+        </label>
+        <label className="flex flex-col gap-1.5">
+          <span className="text-label-ui">Country</span>
+          <input
+            name="country"
+            type="text"
+            required
+            autoComplete="country-name"
+            value={form.country ?? ''}
+            onChange={(e) => setForm((f) => ({ ...f, country: e.target.value }))}
+            className="input-field"
+            placeholder="e.g. Malaysia"
+          />
+        </label>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <label className="flex flex-col gap-1.5">
           <span className="text-label-ui">Email</span>
           <input
             name="email"
@@ -225,23 +238,6 @@ const ContactForm = ({ initialInterest }: ContactFormProps) => {
           />
         </label>
       </div>
-
-      <AnimatePresence>
-        {isMedia && (
-          <motion.div
-            key="media-fields"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="flex flex-col gap-4 overflow-hidden"
-          >
-            <div className="callout-accent">
-              Applying for press accreditation — include your outlet and coverage angle in your message below.
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <label className="flex flex-col gap-1.5">
         <span className="text-label-ui">Message</span>

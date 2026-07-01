@@ -12,6 +12,7 @@ export const LEAD_INTEREST_OPTIONS = [
   "Partnership",
   "Government partnership",
   "University partnership",
+  "General Enquiries",
 ] as const;
 
 export type LeadInterest = (typeof LEAD_INTEREST_OPTIONS)[number];
