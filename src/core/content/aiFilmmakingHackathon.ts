@@ -244,7 +244,11 @@ export const HACKATHON_RULES = {
       number: 10,
       title: "Acceptance",
       intro: "Participation constitutes full acceptance of:",
-      bullets: ["These requirements", "Organiser decisions"],
+      bullets: [
+        "These requirements",
+        "Organiser decisions",
+        "Event terms and conditions",
+      ],
     },
   ],
 } as const;
@@ -309,7 +313,7 @@ export const HACKATHON_PRIZE_STRUCTURE = {
 
 export const HACKATHON_CHECKIN = {
   title: "Event Check-in & Access",
-  scanLabel: "Scan QR and Register",
+  scanLabel: "Take Your Story to Asia's Biggest XR Stage",
   qrImage: "/qr/old_qr.png",
   qrAlt: "Registration QR code for XR SUMMIT Mothership Hackathon",
   intro:

@@ -79,37 +79,37 @@ const Navbar = () => {
         initial={{ opacity: isHome ? 1 : 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-[100]"
+        className="fixed top-0 left-0 right-0 z-100"
       >
         <div
           className="absolute inset-0 transition-all duration-600"
           style={{
-            background: isHome && !scrolled ? 'transparent' : 'rgba(5, 11, 24, 0.88)',
-            backdropFilter: isHome && !scrolled ? 'none' : 'blur(28px) saturate(160%)',
-            WebkitBackdropFilter: isHome && !scrolled ? 'none' : 'blur(28px) saturate(160%)',
+            background: menuOpen || !isHome || scrolled ? 'rgba(5, 11, 24, 0.88)' : 'transparent',
+            backdropFilter: menuOpen || !isHome || scrolled ? 'blur(28px) saturate(160%)' : 'none',
+            WebkitBackdropFilter: menuOpen || !isHome || scrolled ? 'blur(28px) saturate(160%)' : 'none',
             borderBottom:
-              isHome && !scrolled ? '1px solid transparent' : '1px solid rgba(255,255,255,0.045)',
+              menuOpen || !isHome || scrolled ? '1px solid rgba(255,255,255,0.045)' : '1px solid transparent',
           }}
         />
-        <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden z-10">
+        <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden z-10">
           <div
             ref={progressBarRef}
             className="h-full origin-left will-change-transform optimize-gpu"
             style={{
               background: 'linear-gradient(90deg, #fb923c 0%, rgba(240,244,255,0.6) 100%)',
               transform: 'scaleX(0)',
-              opacity: isHome && !scrolled ? 0 : 0.65,
+              opacity: menuOpen || !isHome || scrolled ? 0.65 : 0,
               transition: 'opacity 0.4s ease',
               boxShadow: '0 0 6px rgba(251,146,60,0.5)',
             }}
           />
         </div>
         <div
-          className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-[4.5rem] transition-[max-width] duration-700 ease-in-out max-w-7xl`}
+          className={`relative z-10 mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-18 transition-[max-width] duration-700 ease-in-out max-w-7xl`}
         >
           <Link
             to="/"
-            className="group flex items-center gap-3 shrink-0 select-none"
+            className="group flex min-w-0 max-w-[calc(100vw-6rem)] items-center gap-2.5 sm:gap-3 shrink-0 select-none"
             aria-label="XR ASIA SUMMIT — Home"
           >
             <div className="relative shrink-0 flex items-center justify-center">
@@ -117,17 +117,15 @@ const Navbar = () => {
                 src="/logo_dark_transparent.png"
                 alt=""
                 aria-hidden="true"
-                className="relative object-contain transition-transform duration-500 group-hover:scale-105"
+                className="relative h-8 w-auto object-contain transition-transform duration-500 group-hover:scale-105 sm:h-9"
                 style={{
-                  height: '36px',
-                  width: 'auto',
                   filter: 'drop-shadow(0 0 3px rgba(255,255,255,0.5)) brightness(1.06)',
                 }}
               />
             </div>
             <span
-              className={`${BRAND_FONT_CLASS} font-bold tracking-[0.3em] text-foreground group-hover:text-accent transition-colors duration-350`}
-              style={{ fontSize: '1rem' }}
+              className={`${BRAND_FONT_CLASS} min-w-0 truncate whitespace-nowrap font-bold tracking-[0.12em] text-foreground group-hover:text-accent transition-colors duration-350 sm:tracking-[0.3em]`}
+              style={{ fontSize: 'clamp(0.72rem, 2.8vw, 1rem)' }}
             >
               {COMPANY.navbarBrand}
             </span>
@@ -266,7 +264,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.28 }}
-            className="fixed inset-0 z-[99] flex flex-col"
+            className="fixed inset-0 z-99 flex flex-col"
             style={{ background: 'rgba(5, 11, 24, 0.97)', backdropFilter: 'blur(28px)' }}
           >
             <div
@@ -288,38 +286,7 @@ const Navbar = () => {
               }}
               aria-hidden="true"
             />
-
-            {/* Mobile menu header */}
-            <div className="h-16 flex items-center px-6 flex-shrink-0">
-              <Link
-                to="/"
-                className="group flex items-center gap-3 select-none flex-shrink-0 transition-all duration-500 ease-in-out"
-              >
-                {/*
-                  Logo landscape di mobile menu — height kecil, width auto
-                */}
-                <img
-                  src="/logo_dark_transparent.png"
-                  alt="XR ASIA SUMMIT"
-                  className="object-contain"
-                  style={{
-                    height: '32px',
-                    width: 'auto',
-                    filter:
-                      'drop-shadow(0 0 3px rgba(255,255,255,0.5)) brightness(1.06)',
-                  }}
-                />
-                <div className="flex flex-col leading-none gap-[3px]">
-                  <span
-                    className={`${BRAND_FONT_CLASS} font-bold tracking-[0.3em] text-foreground`}
-                    style={{ fontSize: '0.76rem' }}
-                  >
-                    {COMPANY.navbarBrand}
-                  </span>
-                </div>
-              </Link>
-            </div>
-
+            <div className="h-16 shrink-0" />
             <div className="mx-6 h-px" style={{ background: 'rgba(255,255,255,0.05)' }} />
 
             <nav
@@ -345,7 +312,7 @@ const Navbar = () => {
                       `group flex items-center gap-4 py-4 border-b transition-all duration-200
                       ${isActive
                         ? 'text-accent border-white/10'
-                        : 'text-foreground-muted hover:text-foreground border-white/[0.04]'
+                        : 'text-foreground-muted hover:text-foreground border-white/4'
                       }`
                     }
                     onClick={() => setMenuOpen(false)}
@@ -353,7 +320,7 @@ const Navbar = () => {
                     {({ isActive }) => (
                       <>
                         <span
-                          className="w-1 h-1 rounded-full flex-shrink-0 transition-colors duration-200"
+                          className="w-1 h-1 rounded-full shrink-0 transition-colors duration-200"
                           style={{
                             background: isActive ? '#fb923c' : 'rgba(255,255,255,0.12)',
                           }}

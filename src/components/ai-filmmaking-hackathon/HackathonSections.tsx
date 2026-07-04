@@ -537,22 +537,25 @@ const HackathonSections = ({ onRegister }: HackathonSectionsProps) => (
       >
         <div className="grid grid-cols-1 md:grid-cols-[minmax(0,200px)_1fr] gap-8 items-start">
           <div className="flex flex-col items-center md:items-start gap-3">
-            <div
-              className="rounded-xl overflow-hidden p-3"
+            <button
+              type="button"
+              onClick={onRegister}
+              className="group inline-flex w-full max-w-[220px] flex-col items-center justify-center rounded-xl px-6 py-6 text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(251,146,60,0.32)]"
               style={{
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: 'rgba(255,255,255,0.97)',
+                border: `1px solid ${HACKATHON_ACCENT}55`,
+                background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+                color: '#050b18',
               }}
             >
-              <img
-                src={HACKATHON_CHECKIN.qrImage}
-                alt={HACKATHON_CHECKIN.qrAlt}
-                className="w-full max-w-[176px] aspect-square object-contain"
-                loading="lazy"
-              />
-            </div>
+              <span className="font-heading font-black tracking-[0.18em] uppercase" style={{ fontSize: '0.95rem' }}>
+                Apply Now
+              </span>
+              <span className="mt-2 font-bold tracking-[0.2em] uppercase opacity-80" style={{ fontSize: '0.58rem' }}>
+                Register Your Team
+              </span>
+            </button>
             <p className="text-center md:text-left text-foreground-muted" style={{ fontSize: '0.78rem', lineHeight: 1.5 }}>
-              Scan to register
+              Start your registration
             </p>
           </div>
 
