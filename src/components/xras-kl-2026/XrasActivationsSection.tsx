@@ -35,8 +35,17 @@ type ActivationMediaSection = {
   layout?: 'single' | 'grid';
 };
 
+type ActivationId =
+  | 'conference'
+  | 'expo'
+  | 'masterclasses'
+  | 'coaching'
+  | 'hackathon'
+  | 'esports'
+  | 'gala';
+
 type Activation = {
-  id: string;
+  id: ActivationId;
   icon: React.ReactNode;
   shortTitle: string;
   category: string;
@@ -49,12 +58,15 @@ type Activation = {
 
 const iconClass = 'w-5 h-5 flex-shrink-0';
 
-const ACTIVATION_PANEL_BACKGROUNDS = [
-  '/xras-activation/1.jpg',
-  '/xras-activation/2.jpg',
-  '/xras-activation/3.jpg',
-  '/xras-activation/4.jpg',
-] as const;
+const ACTIVATION_PANEL_BACKGROUNDS = {
+  conference: '/xras-tabs/CONFERENCE.png',
+  expo: '/xras-tabs/Expo.png',
+  masterclasses: '/xras-tabs/Masterclass.png',
+  coaching: '/xras-tabs/Coaching.png',
+  hackathon: '/xras-tabs/Filmmaking Hackathon.png',
+  esports: '/xras-tabs/Esports (3).png',
+  gala: '/xras-tabs/Awards & Gala.jpg.jpeg',
+} as const satisfies Record<ActivationId, string>;
 
 const ACTIVATIONS: Activation[] = [
   {
@@ -537,7 +549,7 @@ const ExpandedPanel = ({
   <div
     className="relative rounded-2xl overflow-hidden"
     style={{
-      backgroundImage: `linear-gradient(155deg, rgba(22,36,60,0.75) 0%, rgba(10,18,34,0.92) 100%), url(${backgroundSrc})`,
+      backgroundImage: `linear-gradient(155deg, rgba(22,36,60,0.75) 0%, rgba(10,18,34,0.92) 100%), url("${backgroundSrc}")`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       border: '1px solid rgba(239,120,61,0.22)',
@@ -823,15 +835,12 @@ const XrasActivationsSection = () => {
             <ActivationPanelStack
               items={ACTIVATIONS}
               activeId={activeId}
-              renderPanel={(activation) => {
-                const index = ACTIVATIONS.findIndex((item) => item.id === activation.id);
-                const backgroundSrc =
-                  ACTIVATION_PANEL_BACKGROUNDS[index % ACTIVATION_PANEL_BACKGROUNDS.length];
-
-                return (
-                  <ExpandedPanel activation={activation} backgroundSrc={backgroundSrc} />
-                );
-              }}
+              renderPanel={(activation) => (
+                <ExpandedPanel
+                  activation={activation}
+                  backgroundSrc={ACTIVATION_PANEL_BACKGROUNDS[activation.id]}
+                />
+              )}
             />
           </div>
         </div>
