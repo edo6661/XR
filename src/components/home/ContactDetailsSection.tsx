@@ -12,15 +12,13 @@ const ContactDetailsSection = () => (
       paddingTop: 'var(--section-padding-y)',
       paddingBottom: 'var(--section-padding-y)',
       /* Solid stops only — semi-transparent gradient let pinned SponsorsSection logos show through */
-      backgroundColor: '#fafbfd',
+      backgroundColor: '#ffffff',
       background: `
       linear-gradient(
         to bottom,
-        #050505 0%,
-        #0a0e16 15%,
-        #121a30 35%,
-        #7d94b5 62%,
-        #c3d2e8 80%,
+        #ffffff 0%,
+        #fbfcff 42%,
+        #f6f8fc 76%,
         #fafbfd 100%
       )
     `,
@@ -92,8 +90,7 @@ const ContactDetailsSection = () => (
     </div>
 
     <div className="relative z-10 max-w-5xl mx-auto px-6">
-      {/* SectionEyebrow — di bagian gelap masih pakai default (dark tone) */}
-      <SectionEyebrow align="center">Contact</SectionEyebrow>
+      <SectionEyebrow align="center" tone="light">Contact</SectionEyebrow>
 
       <motion.div
         initial={{ opacity: 0, y: 24 }}

@@ -252,11 +252,11 @@ const SpotlightCard = ({
             />
             {/* Gradient overlay so text stays readable */}
             <div
-              className="absolute inset-x-0 bottom-0 z-[2] pointer-events-none"
+              className="absolute inset-x-0 bottom-0 z-2 pointer-events-none"
               style={{
                 height: '65%',
                 background:
-                  'linear-gradient(to top, rgba(5,11,24,0.98) 0%, rgba(5,11,24,0.82) 35%, rgba(5,11,24,0.3) 70%, transparent 100%)',
+                  'linear-gradient(to top, rgba(5,11,24,0.86) 0%, rgba(5,11,24,0.66) 35%, rgba(5,11,24,0.24) 70%, transparent 100%)',
               }}
               aria-hidden="true"
             />
@@ -352,7 +352,7 @@ const SpotlightCard = ({
             {imageSrc ? (
               <>
                 {imageFit === 'contain' && (
-                  <div className="absolute inset-0 bg-[#050b18]" aria-hidden="true" />
+                  <div className="absolute inset-0 bg-[#f6f8fc]" aria-hidden="true" />
                 )}
                 <div
                   className={`absolute inset-0 ${imageFit === 'contain' ? 'origin-center' : 'origin-bottom'}`}
@@ -372,10 +372,11 @@ const SpotlightCard = ({
                   />
                 </div>
                 <div
-                  className="absolute inset-x-0 bottom-0 z-[2] pointer-events-none"
+                  className="absolute inset-x-0 bottom-0 z-2 pointer-events-none"
                   style={{
                     height: isFeatured ? '68%' : '58%',
-                    background: 'linear-gradient(to top, rgba(5,11,24,0.98) 0%, rgba(5,11,24,0.88) 30%, rgba(5,11,24,0.45) 65%, transparent 100%)',
+                    background:
+                      'linear-gradient(to top, rgba(5,11,24,0.84) 0%, rgba(5,11,24,0.64) 30%, rgba(5,11,24,0.22) 65%, transparent 100%)',
                   }}
                   aria-hidden="true"
                 />
@@ -383,7 +384,9 @@ const SpotlightCard = ({
             ) : (
               <div
                 className="w-full h-full"
-                style={{ background: `linear-gradient(148deg, rgba(13,27,46,0.96) 0%, ${accentColor}10 100%)` }}
+                style={{
+                  background: `linear-gradient(148deg, rgba(255,255,255,0.92) 0%, ${accentColor}12 100%)`,
+                }}
               />
             )}
           </div>
@@ -416,7 +419,7 @@ const SpotlightCard = ({
       {/* ── Cursor shine ── */}
       <div
         ref={shineRef}
-        className="absolute w-56 h-56 rounded-full pointer-events-none opacity-0 z-[1] will-change-transform"
+        className="absolute w-56 h-56 rounded-full pointer-events-none opacity-0 z-1 will-change-transform"
         style={{
           background: `radial-gradient(circle, ${accentColor}50 0%, transparent 65%)`,
           left: '50%', top: '50%',

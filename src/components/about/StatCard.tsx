@@ -23,26 +23,29 @@ const StatCard = ({
       className="group relative flex flex-col gap-4 rounded-xl overflow-hidden"
       style={{
         padding: '1.75rem',
-        background: 'rgba(10, 20, 38, 0.6)',
-        border: '1px solid rgba(255,255,255,0.048)',
+        background:
+          'linear-gradient(145deg, rgba(255,255,255,0.92) 0%, rgba(240,244,252,0.78) 100%)',
+        border: '1px solid rgba(26,46,80,0.08)',
+        boxShadow: '0 10px 34px rgba(30,58,138,0.07), inset 0 1px 0 rgba(255,255,255,0.95)',
         transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLDivElement;
         el.style.borderColor = `${accentColor}28`;
-        el.style.boxShadow = `0 0 48px ${accentColor}0a, 0 20px 48px rgba(0,0,0,0.32)`;
+        el.style.boxShadow = `0 14px 42px rgba(30,58,138,0.1), 0 0 36px ${accentColor}16, inset 0 1px 0 rgba(255,255,255,0.98)`;
         el.style.transform = 'translateY(-3px)';
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = 'rgba(255,255,255,0.048)';
-        el.style.boxShadow = 'none';
+        el.style.borderColor = 'rgba(26,46,80,0.08)';
+        el.style.boxShadow =
+          '0 10px 34px rgba(30,58,138,0.07), inset 0 1px 0 rgba(255,255,255,0.95)';
         el.style.transform = 'translateY(0)';
       }}
     >
       {/* Top gradient line */}
       <div
-        className="absolute top-0 left-0 right-0 h-[1px]"
+        className="absolute top-0 left-0 right-0 h-px"
         style={{
           background: `linear-gradient(90deg, transparent 0%, ${accentColor}70 30%, ${accentColor}70 70%, transparent 100%)`,
           opacity: 0.6,
@@ -69,7 +72,7 @@ const StatCard = ({
           className="font-heading font-black leading-none block"
           style={{
             fontSize: 'clamp(3rem, 6vw, 4.2rem)',
-            background: `linear-gradient(140deg, ${accentColor} 0%, #f0f4ff 85%)`,
+            background: `linear-gradient(140deg, ${accentColor} 0%, var(--theme-on-light-heading) 88%)`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -89,12 +92,12 @@ const StatCard = ({
       {/* Labels */}
       <div className="flex flex-col gap-1">
         <span
-          className="font-heading font-bold tracking-[0.2em] uppercase text-foreground"
-          style={{ fontSize: '0.7rem' }}
+          className="font-heading font-bold tracking-[0.2em] uppercase"
+          style={{ fontSize: '0.7rem', color: 'var(--theme-on-light-heading)' }}
         >
           {label}
         </span>
-        <span className="text-copy-sm">
+        <span className="text-copy-sm" style={{ color: 'var(--theme-on-light-muted)' }}>
           {sublabel}
         </span>
       </div>

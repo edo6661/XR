@@ -9,12 +9,13 @@ type Photo = (typeof ECOSYSTEM_IN_ACTION_PHOTOS)[number];
 
 const PhotoCard = ({ photo }: { photo: Photo }) => (
   <div
-    className="relative flex-shrink-0 overflow-hidden rounded-xl"
+    className="relative shrink-0 overflow-hidden rounded-xl"
     style={{
       width: '220px',
       height: '148px',
-      border: '1px solid rgba(255,255,255,0.08)',
-      background: 'rgba(10,10,10,0.5)',
+      border: '1px solid rgba(26,46,80,0.08)',
+      background: '#ffffff',
+      boxShadow: '0 10px 30px rgba(30,58,138,0.08)',
     }}
   >
     <img
@@ -103,11 +104,14 @@ const ROW_TWO = ECOSYSTEM_IN_ACTION_PHOTOS.slice(midpoint);
 
 const EcosystemInActionSection = () => (
   <section
-    className="relative w-full overflow-hidden"
+    className="relative w-full overflow-hidden isolate"
     style={{
-      borderTop: '1px solid rgba(255,255,255,0.055)',
+      borderTop: '1px solid rgba(26,46,80,0.08)',
       paddingTop: 'var(--section-padding-y)',
       paddingBottom: 'var(--section-padding-y)',
+      backgroundColor: '#dbe5f2',
+      background:
+        'linear-gradient(180deg, #dbe5f2 0%, #eef3fa 48%, #f6f8fc 100%)',
     }}
     aria-labelledby="ecosystem-in-action-heading"
   >
@@ -115,13 +119,22 @@ const EcosystemInActionSection = () => (
       className="absolute inset-0 pointer-events-none"
       style={{
         background:
-          'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(34,211,238,0.05) 0%, transparent 65%)',
+          'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(57,83,163,0.14) 0%, transparent 65%)',
+      }}
+      aria-hidden="true"
+    />
+    <div
+      className="absolute inset-0 pointer-events-none opacity-[0.028]"
+      style={{
+        backgroundImage:
+          'linear-gradient(rgba(26,46,80,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(26,46,80,0.5) 1px, transparent 1px)',
+        backgroundSize: '52px 52px',
       }}
       aria-hidden="true"
     />
 
     <div className="relative z-10 max-w-6xl mx-auto px-6">
-      <SectionEyebrow align="center">Past Event Highlights</SectionEyebrow>
+      <SectionEyebrow align="center" tone="light">Past Event Highlights</SectionEyebrow>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -132,18 +145,26 @@ const EcosystemInActionSection = () => (
       >
         <h2
           id="ecosystem-in-action-heading"
-          className="font-heading font-black text-foreground mb-4"
-          style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
+          className="font-heading font-black mb-4"
+          style={{
+            fontSize: 'clamp(1.85rem, 4vw, 2.75rem)',
+            color: 'var(--theme-on-light-heading)',
+            letterSpacing: '0.03em',
+          }}
         >
           The{' '}
-          <span className="gradient-text-accent">
+          <span className="text-accent">
             Ecosystem
           </span>
           , in Action.
         </h2>
         <p
-          className="text-foreground-muted max-w-xl mx-auto leading-relaxed"
-          style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: 1.8 }}
+          className="max-w-xl mx-auto leading-relaxed"
+          style={{
+            fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)',
+            color: 'var(--theme-on-light-muted)',
+            lineHeight: 1.8,
+          }}
         >
           {ECOSYSTEM_IN_ACTION_DESCRIPTION}
         </p>

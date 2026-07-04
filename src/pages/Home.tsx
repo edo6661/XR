@@ -27,25 +27,25 @@ const Home = () => {
         <HeroSection />
       </StackedSection>
 
-      <StackedSection zIndex={20}>
+      <StackedSection zIndex={20} backgroundColor="#0f1d34">
         <AboutSection />
       </StackedSection>
 
       {/* Gunakan div wrapper untuk referensi ScrollTrigger yang akurat, di luar logic "pinning" StackedSection */}
       <div className="w-full relative">
-        <StackedSection zIndex={30}>
+        <StackedSection zIndex={30} backgroundColor="#6f87a8">
           <EventsSection />
         </StackedSection>
       </div>
 
       <div className="w-full relative">
-        <StackedSection zIndex={40}>
+        <StackedSection zIndex={40} tone="light" backgroundColor="#dbe5f2">
           <EcosystemInActionSection />
         </StackedSection>
       </div>
 
       <div className="w-full relative">
-        <StackedSection zIndex={50}>
+        <StackedSection zIndex={50} tone="light" backgroundColor="#f6f8fc">
           <SponsorsSection />
         </StackedSection>
       </div>

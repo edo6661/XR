@@ -9,9 +9,17 @@ interface StackedSectionProps {
   children: ReactNode;
   zIndex: number;
   isLast?: boolean;
+  tone?: 'dark' | 'light';
+  backgroundColor?: string;
 }
 
-const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProps) => {
+const StackedSection = ({
+  children,
+  zIndex,
+  isLast = false,
+  tone = 'dark',
+  backgroundColor,
+}: StackedSectionProps) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -57,18 +65,20 @@ const StackedSection = ({ children, zIndex, isLast = false }: StackedSectionProp
   }, [isLast]);
 
   useLayoutEffect(() => {
+    const outer = outerRef.current;
+
     return () => {
-      killScrollTriggersIn(outerRef.current);
+      killScrollTriggersIn(outer);
     };
-  }, [isLast]);
+  }, []);
 
   return (
     <div ref={outerRef} className="relative w-full" style={{ zIndex }}>
       <div
         ref={sectionRef}
-        className={`relative w-full will-change-transform ${
-          isLast ? 'min-h-dvh bg-transparent' : 'bg-background'
-        }`}
+        className={`relative w-full will-change-transform ${isLast ? 'min-h-dvh bg-transparent' : tone === 'light' ? 'bg-[#fafbfd]' : 'bg-background'
+          }`}
+        style={backgroundColor && !isLast ? { backgroundColor } : undefined}
       >
         <div
           ref={contentRef}

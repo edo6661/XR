@@ -174,23 +174,38 @@ const SponsorsSection = () => {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden isolate"
       style={{
-        borderTop: '1px solid rgba(255,255,255,0.055)',
+        borderTop: '1px solid rgba(26,46,80,0.08)',
         paddingTop: 'var(--section-padding-y)',
         paddingBottom: 'var(--section-padding-y)',
+        backgroundColor: '#f6f8fc',
+        background:
+          'linear-gradient(180deg, #f6f8fc 0%, #fbfcff 46%, #ffffff 100%)',
       }}
       aria-labelledby="partners-heading"
     >
-      {/* Subtle background tint */}
+      {/* Subtle light background tint */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: 'rgba(13,27,46,0.35)' }}
+        style={{
+          background:
+            'radial-gradient(ellipse 60% 45% at 50% 0%, rgba(239,120,61,0.1) 0%, transparent 65%)',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.028]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(26,46,80,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(26,46,80,0.5) 1px, transparent 1px)',
+          backgroundSize: '52px 52px',
+        }}
         aria-hidden="true"
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        <SectionEyebrow align="center">Past Partners</SectionEyebrow>
+        <SectionEyebrow align="center" tone="light">Past Partners</SectionEyebrow>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -201,15 +216,24 @@ const SponsorsSection = () => {
         >
           <h2
             id="partners-heading"
-            className="font-heading font-bold text-foreground mb-3"
-            style={{ fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)' }}
+            className="font-heading font-bold mb-3"
+            style={{
+              fontSize: 'clamp(1.2rem, 2.5vw, 1.65rem)',
+              color: 'var(--theme-on-light-heading)',
+            }}
           >
             Trusted by{' '}
-            <span className='gradient-text-accent'>
+            <span className="text-accent">
               Industry Leaders
             </span>
           </h2>
-          <p className="text-foreground-muted max-w-lg mx-auto leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)' }}>
+          <p
+            className="max-w-lg mx-auto leading-relaxed"
+            style={{
+              fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
+              color: 'var(--theme-on-light-muted)',
+            }}
+          >
             A growing ecosystem of government agencies, technology innovators, and industry partners
             driving immersive adoption across Asia.
           </p>
@@ -250,17 +274,21 @@ const SponsorsSection = () => {
             style={{
               fontSize: '0.72rem',
               border: '1px solid rgba(239,120,61,0.4)',
+              background: 'rgba(255,255,255,0.72)',
               color: '#ef783d',
+              boxShadow: '0 8px 24px rgba(30,58,138,0.06)',
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLButtonElement;
               el.style.background = 'rgba(239,120,61,0.08)';
               el.style.borderColor = 'rgba(239,120,61,0.65)';
+              el.style.boxShadow = '0 10px 30px rgba(239,120,61,0.14)';
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLButtonElement;
-              el.style.background = 'transparent';
+              el.style.background = 'rgba(255,255,255,0.72)';
               el.style.borderColor = 'rgba(239,120,61,0.4)';
+              el.style.boxShadow = '0 8px 24px rgba(30,58,138,0.06)';
             }}
           >
             Become a partner

@@ -97,34 +97,57 @@ const EventsSection = () => {
     <section
       id="events"
       ref={sectionRef}
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden isolate"
       style={{
         paddingTop: 'var(--section-padding-y)',
         paddingBottom: 'var(--section-padding-y)',
+        backgroundColor: '#6f87a8',
+        background:
+          'linear-gradient(180deg, #6f87a8 0%, #9fb2cc 46%, #dbe5f2 100%)',
       }}
     >
       {/* Atmospheric bg */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
-          className="absolute top-0 right-0 w-[600px] h-[600px] opacity-[0.04] rounded-full"
+          className="absolute top-0 right-0 w-[600px] h-[600px] opacity-[0.16] rounded-full"
           style={{ background: 'radial-gradient(circle, #fb923c 0%, transparent 68%)' }}
         />
         <div
-          className="absolute bottom-0 left-0 w-[480px] h-[480px] opacity-[0.035] rounded-full"
-          style={{ background: 'radial-gradient(circle, #22d3ee 0%, transparent 68%)' }}
+          className="absolute bottom-0 left-0 w-[560px] h-[560px] opacity-[0.24] rounded-full"
+          style={{ background: 'radial-gradient(circle, #f6f8fc 0%, transparent 68%)' }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
+            backgroundSize: '56px 56px',
+          }}
         />
       </div>
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* ══ UPCOMING ═══════════════════════════════════════════════════ */}
-        <SectionEyebrow>Upcoming Events</SectionEyebrow>
+        <SectionEyebrow accent="indigo">Upcoming Events</SectionEyebrow>
         {/* ── Entry points: XRAS + AIXR ── */}
         <h2
           ref={headingRef}
-          className="font-heading font-black text-foreground mb-12 opacity-0"
-          style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
+          className="font-heading font-black mb-12 opacity-0"
+          style={{
+            fontSize: 'clamp(1.85rem, 4vw, 2.75rem)',
+            color: '#f8faff',
+            letterSpacing: '0.03em',
+          }}
         >
 
-          <span className="gradient-text-accent">
+          <span
+            style={{
+              background: 'linear-gradient(90deg, #1e3a8a 0%, #3730a3 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: '0 1px 0 rgba(255,255,255,0.22)',
+            }}
+          >
             Welcome
           </span>
         </h2>
@@ -135,8 +158,11 @@ const EventsSection = () => {
         </div>
 
         {/* ── Programme highlights (sub-events under XRAS) ── */}
-        <div className="mt-14 md:mt-16 pt-10 border-t border-white/[0.06]">
-          <SectionEyebrow className="mb-8">Programme Highlights</SectionEyebrow>
+        <div
+          className="mt-14 md:mt-16 pt-10 border-t"
+          style={{ borderColor: 'rgba(255,255,255,0.22)' }}
+        >
+          <SectionEyebrow accent="indigo" className="mb-8">Programme Highlights</SectionEyebrow>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:grid-rows-[repeat(2,minmax(280px,1fr))]">
             <SpotlightCard
               key={HACKATHON_HIGHLIGHT.title}

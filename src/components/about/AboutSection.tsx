@@ -72,9 +72,9 @@ const IntroBar = ({ children }: { children: React.ReactNode }) => (
   <div
     className="inline-flex items-center px-4 py-2 rounded-sm"
     style={{
-      border: '1px solid rgba(251, 191, 36, 0.45)',
-      background: 'rgba(8, 12, 24, 0.72)',
-      boxShadow: 'inset 0 0 24px rgba(251, 146, 60, 0.06)',
+      border: '1px solid rgba(251, 191, 36, 0.42)',
+      background: 'rgba(8, 12, 24, 0.68)',
+      boxShadow: 'inset 0 0 24px rgba(251, 146, 60, 0.08), 0 12px 34px rgba(0,0,0,0.18)',
     }}
   >
     <span
@@ -161,10 +161,13 @@ const AboutSection = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden isolate"
       style={{
         paddingTop: 'var(--section-padding-y)',
         paddingBottom: 'var(--section-padding-y)',
+        backgroundColor: '#0f1d34',
+        background:
+          'linear-gradient(180deg, #050b18 0%, #0f1d34 42%, #243c61 78%, #6f87a8 100%)',
       }}
     >
       {/* Louis opening keyart — atmospheric backdrop */}
@@ -172,25 +175,29 @@ const AboutSection = () => {
         <img
           src={OPENING_KEYART}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.14]"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.08]"
           style={{ objectPosition: '50% 20%' }}
         />
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(180deg, rgba(5,11,24,0.55) 0%, rgba(5,11,24,0.88) 45%, rgba(5,11,24,0.96) 100%)',
+              'linear-gradient(180deg, rgba(5,11,24,0.78) 0%, rgba(15,29,52,0.82) 46%, rgba(36,60,97,0.76) 78%, rgba(111,135,168,0.58) 100%)',
           }}
         />
         <div
-          className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full opacity-[0.05]"
+          className="absolute -top-40 -left-40 w-[700px] h-[700px] rounded-full opacity-[0.08]"
           style={{ background: 'radial-gradient(circle, #fb923c 0%, transparent 68%)' }}
         />
         <div
-          className="absolute inset-0 opacity-[0.018]"
+          className="absolute bottom-0 -right-32 w-[680px] h-[680px] rounded-full opacity-[0.22]"
+          style={{ background: 'radial-gradient(circle, #c3d2e8 0%, transparent 68%)' }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.025]"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
+              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
             backgroundSize: '64px 64px',
           }}
         />
@@ -209,7 +216,7 @@ const AboutSection = () => {
             className="font-heading font-black uppercase tracking-[0.12em] mb-4"
             style={{
               fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-              color: '#f0f4ff',
+              color: '#f8faff',
               lineHeight: 1,
             }}
           >
@@ -233,7 +240,7 @@ const AboutSection = () => {
                   style={{
                     fontSize: 'clamp(2rem, 4.8vw, 3.6rem)',
                     letterSpacing: '0.04em',
-                    ...(!line.accent ? { color: '#f0f4ff' } : {}),
+                    ...(!line.accent ? { color: '#f8faff' } : {}),
                   }}
                 >
                   {line.text}
@@ -256,26 +263,44 @@ const AboutSection = () => {
           <div ref={bodyRef} className="flex flex-col justify-start gap-6">
             <h3
               data-para
-              className="font-heading font-bold text-foreground"
-              style={{ fontSize: 'clamp(1.15rem, 2.4vw, 1.55rem)', lineHeight: 1.25 }}
+              className="font-heading font-bold"
+              style={{
+                fontSize: 'clamp(1.15rem, 2.4vw, 1.55rem)',
+                color: '#f8faff',
+                lineHeight: 1.25,
+              }}
             >
               XR Asia Summit 2026: FROM VISION TO DEPLOYMENT
             </h3>
 
-            <p data-para className="text-base text-foreground leading-[1.75]">
+            <p
+              data-para
+              className="text-base leading-[1.75]"
+              style={{ color: 'rgba(216,228,246,0.88)' }}
+            >
               What began as a response to disruption has become the Launchpad for execution.{' '}
               <span className="text-accent font-semibold">XR Asia Summit 2026</span> unites the
               visionaries, builders, and decision-makers driving the future of{' '}
-              <span className="font-semibold text-foreground">AI, Extended Reality, and Spatial Media</span>
+              <span className="font-semibold" style={{ color: '#f8faff' }}>
+                AI, Extended Reality, and Spatial Media
+              </span>
               {' '}— not as prototypes, but as production-ready systems transforming enterprise,
               broadcast, and competitive media.
             </p>
 
-            <p data-para className="text-copy-bright text-base leading-[1.75]">
+            <p
+              data-para
+              className="text-base leading-[1.75]"
+              style={{ color: 'rgba(216,228,246,0.88)' }}
+            >
               Over three electrifying days, XRAS2026 delivers:
             </p>
 
-            <ul data-para className="flex flex-col gap-3.5 text-copy-bright text-base leading-[1.75] list-none pl-0">
+            <ul
+              data-para
+              className="flex flex-col gap-3.5 text-base leading-[1.75] list-none pl-0"
+              style={{ color: 'rgba(216,228,246,0.88)' }}
+            >
               {DELIVERABLES.map((item) => (
                 <li key={item} className="flex gap-3">
                   <span
@@ -287,7 +312,11 @@ const AboutSection = () => {
               ))}
             </ul>
 
-            <p data-para className="text-base text-foreground leading-[1.75]">
+            <p
+              data-para
+              className="text-base leading-[1.75]"
+              style={{ color: 'rgba(216,228,246,0.88)' }}
+            >
               The prestigious{' '}
               <span className="text-accent font-semibold">AiXR Awards Night</span>, celebrating
               excellence across the region.
@@ -331,13 +360,14 @@ const AboutSection = () => {
                 transition={{ delay: i * 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-col items-center text-center gap-3"
               >
-                {/* Card persegi dark purple */}
+                {/* Light glass card keeps the icon artwork prominent on the brighter page */}
                 <div
                   className="relative flex flex-col items-center justify-end w-full aspect-square rounded-lg overflow-hidden"
                   style={{
-                    background: 'linear-gradient(160deg, #1a0a2e 0%, #0d0618 60%, #120820 100%)',
-                    border: `1px solid ${pillar.accentColor}30`,
-                    boxShadow: `0 0 32px ${pillar.accentColor}18, inset 0 0 40px rgba(80,0,120,0.25)`,
+                    background:
+                      'linear-gradient(145deg, rgba(255,255,255,0.92) 0%, rgba(240,244,252,0.76) 100%)',
+                    border: `1px solid ${pillar.accentColor}24`,
+                    boxShadow: `0 12px 34px rgba(30,58,138,0.08), inset 0 1px 0 rgba(255,255,255,0.95), 0 0 22px ${pillar.accentColor}12`,
                   }}
                 >
                   {/* Image — besar, center atas */}
@@ -346,19 +376,24 @@ const AboutSection = () => {
                     alt={pillar.label}
                     className="absolute inset-0 w-full h-full object-contain p-4"
                     style={{
-                      filter: `drop-shadow(0 0 16px ${pillar.accentColor}66) drop-shadow(0 0 40px rgba(160,60,255,0.4))`,
+                      filter: `drop-shadow(0 8px 18px rgba(30,58,138,0.14)) drop-shadow(0 0 18px ${pillar.accentColor}35)`,
                     }}
                   />
                   {/* Gradient overlay bawah untuk label */}
                   <div
                     className="relative z-10 w-full px-3 pb-3 pt-8"
                     style={{
-                      background: 'linear-gradient(0deg, rgba(10,4,20,0.92) 0%, rgba(10,4,20,0.6) 60%, transparent 100%)',
+                      background:
+                        'linear-gradient(0deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.78) 58%, transparent 100%)',
                     }}
                   >
                     <p
-                      className="font-heading font-bold leading-snug text-white"
-                      style={{ fontSize: '0.75rem', letterSpacing: '0.01em' }}
+                      className="font-heading font-bold leading-snug"
+                      style={{
+                        fontSize: '0.75rem',
+                        color: 'var(--theme-on-light-heading)',
+                        letterSpacing: '0.01em',
+                      }}
                     >
                       {pillar.label}
                     </p>
@@ -375,10 +410,14 @@ const AboutSection = () => {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ delay: 0.2, duration: 0.7 }}
             className="mt-12 text-center font-heading font-bold max-w-2xl mx-auto"
-            style={{ fontSize: 'clamp(1rem, 2.2vw, 1.25rem)', lineHeight: 1.5 }}
+            style={{
+              fontSize: 'clamp(1rem, 2.2vw, 1.25rem)',
+              color: '#f8faff',
+              lineHeight: 1.5,
+            }}
           >
             This is the next phase where{' '}
-            <span className="gradient-text-accent">Asia builds its spatial future.</span>
+            <span className="text-accent">Asia builds its spatial future.</span>
           </motion.p>
         </div>
 
