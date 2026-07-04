@@ -24,6 +24,7 @@ const lineVariants: Variants = {
 };
 
 const INTRO_WORDS = ['IMAGINE', 'GENERATE', 'IMMERSE'] as const;
+const MOVING_BOY_WORLD_VIDEO = '/hero/XRAS26 - Keyart Moving Landscape.mp4';
 
 const wordStyle = (index: number): CSSProperties => {
   if (index === 1) {
@@ -41,8 +42,6 @@ const wordStyle = (index: number): CSSProperties => {
 };
 
 const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
-  const veilVisible = step < 2;
-
   return (
     <AnimatePresence>
       {step < 4 && (
@@ -52,31 +51,20 @@ const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.35 } }}
         >
-          {/* Veil */}
-          <motion.div
-            className="absolute inset-0"
-            animate={{ opacity: veilVisible ? 1 : 0, scale: veilVisible ? 1 : 1.08 }}
-            transition={{ duration: 0.45, ease: [0.7, 0, 0.84, 0] }}
-            style={{
-              background: 'radial-gradient(ellipse 90% 70% at 50% 50%, #0a1730 0%, #050b18 60%, #02060f 100%)',
-            }}
-            aria-hidden="true"
-          />
-
-          {/* Grid */}
-          <motion.div
-            className="absolute inset-0"
-            animate={{ opacity: veilVisible ? 0.5 : 0 }}
-            transition={{ duration: 0.4 }}
-            style={{
-              backgroundImage:
-                'linear-gradient(rgba(125,211,252,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,0.05) 1px, transparent 1px)',
-              backgroundSize: '64px 64px',
-              maskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 80%)',
-              WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at 50% 50%, black 0%, transparent 80%)',
-            }}
-            aria-hidden="true"
-          />
+          {step < 3 && (
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              src={MOVING_BOY_WORLD_VIDEO}
+              style={{ objectPosition: '50% center' }}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              disablePictureInPicture
+              aria-hidden="true"
+            />
+          )}
 
           {/* Lines */}
           <div className="relative z-10 px-6 text-center">

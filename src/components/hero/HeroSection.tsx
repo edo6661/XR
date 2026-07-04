@@ -5,23 +5,18 @@ import SplatField from './SplatField';
 import HeroLogo from './HeroLogo';
 import HeroIntroOverlay from './HeroIntroOverlay';
 
-/** Master keyart — backmost layer at ~55% opacity (client: 50–60%). */
-const MASTER_KEYART = '/hero/new_hero_from_louis_2.png';
-const KEYART_OPACITY = 0.58;
-
 const GLOBE_VIDEO: HeroVideoConfig = {
   src: '/hero/videos/3d_digital_globe.mp4',
   poster: '/hero/earth-dark.jpg',
   objectPosition: '50% 50%',
   filter: 'brightness(0.92) contrast(1.05) saturate(1.06)',
-  overKeyart: true,
 };
 
 type Phase = 'globe' | 'boot' | 'reveal';
 
 const HERO_INTRO_SEEN_KEY = 'xr-hero-intro-seen';
 const INTRO_LINE_ENTER_MS = 420;
-const INTRO_LINE_READ_MS = 1000;
+const INTRO_LINE_READ_MS = 2000;
 const INTRO_ZAP_MS = 700;
 
 const STEP_TIMELINE: { at: number; step: number }[] = [
@@ -104,7 +99,6 @@ const HeroSection = () => {
   const showHint = step >= LAST_STEP;
 
   const hudPhase: Phase = step < 4 ? 'globe' : step === 4 ? 'boot' : 'reveal';
-  const bgBrightness = step >= 4 ? 0.94 : 0.92;
 
   return (
     <section
@@ -112,45 +106,23 @@ const HeroSection = () => {
       className="relative w-full min-h-screen flex flex-col overflow-hidden"
       aria-label="Hero"
     >
-      {/* ── BACKDROP: keyart → globe + particles → text ── */}
+      {/* ── BACKDROP: globe + particles → text ── */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#050b18]" aria-hidden="true">
-        {/* 1. Master keyart Louis — backmost, 50–60% visible */}
+        {/* 1. Liquid globe video — sole hero background after intro words */}
         <motion.div
           className="absolute inset-0 z-0"
           animate={{
-            scale: videoRevealed && !prefersReducedMotion ? 1.04 : 1.08,
-          }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <img
-            src={MASTER_KEYART}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{
-              opacity: KEYART_OPACITY,
-              objectPosition: '50% center',
-            }}
-            loading="eager"
-            fetchPriority="high"
-          />
-        </motion.div>
-
-        {/* 2. Current animated globe video — composited over keyart */}
-        <motion.div
-          className="absolute inset-0 z-1"
-          animate={{
             scale: videoRevealed && !prefersReducedMotion ? 1.06 : 1.12,
-            opacity: videoRevealed ? 0.82 : 0.68,
+            opacity: videoRevealed ? 1 : 0.92,
           }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ mixBlendMode: 'lighten' }}
         >
           <HeroVideoBackdrop {...GLOBE_VIDEO} />
         </motion.div>
 
-        {/* 3. Blue static particles — mixed with the animated globe */}
+        {/* 2. Blue static particles — mixed with the animated globe */}
         <motion.div
-          className="absolute inset-0 z-2 pointer-events-none"
+          className="absolute inset-0 z-1 pointer-events-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: step === 4 ? 0.95 : step >= 5 ? 0.7 : 0.4 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
@@ -160,42 +132,7 @@ const HeroSection = () => {
           <SplatField />
         </motion.div>
 
-        {/* Very light depth tint — must not bury the keyart */}
-        <motion.div
-          className="absolute inset-0 z-3 pointer-events-none"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: prefersReducedMotion ? 0 : 1,
-            backgroundColor: prefersReducedMotion
-              ? 'transparent'
-              : `rgba(5, 11, 24, ${(1 - bgBrightness).toFixed(2)})`,
-          }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ willChange: 'opacity, background-color' }}
-        />
       </div>
-
-      {/* Radial vignette — lighter so Louis keyart stays readable at edges */}
-      <motion.div
-        className="absolute inset-0 z-1 pointer-events-none"
-        animate={{ opacity: showTiles ? 0.85 : 0.55 }}
-        transition={{ duration: 1.2 }}
-        style={{
-          background:
-            'radial-gradient(ellipse 82% 68% at 50% 42%, transparent 0%, rgba(5,11,24,0.22) 52%, rgba(5,11,24,0.62) 82%, rgba(5,11,24,0.88) 100%)',
-        }}
-        aria-hidden="true"
-      />
-
-      {/* Bottom fade */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-64 z-2 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to bottom, transparent 0%, rgba(5,11,24,0.7) 50%, #050b18 100%)',
-        }}
-        aria-hidden="true"
-      />
 
       <BootOverlay phase={hudPhase} reduced={prefersReducedMotion} />
       {!prefersReducedMotion && <HeroIntroOverlay step={step} />}
