@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useLayoutEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Mic,
@@ -407,6 +408,23 @@ const AiFilmmakingDetails = () => {
             className="w-full object-contain rounded-xl"
           />
         </figure>
+        <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <p className="leading-relaxed" style={bodyTextStyle}>
+            Click here for more details and how to register
+          </p>
+          <Link
+            to="/ai-filmmaking-hackathon"
+            className="inline-flex items-center justify-center rounded-full px-5 py-2.5 font-bold tracking-[0.18em] uppercase transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fb923c]"
+            style={{
+              color: '#050b18',
+              background: 'linear-gradient(135deg, #ef783d, #fb923c)',
+              boxShadow: '0 12px 28px rgba(239,120,61,0.22)',
+              fontSize: '0.72rem',
+            }}
+          >
+            FULL DETAILS
+          </Link>
+        </div>
       </div>
     </div>
   );
