@@ -14,10 +14,10 @@ const neoShadow = `
 `;
 
 type HackathonHeroProps = {
-  onRegister: () => void;
+  registerUrl: string;
 };
 
-const HackathonHero = ({ onRegister }: HackathonHeroProps) => (
+const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
   <section
     className="relative w-full overflow-hidden pt-28 pb-16 md:pb-24 px-6 min-h-[min(88vh,920px)] flex items-center"
     aria-labelledby="hackathon-hero-heading"
@@ -131,30 +131,17 @@ const HackathonHero = ({ onRegister }: HackathonHeroProps) => (
           transition={{ delay: 0.32, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3"
         >
-          <button
-            type="button"
-            onClick={onRegister}
+          <a
+            href={registerUrl}
+            target={registerUrl.startsWith('http') ? '_blank' : undefined}
+            rel={registerUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',
             }}
           >
-            Register Your Team
-          </button>
-          <a
-            href={`tel:${HACKATHON_META.contactPhone.replace(/-/g, '')}`}
-            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-center transition-all duration-300"
-            style={{
-              color: HACKATHON_ACCENT,
-              background: 'rgba(255,255,255,0.72)',
-              backdropFilter: 'blur(14px)',
-              WebkitBackdropFilter: 'blur(14px)',
-              border: `1px solid ${HACKATHON_ACCENT}55`,
-              boxShadow: '0 2px 14px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.95)',
-            }}
-          >
-            Contact: {HACKATHON_META.contactPhone}
+            Apply Now
           </a>
         </motion.div>
       </motion.div>

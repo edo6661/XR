@@ -35,7 +35,6 @@ import {
   HACKATHON_DELIVERABLES,
   HACKATHON_EXPERIENCE_FRAMEWORK,
   HACKATHON_FINALS_QUALIFICATION,
-  HACKATHON_META,
   HACKATHON_PARTICIPATION_FEE,
   HACKATHON_PRIZE_STRUCTURE,
   HACKATHON_RULES,
@@ -102,10 +101,10 @@ const statIcons = [
 ];
 
 type HackathonSectionsProps = {
-  onRegister: () => void;
+  registerUrl: string;
 };
 
-const HackathonSections = ({ onRegister }: HackathonSectionsProps) => (
+const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
   <>
     <AboutSectionShell
       id="experience-framework"
@@ -418,23 +417,17 @@ const HackathonSections = ({ onRegister }: HackathonSectionsProps) => (
           className="relative flex flex-col sm:flex-row gap-3 px-6 md:px-10 pb-6 md:pb-10 pt-2 border-t"
           style={{ borderColor: 'rgba(255,255,255,0.06)' }}
         >
-          <button
-            type="button"
-            onClick={onRegister}
+          <a
+            href={registerUrl}
+            target={registerUrl.startsWith('http') ? '_blank' : undefined}
+            rel={registerUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',
             }}
           >
-            Register Your Team
-          </button>
-          <a
-            href={`tel:${HACKATHON_META.contactPhone.replace(/-/g, '')}`}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] transition-all duration-300"
-            style={{ color: HACKATHON_ACCENT, border: `1px solid ${HACKATHON_ACCENT}44`, background: 'rgba(255,255,255,0.04)' }}
-          >
-            Contact: {HACKATHON_META.contactPhone}
+            Apply Now
           </a>
         </div>
       </motion.div>
@@ -522,11 +515,10 @@ const HackathonSections = ({ onRegister }: HackathonSectionsProps) => (
 
     <AboutSectionShell
       id="event-checkin"
-      eyebrow="On-Site"
+      eyebrow="Applications"
       title={
         <>
-          Event Check-in &{' '}
-          <span className="gradient-text-accent">Access</span>
+          <span className="gradient-text-accent">Apply</span> for the Hackathon
         </>
       }
       description={HACKATHON_CHECKIN.intro}
@@ -535,30 +527,7 @@ const HackathonSections = ({ onRegister }: HackathonSectionsProps) => (
         className="max-w-4xl rounded-xl px-6 py-6 sm:px-8"
         style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(9,18,34,0.45)' }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,200px)_1fr] gap-8 items-start">
-          <div className="flex flex-col items-center md:items-start gap-3">
-            <button
-              type="button"
-              onClick={onRegister}
-              className="group inline-flex w-full max-w-[220px] flex-col items-center justify-center rounded-xl px-6 py-6 text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(251,146,60,0.32)]"
-              style={{
-                border: `1px solid ${HACKATHON_ACCENT}55`,
-                background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
-                color: '#050b18',
-              }}
-            >
-              <span className="font-heading font-black tracking-[0.18em] uppercase" style={{ fontSize: '0.95rem' }}>
-                Apply Now
-              </span>
-              <span className="mt-2 font-bold tracking-[0.2em] uppercase opacity-80" style={{ fontSize: '0.58rem' }}>
-                Register Your Team
-              </span>
-            </button>
-            <p className="text-center md:text-left text-foreground-muted" style={{ fontSize: '0.78rem', lineHeight: 1.5 }}>
-              Start your registration
-            </p>
-          </div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-center">
           <div>
             <div className="flex items-center gap-3 mb-5">
               <div
@@ -568,16 +537,35 @@ const HackathonSections = ({ onRegister }: HackathonSectionsProps) => (
                 <Smartphone {...iconSize} />
               </div>
               <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.62rem', color: HACKATHON_ACCENT }}>
-                {HACKATHON_CHECKIN.scanLabel}
+                Hackathon Applications
               </p>
             </div>
-            {bulletList(HACKATHON_CHECKIN.requirements)}
+            <h3 className="font-heading font-bold text-foreground mb-3" style={{ fontSize: 'clamp(1.35rem, 4vw, 2rem)', lineHeight: 1.15 }}>
+              {HACKATHON_CHECKIN.title}
+            </h3>
+            <p className="text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
+              {HACKATHON_CHECKIN.subheadline}
+            </p>
+            <p className="mt-5 text-foreground-muted leading-relaxed" style={{ fontSize: '0.92rem', lineHeight: 1.7 }}>
+              {HACKATHON_CHECKIN.closing}
+            </p>
+          </div>
+
+          <div className="flex flex-col items-stretch lg:items-end gap-3">
+            <a
+              href={registerUrl}
+              target={registerUrl.startsWith('http') ? '_blank' : undefined}
+              rel={registerUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="group inline-flex w-full sm:w-auto min-w-[220px] items-center justify-center rounded-sm px-6 py-4 text-center font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(251,146,60,0.32)]"
+              style={{
+                border: `1px solid ${HACKATHON_ACCENT}55`,
+                background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
+              }}
+            >
+              Apply Now
+            </a>
           </div>
         </div>
-
-        <p className="mt-8 text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
-          {HACKATHON_CHECKIN.closing}
-        </p>
       </div>
     </AboutSectionShell>
   </>

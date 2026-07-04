@@ -50,7 +50,7 @@ const XrasKl2026Page = () => {
           } as React.CSSProperties
         }
       >
-        <XrasActivationsSection />
+        <XrasActivationsSection onRegister={openRegister} />
         <SpeakersSection />
         <EventPartnersSection />
         <XrasKlCtaRow onDownloadBrochure={openBrochure} onRegister={openRegister} />

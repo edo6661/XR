@@ -13,6 +13,8 @@ export const HACKATHON_META = {
   contactPhone: "012-2020264",
 } as const;
 
+export const HACKATHON_REGISTRATION_URL = "#";
+
 export const HACKATHON_HERO = {
   eyebrow: "XR ASIA SUMMIT 26' MOTHERSHIP",
   title: "AI Filmmaking Hackathon",
@@ -312,17 +314,11 @@ export const HACKATHON_PRIZE_STRUCTURE = {
 } as const;
 
 export const HACKATHON_CHECKIN = {
-  title: "Event Check-in & Access",
-  scanLabel: "Take Your Story to Asia's Biggest XR Stage",
-  qrImage: "/qr/old_qr.png",
-  qrAlt: "Registration QR code for XR SUMMIT Mothership Hackathon",
+  title: "Ready to Build the Future of AI Filmmaking?",
+  subheadline:
+    "Form your team. Create in 72 hours. Compete for RM25K+. Present your work at XR Asia Summit 2026.",
   intro:
-    "Upon your arrival at the XR SUMMIT's Mothership Hackathon, please proceed directly to the designated registration area. Our team will be on hand to assist you with a swift and seamless check-in process.",
-  requirements: [
-    "Have your unique registration QR code ready on your mobile device.",
-    "A valid government-issued ID (e.g., passport, national ID card) matching your registration details.",
-    "Your team will receive event badges and access passes upon successful verification.",
-  ],
+    "Applications are now open for teams ready to build and present client-ready AI filmmaking work.",
   closing:
     "Get ready to dive into the future of filmmaking! We look forward to welcoming you to this groundbreaking event.",
 } as const;

@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback, useLayoutEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Mic,
@@ -347,7 +346,11 @@ const cardStyle = {
   boxShadow: '0 0 24px rgba(239,120,61,0.06), inset 0 1px 0 rgba(255,255,255,0.05)',
 } as const;
 
-const AiFilmmakingDetails = () => {
+type AiFilmmakingDetailsProps = {
+  onRegister: () => void;
+};
+
+const AiFilmmakingDetails = ({ onRegister }: AiFilmmakingDetailsProps) => {
   const { highlights, framework, benefits } = XRAS_KL_AI_FILMMAKING;
 
   return (
@@ -420,12 +423,9 @@ const AiFilmmakingDetails = () => {
             className="w-full object-contain rounded-xl"
           />
         </figure>
-        <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-          <p className="leading-relaxed" style={bodyTextStyle}>
-            Click here for more details and how to register
-          </p>
-          <Link
-            to="/ai-filmmaking-hackathon"
+        <div className="mt-5 flex flex-col items-start justify-center gap-3 sm:flex-row sm:items-center">
+          <a
+            href="https://xr-summits.com/ai-filmmaking-hackathon"
             className="inline-flex items-center justify-center rounded-full px-5 py-2.5 font-bold tracking-[0.18em] uppercase transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fb923c]"
             style={{
               color: '#050b18',
@@ -434,8 +434,21 @@ const AiFilmmakingDetails = () => {
               fontSize: '0.72rem',
             }}
           >
-            FULL DETAILS
-          </Link>
+            VIEW MORE DETAILS
+          </a>
+          <button
+            type="button"
+            onClick={onRegister}
+            className="inline-flex items-center justify-center rounded-full px-5 py-2.5 font-bold tracking-[0.18em] uppercase transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fb923c]"
+            style={{
+              color: '#fb923c',
+              background: 'rgba(255,255,255,0.04)',
+              border: '1px solid rgba(251,146,60,0.45)',
+              fontSize: '0.72rem',
+            }}
+          >
+            REGISTER YOUR TEAM
+          </button>
         </div>
       </div>
     </div>
@@ -542,9 +555,11 @@ const AwardsGalaDetails = () => {
 const ExpandedPanel = ({
   activation,
   backgroundSrc,
+  onRegister,
 }: {
   activation: Activation;
   backgroundSrc: string;
+  onRegister: () => void;
 }) => (
   <div
     className="relative rounded-2xl overflow-hidden"
@@ -671,7 +686,7 @@ const ExpandedPanel = ({
 
       {activation.id === 'conference' && <ConferenceAgenda />}
 
-      {activation.id === 'hackathon' && <AiFilmmakingDetails />}
+      {activation.id === 'hackathon' && <AiFilmmakingDetails onRegister={onRegister} />}
 
       {activation.id === 'esports' && <EsportsDetails />}
 
@@ -688,7 +703,11 @@ const ExpandedPanel = ({
 // Main Section with sticky tabs
 // ─────────────────────────────────────────────────────────────────────────────
 
-const XrasActivationsSection = () => {
+type XrasActivationsSectionProps = {
+  onRegister: () => void;
+};
+
+const XrasActivationsSection = ({ onRegister }: XrasActivationsSectionProps) => {
   const [activeId, setActiveId] = useState<string>(ACTIVATIONS[0].id);
   const headingRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -839,6 +858,7 @@ const XrasActivationsSection = () => {
                 <ExpandedPanel
                   activation={activation}
                   backgroundSrc={ACTIVATION_PANEL_BACKGROUNDS[activation.id]}
+                  onRegister={onRegister}
                 />
               )}
             />
