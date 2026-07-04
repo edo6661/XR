@@ -13,7 +13,8 @@ export const HACKATHON_META = {
   contactPhone: "012-2020264",
 } as const;
 
-export const HACKATHON_REGISTRATION_URL = "#";
+export const HACKATHON_REGISTRATION_URL =
+  "https://forms.office.com/r/uUExQZ4Q7E";
 
 export const HACKATHON_HERO = {
   eyebrow: "XR ASIA SUMMIT 26' MOTHERSHIP",

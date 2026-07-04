@@ -5,7 +5,7 @@ import {
   HACKATHON_META,
 } from '../../core/content/aiFilmmakingHackathon';
 
-const HACKATHON_HERO_IMAGE = '/programme-highlights/AI Filmmaking Hackathon.png';
+const HACKATHON_HERO_IMAGE = '/hero/Hackathon Page Top Image.png';
 
 const neoShadow = `
   10px 10px 28px rgba(180,190,208,0.58),

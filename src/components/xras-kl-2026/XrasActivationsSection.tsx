@@ -21,6 +21,7 @@ import {
   XRAS_KL_ESPORTS,
   XRAS_KL_AWARDS_GALA,
 } from '../../core/content/xrasKl2026';
+import { Link } from 'react-router-dom';
 
 type ActivationImage = {
   src: string;
@@ -424,8 +425,8 @@ const AiFilmmakingDetails = ({ onRegister }: AiFilmmakingDetailsProps) => {
           />
         </figure>
         <div className="mt-5 flex flex-col items-start justify-center gap-3 sm:flex-row sm:items-center">
-          <a
-            href="https://xr-summits.com/ai-filmmaking-hackathon"
+          <Link
+            to="/ai-filmmaking-hackathon"
             className="inline-flex items-center justify-center rounded-full px-5 py-2.5 font-bold tracking-[0.18em] uppercase transition duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fb923c]"
             style={{
               color: '#050b18',
@@ -435,7 +436,7 @@ const AiFilmmakingDetails = ({ onRegister }: AiFilmmakingDetailsProps) => {
             }}
           >
             VIEW MORE DETAILS
-          </a>
+          </Link>
           <button
             type="button"
             onClick={onRegister}
