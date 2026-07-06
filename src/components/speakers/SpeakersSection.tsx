@@ -1,8 +1,10 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import SpeakerDetailModal from './SpeakerDetailModal';
 import { XRAS_KL_SPEAKERS, type XrasSpeaker } from '../../core/content/xrasKl2026';
+import { toSpeakerProfile, type SpeakerProfile } from '../../core/content/speakerUtils';
 
 const SPEAKERS: XrasSpeaker[] = [...XRAS_KL_SPEAKERS];
 const ROW_SIZE = 5;
@@ -20,14 +22,27 @@ const speakerRows = Array.from(
   (_, i) => SPEAKERS.slice(i * ROW_SIZE, i * ROW_SIZE + ROW_SIZE),
 );
 
-const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }) => {
+const SpeakerCard = ({
+  speaker,
+  index,
+  onSelect,
+}: {
+  speaker: XrasSpeaker;
+  index: number;
+  onSelect: (speaker: SpeakerProfile) => void;
+}) => {
   const accent = speaker.accentColor ?? '#ef783d';
   const initials = getInitials(speaker.name);
   const rowIndex = Math.floor(index / ROW_SIZE);
   const colIndex = index % ROW_SIZE;
 
   return (
-    <motion.article
+    <motion.button
+      type="button"
+      onClick={() => {
+        const profile = toSpeakerProfile(speaker);
+        if (profile) onSelect(profile);
+      }}
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
@@ -36,7 +51,8 @@ const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }
         duration: 0.65,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="group relative flex flex-col h-full rounded-2xl overflow-hidden text-left select-none"
+      className="group relative flex flex-col h-full w-full rounded-2xl overflow-hidden text-left select-none cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fb923c]"
+      aria-label={`View details for ${speaker.name}`}
       style={{
         background: 'linear-gradient(165deg, rgba(14,18,32,0.92) 0%, rgba(8,10,18,0.98) 100%)',
         border: '1px solid rgba(255,255,255,0.07)',
@@ -140,11 +156,13 @@ const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }
         }}
         aria-hidden="true"
       />
-    </motion.article>
+    </motion.button>
   );
 };
 
 const SpeakersSection = () => {
+  const [selectedSpeaker, setSelectedSpeaker] = useState<SpeakerProfile | null>(null);
+
   return (
     <section
       className="relative w-full overflow-hidden"
@@ -226,7 +244,7 @@ const SpeakersSection = () => {
                   <div className="h-px flex-1 bg-linear-to-r from-transparent via-white/8 to-transparent" />
                 </div>
               ) : null}
-              <SpeakerCard speaker={speaker} index={index} />
+              <SpeakerCard speaker={speaker} index={index} onSelect={setSelectedSpeaker} />
             </Fragment>
           ))}
         </div>
@@ -268,6 +286,8 @@ const SpeakersSection = () => {
           </Link>
         </motion.div>
       </div>
+
+      <SpeakerDetailModal speaker={selectedSpeaker} onClose={() => setSelectedSpeaker(null)} />
     </section>
   );
 };

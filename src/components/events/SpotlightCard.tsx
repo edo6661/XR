@@ -26,6 +26,26 @@ interface SpotlightCardProps {
   className?: string;
 }
 
+const ViewDetailsCta = ({ accentColor }: { accentColor: string }) => (
+  <span
+    className="shrink-0 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[0.68rem] font-bold tracking-[0.2em] uppercase backdrop-blur-sm transition-all duration-300 group-hover:gap-2 group-hover:brightness-110"
+    style={{
+      color: accentColor,
+      background: `${accentColor}1c`,
+      border: `1px solid ${accentColor}45`,
+      boxShadow: `0 4px 14px ${accentColor}14`,
+    }}
+  >
+    View Details
+    <span
+      className="text-[0.85em] transition-transform duration-300 group-hover:translate-x-0.5"
+      aria-hidden="true"
+    >
+      →
+    </span>
+  </span>
+);
+
 const SpotlightCard = ({
   index,
   title,
@@ -139,6 +159,49 @@ const SpotlightCard = ({
 
   }, [accentColor, baseImgScale, isHero]);
 
+  const hasMeta = Boolean(date || location);
+  const showFooter = hasMeta || Boolean(to);
+
+  const cardFooter = showFooter ? (
+    <div
+      className={[
+        'flex items-end gap-3 pt-3 border-t',
+        hasMeta ? 'justify-between' : 'justify-end',
+      ].join(' ')}
+      style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+    >
+      {hasMeta && (
+        <div className="flex flex-col gap-2 min-w-0">
+          {date && (
+            <span
+              className="flex items-start gap-2 leading-snug"
+              style={{ fontSize: '1rem', color: 'rgba(220, 232, 248, 0.95)' }}
+            >
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true">
+                <rect x="2" y="3" width="12" height="11" rx="1" />
+                <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
+              </svg>
+              {date}
+            </span>
+          )}
+          {location && (
+            <span
+              className="flex items-start gap-2 leading-snug"
+              style={{ fontSize: '1rem', color: 'rgba(220, 232, 248, 0.95)' }}
+            >
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
+                <circle cx="8" cy="6" r="1.5" />
+              </svg>
+              {location}
+            </span>
+          )}
+        </div>
+      )}
+      {to && <ViewDetailsCta accentColor={accentColor} />}
+    </div>
+  ) : null;
+
   const contentBlock = (
     <div
       className={[
@@ -186,47 +249,7 @@ const SpotlightCard = ({
         </p>
       </div>
 
-      {/* Meta row */}
-      <div
-        className="flex items-start justify-between gap-3 pt-3 border-t"
-        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
-      >
-        <div className="flex flex-col gap-2 min-w-0">
-          {date && (
-            <span
-              className="flex items-start gap-2 leading-snug"
-              style={{ fontSize: '1rem', color: 'rgba(220, 232, 248, 0.95)' }}
-            >
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true">
-                <rect x="2" y="3" width="12" height="11" rx="1" />
-                <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
-              </svg>
-              {date}
-            </span>
-          )}
-          {location && (
-            <span
-              className="flex items-start gap-2 leading-snug"
-              style={{ fontSize: '1rem', color: 'rgba(220, 232, 248, 0.95)' }}
-            >
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
-                <circle cx="8" cy="6" r="1.5" />
-              </svg>
-              {location}
-            </span>
-          )}
-        </div>
-        {to && (
-          <span
-            className="shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-1"
-            style={{ color: `${accentColor}65` }}
-            aria-hidden="true"
-          >
-            →
-          </span>
-        )}
-      </div>
+      {cardFooter}
     </div>
   );
 
@@ -311,49 +334,7 @@ const SpotlightCard = ({
                 </p>
               )}
             </div>
-            {/* Meta row */}
-            {(date || location || to) && (
-              <div
-                className="flex items-start justify-between gap-3 pt-3 border-t"
-                style={{ borderColor: 'rgba(255,255,255,0.06)' }}
-              >
-                <div className="flex flex-col gap-2 min-w-0">
-                  {date && (
-                    <span
-                      className="flex items-start gap-2 leading-snug"
-                      style={{ fontSize: '1rem', color: 'rgba(220, 232, 248, 0.95)' }}
-                    >
-                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true">
-                        <rect x="2" y="3" width="12" height="11" rx="1" />
-                        <path strokeLinecap="round" d="M5 1v3M11 1v3M2 7h12" />
-                      </svg>
-                      {date}
-                    </span>
-                  )}
-                  {location && (
-                    <span
-                      className="flex items-start gap-2 leading-snug"
-                      style={{ fontSize: '1rem', color: 'rgba(220, 232, 248, 0.95)' }}
-                    >
-                      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M8 1.5C5.515 1.5 3.5 3.515 3.5 6c0 3.75 4.5 8.5 4.5 8.5S12.5 9.75 12.5 6c0-2.485-2.015-4.5-4.5-4.5z" />
-                        <circle cx="8" cy="6" r="1.5" />
-                      </svg>
-                      {location}
-                    </span>
-                  )}
-                </div>
-                {to && (
-                  <span
-                    className="shrink-0 text-sm transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: `${accentColor}65` }}
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                )}
-              </div>
-            )}
+            {cardFooter}
           </div>
         </>
       ) : (

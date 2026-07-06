@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import { User } from 'lucide-react';
+import SpeakerDetailModal from '../speakers/SpeakerDetailModal';
+import { toSpeakerProfile, type SpeakerProfile } from '../../core/content/speakerUtils';
 
 export type SessionSpeaker = {
   photo?: string;
@@ -32,175 +35,194 @@ const getGridClass = (count: number) => {
 const ActivationSessionSlots = ({
   slots,
   accentColor = '#ef783d',
-}: ActivationSessionSlotsProps) => (
-  <div className={`mt-8 grid items-stretch gap-4 ${getGridClass(slots.length)}`}>
-    {slots.map((slot, index) => {
-      const speakerList = slot.speakers?.length
-        ? slot.speakers
-        : slot.speaker
-          ? [slot.speaker]
-          : [];
-      const hasSpeakerDetails = speakerList.some(
-        (speaker) => speaker.name || speaker.jobTitle || speaker.organization,
-      );
-      const hasTopic = Boolean(slot.topic);
-      const showSpeakerComingSoon = Boolean(slot.comingSoon) || !hasSpeakerDetails;
-      const topicText = hasTopic ? slot.topic! : 'Topic to be announced';
+}: ActivationSessionSlotsProps) => {
+  const [selectedSpeaker, setSelectedSpeaker] = useState<SpeakerProfile | null>(null);
 
-      const renderSpeaker = (speaker: SessionSpeaker, speakerIndex: number) => {
-        const hasPhoto = Boolean(speaker.photo);
-        const hasName = Boolean(speaker.name);
-        const hasJobTitle = Boolean(speaker.jobTitle);
-        const hasOrganization = Boolean(speaker.organization);
+  const handleSpeakerClick = (speaker: SessionSpeaker) => {
+    const profile = toSpeakerProfile(speaker);
+    if (profile) setSelectedSpeaker(profile);
+  };
 
-        return (
-          <div
-            key={`speaker-${speakerIndex}`}
-            className={`flex items-start gap-4 ${speakerIndex > 0 ? 'pt-4' : ''}`}
-          >
-            <div
-              className="relative shrink-0 overflow-hidden rounded-xl"
-              style={{
-                width: '5.5rem',
-                height: '5.5rem',
-                background: hasPhoto ? 'transparent' : 'rgba(255,255,255,0.03)',
-                border: hasPhoto
-                  ? `1.5px solid ${accentColor}55`
-                  : `1.5px dashed ${accentColor}55`,
-                boxShadow: hasPhoto ? `0 0 18px ${accentColor}22` : 'none',
-              }}
-            >
-              {hasPhoto ? (
-                <img
-                  src={speaker.photo}
-                  alt={speaker.name ?? 'Speaker'}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-1">
-                  <User
-                    className="h-7 w-7"
-                    style={{ color: `${accentColor}88` }}
-                    strokeWidth={1.5}
-                    aria-hidden="true"
-                  />
-                  <span
-                    className="font-bold tracking-[0.18em] uppercase"
-                    style={{ fontSize: '1rem', color: 'rgba(200,215,240,0.45)' }}
-                  >
-                    Photo
-                  </span>
-                </div>
-              )}
-            </div>
+  return (
+    <>
+      <div className={`mt-8 grid items-stretch gap-4 ${getGridClass(slots.length)}`}>
+        {slots.map((slot, index) => {
+          const speakerList = slot.speakers?.length
+            ? slot.speakers
+            : slot.speaker
+              ? [slot.speaker]
+              : [];
+          const hasSpeakerDetails = speakerList.some(
+            (speaker) => speaker.name || speaker.jobTitle || speaker.organization,
+          );
+          const hasTopic = Boolean(slot.topic);
+          const showSpeakerComingSoon = Boolean(slot.comingSoon) || !hasSpeakerDetails;
+          const topicText = hasTopic ? slot.topic! : 'Topic to be announced';
 
-            <div className="min-w-0 flex-1 space-y-2">
-              {hasName ? (
-                <p className="font-bold leading-tight" style={{ fontSize: '1rem', color: '#f8faff' }}>
-                  {speaker.name}
-                </p>
-              ) : null}
-              <div>
-                {hasJobTitle ? (
-                  <p
-                    className="leading-snug whitespace-pre-line"
-                    style={{ fontSize: '1rem', color: '#c8d8f0' }}
-                  >
-                    {speaker.jobTitle}
-                  </p>
-                ) : null}
-                {hasOrganization ? (
-                  <p
-                    className="leading-snug whitespace-pre-line"
-                    style={{ fontSize: '1rem', color: '#a8b8d0' }}
-                  >
-                    {speaker.organization}
-                  </p>
-                ) : null}
-              </div>
-            </div>
-          </div>
-        );
-      };
+          const renderSpeaker = (speaker: SessionSpeaker, speakerIndex: number) => {
+            const hasPhoto = Boolean(speaker.photo);
+            const hasName = Boolean(speaker.name);
+            const hasJobTitle = Boolean(speaker.jobTitle);
+            const hasOrganization = Boolean(speaker.organization);
 
-      return (
-        <article
-          key={`session-slot-${index}`}
-          className="relative flex h-full flex-col gap-5 rounded-xl p-5"
-          style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: `1px solid ${accentColor}33`,
-            boxShadow: `0 0 24px ${accentColor}0a, inset 0 1px 0 rgba(255,255,255,0.05)`,
-          }}
-        >
-          <div className="shrink-0">
-            {slot.title && (
-              <p
-                className="mb-2 font-bold tracking-[0.28em] uppercase"
-                style={{ fontSize: '0.92rem', color: accentColor }}
+            const isClickable = hasName;
+
+            return (
+              <button
+                type="button"
+                key={`speaker-${speakerIndex}`}
+                onClick={isClickable ? () => handleSpeakerClick(speaker) : undefined}
+                disabled={!isClickable}
+                className={`flex w-full items-start gap-4 text-left transition-colors duration-300 ${speakerIndex > 0 ? 'pt-4' : ''} ${isClickable ? 'cursor-pointer rounded-xl hover:bg-white/[0.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#fb923c]' : 'cursor-default'}`}
+                aria-label={isClickable ? `View details for ${speaker.name}` : undefined}
               >
-                {slot.title}
-              </p>
-            )}
-            <div
-              className="flex h-20 items-center rounded-lg px-3 py-2 overflow-hidden"
-              style={{
-                background: hasTopic ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.02)',
-                border: hasTopic
-                  ? `1px solid ${accentColor}44`
-                  : `1.5px dashed ${accentColor}55`,
-              }}
-            >
-              <p
-                className="w-full font-semibold leading-[1.35]"
-                style={{
-                  fontSize: TOPIC_FONT_SIZE,
-                  color: hasTopic ? '#f0f6ff' : 'rgba(200,215,240,0.55)',
-                  fontStyle: hasTopic ? 'normal' : 'italic',
-                }}
-              >
-                {topicText}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex min-h-22 flex-1 flex-col">
-            <p
-              className="mb-3 font-bold tracking-[0.28em] uppercase"
-              style={{ fontSize: '0.92rem', color: accentColor }}
-            >
-              Speaker
-            </p>
-
-            {showSpeakerComingSoon ? (
-              <div className="flex flex-1 items-center justify-center rounded-xl">
-                <span
-                  className="text-center font-bold tracking-[0.18em] uppercase"
+                <div
+                  className="relative shrink-0 overflow-hidden rounded-xl"
                   style={{
-                    fontSize: '0.95rem',
-                    color: accentColor,
-                    textShadow: `0 0 16px ${accentColor}66`,
+                    width: '5.5rem',
+                    height: '5.5rem',
+                    background: hasPhoto ? 'transparent' : 'rgba(255,255,255,0.03)',
+                    border: hasPhoto
+                      ? `1.5px solid ${accentColor}55`
+                      : `1.5px dashed ${accentColor}55`,
+                    boxShadow: hasPhoto ? `0 0 18px ${accentColor}22` : 'none',
                   }}
                 >
-                  {COMING_SOON_LABEL}
-                </span>
+                  {hasPhoto ? (
+                    <img
+                      src={speaker.photo}
+                      alt={speaker.name ?? 'Speaker'}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-1">
+                      <User
+                        className="h-7 w-7"
+                        style={{ color: `${accentColor}88` }}
+                        strokeWidth={1.5}
+                        aria-hidden="true"
+                      />
+                      <span
+                        className="font-bold tracking-[0.18em] uppercase"
+                        style={{ fontSize: '1rem', color: 'rgba(200,215,240,0.45)' }}
+                      >
+                        Photo
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="min-w-0 flex-1 space-y-2">
+                  {hasName ? (
+                    <p className="font-bold leading-tight" style={{ fontSize: '1rem', color: '#f8faff' }}>
+                      {speaker.name}
+                    </p>
+                  ) : null}
+                  <div>
+                    {hasJobTitle ? (
+                      <p
+                        className="leading-snug whitespace-pre-line"
+                        style={{ fontSize: '1rem', color: '#c8d8f0' }}
+                      >
+                        {speaker.jobTitle}
+                      </p>
+                    ) : null}
+                    {hasOrganization ? (
+                      <p
+                        className="leading-snug whitespace-pre-line"
+                        style={{ fontSize: '1rem', color: '#a8b8d0' }}
+                      >
+                        {speaker.organization}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              </button>
+            );
+          };
+
+          return (
+            <article
+              key={`session-slot-${index}`}
+              className="relative flex h-full flex-col gap-5 rounded-xl p-5"
+              style={{
+                background: 'rgba(255,255,255,0.04)',
+                border: `1px solid ${accentColor}33`,
+                boxShadow: `0 0 24px ${accentColor}0a, inset 0 1px 0 rgba(255,255,255,0.05)`,
+              }}
+            >
+              <div className="shrink-0">
+                {slot.title && (
+                  <p
+                    className="mb-2 font-bold tracking-[0.28em] uppercase"
+                    style={{ fontSize: '0.92rem', color: accentColor }}
+                  >
+                    {slot.title}
+                  </p>
+                )}
+                <div
+                  className="flex h-20 items-center rounded-lg px-3 py-2 overflow-hidden"
+                  style={{
+                    background: hasTopic ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.02)',
+                    border: hasTopic
+                      ? `1px solid ${accentColor}44`
+                      : `1.5px dashed ${accentColor}55`,
+                  }}
+                >
+                  <p
+                    className="w-full font-semibold leading-[1.35]"
+                    style={{
+                      fontSize: TOPIC_FONT_SIZE,
+                      color: hasTopic ? '#f0f6ff' : 'rgba(200,215,240,0.55)',
+                      fontStyle: hasTopic ? 'normal' : 'italic',
+                    }}
+                  >
+                    {topicText}
+                  </p>
+                </div>
               </div>
-            ) : (
-              <div
-                className={
-                  slots.length === 1 && speakerList.length > 1
-                    ? 'grid grid-cols-1 gap-4 md:grid-cols-2'
-                    : 'space-y-0'
-                }
-              >
-                {speakerList.map((speaker, speakerIndex) => renderSpeaker(speaker, speakerIndex))}
+
+              <div className="flex min-h-22 flex-1 flex-col">
+                <p
+                  className="mb-3 font-bold tracking-[0.28em] uppercase"
+                  style={{ fontSize: '0.92rem', color: accentColor }}
+                >
+                  Speaker
+                </p>
+
+                {showSpeakerComingSoon ? (
+                  <div className="flex flex-1 items-center justify-center rounded-xl">
+                    <span
+                      className="text-center font-bold tracking-[0.18em] uppercase"
+                      style={{
+                        fontSize: '0.95rem',
+                        color: accentColor,
+                        textShadow: `0 0 16px ${accentColor}66`,
+                      }}
+                    >
+                      {COMING_SOON_LABEL}
+                    </span>
+                  </div>
+                ) : (
+                  <div
+                    className={
+                      slots.length === 1 && speakerList.length > 1
+                        ? 'grid grid-cols-1 gap-4 md:grid-cols-2'
+                        : 'space-y-0'
+                    }
+                  >
+                    {speakerList.map((speaker, speakerIndex) => renderSpeaker(speaker, speakerIndex))}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </article>
-      );
-    })}
-  </div>
-);
+            </article>
+          );
+        })}
+      </div>
+
+      <SpeakerDetailModal speaker={selectedSpeaker} onClose={() => setSelectedSpeaker(null)} />
+    </>
+  );
+};
 
 export default ActivationSessionSlots;
