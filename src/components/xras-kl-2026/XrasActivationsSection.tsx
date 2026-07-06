@@ -52,21 +52,19 @@ type Activation = {
   tagline: string;
   body: string;
   meta: string;
+  panelImage?: ActivationImage;
   sessionSlots?: SessionSlot[];
   mediaSections?: ActivationMediaSection[];
 };
 
 const iconClass = 'w-5 h-5 flex-shrink-0';
 
-const ACTIVATION_PANEL_BACKGROUNDS = {
-  conference: '/xras-tabs/CONFERENCE.png',
-  expo: '/xras-tabs/Expo.png',
-  masterclasses: '/xras-tabs/Masterclass.png',
-  coaching: '/xras-tabs/Coaching.png',
-  hackathon: '/xras-tabs/Filmmaking Hackathon.png',
-  esports: '/xras-tabs/Esports (3).png',
-  gala: '/xras-tabs/Awards & Gala.jpg.jpeg',
-} as const satisfies Record<ActivationId, string>;
+const ACTIVATION_PANEL_BACKGROUNDS = [
+  '/xras-activation/1.jpg',
+  '/xras-activation/2.jpg',
+  '/xras-activation/3.jpg',
+  '/xras-activation/4.jpg',
+] as const;
 
 const ACTIVATIONS: Activation[] = [
   {
@@ -77,6 +75,10 @@ const ACTIVATIONS: Activation[] = [
     tagline: 'The ideas that move the industry forward.',
     body: 'Three days of keynotes, panel discussions, and fireside chats covering AI infrastructure, spatial media, virtual production, and the future of competitive broadcast. Featuring global speakers across industry, policy, and creative tech.',
     meta: 'Day 1–2 · Main Stage',
+    panelImage: {
+      src: '/xras-tabs/CONFERENCE.png',
+      alt: 'Conference activation visual',
+    },
   },
   {
     id: 'expo',
@@ -86,6 +88,10 @@ const ACTIVATIONS: Activation[] = [
     tagline: 'Where technology meets its buyers.',
     body: 'A curated B2B exhibition floor connecting XR solution providers with enterprise and government decision-makers. Demo live. Match on the spot. Close faster.',
     meta: 'Dec 1–3 · Expo Floor',
+    panelImage: {
+      src: '/xras-tabs/Expo.png',
+      alt: 'Expo activation visual',
+    },
     mediaSections: [
       {
         title: 'Expo Hall Layout',
@@ -120,6 +126,10 @@ const ACTIVATIONS: Activation[] = [
     tagline: 'Hands-on, production-ready skills.',
     body: 'Deep-dive technical sessions covering real-world XR workflows — from production pipelines to immersive deployment. Built for practitioners who want to leave with something they can use.',
     meta: '',
+    panelImage: {
+      src: '/xras-tabs/Masterclass.png',
+      alt: 'Masterclass activation visual',
+    },
     sessionSlots: XRAS_KL_MASTERCLASS_SLOTS as SessionSlot[],
   },
   {
@@ -130,6 +140,10 @@ const ACTIVATIONS: Activation[] = [
     tagline: 'For the builders who need a sounding board.',
     body: 'One-on-one and small group coaching sessions pairing AI and XR startups with industry mentors. Get direct feedback, sharpen your pitch, and find your next move.',
     meta: '',
+    panelImage: {
+      src: '/xras-tabs/Coaching.png',
+      alt: 'Coaching activation visual',
+    },
     sessionSlots: XRAS_KL_COACHING_SLOTS as SessionSlot[],
   },
   {
@@ -140,6 +154,10 @@ const ACTIVATIONS: Activation[] = [
     tagline: XRAS_KL_AI_FILMMAKING.highlights[0],
     body: XRAS_KL_AI_FILMMAKING.highlights[1],
     meta: '',
+    panelImage: {
+      src: '/xras-tabs/Filmmaking Hackathon.png',
+      alt: 'AI filmmaking activation visual',
+    },
   },
   {
     id: 'esports',
@@ -149,6 +167,10 @@ const ACTIVATIONS: Activation[] = [
     tagline: XRAS_KL_ESPORTS.tagline,
     body: XRAS_KL_ESPORTS.body,
     meta: '',
+    panelImage: {
+      src: '/xras-tabs/Esports (3).png',
+      alt: 'Esports activation visual',
+    },
   },
   {
     id: 'gala',
@@ -158,6 +180,10 @@ const ACTIVATIONS: Activation[] = [
     tagline: XRAS_KL_AWARDS_GALA.tagline,
     body: XRAS_KL_AWARDS_GALA.body,
     meta: '',
+    panelImage: {
+      src: '/xras-tabs/Awards & Gala.jpg.jpeg',
+      alt: 'Awards and gala activation visual',
+    },
   },
 ];
 
@@ -240,7 +266,7 @@ const TabButton = ({
         fontSize: 'clamp(0.82rem, 2.2vw, 0.85rem)',
         color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.92)',
         textShadow: isActive ? '0 0 16px rgba(239,120,61,0.5)' : 'none',
-        fontWeight: isActive ? 800 : 700,
+        fontWeight: isActive ? 600 : 700,
       }}
     >
       {activation.shortTitle}
@@ -632,6 +658,24 @@ const ExpandedPanel = ({
             </>
           ) : null}
 
+          {activation.panelImage ? (
+            <div
+              className="mb-6 overflow-hidden rounded-2xl"
+              style={{
+                border: '1px solid rgba(239,120,61,0.18)',
+                boxShadow: '0 18px 36px rgba(0,0,0,0.24)',
+                background: 'rgba(255,255,255,0.03)',
+              }}
+            >
+              <img
+                src={activation.panelImage.src}
+                alt={activation.panelImage.alt}
+                className="block w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </div>
+          ) : null}
+
           {/* Body — clearly readable muted white */}
           {activation.body ? (
             <p
@@ -855,13 +899,19 @@ const XrasActivationsSection = ({ onRegister }: XrasActivationsSectionProps) => 
             <ActivationPanelStack
               items={ACTIVATIONS}
               activeId={activeId}
-              renderPanel={(activation) => (
-                <ExpandedPanel
-                  activation={activation}
-                  backgroundSrc={ACTIVATION_PANEL_BACKGROUNDS[activation.id]}
-                  onRegister={onRegister}
-                />
-              )}
+              renderPanel={(activation) => {
+                const index = ACTIVATIONS.findIndex((item) => item.id === activation.id);
+                const backgroundSrc =
+                  ACTIVATION_PANEL_BACKGROUNDS[index % ACTIVATION_PANEL_BACKGROUNDS.length];
+
+                return (
+                  <ExpandedPanel
+                    activation={activation}
+                    backgroundSrc={backgroundSrc}
+                    onRegister={onRegister}
+                  />
+                );
+              }}
             />
           </div>
         </div>
