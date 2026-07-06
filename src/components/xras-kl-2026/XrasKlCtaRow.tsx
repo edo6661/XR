@@ -25,7 +25,7 @@ const XrasKlCtaRow = ({ onDownloadBrochure, onRegister }: XrasKlCtaRowProps) => 
         <button
           type="button"
           onClick={onDownloadBrochure}
-          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] transition-all duration-300 hover:shadow-[0_0_28px_rgba(239,120,61,0.25)] cursor-none"
+          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[1rem] transition-all duration-300 hover:shadow-[0_0_28px_rgba(239,120,61,0.25)] cursor-none"
           style={{
             color: '#ef783d',
             background: 'rgba(239,120,61,0.08)',
@@ -37,7 +37,7 @@ const XrasKlCtaRow = ({ onDownloadBrochure, onRegister }: XrasKlCtaRowProps) => 
         <button
           type="button"
           onClick={onRegister}
-          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.75rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] hover:-translate-y-px cursor-none"
+          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[1rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] hover:-translate-y-px cursor-none"
           style={{
             background: 'linear-gradient(135deg, #ef783d 0%, #fb923c 100%)',
             border: '1px solid rgba(239,120,61,0.5)',

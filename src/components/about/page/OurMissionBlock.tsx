@@ -86,7 +86,7 @@ const OurMissionBlock = () => (
                 </div>
                 <span
                   className="font-heading font-bold tracking-wide"
-                  style={{ fontSize: '0.78rem', color: 'rgba(240,244,255,0.92)' }}
+                  style={{ fontSize: '1rem', color: 'rgba(240,244,255,0.92)' }}
                 >
                   {pillar.label}
                 </span>

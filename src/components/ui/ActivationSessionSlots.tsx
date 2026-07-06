@@ -21,7 +21,7 @@ type ActivationSessionSlotsProps = {
 };
 
 const COMING_SOON_LABEL = 'COMING SOON';
-const TOPIC_FONT_SIZE = '0.78rem';
+const TOPIC_FONT_SIZE = '1rem';
 
 const getGridClass = (count: number) => {
   if (count === 1) return 'grid-cols-1';
@@ -86,7 +86,7 @@ const ActivationSessionSlots = ({
                   />
                   <span
                     className="font-bold tracking-[0.18em] uppercase"
-                    style={{ fontSize: '0.45rem', color: 'rgba(200,215,240,0.45)' }}
+                    style={{ fontSize: '1rem', color: 'rgba(200,215,240,0.45)' }}
                   >
                     Photo
                   </span>
@@ -104,7 +104,7 @@ const ActivationSessionSlots = ({
                 {hasJobTitle ? (
                   <p
                     className="leading-snug whitespace-pre-line"
-                    style={{ fontSize: '0.82rem', color: '#c8d8f0' }}
+                    style={{ fontSize: '1rem', color: '#c8d8f0' }}
                   >
                     {speaker.jobTitle}
                   </p>
@@ -112,7 +112,7 @@ const ActivationSessionSlots = ({
                 {hasOrganization ? (
                   <p
                     className="leading-snug whitespace-pre-line"
-                    style={{ fontSize: '0.78rem', color: '#a8b8d0' }}
+                    style={{ fontSize: '1rem', color: '#a8b8d0' }}
                   >
                     {speaker.organization}
                   </p>
@@ -137,7 +137,7 @@ const ActivationSessionSlots = ({
             {slot.title && (
               <p
                 className="mb-2 font-bold tracking-[0.28em] uppercase"
-                style={{ fontSize: '0.58rem', color: accentColor }}
+                style={{ fontSize: '0.92rem', color: accentColor }}
               >
                 {slot.title}
               </p>
@@ -167,7 +167,7 @@ const ActivationSessionSlots = ({
           <div className="flex min-h-22 flex-1 flex-col">
             <p
               className="mb-3 font-bold tracking-[0.28em] uppercase"
-              style={{ fontSize: '0.58rem', color: accentColor }}
+              style={{ fontSize: '0.92rem', color: accentColor }}
             >
               Speaker
             </p>

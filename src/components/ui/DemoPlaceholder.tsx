@@ -93,7 +93,7 @@ const DemoPlaceholder = ({
           {/* Eyebrow */}
           <p
             className="font-bold tracking-[0.45em] uppercase"
-            style={{ fontSize: '0.55rem', color: `${accentColor}70` }}
+            style={{ fontSize: '0.88rem', color: `${accentColor}70` }}
           >
             {eta ? `Coming ${eta}` : 'Under Development'}
           </p>
@@ -107,14 +107,14 @@ const DemoPlaceholder = ({
               {title}
             </h1>
             {subtitle && (
-              <p style={{ fontSize: '0.85rem', color: 'rgba(107,127,163,0.75)', lineHeight: 1.7 }}>
+              <p style={{ fontSize: '1.02rem', color: 'rgba(107,127,163,0.75)', lineHeight: 1.7 }}>
                 {subtitle}
               </p>
             )}
           </div>
 
           {/* Body */}
-          <p style={{ fontSize: '0.82rem', color: 'rgba(107,127,163,0.7)', lineHeight: 1.8, maxWidth: '340px' }}>
+          <p style={{ fontSize: '1rem', color: 'rgba(107,127,163,0.7)', lineHeight: 1.8, maxWidth: '340px' }}>
             This section is currently being built. We're working hard to bring you
             something exceptional — check back soon or register your interest below.
           </p>
@@ -137,7 +137,7 @@ const DemoPlaceholder = ({
               }
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-sm font-bold tracking-[0.18em] uppercase transition-all duration-300 group"
               style={{
-                fontSize: '0.7rem',
+                fontSize: '1rem',
                 background: accentColor,
                 color: '#050b18',
                 boxShadow: `0 0 24px ${accentColor}30`,
@@ -151,7 +151,7 @@ const DemoPlaceholder = ({
               to="/"
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-sm font-bold tracking-[0.18em] uppercase transition-all duration-300 group"
               style={{
-                fontSize: '0.7rem',
+                fontSize: '1rem',
                 border: `1px solid rgba(255,255,255,0.1)`,
                 color: 'rgba(107,127,163,0.7)',
               }}
@@ -177,7 +177,7 @@ const DemoPlaceholder = ({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8, duration: 0.7 }}
         className="absolute bottom-10 font-mono tracking-[0.35em] uppercase"
-        style={{ fontSize: '0.46rem', color: 'rgba(107,127,163,0.25)' }}
+        style={{ fontSize: '0.95rem', color: 'rgba(107,127,163,0.25)' }}
         aria-hidden="true"
       >
         XR SUMMITS · KUL · 2026

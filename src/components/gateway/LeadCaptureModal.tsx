@@ -47,7 +47,7 @@ const INPUT_CLASS =
   ' bg-white/[0.06] border border-white/[0.14] text-[#f8faff] focus:border-[rgba(239,120,61,0.6)] focus:shadow-[0_0_0_3px_rgba(239,120,61,0.1)]';
 
 const LABEL_CLASS =
-  'font-mono text-[0.58rem] tracking-[0.3em] uppercase text-foreground-muted/80';
+  'font-mono text-[0.92rem] tracking-[0.3em] uppercase text-foreground-muted/80';
 
 const LeadCaptureModal = ({
   open,
@@ -268,7 +268,7 @@ const LeadCaptureModal = ({
 
             <button
               type="submit"
-              className="flex items-center justify-center gap-2.5 w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.72rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] active:scale-[0.99] mt-1"
+              className="flex items-center justify-center gap-2.5 w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[1rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] active:scale-[0.99] mt-1"
               style={{
                 background: `linear-gradient(135deg, ${accentColor} 0%, #fb923c 100%)`,
                 border: `1px solid ${accentColor}80`,
@@ -310,7 +310,7 @@ const LeadCaptureModal = ({
                   key={doc.href}
                   href={doc.href}
                   download
-                  className="flex items-center justify-center gap-2 w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[0.68rem] text-[#050505]"
+                  className="flex items-center justify-center gap-2 w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[1rem] text-[#050505]"
                   style={{
                     background: `linear-gradient(135deg, ${accentColor} 0%, #fb923c 100%)`,
                     border: `1px solid ${accentColor}80`,
@@ -332,7 +332,7 @@ const LeadCaptureModal = ({
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[0.68rem] transition-all duration-300 hover:shadow-[0_0_24px_rgba(74,222,128,0.2)]"
+            className="flex items-center justify-center gap-2 w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[1rem] transition-all duration-300 hover:shadow-[0_0_24px_rgba(74,222,128,0.2)]"
             style={{
               border: '1px solid rgba(74,222,128,0.35)',
               background: 'rgba(74,222,128,0.08)',
@@ -353,7 +353,7 @@ const LeadCaptureModal = ({
           <button
             type="button"
             onClick={handleClose}
-            className="px-7 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.7rem] text-[#050505]"
+            className="px-7 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050505]"
             style={{
               background: `linear-gradient(135deg, ${accentColor} 0%, #fb923c 100%)`,
               border: `1px solid ${accentColor}80`,

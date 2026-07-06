@@ -100,13 +100,13 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
           >
             <span
               className="font-mono tracking-[0.35em] uppercase"
-              style={{ fontSize: '0.48rem', color: 'rgba(107,127,163,0.4)' }}
+              style={{ fontSize: '1rem', color: 'rgba(107,127,163,0.4)' }}
             >
               XRAS · 2026
             </span>
             <span
               className="font-mono tracking-[0.35em] uppercase"
-              style={{ fontSize: '0.48rem', color: 'rgba(107,127,163,0.25)' }}
+              style={{ fontSize: '1rem', color: 'rgba(107,127,163,0.25)' }}
             >
               KUL · 03°08′N
             </span>
@@ -116,7 +116,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
           <div className="absolute bottom-8 right-8" aria-hidden="true">
             <span
               className="font-mono tracking-[0.35em] uppercase"
-              style={{ fontSize: '0.48rem', color: 'rgba(107,127,163,0.3)' }}
+              style={{ fontSize: '1rem', color: 'rgba(107,127,163,0.3)' }}
             >
               v4.0
             </span>
@@ -209,7 +209,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
                     exit={{ y: -10, opacity: 0 }}
                     transition={{ duration: 0.3, ease: 'easeOut' }}
                     className="font-mono tracking-[0.3em] uppercase text-center"
-                    style={{ fontSize: '0.5rem', color: 'rgba(107,127,163,0.55)' }}
+                    style={{ fontSize: '1.02rem', color: 'rgba(107,127,163,0.55)' }}
                     aria-hidden="true"
                   >
                     {LOADING_STEPS[stepIndex]}

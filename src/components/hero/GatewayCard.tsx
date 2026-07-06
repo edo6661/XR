@@ -259,7 +259,7 @@ const GatewayCard = ({
               {/* Tag + index row */}
               <div className="flex items-center justify-between">
                 <span
-                  className="text-[0.56rem] font-bold tracking-[0.35em] uppercase px-2.5 py-1 rounded-sm"
+                  className="text-[0.9rem] font-bold tracking-[0.35em] uppercase px-2.5 py-1 rounded-sm"
                   style={{
                     color: accentColor,
                     background: `${accentColor}14`,
@@ -270,7 +270,7 @@ const GatewayCard = ({
                   {tag}
                 </span>
                 <span
-                  className="font-mono text-[0.5rem] tracking-[0.3em]"
+                  className="font-mono text-[1.02rem] tracking-[0.3em]"
                   style={{ color: `${accentColor}45` }}
                   aria-hidden="true"
                 >
@@ -296,7 +296,7 @@ const GatewayCard = ({
               <div className="flex flex-col gap-1.5 flex-1">
                 <p
                   className="font-semibold tracking-[0.28em] uppercase"
-                  style={{ fontSize: '0.57rem', color: `${accentColor}75` }}
+                  style={{ fontSize: '0.9rem', color: `${accentColor}75` }}
                 >
                   {subtitle}
                 </p>
@@ -308,7 +308,7 @@ const GatewayCard = ({
                 </h3>
                 <p
                   className="text-foreground-muted leading-relaxed"
-                  style={{ fontSize: isCenter ? '0.8rem' : '0.74rem', marginTop: '3px', lineHeight: 1.7 }}
+                  style={{ fontSize: isCenter ? '0.95rem' : '1rem', marginTop: '3px', lineHeight: 1.7 }}
                 >
                   {description}
                 </p>
@@ -329,7 +329,7 @@ const GatewayCard = ({
               >
                 <span
                   ref={ctaTextRef}
-                  className="text-[0.64rem] font-bold tracking-[0.2em] uppercase"
+                  className="text-[0.95rem] font-bold tracking-[0.2em] uppercase"
                   style={{ color: accentColor, opacity: 0.7 }}
                 >
                   {cta}

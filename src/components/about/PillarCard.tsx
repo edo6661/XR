@@ -40,9 +40,9 @@ const PillarCard = ({
     ? 'clamp(1.15rem, 2.4vw, 1.45rem)'
     : isFeatured
       ? '0.86rem'
-      : '0.78rem';
-  const descSize = isHero ? 'clamp(0.98rem, 1.9vw, 1.1rem)' : '0.82rem';
-  const indexSize = isHero ? '0.72rem' : '0.56rem';
+      : '1rem';
+  const descSize = isHero ? 'clamp(0.98rem, 1.9vw, 1.1rem)' : '1rem';
+  const indexSize = isHero ? '1rem' : '0.9rem';
 
   return (
     <motion.div

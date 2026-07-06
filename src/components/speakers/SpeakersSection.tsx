@@ -98,7 +98,7 @@ const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }
         <span
           className="absolute top-3 left-3 font-mono font-medium px-2 py-0.5 rounded-sm backdrop-blur-sm"
           style={{
-            fontSize: '0.5rem',
+            fontSize: '1.02rem',
             letterSpacing: '0.22em',
             color: 'rgba(240,244,255,0.75)',
             background: 'rgba(5,8,16,0.55)',
@@ -113,19 +113,19 @@ const SpeakerCard = ({ speaker, index }: { speaker: XrasSpeaker; index: number }
       <div className="relative flex flex-col flex-1 gap-1.5 p-4 pt-3">
         <h3
           className="font-heading font-bold text-foreground leading-snug group-hover:text-white transition-colors duration-300"
-          style={{ fontSize: '0.8rem' }}
+          style={{ fontSize: '0.95rem' }}
         >
           {speaker.name}
         </h3>
         {speaker.role ? (
-          <p className="font-medium leading-snug" style={{ fontSize: '0.8rem', color: accent }}>
+          <p className="font-medium leading-snug" style={{ fontSize: '0.95rem', color: accent }}>
             {speaker.role}
           </p>
         ) : null}
         {speaker.company ? (
           <p
-            className="line-clamp-2"
-            style={{ fontSize: '0.68rem', color: 'rgba(200,212,235,0.72)', lineHeight: 1.45 }}
+            className="line-clamp-3"
+            style={{ fontSize: '1rem', color: 'rgba(200,212,235,0.72)', lineHeight: 1.45 }}
           >
             {speaker.company}
           </p>
@@ -198,7 +198,7 @@ const SpeakersSection = () => {
           >
             <span
               className="font-mono uppercase"
-              style={{ fontSize: '0.58rem', letterSpacing: '0.22em', color: 'rgba(139,155,180,0.55)' }}
+              style={{ fontSize: '0.92rem', letterSpacing: '0.22em', color: 'rgba(139,155,180,0.55)' }}
             >
               {String(SPEAKERS.length).padStart(2, '0')} Speakers
             </span>
@@ -208,7 +208,7 @@ const SpeakersSection = () => {
             />
             <span
               className="font-mono uppercase"
-              style={{ fontSize: '0.58rem', letterSpacing: '0.22em', color: 'rgba(139,155,180,0.4)' }}
+              style={{ fontSize: '0.92rem', letterSpacing: '0.22em', color: 'rgba(139,155,180,0.4)' }}
             >
               {speakerRows.length} Rows
             </span>
@@ -246,7 +246,7 @@ const SpeakersSection = () => {
             to="/contact#section-speakers"
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
             style={{
-              fontSize: '0.72rem',
+              fontSize: '1rem',
               border: '1px solid rgba(239,120,61,0.4)',
               color: '#ef783d',
             }}

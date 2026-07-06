@@ -78,7 +78,7 @@ const ConferenceAgenda = () => (
     <div>
       <p
         className="mb-1 font-bold tracking-[0.28em] uppercase"
-        style={{ fontSize: '0.58rem', color: 'var(--theme-accent)' }}
+        style={{ fontSize: '0.92rem', color: 'var(--theme-accent)' }}
       >
         Programme Highlights
       </p>
@@ -111,13 +111,13 @@ const ConferenceAgenda = () => (
               />
               <p
                 className="font-heading font-bold tracking-[0.12em] uppercase"
-                style={{ fontSize: '0.72rem', color: 'var(--theme-foreground)' }}
+                style={{ fontSize: '1rem', color: 'var(--theme-foreground)' }}
               >
                 Day {day.day}
               </p>
               <p
                 className="mt-1 font-semibold leading-snug"
-                style={{ fontSize: '0.78rem', color: 'var(--theme-accent-bright)' }}
+                style={{ fontSize: '1rem', color: 'var(--theme-accent-bright)' }}
               >
                 {day.theme}
               </p>
@@ -129,7 +129,7 @@ const ConferenceAgenda = () => (
                   <p
                     className="leading-snug"
                     style={{
-                      fontSize: '0.82rem',
+                      fontSize: '1rem',
                       color: item.emphasis ? 'var(--theme-accent)' : 'var(--theme-foreground-muted)',
                       fontWeight: item.emphasis ? 700 : 400,
                     }}
@@ -155,7 +155,7 @@ const ConferenceAgenda = () => (
     <div>
       <p
         className="mb-4 font-bold tracking-[0.28em] uppercase"
-        style={{ fontSize: '0.58rem', color: 'var(--theme-accent)' }}
+        style={{ fontSize: '0.92rem', color: 'var(--theme-accent)' }}
       >
         Activity Matrix
       </p>
@@ -176,7 +176,7 @@ const ConferenceAgenda = () => (
               key={label}
               role="columnheader"
               className="text-center font-heading font-bold tracking-[0.1em] uppercase"
-              style={{ fontSize: '0.65rem', color: 'var(--theme-accent)' }}
+              style={{ fontSize: '0.95rem', color: 'var(--theme-accent)' }}
             >
               {label}
             </p>
@@ -187,7 +187,7 @@ const ConferenceAgenda = () => (
               <p
                 role="rowheader"
                 className="font-heading font-bold leading-snug pr-1"
-                style={{ fontSize: '0.78rem', color: 'var(--theme-foreground)' }}
+                style={{ fontSize: '1rem', color: 'var(--theme-foreground)' }}
               >
                 {row.name}
               </p>

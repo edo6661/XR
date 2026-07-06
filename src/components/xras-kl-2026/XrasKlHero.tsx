@@ -118,7 +118,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.26, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-semibold tracking-[0.22em] uppercase mb-8"
-          style={{ fontSize: '0.68rem', color: 'rgba(22,36,62,0.55)' }}
+          style={{ fontSize: '1rem', color: 'rgba(22,36,62,0.55)' }}
         >
           {XRAS_KL_META.location}
         </motion.p>
@@ -132,7 +132,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           <button
             type="button"
             onClick={onDownloadBrochure}
-            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] transition-all duration-300"
+            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] transition-all duration-300"
             style={{
               color: XRAS_KL_ACCENT,
               background: 'rgba(255,255,255,0.72)',
@@ -147,7 +147,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           <button
             type="button"
             onClick={onRegister}
-            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
+            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',

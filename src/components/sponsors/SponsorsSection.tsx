@@ -107,7 +107,7 @@ const SliderLogoCard = ({ partner }: { partner: Partner }) => {
           if (parent) {
             const fallback = document.createElement('span');
             fallback.style.cssText =
-              'font-size:0.55rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(107,127,163,0.55);text-align:center;line-height:1.4;';
+              'font-size:0.88rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(107,127,163,0.55);text-align:center;line-height:1.4;';
             fallback.textContent = partner.name;
             parent.appendChild(fallback);
           }
@@ -272,7 +272,7 @@ const SponsorsSection = () => {
             }
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300"
             style={{
-              fontSize: '0.72rem',
+              fontSize: '1rem',
               border: '1px solid rgba(239,120,61,0.4)',
               background: 'rgba(255,255,255,0.72)',
               color: '#ef783d',

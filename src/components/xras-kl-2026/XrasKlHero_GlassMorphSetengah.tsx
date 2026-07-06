@@ -66,14 +66,14 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
       >
         <Link
           to="/"
-          className="font-mono text-[0.5rem] tracking-[0.35em] uppercase text-foreground hover:text-accent transition-colors"
+          className="font-mono text-[1.02rem] tracking-[0.35em] uppercase text-foreground hover:text-accent transition-colors"
         >
           XR Summits
         </Link>
         <span className="w-1 h-1 rounded-full bg-accent/70" aria-hidden="true" />
         <span
           className="font-bold tracking-[0.4em] uppercase"
-          style={{ fontSize: '0.5rem', color: XRAS_KL_ACCENT }}
+          style={{ fontSize: '1.02rem', color: XRAS_KL_ACCENT }}
         >
           {XRAS_KL_META.edition}
         </span>
@@ -138,7 +138,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
         <button
           type="button"
           onClick={onDownloadBrochure}
-          className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-accent transition-all duration-300 hover:text-foreground"
+          className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-accent transition-all duration-300 hover:text-foreground"
           style={{
             ...glassLight,
             borderRadius: '3px',
@@ -149,7 +149,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
         <button
           type="button"
           onClick={onRegister}
-          className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
+          className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
           style={{
             background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
             border: '1px solid rgba(251,146,60,0.5)',

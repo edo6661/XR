@@ -413,7 +413,7 @@ const BootOverlay = ({ phase, reduced }: { phase: Phase; reduced: boolean }) => 
             }
             className="font-mono uppercase"
             style={{
-              fontSize: '0.42rem',
+              fontSize: '1rem',
               letterSpacing: '0.28em',
               color: 'rgba(125,211,252,0.55)',
             }}

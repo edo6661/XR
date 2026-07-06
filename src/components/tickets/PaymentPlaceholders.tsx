@@ -13,7 +13,7 @@ const PaymentPlaceholders = () => (
     >
       <p
         className="font-bold tracking-[0.45em] uppercase mb-3"
-        style={{ fontSize: '0.52rem', color: 'rgba(251,146,60,0.65)' }}
+        style={{ fontSize: '1.02rem', color: 'rgba(251,146,60,0.65)' }}
       >
         Payment options
       </p>
@@ -52,12 +52,12 @@ const PaymentPlaceholders = () => (
         <button
           type="button"
           disabled
-          className="mt-auto w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[0.65rem] text-white/50 cursor-not-allowed"
+          className="mt-auto w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[0.95rem] text-white/50 cursor-not-allowed"
           style={{ background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' }}
         >
           Pay with Stripe (mockup)
         </button>
-        <p className="font-mono text-[0.45rem] tracking-[0.25em] uppercase text-center text-foreground-muted/40">
+        <p className="font-mono text-[1rem] tracking-[0.25em] uppercase text-center text-foreground-muted/40">
           No Stripe API · Phase 1
         </p>
       </motion.div>
@@ -87,14 +87,14 @@ const PaymentPlaceholders = () => (
             ['Branch', BNI_BANK_DETAILS.branch],
           ].map(([dt, dd]) => (
             <div key={dt} className="flex flex-col sm:flex-row sm:gap-2">
-              <dt className="font-mono text-[0.48rem] tracking-[0.2em] uppercase text-foreground-muted/50 shrink-0 sm:w-24">
+              <dt className="font-mono text-[1rem] tracking-[0.2em] uppercase text-foreground-muted/50 shrink-0 sm:w-24">
                 {dt}
               </dt>
               <dd className="text-foreground-muted">{dd}</dd>
             </div>
           ))}
         </dl>
-        <p className="font-mono text-[0.45rem] tracking-[0.25em] uppercase text-foreground-muted/40 mt-auto">
+        <p className="font-mono text-[1rem] tracking-[0.25em] uppercase text-foreground-muted/40 mt-auto">
           Placeholder account details
         </p>
       </motion.div>
@@ -137,7 +137,7 @@ const PaymentPlaceholders = () => (
         <p className="text-center text-foreground-muted text-xs leading-relaxed">
           Scan to pay — QR image placeholder
         </p>
-        <p className="font-mono text-[0.45rem] tracking-[0.25em] uppercase text-foreground-muted/40">
+        <p className="font-mono text-[1rem] tracking-[0.25em] uppercase text-foreground-muted/40">
           DuitNow / FPX · Coming soon
         </p>
       </motion.div>

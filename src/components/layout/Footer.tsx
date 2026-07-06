@@ -43,7 +43,7 @@ const FooterLink = ({ label, to }: { label: string; to: string }) => (
     <Link
       to={to}
       className="group inline-flex items-center gap-1.5 transition-colors duration-250 hover:text-on-light-heading"
-      style={{ color: 'var(--theme-on-light-muted)', fontSize: '0.82rem' }}
+      style={{ color: 'var(--theme-on-light-muted)', fontSize: '1rem' }}
     >
       <span
         className="w-0 h-px transition-all duration-300 group-hover:w-3 shrink-0"
@@ -163,7 +163,7 @@ const Footer = () => {
 
             <p
               style={{
-                fontSize: '0.82rem',
+                fontSize: '1rem',
                 color: 'var(--theme-on-light-muted)',
                 lineHeight: 1.75,
                 maxWidth: '320px',
@@ -207,7 +207,7 @@ const Footer = () => {
             <div
               className="flex flex-col gap-1.5"
               style={{
-                fontSize: '0.8rem',
+                fontSize: '0.95rem',
                 color: 'var(--theme-on-light-muted)',
                 lineHeight: 1.8,
               }}
@@ -273,14 +273,14 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="flex flex-col gap-4 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}>
+            <p style={{ fontSize: '1rem', color: 'var(--theme-on-light-muted)' }}>
               XR SUMMITS SDN BHD, MALAYSIA ({COMPANY.registrationNo}) · {COPYRIGHT_NOTICE.line1}
             </p>
 
             <a
               href={`mailto:${COMPANY.email}`}
               className="transition-colors duration-250 hover:text-accent"
-              style={{ fontSize: '0.76rem', color: 'var(--theme-on-light-muted)' }}
+              style={{ fontSize: '1rem', color: 'var(--theme-on-light-muted)' }}
             >
               {COMPANY.email}
             </a>
@@ -288,7 +288,7 @@ const Footer = () => {
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="group flex items-center gap-2 transition-colors duration-250 hover:text-accent"
-              style={{ color: 'var(--theme-on-light-muted)', fontSize: '0.76rem' }}
+              style={{ color: 'var(--theme-on-light-muted)', fontSize: '1rem' }}
               aria-label="Back to top"
             >
               <span className="font-bold tracking-[0.24em] uppercase">Back to top</span>
@@ -305,13 +305,13 @@ const Footer = () => {
           <div className="flex flex-col">
             <p
               className="max-w-4xl mx-auto text-center font-semibold mb-1"
-              style={{ fontSize: '0.72rem', color: 'var(--theme-on-light-muted)' }}
+              style={{ fontSize: '1rem', color: 'var(--theme-on-light-muted)' }}
             >
               {COPYRIGHT_NOTICE.heading}
             </p>
             <p
               className="max-w-4xl mx-auto text-center leading-relaxed"
-              style={{ fontSize: '0.68rem', color: 'var(--theme-on-light-muted)', opacity: 0.75 }}
+              style={{ fontSize: '1rem', color: 'var(--theme-on-light-muted)', opacity: 0.75 }}
             >
               {COPYRIGHT_NOTICE.line2} {COPYRIGHT_NOTICE.line3}
             </p>

@@ -19,7 +19,7 @@ export const bulletList = (
   items: readonly string[],
   accent = HACKATHON_ACCENT,
 ) => (
-  <ul className="space-y-1.5" style={{ fontSize: '0.82rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.6 }}>
+  <ul className="space-y-1.5" style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.6 }}>
     {items.map((item) => (
       <li key={item} className="flex items-start gap-2">
         <span className="mt-[0.45em] h-1 w-1 shrink-0 rounded-full" style={{ background: accent }} aria-hidden="true" />
@@ -96,7 +96,7 @@ const IconCard = ({
       {index !== undefined && (
         <span
           className="font-heading font-black"
-          style={{ fontSize: '0.56rem', letterSpacing: '0.38em', color: `${accent}40` }}
+          style={{ fontSize: '0.9rem', letterSpacing: '0.38em', color: `${accent}40` }}
           aria-hidden="true"
         >
           {String(index + 1).padStart(2, '0')}
@@ -105,21 +105,21 @@ const IconCard = ({
     </div>
 
     <div className="flex flex-col gap-1.5">
-      <h4 className="font-heading font-bold text-foreground leading-snug" style={{ fontSize: featured ? '0.92rem' : '0.84rem' }}>
+      <h4 className="font-heading font-bold text-foreground leading-snug" style={{ fontSize: featured ? '0.92rem' : '1.02rem' }}>
         {title}
       </h4>
       {subtitle && (
-        <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.6rem', color: accent }}>
+        <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.92rem', color: accent }}>
           {subtitle}
         </p>
       )}
       {amount && (
-        <p className="font-semibold" style={{ fontSize: '0.78rem', color: accent }}>
+        <p className="font-semibold" style={{ fontSize: '1rem', color: accent }}>
           {amount}
         </p>
       )}
       {description && (
-        <p style={{ fontSize: '0.84rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}>
+        <p style={{ fontSize: '1.02rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}>
           {description}
         </p>
       )}

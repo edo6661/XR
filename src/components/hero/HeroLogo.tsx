@@ -66,7 +66,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
             transition={{ delay: 1.28, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="text-center leading-relaxed px-4"
             style={{
-              fontSize: 'clamp(0.68rem, 1.2vw, 0.78rem)',
+              fontSize: 'clamp(0.9rem, 1.2vw, 1rem)',
               color: 'rgba(107,127,163,0.7)',
               lineHeight: 1.75,
               letterSpacing: '0.04em',

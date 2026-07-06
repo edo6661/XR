@@ -35,7 +35,7 @@ const ProgramCard = ({ program, index }: { program: AixrProgram; index: number }
         <span
           className="font-bold tracking-[0.32em] uppercase px-2.5 py-1 rounded-sm"
           style={{
-            fontSize: '0.5rem',
+            fontSize: '1.02rem',
             color: AIXR_SARAWAK_ACCENT,
             background: `${AIXR_SARAWAK_ACCENT}12`,
             border: `1px solid ${AIXR_SARAWAK_ACCENT}22`,
@@ -43,7 +43,7 @@ const ProgramCard = ({ program, index }: { program: AixrProgram; index: number }
         >
           {program.category}
         </span>
-        <span className="font-mono text-[0.48rem] tracking-[0.25em]" style={{ color: 'rgba(107,127,163,0.35)' }}>
+        <span className="font-mono text-[1rem] tracking-[0.25em]" style={{ color: 'rgba(107,127,163,0.35)' }}>
           {String(index + 1).padStart(2, '0')}
         </span>
       </div>
@@ -55,7 +55,7 @@ const ProgramCard = ({ program, index }: { program: AixrProgram; index: number }
         {program.title}
       </h3>
 
-      <p className="text-foreground-muted flex-1 leading-relaxed" style={{ fontSize: '0.8rem', lineHeight: 1.75 }}>
+      <p className="text-foreground-muted flex-1 leading-relaxed" style={{ fontSize: '0.95rem', lineHeight: 1.75 }}>
         {program.description}
       </p>
     </div>
@@ -117,7 +117,7 @@ const AixrProgramsSection = ({ onDownloadBrochure, onRegister }: AixrProgramsSec
         <button
           type="button"
           onClick={onDownloadBrochure}
-          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] transition-colors duration-300"
+          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] transition-colors duration-300"
           style={{
             color: AIXR_SARAWAK_ACCENT,
             background: 'rgba(255,255,255,0.03)',
@@ -129,7 +129,7 @@ const AixrProgramsSection = ({ onDownloadBrochure, onRegister }: AixrProgramsSec
         <button
           type="button"
           onClick={onRegister}
-          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
+          className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(34,211,238,0.35)]"
           style={{
             background: `linear-gradient(135deg, ${AIXR_SARAWAK_ACCENT} 0%, #06b6d4 100%)`,
             border: `1px solid ${AIXR_SARAWAK_ACCENT}80`,

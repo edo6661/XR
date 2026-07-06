@@ -171,11 +171,11 @@ html.lenis body {
   --text-h3: clamp(1.2rem, 2vw, 1.5rem);
   --text-body-lg: 1.0625rem; /* 17px — up from 16px */
   --text-body: 0.9375rem; /* 15px — up from 14px */
-  --text-sm: 0.875rem; /* 14px — up from 12.8px */
-  --text-xs: 0.8125rem; /* 13px — up from 11.5px */
-  --text-2xs: 0.75rem; /* 12px — up from 9.9px */
-  --text-label: 0.6875rem; /* 11px — up from 9.1px */
-  --text-micro: 0.625rem; /* 10px — up from 8px */
+  --text-sm: 0.9375rem; /* 15px */
+  --text-xs: 0.9375rem; /* 15px */
+  --text-2xs: 0.875rem; /* 14px — meta / secondary labels */
+  --text-label: 0.8125rem; /* 13px */
+  --text-micro: 0.75rem; /* 12px — minimum legible size */
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────── */
@@ -879,7 +879,7 @@ svg {
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.875rem;
-  font-size: 0.62rem;
+  font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;

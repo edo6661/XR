@@ -151,7 +151,7 @@ const EventPartnersSection = () => {
                 <span
                   className="font-mono font-bold tracking-[0.28em] uppercase"
                   style={{
-                    fontSize: '0.65rem',
+                    fontSize: '0.95rem',
                     color: 'rgba(239,120,61,0.85)',
                   }}
                 >
@@ -168,7 +168,7 @@ const EventPartnersSection = () => {
                 <span
                   className="font-mono"
                   style={{
-                    fontSize: '0.58rem',
+                    fontSize: '0.92rem',
                     letterSpacing: '0.18em',
                     color: 'rgba(139,155,180,0.45)',
                   }}

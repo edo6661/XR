@@ -118,7 +118,7 @@ const BrochureRequestModal = ({
                   >
                     Request Brochure
                   </h2>
-                  <p className="font-mono text-[0.55rem] tracking-[0.28em] uppercase mt-0.5" style={{ color: `${accentColor}aa` }}>
+                  <p className="font-mono text-[0.88rem] tracking-[0.28em] uppercase mt-0.5" style={{ color: `${accentColor}aa` }}>
                     {eventName}
                   </p>
                 </div>
@@ -149,7 +149,7 @@ const BrochureRequestModal = ({
                     }}
                   >
                     <FileText size={16} className="flex-shrink-0 mt-0.5" style={{ color: accentColor }} />
-                    <p className="text-[#a8b8d0] leading-relaxed" style={{ fontSize: '0.85rem' }}>
+                    <p className="text-[#a8b8d0] leading-relaxed" style={{ fontSize: '1.02rem' }}>
                       Fill in your details below. Your email app will open with a pre-filled message — simply hit send and we'll deliver the{' '}
                       <strong className="text-[#f8faff]">{eventName}</strong> brochure to your inbox.
                     </p>
@@ -158,7 +158,7 @@ const BrochureRequestModal = ({
                   <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     {/* Name */}
                     <label className="flex flex-col gap-1.5">
-                      <span className="flex items-center gap-2 font-mono text-[0.58rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(168,184,208,0.7)' }}>
+                      <span className="flex items-center gap-2 font-mono text-[0.92rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(168,184,208,0.7)' }}>
                         <User size={11} />
                         Full Name <span style={{ color: accentColor }}>*</span>
                       </span>
@@ -176,7 +176,7 @@ const BrochureRequestModal = ({
 
                     {/* Email */}
                     <label className="flex flex-col gap-1.5">
-                      <span className="flex items-center gap-2 font-mono text-[0.58rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(168,184,208,0.7)' }}>
+                      <span className="flex items-center gap-2 font-mono text-[0.92rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(168,184,208,0.7)' }}>
                         <Mail size={11} />
                         Email Address <span style={{ color: accentColor }}>*</span>
                       </span>
@@ -194,7 +194,7 @@ const BrochureRequestModal = ({
 
                     {/* Location */}
                     <label className="flex flex-col gap-1.5">
-                      <span className="flex items-center gap-2 font-mono text-[0.58rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(168,184,208,0.7)' }}>
+                      <span className="flex items-center gap-2 font-mono text-[0.92rem] tracking-[0.3em] uppercase" style={{ color: 'rgba(168,184,208,0.7)' }}>
                         <MapPin size={11} />
                         Location / Origin <span style={{ color: accentColor }}>*</span>
                       </span>
@@ -209,13 +209,13 @@ const BrochureRequestModal = ({
                       />
                     </label>
 
-                    <p className="font-mono text-[0.52rem] tracking-[0.2em] uppercase text-center mt-1" style={{ color: 'rgba(107,127,163,0.5)' }}>
+                    <p className="font-mono text-[1.02rem] tracking-[0.2em] uppercase text-center mt-1" style={{ color: 'rgba(107,127,163,0.5)' }}>
                       Your email app will open — just hit send
                     </p>
 
                     <button
                       type="submit"
-                      className="flex items-center justify-center gap-2.5 w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.72rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] active:scale-[0.99] mt-1"
+                      className="flex items-center justify-center gap-2.5 w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[1rem] text-[#050505] transition-all duration-300 hover:shadow-[0_0_36px_rgba(239,120,61,0.45)] active:scale-[0.99] mt-1"
                       style={{
                         background: `linear-gradient(135deg, ${accentColor} 0%, #fb923c 100%)`,
                         border: `1px solid ${accentColor}80`,
@@ -260,14 +260,14 @@ const BrochureRequestModal = ({
                     </p>
                   </div>
 
-                  <p className="font-mono text-[0.52rem] tracking-[0.25em] uppercase" style={{ color: 'rgba(107,127,163,0.5)' }}>
+                  <p className="font-mono text-[1.02rem] tracking-[0.25em] uppercase" style={{ color: 'rgba(107,127,163,0.5)' }}>
                     We'll deliver the brochure within 1–2 business days
                   </p>
 
                   <button
                     type="button"
                     onClick={handleClose}
-                    className="px-7 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.7rem] transition-all duration-300"
+                    className="px-7 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] transition-all duration-300"
                     style={{
                       background: `linear-gradient(135deg, ${accentColor} 0%, #fb923c 100%)`,
                       color: '#050505',

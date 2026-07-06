@@ -168,7 +168,7 @@ export function LegalDocumentBody({ document }: LegalDocumentBodyProps) {
         className="mt-10 pt-8 border-t border-white/10"
         aria-label="Legal & Policy Pack contents"
       >
-        <p className="font-mono text-[0.5rem] tracking-[0.35em] uppercase text-foreground-muted/50 mb-3">
+        <p className="font-mono text-[1.02rem] tracking-[0.35em] uppercase text-foreground-muted/50 mb-3">
           Contents — Legal & Policy Pack 2026
         </p>
         <ol className="flex flex-col gap-3">

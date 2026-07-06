@@ -122,21 +122,21 @@ const AboutPage = () => (
                   />
                   <h4
                     className="font-heading font-bold text-foreground leading-tight"
-                    style={{ fontSize: '0.8rem' }}
+                    style={{ fontSize: '0.95rem' }}
                   >
                     {sector.title}
                   </h4>
                 </div>
                 <p
                   className="leading-relaxed pl-3"
-                  style={{ fontSize: '0.84rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}
+                  style={{ fontSize: '1.02rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}
                 >
                   {sector.desc}
                 </p>
                 {'bullets' in sector && sector.bullets.length > 0 && (
                   <ul
                     className="mt-1 space-y-1 pl-3"
-                    style={{ fontSize: '0.8rem', color: 'rgba(150,165,195,0.85)', lineHeight: 1.55 }}
+                    style={{ fontSize: '0.95rem', color: 'rgba(150,165,195,0.85)', lineHeight: 1.55 }}
                   >
                     {sector.bullets.map((item) => (
                       <li key={item} className="flex items-start gap-2">
@@ -209,7 +209,7 @@ const AboutPage = () => (
             className="flex flex-col items-center justify-center aspect-[2.2/1] rounded-lg"
             style={{ border: '1px dashed rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.02)' }}
           >
-            <span className="font-mono text-[0.48rem] tracking-[0.28em] uppercase text-foreground-muted/40">Partner logo</span>
+            <span className="font-mono text-[1rem] tracking-[0.28em] uppercase text-foreground-muted/40">Partner logo</span>
           </motion.div>
         ))}
       </div>
@@ -226,16 +226,16 @@ const AboutPage = () => (
           >
             <div>
               <p className="font-heading font-bold text-foreground" style={{ fontSize: '0.88rem' }}>{item.outlet}</p>
-              <p className="text-foreground-muted mt-1" style={{ fontSize: '0.72rem' }}>{item.type}</p>
+              <p className="text-foreground-muted mt-1" style={{ fontSize: '1rem' }}>{item.type}</p>
             </div>
-            <span className="font-mono text-[0.5rem] tracking-[0.25em] uppercase text-foreground-muted/45 shrink-0">{item.date}</span>
+            <span className="font-mono text-[1.02rem] tracking-[0.25em] uppercase text-foreground-muted/45 shrink-0">{item.date}</span>
           </motion.div>
         ))}
       </div>
       <div className="mt-10 text-center">
         <Link
           to="/contact"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050505]"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050505]"
           style={{ background: 'linear-gradient(135deg, #ef783d 0%, #d9652b 100%)', border: '1px solid rgba(239,120,61,0.5)' }}
         >
           Media enquiries

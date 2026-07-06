@@ -180,7 +180,7 @@ const TabButton = ({
     initial={{ opacity: 0, y: 12 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: index * 0.04, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-    className={`group relative flex flex-col items-center gap-2 px-4 py-4 rounded-xl transition-all duration-300 cursor-pointer shrink-0 min-w-[92px] sm:min-w-[108px] md:flex-row md:items-center md:gap-3 md:w-full md:min-w-0 md:px-3 md:py-3 md:justify-start ${isActive ? 'md:translate-x-0.5' : ''}`}
+    className={`group relative flex flex-col items-center gap-2 px-4 py-4 rounded-xl transition-all duration-300 cursor-pointer shrink-0 min-w-[108px] sm:min-w-[120px] md:flex-row md:items-center md:gap-3 md:w-full md:min-w-0 md:px-3 md:py-3 md:justify-start overflow-hidden ${isActive ? 'md:translate-x-0.5' : ''}`}
     style={{
       background: isActive
         ? 'linear-gradient(135deg, rgba(239,120,61,0.34), rgba(251,146,60,0.2))'
@@ -233,9 +233,9 @@ const TabButton = ({
     </div>
 
     <span
-      className="font-bold tracking-[0.1em] uppercase text-center leading-tight transition-all duration-300 whitespace-nowrap md:text-left md:whitespace-normal md:leading-snug md:flex-1"
+      className="font-bold tracking-[0.08em] uppercase text-center leading-tight transition-all duration-300 min-w-0 break-words whitespace-normal md:text-left md:leading-snug md:flex-1"
       style={{
-        fontSize: '0.65rem',
+        fontSize: 'clamp(0.82rem, 2.2vw, 0.9rem)',
         color: isActive ? '#ef783d' : 'rgba(248, 250, 255, 0.92)',
         textShadow: isActive ? '0 0 16px rgba(239,120,61,0.5)' : 'none',
         fontWeight: isActive ? 800 : 700,
@@ -280,7 +280,7 @@ const ActivationMediaGallery = ({ sections }: { sections: ActivationMediaSection
       <div key={section.title}>
         <p
           className="mb-4 font-bold tracking-[0.28em] uppercase"
-          style={{ fontSize: '0.58rem', color: '#ef783d' }}
+          style={{ fontSize: '0.92rem', color: '#ef783d' }}
         >
           {section.title}
         </p>
@@ -311,7 +311,7 @@ const ActivationMediaGallery = ({ sections }: { sections: ActivationMediaSection
               {image.caption && (
                 <figcaption
                   className="px-4 py-2.5 text-center font-mono font-semibold tracking-[0.16em] uppercase"
-                  style={{ fontSize: '0.65rem', color: '#a8b8d0', borderTop: '1px solid rgba(255,255,255,0.08)' }}
+                  style={{ fontSize: '0.95rem', color: '#a8b8d0', borderTop: '1px solid rgba(255,255,255,0.08)' }}
                 >
                   {image.caption}
                 </figcaption>
@@ -384,7 +384,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
           <span
             className="inline-block font-bold tracking-[0.32em] uppercase mb-4 px-3 py-1.5 rounded-sm"
             style={{
-              fontSize: '0.6rem',
+              fontSize: '0.92rem',
               color: '#ef783d',
               background: 'rgba(239,120,61,0.12)',
               border: '1px solid rgba(239,120,61,0.3)',
@@ -445,7 +445,7 @@ const ExpandedPanel = ({ activation }: { activation: Activation }) => (
             <span
               className="font-mono font-semibold tracking-[0.16em] uppercase whitespace-nowrap"
               style={{
-                fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)',
+                fontSize: 'clamp(0.9rem, 1.8vw, 1rem)',
                 color: '#ef783d',
               }}
             >
@@ -556,7 +556,7 @@ const AixrActivationsSection = () => {
         {/* ── Left tab dock + content panel ───────────────────────────── */}
         <div ref={sentinelRef} className="h-0 w-full" aria-hidden="true" />
         <div className="flex flex-col md:flex-row md:items-start gap-5 md:gap-6 lg:gap-8">
-          <div ref={dockSlotRef} className="w-full md:w-56 lg:w-60 shrink-0">
+          <div ref={dockSlotRef} className="w-full md:w-60 lg:w-64 shrink-0">
             {isPinned && (
               <div className="w-full" style={{ height: placeholderHeight }} aria-hidden="true" />
             )}

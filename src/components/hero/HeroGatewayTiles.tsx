@@ -200,7 +200,7 @@ const TileCard = ({
 
             <div className="relative z-10 flex flex-col h-full p-5">
               <span
-                className="self-start text-[0.52rem] font-bold tracking-[0.3em] uppercase px-2 py-1 rounded-sm mb-2"
+                className="self-start text-[1.02rem] font-bold tracking-[0.3em] uppercase px-2 py-1 rounded-sm mb-2"
                 style={{
                   color: tile.accent,
                   background: `${tile.accent}16`,
@@ -219,7 +219,7 @@ const TileCard = ({
                 </h3>
                 <p
                   className="text-foreground-muted leading-snug"
-                  style={{ fontSize: '0.7rem' }}
+                  style={{ fontSize: '1rem' }}
                 >
                   {tile.subtitle}
                 </p>
@@ -230,7 +230,7 @@ const TileCard = ({
                 style={{ borderColor: `${tile.accent}1c` }}
               >
                 <span
-                  className="text-[0.6rem] font-bold tracking-[0.2em] uppercase"
+                  className="text-[0.92rem] font-bold tracking-[0.2em] uppercase"
                   style={{ color: tile.accent, opacity: 0.8 }}
                 >
                   Enter

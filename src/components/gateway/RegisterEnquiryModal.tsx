@@ -65,13 +65,13 @@ const RegisterEnquiryModal = ({
             </a>
             .
           </p>
-          <p className="font-mono text-[0.5rem] tracking-[0.3em] uppercase text-foreground-muted/50">
+          <p className="font-mono text-[1.02rem] tracking-[0.3em] uppercase text-foreground-muted/50">
             Phase 1 · UI placeholder — no backend submission
           </p>
           <button
             type="button"
             onClick={handleClose}
-            className="mt-2 px-6 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18]"
+            className="mt-2 px-6 py-3 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18]"
             style={{ background: `linear-gradient(135deg, ${accentColor} 0%, ${accentColor}cc 100%)` }}
           >
             Close
@@ -123,7 +123,7 @@ const RegisterEnquiryModal = ({
 
             <button
               type="submit"
-              className="mt-2 w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[0.7rem] text-[#050b18] transition-shadow"
+              className="mt-2 w-full py-3.5 rounded-sm font-bold tracking-[0.2em] uppercase text-[1rem] text-[#050b18] transition-shadow"
               style={{
                 background: `linear-gradient(135deg, ${accentColor} 0%, ${accentColor}cc 100%)`,
                 border: `1px solid ${accentColor}80`,

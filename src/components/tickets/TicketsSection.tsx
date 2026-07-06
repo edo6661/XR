@@ -66,7 +66,7 @@ const TicketsSection = () => {
               <span className="w-5 h-px" style={{ background: 'rgba(251,146,60,0.55)' }} />
               <span
                 className="font-bold tracking-[0.52em] uppercase"
-                style={{ fontSize: '0.57rem', color: 'rgba(251,146,60,0.72)' }}
+                style={{ fontSize: '0.9rem', color: 'rgba(251,146,60,0.72)' }}
               >
                 Join The Movement
               </span>
@@ -112,7 +112,7 @@ const TicketsSection = () => {
                 <li
                   key={perk}
                   className="flex items-center gap-3"
-                  style={{ fontSize: '0.8rem', color: 'rgba(240,244,255,0.75)' }}
+                  style={{ fontSize: '0.95rem', color: 'rgba(240,244,255,0.75)' }}
                 >
                   <span style={{ color: '#fb923c' }}>
                     <CheckIcon />
@@ -153,7 +153,7 @@ const TicketsSection = () => {
                 <span
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm font-bold tracking-[0.22em] uppercase"
                   style={{
-                    fontSize: '0.58rem',
+                    fontSize: '0.92rem',
                     color: '#050b18',
                     background: '#fb923c',
                     boxShadow: '0 0 20px rgba(251,146,60,0.4)',
@@ -171,7 +171,7 @@ const TicketsSection = () => {
                 <h3 className="font-heading font-bold text-foreground text-xl">
                   Ready to Shape the Future?
                 </h3>
-                <p style={{ fontSize: '0.72rem', color: 'rgba(107,127,163,0.7)', lineHeight: '1.6' }}>
+                <p style={{ fontSize: '1rem', color: 'rgba(107,127,163,0.7)', lineHeight: '1.6' }}>
                   Get in touch with our team today to discuss ticketing, exhibition spaces, or speaking opportunities.
                 </p>
               </div>
@@ -216,7 +216,7 @@ const TicketsSection = () => {
                     }}
                     aria-hidden="true"
                   />
-                  <span className="relative font-bold tracking-[0.22em] uppercase" style={{ fontSize: '0.76rem' }}>
+                  <span className="relative font-bold tracking-[0.22em] uppercase" style={{ fontSize: '1rem' }}>
                     Join the Movement
                   </span>
                   <span className="relative text-sm transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">
@@ -227,7 +227,7 @@ const TicketsSection = () => {
 
               <p
                 className="text-center"
-                style={{ fontSize: '0.62rem', color: 'rgba(107,127,163,0.5)' }}
+                style={{ fontSize: '0.95rem', color: 'rgba(107,127,163,0.5)' }}
               >
                 Connects you to the conversations that matter
               </p>

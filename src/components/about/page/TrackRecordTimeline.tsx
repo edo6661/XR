@@ -58,7 +58,7 @@ const TrackRecordTimeline = () => (
               </h3>
               <p
                 className="text-foreground-muted leading-relaxed"
-                style={{ fontSize: '0.8rem', lineHeight: 1.75 }}
+                style={{ fontSize: '0.95rem', lineHeight: 1.75 }}
               >
                 {item.detail}
               </p>

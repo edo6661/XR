@@ -79,7 +79,7 @@ const AwardsRecognitionBlock = () => (
                 transition={{ delay: 0.15 + i * 0.06, duration: 0.45 }}
                 className="inline-flex items-center px-2.5 py-1 rounded-full font-mono uppercase tracking-[0.12em]"
                 style={{
-                  fontSize: '0.58rem',
+                  fontSize: '0.92rem',
                   color: i === 0 ? GOLD : 'rgba(200,195,220,0.85)',
                   background: i === 0 ? `${GOLD}14` : 'rgba(255,255,255,0.04)',
                   border: `1px solid ${i === 0 ? `${GOLD}35` : 'rgba(255,255,255,0.08)'}`,
@@ -115,7 +115,7 @@ const AwardsRecognitionBlock = () => (
             />
             <p
               className="font-mono uppercase tracking-[0.14em]"
-              style={{ fontSize: '0.7rem', color: 'rgba(175,185,210,0.88)' }}
+              style={{ fontSize: '1rem', color: 'rgba(175,185,210,0.88)' }}
             >
               {AWARDS_RECOGNITION.event}
             </p>

@@ -86,7 +86,7 @@ const ProgramCard = ({
           )}
         </div>
         <span
-          className="font-mono text-[0.55rem] tracking-[0.25em]"
+          className="font-mono text-[0.88rem] tracking-[0.25em]"
           style={{ color: 'rgba(107,127,163,0.4)' }}
         >
           {String(index + 1).padStart(2, '0')}
@@ -97,7 +97,7 @@ const ProgramCard = ({
         <span
           className="inline-block font-bold tracking-[0.32em] uppercase mb-3 transition-colors duration-300"
           style={{
-            fontSize: '0.55rem',
+            fontSize: '0.88rem',
             color: program.featured ? XRAS_KL_ACCENT : 'rgba(139, 155, 180, 0.8)',
           }}
         >
@@ -182,11 +182,11 @@ const ProgramDetailModal = ({
             <div>
               <span
                 className="font-bold tracking-[0.25em] uppercase text-accent mb-1 block"
-                style={{ fontSize: '0.6rem' }}
+                style={{ fontSize: '0.92rem' }}
               >
                 {program.category}
               </span>
-              <span className="font-mono text-[0.6rem] text-foreground-muted">
+              <span className="font-mono text-[0.92rem] text-foreground-muted">
                 XRAS 26 KL'
               </span>
             </div>
@@ -205,7 +205,7 @@ const ProgramDetailModal = ({
           <div className="mt-10 flex gap-4">
             <button
               onClick={onClose}
-              className="w-full py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.7rem] transition-colors duration-300"
+              className="w-full py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] transition-colors duration-300"
               style={{
                 background: 'rgba(255,255,255,0.05)',
                 border: `1px solid rgba(255,255,255,0.1)`,
@@ -285,7 +285,7 @@ const XrasProgramsSection = ({ onDownloadBrochure, onRegister }: XrasProgramsSec
           <button
             type="button"
             onClick={onDownloadBrochure}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-accent transition-colors duration-300 hover:text-foreground cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-accent transition-colors duration-300 hover:text-foreground cursor-none"
             style={{
               background: 'rgba(255,255,255,0.03)',
               border: `1px solid ${XRAS_KL_ACCENT}45`,
@@ -296,7 +296,7 @@ const XrasProgramsSection = ({ onDownloadBrochure, onRegister }: XrasProgramsSec
           <button
             type="button"
             onClick={onRegister}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(251,146,60,0.35)] cursor-none"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow hover:shadow-[0_0_28px_rgba(251,146,60,0.35)] cursor-none"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',

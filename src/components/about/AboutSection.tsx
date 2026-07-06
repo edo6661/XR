@@ -79,7 +79,7 @@ const IntroBar = ({ children }: { children: React.ReactNode }) => (
   >
     <span
       className="font-heading font-bold uppercase tracking-[0.22em]"
-      style={{ fontSize: '0.62rem', color: 'rgba(251, 191, 36, 0.92)' }}
+      style={{ fontSize: '0.95rem', color: 'rgba(251, 191, 36, 0.92)' }}
     >
       {children}
     </span>
@@ -390,7 +390,7 @@ const AboutSection = () => {
                     <p
                       className="font-heading font-bold leading-snug"
                       style={{
-                        fontSize: '0.75rem',
+                        fontSize: '1rem',
                         color: 'var(--theme-on-light-heading)',
                         letterSpacing: '0.01em',
                       }}

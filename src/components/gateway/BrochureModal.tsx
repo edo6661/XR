@@ -43,7 +43,7 @@ const BrochureModal = ({ open, onClose, eventName, accentColor = '#fb923c' }: Br
 
         <a
           href={mailtoHref}
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow"
+          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow"
           style={{
             background: `linear-gradient(135deg, ${accentColor} 0%, ${accentColor}cc 100%)`,
             border: `1px solid ${accentColor}80`,
@@ -53,7 +53,7 @@ const BrochureModal = ({ open, onClose, eventName, accentColor = '#fb923c' }: Br
           Request brochure by email
         </a>
 
-        <p className="font-mono text-[0.48rem] tracking-[0.28em] uppercase text-center text-foreground-muted/45">
+        <p className="font-mono text-[1rem] tracking-[0.28em] uppercase text-center text-foreground-muted/45">
           Phase 1 · Asset placeholder
         </p>
       </div>

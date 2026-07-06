@@ -267,30 +267,30 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
               </div>
               <span
                 className="font-heading font-black"
-                style={{ fontSize: '0.52rem', letterSpacing: '0.2em', color: `${HACKATHON_ACCENT}50` }}
+                style={{ fontSize: '1.02rem', letterSpacing: '0.2em', color: `${HACKATHON_ACCENT}50` }}
               >
                 {String(section.number).padStart(2, '0')}
               </span>
             </div>
 
             <div className="flex flex-col gap-2 min-w-0">
-              <h4 className="font-heading font-bold text-foreground" style={{ fontSize: '0.84rem' }}>
+              <h4 className="font-heading font-bold text-foreground" style={{ fontSize: '1.02rem' }}>
                 {section.title}
               </h4>
               {'intro' in section && section.intro && (
-                <p style={{ fontSize: '0.82rem', color: 'rgba(180,195,220,0.88)', lineHeight: 1.6 }}>
+                <p style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.88)', lineHeight: 1.6 }}>
                   {section.intro}
                 </p>
               )}
               {'paragraphs' in section &&
                 section.paragraphs?.map((p) => (
-                  <p key={p.slice(0, 40)} style={{ fontSize: '0.82rem', color: 'rgba(180,195,220,0.88)', lineHeight: 1.6 }}>
+                  <p key={p.slice(0, 40)} style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.88)', lineHeight: 1.6 }}>
                     {p}
                   </p>
                 ))}
               {'bullets' in section && section.bullets && bulletList(section.bullets)}
               {'footer' in section && section.footer && (
-                <p className="font-semibold" style={{ fontSize: '0.78rem', color: 'rgba(180,195,220,0.65)' }}>
+                <p className="font-semibold" style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.65)' }}>
                   {section.footer}
                 </p>
               )}
@@ -366,7 +366,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
               >
                 <Clapperboard size={24} strokeWidth={1.5} />
               </div>
-              <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.68rem', color: HACKATHON_ACCENT }}>
+              <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '1rem', color: HACKATHON_ACCENT }}>
                 {HACKATHON_CLOSING.title}
               </p>
             </div>
@@ -401,7 +401,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
                   {statIcons[i]}
                 </div>
                 <div>
-                  <p className="font-semibold tracking-[0.16em] uppercase" style={{ fontSize: '0.55rem', color: 'rgba(180,195,220,0.55)' }}>
+                  <p className="font-semibold tracking-[0.16em] uppercase" style={{ fontSize: '0.88rem', color: 'rgba(180,195,220,0.55)' }}>
                     {stat.label}
                   </p>
                   <p className="font-heading font-bold text-foreground" style={{ fontSize: '0.9rem' }}>
@@ -421,7 +421,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
             href={registerUrl}
             target={registerUrl.startsWith('http') ? '_blank' : undefined}
             rel={registerUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',
@@ -477,7 +477,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
               <Trophy size={28} strokeWidth={1.5} />
             </div>
             <div className="relative flex-1">
-              <p className="font-semibold tracking-[0.2em] uppercase mb-1" style={{ fontSize: '0.58rem', color: HACKATHON_ACCENT }}>
+              <p className="font-semibold tracking-[0.2em] uppercase mb-1" style={{ fontSize: '0.92rem', color: HACKATHON_ACCENT }}>
                 Top Award
               </p>
               <h4 className="font-heading font-bold text-foreground mb-1" style={{ fontSize: '1.1rem' }}>
@@ -486,7 +486,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
               <p className="font-semibold mb-2" style={{ fontSize: '0.88rem', color: HACKATHON_ACCENT }}>
                 {prize.amount}
               </p>
-              <p style={{ fontSize: '0.84rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}>
+              <p style={{ fontSize: '1.02rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}>
                 {prize.description}
               </p>
             </div>
@@ -536,7 +536,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
               >
                 <Smartphone {...iconSize} />
               </div>
-              <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.62rem', color: HACKATHON_ACCENT }}>
+              <p className="font-semibold tracking-[0.14em] uppercase" style={{ fontSize: '0.95rem', color: HACKATHON_ACCENT }}>
                 Hackathon Applications
               </p>
             </div>
@@ -556,7 +556,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
               href={registerUrl}
               target={registerUrl.startsWith('http') ? '_blank' : undefined}
               rel={registerUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="group inline-flex w-full sm:w-auto min-w-[220px] items-center justify-center rounded-sm px-6 py-4 text-center font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(251,146,60,0.32)]"
+              className="group inline-flex w-full sm:w-auto min-w-[220px] items-center justify-center rounded-sm px-6 py-4 text-center font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(251,146,60,0.32)]"
               style={{
                 border: `1px solid ${HACKATHON_ACCENT}55`,
                 background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',

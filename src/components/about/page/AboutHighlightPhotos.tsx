@@ -46,7 +46,7 @@ const AboutHighlightPhotos = ({ className = '' }: { className?: string }) => (
           className={`absolute bottom-2.5 left-3 right-3 font-mono uppercase tracking-[0.12em] ${photo.fit === 'contain' ? 'text-center' : ''
             }`}
           style={{
-            fontSize: '0.55rem',
+            fontSize: '0.88rem',
             color: photo.fit === 'contain' ? 'rgba(40,48,68,0.75)' : 'rgba(240,244,255,0.92)',
           }}
         >

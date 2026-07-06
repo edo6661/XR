@@ -108,7 +108,7 @@ const ContactPage = () => {
           <motion.p
             {...fadeUp(0)}
             className="font-mono tracking-[0.4em] uppercase mb-5 text-accent"
-            style={{ fontSize: '0.55rem', opacity: 0.75 }}
+            style={{ fontSize: '0.88rem', opacity: 0.75 }}
           >
             Contact Us
           </motion.p>
@@ -445,7 +445,7 @@ const ContactPage = () => {
               <li key={page.slug}>
                 <Link
                   to={page.path}
-                  className="block px-4 py-3 rounded-lg text-[0.78rem] transition-colors duration-300 hover:text-accent"
+                  className="block px-4 py-3 rounded-lg text-[1rem] transition-colors duration-300 hover:text-accent"
                   style={{
                     border: '1px solid rgba(255,255,255,0.07)',
                     background: 'rgba(255,255,255,0.02)',

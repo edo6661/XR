@@ -21,7 +21,7 @@ const BecomePartnerCta = () => (
       to="/contact"
       className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-sm font-bold tracking-[0.18em] uppercase whitespace-nowrap transition-all duration-300 shrink-0"
       style={{
-        fontSize: '0.72rem',
+        fontSize: '1rem',
         border: '1px solid rgba(239,120,61,0.4)',
         color: '#ef783d',
       }}

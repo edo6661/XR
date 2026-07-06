@@ -196,7 +196,7 @@ const ContactDetailsSection = () => (
             to="/contact"
             className="group/btn inline-flex items-center gap-2 font-bold uppercase tracking-[0.18em] rounded-sm transition-all duration-300"
             style={{
-              fontSize: '0.72rem',
+              fontSize: '1rem',
               padding: '0.875rem 1.75rem',
               background: 'linear-gradient(135deg, #ef783d 0%, #fb923c 100%)',
               color: '#050505',

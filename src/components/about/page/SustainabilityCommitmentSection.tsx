@@ -151,7 +151,7 @@ const SustainabilityCommitmentSection = () => (
                 <p
                   className="font-heading font-semibold mb-3"
                   style={{
-                    fontSize: '0.8rem',
+                    fontSize: '0.95rem',
                     color: 'rgba(248,250,255,0.95)',
                     letterSpacing: '0.02em',
                   }}
@@ -176,7 +176,7 @@ const SustainabilityCommitmentSection = () => (
               <p
                 className="font-heading font-semibold pt-3"
                 style={{
-                  fontSize: '0.8rem',
+                  fontSize: '0.95rem',
                   color: 'rgba(248,250,255,0.95)',
                   letterSpacing: '0.02em',
                   borderTop: '1px solid rgba(255,255,255,0.1)',

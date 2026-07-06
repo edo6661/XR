@@ -71,7 +71,7 @@ const PastEventCard = ({
       >
         <span
           className="font-heading font-black leading-none"
-          style={{ fontSize: compact ? '0.78rem' : '0.95rem', color: accentColor }}
+          style={{ fontSize: compact ? '1rem' : '0.95rem', color: accentColor }}
         >
           {year}
         </span>
@@ -96,7 +96,7 @@ const PastEventCard = ({
       >
         <span
           className="font-heading font-bold"
-          style={{ fontSize: compact ? '0.54rem' : '0.62rem', color: accentColor }}
+          style={{ fontSize: compact ? '0.88rem' : '0.95rem', color: accentColor }}
         >
           &apos;{year.slice(-2)}
         </span>
@@ -174,14 +174,14 @@ const PastEventCard = ({
             >
               <span
                 className="font-heading font-bold"
-                style={{ fontSize: compact ? '0.58rem' : '0.68rem', color: '#1a2840', letterSpacing: '0.06em' }}
+                style={{ fontSize: compact ? '0.92rem' : '1rem', color: '#1a2840', letterSpacing: '0.06em' }}
               >
                 {year}
               </span>
-              <span style={{ fontSize: '0.5rem', color: 'rgba(26,40,64,0.3)' }}>·</span>
+              <span style={{ fontSize: '1.02rem', color: 'rgba(26,40,64,0.3)' }}>·</span>
               <span
                 className="font-semibold"
-                style={{ fontSize: compact ? '0.55rem' : '0.63rem', color: accentColor }}
+                style={{ fontSize: compact ? '0.88rem' : '0.95rem', color: accentColor }}
               >
                 {attendees} Attendees
               </span>
@@ -239,7 +239,7 @@ const PastEventCard = ({
             <p
               className={`font-semibold ${compact ? 'mb-1' : 'mb-2'}`}
               style={{
-                fontSize: compact ? '0.6rem' : '0.67rem',
+                fontSize: compact ? '0.92rem' : '0.95rem',
                 color: accentColor,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
@@ -252,7 +252,7 @@ const PastEventCard = ({
               <p
                 className={`font-semibold tracking-[0.14em] uppercase ${compact ? 'mb-2' : 'mb-2.5'}`}
                 style={{
-                  fontSize: compact ? '0.58rem' : '0.63rem',
+                  fontSize: compact ? '0.92rem' : '0.95rem',
                   color: 'rgba(22,36,62,0.55)',
                 }}
               >
@@ -284,7 +284,7 @@ const PastEventCard = ({
               <p
                 className="leading-relaxed"
                 style={{
-                  fontSize: compact ? 'clamp(0.72rem, 1.2vw, 0.82rem)' : 'clamp(0.8rem, 1.4vw, 0.92rem)',
+                  fontSize: compact ? 'clamp(0.9rem, 1.2vw, 1rem)' : 'clamp(0.95rem, 1.4vw, 1.05rem)',
                   color: 'rgba(15,27,48,0.92)',
                   lineHeight: compact ? 1.7 : 1.85,
                 }}

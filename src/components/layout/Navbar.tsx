@@ -125,7 +125,7 @@ const Navbar = () => {
             </div>
             <span
               className={`${BRAND_FONT_CLASS} min-w-0 truncate whitespace-nowrap font-bold tracking-[0.12em] text-foreground group-hover:text-accent transition-colors duration-350 sm:tracking-[0.3em]`}
-              style={{ fontSize: 'clamp(0.72rem, 2.8vw, 1rem)' }}
+              style={{ fontSize: 'clamp(0.9rem, 2.8vw, 1rem)' }}
             >
               {COMPANY.navbarBrand}
             </span>
@@ -147,7 +147,7 @@ const Navbar = () => {
                   end={link.to === '/'}
                   className={({ isActive }) =>
                     `relative group px-3.5 py-2 rounded-sm transition-colors duration-300 cursor-none
-                    text-[0.66rem] font-semibold tracking-[0.16em] uppercase
+                    text-[0.9rem] font-semibold tracking-[0.16em] uppercase
                     ${isActive ? 'text-accent' : 'text-foreground-muted hover:text-foreground'}`
                   }
                 >
@@ -207,11 +207,11 @@ const Navbar = () => {
                     }}
                     aria-hidden="true"
                   />
-                  <span className="relative text-[0.66rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200">
+                  <span className="relative text-[0.9rem] font-bold tracking-[0.22em] uppercase text-accent group-hover:text-[#050b18] transition-colors duration-200">
                     Join Us
                   </span>
                   <span
-                    className="relative text-[0.62rem] transition-all duration-300 text-accent/55 group-hover:text-[#050b18] group-hover:translate-x-0.5"
+                    className="relative text-[0.95rem] transition-all duration-300 text-accent/55 group-hover:text-[#050b18] group-hover:translate-x-0.5"
                     aria-hidden="true"
                   >
                     →
@@ -336,7 +336,7 @@ const Navbar = () => {
                           <motion.span
                             initial={{ opacity: 0, x: -4 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="ml-auto font-mono text-[0.5rem] tracking-widest text-accent/50"
+                            className="ml-auto font-mono text-[1.02rem] tracking-widest text-accent/50"
                           >
                             ●
                           </motion.span>
@@ -355,7 +355,7 @@ const Navbar = () => {
               transition={{ delay: 0.34, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="px-6 pb-10 pt-5"
             >
-              <p className="font-mono text-[0.5rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
+              <p className="font-mono text-[1.02rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
                 4th Edition · Kuala Lumpur · 2026
               </p>
               <button
@@ -369,7 +369,7 @@ const Navbar = () => {
                     intent: 'register',
                   });
                 }}
-                className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[0.75rem] text-background"
+                className="flex items-center justify-center gap-3 w-full py-4 rounded-sm font-bold tracking-[0.22em] uppercase text-[1rem] text-background"
                 style={{
                   background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
                   boxShadow: '0 0 36px rgba(251,146,60,0.3)',

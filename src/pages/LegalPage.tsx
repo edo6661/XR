@@ -28,7 +28,7 @@ const LegalPage = () => {
         <div className="max-w-3xl mx-auto">
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 font-mono text-[0.5rem] tracking-[0.35em] uppercase text-foreground-muted/50 hover:text-accent transition-colors mb-8"
+            className="inline-flex items-center gap-2 font-mono text-[1.02rem] tracking-[0.35em] uppercase text-foreground-muted/50 hover:text-accent transition-colors mb-8"
           >
             ← Back to contact
           </Link>

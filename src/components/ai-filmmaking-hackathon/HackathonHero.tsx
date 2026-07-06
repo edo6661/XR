@@ -85,7 +85,7 @@ const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.08, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="font-semibold tracking-[0.22em] uppercase mb-4"
-          style={{ fontSize: '0.68rem', color: 'rgba(22,36,62,0.55)' }}
+          style={{ fontSize: '1rem', color: 'rgba(22,36,62,0.55)' }}
         >
           {HACKATHON_HERO.eyebrow}
         </motion.p>
@@ -115,7 +115,7 @@ const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.24, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-8 text-[0.68rem] font-semibold tracking-[0.18em] uppercase"
+          className="flex flex-wrap items-center justify-center gap-4 mb-8 text-[1rem] font-semibold tracking-[0.18em] uppercase"
           style={{ color: 'rgba(22,36,62,0.55)' }}
         >
           <span>{HACKATHON_META.dates}</span>
@@ -135,7 +135,7 @@ const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
             href={registerUrl}
             target={registerUrl.startsWith('http') ? '_blank' : undefined}
             rel={registerUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[0.68rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
+            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',

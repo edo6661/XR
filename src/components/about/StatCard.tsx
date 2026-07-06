@@ -93,7 +93,7 @@ const StatCard = ({
       <div className="flex flex-col gap-1">
         <span
           className="font-heading font-bold tracking-[0.2em] uppercase"
-          style={{ fontSize: '0.7rem', color: 'var(--theme-on-light-heading)' }}
+          style={{ fontSize: '1rem', color: 'var(--theme-on-light-heading)' }}
         >
           {label}
         </span>

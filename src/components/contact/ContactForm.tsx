@@ -79,7 +79,7 @@ const ContactForm = () => {
           href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[0.68rem] mb-4"
+          className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-sm font-bold tracking-[0.16em] uppercase text-[1rem] mb-4"
           style={{
             border: '1px solid rgba(74,222,128,0.35)',
             background: 'rgba(74,222,128,0.08)',

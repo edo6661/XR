@@ -26,19 +26,14 @@ const lineVariants: Variants = {
 const INTRO_WORDS = ['IMAGINE', 'GENERATE', 'IMMERSE'] as const;
 const MOVING_BOY_WORLD_VIDEO = '/hero/XRAS26 - Keyart Moving Landscape.mp4';
 
+const INTRO_DROP_SHADOW =
+  '0 4px 28px rgba(0,0,0,0.92), 0 2px 12px rgba(0,0,0,0.78), 0 0 56px rgba(0,0,0,0.55)';
+
 const wordStyle = (index: number): CSSProperties => {
   if (index === 1) {
-    return {
-      background: 'linear-gradient(120deg, #7dd3fc 0%, #38bdf8 100%)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
-      backgroundClip: 'text',
-    };
+    return { color: '#fb923c', textShadow: INTRO_DROP_SHADOW };
   }
-  if (index === 2) {
-    return { color: '#fb923c' };
-  }
-  return { color: '#f0f4ff' };
+  return { color: '#f0f4ff', textShadow: INTRO_DROP_SHADOW };
 };
 
 const HeroIntroOverlay = ({ step }: HeroIntroOverlayProps) => {
