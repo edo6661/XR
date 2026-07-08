@@ -1,7 +1,14 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import BecomePartnerCta from '../ui/BecomePartnerCta';
+import {
+  FALLBACK_EVENT_PARTNERS,
+  groupPartnersByCategory,
+  type EventPartner,
+} from '../../core/content/eventPartners';
+import { useSanityQuery } from '../../hooks/useSanityQuery';
+import { fetchPartners } from '../../lib/sanity/queries';
 
 const LOGO_CARD = {
   background: '#ffffff',
@@ -10,40 +17,11 @@ const LOGO_CARD = {
   hoverShadow: '0 6px 28px rgba(0,0,0,0.14)',
 } as const;
 
-type Partner = {
-  name: string;
-  logo: string;
-  category: string;
-};
-
-type PartnerCategory = {
-  label: string;
-  partners: Partner[];
-};
-
-const PARTNER_CATEGORIES: PartnerCategory[] = [
-  {
-    label: 'Media Partner',
-    partners: [
-      {
-        name: 'Vanakkam Malaysia News',
-        logo: '/partners-logo/vanakkam-malaysia.jpeg',
-        category: 'Media Partner',
-      },
-      {
-        name: 'ESG TV',
-        logo: '/partners-logo/esg-tv.png',
-        category: 'Media Partner',
-      },
-    ],
-  },
-];
-
 const PartnerLogo = ({
   partner,
   index,
 }: {
-  partner: Partner;
+  partner: EventPartner;
   index: number;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -90,7 +68,13 @@ const PartnerLogo = ({
         className="max-h-12 w-auto object-contain transition-all duration-300 group-hover:scale-[1.04]"
         style={{
           maxWidth: '160px',
-          filter: hovered ? 'brightness(1.02)' : 'none',
+          filter: partner.filter
+            ? hovered
+              ? `${partner.filter} brightness(1.02)`
+              : partner.filter
+            : hovered
+              ? 'brightness(1.02)'
+              : 'none',
         }}
       />
       <span className="sr-only">{partner.name}</span>
@@ -99,6 +83,9 @@ const PartnerLogo = ({
 };
 
 const EventPartnersSection = () => {
+  const { data: partners } = useSanityQuery(fetchPartners, FALLBACK_EVENT_PARTNERS);
+  const categories = useMemo(() => groupPartnersByCategory(partners), [partners]);
+
   return (
     <section
       className="relative w-full overflow-hidden px-6"
@@ -138,7 +125,7 @@ const EventPartnersSection = () => {
         </motion.h2>
 
         <div className="space-y-12">
-          {PARTNER_CATEGORIES.map((category) => (
+          {categories.map((category) => (
             <div key={category.label}>
               {/* Category divider */}
               <motion.div

@@ -1,12 +1,14 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import SpeakerDetailModal from './SpeakerDetailModal';
 import { XRAS_KL_SPEAKERS, type XrasSpeaker } from '../../core/content/xrasKl2026';
 import { toSpeakerProfile, type SpeakerProfile } from '../../core/content/speakerUtils';
+import { useSanityQuery } from '../../hooks/useSanityQuery';
+import { fetchSpeakers } from '../../lib/sanity/queries';
 
-const SPEAKERS: XrasSpeaker[] = [...XRAS_KL_SPEAKERS];
+const FALLBACK_SPEAKERS: XrasSpeaker[] = [...XRAS_KL_SPEAKERS];
 const ROW_SIZE = 5;
 
 const getInitials = (name: string) =>
@@ -16,11 +18,6 @@ const getInitials = (name: string) =>
     .slice(0, 2)
     .map((p) => p[0])
     .join('');
-
-const speakerRows = Array.from(
-  { length: Math.ceil(SPEAKERS.length / ROW_SIZE) },
-  (_, i) => SPEAKERS.slice(i * ROW_SIZE, i * ROW_SIZE + ROW_SIZE),
-);
 
 const SpeakerCard = ({
   speaker,
@@ -162,6 +159,16 @@ const SpeakerCard = ({
 
 const SpeakersSection = () => {
   const [selectedSpeaker, setSelectedSpeaker] = useState<SpeakerProfile | null>(null);
+  const { data: speakers } = useSanityQuery(fetchSpeakers, FALLBACK_SPEAKERS);
+
+  const speakerRows = useMemo(
+    () =>
+      Array.from(
+        { length: Math.ceil(speakers.length / ROW_SIZE) },
+        (_, i) => speakers.slice(i * ROW_SIZE, i * ROW_SIZE + ROW_SIZE),
+      ),
+    [speakers],
+  );
 
   return (
     <section
@@ -218,7 +225,7 @@ const SpeakersSection = () => {
               className="font-mono uppercase"
               style={{ fontSize: '0.92rem', letterSpacing: '0.22em', color: 'rgba(139,155,180,0.55)' }}
             >
-              {String(SPEAKERS.length).padStart(2, '0')} Speakers
+              {String(speakers.length).padStart(2, '0')} Speakers
             </span>
             <div
               style={{ width: '1px', height: '1rem', background: 'rgba(255,255,255,0.1)' }}
@@ -234,7 +241,7 @@ const SpeakersSection = () => {
         </div>
 
         <div className="grid grid-cols-2 min-[640px]:max-[767px]:grid-cols-3 min-[768px]:max-[1079px]:grid-cols-4 min-[1080px]:grid-cols-5 gap-4 lg:gap-5">
-          {SPEAKERS.map((speaker, index) => (
+          {speakers.map((speaker, index) => (
             <Fragment key={speaker.name}>
               {index > 0 && index % ROW_SIZE === 0 ? (
                 <div
