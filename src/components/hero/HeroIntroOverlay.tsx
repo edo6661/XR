@@ -6,14 +6,22 @@ type HeroIntroOverlayProps = {
   step: number;
 };
 
+const INTRO_WORDS = ['IMAGINE', 'GENERATE', 'IMMERSE'] as const;
+const MOVING_BOY_WORLD_VIDEO = '/hero/XRAS26 - Keyart Moving Landscape.mp4';
+
+/** Soft dark halo behind the words so they pop against bright video */
+const INTRO_DROP_SHADOW =
+  '0 6px 24px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.7), 0 0 48px rgba(0,0,0,0.55)';
+
 const lineVariants: Variants = {
   initial: { opacity: 0, y: 18, scale: 1.1, filter: 'blur(18px)' },
   enter: {
     opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+    // Glitch chroma briefly, then settle on the drop shadow (do not clear textShadow)
     textShadow: [
-      '3px 0 rgba(56,189,248,0.9), -3px 0 rgba(251,146,60,0.9)',
-      '1px 0 rgba(56,189,248,0.5), -1px 0 rgba(251,146,60,0.5)',
-      '0px 0 rgba(0,0,0,0)',
+      `3px 0 rgba(56,189,248,0.9), -3px 0 rgba(251,146,60,0.9), ${INTRO_DROP_SHADOW}`,
+      `1px 0 rgba(56,189,248,0.5), -1px 0 rgba(251,146,60,0.5), ${INTRO_DROP_SHADOW}`,
+      INTRO_DROP_SHADOW,
     ],
     transition: { duration: 0.42, ease: [0.16, 1, 0.3, 1] as const },
   },
@@ -22,12 +30,6 @@ const lineVariants: Variants = {
     transition: { duration: 0.24, ease: [0.4, 0, 1, 1] as const },
   },
 };
-
-const INTRO_WORDS = ['IMAGINE', 'GENERATE', 'IMMERSE'] as const;
-const MOVING_BOY_WORLD_VIDEO = '/hero/XRAS26 - Keyart Moving Landscape.mp4';
-
-const INTRO_DROP_SHADOW =
-  '0 4px 28px rgba(0,0,0,0.92), 0 2px 12px rgba(0,0,0,0.78), 0 0 56px rgba(0,0,0,0.55)';
 
 const wordStyle = (index: number): CSSProperties => {
   if (index === 1) {

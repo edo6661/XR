@@ -18,10 +18,27 @@ const getInitials = (name: string) =>
     .map((part) => part[0])
     .join('');
 
+const SectionLabel = ({
+  children,
+  accent,
+}: {
+  children: string;
+  accent: string;
+}) => (
+  <p
+    className="mb-2 font-bold tracking-[0.22em] uppercase"
+    style={{ fontSize: '0.72rem', color: accent }}
+  >
+    {children}
+  </p>
+);
+
 const SpeakerDetailModal = ({ speaker, onClose }: SpeakerDetailModalProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
   const open = Boolean(speaker);
   const accent = speaker?.accentColor ?? '#ef783d';
+  const hasTopic = Boolean(speaker?.topic?.trim());
+  const hasBio = Boolean(speaker?.bio?.trim());
 
   useEffect(() => {
     if (!open) return;
@@ -209,6 +226,37 @@ const SpeakerDetailModal = ({ speaker, onClose }: SpeakerDetailModalProps) => {
                 ) : null}
               </div>
             </div>
+
+            {(hasTopic || hasBio) && (
+              <div
+                className="flex flex-col gap-6 px-6 pb-7 sm:px-8 sm:pb-8"
+                style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+              >
+                {hasTopic ? (
+                  <div className="pt-6">
+                    <SectionLabel accent={accent}>Topic & Syllabus</SectionLabel>
+                    <p
+                      className="leading-relaxed whitespace-pre-line"
+                      style={{ fontSize: '0.95rem', color: '#e8eef8', lineHeight: 1.7 }}
+                    >
+                      {speaker.topic}
+                    </p>
+                  </div>
+                ) : null}
+
+                {hasBio ? (
+                  <div className={hasTopic ? '' : 'pt-6'}>
+                    <SectionLabel accent={accent}>Bio</SectionLabel>
+                    <p
+                      className="leading-relaxed whitespace-pre-line"
+                      style={{ fontSize: '0.95rem', color: '#a8b8d0', lineHeight: 1.75 }}
+                    >
+                      {speaker.bio}
+                    </p>
+                  </div>
+                ) : null}
+              </div>
+            )}
           </motion.div>
         </motion.div>
       )}

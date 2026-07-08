@@ -10,6 +10,8 @@ export type SpeakerProfile = {
   company?: string;
   photo?: string;
   accentColor?: string;
+  topic?: string;
+  bio?: string;
 };
 
 const normalizeName = (name: string) =>
@@ -43,6 +45,8 @@ export const toSpeakerProfile = (
       company: source.company || undefined,
       photo: source.photo,
       accentColor: source.accentColor ?? known?.accentColor,
+      topic: source.topic || known?.topic,
+      bio: source.bio || known?.bio,
     };
   }
 
@@ -52,5 +56,7 @@ export const toSpeakerProfile = (
     company: source.organization ?? known?.company,
     photo: source.photo ?? known?.photo,
     accentColor: known?.accentColor,
+    topic: known?.topic,
+    bio: known?.bio,
   };
 };

@@ -657,39 +657,6 @@ const ExpandedPanel = ({
               />
             </>
           ) : null}
-
-          {activation.panelImage ? (
-            <div
-              className="mb-6 overflow-hidden rounded-2xl"
-              style={{
-                border: '1px solid rgba(239,120,61,0.18)',
-                boxShadow: '0 18px 36px rgba(0,0,0,0.24)',
-                background: 'rgba(255,255,255,0.03)',
-              }}
-            >
-              <img
-                src={activation.panelImage.src}
-                alt={activation.panelImage.alt}
-                className="block w-full h-auto object-cover"
-                loading="lazy"
-              />
-            </div>
-          ) : null}
-
-          {/* Body — clearly readable muted white */}
-          {activation.body ? (
-            <p
-              className="leading-relaxed"
-              style={{
-                fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
-                lineHeight: 1.9,
-                color: '#a8b8d0',
-                maxWidth: '58ch',
-              }}
-            >
-              {activation.body}
-            </p>
-          ) : null}
         </div>
 
         {/* Meta pill */}
@@ -724,6 +691,39 @@ const ExpandedPanel = ({
           </div>
         ) : null}
       </div>
+
+      {activation.panelImage ? (
+        <div
+          className="mt-2 mb-6 w-full overflow-hidden rounded-2xl"
+          style={{
+            border: '1px solid rgba(239,120,61,0.18)',
+            boxShadow: '0 18px 36px rgba(0,0,0,0.24)',
+            background: 'rgba(255,255,255,0.03)',
+          }}
+        >
+          <img
+            src={activation.panelImage.src}
+            alt={activation.panelImage.alt}
+            className="block w-full h-auto object-cover"
+            loading="lazy"
+          />
+        </div>
+      ) : null}
+
+      {/* Body — clearly readable muted white */}
+      {activation.body ? (
+        <p
+          className="leading-relaxed"
+          style={{
+            fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)',
+            lineHeight: 1.9,
+            color: '#a8b8d0',
+            maxWidth: '58ch',
+          }}
+        >
+          {activation.body}
+        </p>
+      ) : null}
 
       {activation.sessionSlots && activation.sessionSlots.length > 0 && (
         <ActivationSessionSlots slots={activation.sessionSlots} />

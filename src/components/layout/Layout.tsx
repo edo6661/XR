@@ -12,6 +12,7 @@ import BackgroundElements from '../ui/BackgroundElements';
 import { lenisInstance, registerLenis, unregisterLenis } from '../../lib/lenisInstance';
 import { killPinnedScrollTriggers } from '../../lib/scrollTriggerCleanup';
 import { LeadCaptureProvider } from '../../context/LeadCaptureContext';
+import GoogleAnalytics from '../analytics/GoogleAnalytics';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,24 +67,25 @@ const Layout = () => {
 
   return (
     <LeadCaptureProvider>
-    <div className="relative min-h-screen w-full overflow-x-hidden text-foreground flex flex-col selection:bg-accent/30 selection:text-white">
-      <BackgroundElements />
-      <FilmGrain />
+      <div className="relative min-h-screen w-full overflow-x-hidden text-foreground flex flex-col selection:bg-accent/30 selection:text-white">
+        <GoogleAnalytics />
+        <BackgroundElements />
+        <FilmGrain />
 
-      <CustomCursor />
-      <ScrollProgress />
-      <Navbar />
+        <CustomCursor />
+        <ScrollProgress />
+        <Navbar />
 
-      <div className="relative z-10 bg-background">
-        <main className="flex-1 flex flex-col">
-          <Outlet />
-        </main>
+        <div className="relative z-10 bg-background">
+          <main className="flex-1 flex flex-col">
+            <Outlet />
+          </main>
+        </div>
+
+        <div className="sticky bottom-0 z-0 h-auto">
+          <Footer />
+        </div>
       </div>
-
-      <div className="sticky bottom-0 z-0 h-auto">
-        <Footer />
-      </div>
-    </div>
     </LeadCaptureProvider>
   );
 };
