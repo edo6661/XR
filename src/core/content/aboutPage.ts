@@ -1,35 +1,80 @@
 export const ABOUT_ACCENT = "#ef783d";
 
-export const ABOUT_HIGHLIGHT_PHOTOS = [
-  {
-    src: "/awards/awards_new.jpeg",
-    alt: "Initiative Award – Malaysia for AI-XR Production, Asia-Pacific Broadcasting+ Awards 2026",
-    caption: "Initiative Award · APB+ 2026",
-    fit: "contain" as const,
-  },
-  {
-    src: "/random/events.jpeg",
-    alt: "XR Asia Summit community on stage at IMMERSE KL",
-    caption: "Community in action · IMMERSE KL",
-    fit: "cover" as const,
-  },
-] as const;
+export type AboutPillarItem = {
+  title: string;
+  description: string;
+  accentColor: string;
+  featured: boolean;
+};
 
-export const COMPANY_OVERVIEW = {
-  title: "Connecting Innovators Across Asia's Immersive Future",
+export type CompanyOverviewItem = {
+  titleHighlight: string;
+  titleRest: string;
+  body: string[];
+  founderLine: string;
+};
+
+export type MissionItem = {
+  titleHighlight: string;
+  titleRest: string;
+  bodyHighlight: string;
+  bodyRest: string;
+};
+
+export type IndustryFocusSectorItem = {
+  title: string;
+  desc: string;
+  bullets: string[];
+  image: string;
+};
+
+export type IndustryFocusItem = {
+  titlePrefix: string;
+  titleHighlight: string;
+  titleRest: string;
+  description: string;
+};
+
+export type AboutHighlightPhotoItem = {
+  src: string;
+  alt: string;
+  caption: string;
+  fit: "contain" | "cover";
+};
+
+export type AwardRecognitionItem = {
+  companyName: string;
+  body: string;
+  event: string;
+  date: string;
+  category: string;
+  subcategory: string;
+  logo: string;
+  ceremonyPhoto: string;
+  ceremonyPhotoAlt: string;
+};
+
+export const FALLBACK_COMPANY_OVERVIEW: CompanyOverviewItem = {
+  titleHighlight: "Connecting Innovators Across Asia's",
+  titleRest: "Immersive Future",
   body: [
     "XR Asia Summit, founded by Louis Clovis, is a premier AI-XR platform dedicated to advancing the future of Artificial Intelligence, Virtual Reality, Augmented Reality, Extended Reality and Spatial Computing.",
     "The summit brings together global XR creators, technology innovators, industry leaders, researchers, policymakers and decision-makers to explore the latest advancements in AI, XR and immersive technologies. Through cutting-edge production techniques, immersive experiences and transformative applications, the platform showcases innovation across a wide range of sectors, including film, broadcast, virtual production, gaming, esports, healthcare, defence, aviation, automotive, manufacturing, education, tourism and enterprise transformation.",
     "Through world-class speaker sessions, industry showcases, networking opportunities, masterclasses and strategic presentations, XR Asia Summit drives meaningful conversations on how AI and XR are transforming storytelling, business, learning, industry and the future of human experience.",
   ],
-} as const;
+  founderLine: "Founded by Louis Clovis",
+};
 
-export const OUR_MISSION = {
-  title: "Maximum reach. Minimum friction.",
-  body: "XR ASIA SUMMIT exists to accelerate what the XR industry can achieve together. By connecting creators, industry leaders, educators, broadcasters, governments, and technology innovators through deployment-ready immersive experiences, we eliminate the silos that slow growth — so every stakeholder gets more value from every conversation, every session, and every collaboration.",
-} as const;
+export const FALLBACK_MISSION: MissionItem = {
+  titleHighlight: "Maximum reach.",
+  titleRest: "Minimum friction.",
+  bodyHighlight:
+    "XR ASIA SUMMIT exists to accelerate what the XR industry can achieve together",
+  bodyRest:
+    "By connecting creators, industry leaders, educators, broadcasters, governments, and technology innovators through deployment-ready immersive experiences, we eliminate the silos that slow growth — so every stakeholder gets more value from every conversation, every session, and every collaboration.",
+};
 
-export const WHY_XR_PILLARS = [
+export const FALLBACK_ABOUT_PILLARS: AboutPillarItem[] = [
   {
     title: "Premier Event Organiser",
     description:
@@ -51,55 +96,24 @@ export const WHY_XR_PILLARS = [
     accentColor: "#fedb21",
     featured: false,
   },
-] as const;
-export const INDUSTRY_FOCUS = {
-  description:
-    "XR ASIA SUMMIT focus on how immersive technologies like Virtual Reality (VR), Augmented Reality (AR), and Extended Reality (XR) are transforming various industries. XR ASIA SUMMIT explore the latest trends and innovations across these sectors, showcasing how XR is reshaping industries. Key sectors include:",
-  sectors: [
-    {
-      title: "Medical XR",
-      desc: "Transforming healthcare through immersive training, patient care, and advanced visualisation.",
-      bullets: [
-        "Surgical training & simulation",
-        "Anatomy & medical education",
-        "Remote consultation & collaboration",
-      ],
-      image: "/industry-focus/doctor.jpeg",
-    },
-    {
-      title: "Military XR",
-      desc: "Enhancing readiness, mission success, and decision-making across the defense ecosystem.",
-      bullets: [
-        "Simulation & mission rehearsal",
-        "Tactical training & wargaming",
-        "Situational awareness & battlefield visualisation",
-      ],
-      image: "/industry-focus/military-vr.jpeg",
-    },
-    {
-      title: "Aviation XR",
-      desc: "Elevating flight operations, training, maintenance, and passenger experiences.",
-      bullets: [
-        "Pilot training & flight simulation",
-        "Maintenance, repair & overhaul (MRO) guidance",
-        "Safety & emergency response drills",
-      ],
-      image: "/industry-focus/people-with-gun.png",
-    },
-    {
-      title: "Broadcast & Sports XR",
-      desc: "Redefining how sports are produced, experienced, and consumed through immersive technologies.",
-      bullets: [
-        "Real-time XR broadcasting & virtual production",
-        "Interactive fan engagement & immersive storytelling",
-        "Performance training, simulation & sports analytics",
-      ],
-      image: "/industry-focus/Broadcast_&_Sports_XR.png",
-    },
-  ],
-} as const;
+];
 
-export const AWARDS_RECOGNITION = {
+export const FALLBACK_ABOUT_HIGHLIGHT_PHOTOS: AboutHighlightPhotoItem[] = [
+  {
+    src: "/awards/awards_new.jpeg",
+    alt: "Initiative Award – Malaysia for AI-XR Production, Asia-Pacific Broadcasting+ Awards 2026",
+    caption: "Initiative Award · APB+ 2026",
+    fit: "contain",
+  },
+  {
+    src: "/random/events.jpeg",
+    alt: "XR Asia Summit community on stage at IMMERSE KL",
+    caption: "Community in action · IMMERSE KL",
+    fit: "cover",
+  },
+];
+
+export const FALLBACK_AWARD_RECOGNITION: AwardRecognitionItem = {
   companyName: "XR Summits Sdn Bhd",
   body: "received an accolade in the Initiative Award – Malaysia for AI-XR Production category at the Asia-Pacific Broadcasting+ Awards 2026 for its work in advancing Extended Reality (XR), virtual production, and AI-generated content across Southeast Asia.",
   event: "Asia-Pacific Broadcasting+ Awards 2026",
@@ -110,7 +124,73 @@ export const AWARDS_RECOGNITION = {
   ceremonyPhoto: "/awards/XR_Summits_Sdn_Bhd_APB_Awards.jpg",
   ceremonyPhotoAlt:
     "XR Summits Sdn Bhd receiving the Initiative Award at the Asia-Pacific Broadcasting+ Awards 2026",
-} as const;
+};
+
+export const ABOUT_HIGHLIGHT_PHOTOS = FALLBACK_ABOUT_HIGHLIGHT_PHOTOS;
+
+export const COMPANY_OVERVIEW = FALLBACK_COMPANY_OVERVIEW;
+
+export const OUR_MISSION = FALLBACK_MISSION;
+
+export const WHY_XR_PILLARS = FALLBACK_ABOUT_PILLARS;
+
+export const FALLBACK_INDUSTRY_FOCUS_SECTORS: IndustryFocusSectorItem[] = [
+  {
+    title: "Medical XR",
+    desc: "Transforming healthcare through immersive training, patient care, and advanced visualisation.",
+    bullets: [
+      "Surgical training & simulation",
+      "Anatomy & medical education",
+      "Remote consultation & collaboration",
+    ],
+    image: "/industry-focus/doctor.jpeg",
+  },
+  {
+    title: "Military XR",
+    desc: "Enhancing readiness, mission success, and decision-making across the defense ecosystem.",
+    bullets: [
+      "Simulation & mission rehearsal",
+      "Tactical training & wargaming",
+      "Situational awareness & battlefield visualisation",
+    ],
+    image: "/industry-focus/military-vr.jpeg",
+  },
+  {
+    title: "Aviation XR",
+    desc: "Elevating flight operations, training, maintenance, and passenger experiences.",
+    bullets: [
+      "Pilot training & flight simulation",
+      "Maintenance, repair & overhaul (MRO) guidance",
+      "Safety & emergency response drills",
+    ],
+    image: "/industry-focus/people-with-gun.png",
+  },
+  {
+    title: "Broadcast & Sports XR",
+    desc: "Redefining how sports are produced, experienced, and consumed through immersive technologies.",
+    bullets: [
+      "Real-time XR broadcasting & virtual production",
+      "Interactive fan engagement & immersive storytelling",
+      "Performance training, simulation & sports analytics",
+    ],
+    image: "/industry-focus/Broadcast_&_Sports_XR.png",
+  },
+];
+
+export const FALLBACK_INDUSTRY_FOCUS: IndustryFocusItem = {
+  titlePrefix: "Where",
+  titleHighlight: "immersive technology",
+  titleRest: "meets real-world impact.",
+  description:
+    "XR ASIA SUMMIT focus on how immersive technologies like Virtual Reality (VR), Augmented Reality (AR), and Extended Reality (XR) are transforming various industries. XR ASIA SUMMIT explore the latest trends and innovations across these sectors, showcasing how XR is reshaping industries. Key sectors include:",
+};
+
+export const INDUSTRY_FOCUS = {
+  ...FALLBACK_INDUSTRY_FOCUS,
+  sectors: FALLBACK_INDUSTRY_FOCUS_SECTORS,
+};
+
+export const AWARDS_RECOGNITION = FALLBACK_AWARD_RECOGNITION;
 
 export const TRACK_RECORD = [
   {

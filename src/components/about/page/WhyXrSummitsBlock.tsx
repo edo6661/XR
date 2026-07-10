@@ -1,5 +1,7 @@
 import PillarCard from '../PillarCard';
-import { WHY_XR_PILLARS } from '../../../core/content/aboutPage';
+import { FALLBACK_ABOUT_PILLARS } from '../../../core/content/aboutPage';
+import { useSanityQuery } from '../../../hooks/useSanityQuery';
+import { fetchAboutPillars } from '../../../lib/sanity/queries';
 import {
   AIIcon,
   SpatialIcon,
@@ -18,7 +20,10 @@ const AMBIENT_GLOWS = [
   { color: 'rgba(254,219,33,0.08)', position: 'bottom-0 left-1/3 w-[380px] h-[380px]' },
 ] as const;
 
-const WhyXrSummitsBlock = () => (
+const WhyXrSummitsBlock = () => {
+  const { data: pillars } = useSanityQuery(fetchAboutPillars, FALLBACK_ABOUT_PILLARS);
+
+  return (
   <div className="relative -mx-4 sm:-mx-6 px-4 sm:px-8 py-12 md:py-16 lg:py-20 rounded-2xl overflow-hidden">
     {/* Section background layers */}
     <div
@@ -64,7 +69,7 @@ const WhyXrSummitsBlock = () => (
 
     {/* Card grid — always 3 columns from md up */}
     <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-stretch gap-6 md:gap-7 lg:gap-8">
-      {WHY_XR_PILLARS.map((pillar, index) => (
+      {pillars.map((pillar, index) => (
         <PillarCard
           key={pillar.title}
           index={index}
@@ -78,6 +83,7 @@ const WhyXrSummitsBlock = () => (
       ))}
     </div>
   </div>
-);
+  );
+};
 
 export default WhyXrSummitsBlock;

@@ -1,45 +1,10 @@
-import { useRef, useState, type CSSProperties } from 'react';
+import { useMemo, useRef, useState, type CSSProperties } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import { useLeadCapture } from '../../context/LeadCaptureContext';
-/**
- * Partner logos — assets in /public/all-partner-logos/
- *
- * All logos render on a white tile so dark / mixed-contrast brand marks stay
- * legible on the dark section. A few monochrome assets need a CSS filter boost.
- */
-type Partner = {
-  name: string;
-  src: string;
-  /** CSS filter for assets that are near-invisible even on white */
-  filter?: string;
-};
-
-const GOVERNMENT_PARTNERS: Partner[] = [
-
-  { name: 'FINAS', src: '/all-partner-logos/FINAS.png' },
-  { name: 'POSTAM', src: '/all-partner-logos/postamsmall.png' },
-];
-
-const TECH_PARTNERS: Partner[] = [
-  { name: 'AOTO', src: '/all-partner-logos/AOTO LOGO2.png' },
-  { name: 'Artixium', src: '/all-partner-logos/artixium.png' },
-  { name: 'Aximmetry', src: '/all-partner-logos/aximmetry.png' },
-  { name: 'Blackcam Robotics', src: '/all-partner-logos/blackcam robotics.png', filter: 'contrast(2.8) brightness(1.35)' },
-  { name: 'Brompton Technology', src: '/all-partner-logos/brompton_technology_logo.png' },
-  { name: 'Eztrack', src: '/all-partner-logos/logo_eztrack-noir.png' },
-  { name: 'Korad', src: '/all-partner-logos/korad.png' },
-  { name: 'OARO', src: '/all-partner-logos/OARO.png' },
-  { name: 'Object Matrix', src: '/all-partner-logos/Object-Matrix-Logo-e1610495539370.png' },
-  { name: 'Ortana', src: '/all-partner-logos/ortana-omg-wide-logo-with-new-tagline-sml.png' },
-  { name: 'Smode', src: '/all-partner-logos/logo_smode.png', filter: 'contrast(2.5) brightness(1.4)' },
-  { name: 'STYPE', src: '/all-partner-logos/STYPE-logo-black.png' },
-  { name: 'Unreal Engine', src: '/all-partner-logos/unreal logo.png', filter: 'contrast(2.8) brightness(1.35)' },
-  { name: 'Vivemars', src: '/all-partner-logos/vivemars_logo.png' },
-];
-
-// Merge all partners into one flat list for the slider
-const ALL_PARTNERS: Partner[] = [...GOVERNMENT_PARTNERS, ...TECH_PARTNERS];
+import { FALLBACK_SPONSOR_PARTNERS, toSliderPartners, type SliderPartner } from '../../core/content/partners';
+import { useSanityQuery } from '../../hooks/useSanityQuery';
+import { fetchSponsorPartners } from '../../lib/sanity/queries';
 
 // ─── Single Logo Card (for slider) ──────────────────────────────────────────
 const LOGO_CARD = {
@@ -49,7 +14,7 @@ const LOGO_CARD = {
   hoverShadow: '0 6px 28px rgba(0,0,0,0.14)',
 } as const;
 
-const logoImageStyle = (partner: Partner, hovered: boolean): CSSProperties => {
+const logoImageStyle = (partner: SliderPartner, hovered: boolean): CSSProperties => {
   const base = partner.filter ?? 'none';
   const filter =
     hovered && base !== 'none'
@@ -60,7 +25,7 @@ const logoImageStyle = (partner: Partner, hovered: boolean): CSSProperties => {
   return { opacity: 1, mixBlendMode: 'normal', filter };
 };
 
-const SliderLogoCard = ({ partner }: { partner: Partner }) => {
+const SliderLogoCard = ({ partner }: { partner: SliderPartner }) => {
   const reduce = useReducedMotion();
   const cardRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -120,7 +85,7 @@ const SliderLogoCard = ({ partner }: { partner: Partner }) => {
 // ─── Infinite Slider ─────────────────────────────────────────────────────────
 // Uses pure CSS animation — no JS scroll loop, no RAF, GPU-friendly.
 // We duplicate the list once to create the seamless loop illusion.
-const InfiniteSlider = ({ partners }: { partners: Partner[] }) => {
+const InfiniteSlider = ({ partners }: { partners: SliderPartner[] }) => {
   const reduce = useReducedMotion();
   // Duplicate for seamless loop
   const doubled = [...partners, ...partners];
@@ -171,6 +136,8 @@ const InfiniteSlider = ({ partners }: { partners: Partner[] }) => {
 // ─── Section ─────────────────────────────────────────────────────────────────
 const SponsorsSection = () => {
   const { openLeadCapture } = useLeadCapture();
+  const { data: partners } = useSanityQuery(fetchSponsorPartners, FALLBACK_SPONSOR_PARTNERS);
+  const sliderPartners = useMemo(() => toSliderPartners(partners), [partners]);
 
   return (
     <section
@@ -247,7 +214,7 @@ const SponsorsSection = () => {
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
           className="mb-14"
         >
-          <InfiniteSlider partners={ALL_PARTNERS} />
+          <InfiniteSlider partners={sliderPartners} />
         </motion.div>
 
 

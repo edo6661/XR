@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ABOUT_ACCENT, OUR_MISSION } from '../../../core/content/aboutPage';
+import type { MissionItem } from '../../../core/content/aboutPage';
+import { ABOUT_ACCENT } from '../../../core/content/aboutPage';
 
 const MISSION_PILLARS = [
   { label: 'Connect', color: '#ef783d' },
@@ -7,7 +8,7 @@ const MISSION_PILLARS = [
   { label: 'Collaborate', color: '#3953a3' },
 ] as const;
 
-const OurMissionBlock = () => (
+const OurMissionBlock = ({ content }: { content: MissionItem }) => (
   <div className="relative">
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -123,10 +124,10 @@ const OurMissionBlock = () => (
             }}
           >
             <span className="gradient-text-accent font-bold">
-              {OUR_MISSION.body.split('. By ')[0]}.
+              {content.bodyHighlight}.
             </span>
             {' '}
-            By {OUR_MISSION.body.split('. By ')[1]}
+            {content.bodyRest}
           </motion.p>
 
           {/* Bottom accent bar */}

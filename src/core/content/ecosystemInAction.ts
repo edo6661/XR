@@ -2,8 +2,13 @@ export const ECOSYSTEM_IN_ACTION_HEADLINE = "The Ecosystem, in Action.";
 export const ECOSYSTEM_IN_ACTION_DESCRIPTION =
   "Real people. Real connections. Real impact.";
 
+export type EventPhoto = {
+  src: string;
+  alt: string;
+};
+
 /** Event photos served from /public/past-event-pics */
-export const ECOSYSTEM_IN_ACTION_PHOTOS = [
+export const FALLBACK_EVENT_PHOTOS: EventPhoto[] = [
   {
     src: "/past-event-pics/Conference2.jpg",
     alt: "XR ASIA SUMMIT conference session",
@@ -41,4 +46,7 @@ export const ECOSYSTEM_IN_ACTION_PHOTOS = [
   { src: "/past-event-pics/1 (168).JPG", alt: "Summit event moment" },
   { src: "/past-event-pics/1 (187).JPG", alt: "Summit event moment" },
   { src: "/past-event-pics/1 (196).JPG", alt: "Summit event moment" },
-] as const;
+];
+
+/** @deprecated Use FALLBACK_EVENT_PHOTOS */
+export const ECOSYSTEM_IN_ACTION_PHOTOS = FALLBACK_EVENT_PHOTOS;

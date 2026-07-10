@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { ABOUT_ACCENT, COMPANY_OVERVIEW } from '../../../core/content/aboutPage';
+import type { CompanyOverviewItem } from '../../../core/content/aboutPage';
+import { ABOUT_ACCENT } from '../../../core/content/aboutPage';
 
 const HIGHLIGHTS = [
   'AI & XR Innovation',
@@ -14,7 +15,7 @@ const MOSAIC_IMAGES = [
   { src: '/louis/louis-1.jpeg', alt: 'Louis Clovis, Founder of XR Asia Summit', className: 'col-span-1 row-span-1', objectPosition: 'center top' },
 ] as const;
 
-const CompanyOverviewBlock = () => {
+const CompanyOverviewBlock = ({ content }: { content: CompanyOverviewItem }) => {
   const reduce = useReducedMotion();
 
   return (
@@ -119,7 +120,7 @@ const CompanyOverviewBlock = () => {
             </div>
 
             <div className="flex flex-col gap-5">
-              {COMPANY_OVERVIEW.body.map((paragraph, i) => (
+              {content.body.map((paragraph, i) => (
                 <motion.p
                   key={paragraph.slice(0, 24)}
                   initial={{ opacity: 0, x: -12 }}
@@ -155,7 +156,7 @@ const CompanyOverviewBlock = () => {
                 className="font-mono uppercase tracking-[0.2em]"
                 style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.88)' }}
               >
-                Founded by Louis Clovis
+                {content.founderLine}
               </p>
             </motion.div>
           </div>

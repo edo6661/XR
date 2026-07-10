@@ -8,7 +8,7 @@ import {
   type EventPartner,
 } from '../../core/content/eventPartners';
 import { useSanityQuery } from '../../hooks/useSanityQuery';
-import { fetchPartners } from '../../lib/sanity/queries';
+import { fetchEventPartners } from '../../lib/sanity/queries';
 
 const LOGO_CARD = {
   background: '#ffffff',
@@ -83,7 +83,7 @@ const PartnerLogo = ({
 };
 
 const EventPartnersSection = () => {
-  const { data: partners } = useSanityQuery(fetchPartners, FALLBACK_EVENT_PARTNERS);
+  const { data: partners } = useSanityQuery(fetchEventPartners, FALLBACK_EVENT_PARTNERS);
   const categories = useMemo(() => groupPartnersByCategory(partners), [partners]);
 
   return (

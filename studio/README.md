@@ -21,10 +21,27 @@ npm run dev
 
 ## Schema types
 
-| Type      | Purpose                                               |
-| --------- | ----------------------------------------------------- |
-| `speaker` | Conference speakers (name, role, photo, bio, order)   |
-| `partner` | Event / media / tech partners (logo, category, order) |
+| Type                  | Purpose                                               | Website section            |
+| --------------------- | ----------------------------------------------------- | -------------------------- |
+| `speaker`             | Conference speakers                                   | XRAS KL → Speakers         |
+| `partner`             | Partner logos — category controls which page shows it | See categories below       |
+| `eventPhoto`          | Past event gallery photos                             | Home → Ecosystem in Action |
+| `eventCard`           | Upcoming events & programme highlights                | Home → Events section      |
+| `aboutPillar`         | Why XR pillars                                        | About → Why XR ASIA SUMMIT |
+| `aboutCompanyOverview`| Company overview copy (keep one published entry)      | About → Company Overview   |
+| `aboutMission`        | Mission statement (keep one published entry)          | About → Our Mission        |
+| `aboutIndustryFocus`  | Industry focus intro (keep one published entry)         | About → Industry Focus     |
+| `industryFocusSector` | Industry sector cards                                   | About → Industry Focus     |
+| `aboutHighlightPhoto` | Award highlight photos                                | About → Awards             |
+| `awardRecognition`    | Awards copy (keep one published entry)                | About → Awards             |
+
+### Partner categories
+
+| Category           | Website section             |
+| ------------------ | --------------------------- |
+| Government Partner | Home → Past Partners slider |
+| Tech Partner       | Home → Past Partners slider |
+| Media Partner      | XRAS KL → Event Partners    |
 
 Toggle **Show on website** (`active`) to hide a document without deleting it.
 

@@ -1,17 +1,21 @@
 import { motion } from 'framer-motion';
-import { AWARDS_RECOGNITION } from '../../../core/content/aboutPage';
+import { FALLBACK_AWARD_RECOGNITION } from '../../../core/content/aboutPage';
+import { useSanityQuery } from '../../../hooks/useSanityQuery';
+import { fetchAwardRecognition } from '../../../lib/sanity/queries';
 import AboutHighlightPhotos from './AboutHighlightPhotos';
 
 const GOLD = '#d4af37';
 const BURGUNDY = '#6b0f1a';
 
-const AWARD_TAGS = [
-  AWARDS_RECOGNITION.category,
-  AWARDS_RECOGNITION.subcategory,
-  AWARDS_RECOGNITION.date,
-] as const;
+const AwardsRecognitionBlock = () => {
+  const { data: award } = useSanityQuery(
+    fetchAwardRecognition,
+    FALLBACK_AWARD_RECOGNITION,
+  );
 
-const AwardsRecognitionBlock = () => (
+  const awardTags = [award.category, award.subcategory, award.date] as const;
+
+  return (
   <div className="relative max-w-5xl">
     {/* Ambient glow — burgundy + gold echoing APB ceremony backdrop */}
     <div className="absolute -inset-x-6 -top-10 -bottom-10 pointer-events-none" aria-hidden="true">
@@ -70,7 +74,7 @@ const AwardsRecognitionBlock = () => (
         {/* Copy + tags */}
         <div className="flex flex-col gap-5 p-6 md:p-8 lg:px-9 lg:pt-6 lg:pb-7">
           <div className="flex flex-wrap gap-2">
-            {AWARD_TAGS.map((tag, i) => (
+            {awardTags.map((tag, i) => (
               <motion.span
                 key={tag}
                 initial={{ opacity: 0, y: 8 }}
@@ -99,9 +103,9 @@ const AwardsRecognitionBlock = () => (
             }}
           >
             <strong className="text-foreground font-semibold" style={{ fontSize: '0.95em' }}>
-              {AWARDS_RECOGNITION.companyName}
+              {award.companyName}
             </strong>{' '}
-            {AWARDS_RECOGNITION.body}
+            {award.body}
           </p>
 
           <div
@@ -117,7 +121,7 @@ const AwardsRecognitionBlock = () => (
               className="font-mono uppercase tracking-[0.14em]"
               style={{ fontSize: '1rem', color: 'rgba(175,185,210,0.88)' }}
             >
-              {AWARDS_RECOGNITION.event}
+              {award.event}
             </p>
           </div>
         </div>
@@ -136,6 +140,7 @@ const AwardsRecognitionBlock = () => (
       />
     </motion.div>
   </div>
-);
+  );
+};
 
 export default AwardsRecognitionBlock;

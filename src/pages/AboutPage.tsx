@@ -4,14 +4,13 @@ import { motion } from 'framer-motion';
 import RegionalNetworkMap from '../components/about/RegionalNetworkMap';
 import PastEventsSection from '../components/about/PastEventsSection';
 import AboutSectionShell from '../components/about/page/AboutSectionShell';
-import CompanyOverviewBlock from '../components/about/page/CompanyOverviewBlock';
-import OurMissionBlock from '../components/about/page/OurMissionBlock';
+import CompanyOverviewSection from '../components/about/page/CompanyOverviewSection';
+import OurMissionSection from '../components/about/page/OurMissionSection';
+import IndustryFocusSection from '../components/about/page/IndustryFocusSection';
 import WhyXrSummitsBlock from '../components/about/page/WhyXrSummitsBlock';
 import AwardsRecognitionBlock from '../components/about/page/AwardsRecognitionBlock';
 import SustainabilityCommitmentSection from '../components/about/page/SustainabilityCommitmentSection';
 import {
-  ABOUT_ACCENT,
-  INDUSTRY_FOCUS,
   // MEDIA_PRESS,
   // STRATEGIC_PARTNER_SLOTS,
   REGIONAL_NETWORK,
@@ -24,35 +23,9 @@ const AboutPage = () => (
       <meta name="description" content="Learn about XR Summits — company overview, mission, awards, partners, and media." />
     </Helmet>
 
-    {/* 1. Company Overview */}
-    <AboutSectionShell
-      id="company-overview"
-      eyebrow="Company Overview"
-      title={
-        <>
-          Connecting Innovators Across Asia&apos;s{' '}
-          <span className="gradient-text-accent">Immersive Future</span>
-        </>
-      }
-      showTopBorder={false}
-    >
-      <CompanyOverviewBlock />
-    </AboutSectionShell>
+    <CompanyOverviewSection />
 
-    {/* 2. Our Mission */}
-    <AboutSectionShell
-      id="our-mission"
-      eyebrow="Our Mission"
-      title={
-        <>
-          <span className="gradient-text-accent">Maximum reach.</span> Minimum friction.
-        </>
-      }
-    >
-      <OurMissionBlock />
-    </AboutSectionShell>
-
-    {/* 3. Why XR ASIA SUMMIT */}
+    <OurMissionSection />
     <AboutSectionShell
       id="why-xr-summits"
       eyebrow="Why XR ASIA SUMMIT"
@@ -67,96 +40,7 @@ const AboutPage = () => (
       <WhyXrSummitsBlock />
     </AboutSectionShell>
 
-    <AboutSectionShell
-      id="industry-focus"
-      eyebrow="Industry Focus"
-      title={
-        <>
-          Where{" "}
-          <span className="gradient-text-accent">immersive technology</span>
-          {" "}meets real-world impact.
-        </>
-      }
-    >
-      <div className="max-w-5xl">
-        <p className="text-foreground-muted leading-relaxed mb-10" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
-          {INDUSTRY_FOCUS.description}
-        </p>
-
-        {/* Card grid — 2×2 (4 items), never 3+1 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-          {INDUSTRY_FOCUS.sectors.map((sector, index) => (
-            <motion.div
-              key={sector.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: index * 0.07, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative flex flex-col overflow-hidden rounded-xl"
-              style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(10,10,10,0.6)' }}
-            >
-              {/* Image */}
-              <div className="relative overflow-hidden aspect-[16/9]">
-                <img
-                  src={sector.image}
-                  alt={sector.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                {/* Overlay gradient */}
-                <div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(to bottom, transparent 40%, rgba(5,5,5,0.85) 100%)' }}
-                  aria-hidden="true"
-                />
-              </div>
-
-              {/* Text */}
-              <div className="flex flex-col gap-1.5 px-4 py-4">
-                {/* Accent bar + title */}
-                <div className="flex items-center gap-2">
-                  <span
-                    className="w-1 h-3.5 rounded-full flex-shrink-0"
-                    style={{ background: ABOUT_ACCENT }}
-                    aria-hidden="true"
-                  />
-                  <h4
-                    className="font-heading font-bold text-foreground leading-tight"
-                    style={{ fontSize: '0.95rem' }}
-                  >
-                    {sector.title}
-                  </h4>
-                </div>
-                <p
-                  className="leading-relaxed pl-3"
-                  style={{ fontSize: '1.02rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}
-                >
-                  {sector.desc}
-                </p>
-                {'bullets' in sector && sector.bullets.length > 0 && (
-                  <ul
-                    className="mt-1 space-y-1 pl-3"
-                    style={{ fontSize: '0.95rem', color: 'rgba(150,165,195,0.85)', lineHeight: 1.55 }}
-                  >
-                    {sector.bullets.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span
-                          className="mt-[0.45em] h-1 w-1 flex-shrink-0 rounded-full"
-                          style={{ background: ABOUT_ACCENT }}
-                          aria-hidden="true"
-                        />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-      </div>
-    </AboutSectionShell>
+    <IndustryFocusSection />
     {/* 4. Regional Network */}
     <AboutSectionShell
       id="regional-network"
