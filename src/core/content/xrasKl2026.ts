@@ -1,11 +1,19 @@
 export const XRAS_KL_ACCENT = "#fb923c";
 
+export type SpeakerType = "guest" | "sponsor";
+
 export type XrasSpeaker = {
   name: string;
   role: string;
   company: string;
   photo: string;
   accentColor?: string;
+  /** Guest = country flag; Sponsor = company logo in detail popup */
+  speakerType?: SpeakerType;
+  /** Guest speaker country label (e.g. Malaysia) — resolves flag via /country-flags/ */
+  country?: string;
+  countryFlagUrl?: string;
+  companyLogoUrl?: string;
   /** Speaker session topic / syllabus (optional until provided) */
   topic?: string;
   bio?: string;
@@ -18,6 +26,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Malaysia National AI Office (NAIO)",
     photo: "/speaker-pics/Sam Majid.jpg",
     accentColor: "#ef783d",
+    speakerType: "guest",
+    country: "Malaysia",
   },
   {
     name: "Prof. Jeasy Sehgal",
@@ -25,6 +35,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Unreal Engine GOLD Authorised Instructor Partner",
     photo: "/speaker-pics/Jeasy Sehgal.png",
     accentColor: "#ef783d",
+    speakerType: "guest",
+    country: "Norway",
     bio: 'Prof. Jagmeet Singh (Jeasy Sehgal) is an internationally acclaimed filmmaker and emerging technology strategist with 30+ years of global experience. An Unreal Engine GOLD Authorized Instructor Partner and Professor of Practice (former) at Georgia State University, he bridges the gap between Hollywood-grade production and scientific research. Having delivered solutions for Fortune 500 giants like Ferrari, Pepsi, FOX DC, and the Weta Group, he is a pioneer in Virtual Production and Realistic Digital Humans. As the founder of Graphic Monk Production, Virtual Production Dojo and Vivience AI, his groundbreaking research in "Affective-Emotive Resonance" (AER) is architecting the next era of empathetic, relational AI and immersive storytelling.',
   },
   {
@@ -33,6 +45,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Annapurna Studios",
     photo: "/speaker-pics/ROHIT.jpg",
     accentColor: "#ef783d",
+    speakerType: "guest",
+    country: "India",
     bio: "Rohit Kapoor is Virtual Production Supervisor at Annapurna Studios, India, with over 10 years of Unreal Engine experience and a career spanning gaming and film. A pioneer in India's virtual production landscape, he led the setup of India's first and largest curved LED Volume and has delivered industry seminars on Unreal Engine and VP pipelines. His expertise spans ICVFX setups, nDisplay, camera tracking, real-time keying, UE Environments and LED wall systems. Alongside his technical work, he also leads the Virtual Art Department at Annapurna Studios, driving high-quality real-time production for India's biggest projects. Previously at Red Chillies Entertainment and game studios including Lemon Sky and Codemasters, Rohit brings a rare blend of technical depth and creative vision to immersive storytelling.",
   },
   {
@@ -41,6 +55,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Whistling Woods International",
     photo: "/speaker-pics/Chaitanya.jpeg",
     accentColor: "#0ea5e9",
+    speakerType: "guest",
+    country: "India",
   },
   {
     name: "Dr. Lukasz Mirocha",
@@ -48,6 +64,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Opus Lab",
     photo: "/speaker-pics/Lukasz Mirocha.jpeg",
     accentColor: "#0ea5e9",
+    speakerType: "guest",
+    country: "Hong Kong",
   },
   {
     name: "Florin Ursu",
@@ -55,6 +73,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Xsolla",
     photo: "/speaker-pics/Florin Ursu.jpg.jpeg",
     accentColor: "#0ea5e9",
+    speakerType: "guest",
+    country: "Malaysia",
   },
   {
     name: "Virgile Mangiavillano",
@@ -62,6 +82,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "VR Future & Müzeverse",
     photo: "/speaker-pics/Virgile Mangiavillano.jpg",
     accentColor: "#ef783d",
+    speakerType: "guest",
+    country: "Turkey",
     bio: "Virgile Mangiavillano is the Co-Founder of VR Future and Müzeverse, the first Virtual Reality Museum in Türkiye and the MENA region. With a background in acting and technology, he has collaborated with Netflix, Ridley Scott, and the Avignon Festival. His work was selected at the Cannes Film Festival. As an XR expert, he advises institutions and speaks at leading global events including AWE, UnitedXR, Venice & Cannes Immersive, and Immersive Tech Week.",
   },
   {
@@ -70,6 +92,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "",
     photo: "/speaker-pics/Lakshmi Deshpande.jpg",
     accentColor: "#ef783d",
+    speakerType: "guest",
+    country: "India",
     bio: "Lakshmi leads a multidisciplinary team designing intelligent spatial experiences that blend XR, AI, and immersive storytelling. She specialises in translating emerging technologies into intuitive, human-centered solutions that transform how people collaborate, train, and engage with immersive environments.\n\nAt the intersection of design, technology, and human behavior, Lakshmi explores how Spatial Computing is reshaping the way people interact with information, environments, and one another. As a spatial storyteller, she blends immersive technologies, intelligent systems, and design thinking to create experiences that are engaging, meaningful, and future-focused.\n\nLakshmi holds a Master's degree in Visual Communication from IDC School of Design, IIT Bombay. Beyond her professional work, she is passionate about visual thinking, AI-assisted creativity, behavioral design, and blogging about new forms of storytelling.",
   },
   {
@@ -78,6 +102,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Tokyo Epic Inc",
     photo: "/speaker-pics/Ryoichi Wada.jpeg",
     accentColor: "#fedb21",
+    speakerType: "guest",
+    country: "Japan",
   },
   {
     name: "Robert Majoch (Bobby)",
@@ -85,6 +111,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Monnver LLC",
     photo: "/speaker-pics/Robert Majoch.jpg.jpeg",
     accentColor: "#fedb21",
+    speakerType: "guest",
+    country: "US",
     bio: "Bobby Majoch is an international award-winning filmmaker and visual design and marketing specialist working at the intersection of real-time 3D, artificial intelligence, and immersive storytelling. His short film Requited earned more than fifty international festival awards, and his work spans virtual production and broadcast, with credits including collaborations connected to Fox Broadcasting and JPMorgan.\n\nHe leads creative and content direction for large-scale immersive experiences, translating emerging spatial technologies into work that reaches audiences at scale. He builds in Unreal Engine, develops generative AI pipelines for content creation, and consults on the visual language of XR, from previsualization through final delivery.\n\nBobby's work is grounded in both craft and inquiry. He holds an MFA in Digital Filmmaking and Virtual Production from Georgia State University's Creative Media Industries Institute, and has taught courses in level design, previsualization, writing, and entrepreneurship. He also holds an MA in Philosophy and has taught critical thinking, which anchors his ongoing interest in authenticity, subjectivity, and what creative technology can and cannot capture about human experience.\n\nHis graduate research, a real-time virtual reconstruction of Atlanta's Chattahoochee Brick Company developed with Pulitzer Prize-winning historian Douglas Blackmon, explores simulation as an instrument for memory, history, and ethics.\n\nHis broader mission is to bridge technical capability and human meaning, ensuring that as spatial media advances, the stories it tells stay genuinely human, and that the people experiencing them remain at the center of the work.",
   },
   {
@@ -93,6 +121,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Techcopter & Techwedia+",
     photo: "/speaker-pics/Amirsoleiman E.jpg",
     accentColor: "#ef783d",
+    speakerType: "guest",
+    country: "UK",
   },
   {
     name: "Dimitri Josephine",
@@ -100,6 +130,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Unreal Engine Authorised Instructor",
     photo: "/speaker-pics/Dimitri Josephine.jpg.jpeg",
     accentColor: "#fedb21",
+    speakerType: "guest",
+    country: "Indonesia",
     bio: "Dimitri Josephine is a Virtual Art Director and Head of Virtual Production working at the intersection of immersive storytelling, real-time technology, and XR experiences. She is the first Unreal Engine Authorised Instructor in Indonesia and an early pioneer in Southeast Asia's virtual production industry. She has contributed to a range of large-scale virtual production projects and extends this practice into creative technology education through workshops and talks across industry and academic contexts. She is currently undertaking doctoral research on adaptive audience experiences, generative AI, and co-authorship in immersive and XR storytelling.",
   },
   {
@@ -108,6 +140,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Multimedia University",
     photo: "/speaker-pics/Datin Noorlindah.jpg",
     accentColor: "#fedb21",
+    speakerType: "guest",
+    country: "Malaysia",
   },
   {
     name: "Prof. Yoki Chin",
@@ -115,6 +149,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "POINT College",
     photo: "/speaker-pics/Prof Yoki.jpg.jpeg",
     accentColor: "#fedb21",
+    speakerType: "guest",
+    country: "Malaysia",
   },
   {
     name: "Dr. Yahaya Abdullah",
@@ -122,6 +158,8 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Management and Science University (MSU)",
     photo: "/speaker-pics/Dr Yahaya Abdullah.jpg",
     accentColor: "#0ea5e9",
+    speakerType: "guest",
+    country: "Malaysia",
   },
   {
     name: "Assoc. Prof. Ts. Dr. Safaa N.S. Al-Humairi",
@@ -129,6 +167,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     company: "Management and Science University (MSU)",
     photo: "/speaker-pics/Safaa Al-Humairi.webp",
     accentColor: "#0ea5e9",
+    speakerType: "guest",
   },
 ] as const;
 

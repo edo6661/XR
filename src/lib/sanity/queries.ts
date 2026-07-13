@@ -19,6 +19,12 @@ export type SanitySpeaker = {
   name: string;
   role?: string;
   company?: string;
+  speakerType?: "guest" | "sponsor";
+  country?: string;
+  countryFlag?: SanityImageSource;
+  countryFlagUrl?: string;
+  companyLogo?: SanityImageSource;
+  companyLogoUrl?: string;
   photo?: SanityImageSource;
   photoUrl?: string;
   accentColor?: string;
@@ -138,6 +144,12 @@ const speakersQuery = `*[_type == "speaker" && active != false] | order(order as
   name,
   role,
   company,
+  speakerType,
+  country,
+  countryFlag,
+  countryFlagUrl,
+  companyLogo,
+  companyLogoUrl,
   photo,
   photoUrl,
   accentColor,
@@ -240,6 +252,12 @@ export function mapSanitySpeaker(doc: SanitySpeaker): XrasSpeaker {
     company: doc.company ?? "",
     photo: resolveImageUrl(doc.photo, doc.photoUrl),
     accentColor: doc.accentColor,
+    speakerType: doc.speakerType ?? "guest",
+    country: doc.country,
+    countryFlagUrl:
+      resolveImageUrl(doc.countryFlag, doc.countryFlagUrl) || undefined,
+    companyLogoUrl:
+      resolveImageUrl(doc.companyLogo, doc.companyLogoUrl) || undefined,
     topic: doc.topic,
     bio: doc.bio,
   };

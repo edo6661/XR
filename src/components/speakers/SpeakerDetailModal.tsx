@@ -192,12 +192,47 @@ const SpeakerDetailModal = ({ speaker, onClose }: SpeakerDetailModalProps) => {
 
               <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 p-6 sm:p-8">
                 <div>
-                  <p
-                    className="mb-2 font-bold tracking-[0.28em] uppercase"
-                    style={{ fontSize: '0.82rem', color: accent }}
-                  >
-                    Speaker
-                  </p>
+                  <div className="mb-2 flex flex-wrap items-center gap-2.5">
+                    <p
+                      className="font-bold tracking-[0.28em] uppercase"
+                      style={{ fontSize: '0.82rem', color: accent }}
+                    >
+                      {speaker.speakerType === 'sponsor' ? 'Sponsor Speaker' : 'Guest Speaker'}
+                    </p>
+                    {speaker.badgeImageUrl ? (
+                      <span
+                        className="inline-flex items-center justify-center overflow-hidden rounded-sm"
+                        style={{
+                          height: speaker.speakerType === 'sponsor' ? '1.35rem' : '1.05rem',
+                          width: speaker.speakerType === 'sponsor' ? 'auto' : '1.55rem',
+                          maxWidth: '4.5rem',
+                          border: '1px solid rgba(255,255,255,0.14)',
+                          background: 'rgba(5,8,16,0.45)',
+                          boxShadow: '0 1px 6px rgba(0,0,0,0.28)',
+                        }}
+                        title={
+                          speaker.speakerType === 'sponsor'
+                            ? speaker.company || 'Company logo'
+                            : speaker.country || 'Country flag'
+                        }
+                      >
+                        <img
+                          src={speaker.badgeImageUrl}
+                          alt={
+                            speaker.speakerType === 'sponsor'
+                              ? `${speaker.company || speaker.name} logo`
+                              : `${speaker.country || 'Country'} flag`
+                          }
+                          className="h-full w-full object-contain"
+                          style={
+                            speaker.speakerType === 'sponsor'
+                              ? { padding: '0.15rem 0.3rem' }
+                              : undefined
+                          }
+                        />
+                      </span>
+                    ) : null}
+                  </div>
                   <h2
                     id="speaker-detail-name"
                     className="font-heading font-bold leading-tight"

@@ -210,8 +210,8 @@ const SpeakersSection = () => {
             className="font-heading font-black text-foreground max-w-2xl"
             style={{ fontSize: 'clamp(1.85rem, 4vw, 2.75rem)', letterSpacing: '0.03em' }}
           >
-            Conference{' '}
-            <span className="gradient-text-accent">Speakers</span>
+            Featured{' '}
+            <span className="gradient-text-accent">Guest Speakers</span>
           </motion.h2>
 
           <motion.div
@@ -225,7 +225,7 @@ const SpeakersSection = () => {
               className="font-mono uppercase"
               style={{ fontSize: '0.92rem', letterSpacing: '0.22em', color: 'rgba(139,155,180,0.55)' }}
             >
-              {String(speakers.length).padStart(2, '0')} Speakers
+              {String(speakers.length).padStart(2, '0')} Guests
             </span>
             <div
               style={{ width: '1px', height: '1rem', background: 'rgba(255,255,255,0.1)' }}
