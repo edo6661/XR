@@ -26,6 +26,7 @@ import {
 import AboutSectionShell from '../about/page/AboutSectionShell';
 import PillarCard from '../about/PillarCard';
 import IconCard, { bulletList } from './IconCard';
+import MothershipMissionsCarousel from './MothershipMissionsCarousel';
 import {
   HACKATHON_ACCENT,
   HACKATHON_BENEFITS,
@@ -35,6 +36,7 @@ import {
   HACKATHON_DELIVERABLES,
   HACKATHON_EXPERIENCE_FRAMEWORK,
   HACKATHON_FINALS_QUALIFICATION,
+  HACKATHON_MOTHERSHIP_MISSION,
   HACKATHON_PARTICIPATION_FEE,
   HACKATHON_PRIZE_STRUCTURE,
   HACKATHON_RULES,
@@ -171,6 +173,20 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
           );
         })}
       </div>
+    </AboutSectionShell>
+
+    {/* Mothership missions — swipeable challenges */}
+    <AboutSectionShell
+      id="mothership-missions"
+      eyebrow={HACKATHON_MOTHERSHIP_MISSION.eyebrow}
+      title={
+        <>
+          MOTHERSHIP MISSION:{' '}
+          <span className="gradient-text-accent">&ldquo;PACKAGING FUTURES&rdquo;</span>
+        </>
+      }
+    >
+      <MothershipMissionsCarousel />
     </AboutSectionShell>
 
     {/* Benefits — featured first + grid */}

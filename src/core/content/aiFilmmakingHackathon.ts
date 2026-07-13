@@ -92,6 +92,77 @@ export const HACKATHON_DELIVERABLES = {
   ],
 } as const;
 
+/** Mothership mission challenges — titles & SDG ids taken from the brief slides. */
+export const HACKATHON_MOTHERSHIP_MISSION = {
+  eyebrow: "Mothership Mission",
+  title: 'MOTHERSHIP MISSION: "PACKAGING FUTURES"',
+  challenges: [
+    {
+      id: 1,
+      title: "Environment, Biodiversity & Waste",
+      sdgs: [12, 14, 15],
+      image: "/aifilmmakinghackhaton/challenge/1.png",
+    },
+    {
+      id: 2,
+      title: "Clean Energy . Smart City",
+      sdgs: [3, 6, 7, 11],
+      image: "/aifilmmakinghackhaton/challenge/2.png",
+    },
+    {
+      id: 3,
+      title: "Peace, Justice & Strong Institutions",
+      sdgs: [16],
+      image: "/aifilmmakinghackhaton/challenge/3.png",
+    },
+    {
+      id: 4,
+      title: "Climate Action & Resilience",
+      sdgs: [13],
+      image: "/aifilmmakinghackhaton/challenge/4.png",
+    },
+    {
+      id: 5,
+      title: "Marine & Coastal Ecosystems",
+      sdgs: [14],
+      image: "/aifilmmakinghackhaton/challenge/5.png",
+    },
+    {
+      id: 6,
+      title: "Forests & Biodiversity",
+      sdgs: [15],
+      image: "/aifilmmakinghackhaton/challenge/6.png",
+    },
+    {
+      id: 7,
+      title: "Sustainable Agriculture & Palm Oil",
+      sdgs: [12, 15],
+      image: "/aifilmmakinghackhaton/challenge/7.png",
+    },
+    {
+      id: 8,
+      title: "Water & Urban Resilience",
+      sdgs: [6, 11],
+      image: "/aifilmmakinghackhaton/challenge/8.png",
+    },
+    {
+      id: 9,
+      title: "Plastics & Waste",
+      sdgs: [12],
+      image: "/aifilmmakinghackhaton/challenge/9.png",
+    },
+    {
+      id: 10,
+      title: "Endangered Species & Habitat Conservation",
+      sdgs: [15],
+      image: "/aifilmmakinghackhaton/challenge/10.png",
+    },
+  ],
+} as const;
+
+export const sdgIconPath = (sdg: number) =>
+  `/aifilmmakinghackhaton/SDG%20Icons/${sdg}.png`;
+
 export const HACKATHON_BENEFITS = {
   title: "Participant Benefits",
   items: [
