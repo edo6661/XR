@@ -76,7 +76,7 @@ const ACTIVATIONS: Activation[] = [
     body: 'Three days of keynotes, panel discussions, and fireside chats covering AI infrastructure, spatial media, virtual production, and the future of competitive broadcast. Featuring global speakers across industry, policy, and creative tech.',
     meta: 'Day 1–2 · Main Stage',
     panelImage: {
-      src: '/xras-tabs/CONFERENCE.png',
+      src: '/xras-tabs/graphic-banner/Conference (3).png',
       alt: 'Conference activation visual',
     },
   },
@@ -89,7 +89,7 @@ const ACTIVATIONS: Activation[] = [
     body: 'A curated B2B exhibition floor connecting XR solution providers with enterprise and government decision-makers. Demo live. Match on the spot. Close faster.',
     meta: 'Dec 1–3 · Expo Floor',
     panelImage: {
-      src: '/xras-tabs/Expo.png',
+      src: '/xras-tabs/graphic-banner/Expo (2).png',
       alt: 'Expo activation visual',
     },
     mediaSections: [
@@ -127,7 +127,7 @@ const ACTIVATIONS: Activation[] = [
     body: 'Deep-dive technical sessions covering real-world XR workflows — from production pipelines to immersive deployment. Built for practitioners who want to leave with something they can use.',
     meta: '',
     panelImage: {
-      src: '/xras-tabs/Masterclass.png',
+      src: '/xras-tabs/graphic-banner/XR Masterclass.png',
       alt: 'Masterclass activation visual',
     },
     sessionSlots: XRAS_KL_MASTERCLASS_SLOTS as SessionSlot[],
@@ -141,7 +141,7 @@ const ACTIVATIONS: Activation[] = [
     body: 'One-on-one and small group coaching sessions pairing AI and XR startups with industry mentors. Get direct feedback, sharpen your pitch, and find your next move.',
     meta: '',
     panelImage: {
-      src: '/xras-tabs/Coaching.png',
+      src: '/xras-tabs/graphic-banner/Coaching (3).png',
       alt: 'Coaching activation visual',
     },
     sessionSlots: XRAS_KL_COACHING_SLOTS as SessionSlot[],
@@ -155,7 +155,7 @@ const ACTIVATIONS: Activation[] = [
     body: XRAS_KL_AI_FILMMAKING.highlights[1],
     meta: '',
     panelImage: {
-      src: '/xras-tabs/Filmmaking Hackathon.png',
+      src: '/xras-tabs/graphic-banner/AI Filmmaking Hackathon.png',
       alt: 'AI filmmaking activation visual',
     },
   },
@@ -168,7 +168,7 @@ const ACTIVATIONS: Activation[] = [
     body: XRAS_KL_ESPORTS.body,
     meta: '',
     panelImage: {
-      src: '/xras-tabs/Esports (3).png',
+      src: '/xras-tabs/graphic-banner/Esports (2).png',
       alt: 'Esports activation visual',
     },
   },
@@ -181,7 +181,7 @@ const ACTIVATIONS: Activation[] = [
     body: XRAS_KL_AWARDS_GALA.body,
     meta: '',
     panelImage: {
-      src: '/xras-tabs/Awards & Gala.jpg.jpeg',
+      src: '/xras-tabs/graphic-banner/XR Awards & Gala.png',
       alt: 'Awards and gala activation visual',
     },
   },
