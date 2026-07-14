@@ -168,6 +168,7 @@ export const XRAS_KL_SPEAKERS: readonly XrasSpeaker[] = [
     photo: "/speaker-pics/Safaa Al-Humairi.webp",
     accentColor: "#0ea5e9",
     speakerType: "guest",
+    country: "Malaysia",
   },
 ] as const;
 
