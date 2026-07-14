@@ -1,16 +1,24 @@
-import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
-import { createPortal } from 'react-dom';
+import { useCallback, useSyncExternalStore } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { EmblaCarouselType } from 'embla-carousel';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   HACKATHON_ACCENT,
   HACKATHON_MOTHERSHIP_MISSION,
+  sdgIconPath,
 } from '../../core/content/aiFilmmakingHackathon';
-import { lenisInstance } from '../../lib/lenisInstance';
+import { bulletList } from './IconCard';
 
 const challenges = HACKATHON_MOTHERSHIP_MISSION.challenges;
+
+const navBtnStyle = {
+  width: 40,
+  height: 40,
+  background: 'rgba(5, 11, 24, 0.82)',
+  border: `1px solid ${HACKATHON_ACCENT}40`,
+  color: HACKATHON_ACCENT,
+  backdropFilter: 'blur(8px)',
+} as const;
 
 const useEmblaSelectedIndex = (emblaApi: EmblaCarouselType | undefined) => {
   const subscribe = useCallback(
@@ -34,119 +42,6 @@ const useEmblaSelectedIndex = (emblaApi: EmblaCarouselType | undefined) => {
   return useSyncExternalStore(subscribe, getSnapshot, () => 0);
 };
 
-type ChallengeLightboxProps = {
-  open: boolean;
-  challenge: (typeof challenges)[number];
-  onClose: () => void;
-};
-
-const ChallengeLightbox = ({ open, challenge, onClose }: ChallengeLightboxProps) => {
-  useEffect(() => {
-    if (!open) return;
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
-    };
-
-    const lenis = lenisInstance.current;
-    lenis?.stop();
-
-    const html = document.documentElement;
-    const { style: htmlStyle } = html;
-    const { style: bodyStyle } = document.body;
-    const prevHtmlOverflow = htmlStyle.overflow;
-    const prevBodyOverflow = bodyStyle.overflow;
-
-    htmlStyle.overflow = 'hidden';
-    bodyStyle.overflow = 'hidden';
-    window.addEventListener('keydown', onKey);
-
-    return () => {
-      htmlStyle.overflow = prevHtmlOverflow;
-      bodyStyle.overflow = prevBodyOverflow;
-      lenis?.start();
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [open, onClose]);
-
-  return createPortal(
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.22 }}
-          className="fixed inset-0 z-[99999] flex flex-col overscroll-none"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Challenge ${challenge.id}: ${challenge.title}`}
-        >
-          <button
-            type="button"
-            className="absolute inset-0 bg-[#050b18]/92 backdrop-blur-md"
-            onClick={onClose}
-            aria-label="Close enlarged challenge"
-          />
-
-          <div className="relative z-10 flex shrink-0 items-center justify-between gap-3 px-4 py-3 sm:px-5">
-            <div className="min-w-0">
-              <p
-                className="font-semibold tracking-[0.16em] uppercase"
-                style={{ fontSize: '0.78rem', color: HACKATHON_ACCENT }}
-              >
-                Challenge #{String(challenge.id).padStart(2, '0')}
-              </p>
-              <p className="truncate font-heading font-bold text-foreground" style={{ fontSize: '0.95rem' }}>
-                {challenge.title}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close"
-              className="flex shrink-0 items-center justify-center rounded-lg"
-              style={{
-                width: 42,
-                height: 42,
-                background: 'rgba(5, 11, 24, 0.85)',
-                border: `1px solid ${HACKATHON_ACCENT}45`,
-                color: HACKATHON_ACCENT,
-              }}
-            >
-              <X size={20} strokeWidth={1.75} />
-            </button>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.98 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 min-h-0 flex-1 overflow-auto overscroll-contain"
-            data-lenis-prevent
-            onClick={onClose}
-          >
-            <div className="flex min-h-full w-full items-safe-center justify-safe-center px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-5">
-              <img
-                src={challenge.image}
-                alt={`Challenge ${challenge.id}: ${challenge.title}`}
-                className="block h-auto max-h-[calc(100dvh-5.75rem)] w-auto max-w-full rounded-lg object-contain select-none"
-                style={{
-                  border: '1px solid rgba(255,255,255,0.1)',
-                }}
-                draggable={false}
-                onClick={(event) => event.stopPropagation()}
-              />
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>,
-    document.body,
-  );
-};
-
 const MothershipMissionsCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'center',
@@ -154,114 +49,128 @@ const MothershipMissionsCarousel = () => {
     skipSnaps: false,
   });
   const selectedIndex = useEmblaSelectedIndex(emblaApi);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const scrollPrev = () => emblaApi?.scrollPrev();
   const scrollNext = () => emblaApi?.scrollNext();
   const scrollTo = (index: number) => emblaApi?.scrollTo(index);
-  const closeLightbox = useCallback(() => setLightboxOpen(false), []);
-
-  const active = challenges[selectedIndex];
 
   return (
     <div className="relative">
-      <div className="mb-5 min-w-0">
-        <p
-          className="font-semibold tracking-[0.18em] uppercase mb-1.5"
-          style={{ fontSize: '0.88rem', color: HACKATHON_ACCENT }}
-        >
-          Challenge #{String(active.id).padStart(2, '0')}
-        </p>
-        <h3
-          className="font-heading font-bold text-foreground"
-          style={{ fontSize: 'clamp(1.05rem, 2.6vw, 1.35rem)', lineHeight: 1.25 }}
-        >
-          {active.title}
-        </h3>
-      </div>
-
-      <div className="relative">
-        <div className="overflow-hidden rounded-xl" ref={emblaRef}>
-          <div className="flex touch-pan-y">
-            {challenges.map((challenge) => (
-              <div
-                key={challenge.id}
-                className="min-w-0 flex-[0_0_100%] px-0.5"
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex touch-pan-y">
+          {challenges.map((challenge) => (
+            <div
+              key={challenge.id}
+              className="min-w-0 flex-[0_0_100%] px-0.5"
+            >
+              <article
+                className="relative overflow-hidden rounded-xl px-5 py-5 sm:px-7 sm:py-6"
+                style={{
+                  background: 'rgba(9, 18, 34, 0.58)',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                }}
               >
                 <div
-                  className="overflow-hidden rounded-xl"
+                  className="absolute left-0 top-5 bottom-5 w-px rounded-full pointer-events-none"
                   style={{
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    background: 'rgba(9, 18, 34, 0.55)',
+                    background: `linear-gradient(to bottom, transparent, ${HACKATHON_ACCENT}55, transparent)`,
                   }}
-                >
-                  <img
-                    src={challenge.image}
-                    alt={`Challenge ${challenge.id}: ${challenge.title}`}
-                    className="block w-full h-auto select-none"
-                    draggable={false}
-                    loading={challenge.id === 1 ? 'eager' : 'lazy'}
-                    decoding="async"
-                  />
+                  aria-hidden="true"
+                />
+
+                <div className="flex flex-col gap-5">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                    <div className="min-w-0">
+                      <p
+                        className="font-semibold tracking-[0.18em] uppercase mb-2"
+                        style={{ fontSize: '0.88rem', color: HACKATHON_ACCENT }}
+                      >
+                        Challenge #{String(challenge.id).padStart(2, '0')}
+                      </p>
+                      <h3
+                        className="inline-block font-heading font-bold text-foreground"
+                        style={{
+                          fontSize: 'clamp(1.05rem, 2.6vw, 1.3rem)',
+                          lineHeight: 1.25,
+                          background: `${HACKATHON_ACCENT}18`,
+                          border: `1px solid ${HACKATHON_ACCENT}35`,
+                          padding: '0.4rem 0.75rem',
+                          borderRadius: '0.4rem',
+                        }}
+                      >
+                        {challenge.title}
+                      </h3>
+                    </div>
+
+                    <div
+                      className="flex flex-wrap items-center gap-3 shrink-0"
+                      aria-label="Related SDG icons"
+                    >
+                      {challenge.sdgs.map((sdg) => (
+                        <img
+                          key={sdg}
+                          src={sdgIconPath(sdg)}
+                          alt={`SDG ${sdg}`}
+                          className="h-20 w-20 sm:h-24 sm:w-24 rounded-md object-cover shadow-sm"
+                          style={{ border: '1px solid rgba(255,255,255,0.14)' }}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-4">
+                    {challenge.sections.map((section, sectionIndex) => {
+                      const heading = 'heading' in section ? section.heading : undefined;
+                      const body = 'body' in section ? section.body : undefined;
+                      const bullets = 'bullets' in section ? section.bullets : undefined;
+
+                      return (
+                        <div key={`${challenge.id}-section-${sectionIndex}`}>
+                          {heading && (
+                            <h4
+                              className="font-heading font-bold text-foreground mb-1.5"
+                              style={{ fontSize: '1rem' }}
+                            >
+                              {heading}
+                            </h4>
+                          )}
+                          {body && (
+                            <p
+                              className="mb-2"
+                              style={{
+                                fontSize: '1rem',
+                                color: 'rgba(180,195,220,0.9)',
+                                lineHeight: 1.65,
+                              }}
+                            >
+                              {body}
+                            </p>
+                          )}
+                          {bullets && bulletList(bullets)}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              </article>
+            </div>
+          ))}
         </div>
+      </div>
 
-        <button
-          type="button"
-          onClick={() => setLightboxOpen(true)}
-          aria-label="View challenge larger"
-          className="absolute right-2 top-2 z-10 flex items-center justify-center rounded-lg sm:right-3 sm:top-3"
-          style={{
-            width: 40,
-            height: 40,
-            background: 'rgba(5, 11, 24, 0.82)',
-            border: `1px solid ${HACKATHON_ACCENT}45`,
-            color: HACKATHON_ACCENT,
-            backdropFilter: 'blur(8px)',
-          }}
-        >
-          <Expand size={18} strokeWidth={1.75} />
-        </button>
-
+      <div className="mt-5 flex items-center justify-center gap-4">
         <button
           type="button"
           onClick={scrollPrev}
           aria-label="Previous challenge"
-          className="absolute left-2 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center rounded-lg sm:left-3"
-          style={{
-            width: 40,
-            height: 40,
-            background: 'rgba(5, 11, 24, 0.78)',
-            border: `1px solid ${HACKATHON_ACCENT}40`,
-            color: HACKATHON_ACCENT,
-            backdropFilter: 'blur(8px)',
-          }}
+          className="flex shrink-0 items-center justify-center rounded-lg"
+          style={navBtnStyle}
         >
           <ChevronLeft size={20} strokeWidth={1.75} />
         </button>
 
-        <button
-          type="button"
-          onClick={scrollNext}
-          aria-label="Next challenge"
-          className="absolute right-2 top-1/2 z-10 -translate-y-1/2 flex items-center justify-center rounded-lg sm:right-3"
-          style={{
-            width: 40,
-            height: 40,
-            background: 'rgba(5, 11, 24, 0.78)',
-            border: `1px solid ${HACKATHON_ACCENT}40`,
-            color: HACKATHON_ACCENT,
-            backdropFilter: 'blur(8px)',
-          }}
-        >
-          <ChevronRight size={20} strokeWidth={1.75} />
-        </button>
-      </div>
-
-      <div className="mt-5 flex justify-center">
         <div className="flex flex-wrap items-center justify-center gap-2" role="tablist" aria-label="Challenge slides">
           {challenges.map((challenge, index) => {
             const isActive = index === selectedIndex;
@@ -283,13 +192,17 @@ const MothershipMissionsCarousel = () => {
             );
           })}
         </div>
-      </div>
 
-      <ChallengeLightbox
-        open={lightboxOpen}
-        challenge={active}
-        onClose={closeLightbox}
-      />
+        <button
+          type="button"
+          onClick={scrollNext}
+          aria-label="Next challenge"
+          className="flex shrink-0 items-center justify-center rounded-lg"
+          style={navBtnStyle}
+        >
+          <ChevronRight size={20} strokeWidth={1.75} />
+        </button>
+      </div>
     </div>
   );
 };

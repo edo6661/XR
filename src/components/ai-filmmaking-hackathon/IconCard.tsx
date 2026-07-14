@@ -19,10 +19,14 @@ export const bulletList = (
   items: readonly string[],
   accent = HACKATHON_ACCENT,
 ) => (
-  <ul className="space-y-1.5" style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.6 }}>
+  <ul className="space-y-1.5" style={{ fontSize: '1rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}>
     {items.map((item) => (
-      <li key={item} className="flex items-start gap-2">
-        <span className="mt-[0.45em] h-1 w-1 shrink-0 rounded-full" style={{ background: accent }} aria-hidden="true" />
+      <li key={item} className="flex items-start gap-2.5">
+        <span
+          className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full"
+          style={{ background: accent }}
+          aria-hidden="true"
+        />
         <span>{item}</span>
       </li>
     ))}
