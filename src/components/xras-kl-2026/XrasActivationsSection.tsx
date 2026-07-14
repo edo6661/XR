@@ -98,7 +98,7 @@ const ACTIVATIONS: Activation[] = [
         layout: 'single',
         images: [
           {
-            src: '/others/MITEC.jpeg',
+            src: '/others/mitec-new-logo.png',
             alt: 'Malaysia International Trade and Exhibition Centre (MITEC) at dusk',
           },
           {
