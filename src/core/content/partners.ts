@@ -16,7 +16,13 @@ export type PartnerCategory = {
   partners: PartnerItem[];
 };
 
-/** Media partners on XRAS event page */
+/** Preferred display order for XRAS event partner categories */
+export const EVENT_PARTNER_CATEGORY_ORDER = [
+  "Media Partner",
+  "Venue Partner",
+] as const;
+
+/** Media + venue partners on XRAS event page */
 export const FALLBACK_MEDIA_PARTNERS: PartnerItem[] = [
   {
     name: "Vanakkam Malaysia News",
@@ -27,6 +33,11 @@ export const FALLBACK_MEDIA_PARTNERS: PartnerItem[] = [
     name: "ESG TV",
     logo: "/partners-logo/esg-tv.png",
     category: "Media Partner",
+  },
+  {
+    name: "MITEC",
+    logo: "/others/mitec-new-logo.png",
+    category: "Venue Partner",
   },
 ];
 
@@ -127,6 +138,7 @@ export function toSliderPartners(partners: PartnerItem[]): SliderPartner[] {
 
 export function groupPartnersByCategory(
   partners: PartnerItem[],
+  preferredOrder: readonly string[] = [],
 ): PartnerCategory[] {
   const order: string[] = [];
   const map = new Map<string, PartnerItem[]>();
@@ -140,7 +152,12 @@ export function groupPartnersByCategory(
     map.get(category)!.push(partner);
   }
 
-  return order.map((label) => ({
+  const sortedLabels = [
+    ...preferredOrder.filter((label) => map.has(label)),
+    ...order.filter((label) => !preferredOrder.includes(label)),
+  ];
+
+  return sortedLabels.map((label) => ({
     label,
     partners: map.get(label) ?? [],
   }));

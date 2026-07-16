@@ -185,8 +185,7 @@ export const HackathonMissionsGroup = () => (
       eyebrow={HACKATHON_MOTHERSHIP_MISSION.eyebrow}
       title={
         <>
-          MOTHERSHIP MISSION:{' '}
-          <span className="gradient-text-accent">&ldquo;PACKAGING FUTURES&rdquo;</span>
+
         </>
       }
       showTopBorder={false}

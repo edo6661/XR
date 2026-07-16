@@ -11,6 +11,7 @@ import type {
 } from "../../core/content/aboutPage";
 import type { EventCardItem } from "../../core/content/events";
 import type { PartnerItem } from "../../core/content/partners";
+import { FALLBACK_MEDIA_PARTNERS } from "../../core/content/partners";
 import type { EventPhoto } from "../../core/content/ecosystemInAction";
 import type { XrasSpeaker } from "../../core/content/xrasKl2026";
 
@@ -418,9 +419,24 @@ export async function fetchSpeakers(): Promise<XrasSpeaker[] | null> {
   }
 }
 
-/** Media partners on XRAS event page */
-export function fetchEventPartners() {
-  return fetchPartnersByCategory(["Media Partner"]);
+/** Media + venue partners on XRAS event page */
+export async function fetchEventPartners(): Promise<PartnerItem[] | null> {
+  const fromCms = await fetchPartnersByCategory([
+    "Media Partner",
+    "Venue Partner",
+  ]);
+  if (fromCms === null) return null;
+
+  const hasVenuePartner = fromCms.some(
+    (partner) => partner.category === "Venue Partner",
+  );
+  if (hasVenuePartner) return fromCms;
+
+  // Keep MITEC visible until Venue Partner is added in Sanity
+  const venueFallback = FALLBACK_MEDIA_PARTNERS.filter(
+    (partner) => partner.category === "Venue Partner",
+  );
+  return [...fromCms, ...venueFallback];
 }
 
 /** Government + tech partners on Home page slider */

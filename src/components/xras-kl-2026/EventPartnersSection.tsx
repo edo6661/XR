@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import BecomePartnerCta from '../ui/BecomePartnerCta';
 import {
+  EVENT_PARTNER_CATEGORY_ORDER,
   FALLBACK_EVENT_PARTNERS,
   groupPartnersByCategory,
   type EventPartner,
@@ -84,7 +85,10 @@ const PartnerLogo = ({
 
 const EventPartnersSection = () => {
   const { data: partners } = useSanityQuery(fetchEventPartners, FALLBACK_EVENT_PARTNERS);
-  const categories = useMemo(() => groupPartnersByCategory(partners), [partners]);
+  const categories = useMemo(
+    () => groupPartnersByCategory(partners, EVENT_PARTNER_CATEGORY_ORDER),
+    [partners],
+  );
 
   return (
     <section

@@ -18,6 +18,7 @@ export const partner = defineType({
       options: {
         list: [
           {title: 'Media Partner', value: 'Media Partner'},
+          {title: 'Venue Partner', value: 'Venue Partner'},
           {title: 'Government Partner', value: 'Government Partner'},
           {title: 'Tech Partner', value: 'Tech Partner'},
           {title: 'Event Partner', value: 'Event Partner'},
