@@ -13,6 +13,8 @@ type IconCardProps = {
   featured?: boolean;
   className?: string;
   accent?: string;
+  /** Stretch to parent height; keep title/description columns aligned */
+  equalHeight?: boolean;
 };
 
 export const bulletList = (
@@ -44,13 +46,14 @@ const IconCard = ({
   featured = false,
   className = '',
   accent = HACKATHON_ACCENT,
+  equalHeight = false,
 }: IconCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, amount: 0.2 }}
     transition={{ delay: (index ?? 0) * 0.06, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    className={`group relative flex flex-col gap-3 rounded-xl overflow-hidden ${className}`}
+    className={`group relative flex flex-col gap-3 rounded-xl overflow-hidden ${equalHeight ? 'h-full' : ''} ${className}`}
     style={{
       padding: featured ? '1.5rem 1.65rem' : '1.25rem 1.4rem',
       background: featured
@@ -84,7 +87,7 @@ const IconCard = ({
       />
     )}
 
-    <div className="flex items-start justify-between gap-3">
+    <div className="flex items-start justify-between gap-3 shrink-0">
       <div
         className="flex items-center justify-center rounded-lg shrink-0 transition-transform duration-300 group-hover:scale-105"
         style={{
@@ -108,8 +111,15 @@ const IconCard = ({
       )}
     </div>
 
-    <div className="flex flex-col gap-1.5">
-      <h4 className="font-heading font-bold text-foreground leading-snug" style={{ fontSize: featured ? '0.92rem' : '1.02rem' }}>
+    <div className={`flex flex-col gap-1.5 ${equalHeight ? 'flex-1 min-h-0' : ''}`}>
+      <h4
+        className="font-heading font-bold text-foreground leading-snug"
+        style={{
+          fontSize: featured ? '0.92rem' : '1.02rem',
+          // Reserve 2 lines so titles align across equal-height cards
+          minHeight: equalHeight ? '2.4em' : undefined,
+        }}
+      >
         {title}
       </h4>
       {subtitle && (
@@ -118,7 +128,10 @@ const IconCard = ({
         </p>
       )}
       {amount && (
-        <p className="font-semibold" style={{ fontSize: '1rem', color: accent }}>
+        <p
+          className="font-heading font-black tracking-tight"
+          style={{ fontSize: featured ? 'clamp(1.35rem, 3vw, 1.85rem)' : 'clamp(1.15rem, 2.5vw, 1.45rem)', color: accent, lineHeight: 1.15 }}
+        >
           {amount}
         </p>
       )}

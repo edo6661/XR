@@ -9,7 +9,7 @@ export const HACKATHON_META = {
   edition: "Mothership · 2026",
   location: "Malaysia",
   dates: "1–3 May 2026",
-  finalsDates: "1–3 December 2026",
+  finalsDates: "1–2 December 2026",
   contactPhone: "012-2020264",
 } as const;
 
@@ -424,7 +424,7 @@ export const HACKATHON_BENEFITS = {
   items: [
     {
       title: "Prize Pool – Approx. RM25,000 @ THE FINALS",
-      subtitle: "1–3 December 2026",
+      subtitle: "1–2 December 2026",
       description:
         "Cash prizes, technology credits, and partner-sponsored awards.",
     },
@@ -436,12 +436,12 @@ export const HACKATHON_BENEFITS = {
     {
       title:
         "Complimentary XR / VR / AR Workshop Access to top 10 winners this round",
-      subtitle: "1–3 December 2026",
+      subtitle: "1–2 December 2026",
       description: "Free tickets to selected workshops at XR ASIA SUMMITS.",
     },
     {
       title: "Industry Exposure & Showcasing at XR ASIA SUMMITS",
-      subtitle: "1–3 December 2026",
+      subtitle: "1–2 December 2026",
       description:
         "Projects will be presented to industry leaders, sponsors, agencies, and potential employers and partners.",
     },
@@ -456,8 +456,9 @@ export const HACKATHON_BENEFITS = {
 export const HACKATHON_PARTICIPATION_FEE = {
   amount: "RM 1,000.00",
   label: "Per Participant",
+  subsidisedTitle: "Participation Fee Subsidised",
   intro:
-    "The RM 1,000 participation fee is a subsidised, all-inclusive package designed to allow participants to focus entirely on creation and innovation.",
+    "All-inclusive package designed to allow participants to focus entirely on creation and innovation.",
   inclusions: [
     {
       title: "Group Work",
@@ -593,7 +594,6 @@ export const HACKATHON_CLOSING = {
   body2:
     "You'll walk away with portfolio pieces that open doors, workflows that save months of trial-and-error, and connections to brands actively hiring efficient production partners across MY / SG / ID / TH / PH / VN.",
   stats: [
-    { label: "Dates", value: "1–3 May 2026" },
     { label: "Location", value: "Malaysia" },
     { label: "Prize Pool", value: "RM 25K" },
   ],

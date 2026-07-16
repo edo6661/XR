@@ -35,7 +35,7 @@ const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
         className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(175deg, rgba(5,11,24,0.2) 0%, rgba(5,11,24,0.35) 45%, rgba(5,11,24,0.55) 100%)',
+            'linear-gradient(175deg, rgba(5,11,24,0.2) 0%, rgba(5,11,24,0.35) 45%, rgba(5,11,24,0.4) 70%, transparent 100%)',
         }}
       />
       <div
@@ -43,6 +43,14 @@ const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
         style={{
           background:
             'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(251,146,60,0.12) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 80% 60%, rgba(56,189,248,0.06) 0%, transparent 50%)',
+        }}
+      />
+      {/* Fade bottom → #fcfcfd (continues into next section) */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-[42%]"
+        style={{
+          background:
+            'linear-gradient(to bottom, transparent 0%, rgba(252,252,253,0.45) 45%, #fcfcfd 100%)',
         }}
       />
     </div>
@@ -141,7 +149,18 @@ const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
               border: '1px solid rgba(251,146,60,0.5)',
             }}
           >
-            Apply Now
+            Register Your Team
+          </a>
+          <a
+            href={`tel:${HACKATHON_META.contactPhone.replace(/-/g, '')}`}
+            className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.14em] uppercase text-[1rem] transition-shadow hover:shadow-[0_8px_24px_rgba(26,46,80,0.12)]"
+            style={{
+              background: 'rgba(255,255,255,0.92)',
+              border: `1px solid ${HACKATHON_ACCENT}55`,
+              color: HACKATHON_ACCENT,
+            }}
+          >
+            Contact: {HACKATHON_META.contactPhone}
           </a>
         </motion.div>
       </motion.div>
