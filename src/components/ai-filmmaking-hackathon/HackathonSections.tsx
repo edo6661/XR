@@ -106,7 +106,8 @@ type HackathonSectionsProps = {
   registerUrl: string;
 };
 
-const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
+/** Experience framework + deliverables — dark navy stack */
+export const HackathonFrameworkGroup = () => (
   <>
     <AboutSectionShell
       id="experience-framework"
@@ -134,7 +135,6 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
       </div>
     </AboutSectionShell>
 
-    {/* Deliverables — bento grid */}
     <AboutSectionShell
       id="challenge-deliverables"
       eyebrow="Challenge Brief"
@@ -174,8 +174,12 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
         })}
       </div>
     </AboutSectionShell>
+  </>
+);
 
-    {/* Mothership missions — swipeable challenges */}
+/** Missions + benefits — mid-dark stack */
+export const HackathonMissionsGroup = () => (
+  <>
     <AboutSectionShell
       id="mothership-missions"
       eyebrow={HACKATHON_MOTHERSHIP_MISSION.eyebrow}
@@ -185,11 +189,11 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
           <span className="gradient-text-accent">&ldquo;PACKAGING FUTURES&rdquo;</span>
         </>
       }
+      showTopBorder={false}
     >
       <MothershipMissionsCarousel />
     </AboutSectionShell>
 
-    {/* Benefits — featured first + grid */}
     <AboutSectionShell
       id="participant-benefits"
       eyebrow="Benefits"
@@ -214,8 +218,12 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
         ))}
       </div>
     </AboutSectionShell>
+  </>
+);
 
-    {/* Participation fee — 4-up icon row */}
+/** Fee + rules — steel-blue mid stack */
+export const HackathonDetailsGroup = () => (
+  <>
     <AboutSectionShell
       id="participation-fee"
       eyebrow="Registration"
@@ -226,6 +234,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
         </>
       }
       description={`${HACKATHON_PARTICIPATION_FEE.label}. ${HACKATHON_PARTICIPATION_FEE.intro}`}
+      showTopBorder={false}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {HACKATHON_PARTICIPATION_FEE.inclusions.map((item, index) => (
@@ -240,7 +249,6 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
       </div>
     </AboutSectionShell>
 
-    {/* Rules — 2-column compact grid */}
     <AboutSectionShell
       id="requirements-rules"
       eyebrow="Requirements & Rules"
@@ -331,17 +339,23 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
         </p>
       </motion.div>
     </AboutSectionShell>
+  </>
+);
 
-    {/* Mothership statement — split banner */}
+/** Closing statement + prizes — light silver stack */
+export const HackathonAwardsGroup = ({ registerUrl }: HackathonSectionsProps) => (
+  <>
     <AboutSectionShell
       id="mothership-statement"
       eyebrow="The Mothership Hackathon"
+      tone="light"
       title={
         <>
           Isn&apos;t Just Another{' '}
-          <span className="gradient-text-accent">AI Filmmaking Competition</span>
+          <span className="text-accent">AI Filmmaking Competition</span>
         </>
       }
+      showTopBorder={false}
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -352,6 +366,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
         style={{
           border: `1px solid ${HACKATHON_ACCENT}25`,
           background: 'linear-gradient(145deg, rgba(22,38,62,0.95) 0%, rgba(9,18,34,0.88) 55%, rgba(13,27,46,0.92) 100%)',
+          boxShadow: '0 20px 48px rgba(26,46,80,0.12)',
         }}
       >
         <div
@@ -449,19 +464,18 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
       </motion.div>
     </AboutSectionShell>
 
-    {/* Prize structure — podium layout */}
     <AboutSectionShell
       id="prize-structure"
       eyebrow="Awards"
+      tone="light"
       title={
         <>
           AI XR Awards{' '}
-          <span className="gradient-text-accent">Prize Structure</span>
+          <span className="text-accent">Prize Structure</span>
         </>
       }
     >
       <div className="flex flex-col gap-4">
-        {/* Grand Prix — hero */}
         {HACKATHON_PRIZE_STRUCTURE.prizes.slice(0, 1).map((prize) => (
           <motion.div
             key={prize.title}
@@ -473,6 +487,7 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
             style={{
               background: `linear-gradient(135deg, ${HACKATHON_ACCENT}14 0%, rgba(9,18,34,0.75) 100%)`,
               border: `1px solid ${HACKATHON_ACCENT}35`,
+              boxShadow: '0 16px 40px rgba(26,46,80,0.1)',
             }}
           >
             <div
@@ -509,7 +524,6 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
           </motion.div>
         ))}
 
-        {/* Remaining prizes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {HACKATHON_PRIZE_STRUCTURE.prizes.slice(1).map((prize, index) => (
             <IconCard
@@ -524,24 +538,48 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
         </div>
       </div>
 
-      <p className="mt-8 max-w-3xl text-foreground-muted leading-relaxed" style={{ fontSize: '0.92rem', lineHeight: 1.75 }}>
+      <p className="mt-8 max-w-3xl text-on-light-muted leading-relaxed" style={{ fontSize: '0.92rem', lineHeight: 1.75 }}>
         {HACKATHON_PRIZE_STRUCTURE.footer}
       </p>
     </AboutSectionShell>
+  </>
+);
 
+/** Final apply CTA — near-white stack, reveals footer */
+export const HackathonApplyGroup = ({ registerUrl }: HackathonSectionsProps) => (
+  <div
+    className="relative w-full min-h-dvh overflow-hidden flex flex-col justify-center"
+    style={{
+      backgroundColor: '#ffffff',
+      background: `
+        linear-gradient(
+          to bottom,
+          #f6f8fc 0%,
+          #fbfcff 42%,
+          #ffffff 100%
+        )
+      `,
+    }}
+  >
     <AboutSectionShell
       id="event-checkin"
       eyebrow="Applications"
+      tone="light"
       title={
         <>
-          <span className="gradient-text-accent">Apply</span> for the Hackathon
+          <span className="text-accent">Apply</span> for the Hackathon
         </>
       }
       description={HACKATHON_CHECKIN.intro}
+      showTopBorder={false}
     >
       <div
         className="max-w-4xl rounded-xl px-6 py-6 sm:px-8"
-        style={{ border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(9,18,34,0.45)' }}
+        style={{
+          border: '1px solid rgba(26,46,80,0.1)',
+          background: 'rgba(255,255,255,0.72)',
+          boxShadow: '0 18px 44px rgba(26,46,80,0.08)',
+        }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-6 items-center">
           <div>
@@ -556,13 +594,13 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
                 Hackathon Applications
               </p>
             </div>
-            <h3 className="font-heading font-bold text-foreground mb-3" style={{ fontSize: 'clamp(1.35rem, 4vw, 2rem)', lineHeight: 1.15 }}>
+            <h3 className="font-heading font-bold text-on-light-heading mb-3" style={{ fontSize: 'clamp(1.35rem, 4vw, 2rem)', lineHeight: 1.15 }}>
               {HACKATHON_CHECKIN.title}
             </h3>
-            <p className="text-foreground-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
+            <p className="text-on-light-muted leading-relaxed" style={{ fontSize: 'clamp(0.95rem, 2.5vw, 1.05rem)', lineHeight: 1.8 }}>
               {HACKATHON_CHECKIN.subheadline}
             </p>
-            <p className="mt-5 text-foreground-muted leading-relaxed" style={{ fontSize: '0.92rem', lineHeight: 1.7 }}>
+            <p className="mt-5 text-on-light-muted leading-relaxed" style={{ fontSize: '0.92rem', lineHeight: 1.7 }}>
               {HACKATHON_CHECKIN.closing}
             </p>
           </div>
@@ -584,6 +622,17 @@ const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
         </div>
       </div>
     </AboutSectionShell>
+  </div>
+);
+
+/** @deprecated Prefer composing the exported groups with StackedSection */
+const HackathonSections = ({ registerUrl }: HackathonSectionsProps) => (
+  <>
+    <HackathonFrameworkGroup />
+    <HackathonMissionsGroup />
+    <HackathonDetailsGroup />
+    <HackathonAwardsGroup registerUrl={registerUrl} />
+    <HackathonApplyGroup registerUrl={registerUrl} />
   </>
 );
 
