@@ -485,14 +485,14 @@ export const HackathonAwardsGroup = ({ registerUrl }: HackathonSectionsProps) =>
             transition={{ duration: 0.6 }}
             className="relative flex flex-col sm:flex-row sm:items-center gap-5 rounded-xl px-6 py-6 overflow-hidden"
             style={{
-              background: `linear-gradient(135deg, ${HACKATHON_ACCENT}14 0%, rgba(9,18,34,0.75) 100%)`,
-              border: `1px solid ${HACKATHON_ACCENT}35`,
-              boxShadow: '0 16px 40px rgba(26,46,80,0.1)',
+              background: `linear-gradient(135deg, rgba(22,38,62,0.97) 0%, rgba(9,18,34,0.98) 100%)`,
+              border: `1px solid ${HACKATHON_ACCENT}40`,
+              boxShadow: '0 16px 40px rgba(26,46,80,0.14)',
             }}
           >
             <div
               className="absolute top-0 right-0 w-40 h-40 pointer-events-none"
-              style={{ background: `radial-gradient(circle, ${HACKATHON_ACCENT}18 0%, transparent 70%)` }}
+              style={{ background: `radial-gradient(circle, ${HACKATHON_ACCENT}22 0%, transparent 70%)` }}
               aria-hidden="true"
             />
             <div
@@ -517,7 +517,7 @@ export const HackathonAwardsGroup = ({ registerUrl }: HackathonSectionsProps) =>
               <p className="font-semibold mb-2" style={{ fontSize: '0.88rem', color: HACKATHON_ACCENT }}>
                 {prize.amount}
               </p>
-              <p style={{ fontSize: '1.02rem', color: 'rgba(180,195,220,0.9)', lineHeight: 1.65 }}>
+              <p style={{ fontSize: '1.02rem', color: 'rgba(232,238,248,0.92)', lineHeight: 1.65 }}>
                 {prize.description}
               </p>
             </div>
