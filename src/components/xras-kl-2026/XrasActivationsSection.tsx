@@ -74,7 +74,7 @@ const ACTIVATIONS: Activation[] = [
     category: 'Conference',
     tagline: 'The ideas that move the industry forward.',
     body: 'Three days of keynotes, panel discussions, and fireside chats covering AI infrastructure, spatial media, virtual production, and the future of competitive broadcast. Featuring global speakers across industry, policy, and creative tech.',
-    meta: 'Day 1–2 · Main Stage',
+    meta: 'Day 1–3 · Main Stage',
     panelImage: {
       src: '/xras-tabs/graphic-banner/Conference (3).png',
       alt: 'Conference activation visual',
@@ -851,7 +851,7 @@ const XrasActivationsSection = ({ onRegister }: XrasActivationsSectionProps) => 
             className="leading-relaxed"
             style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', lineHeight: 1.85, color: '#a8b8d0' }}
           >
-            1–3 December 2026 · Malaysia International Trade and Exhibition Centre (MITEC, Kuala Lumpur)
+            1–3 December 2026 · MITEC, Kuala Lumpur (Malaysia International Trade and Exhibition Centre)
 
           </p>
         </motion.div>

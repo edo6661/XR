@@ -18,7 +18,7 @@ export const FALLBACK_FLAGSHIP_EVENTS: EventCardItem[] = [
     title: "XR ASIA SUMMIT 2026",
     date: "1 – 3 Dec 2026",
     location:
-      "Malaysia International Trade and Exhibition Centre (MITEC), Kuala Lumpur",
+      "MITEC, Kuala Lumpur (Malaysia International Trade and Exhibition Centre)",
     description:
       "One platform, 6 Experiences – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.",
     accentColor: "#fb923c",

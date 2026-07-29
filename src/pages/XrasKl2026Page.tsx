@@ -41,7 +41,7 @@ const XrasKl2026Page = () => {
         <meta name="description" content={XRAS_KL_META.description} />
       </Helmet>
 
-      <XrasKlHero onDownloadBrochure={openBrochure} onRegister={openRegister} />
+      <XrasKlHero onDownloadBrochure={openBrochure} />
 
       <div
         style={
@@ -53,7 +53,7 @@ const XrasKl2026Page = () => {
         <XrasActivationsSection onRegister={openRegister} />
         <SpeakersSection />
         <EventPartnersSection />
-        <XrasKlCtaRow onDownloadBrochure={openBrochure} onRegister={openRegister} />
+        <XrasKlCtaRow onDownloadBrochure={openBrochure} />
       </div>
 
     </>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { XRAS_KL_ACCENT, XRAS_KL_META } from '../../core/content/xrasKl2026';
+import { XRAS_KL_ACCENT, XRAS_KL_META, XRAS_KL_PASS_URL } from '../../core/content/xrasKl2026';
 
 const HERO_KEYART = '/hero/new_hero_from_louis_2.png';
 
@@ -11,10 +11,9 @@ const neoShadow = `
 
 type XrasKlHeroProps = {
   onDownloadBrochure: () => void;
-  onRegister: () => void;
 };
 
-const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
+const XrasKlHero = ({ onDownloadBrochure }: XrasKlHeroProps) => (
   <section
     className="relative w-full overflow-hidden pt-28 pb-16 md:pb-24 px-6 min-h-[min(88vh,920px)] flex items-center"
     aria-labelledby="xras-hero-heading"
@@ -144,17 +143,18 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
           >
             Download Brochure
           </button>
-          <button
-            type="button"
-            onClick={onRegister}
+          <a
+            href={XRAS_KL_PASS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto min-w-[200px] px-6 py-3.5 rounded-sm font-bold tracking-[0.18em] uppercase text-[1rem] text-[#050b18] transition-shadow hover:shadow-[0_0_32px_rgba(251,146,60,0.35)]"
             style={{
               background: 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)',
               border: '1px solid rgba(251,146,60,0.5)',
             }}
           >
-            Register / Enquiry
-          </button>
+            Choose Your Pass
+          </a>
         </motion.div>
       </motion.div>
     </div>

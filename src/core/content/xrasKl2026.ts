@@ -381,11 +381,15 @@ export const XRAS_KL_AWARDS_GALA = {
   },
 } as const;
 
+export const XRAS_KL_PASS_URL =
+  "http://t2u.asia/e/51250_156af371d60748a9b99cce89e454d679";
+
 export const XRAS_KL_META = {
   title: "XRAS 26 KL' | XR Summits",
   description:
     "XR ASIA SUMMIT Kuala Lumpur 2026 — flagship conference, expo, workshops, coaching, masterclasses, grand finals, and AI/XR Awards Gala.",
-  location: "Kuala Lumpur, Malaysia",
+  location:
+    "MITEC, Kuala Lumpur (Malaysia International Trade and Exhibition Centre)",
   edition: "4th Edition · 2026",
 } as const;
 
