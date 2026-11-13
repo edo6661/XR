@@ -6,9 +6,9 @@ export const AIXR_SARAWAK_POSITIONING =
 export const AIXR_SARAWAK_META = {
   title: "AI·XR Cultural Innovation Forum 2026 | XR Summits",
   description:
-    "AI·XR Cultural Innovation Forum 2026 — a prelude to XR Asia Summits 2026. Where heritage meets future technology at BCCK, Kuching, Sarawak, 16–17 October 2026.",
+    "AI·XR Cultural Innovation Forum 2026 — a prelude to XR Asia Summits 2027. Where heritage meets future technology at BCCK, Kuching, Sarawak, 16–17 October 2026.",
   location: "16–17 October 2026 · BCCK, Kuching, Sarawak",
-  edition: "A Prelude to XR Asia Summits 2026",
+  edition: "A Prelude to XR Asia Summits 2027",
 } as const;
 
 export type AixrProgram = {
@@ -78,7 +78,7 @@ export const AIXR_SARAWAK_PROGRAMS: readonly AixrProgram[] = [
     category: "Semi Finals",
     title: "Esports Semi Finals",
     description:
-      "Regional Esports Tournament Semi Final on the road to the Grand Final at XR ASIA SUMMIT 2026 in Kuala Lumpur.",
+      "Regional Esports Tournament Semi Final on the road to the Grand Final at XR ASIA SUMMIT 2027 in Malaysia.",
     featured: true,
   },
 ] as const;

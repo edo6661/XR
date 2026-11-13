@@ -119,7 +119,7 @@ const XrasKlHero = ({ onDownloadBrochure }: XrasKlHeroProps) => (
           className="font-semibold tracking-[0.22em] uppercase mb-8"
           style={{ fontSize: '1rem', color: 'rgba(22,36,62,0.55)' }}
         >
-          {XRAS_KL_META.location}
+          {XRAS_KL_META.dates} · {XRAS_KL_META.location}
         </motion.p>
 
         <motion.div

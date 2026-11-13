@@ -356,7 +356,7 @@ const Navbar = () => {
               className="px-6 pb-10 pt-5"
             >
               <p className="font-mono text-[1.02rem] tracking-[0.4em] text-foreground-muted/40 uppercase mb-5">
-                4th Edition · Kuala Lumpur · 2026
+                4th Edition · FINAS Damansara · 2027
               </p>
               <button
                 type="button"

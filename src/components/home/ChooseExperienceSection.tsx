@@ -25,12 +25,12 @@ const HackathonIcon = () => (
 
 const EVENT_GATEWAYS = [
   {
-    title: "4th XR ASIA SUMMITs 2026",
-    subtitle: '1 - 3 December 2026',
-    description: 'MITEC, Kuala Lumpur (Malaysia International Trade and Exhibition Centre). One platform, six activations – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.',
+    title: "4th XR ASIA SUMMITs 2027",
+    subtitle: '20 - 22 January 2027',
+    description: 'FINAS Damansara, Malaysia. One platform, six activations – Conference • Expo • Workshops • Masterclasses • Hackathon Grandfinals • Esports Tournament • Awards & Gala.',
     to: '/xras-kl-2026',
     accentColor: '#fb923c',
-    tag: 'XRAS26',
+    tag: 'XRAS27',
     icon: <XRIcon />,
   },
   {

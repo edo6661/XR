@@ -270,7 +270,7 @@ const AboutSection = () => {
                 lineHeight: 1.25,
               }}
             >
-              XR Asia Summit 2026: FROM VISION TO DEPLOYMENT
+              XR Asia Summit 2027: FROM VISION TO DEPLOYMENT
             </h3>
 
             <p
@@ -279,7 +279,7 @@ const AboutSection = () => {
               style={{ color: 'rgba(216,228,246,0.88)' }}
             >
               What began as a response to disruption has become the Launchpad for execution.{' '}
-              <span className="text-accent font-semibold">XR Asia Summit 2026</span> unites the
+              <span className="text-accent font-semibold">XR Asia Summit 2027</span> unites the
               visionaries, builders, and decision-makers driving the future of{' '}
               <span className="font-semibold" style={{ color: '#f8faff' }}>
                 AI, Extended Reality, and Spatial Media
@@ -293,7 +293,7 @@ const AboutSection = () => {
               className="text-base leading-[1.75]"
               style={{ color: 'rgba(216,228,246,0.88)' }}
             >
-              Over three electrifying days, XRAS2026 delivers:
+              Over three electrifying days, XRAS2027 delivers:
             </p>
 
             <ul
@@ -332,7 +332,7 @@ const AboutSection = () => {
                 letterSpacing: '0.01em',
               }}
             >
-              From immersive demos to competitive arenas, XR Asia Summit 2026 is where innovation
+              From immersive demos to competitive arenas, XR Asia Summit 2027 is where innovation
               meets implementation — and where immersive technology moves boldly.
             </p>
           </div>

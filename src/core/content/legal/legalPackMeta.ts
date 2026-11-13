@@ -8,7 +8,7 @@ export const LEGAL_PACK_META = {
   intro:
     "This consolidated pack contains the seven legal documents to be published in the LEGAL section of the XR Summits website footer, together with a copyright and trademark notice for the footer. It replaces all previous versions of these documents. It is written for XR Summits Sdn Bhd and its 2026 events, and is governed by the laws of Malaysia.",
   appliesTo:
-    "XR Summits Sdn Bhd, its websites, and its events — including the 4th XR Asia Summit 2026 (MITEC, Kuala Lumpur, 1–3 December 2026) and the AI·XR Cultural Innovation Forum 2026 (BCCK, Kuching, Sarawak, 16–17 October 2026).",
+    "XR Summits Sdn Bhd, its websites, and its events — including the 4th XR Asia Summit 2027 (FINAS Damansara, Malaysia, 20–22 January 2027) and the AI·XR Cultural Innovation Forum 2026 (BCCK, Kuching, Sarawak, 16–17 October 2026).",
   registeredOffice:
     "XR Summits Sdn Bhd, Sunway PJS 51A, 47300 Petaling Jaya, Selangor, Malaysia",
   contactEmail: "register@xr-summits.com",

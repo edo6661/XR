@@ -103,7 +103,7 @@ export const websiteDisclaimer: LegalDocument = {
 
 export const COPYRIGHT_NOTICE = {
   heading: "Intellectual Property Notice",
-  line1: "© 2026 XR Summits Sdn Bhd. All Rights Reserved.",
+  line1: "© 2027 XR Summits Sdn Bhd. All Rights Reserved.",
   line2:
     "XR Summits™, XR Asia Summit™, associated event names, logos, branding elements and promotional materials are trademarks and/or intellectual property of XR Summits Sdn Bhd.",
   line3:

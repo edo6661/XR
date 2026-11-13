@@ -310,17 +310,17 @@ export const XRAS_KL_AI_FILMMAKING = {
         title:
           "Complimentary XR/VR/AR Workshop Access to the top 10 winners this round.",
         description:
-          "Free tickets to selected workshops at XR ASIA SUMMITS 2026.",
+          "Free tickets to selected workshops at XR ASIA SUMMITS 2027.",
       },
       {
-        title: "Industry Exposure & Showcasing at XR ASIA SUMMITS 2026",
+        title: "Industry Exposure & Showcasing at XR ASIA SUMMITS 2027",
         description:
           "Projects will be presented to industry leaders, sponsors, agencies, and potential employers and partners.",
       },
       {
         title: "Industry Certification & Recognition",
         description:
-          "Official participation recognition under XR ASIA SUMMITS 2026, supported by sponsors and international industry partners.",
+          "Official participation recognition under XR ASIA SUMMITS 2027, supported by sponsors and international industry partners.",
       },
     ],
     closing:
@@ -385,12 +385,12 @@ export const XRAS_KL_PASS_URL =
   "http://t2u.asia/e/51250_156af371d60748a9b99cce89e454d679";
 
 export const XRAS_KL_META = {
-  title: "XRAS 26 KL' | XR Summits",
+  title: "XRAS 27 KL' | XR Summits",
   description:
-    "XR ASIA SUMMIT Kuala Lumpur 2026 — flagship conference, expo, workshops, coaching, masterclasses, grand finals, and AI/XR Awards Gala.",
-  location:
-    "MITEC, Kuala Lumpur (Malaysia International Trade and Exhibition Centre)",
-  edition: "4th Edition · 2026",
+    "XR ASIA SUMMIT Kuala Lumpur 2027 — flagship conference, expo, workshops, coaching, masterclasses, grand finals, and AI/XR Awards Gala.",
+  location: "FINAS Damansara, Malaysia",
+  dates: "20–22 January 2027",
+  edition: "4th Edition · 2027",
 } as const;
 
 export type XrasProgram = {

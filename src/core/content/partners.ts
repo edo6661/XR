@@ -35,8 +35,8 @@ export const FALLBACK_MEDIA_PARTNERS: PartnerItem[] = [
     category: "Media Partner",
   },
   {
-    name: "MITEC",
-    logo: "/others/mitec-new-logo.png",
+    name: "FINAS Damansara",
+    logo: "/all-partner-logos/FINAS.png",
     category: "Venue Partner",
   },
 ];

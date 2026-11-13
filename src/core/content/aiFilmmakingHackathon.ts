@@ -9,7 +9,7 @@ export const HACKATHON_META = {
   edition: "Mothership · 2026",
   location: "Malaysia",
   dates: "1–3 May 2026",
-  finalsDates: "1–2 December 2026",
+  finalsDates: "20–22 January 2027",
   contactPhone: "012-2020264",
 } as const;
 
@@ -424,7 +424,7 @@ export const HACKATHON_BENEFITS = {
   items: [
     {
       title: "Prize Pool – Approx. RM25,000 @ THE FINALS",
-      subtitle: "1–2 December 2026",
+      subtitle: "20–22 January 2027",
       description:
         "Cash prizes, technology credits, and partner-sponsored awards.",
     },
@@ -436,19 +436,19 @@ export const HACKATHON_BENEFITS = {
     {
       title:
         "Complimentary XR / VR / AR Workshop Access to top 10 winners this round",
-      subtitle: "1–2 December 2026",
+      subtitle: "20–22 January 2027",
       description: "Free tickets to selected workshops at XR ASIA SUMMITS.",
     },
     {
       title: "Industry Exposure & Showcasing at XR ASIA SUMMITS",
-      subtitle: "1–2 December 2026",
+      subtitle: "20–22 January 2027",
       description:
         "Projects will be presented to industry leaders, sponsors, agencies, and potential employers and partners.",
     },
     {
       title: "Industry Certification & Recognition",
       description:
-        "Official participation recognition under XR ASIA SUMMITS 2026, supported by sponsors and international industry partners.",
+        "Official participation recognition under XR ASIA SUMMITS 2027, supported by sponsors and international industry partners.",
     },
   ],
 } as const;
@@ -644,7 +644,7 @@ export const HACKATHON_PRIZE_STRUCTURE = {
 export const HACKATHON_CHECKIN = {
   title: "Ready to Build the Future of AI Filmmaking?",
   subheadline:
-    "Form your team. Create in 72 hours. Compete for RM25K+. Present your work at XR Asia Summit 2026.",
+    "Form your team. Create in 72 hours. Compete for RM25K+. Present your work at XR Asia Summit 2027.",
   intro:
     "Applications are now open for teams ready to build and present client-ready AI filmmaking work.",
   closing:

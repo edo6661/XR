@@ -87,7 +87,7 @@ const ACTIVATIONS: Activation[] = [
     category: 'Expo',
     tagline: 'Where technology meets its buyers.',
     body: 'A curated B2B exhibition floor connecting XR solution providers with enterprise and government decision-makers. Demo live. Match on the spot. Close faster.',
-    meta: 'Dec 1–3 · Expo Floor',
+    meta: 'Jan 20–22 · Expo Floor',
     panelImage: {
       src: '/xras-tabs/graphic-banner/Expo (2).png',
       alt: 'Expo activation visual',
@@ -98,12 +98,12 @@ const ACTIVATIONS: Activation[] = [
         layout: 'single',
         images: [
           {
-            src: '/others/mitec-new-logo.png',
-            alt: 'Malaysia International Trade and Exhibition Centre (MITEC) at dusk',
+            src: '/all-partner-logos/FINAS.png',
+            alt: 'FINAS Damansara, Malaysia',
           },
           {
             src: '/booth/Expo-Layout-(XRAS26).png',
-            alt: 'MITEC expo hall floor plan — 120 booths, kiosks, and masterclass zones',
+            alt: 'FINAS Damansara expo hall floor plan — 120 booths, kiosks, and masterclass zones',
           },
         ],
       },
@@ -851,7 +851,7 @@ const XrasActivationsSection = ({ onRegister }: XrasActivationsSectionProps) => 
             className="leading-relaxed"
             style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', lineHeight: 1.85, color: '#a8b8d0' }}
           >
-            1–3 December 2026 · MITEC, Kuala Lumpur (Malaysia International Trade and Exhibition Centre)
+            20–22 January 2027 · FINAS Damansara, Malaysia
 
           </p>
         </motion.div>

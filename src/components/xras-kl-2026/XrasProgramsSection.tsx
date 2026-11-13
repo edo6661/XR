@@ -187,7 +187,7 @@ const ProgramDetailModal = ({
                 {program.category}
               </span>
               <span className="font-mono text-[0.92rem] text-foreground-muted">
-                XRAS 26 KL'
+                XRAS 27 KL'
               </span>
             </div>
           </div>
@@ -257,7 +257,7 @@ const XrasProgramsSection = ({ onDownloadBrochure, onRegister }: XrasProgramsSec
             Summit programme
           </h2>
           <p className="text-foreground-muted leading-relaxed" style={{ fontSize: '0.88rem', lineHeight: 1.8 }}>
-            Explore the full XRAS KL 2026 experience — from mainstage conference and expo floor to workshops, startup
+            Explore the full XRAS KL 2027 experience — from mainstage conference and expo floor to workshops, startup
             coaching, masterclasses, championship finals, and the awards gala. Click on any program to view details.
           </p>
         </motion.div>

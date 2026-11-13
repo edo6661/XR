@@ -1,5 +1,5 @@
 export type EnquiryEmailEvent =
-  | "XR ASIA SUMMIT 2026"
+  | "XR ASIA SUMMIT 2027"
   | "AI-XR Cultural Innovation Forum"
   | "Both"
   | "Not sure yet, need more details"
@@ -25,8 +25,8 @@ const LEAD_EMAIL_CLOSING = "I look forward to hearing from you.";
 
 const EVENT_CHECKBOX_OPTIONS = [
   {
-    key: "XR ASIA SUMMIT 2026",
-    label: "XR ASIA SUMMIT 2026 (1–3 December 2026, Kuala Lumpur)",
+    key: "XR ASIA SUMMIT 2027",
+    label: "XR ASIA SUMMIT 2027 (20–22 January 2027, FINAS Damansara, Malaysia)",
   },
   {
     key: "AI-XR Cultural Innovation Forum",
@@ -38,12 +38,12 @@ const EVENT_CHECKBOX_OPTIONS = [
 function formatEventCheckboxes(event: EnquiryEmailEvent): string {
   const selected = new Set<string>();
 
-  if (event === "XR ASIA SUMMIT 2026") {
-    selected.add("XR ASIA SUMMIT 2026");
+  if (event === "XR ASIA SUMMIT 2027") {
+    selected.add("XR ASIA SUMMIT 2027");
   } else if (event === "AI-XR Cultural Innovation Forum") {
     selected.add("AI-XR Cultural Innovation Forum");
   } else if (event === "Both") {
-    selected.add("XR ASIA SUMMIT 2026");
+    selected.add("XR ASIA SUMMIT 2027");
     selected.add("AI-XR Cultural Innovation Forum");
   }
 

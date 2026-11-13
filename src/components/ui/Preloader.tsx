@@ -102,7 +102,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
               className="font-mono tracking-[0.35em] uppercase"
               style={{ fontSize: '1rem', color: 'rgba(107,127,163,0.4)' }}
             >
-              XRAS · 2026
+              XRAS · 2027
             </span>
             <span
               className="font-mono tracking-[0.35em] uppercase"

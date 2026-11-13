@@ -432,7 +432,7 @@ export async function fetchEventPartners(): Promise<PartnerItem[] | null> {
   );
   if (hasVenuePartner) return fromCms;
 
-  // Keep MITEC visible until Venue Partner is added in Sanity
+  // Keep FINAS Damansara visible until Venue Partner is added in Sanity
   const venueFallback = FALLBACK_MEDIA_PARTNERS.filter(
     (partner) => partner.category === "Venue Partner",
   );

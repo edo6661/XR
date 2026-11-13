@@ -153,7 +153,7 @@ const ACTIVATIONS: Activation[] = [
     shortTitle: 'Esports',
     category: 'Esports Semi Final',
     tagline: 'Regional competition on the road to Kuala Lumpur.',
-    body: 'Teams battle in the Esports Tournament Semi Final — competitive spatial entertainment on the regional stage. Winners advance to the Grand Final at XR ASIA SUMMIT 2026 in December.',
+    body: 'Teams battle in the Esports Tournament Semi Final — competitive spatial entertainment on the regional stage. Winners advance to the Grand Final at XR ASIA SUMMIT 2027 in January.',
     meta: 'Day 2 · Competition Stage',
   },
 ];
@@ -547,7 +547,7 @@ const AixrActivationsSection = () => {
             className="leading-relaxed"
             style={{ fontSize: 'clamp(1rem, 2.5vw, 1.1rem)', lineHeight: 1.85, color: '#a8b8d0' }}
           >
-            AI·XR Cultural Innovation Forum 2026 — a prelude to XR Asia Summits 2026. Reimagining heritage
+            AI·XR Cultural Innovation Forum 2026 — a prelude to XR Asia Summits 2027. Reimagining heritage
             through artificial intelligence and immersive technology at Borneo Convention Centre (BCCK),
             Kuching, Sarawak · 16–17 October 2026.
           </p>

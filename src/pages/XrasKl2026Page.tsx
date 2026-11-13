@@ -7,7 +7,7 @@ import { useLeadCapture } from '../context/LeadCaptureContext';
 import EventPartnersSection from '../components/xras-kl-2026/EventPartnersSection';
 import XrasKlCtaRow from '../components/xras-kl-2026/XrasKlCtaRow';
 
-const XRAS_KL_EVENT_NAME = 'XRAS KL 2026';
+const XRAS_KL_EVENT_NAME = 'XRAS KL 2027';
 
 const XrasKl2026Page = () => {
   const { openLeadCapture } = useLeadCapture();
@@ -15,10 +15,10 @@ const XrasKl2026Page = () => {
   const openBrochure = () =>
     openLeadCapture({
       title: 'Download Brochure',
-      description: 'Share your details to access the XRAS KL 2026 brochure and start a conversation with our team.',
+      description: 'Share your details to access the XRAS KL 2027 brochure and start a conversation with our team.',
       eventName: XRAS_KL_EVENT_NAME,
       defaultInterest: 'Brochure download',
-      defaultEvent: 'XR ASIA SUMMIT 2026',
+      defaultEvent: 'XR ASIA SUMMIT 2027',
       intent: 'brochure',
       accentColor: XRAS_KL_ACCENT,
     });
@@ -26,10 +26,10 @@ const XrasKl2026Page = () => {
   const openRegister = () =>
     openLeadCapture({
       title: 'Register / Enquiry',
-      description: 'Tell us about your interest in XRAS KL 2026 and we will follow up with next steps.',
+      description: 'Tell us about your interest in XRAS KL 2027 and we will follow up with next steps.',
       eventName: XRAS_KL_EVENT_NAME,
       defaultInterest: 'General registration interest',
-      defaultEvent: 'XR ASIA SUMMIT 2026',
+      defaultEvent: 'XR ASIA SUMMIT 2027',
       intent: 'register',
       accentColor: XRAS_KL_ACCENT,
     });

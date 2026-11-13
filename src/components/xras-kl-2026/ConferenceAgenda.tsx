@@ -49,7 +49,7 @@ const AGENDA_DAYS: AgendaDay[] = [
       { label: 'Intensive buyer-seller deal sessions' },
       { label: 'Startup & Innovation Showcase' },
       { time: '06:00 PM', label: 'Closing Main Stage' },
-      { label: 'End of XR ASIA SUMMIT 2026', emphasis: true },
+      { label: 'End of XR ASIA SUMMIT 2027', emphasis: true },
     ],
   },
 ];

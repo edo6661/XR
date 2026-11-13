@@ -10,7 +10,7 @@ const AwardsGalaPage = () => (
     <DemoPlaceholder
       title="Broadcast Digital Awards"
       subtitle="Celebrating excellence in digital broadcasting and immersive media production across the Asia-Pacific region."
-      eta="TBC 2026"
+      eta="TBC 2027"
       accentColor="#a78bfa"
     />
   </>

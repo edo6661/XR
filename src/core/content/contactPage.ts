@@ -79,9 +79,9 @@ export const PARTNERSHIP_CARDS = [
 
 export const SPEAKER_EVENTS = [
   {
-    label: "Apply for XRAS KL '26",
-    subject: "Speaker Application — XRAS KL '26",
-    event: "XR ASIA SUMMITs 2026",
+    label: "Apply for XRAS KL '27",
+    subject: "Speaker Application — XRAS KL '27",
+    event: "XR ASIA SUMMITs 2027",
   },
   {
     label: "Apply for AIXR Sarawak '26",

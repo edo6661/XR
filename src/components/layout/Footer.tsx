@@ -235,7 +235,7 @@ const Footer = () => {
           {/* Links columns */}
           <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="flex flex-col gap-3">
-              <FooterColumnTitle>Events 2026</FooterColumnTitle>
+              <FooterColumnTitle>Events 2027</FooterColumnTitle>
               <ul className="flex flex-col gap-2.5">
                 {eventLinks.map((link) => (
                   <FooterLink key={link.to} {...link} />

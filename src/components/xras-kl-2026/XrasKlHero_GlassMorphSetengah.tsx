@@ -125,7 +125,7 @@ const XrasKlHero = ({ onDownloadBrochure, onRegister }: XrasKlHeroProps) => (
             color: 'rgba(240,244,255,0.94)',
           }}
         >
-          1–3 December 2026 · Malaysia International Trade and Exhibition Centre (MITEC, Kuala Lumpur)
+          20–22 January 2027 · FINAS Damansara, Malaysia
         </p>
       </motion.div>
 

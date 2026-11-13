@@ -18,7 +18,7 @@ export const LEAD_INTEREST_OPTIONS = [
 export type LeadInterest = (typeof LEAD_INTEREST_OPTIONS)[number];
 
 export const LEAD_EVENT_OPTIONS = [
-  "XR ASIA SUMMIT 2026",
+  "XR ASIA SUMMIT 2027",
   "AI-XR Cultural Innovation Forum",
   "Both",
   "Not sure yet, need more details",
@@ -30,7 +30,7 @@ export type LeadEvent = (typeof LEAD_EVENT_OPTIONS)[number];
 export function resolveDefaultEvent(eventName?: string): LeadEvent | undefined {
   if (!eventName) return undefined;
   if (eventName.includes("XRAS") || eventName.includes("XR ASIA")) {
-    return "XR ASIA SUMMIT 2026";
+    return "XR ASIA SUMMIT 2027";
   }
   if (eventName.includes("AI") && eventName.includes("XR")) {
     return "AI-XR Cultural Innovation Forum";
@@ -76,8 +76,8 @@ export type LeadCaptureFields = {
 /** Brochure & package PDFs — flip `available` to true when assets are in /public/docs */
 export const LEAD_CAPTURE_DOCUMENTS = {
   brochures: {
-    "XRAS KL 2026": {
-      label: "XRAS KL 2026 Brochure",
+    "XRAS KL 2027": {
+      label: "XRAS KL 2027 Brochure",
       href: "/docs/xras-kl-2026-brochure.pdf",
       available: false,
     },

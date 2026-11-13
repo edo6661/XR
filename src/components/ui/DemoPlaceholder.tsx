@@ -180,7 +180,7 @@ const DemoPlaceholder = ({
         style={{ fontSize: '0.95rem', color: 'rgba(107,127,163,0.25)' }}
         aria-hidden="true"
       >
-        XR SUMMITS · KUL · 2026
+        XR SUMMITS · KUL · 2027
       </motion.p>
     </section>
   );
