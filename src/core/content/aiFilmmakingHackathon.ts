@@ -5,7 +5,7 @@ export const HACKATHON_EVENT_NAME = "AI Filmmaking Hackathon";
 export const HACKATHON_META = {
   title: "AI Filmmaking Hackathon | XR Summits",
   description:
-    "XR ASIA SUMMIT 26' Mothership — A 3-day crash-production sprint where teams deliver a client-ready 180-second commercial short using AI and XR workflows.",
+    "XR ASIA SUMMIT 27' Mothership — A 3-day crash-production sprint where teams deliver a client-ready 180-second commercial short using AI and XR workflows.",
   edition: "Mothership · 2026",
   location: "Malaysia",
   dates: "1–3 May 2026",
@@ -17,7 +17,7 @@ export const HACKATHON_REGISTRATION_URL =
   "https://forms.office.com/r/uUExQZ4Q7E";
 
 export const HACKATHON_HERO = {
-  eyebrow: "XR ASIA SUMMIT 26' MOTHERSHIP",
+  eyebrow: "XR ASIA SUMMIT 27' MOTHERSHIP",
   title: "AI Filmmaking Hackathon",
   subtitle:
     "3 days crash-production sprint where teams deliver a client-ready 180 second commercial short. Real-world production constraints meet cutting-edge AI and XR workflows in Southeast Asia's premier filmmaking challenge.",

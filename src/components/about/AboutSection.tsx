@@ -222,7 +222,7 @@ const AboutSection = () => {
           >
             Welcome
           </p>
-          <IntroBar>XR ASIA SUMMIT &apos;26 — INTRODUCTION</IntroBar>
+          <IntroBar>XR ASIA SUMMIT &apos;27 — INTRODUCTION</IntroBar>
         </motion.div>
 
         {/* Two-column: tagline top-left, introduction body right */}
@@ -347,7 +347,7 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
             className="mb-10"
           >
-            <IntroBar>XR ASIA SUMMIT &apos;26 — PILLARS</IntroBar>
+            <IntroBar>XR ASIA SUMMIT &apos;27 — PILLARS</IntroBar>
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-3">

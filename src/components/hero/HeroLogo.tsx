@@ -40,7 +40,7 @@ const HeroLogo = ({ showText = true }: { showText?: boolean }) => {
               initial="animate"
               animate="animate"
             >
-              XR ASIA SUMMIT &apos;26
+              XR ASIA SUMMIT &apos;27
             </motion.h1>
           </div>
         </motion.div>
