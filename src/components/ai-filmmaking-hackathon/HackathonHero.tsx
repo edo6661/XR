@@ -126,10 +126,6 @@ const HackathonHero = ({ registerUrl }: HackathonHeroProps) => (
           className="flex flex-wrap items-center justify-center gap-4 mb-8 text-[1rem] font-semibold tracking-[0.18em] uppercase"
           style={{ color: 'rgba(22,36,62,0.55)' }}
         >
-          <span>{HACKATHON_META.dates}</span>
-          <span aria-hidden="true">·</span>
-          <span>{HACKATHON_META.location}</span>
-          <span aria-hidden="true">·</span>
           <span style={{ color: HACKATHON_ACCENT }}>RM 25K Prize Pool</span>
         </motion.div>
 

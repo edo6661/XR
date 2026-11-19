@@ -7,8 +7,6 @@ export const HACKATHON_META = {
   description:
     "XR ASIA SUMMIT 27' Mothership — A 3-day crash-production sprint where teams deliver a client-ready 180-second commercial short using AI and XR workflows.",
   edition: "Mothership · 2026",
-  location: "Malaysia",
-  dates: "1–3 May 2026",
   finalsDates: "20–22 January 2027",
   contactPhone: "012-2020264",
 } as const;
@@ -455,14 +453,14 @@ export const HACKATHON_BENEFITS = {
 
 export const HACKATHON_PARTICIPATION_FEE = {
   amount: "RM 1,000.00",
-  label: "Per Participant",
+  label: "Per Group",
   subsidisedTitle: "Participation Fee Subsidised",
   intro:
     "All-inclusive package designed to allow participants to focus entirely on creation and innovation.",
   inclusions: [
     {
       title: "Group Work",
-      description: "Min 2pax · Max 5 pax.",
+      description: "2 person max.",
     },
     {
       title: "AI Tokens / Credits",
@@ -491,7 +489,7 @@ export const HACKATHON_RULES = {
       bullets: [
         "Open to students, professionals, startups, and independent creators",
         "Participants must be 18 years and above",
-        "Teams must consist of 2–5 members",
+        "Teams must consist of a maximum of 2 members",
       ],
     },
     {
@@ -594,8 +592,8 @@ export const HACKATHON_CLOSING = {
   body2:
     "You'll walk away with portfolio pieces that open doors, workflows that save months of trial-and-error, and connections to brands actively hiring efficient production partners across MY / SG / ID / TH / PH / VN.",
   stats: [
-    { label: "Location", value: "Malaysia" },
     { label: "Prize Pool", value: "RM 25K" },
+    { label: "Fee", value: "RM 1K / group" },
   ],
 } as const;
 

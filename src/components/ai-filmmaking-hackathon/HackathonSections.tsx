@@ -8,7 +8,6 @@ import {
   Film,
   Gift,
   ImageIcon,
-  MapPin,
   Medal,
   Megaphone,
   Scale,
@@ -100,8 +99,8 @@ const prizeIcons = [
 ];
 
 const closingStatIcons = [
-  <MapPin key="loc" {...iconSize} />,
   <Trophy key="prize" {...iconSize} />,
+  <Users key="fee" {...iconSize} />,
 ];
 
 type HackathonSectionsProps = {
